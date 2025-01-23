@@ -1,4 +1,4 @@
-package com.activeitzone.activeecommercecmsdemoapp
+package com.devefinance
 
 import io.flutter.embedding.android.FlutterActivity
 

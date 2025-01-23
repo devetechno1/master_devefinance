@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.activeitzone.activeecommercecmsdemoapp"
+        applicationId "com.devefinance"
         minSdkVersion 23
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()

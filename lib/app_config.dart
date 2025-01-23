@@ -3,11 +3,11 @@ var this_year = DateTime.now().year.toString();
 class AppConfig {
   //configure this
   static String copyright_text =
-      "@ ActiveItZone " + this_year; //this shows in the splash screen
+      "@ DeveTechno " + this_year; //this shows in the splash screen
   static String app_name =
-      "Active eCommerce CMS Demo"; //this shows in the splash screen
+      "Devefinance Store"; //this shows in the splash screen
   static String search_bar_text =
-      "Search in Active eCommerce CMS..."; //this will show in app Search bar.
+      ""; //this will show in app Search bar.
   static String purchase_code =
       "a"; //enter your purchase code for the app from codecanyon
   static String system_key =
@@ -21,7 +21,8 @@ class AppConfig {
   //configure this
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
-  static const DOMAIN_PATH = "devefinance.com"; //use only domain name without http:// or https://
+  static const DOMAIN_PATH =
+      "devefinance.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
