@@ -169,7 +169,7 @@ class _ProductCardState extends State<ProductCard> {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                            color: Color(0xffE62E04),
+                            color: MyTheme.accent_color,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
@@ -193,7 +193,7 @@ class _ProductCardState extends State<ProductCard> {
                         width: 48,
                         margin: EdgeInsets.only(top: 8, right: 8, bottom: 15),
                         decoration: BoxDecoration(
-                          color: const Color(0xffe62e04),
+                          color: MyTheme.accent_color,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(

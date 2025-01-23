@@ -156,7 +156,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                         margin: EdgeInsets.only(
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
-                          color: const Color(0xffe62e04),
+                          color: MyTheme.accent_color,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(

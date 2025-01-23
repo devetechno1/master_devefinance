@@ -552,7 +552,7 @@ class _ChatState extends State<Chat> {
               : Radius.circular(16),
         ),
         color: (_list[index].sendType == "customer"
-            ? const Color(0xffE62E04)
+            ?  MyTheme.accent_color
             : Colors.white),
         boxShadow: [
           BoxShadow(

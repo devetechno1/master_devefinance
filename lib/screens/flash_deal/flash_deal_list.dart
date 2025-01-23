@@ -622,7 +622,7 @@ class _FlashDealListState extends State<FlashDealList> {
       padding: EdgeInsets.all(6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        color: Color(0xffE62E04),
+        color: MyTheme.accent_color,
       ),
     );
   }

@@ -389,7 +389,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               style: TextStyle(
                 fontFamily: 'Public Sans',
                 fontSize: 16,
-                color: Color(0xffE62E04),
+                color: MyTheme.accent_color,
                 fontWeight: FontWeight.bold,
               ),
               textHeightBehavior:
@@ -454,7 +454,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   AppLocalizations.of(context)!
                       .password_must_contain_at_least_6_characters,
                   style: TextStyle(
-                      color: Color(0xffE62E04), fontStyle: FontStyle.italic),
+                      color: MyTheme.accent_color, fontStyle: FontStyle.italic),
                 ),
               )
             ],
@@ -516,7 +516,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               width: 129,
               height: 42,
               decoration: BoxDecoration(
-                  color: Color(0xffE62E04),
+                  color: MyTheme.accent_color,
                   borderRadius: BorderRadius.circular(8)),
               child: Text(
                 textAlign: TextAlign.center,
@@ -683,7 +683,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               width: 129,
               height: 42,
               decoration: BoxDecoration(
-                  color: Color(0xffE62E04),
+                  color: MyTheme.accent_color,
                   borderRadius: BorderRadius.circular(8)),
               child: Text(
                 textAlign: TextAlign.center,

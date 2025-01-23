@@ -126,7 +126,7 @@
 //                           EdgeInsets.symmetric(horizontal: 12, vertical: 4),
 //                       margin: EdgeInsets.only(bottom: 5),
 //                       decoration: BoxDecoration(
-//                         color: const Color(0xffe62e04),
+//                         color:Theme.accent_color,
 //                         borderRadius: BorderRadius.only(
 //                           topRight: Radius.circular(6.0),
 //                           bottomLeft: Radius.circular(6.0),

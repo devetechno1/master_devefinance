@@ -1992,7 +1992,7 @@ class _ProductDetailsState extends State<ProductDetails>
               : _singlePriceString,
           // _singlePriceString,
           style: TextStyle(
-              color: Color(0xffE62E04),
+              color: MyTheme.accent_color,
               fontFamily: 'Public Sans',
               fontSize: 16.0,
               fontWeight: FontWeight.bold),
