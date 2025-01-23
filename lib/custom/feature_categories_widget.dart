@@ -67,7 +67,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                             child: FadeInImage.assetNetwork(
                               placeholder: 'assets/placeholder.png',
                               image: homeData
-                                  .featuredCategoryList[index].coverImage!,
+                                  .featuredCategoryList[index].coverImage ??'',
                               fit: BoxFit.cover,
                             ),
                           ),

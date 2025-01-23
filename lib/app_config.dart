@@ -9,9 +9,9 @@ class AppConfig {
   static String search_bar_text =
       "Search in Active eCommerce CMS..."; //this will show in app Search bar.
   static String purchase_code =
-      "your_purchase_code"; //enter your purchase code for the app from codecanyon
+      "a"; //enter your purchase code for the app from codecanyon
   static String system_key =
-      r"your_system_key"; //enter your purchase code for the app from codecanyon
+      r"a"; //enter your purchase code for the app from codecanyon
 
   //Default language config
   static String default_language = "en";
