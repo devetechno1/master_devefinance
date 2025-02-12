@@ -170,8 +170,7 @@ class _RegistrationState extends State<Registration> {
         print(fcmToken);
         if (is_logged_in.$ == true) {
           // update device token
-          var deviceTokenUpdateResponse =
-              await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken!);
+          await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken!);
         }
       }
 
@@ -195,7 +194,6 @@ class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
-    final _screen_height = MediaQuery.of(context).size.height;
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
@@ -450,14 +448,14 @@ class _RegistrationState extends State<Registration> {
                                                 builder: (context) =>
                                                     CommonWebviewScreen(
                                                       page_name:
-                                                          "Terms Conditions",
+                                                          AppLocalizations.of(context)!.terms_conditions_ucf,
                                                       url:
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
                                                     )));
                                       },
                                     style:
                                         TextStyle(color: MyTheme.accent_color),
-                                    text: " Terms Conditions",
+                                    text: " ${AppLocalizations.of(context)!.terms_conditions_ucf}",
                                   ),
                                   TextSpan(
                                     text: " &",
@@ -471,12 +469,12 @@ class _RegistrationState extends State<Registration> {
                                                 builder: (context) =>
                                                     CommonWebviewScreen(
                                                       page_name:
-                                                          "Privacy Policy",
+                                                          AppLocalizations.of(context)!.privacy_policy_ucf,
                                                       url:
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
                                                     )));
                                       },
-                                    text: " Privacy Policy",
+                                    text: " ${AppLocalizations.of(context)!.privacy_policy_ucf}",
                                     style:
                                         TextStyle(color: MyTheme.accent_color),
                                   )

@@ -33,6 +33,7 @@ import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:route_transitions/route_transitions.dart';
 
+import '../app_config.dart';
 import '../custom/btn.dart';
 import '../repositories/auth_repository.dart';
 import 'auction/auction_bidded_products.dart';
@@ -40,6 +41,7 @@ import 'auction/auction_purchase_history.dart';
 import 'change_language.dart';
 import 'chat/messenger_list.dart';
 import 'club_point.dart';
+import 'common_webview_screen.dart';
 import 'currency_change.dart';
 import 'digital_product/purchased_digital_produts.dart';
 
@@ -52,9 +54,9 @@ import 'wallet.dart';
 import 'wishlist/wishlist.dart';
 
 class Profile extends StatefulWidget {
-  Profile({Key? key, this.show_back_button = false}) : super(key: key);
+  const Profile({Key? key, this.show_back_button = false}) : super(key: key);
 
-  bool show_back_button;
+  final bool show_back_button;
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -62,7 +64,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ScrollController _mainScrollController = ScrollController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   bool _auctionExpand = false;
   int? _cartCounter = 0;
@@ -253,26 +255,29 @@ class _ProfileState extends State<Profile> {
 
   PreferredSize buildCustomAppBar(context) {
     return PreferredSize(
-      preferredSize: Size(DeviceInfo(context).width!, 80),
+      preferredSize: Size(DeviceInfo(context).width!, 92),
       child: Container(
         // color: Colors.green,
         child: SafeArea(
           child: Column(
             children: [
               Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  margin: EdgeInsets.only(right: 18),
-                  height: 30,
+                alignment: AlignmentDirectional.topEnd,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(end: 18,bottom: 12),
                   child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                    onTap: () => Navigator.pop(context),
+                    borderRadius: BorderRadius.circular(100),
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
                       child: Icon(
-                        Icons.close,
-                        color: MyTheme.white,
-                        size: 20,
-                      )),
+                          Icons.close,
+                          color: MyTheme.white,
+                          size: 20,
+                        ),
+                    ),
+                  ),
                 ),
               ),
 
@@ -297,27 +302,27 @@ class _ProfileState extends State<Profile> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Column(
         children: [
-          if (false)
-            // ignore: dead_code
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildBottomVerticalCardListItem(
-                    "assets/coupon.png", LangText(context).local.coupons_ucf,
-                    onPressed: () {}),
-                Divider(
-                  thickness: 1,
-                  color: MyTheme.light_grey,
-                ),
-                buildBottomVerticalCardListItem("assets/favoriteseller.png",
-                    LangText(context).local.favorite_seller_ucf,
-                    onPressed: () {}),
-                Divider(
-                  thickness: 1,
-                  color: MyTheme.light_grey,
-                ),
-              ],
-            ),
+          // if (false)
+          //   // dead_code
+          //   Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       buildBottomVerticalCardListItem(
+          //           "assets/coupon.png", LangText(context).local.coupons_ucf,
+          //           onPressed: () {}),
+          //       Divider(
+          //         thickness: 1,
+          //         color: MyTheme.light_grey,
+          //       ),
+          //       buildBottomVerticalCardListItem("assets/favoriteseller.png",
+          //           LangText(context).local.favorite_seller_ucf,
+          //           onPressed: () {}),
+          //       Divider(
+          //         thickness: 1,
+          //         color: MyTheme.light_grey,
+          //       ),
+          //     ],
+          //   ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -337,7 +342,7 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildBottomVerticalCardListItem(
-                    "assets/wholesale.png", 'Wholesale', onPressed: () {
+                    "assets/wholesale.png", LangText(context).local.wholesale_product, onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -352,7 +357,7 @@ class _ProfileState extends State<Profile> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildBottomVerticalCardListItem("assets/blog.png", 'Blog List',
+              buildBottomVerticalCardListItem("assets/blog.png", LangText(context).local.blog_list_ucf,
                   onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BlogListScreen()));
@@ -408,7 +413,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(
-                    "assets/my_clissified.png", 'My Classified Ads',
+                    "assets/my_clissified.png", LangText(context).local.my_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return MyClassifiedAds();
@@ -425,7 +430,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(
-                    "assets/classified_product.png", 'All Classified Ads',
+                    "assets/classified_product.png", LangText(context).local.all_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ClassifiedAds();
@@ -668,6 +673,24 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
+          buildBottomVerticalCardListItem("assets/delete.png",
+                LangText(context).local.privacy_policy_ucf, onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          CommonWebviewScreen(
+                            page_name:
+                                AppLocalizations.of(context)!.privacy_policy_ucf,
+                            url:
+                                "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
+                          )));
+          },icon: Icons.lock_outline_rounded),
+          Divider(
+            thickness: 1,
+            color: MyTheme.light_grey,
+          ),
+
           if (is_logged_in.$)
             Column(
               children: [
@@ -675,10 +698,6 @@ class _ProfileState extends State<Profile> {
                     LangText(context).local.delete_my_account, onPressed: () {
                   deleteWarningDialog();
                 }),
-                Divider(
-                  thickness: 1,
-                  color: MyTheme.light_grey,
-                ),
               ],
             ),
 
@@ -695,7 +714,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Container buildBottomVerticalCardListItem(String img, String label,
-      {Function()? onPressed, bool isDisable = false}) {
+      {Function()? onPressed, bool isDisable = false, IconData? icon}) {
     return Container(
       height: 40,
       child: TextButton(
@@ -708,13 +727,14 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 24.0),
-              child: Image.asset(
+              padding: const EdgeInsetsDirectional.only(end: 24.0),
+              child: icon == null? Image.asset(
                 img,
                 height: 16,
                 width: 16,
                 color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
-              ),
+              ):
+              Icon(icon,size: 18,color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,),
             ),
             Text(
               label,
@@ -871,14 +891,15 @@ class _ProfileState extends State<Profile> {
 
   Widget buildSettingAndAddonsHorizontalMenu() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 25),
       margin: EdgeInsets.only(top: 14),
       width: DeviceInfo(context).width,
       height: 208,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(6)),
       child: GridView(
         scrollDirection: Axis.horizontal,
+        padding:  EdgeInsets.symmetric(vertical: 2, horizontal: 25),
         physics: const PageScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 50.0,
@@ -926,6 +947,7 @@ class _ProfileState extends State<Profile> {
                     : () => null),
           Container(
             child: badges.Badge(
+              showBadge: is_logged_in.$,
               position: badges.BadgePosition.topEnd(top: 8, end: 20),
               badgeStyle: badges.BadgeStyle(
                 shape: badges.BadgeShape.circle,
@@ -943,7 +965,7 @@ class _ProfileState extends State<Profile> {
               ),
               child: buildSettingAndAddonsHorizontalMenuItem(
                   "assets/notification.png",
-                  "Notifications",
+                  AppLocalizations.of(context)!.notification_ucf,
                   is_logged_in.$
                       ? () {
                           Navigator.push(context,
@@ -999,7 +1021,7 @@ class _ProfileState extends State<Profile> {
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
               "assets/upload.png",
-              "Upload file",
+              AppLocalizations.of(context)!.upload_file_ucf,
               is_logged_in.$
                   ? () {
                       Navigator.push(
@@ -1126,12 +1148,12 @@ class _ProfileState extends State<Profile> {
           ),*/
           // SizedBox(width: 10,),
           Padding(
-            padding: const EdgeInsets.only(right: 14.0),
+            padding: const EdgeInsetsDirectional.only(end: 14.0),
             child: Container(
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: MyTheme.accent_color,
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: MyTheme.white, width: 1),
                 //shape: BoxShape.rectangle,
@@ -1155,31 +1177,27 @@ class _ProfileState extends State<Profile> {
           ),
           buildUserInfo(),
           Spacer(),
-          Container(
-            width: 70,
-            height: 26,
-            child: Btn.basic(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-              // 	rgb(50,205,50)
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  side: BorderSide(color: MyTheme.white)),
-              child: Text(
-                is_logged_in.$
-                    ? AppLocalizations.of(context)!.logout_ucf
-                    : LangText(context).local.login_ucf,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500),
-              ),
-              onPressed: () {
-                if (is_logged_in.$)
-                  onTapLogout(context);
-                else
-                  context.push("/users/login");
-              },
+          Btn.basic(
+            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+            // 	rgb(50,205,50)
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+                side: BorderSide(color: MyTheme.white)),
+            child: Text(
+              is_logged_in.$
+                  ? AppLocalizations.of(context)!.logout_ucf
+                  : LangText(context).local.login_ucf,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500),
             ),
+            onPressed: () {
+              if (is_logged_in.$)
+                onTapLogout(context);
+              else
+                context.push("/users/login");
+            },
           ),
         ],
       ),

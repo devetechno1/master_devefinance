@@ -151,8 +151,7 @@ class _LoginState extends State<Login> {
         // print("token: $fcmToken");
         // update device token
         if (fcmToken != null && is_logged_in.$) {
-          var deviceTokenUpdateResponse =
-              await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
+          await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
         }
       }
 
@@ -369,7 +368,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final _screen_height = MediaQuery.of(context).size.height;
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
@@ -422,9 +420,9 @@ class _LoginState extends State<Login> {
                                 AppLocalizations.of(context)!
                                     .or_login_with_a_phone,
                                 style: TextStyle(
-                                    color: MyTheme.accent_color,
-                                    fontStyle: FontStyle.italic,
-                                    decoration: TextDecoration.underline),
+                                  color: MyTheme.accent_color,
+                                  fontStyle: FontStyle.italic,
+                                ),
                               ),
                             )
                           : Container()
@@ -481,9 +479,9 @@ class _LoginState extends State<Login> {
                         child: Text(
                           AppLocalizations.of(context)!.or_login_with_an_email,
                           style: TextStyle(
-                              color: MyTheme.accent_color,
-                              fontStyle: FontStyle.italic,
-                              decoration: TextDecoration.underline),
+                            color: MyTheme.accent_color,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
                       )
                     ],
@@ -525,9 +523,9 @@ class _LoginState extends State<Login> {
                         AppLocalizations.of(context)!
                             .login_screen_forgot_password,
                         style: TextStyle(
-                            color: MyTheme.accent_color,
-                            fontStyle: FontStyle.italic,
-                            decoration: TextDecoration.underline),
+                          color: MyTheme.accent_color,
+                          fontStyle: FontStyle.italic,
+                        ),
                       ),
                     )
                   ],
@@ -595,7 +593,7 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-              if (Platform.isIOS)
+              if (Platform.isIOS && allow_apple_login.$)
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: SignInWithAppleButton(

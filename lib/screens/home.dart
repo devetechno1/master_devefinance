@@ -13,6 +13,7 @@ import 'package:active_ecommerce_cms_demo_app/single_banner/sincle_banner_page.d
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 import '../custom/feature_categories_widget.dart';
 import '../custom/featured_product_horizontal_list_widget.dart';
@@ -23,16 +24,16 @@ import '../custom/home_search_box.dart';
 import '../custom/pirated_widget.dart';
 
 class Home extends StatefulWidget {
-  Home({
+  const Home({
     Key? key,
     this.title,
     this.show_back_button = false,
-    go_back = true,
+    this.go_back = true,
   }) : super(key: key);
 
   final String? title;
-  bool show_back_button;
-  late bool go_back;
+  final bool show_back_button;
+  final bool go_back;
 
   @override
   _HomeState createState() => _HomeState();
@@ -65,7 +66,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     // ignore: deprecated_member_use
     return WillPopScope(
@@ -168,17 +168,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           if (homeData.isFlashDeal)
                             SliverList(
                                 delegate: SliverChildListDelegate([
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    20.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  AppLocalizations.of(context)!.flash_deals_ucf,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
+                              InkWell(
+                                onTap: () => GoRouter.of(context).go('/flash-deals'),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                                  child: Text(
+                                    AppLocalizations.of(context)!.flash_deals_ucf,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700),
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 10),
                               FlashDealBanner(
                                 context: context,
                                 homeData: homeData,
@@ -193,21 +194,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           //   ),
                           // ])),
 
-                          SliverList(
-                            delegate: SliverChildListDelegate([PhotoWidget()]),
-                          ),
+                          SliverList(delegate: SliverChildListDelegate(const [PhotoWidget()])),
                           //Featured Products
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Container(
                                 height: 305,
-                                color: Color(0xffF2F1F6),
+                                margin: EdgeInsets.only(top: 12),
+                                color: MyTheme.accent_color.withOpacity(0.1),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          20, 22, 0, 0),
+                                      padding: const EdgeInsetsDirectional.only(top: 20, start: 20),
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .featured_products_ucf,
@@ -218,14 +217,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          20, 15, 20, 0),
-                                      child:
-                                          FeaturedProductHorizontalListWidget(
-                                        homeData: homeData,
-                                      ),
-                                    ),
+                                    Flexible(child: FeaturedProductHorizontalListWidget(homeData: homeData)),
                                   ],
                                 ),
                               ),
@@ -242,47 +234,44 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           // ),
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              Container(
-                                color: Color(0xffF2F1F6),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            18.0, 0.0, 20.0, 0.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              AppLocalizations.of(context)!
-                                                  .all_products_ucf,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
-                                        ),
+                              SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          18.0, 20, 20.0, 0.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .all_products_ucf,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
                                       ),
-                                      //Home All Product
-                                      SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            HomeAllProducts2(
-                                                context: context,
-                                                homeData: homeData),
-                                          ],
-                                        ),
+                                    ),
+                                    //Home All Product
+                                    SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          HomeAllProducts2(
+                                              context: context,
+                                              homeData: homeData),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Container(
-                                height: 80,
-                              ),
+                              // Container(
+                              //   height: 80,
+                              // ),
                             ]),
                           ),
                         ],
@@ -383,7 +372,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           return GestureDetector(
             onTap: item['onTap'],
             child: Container(
-              margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              margin: EdgeInsetsDirectional.only(start: 8),
               height: 40,
               width: 106,
               decoration: BoxDecoration(
@@ -399,19 +388,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       child: Container(
                         height: 16,
                         width: 16,
+                        alignment: Alignment.center,
                         child: Image.asset(
                           item['image'],
                           color: item['Textcolor'],
                         ),
                       ),
                     ),
-                    Text(
-                      item['title'],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: item['Textcolor'],
-                        fontWeight: FontWeight.w300,
-                        fontSize: 10,
+                    Flexible(
+                      child: Text(
+                        item['title'],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: item['Textcolor'],
+                          fontWeight: FontWeight.w300,
+                          fontSize: 10,
+                        ),
                       ),
                     ),
                   ],

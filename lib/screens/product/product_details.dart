@@ -46,9 +46,9 @@ import 'widgets/product_slider_image_widget.dart';
 import 'widgets/tappable_icon_widget.dart';
 
 class ProductDetails extends StatefulWidget {
-  String slug;
+  final String slug;
 
-  ProductDetails({Key? key, required this.slug}) : super(key: key);
+  const ProductDetails({Key? key, required this.slug}) : super(key: key);
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
@@ -374,7 +374,7 @@ class _ProductDetailsState extends State<ProductDetails>
     addToCart(mode: "buy_now", context: context);
   }
 
-  addToCart({mode, BuildContext? context, snackbar = null}) async {
+  addToCart({mode, required BuildContext context, snackbar = null}) async {
     // if (is_logged_in.$ == false) {
     //   // ToastComponent.showDialog(AppLocalizations.of(context).common_login_warning, context,
     //   //     gravity: Toast.center, duration: Toast.lengthLong);
@@ -385,7 +385,8 @@ class _ProductDetailsState extends State<ProductDetails>
 
     if (!guest_checkout_status.$) {
       if (is_logged_in.$ == false) {
-        context?.go("/users/login");
+        print("object $context");
+        context.push("/users/login");
         return;
       }
     }
@@ -402,7 +403,7 @@ class _ProductDetailsState extends State<ProductDetails>
       );
       return;
     } else {
-      Provider.of<CartCounter>(context!, listen: false).getCount();
+      Provider.of<CartCounter>(context, listen: false).getCount();
 
       if (mode == "add_to_cart") {
         if (snackbar != null) {
@@ -509,8 +510,9 @@ class _ProductDetailsState extends State<ProductDetails>
                             AppLocalizations.of(context)!.share_options_ucf,
                             style: TextStyle(color: Colors.white),
                           ),
-                          onPressed: () {
-                            Share.share(_productDetails!.link!);
+                          onPressed: () async{
+
+                            Share.share(_productDetails!.link!,sharePositionOrigin: Rect.fromLTWH(0, 0, MediaQuery.sizeOf(context).width, MediaQuery.sizeOf(context).height / 1.92));
                           },
                         ),
                       ),
@@ -789,7 +791,6 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
     SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         AppLocalizations.of(context)!.added_to_cart,
@@ -817,7 +818,7 @@ class _ProductDetailsState extends State<ProductDetails>
       child: Scaffold(
           extendBody: true,
           backgroundColor: MyTheme.mainColor,
-          bottomNavigationBar: buildBottomAppBar(context, _addedToCartSnackbar),
+          bottomNavigationBar: buildBottomAppBar(_addedToCartSnackbar),
           body: RefreshIndicator(
             color: MyTheme.accent_color,
             backgroundColor: Colors.white,
@@ -832,7 +833,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   scrolledUnderElevation: 0.0,
                   backgroundColor: MyTheme.mainColor,
                   pinned: true,
-                  automaticallyImplyLeading: false,
+                  automaticallyImplyLeading: _scrollPosition > 250,
                   expandedHeight: 355.0,
                   title: AnimatedOpacity(
                       opacity: _scrollPosition > 250 ? 1 : 0,
@@ -874,7 +875,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     height: 36,
                                     child: Center(
                                       child: Icon(
-                                        CupertinoIcons.arrow_left,
+                                        app_language_rtl.$! ? CupertinoIcons.arrow_right : CupertinoIcons.arrow_left,
                                         color: MyTheme.dark_font_grey,
                                         size: 20,
                                       ),
@@ -947,9 +948,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                               SizedBox(width: 15),
                               InkWell(
-                                onTap: () {
-                                  onWishTap();
-                                },
+                                onTap: onWishTap,
+                                borderRadius: BorderRadius.circular(100),
                                 child: TappableIconWidget(
                                   icon: Icons.favorite,
                                   color: _isInWishList
@@ -1377,18 +1377,8 @@ class _ProductDetailsState extends State<ProductDetails>
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        16.0,
-                        0.0,
-                        16.0,
-                        0.0,
-                      ),
-                      child: buildTopSellingProductList(),
-                    ),
-                    Container(
-                      height: 83,
-                    )
+                    buildTopSellingProductList(),
+                    Container(height: 120)
                   ]),
                 ),
               ],
@@ -2044,7 +2034,11 @@ class _ProductDetailsState extends State<ProductDetails>
       backgroundColor: Colors.white,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
+          icon: Icon(
+              app_language_rtl.$!
+                  ? CupertinoIcons.arrow_right
+                  : CupertinoIcons.arrow_left,
+              color: MyTheme.dark_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -2079,81 +2073,67 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  Widget buildBottomAppBar(BuildContext context, _addedToCartSnackbar) {
+  Widget buildBottomAppBar(_addedToCartSnackbar) {
     return BottomNavigationBar(
       backgroundColor: MyTheme.white.withOpacity(0.9),
       items: [
-        BottomNavigationBarItem(
-          backgroundColor: Colors.transparent,
-          label: '',
-          icon: InkWell(
-            onTap: () {
-              onPressAddToCart(context, _addedToCartSnackbar);
-            },
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 23,
-                right: 14,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: MyTheme.accent_color,
-                boxShadow: [
-                  BoxShadow(
-                    color: MyTheme.accent_color_shadow,
-                    blurRadius: 20,
-                    spreadRadius: 0.0,
-                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                  )
-                ],
-              ),
-              height: 50,
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.add_to_cart_ucf,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
-                ),
+        bottomTap(context,
+            text: AppLocalizations.of(context)!.add_to_cart_ucf,
+            color: MyTheme.accent_color,
+            shadowColor: MyTheme.accent_color_shadow,
+            onTap: () => onPressAddToCart(context, _addedToCartSnackbar)),
+        bottomTap(context,
+            text: AppLocalizations.of(context)!.buy_now_ucf,
+            color: MyTheme.golden,
+            shadowColor: MyTheme.golden_shadow,
+            onTap: () => onPressBuyNow(context)),
+      ],
+    );
+  }
+
+  BottomNavigationBarItem bottomTap(
+    BuildContext context, {
+    required String text,
+    required Color color,
+    required Color shadowColor,
+    required void Function() onTap,
+  }) {
+    return BottomNavigationBarItem(
+      backgroundColor: Colors.transparent,
+      label: '',
+      icon: Padding(
+        padding: EdgeInsets.only(
+          left: 23,
+          right: 14,
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6.0),
+              color: color,
+              boxShadow: [
+                BoxShadow(
+                  color: color,
+                  blurRadius: 20,
+                  spreadRadius: 0.0,
+                  offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                )
+              ],
+            ),
+            height: 50,
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ),
         ),
-        BottomNavigationBarItem(
-          label: "",
-          icon: InkWell(
-            onTap: () {
-              onPressBuyNow(context);
-            },
-            child: Container(
-              margin: EdgeInsets.only(left: 14, right: 23),
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: MyTheme.golden,
-                boxShadow: [
-                  BoxShadow(
-                    color: MyTheme.golden_shadow,
-                    blurRadius: 20,
-                    spreadRadius: 0.0,
-                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                  )
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.buy_now_ucf,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
+      ),
     );
   }
 
@@ -2321,27 +2301,23 @@ class _ProductDetailsState extends State<ProductDetails>
         ],
       );
     } else if (_topProducts.length > 0) {
-      return SingleChildScrollView(
-        child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(
-            height: 16,
-          ),
-          itemCount: _topProducts.length,
-          scrollDirection: Axis.vertical,
-          padding: EdgeInsets.only(top: 16),
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return TopSellingProductsCard(
-                id: _topProducts[index].id,
-                slug: _topProducts[index].slug,
-                image: _topProducts[index].thumbnail_image,
-                name: _topProducts[index].name,
-                main_price: _topProducts[index].main_price,
-                stroked_price: _topProducts[index].stroked_price,
-                has_discount: _topProducts[index].has_discount);
-          },
-        ),
+      return ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(height: 16),
+        itemCount: _topProducts.length,
+        scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.all(16),
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return TopSellingProductsCard(
+              id: _topProducts[index].id,
+              slug: _topProducts[index].slug,
+              image: _topProducts[index].thumbnail_image,
+              name: _topProducts[index].name,
+              main_price: _topProducts[index].main_price,
+              stroked_price: _topProducts[index].stroked_price,
+              has_discount: _topProducts[index].has_discount);
+        },
       );
     } else {
       return Container(
