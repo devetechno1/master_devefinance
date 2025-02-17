@@ -22,6 +22,8 @@ import '../custom/home_banner_one.dart';
 import '../custom/home_carousel_slider.dart';
 import '../custom/home_search_box.dart';
 import '../custom/pirated_widget.dart';
+import '../other_config.dart';
+import '../services/push_notification_service.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -45,6 +47,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
+      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.updateDeviceToken();
       change();
     });
 

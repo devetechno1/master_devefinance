@@ -249,9 +249,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     Future.microtask(() async {
       await Firebase.initializeApp();
-      if (OtherConfig.USE_PUSH_NOTIFICATION) {
-        PushNotificationService().initialise();
-      }
+      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.initialize();
     });
   }
 
@@ -280,6 +278,7 @@ class _MyAppState extends State<MyApp> {
             routerConfig: routes,
             title: AppConfig.app_name,
             debugShowCheckedModeBanner: false,
+            builder: OneContext().builder,
             theme: ThemeData(
               primaryColor: MyTheme.white,
               scaffoldBackgroundColor: MyTheme.white,
