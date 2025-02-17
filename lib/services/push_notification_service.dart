@@ -13,6 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../custom/toast_component.dart';
+import '../helpers/shimmer_helper.dart';
 
 final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
@@ -45,7 +46,7 @@ class PushNotificationService {
     FirebaseMessaging.onMessage.listen((event) async{
       print("onLaunch: ${event.toMap()}");
       if(Platform.isIOS) {
-        _showMessage(event);
+        _showIosMessage(event);
         return;
       }
       //(Map<String, dynamic> message) async => _showMessage(message);
@@ -130,7 +131,7 @@ class PushNotificationService {
     }
   }
 
-  static void _showMessage(RemoteMessage message) {
+  static void _showIosMessage(RemoteMessage message) {
     //print("onMessage: $message");
 
     OneContext().showDialog(
@@ -138,7 +139,7 @@ class PushNotificationService {
       builder: (context) => AlertDialog(
         content: ListTile(
           title: Text(message.notification!.title!),
-          subtitle: Text(message.notification!.body!),
+          subtitle:message.notification?.apple?.imageUrl == null ? Text(message.notification!.body!) : _dialogImageBody(message),
         ),
         actions: <Widget>[
           Btn.basic(
@@ -171,7 +172,6 @@ class PushNotificationService {
   }
 
   static void _serialiseAndNavigate(Map<String, dynamic> message) {
-    print("message.toString() ${message.toString()}");
     if (is_logged_in.$ == false) {
       OneContext().showDialog(
           // barrierDismissible: false,
@@ -202,5 +202,32 @@ class PushNotificationService {
             from_notification: true);
       }));
     } // If there's no view it'll just open the app on the first view    }
+  }
+}
+
+class _dialogImageBody extends StatelessWidget {
+  const _dialogImageBody(this.message);
+  final RemoteMessage message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(height: 16),
+        Text(message.notification!.body!),
+        SizedBox(height: 16),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.network(
+            message.notification!.apple!.imageUrl!,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return ShimmerHelper().buildBasicShimmer(height: 120.0);
+            },
+          )
+        ),
+      ],
+    );
   }
 }

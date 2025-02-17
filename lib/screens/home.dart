@@ -24,6 +24,7 @@ import '../custom/home_search_box.dart';
 import '../custom/pirated_widget.dart';
 import '../other_config.dart';
 import '../services/push_notification_service.dart';
+HomePresenter homeData = HomePresenter();
 
 class Home extends StatefulWidget {
   const Home({
@@ -42,7 +43,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-  HomePresenter homeData = HomePresenter();
 
   @override
   void initState() {
@@ -138,35 +138,37 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           ),
 
                           //Featured Categories
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    20.0, 10.0, 18.0, 0.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      AppLocalizations.of(context)!
-                                          .featured_categories_ucf,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                  ],
+                          if(homeData.isCategoryInitial ||  homeData.featuredCategoryList.isNotEmpty)...[
+                            SliverList(
+                              delegate: SliverChildListDelegate([
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      20.0, 10.0, 18.0, 0.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .featured_categories_ucf,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]),
+                            ),
+
+                            SliverToBoxAdapter(
+                              child: SizedBox(
+                                height: 175,
+                                child: FeaturedCategoriesWidget(
+                                  homeData: homeData,
                                 ),
                               ),
-                            ]),
-                          ),
-
-                          SliverToBoxAdapter(
-                            child: SizedBox(
-                              height: 175,
-                              child: FeaturedCategoriesWidget(
-                                homeData: homeData,
-                              ),
                             ),
-                          ),
+                          ],
 
                           if (homeData.isFlashDeal)
                             SliverList(
@@ -199,33 +201,34 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                           SliverList(delegate: SliverChildListDelegate(const [PhotoWidget()])),
                           //Featured Products
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              Container(
-                                height: 305,
-                                margin: EdgeInsets.only(top: 12),
-                                color: MyTheme.accent_color.withOpacity(0.1),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.only(top: 20, start: 20),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .featured_products_ucf,
-                                        style: TextStyle(
-                                          color: Color(0xff000000),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
+                          if(homeData.isFeaturedProductInitial || homeData.featuredProductList.length != 0)
+                            SliverList(
+                              delegate: SliverChildListDelegate([
+                                Container(
+                                  height: 305,
+                                  margin: EdgeInsets.only(top: 12),
+                                  color: MyTheme.accent_color.withOpacity(0.1),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.only(top: 20, start: 20),
+                                        child: Text(
+                                          AppLocalizations.of(context)!
+                                              .featured_products_ucf,
+                                          style: TextStyle(
+                                            color: Color(0xff000000),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Flexible(child: FeaturedProductHorizontalListWidget(homeData: homeData)),
-                                  ],
+                                      Flexible(child: FeaturedProductHorizontalListWidget(homeData: homeData)),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ]),
-                          ),
+                              ]),
+                            ),
                           //Home Banner Slider Two
                           // SliverList(
                           //   delegate: SliverChildListDelegate([
