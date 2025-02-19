@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
@@ -44,7 +45,7 @@ class PushNotificationService {
 
 
     FirebaseMessaging.onMessage.listen((event) async{
-      print("onLaunch: ${event.toMap()}");
+      print("onLaunch: ${jsonEncode(event.toMap())}");
       if(Platform.isIOS) {
         _showIosMessage(event);
         return;
