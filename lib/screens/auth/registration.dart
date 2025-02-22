@@ -6,6 +6,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/google_recaptcha.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/intl_phone_input.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -35,7 +36,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  String _register_by = "email"; //phone or email
+  String _register_by =  otp_addon_installed.$ ? "phone" : "email"; //phone or email
   String initialCountry = 'US';
 
   var countries_code = <String?>[];
@@ -256,23 +257,23 @@ class _RegistrationState extends State<Registration> {
                               hint_text: "johndoe@example.com"),
                         ),
                       ),
-                      otp_addon_installed.$
-                          ? GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _register_by = "phone";
-                                });
-                              },
-                              child: Text(
-                                AppLocalizations.of(context)!
-                                    .or_register_with_a_phone,
-                                style: TextStyle(
-                                    color: MyTheme.accent_color,
-                                    fontStyle: FontStyle.italic,
-                                    decoration: TextDecoration.underline),
-                              ),
-                            )
-                          : Container()
+                      // otp_addon_installed.$
+                      //     ? GestureDetector(
+                      //         onTap: () {
+                      //           setState(() {
+                      //             _register_by = "phone";
+                      //           });
+                      //         },
+                      //         child: Text(
+                      //           AppLocalizations.of(context)!
+                      //               .or_register_with_a_phone,
+                      //           style: TextStyle(
+                      //               color: MyTheme.accent_color,
+                      //               fontStyle: FontStyle.italic,
+                      //               decoration: TextDecoration.underline),
+                      //         ),
+                      //       )
+                      //     : Container()
                     ],
                   ),
                 )
@@ -316,21 +317,21 @@ class _RegistrationState extends State<Registration> {
                           },
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _register_by = "email";
-                          });
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .or_register_with_an_email,
-                          style: TextStyle(
-                              color: MyTheme.accent_color,
-                              fontStyle: FontStyle.italic,
-                              decoration: TextDecoration.underline),
-                        ),
-                      )
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     setState(() {
+                      //       _register_by = "email";
+                      //     });
+                      //   },
+                      //   child: Text(
+                      //     AppLocalizations.of(context)!
+                      //         .or_register_with_an_email,
+                      //     style: TextStyle(
+                      //         color: MyTheme.accent_color,
+                      //         fontStyle: FontStyle.italic,
+                      //         decoration: TextDecoration.underline),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -438,7 +439,7 @@ class _RegistrationState extends State<Registration> {
                                     color: MyTheme.font_grey, fontSize: 12),
                                 children: [
                                   TextSpan(
-                                    text: "I agree to the",
+                                    text: LangText(context).local.i_agree_to_the,
                                   ),
                                   TextSpan(
                                     recognizer: TapGestureRecognizer()
