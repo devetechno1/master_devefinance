@@ -1,11 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../app_config.dart';
 import '../helpers/shimmer_helper.dart';
-import '../my_theme.dart';
 import '../presenter/home_presenter.dart';
 import 'aiz_image.dart';
 
@@ -54,8 +52,7 @@ class HomeBannerOne extends StatelessWidget {
           return Builder(
             builder: (BuildContext context) {
               return Padding(
-                padding: const EdgeInsets.only(
-                    left: 12, right: 0, top: 0, bottom: 10),
+                padding: const EdgeInsetsDirectional.only(start: 12, bottom: 10),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white, // background color for container

@@ -14,8 +14,8 @@ import 'package:go_router/go_router.dart';
 import '../../main.dart';
 
 class Otp extends StatefulWidget {
-  String? title;
-  Otp({Key? key, this.title}) : super(key: key);
+  final String? title;
+  const Otp({Key? key, this.title}) : super(key: key);
 
   @override
   _OtpState createState() => _OtpState();

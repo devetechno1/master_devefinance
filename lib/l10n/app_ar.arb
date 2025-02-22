@@ -1,4 +1,7 @@
 {
+    "minimum_order_amount_is": "الحد الأدنى لمبلغ الطلب هو",
+    "minimum_order_qty_is": "الحد الأدنى للمنتجات المختلفة هو",
+    "remaining": "متبقي",
     "seconds": "ثوان",
     "minutes": "دقائق",
     "hours": "ساعات",

@@ -14,7 +14,6 @@ import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart'
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/common_webview_screen.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
@@ -28,6 +27,7 @@ import '../../custom/loading.dart';
 import '../../helpers/auth_helper.dart';
 import '../../repositories/address_repository.dart';
 import 'otp.dart';
+import 'package:go_router/go_router.dart';
 
 class Registration extends StatefulWidget {
   @override
@@ -185,9 +185,10 @@ class _RegistrationState extends State<Registration> {
               );
         }));
       } else {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Home();
-        }));
+        context.push("/");
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return Home();
+        // }));
       }
     }
   }

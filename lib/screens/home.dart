@@ -123,8 +123,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                               if (homeData.isFlashDeal || homeData.isTodayDeal)
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      12.0, 0.0, 0.0, 16.0),
+                                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
                                   child: buildHomeMenu(context, homeData),
                                 ),
                               // SizedBox(height: 16),
@@ -362,6 +361,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 12),
         itemCount: menuItems.length,
         itemBuilder: (context, index) {
           final item = menuItems[index];

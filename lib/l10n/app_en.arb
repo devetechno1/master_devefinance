@@ -1,4 +1,7 @@
 {
+  "minimum_order_amount_is": "Minimum order amount is",
+  "minimum_order_qty_is": "The minimum order quantity for different products is",
+  "remaining":"remaining",
   "seconds": "Seconds",
   "minutes": "Minutes",
   "hours": "Hours",
