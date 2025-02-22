@@ -85,7 +85,8 @@ class _OtpState extends State<Otp> {
 
   @override
   Widget build(BuildContext context) {
-    final _screen_width = MediaQuery.of(context).size.width;
+    final double _screen_width = MediaQuery.sizeOf(context).width;
+    final double _screen_height = MediaQuery.sizeOf(context).height;
     return Directionality(
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
@@ -94,7 +95,7 @@ class _OtpState extends State<Otp> {
         body: Stack(
           children: [
             Container(
-              color: Colors.red,
+              color: MyTheme.soft_accent_color,
               width: _screen_width,
               height: 200,
               child: Image.asset(
@@ -121,7 +122,7 @@ class _OtpState extends State<Otp> {
                     ),
                   ),
                   Container(
-                    width: _screen_width * (3 / 4),
+                    width: _screen_width * 0.7,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -135,6 +136,7 @@ class _OtpState extends State<Otp> {
                                 child: TextField(
                                   controller: _verificationCodeController,
                                   autofocus: false,
+                                  textAlign: TextAlign.center,
                                   decoration:
                                       InputDecorations.buildInputDecoration_1(
                                           hint_text: "A X B 4 J H"),
@@ -144,7 +146,7 @@ class _OtpState extends State<Otp> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 40.0),
+                          padding: EdgeInsets.only(top: _screen_height * 0.2),
                           child: Container(
                             height: 45,
                             decoration: BoxDecoration(
@@ -191,16 +193,18 @@ class _OtpState extends State<Otp> {
                   // SizedBox(height: 15,),
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
-                    child: InkWell(
-                      onTap: () {
-                        onTapLogout(context);
-                      },
-                      child: Text(AppLocalizations.of(context)!.logout_ucf,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: MyTheme.accent_color,
-                              decoration: TextDecoration.underline,
-                              fontSize: 13)),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          onTapLogout(context);
+                        },
+                        child: Text(AppLocalizations.of(context)!.logout_ucf,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: MyTheme.accent_color,
+                                decoration: TextDecoration.underline,
+                                fontSize: 13)),
+                      ),
                     ),
                   ),
                 ],
