@@ -39,7 +39,7 @@ class _RegistrationState extends State<Registration> {
   String _register_by =  otp_addon_installed.$ ? "phone" : "email"; //phone or email
   String initialCountry = 'US';
 
-  var countries_code = <String?>[];
+  List<String?> countries_code = <String?>[];
 
   String? _phone = "";
   bool? _isAgree = false;
@@ -65,6 +65,7 @@ class _RegistrationState extends State<Registration> {
   fetch_country() async {
     var data = await AddressRepository().getCountryList();
     data.countries.forEach((c) => countries_code.add(c.code));
+    setState(() {});
   }
 
   @override
@@ -76,7 +77,6 @@ class _RegistrationState extends State<Registration> {
   }
 
   onPressSignUp() async {
-    Loading.show(context);
 
     var name = _nameController.text.toString();
     var email = _emailController.text.toString();
@@ -120,6 +120,7 @@ class _RegistrationState extends State<Registration> {
       );
       return;
     }
+    Loading.show(context);
 
     var signupResponse = await AuthRepository().getSignupResponse(
         name,
@@ -178,9 +179,10 @@ class _RegistrationState extends State<Registration> {
       // context.go("/");
 
       if ((mail_verification_status.$ && _register_by == "email") ||
-          _register_by == "phone") {
+          (must_otp.$ && _register_by == "phone")) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Otp(
+            fromRegistration: true,
               // verify_by: _register_by,
               // user_id: signupResponse.user_id,
               );
@@ -283,13 +285,14 @@ class _RegistrationState extends State<Registration> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 36,
                         child: CustomInternationalPhoneNumberInput(
                           countries: countries_code,
+                          initialValue: PhoneNumber(isoCode: AppConfig.default_country),
                           onInputChanged: (PhoneNumber number) {
-                            print(number.phoneNumber);
                             setState(() {
+                              if(number.isoCode != null)  AppConfig.default_country = number.isoCode!;
                               _phone = number.phoneNumber;
                             });
                           },

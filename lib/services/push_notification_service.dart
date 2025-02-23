@@ -12,11 +12,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:one_context/one_context.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
-import 'package:go_router/go_router.dart';
 
-import '../app_config.dart';
 import '../helpers/shimmer_helper.dart';
+import 'navigation_service.dart';
 
 final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
@@ -198,14 +196,7 @@ class PushNotificationService {
             from_notification: true);
       }));
     }else{
-      final Uri? url = Uri.tryParse(message['data']['link']);
-      if(url?.hasAbsolutePath ?? false){
-        if(url?.host ==  AppConfig.DOMAIN_PATH){
-          OneContext().context?.push(url!.path);
-        }else{
-          launchUrl(url!);
-        }
-      } // If there's no view it'll just open the app on the first view    }
+      NavigationService.handleUrls(message['data']['link']); 
     }
   }
 }

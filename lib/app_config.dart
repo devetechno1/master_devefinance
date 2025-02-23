@@ -28,6 +28,9 @@ class AppConfig {
   static String mobile_app_code = "en";
   static bool app_language_rtl = false;
 
+  //Default country config
+  static String default_country = "EG";
+
   //configure this
   static const bool HTTPS =
       true; //if you are using localhost , set this to false

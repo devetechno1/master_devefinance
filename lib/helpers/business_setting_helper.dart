@@ -72,6 +72,15 @@ class BusinessSettingHelper {
             }
           }
           break;
+        case 'must_otp':
+          {
+            if (element.value.toString() == "1") {
+              must_otp.$ = true;
+            } else {
+              must_otp.$ = false;
+            }
+          }
+          break;
         case 'conversation_system':
           {
             if (element.value.toString() == "1") {

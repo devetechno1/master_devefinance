@@ -132,6 +132,10 @@ final SharedValue<bool> mail_verification_status = SharedValue(
   value: false, // initial value
   key: "mail_verification_status", // disk storage key for shared_preferences
 );
+final SharedValue<bool> must_otp = SharedValue(
+  value: false, // initial value
+  key: "must_otp", // disk storage key for shared_preferences
+);
 
 final SharedValue<bool> conversation_system_status = SharedValue(
   value: false, // initial value

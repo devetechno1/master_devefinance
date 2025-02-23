@@ -242,6 +242,7 @@ class _CartState extends State<Cart> {
             ? UsefulElements.backToMain(context, go_back: false)
             : UsefulElements.backButton(context),
       ),
+      centerTitle: widget.from_navigation,
       title: Text(
         AppLocalizations.of(context)!.shopping_cart_ucf,
         style: TextStyles.buildAppBarTexStyle(),
