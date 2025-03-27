@@ -524,7 +524,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   borderRadius: BorderRadius.circular(8)),
               child: Text(
                 textAlign: TextAlign.center,
-                'Save Changes',
+                LangText(context).local.save_changes,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -574,7 +574,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               autofocus: false,
               style: TextStyle(color: Color(0xff999999), fontSize: 12),
               decoration:
-                  InputDecorations.buildInputDecoration_1(hint_text: "الاسم")
+                  InputDecorations.buildInputDecoration_1(hint_text: LangText(context).local.name_ucf)
                       .copyWith(
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide.none,
@@ -692,7 +692,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   borderRadius: BorderRadius.circular(8)),
               child: Text(
                 textAlign: TextAlign.center,
-                'Update Profile',
+                LangText(context).local.update_profile_ucf,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

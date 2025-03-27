@@ -241,10 +241,10 @@ class _OrderDetailsState extends State<OrderDetails> {
   _showCancelDialog(id) {
     return ConfirmDialog.show(
       context,
-      title: "Please ensure us.",
-      message: "Do you want to cancel this order?",
-      yesText: "Yes",
-      noText: "No",
+      title: LangText(context).local.pleaseEnsureUs,
+      message: LangText(context).local.do_you_want_to_cancel_this_order,
+      yesText: LangText(context).local.yes_ucf,
+      noText: LangText(context).local.no_ucf,
       pressYes: () {
         _onPressCancelOrder(id);
       },

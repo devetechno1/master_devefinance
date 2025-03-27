@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -620,8 +621,8 @@ class _ChatState extends State<Chat> {
                 child: TextField(
                   controller: _chatTextController,
                   textAlign: TextAlign.start,
-                  decoration: const InputDecoration(
-                    hintText: "  Type your message here . . .",
+                  decoration: InputDecoration(
+                    hintText: "  ${LangText(context).local.type_your_message_here}",
                     hintStyle:
                         TextStyle(color: Color(0xff999999), fontSize: 12),
                     border: InputBorder.none,
