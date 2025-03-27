@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 
 
 // final String this_year = DateTime.now().year.toString();
@@ -43,6 +45,8 @@ class AppConfig {
   static const String PROTOCOL = HTTPS ? "https://" : "http://";
   static const String RAW_BASE_URL = "${PROTOCOL}${DOMAIN_PATH}";
   static const String BASE_URL = "${RAW_BASE_URL}/${API_ENDPATH}";
+
+  static const LatLng initPlace = LatLng(30.723003387451172, 31.02609634399414);
 
   @override
   String toString() {
