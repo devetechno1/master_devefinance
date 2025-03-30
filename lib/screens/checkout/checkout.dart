@@ -295,7 +295,7 @@ class _CheckoutState extends State<Checkout> {
       );
       return;
     }
-    if (_grandTotalValue != 0.00) {
+    if (_grandTotalValue == 0.00) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.nothing_to_pay,
       );

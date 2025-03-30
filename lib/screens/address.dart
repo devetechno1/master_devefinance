@@ -299,9 +299,9 @@ class _AddressState extends State<Address> {
   }
 
   onAddressUpdate(context, index, id) async {
-    var address = _addressControllerListForUpdate[index].text.toString();
-    var postal_code = _postalCodeControllerListForUpdate[index].text.toString();
-    var phone = _phoneControllerListForUpdate[index].text.toString();
+    String address = _addressControllerListForUpdate[index].text.toString();
+    String postal_code = _postalCodeControllerListForUpdate[index].text.toString();
+    String phone = _phoneControllerListForUpdate[index].text.toString();
 
     if (address == "") {
       ToastComponent.showDialog(
@@ -384,18 +384,31 @@ class _AddressState extends State<Address> {
     });
   }
 
-  onSelectCityDuringAdd(city, setModalState) {
+  onSelectCityDuringAdd(City city, setModalState) {
     if (_selected_city != null && city.id == _selected_city!.id) {
       setModalState(() {
-        _cityController.text = city.name;
+        _cityController.text = city.name!;
       });
       return;
     }
     _selected_city = city;
     setModalState(() {
-      _cityController.text = city.name;
+      _cityController.text = city.name!;
     });
   }
+
+  // onSelectCityDuringUpdate(City city,int index, setModalState) {
+  //   if (_selected_city_list_for_update[index] != null && city.id == _selected_city_list_for_update[index]!.id) {
+  //     setModalState(() {
+  //       _cityControllerListForUpdate[index].text = city.name!;
+  //     });
+  //     return;
+  //   }
+  //   _selected_city_list_for_update[index] = city;
+  //   setModalState(() {
+  //     _cityControllerListForUpdate[index].text = city.name!;
+  //   });
+  // }
 
   onSelectCountryDuringUpdate(index, country, setModalState) {
     if (country.id == _selected_country_list_for_update[index].id) {
@@ -724,11 +737,11 @@ class _AddressState extends State<Address> {
                             controller: _cityController,
                             suggestionsCallback: (name) async {
                               if (_selected_state == null) {
-                                var cityResponse = await AddressRepository()
+                                CityResponse cityResponse = await AddressRepository()
                                     .getCityListByState(); // blank response
                                 return cityResponse.cities;
                               }
-                              var cityResponse = await AddressRepository()
+                              CityResponse cityResponse = await AddressRepository()
                                   .getCityListByState(
                                       state_id: _selected_state!.id,
                                       name: name);
@@ -980,7 +993,9 @@ class _AddressState extends State<Address> {
                                 ),
                               );
                             },
-                            onSelected: (value) {},
+                            onSelected: (value) {
+                              onSelectCountryDuringUpdate(index, value, setModalState);
+                            },
 
                           ),
                         ),
@@ -1058,7 +1073,9 @@ class _AddressState extends State<Address> {
                             //       AppLocalizations.of(context)!
                             //           .enter_state_ucf),
                             // ),
-                            onSelected: (value) {},
+                            onSelected: (value) {
+                              onSelectStateDuringUpdate(index, value, setModalState);
+                            },
                           ),
                         ),
                       ),
@@ -1078,11 +1095,11 @@ class _AddressState extends State<Address> {
                             suggestionsCallback: (name) async {
                               if (_selected_state_list_for_update[index] ==
                                   null) {
-                                var cityResponse = await AddressRepository()
+                                CityResponse cityResponse = await AddressRepository()
                                     .getCityListByState(); // blank response
                                 return cityResponse.cities;
                               }
-                              var cityResponse = await AddressRepository()
+                              CityResponse cityResponse = await AddressRepository()
                                   .getCityListByState(
                                       state_id: _selected_state_list_for_update[
                                               index]!
@@ -1101,17 +1118,19 @@ class _AddressState extends State<Address> {
                                             color: MyTheme.medium_grey))),
                               );
                             },
-                            itemBuilder: (context, dynamic city) {
+                            itemBuilder: (context, City city) {
                               //print(suggestion.toString());
                               return ListTile(
                                 dense: true,
                                 title: Text(
-                                  city.name,
+                                  city.name!,
                                   style: TextStyle(color: MyTheme.font_grey),
                                 ),
                               );
                             },
-                            onSelected: (value) {},
+                            onSelected: (City city) {
+                              onSelectCityDuringUpdate(index, city, setModalState);
+                            },
                           ),
                         ),
                       ),
