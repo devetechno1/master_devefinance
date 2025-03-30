@@ -295,7 +295,7 @@ class _CheckoutState extends State<Checkout> {
       );
       return;
     }
-    if (_grandTotalValue == 0.00) {
+    if (_grandTotalValue != 0.00) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.nothing_to_pay,
       );
@@ -631,7 +631,7 @@ class _CheckoutState extends State<Checkout> {
                           child: buildPaymentMethodList(),
                         ),
                         Container(
-                          height: 140,
+                          height: 292,
                         )
                       ],
                     ),
@@ -652,8 +652,8 @@ class _CheckoutState extends State<Checkout> {
                       ),
                       height: (widget.paymentFor == PaymentFor.ManualPayment) ||
                               (widget.paymentFor == PaymentFor.OrderRePayment)
-                          ? 80
-                          : 140,
+                          ? 232
+                          : 292,
                       //color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -666,6 +666,7 @@ class _CheckoutState extends State<Checkout> {
                                     child: buildApplyCouponRow(context),
                                   )
                                 : SizedBox.shrink(),
+                            CheckoutDetails(showTotal: false, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
                             grandTotalSection(),
                           ],
                         ),
@@ -907,8 +908,8 @@ class _CheckoutState extends State<Checkout> {
                   ),
                 ]),
           ),
-          Positioned(
-            right: 16,
+          PositionedDirectional(
+            end: 16,
             top: 16,
             child: buildPaymentMethodCheckContainer(
                 _selected_payment_method_key ==
@@ -978,34 +979,34 @@ class _CheckoutState extends State<Checkout> {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: const EdgeInsetsDirectional.only(start: 16.0),
               child: Text(
                 AppLocalizations.of(context)!.total_amount_ucf,
                 style: TextStyle(color: MyTheme.font_grey, fontSize: 14),
               ),
             ),
-            Visibility(
-              visible: widget.paymentFor != PaymentFor.ManualPayment,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: InkWell(
-                  onTap: () {
-                    onPressDetails();
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.see_details_all_lower,
-                    style: TextStyle(
-                      color: MyTheme.font_grey,
-                      fontSize: 12,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // Visibility(
+            //   visible: widget.paymentFor != PaymentFor.ManualPayment,
+            //   child: Padding(
+            //     padding: const EdgeInsetsDirectional.only(start: 8.0),
+            //     child: InkWell(
+            //       onTap: () {
+            //         onPressDetails();
+            //       },
+            //       child: Text(
+            //         AppLocalizations.of(context)!.see_details_all_lower,
+            //         style: TextStyle(
+            //           color: MyTheme.font_grey,
+            //           fontSize: 12,
+            //           decoration: TextDecoration.underline,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Spacer(),
             Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+              padding: const EdgeInsetsDirectional.only(end: 16.0),
               child: Text(balance(),
                   style: TextStyle(
                       color: MyTheme.accent_color,
@@ -1057,165 +1058,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       contentPadding: EdgeInsets.all(2).copyWith(top: 16),
-      content: Padding(
-        padding: const EdgeInsetsDirectional.only(start: 8.0, end: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 120,
-                      child: Text(
-                        AppLocalizations.of(context)!.subtotal_all_capital,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: MyTheme.font_grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      SystemConfig.systemCurrency != null
-                          ? _subTotalString!.replaceAll(
-                              SystemConfig.systemCurrency!.code!,
-                              SystemConfig.systemCurrency!.symbol!)
-                          : _subTotalString!,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                )),
-            
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 120,
-                      child: Text(
-                        AppLocalizations.of(context)!.tax_all_capital,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: MyTheme.font_grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      SystemConfig.systemCurrency != null
-                          ? _taxString!.replaceAll(
-                              SystemConfig.systemCurrency!.code!,
-                              SystemConfig.systemCurrency!.symbol!)
-                          : _taxString!,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                )),
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 120,
-                      child: Text(
-                        AppLocalizations.of(context)!
-                            .shipping_cost_all_capital,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: MyTheme.font_grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      SystemConfig.systemCurrency != null
-                          ? _shippingCostString.replaceAll(
-                              SystemConfig.systemCurrency!.code!,
-                              SystemConfig.systemCurrency!.symbol!)
-                          : _shippingCostString,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                )),
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 120,
-                      child: Text(
-                        AppLocalizations.of(context)!.discount_all_capital,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: MyTheme.font_grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      SystemConfig.systemCurrency != null
-                          ? _discountString!.replaceAll(
-                              SystemConfig.systemCurrency!.code!,
-                              SystemConfig.systemCurrency!.symbol!)
-                          : _discountString!,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                )),
-            Divider(
-              indent: 8.0,
-            ),
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 120,
-                      child: Text(
-                        AppLocalizations.of(context)!
-                            .grand_total_all_capital,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: MyTheme.font_grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      SystemConfig.systemCurrency != null
-                          ? _totalString!.replaceAll(
-                              SystemConfig.systemCurrency!.code!,
-                              SystemConfig.systemCurrency!.symbol!)
-                          : _totalString!,
-                      style: TextStyle(
-                          color: MyTheme.accent_color,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                )),
-          ],
-        ),
-      ),
+      content: CheckoutDetails(showTotal: true, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
       actions: [
         Btn.basic(
           child: Text(
@@ -1227,6 +1070,189 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class CheckoutDetails extends StatelessWidget {
+  const CheckoutDetails({
+    super.key,
+    required String? subTotalString,
+    required String? taxString,
+    required String shippingCostString,
+    required String? discountString,
+    required String? totalString, 
+    required this.showTotal,
+  }) : _subTotalString = subTotalString, _taxString = taxString, _shippingCostString = shippingCostString, _discountString = discountString, _totalString = totalString;
+
+  final String? _subTotalString;
+  final String? _taxString;
+  final String _shippingCostString;
+  final String? _discountString;
+  final String? _totalString;
+  final bool showTotal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8.0, end: 16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    child: Text(
+                      AppLocalizations.of(context)!.subtotal_all_capital,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    SystemConfig.systemCurrency != null
+                        ? _subTotalString!.replaceAll(
+                            SystemConfig.systemCurrency!.code!,
+                            SystemConfig.systemCurrency!.symbol!)
+                        : _subTotalString!,
+                    style: TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              )),
+          
+          Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    child: Text(
+                      AppLocalizations.of(context)!.tax_all_capital,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    SystemConfig.systemCurrency != null
+                        ? _taxString!.replaceAll(
+                            SystemConfig.systemCurrency!.code!,
+                            SystemConfig.systemCurrency!.symbol!)
+                        : _taxString!,
+                    style: TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              )),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .shipping_cost_all_capital,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    SystemConfig.systemCurrency != null
+                        ? _shippingCostString.replaceAll(
+                            SystemConfig.systemCurrency!.code!,
+                            SystemConfig.systemCurrency!.symbol!)
+                        : _shippingCostString,
+                    style: TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              )),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    child: Text(
+                      AppLocalizations.of(context)!.discount_all_capital,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    SystemConfig.systemCurrency != null
+                        ? _discountString!.replaceAll(
+                            SystemConfig.systemCurrency!.code!,
+                            SystemConfig.systemCurrency!.symbol!)
+                        : _discountString!,
+                    style: TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              )),
+          Divider(
+            indent: 8.0,
+          ),
+          if(showTotal)
+          Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .grand_total_all_capital,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    SystemConfig.systemCurrency != null
+                        ? _totalString!.replaceAll(
+                            SystemConfig.systemCurrency!.code!,
+                            SystemConfig.systemCurrency!.symbol!)
+                        : _totalString!,
+                    style: TextStyle(
+                        color: MyTheme.accent_color,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              )),
+        ],
+      ),
     );
   }
 }

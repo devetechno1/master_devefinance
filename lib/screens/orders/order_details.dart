@@ -33,9 +33,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class OrderDetails extends StatefulWidget {
-  int? id;
+  final int? id;
   final bool from_notification;
-  bool go_back;
+  final bool go_back;
 
   OrderDetails(
       {Key? key, this.id, this.from_notification = false, this.go_back = true})
@@ -275,7 +275,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       context,
       MaterialPageRoute(
         builder: (context) => Checkout(
-          title: "Order Re Payment",
+          title: LangText(context).local.order_repayment,
           rechargeAmount: convertedAmount,
           paymentFor: PaymentFor.OrderRePayment,
           packageId: 0,
