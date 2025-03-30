@@ -24,7 +24,6 @@ import 'lang_config.dart';
 import 'my_theme.dart';
 import 'other_config.dart';
 import 'presenter/cart_counter.dart';
-import 'presenter/cart_provider.dart';
 import 'presenter/currency_presenter.dart';
 import 'presenter/home_presenter.dart';
 import 'presenter/select_address_provider.dart';
@@ -261,7 +260,6 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (context) => CartCounter()),
-        ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => SelectAddressProvider()),
         ChangeNotifierProvider(
             create: (context) => UnReadNotificationCounter()),
