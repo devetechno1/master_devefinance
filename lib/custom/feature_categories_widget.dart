@@ -41,6 +41,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) {
                       return CategoryProducts(
+                        name: homeData.featuredCategoryList[index].name ?? '',
                         slug: homeData.featuredCategoryList[index].slug,
                       );
                     },
