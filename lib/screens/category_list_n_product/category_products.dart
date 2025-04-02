@@ -184,7 +184,6 @@ class _CategoryProductsState extends State<CategoryProducts> {
       child: Row(
         children: [
           Container(
-            width: 20,
             child: UsefulElements.backButton(context, color: "black"),
           ),
           Container(

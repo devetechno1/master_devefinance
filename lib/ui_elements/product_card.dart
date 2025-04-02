@@ -1,11 +1,11 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
 
 import '../custom/lang_text.dart';
 import '../helpers/shared_value_helper.dart';
 import '../screens/auction/auction_products_details.dart';
+import '../screens/product/product_details.dart';
 
 class ProductCard extends StatefulWidget {
   final dynamic identifier;
@@ -18,6 +18,7 @@ class ProductCard extends StatefulWidget {
   final bool has_discount;
   final bool? isWholesale;
   final String? discount;
+  final void Function()? onPopFromProduct;
 
   ProductCard({
     Key? key,
@@ -30,7 +31,8 @@ class ProductCard extends StatefulWidget {
     this.stroked_price,
     this.has_discount = false,
     bool? is_wholesale = false, // Corrected to use is_wholesale
-    this.discount,
+    this.discount, 
+    this.onPopFromProduct,
   })  : isWholesale = is_wholesale, // Assigning isWholesale to is_wholesale
         super(key: key);
 
@@ -54,7 +56,7 @@ class _ProductCardState extends State<ProductCard> {
                   : ProductDetails(slug: widget.slug);
             },
           ),
-        );
+        ).then((_) => widget.onPopFromProduct?.call());
       },
       child: Container(
         child: Stack(
