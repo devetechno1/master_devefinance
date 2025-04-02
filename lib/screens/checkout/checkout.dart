@@ -33,8 +33,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 
 import '../../custom/loading.dart';
+import '../../data_model/order_detail_response.dart';
 import '../../helpers/auth_helper.dart';
 import '../../repositories/guest_checkout_repository.dart';
+import '../../repositories/order_repository.dart';
 import '../guest_checkout_pages/guest_checkout_address.dart';
 
 class Checkout extends StatefulWidget {
@@ -173,6 +175,28 @@ class _CheckoutState extends State<Checkout> {
 
   fetchSummary() async {
     print('in fetch summery');
+    if(widget.paymentFor == PaymentFor.ManualPayment || widget.paymentFor == PaymentFor.OrderRePayment){
+      OrderDetailResponse? orderDetailsResponse = await OrderRepository().getOrderDetails(id: widget.order_id);
+
+      DetailedOrder? details = orderDetailsResponse?.detailed_orders?.firstOrNull;
+
+      if (details != null) {
+        _subTotalString = details.subtotal;
+        _taxString = details.tax;
+        _shippingCostString = details.shipping_cost ?? '';
+        _discountString = details.coupon_discount;
+        _totalString = details.grand_total;
+        _grandTotalValue = double.tryParse(details.grand_total ?? '');
+        _used_coupon_code = details.coupon_discount ?? _used_coupon_code;
+        _couponController.text = _used_coupon_code;
+        _coupon_applied = details.coupon_discount != null;
+        setState(() {});
+      }
+
+
+      return;
+    }
+        
     var cartSummaryResponse = await CartRepository().getCartSummaryResponse();
 
     if (cartSummaryResponse != null) {
@@ -500,9 +524,8 @@ class _CheckoutState extends State<Checkout> {
       pay_by_wallet();
     } else if (_selected_payment_method == "cash_payment") {
       pay_by_cod();
-    } else if (_selected_payment_method == "manual_payment" &&
-        widget.paymentFor == PaymentFor.Order) {
-      pay_by_manual_payment();
+    } else if (_selected_payment_method == "manual_payment" && widget.paymentFor == PaymentFor.Order) {
+        pay_by_manual_payment();
     } else if (_selected_payment_method == "manual_payment" &&
         (widget.paymentFor == PaymentFor.ManualPayment ||
             widget.paymentFor == PaymentFor.WalletRecharge ||
