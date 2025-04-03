@@ -14,6 +14,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
+import '../app_config.dart';
+import '../custom/input_decorations.dart';
+import '../custom/intl_phone_input.dart';
+import 'guest_checkout_pages/old_guest.dart';
 
 class Address extends StatefulWidget {
   const Address({Key? key, this.from_shipping_info = false}) : super(key: key);
@@ -27,20 +33,10 @@ class _AddressState extends State<Address> {
   ScrollController _mainScrollController = ScrollController();
 
   int? _default_shipping_address = 0;
-  City? _selected_city;
-  Country? _selected_country;
-  MyState? _selected_state;
 
   bool _isInitial = true;
   List<dynamic> _shippingAddressList = [];
 
-  //controllers for add purpose
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _postalCodeController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _cityController = TextEditingController();
-  TextEditingController _stateController = TextEditingController();
-  TextEditingController _countryController = TextEditingController();
 
   //for update purpose
   List<TextEditingController> _addressControllerListForUpdate = [];
@@ -112,14 +108,6 @@ class _AddressState extends State<Address> {
     _default_shipping_address = 0;
     _shippingAddressList.clear();
     _isInitial = true;
-
-    _addressController.clear();
-    _postalCodeController.clear();
-    _phoneController.clear();
-
-    _countryController.clear();
-    _stateController.clear();
-    _cityController.clear();
 
     //update-ables
     _addressControllerListForUpdate.clear();
@@ -240,64 +228,6 @@ class _AddressState extends State<Address> {
     afterDeletingAnAddress();
   }
 
-  onAddressAdd(context) async {
-    var address = _addressController.text.toString();
-    var postal_code = _postalCodeController.text.toString();
-    var phone = _phoneController.text.toString();
-
-    if (address == "") {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_address_ucf,
-      );
-      return;
-    }
-
-    if (_selected_country == null) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_country,
-      );
-      return;
-    }
-
-    if (_selected_state == null) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_state,
-      );
-      return;
-    }
-
-    if (_selected_city == null) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_city,
-      );
-      return;
-    }
-
-    var addressAddResponse = await AddressRepository().getAddressAddResponse(
-        address: address,
-        country_id: _selected_country!.id,
-        state_id: _selected_state!.id,
-        city_id: _selected_city!.id,
-        postal_code: postal_code,
-        phone: phone);
-
-    if (addressAddResponse.result == false) {
-      ToastComponent.showDialog(
-        addressAddResponse.message,
-      );
-      return;
-    }
-
-    ToastComponent.showDialog(
-      addressAddResponse.message,
-    );
-
-    Navigator.of(context, rootNavigator: true).pop();
-    await afterAddingAnAddress();
-    final int i = _shippingAddressList.length - 1;
-    _choosePlace(i);
-  }
-
   onAddressUpdate(context, index, id) async {
     String address = _addressControllerListForUpdate[index].text.toString();
     String postal_code = _postalCodeControllerListForUpdate[index].text.toString();
@@ -348,55 +278,6 @@ class _AddressState extends State<Address> {
     Navigator.of(context, rootNavigator: true).pop();
     afterUpdatingAnAddress();
   }
-
-  onSelectCountryDuringAdd(country, setModalState) {
-    if (_selected_country != null && country.id == _selected_country!.id) {
-      setModalState(() {
-        _countryController.text = country.name;
-      });
-      return;
-    }
-    _selected_country = country;
-    _selected_state = null;
-    _selected_city = null;
-    setState(() {});
-
-    setModalState(() {
-      _countryController.text = country.name;
-      _stateController.text = "";
-      _cityController.text = "";
-    });
-  }
-
-  onSelectStateDuringAdd(state, setModalState) {
-    if (_selected_state != null && state.id == _selected_state!.id) {
-      setModalState(() {
-        _stateController.text = state.name;
-      });
-      return;
-    }
-    _selected_state = state;
-    _selected_city = null;
-    setState(() {});
-    setModalState(() {
-      _stateController.text = state.name;
-      _cityController.text = "";
-    });
-  }
-
-  onSelectCityDuringAdd(City city, setModalState) {
-    if (_selected_city != null && city.id == _selected_city!.id) {
-      setModalState(() {
-        _cityController.text = city.name!;
-      });
-      return;
-    }
-    _selected_city = city;
-    setModalState(() {
-      _cityController.text = city.name!;
-    });
-  }
-
   // onSelectCityDuringUpdate(City city,int index, setModalState) {
   //   if (_selected_city_list_for_update[index] != null && city.id == _selected_city_list_for_update[index]!.id) {
   //     setModalState(() {
@@ -558,338 +439,11 @@ class _AddressState extends State<Address> {
     return showDialog(
         context: context,
         builder: (context) {
-          return StatefulBuilder(builder: (BuildContext context,
-              StateSetter setModalState /*You can rename this!*/) {
-            return AlertDialog(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              insetPadding: EdgeInsets.symmetric(horizontal: 10),
-              contentPadding: EdgeInsets.only(
-                  top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
-              content: Container(
-                width: 400,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                            "${AppLocalizations.of(context)!.address_ucf} *",
-                            style: TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            controller: _addressController,
-                            autofocus: false,
-                            maxLines: null,
-                            keyboardType: TextInputType.multiline,
-                            decoration: buildAddressInputDecoration(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .enter_address_ucf),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                            "${AppLocalizations.of(context)!.country_ucf} *",
-                            style: TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
-                        child: Container(
-                          height: 40,
-                          child: TypeAheadField(
-                            controller: _countryController,
-                            builder: (context, controller, focusNode) {
-                              return TextField(
-                                controller: controller,
-                                focusNode: focusNode,
-                                obscureText: false,
-                                decoration: buildAddressInputDecoration(
-                                    context,
-                                    AppLocalizations.of(context)!
-                                        .enter_country_ucf),
-                              );
-                            },
-                            suggestionsCallback: (name) async {
-                              var countryResponse = await AddressRepository()
-                                  .getCountryList(name: name);
-                              return countryResponse.countries;
-                            },
-                            loadingBuilder: (context) {
-                              return Container(
-                                height: 50,
-                                child: Center(
-                                    child: Text(
-                                        AppLocalizations.of(context)!
-                                            .loading_countries_ucf,
-                                        style: TextStyle(
-                                            color: MyTheme.medium_grey))),
-                              );
-                            },
-                            itemBuilder: (context, dynamic country) {
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  country.name,
-                                  style: TextStyle(color: MyTheme.font_grey),
-                                ),
-                              );
-                            },
-                            onSelected: (value) {
-                              onSelectCountryDuringAdd(value, setModalState);
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                            "${AppLocalizations.of(context)!.state_ucf} *",
-                            style: TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Container(
-                          height: 40,
-                          child: TypeAheadField(
-                            builder: (context, controller, focusNode) {
-                              return TextField(
-                                controller: controller,
-                                focusNode: focusNode,
-                                obscureText: false,
-                                decoration: buildAddressInputDecoration(
-                                    context,
-                                    AppLocalizations.of(context)!
-                                        .enter_state_ucf),
-                              );
-                            },
-                            controller: _stateController,
-                            suggestionsCallback: (name) async {
-                              if (_selected_country == null) {
-                                var stateResponse = await AddressRepository()
-                                    .getStateListByCountry(); // blank response
-                                return stateResponse.states;
-                              }
-                              var stateResponse = await AddressRepository()
-                                  .getStateListByCountry(
-                                      country_id: _selected_country!.id,
-                                      name: name);
-                              return stateResponse.states;
-                            },
-                            loadingBuilder: (context) {
-                              return Container(
-                                height: 50,
-                                child: Center(
-                                    child: Text(
-                                        AppLocalizations.of(context)!
-                                            .loading_states_ucf,
-                                        style: TextStyle(
-                                            color: MyTheme.medium_grey))),
-                              );
-                            },
-                            itemBuilder: (context, dynamic state) {
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  state.name,
-                                  style: TextStyle(color: MyTheme.font_grey),
-                                ),
-                              );
-                            },
-                            onSelected: (value) {
-                              onSelectStateDuringAdd(value, setModalState);
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                            "${AppLocalizations.of(context)!.city_ucf} *",
-                            style: TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Container(
-                          height: 40,
-                          child: TypeAheadField(
-                            controller: _cityController,
-                            suggestionsCallback: (name) async {
-                              if (_selected_state == null) {
-                                CityResponse cityResponse = await AddressRepository()
-                                    .getCityListByState(); // blank response
-                                return cityResponse.cities;
-                              }
-                              CityResponse cityResponse = await AddressRepository()
-                                  .getCityListByState(
-                                      state_id: _selected_state!.id,
-                                      name: name);
-                              return cityResponse.cities;
-                            },
-                            loadingBuilder: (context) {
-                              return Container(
-                                height: 50,
-                                child: Center(
-                                    child: Text(
-                                        AppLocalizations.of(context)!
-                                            .loading_cities_ucf,
-                                        style: TextStyle(
-                                            color: MyTheme.medium_grey))),
-                              );
-                            },
-                            itemBuilder: (context, dynamic city) {
-                              //print(suggestion.toString());
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  city.name,
-                                  style: TextStyle(color: MyTheme.font_grey),
-                                ),
-                              );
-                            },
-                            onSelected: (value) {
-                              onSelectCityDuringAdd(value, setModalState);
-                            },
-                            builder: (context, controller, focusNode) {
-                              return TextField(
-                                controller: controller,
-                                focusNode: focusNode,
-                                obscureText: false,
-                                decoration: buildAddressInputDecoration(
-                                    context,
-                                    AppLocalizations.of(context)!
-                                        .enter_city_ucf),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(AppLocalizations.of(context)!.postal_code,
-                            style: TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            controller: _postalCodeController,
-                            autofocus: false,
-                            decoration: buildAddressInputDecoration(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .enter_postal_code_ucf),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(AppLocalizations.of(context)!.phone_ucf,
-                            style: TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            controller: _phoneController,
-                            autofocus: false,
-                            decoration: buildAddressInputDecoration(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .enter_phone_number),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Btn.minWidthFixHeight(
-                        minWidth: 75,
-                        height: 40,
-                        color: Color.fromRGBO(253, 253, 253, 1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            side: BorderSide(
-                                color: MyTheme.light_grey, width: 1)),
-                        child: Text(
-                          LangText(context).local.close_ucf,
-                          style: TextStyle(
-                            color: MyTheme.accent_color,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context, rootNavigator: true).pop();
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 1,
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(start: 28.0),
-                      child: Btn.minWidthFixHeight(
-                        minWidth: 75,
-                        height: 40,
-                        color: MyTheme.accent_color,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Text(
-                          LangText(context).local.continue_ucf,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onPressed: () {
-                          onAddressAdd(context);
-                        },
-                      ),
-                    )
-                  ],
-                )
-              ],
-            );
-          });
+          return AddAddressDialog(
+            shippingAddressList: _shippingAddressList, 
+            afterAddingAnAddress: afterAddingAnAddress, 
+            choosePlace: _choosePlace,
+          );
         });
   }
 
@@ -911,7 +465,8 @@ class _AddressState extends State<Address> {
             const Radius.circular(6.0),
           ),
         ),
-        contentPadding: EdgeInsetsDirectional.only(start: 8.0, top: 6.0, bottom: 6.0));
+        contentPadding:
+            EdgeInsetsDirectional.only(start: 8.0, top: 6.0, bottom: 6.0));
   }
 
   Future buildShowUpdateFormDialog(BuildContext context, index) {
@@ -994,9 +549,9 @@ class _AddressState extends State<Address> {
                               );
                             },
                             onSelected: (value) {
-                              onSelectCountryDuringUpdate(index, value, setModalState);
+                              onSelectCountryDuringUpdate(
+                                  index, value, setModalState);
                             },
-
                           ),
                         ),
                       ),
@@ -1074,7 +629,8 @@ class _AddressState extends State<Address> {
                             //           .enter_state_ucf),
                             // ),
                             onSelected: (value) {
-                              onSelectStateDuringUpdate(index, value, setModalState);
+                              onSelectStateDuringUpdate(
+                                  index, value, setModalState);
                             },
                           ),
                         ),
@@ -1095,12 +651,13 @@ class _AddressState extends State<Address> {
                             suggestionsCallback: (name) async {
                               if (_selected_state_list_for_update[index] ==
                                   null) {
-                                CityResponse cityResponse = await AddressRepository()
-                                    .getCityListByState(); // blank response
+                                CityResponse cityResponse =
+                                    await AddressRepository()
+                                        .getCityListByState(); // blank response
                                 return cityResponse.cities;
                               }
-                              CityResponse cityResponse = await AddressRepository()
-                                  .getCityListByState(
+                              CityResponse cityResponse =
+                                  await AddressRepository().getCityListByState(
                                       state_id: _selected_state_list_for_update[
                                               index]!
                                           .id,
@@ -1129,7 +686,8 @@ class _AddressState extends State<Address> {
                               );
                             },
                             onSelected: (City city) {
-                              onSelectCityDuringUpdate(index, city, setModalState);
+                              onSelectCityDuringUpdate(
+                                  index, city, setModalState);
                             },
                           ),
                         ),
@@ -1243,7 +801,11 @@ class _AddressState extends State<Address> {
       centerTitle: false,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(app_language_rtl.$! ?  CupertinoIcons.arrow_right : CupertinoIcons.arrow_left, color: MyTheme.dark_font_grey),
+          icon: Icon(
+              app_language_rtl.$!
+                  ? CupertinoIcons.arrow_right
+                  : CupertinoIcons.arrow_left,
+              color: MyTheme.dark_font_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -1314,7 +876,7 @@ class _AddressState extends State<Address> {
     return InkWell(
       borderRadius: BorderRadius.circular(6),
       onTap: () {
-        if(_shippingAddressList[index].location_available != true){
+        if (_shippingAddressList[index].location_available != true) {
           _choosePlace(index);
           // ToastComponent.showDialog(AppLocalizations.of(context)!.you_have_to_add_location_first,isError: true,gravity: ToastGravity.BOTTOM);
           return;
@@ -1343,76 +905,77 @@ class _AddressState extends State<Address> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LineData(
-                    name: AppLocalizations.of(context)!.address_ucf, 
+                    name: AppLocalizations.of(context)!.address_ucf,
                     body: "${_shippingAddressList[index].address}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.city_ucf, 
+                    name: AppLocalizations.of(context)!.city_ucf,
                     body: "${_shippingAddressList[index].city_name}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.state_ucf, 
+                    name: AppLocalizations.of(context)!.state_ucf,
                     body: "${_shippingAddressList[index].state_name}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.country_ucf, 
+                    name: AppLocalizations.of(context)!.country_ucf,
                     body: "${_shippingAddressList[index].country_name}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.postal_code, 
+                    name: AppLocalizations.of(context)!.postal_code,
                     body: "${_shippingAddressList[index].postal_code}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.phone_ucf, 
+                    name: AppLocalizations.of(context)!.phone_ucf,
                     body: "${_shippingAddressList[index].phone}",
                   ),
-                  _shippingAddressList[index].location_available != true 
-                  ? Center(
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 8),
-                      padding: EdgeInsets.symmetric(vertical: 3,horizontal: 9),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.error,
-                        borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: Text(
-                          AppLocalizations.of(context)!.you_have_to_add_location_here,
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                  _shippingAddressList[index].location_available != true
+                      ? Center(
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 8),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 9),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.error,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .you_have_to_add_location_here,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
+                        )
+                      : Column(
+                          children: [
+                            LineData(
+                              name: AppLocalizations.of(context)!.latitude,
+                              body: "${_shippingAddressList[index].lat}",
+                            ),
+                            LineData(
+                              name: AppLocalizations.of(context)!.longitude,
+                              body: "${_shippingAddressList[index].lang}",
+                            ),
+                          ],
                         ),
-                    ),
-                  )
-                  : Column(
-                    children: [
-                      LineData(
-                        name: AppLocalizations.of(context)!.latitude, 
-                        body: "${_shippingAddressList[index].lat}",
-                      ),
-                      LineData(
-                        name: AppLocalizations.of(context)!.longitude, 
-                        body: "${_shippingAddressList[index].lang}",
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
             // app_language_rtl.$!
-                // ? 
-                PositionedDirectional(
-                    end: 0.0,
-                    top: 20,
-                    child: showOptions(listIndex: index),
-                  )
-                // : Positioned(
-                //     right: 0.0,
-                //     top: 10.0,
-                //     child: showOptions(listIndex: index),
-                //   ),
+            // ?
+            PositionedDirectional(
+              end: 0.0,
+              top: 20,
+              child: showOptions(listIndex: index),
+            )
+            // : Positioned(
+            //     right: 0.0,
+            //     top: 10.0,
+            //     child: showOptions(listIndex: index),
+            //   ),
             /*  app_language_rtl.$
                 ? Positioned(
                     left: 0,
@@ -1517,10 +1080,7 @@ class _AddressState extends State<Address> {
         padding: EdgeInsets.symmetric(horizontal: 15),
         alignment: AlignmentDirectional.topEnd,
         child: Image.asset("assets/more.png",
-            width: 4,
-            height: 16,
-            fit: BoxFit.contain,
-            color: MyTheme.grey_153),
+            width: 4, height: 16, fit: BoxFit.contain, color: MyTheme.grey_153),
       ),
       onSelected: (MenuOptions result) {
         _tabOption(result.index, listIndex);
@@ -1550,13 +1110,12 @@ class _AddressState extends State<Address> {
 class LineData extends StatelessWidget {
   const LineData({super.key, required this.name, required this.body});
 
-  final String name; 
-  final String? body; 
-
+  final String name;
+  final String? body;
 
   @override
   Widget build(BuildContext context) {
-    if(body?.isNotEmpty != true) return const SizedBox();
+    if (body?.isNotEmpty != true) return const SizedBox();
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
@@ -1576,8 +1135,7 @@ class LineData extends StatelessWidget {
               body!,
               maxLines: 2,
               style: TextStyle(
-                  color: MyTheme.dark_grey,
-                  fontWeight: FontWeight.w600),
+                  color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -1587,3 +1145,541 @@ class LineData extends StatelessWidget {
 }
 
 enum MenuOptions { Edit, Delete, AddLocation }
+
+class AddAddressDialog extends StatefulWidget {
+  const AddAddressDialog({
+    super.key, 
+    required this.shippingAddressList, 
+    required this.afterAddingAnAddress, 
+    required this.choosePlace,
+  });
+
+  final List<dynamic> shippingAddressList;
+  final Future<void> Function() afterAddingAnAddress;
+  final void Function(int) choosePlace;
+
+
+  @override
+  State<AddAddressDialog> createState() => _AddAddressDialogState();
+}
+
+class _AddAddressDialogState extends State<AddAddressDialog> {
+
+  City? _selected_city;
+  Country? _selected_country;
+  MyState? _selected_state;
+
+    //controllers for add purpose
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _postalCodeController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _cityController = TextEditingController();
+  TextEditingController _stateController = TextEditingController();
+  TextEditingController _countryController = TextEditingController();
+  
+  String _phone = "";
+  bool _isValidPhoneNumber = false;
+  List<String?> countries_code = <String?>[];
+  PhoneNumber initialValue = PhoneNumber(isoCode: AppConfig.default_country);
+  
+  Future<void> fetch_country() async {
+    var data = await AddressRepository().getCountryList();
+    data.countries?.forEach((c) => countries_code.add(c.code));
+    setState(() {});
+  }
+
+  Future<void> getInitVal() async {
+    _phone = user_phone.$.trim();
+    initialValue = await PhoneNumber.getRegionInfoFromPhoneNumber(_phone);
+    _phoneController.text = initialValue.parseNumber().replaceAll("+", '');
+    _isValidPhoneNumber = _phoneController.text.isNotEmpty;
+    setState(() {});
+  }
+
+  void reset(){
+    _addressController.clear();
+    _postalCodeController.clear();
+    _phoneController.clear();
+    _countryController.clear();
+    _stateController.clear();
+    _cityController.clear();
+  }
+
+  
+  void _onAddressAdd() async {
+    String address = _addressController.text.toString();
+    String postal_code = _postalCodeController.text.toString();
+    // var phone = _phoneController.text.toString();
+
+    if (address.trim() == "") {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.enter_address_ucf,
+        color: Theme.of(context).colorScheme.error,
+      );
+      return;
+    }
+
+    if (_selected_country == null) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.select_a_country,
+        color: Theme.of(context).colorScheme.error,
+      );
+      return;
+    }
+
+    if (_selected_state == null) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.select_a_state,
+        color: Theme.of(context).colorScheme.error,
+      );
+      return;
+    }
+
+    if (_selected_city == null) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.select_a_city,
+        color: Theme.of(context).colorScheme.error,
+      );
+      return;
+    }
+
+    if (_phone.trim().isEmpty) {
+      ToastComponent.showDialog(
+          AppLocalizations.of(context)!.enter_phone_number,
+          color: Theme.of(context).colorScheme.error);
+      return;
+    } else if (!_isValidPhoneNumber) {
+      ToastComponent.showDialog(
+          AppLocalizations.of(context)!.invalid_phone_number,
+          color: Theme.of(context).colorScheme.error);
+      return;
+    }
+
+    var addressAddResponse = await AddressRepository().getAddressAddResponse(
+        address: address,
+        country_id: _selected_country!.id,
+        state_id: _selected_state!.id,
+        city_id: _selected_city!.id,
+        postal_code: postal_code,
+        phone: _phone);
+
+    if (addressAddResponse.result == false) {
+      ToastComponent.showDialog(
+        addressAddResponse.message,
+        color: Theme.of(context).colorScheme.error,
+      );
+      return;
+    }
+
+    ToastComponent.showDialog(
+      addressAddResponse.message,
+        color: Colors.green,
+    );
+
+    Navigator.of(context, rootNavigator: true).pop();
+    await widget.afterAddingAnAddress();
+    final int i = widget.shippingAddressList.length - 1;
+    widget.choosePlace(i);
+  }
+
+    onSelectCountryDuringAdd(country) {
+    if (_selected_country != null && country.id == _selected_country!.id) {
+      setState(() {
+        _countryController.text = country.name;
+      });
+      return;
+    }
+    _selected_country = country;
+    _selected_state = null;
+    _selected_city = null;
+    setState(() {});
+
+    setState(() {
+      _countryController.text = country.name;
+      _stateController.text = "";
+      _cityController.text = "";
+    });
+  }
+
+  onSelectStateDuringAdd(state) {
+    if (_selected_state != null && state.id == _selected_state!.id) {
+      setState(() {
+        _stateController.text = state.name;
+      });
+      return;
+    }
+    _selected_state = state;
+    _selected_city = null;
+    setState(() {});
+    setState(() {
+      _stateController.text = state.name;
+      _cityController.text = "";
+    });
+  }
+
+  onSelectCityDuringAdd(City city) {
+    if (_selected_city != null && city.id == _selected_city!.id) {
+      setState(() {
+        _cityController.text = city.name!;
+      });
+      return;
+    }
+    _selected_city = city;
+    setState(() {
+      _cityController.text = city.name!;
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    getInitVal();
+    fetch_country();
+  }
+
+  @override
+  void dispose() {
+    _addressController.dispose();
+    _postalCodeController.dispose();
+    _phoneController.dispose();
+    _countryController.dispose();
+    _stateController.dispose();
+    _cityController.dispose();
+    super.dispose();
+  }
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        insetPadding: EdgeInsets.symmetric(horizontal: 10),
+        contentPadding:
+            EdgeInsets.only(top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
+        content: Container(
+          width: 400,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text("${AppLocalizations.of(context)!.address_ucf} *",
+                      style: TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 14.0),
+                  child: Container(
+                    height: 40,
+                    child: TextField(
+                      controller: _addressController,
+                      autofocus: false,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)!.enter_address_ucf),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text("${AppLocalizations.of(context)!.country_ucf} *",
+                      style: TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 14.0),
+                  child: Container(
+                    height: 40,
+                    child: TypeAheadField(
+                      controller: _countryController,
+                      builder: (context, controller, focusNode) {
+                        return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          obscureText: false,
+                          decoration: buildAddressInputDecoration(context,
+                              AppLocalizations.of(context)!.enter_country_ucf),
+                        );
+                      },
+                      suggestionsCallback: (name) async {
+                        var countryResponse = await AddressRepository()
+                            .getCountryList(name: name);
+                        return countryResponse.countries;
+                      },
+                      loadingBuilder: (context) {
+                        return Container(
+                          height: 50,
+                          child: Center(
+                              child: Text(
+                                  AppLocalizations.of(context)!
+                                      .loading_countries_ucf,
+                                  style:
+                                      TextStyle(color: MyTheme.medium_grey))),
+                        );
+                      },
+                      itemBuilder: (context, dynamic country) {
+                        return ListTile(
+                          dense: true,
+                          title: Text(
+                            country.name,
+                            style: TextStyle(color: MyTheme.font_grey),
+                          ),
+                        );
+                      },
+                      onSelected: (value) => onSelectCountryDuringAdd(value),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text("${AppLocalizations.of(context)!.state_ucf} *",
+                      style: TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Container(
+                    height: 40,
+                    child: TypeAheadField(
+                      builder: (context, controller, focusNode) {
+                        return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          obscureText: false,
+                          decoration: buildAddressInputDecoration(context,
+                              AppLocalizations.of(context)!.enter_state_ucf),
+                        );
+                      },
+                      controller: _stateController,
+                      suggestionsCallback: (name) async {
+                        if (_selected_country == null) {
+                          var stateResponse = await AddressRepository()
+                              .getStateListByCountry(); // blank response
+                          return stateResponse.states;
+                        }
+                        var stateResponse = await AddressRepository()
+                            .getStateListByCountry(
+                                country_id: _selected_country!.id, name: name);
+                        return stateResponse.states;
+                      },
+                      loadingBuilder: (context) {
+                        return Container(
+                          height: 50,
+                          child: Center(
+                              child: Text(
+                                  AppLocalizations.of(context)!
+                                      .loading_states_ucf,
+                                  style:
+                                      TextStyle(color: MyTheme.medium_grey))),
+                        );
+                      },
+                      itemBuilder: (context, dynamic state) {
+                        return ListTile(
+                          dense: true,
+                          title: Text(
+                            state.name,
+                            style: TextStyle(color: MyTheme.font_grey),
+                          ),
+                        );
+                      },
+                      onSelected: (value) => onSelectStateDuringAdd(value),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text("${AppLocalizations.of(context)!.city_ucf} *",
+                      style: TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Container(
+                    height: 40,
+                    child: TypeAheadField(
+                      controller: _cityController,
+
+                      suggestionsCallback: (name) async {
+                        if (_selected_state == null) {
+                          CityResponse cityResponse = await AddressRepository()
+                              .getCityListByState(); // blank response
+                          return cityResponse.cities;
+                        }
+                        CityResponse cityResponse = await AddressRepository()
+                            .getCityListByState(
+                                state_id: _selected_state!.id, name: name);
+                        return cityResponse.cities;
+                      },
+                      loadingBuilder: (context) {
+                        return Container(
+                          height: 50,
+                          child: Center(
+                              child: Text(
+                                  AppLocalizations.of(context)!
+                                      .loading_cities_ucf,
+                                  style:
+                                      TextStyle(color: MyTheme.medium_grey))),
+                        );
+                      },
+                      itemBuilder: (context, dynamic city) {
+                        //print(suggestion.toString());
+                        return ListTile(
+                          dense: true,
+                          title: Text(
+                            city.name,
+                            style: TextStyle(color: MyTheme.font_grey),
+                          ),
+                        );
+                      },
+                      onSelected: (value) => onSelectCityDuringAdd(value),
+                      builder: (context, controller, focusNode) {
+                        return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          obscureText: false,
+                          decoration: buildAddressInputDecoration(context,
+                              AppLocalizations.of(context)!.enter_city_ucf),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
+                      style: TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(6),
+                    // boxShadow: [MyTheme.commonShadow()],
+                  ),
+                  height: 40,
+                  child: CustomInternationalPhoneNumberInput(
+                    countries: countries_code,
+                    height: 40,
+                    backgroundColor: Colors.transparent,
+                    hintText: LangText(context).local.phone_number_ucf,
+                    errorMessage: LangText(context).local.invalid_phone_number,
+                    initialValue: initialValue,
+                    onInputChanged: (PhoneNumber number) {
+                      setState(() {
+                        if (number.isoCode != null)
+                          AppConfig.default_country = number.isoCode!;
+                        _phone = number.phoneNumber ?? '';
+                        print(_phone);
+                      });
+                    },
+                    onInputValidated: (bool value) {
+                      print(value);
+                      _isValidPhoneNumber = value;
+                      setState(() {});
+                    },
+                    selectorConfig: SelectorConfig(
+                        selectorType: PhoneInputSelectorType.DIALOG),
+                    ignoreBlank: false,
+                    autoValidateMode: AutovalidateMode.disabled,
+                    selectorTextStyle: TextStyle(color: MyTheme.font_grey),
+                    textStyle: TextStyle(color: MyTheme.font_grey),
+                    textFieldController: _phoneController,
+                    formatInput: true,
+                    keyboardType: TextInputType.numberWithOptions(signed: true),
+                    inputDecoration:
+                        InputDecorations.buildInputDecoration_phone(
+                            hint_text: "01XXX XXX XXX"),
+                    onSaved: (PhoneNumber number) {},
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(AppLocalizations.of(context)!.postal_code,
+                      style: TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Container(
+                    height: 40,
+                    child: TextField(
+                      controller: _postalCodeController,
+                      autofocus: false,
+                      decoration: buildAddressInputDecoration(context,
+                          AppLocalizations.of(context)!.enter_postal_code_ucf),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Btn.minWidthFixHeight(
+                  minWidth: 75,
+                  height: 40,
+                  color: Color.fromRGBO(253, 253, 253, 1),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6.0),
+                      side: BorderSide(color: MyTheme.light_grey, width: 1)),
+                  child: Text(
+                    LangText(context).local.close_ucf,
+                    style: TextStyle(
+                      color: MyTheme.accent_color,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                ),
+              ),
+              SizedBox(width: 1),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 28.0),
+                child: Btn.minWidthFixHeight(
+                  minWidth: 75,
+                  height: 40,
+                  color: MyTheme.accent_color,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  child: Text(
+                    LangText(context).local.continue_ucf,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onPressed: _onAddressAdd,
+                ),
+              )
+            ],
+          )
+        ],
+      );
+  }
+}
