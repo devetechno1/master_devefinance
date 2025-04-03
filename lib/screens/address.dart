@@ -898,7 +898,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                       autofocus: false,
                       maxLines: null,
                       keyboardType: TextInputType.multiline,
-                      decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)!.enter_address_ucf),
+                      decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_address_ucf),
                     ),
                   ),
                 ),
@@ -921,8 +921,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           controller: controller,
                           focusNode: focusNode,
                           obscureText: false,
-                          decoration: buildAddressInputDecoration(context,
-                              AppLocalizations.of(context)!.enter_country_ucf),
+                          decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_country_ucf),
                         );
                       },
                       suggestionsCallback: (name) async {
@@ -972,8 +971,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           controller: controller,
                           focusNode: focusNode,
                           obscureText: false,
-                          decoration: buildAddressInputDecoration(context,
-                              AppLocalizations.of(context)!.enter_state_ucf),
+                          decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_state_ucf),
                         );
                       },
                       controller: _stateController,
@@ -1065,8 +1063,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           controller: controller,
                           focusNode: focusNode,
                           obscureText: false,
-                          decoration: buildAddressInputDecoration(context,
-                              AppLocalizations.of(context)!.enter_city_ucf),
+                          decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_city_ucf),
                         );
                       },
                     ),
@@ -1138,8 +1135,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                     child: TextField(
                       controller: _postalCodeController,
                       autofocus: false,
-                      decoration: buildAddressInputDecoration(context,
-                          AppLocalizations.of(context)!.enter_postal_code_ucf),
+                      decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_postal_code_ucf),
                     ),
                   ),
                 ),
@@ -1454,9 +1450,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                     autofocus: false,
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
-                    decoration: buildAddressInputDecoration(
-                        context,
-                        AppLocalizations.of(context)!
+                    decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!
                             .enter_address_ucf),
                   ),
                 ),
@@ -1478,6 +1472,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                       var countryResponse = await AddressRepository()
                           .getCountryList(name: name);
                       return countryResponse.countries;
+                    },
+                    builder: (context, controller, focusNode) {
+                      return TextField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        obscureText: false,
+                        decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_city_ucf),
+                      );
                     },
                     loadingBuilder: (context) {
                       return Container(
@@ -1525,6 +1527,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                               country_id:_selected_country?.id,
                               name: name);
                       return stateResponse.states;
+                    },
+                    builder: (context, controller, focusNode) {
+                      return TextField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        obscureText: false,
+                        decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_city_ucf),
+                      );
                     },
                     loadingBuilder: (context) {
                       return Container(
@@ -1579,6 +1589,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                               state_id: _selected_state?.id,
                               name: name);
                       return cityResponse.cities;
+                    },
+                    builder: (context, controller, focusNode) {
+                      return TextField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        obscureText: false,
+                        decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!.enter_city_ucf),
+                      );
                     },
                     loadingBuilder: (context) {
                       return Container(
@@ -1672,9 +1690,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                     controller:
                         _postalCodeController,
                     autofocus: false,
-                    decoration: buildAddressInputDecoration(
-                        context,
-                        AppLocalizations.of(context)!
+                    decoration: InputDecorations.buildInputDecoration_with_border(AppLocalizations.of(context)!
                             .enter_postal_code_ucf),
                   ),
                 ),
