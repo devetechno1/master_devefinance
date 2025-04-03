@@ -85,7 +85,7 @@ class _PasswordForgetState extends State<PasswordForget> {
 
   fetch_country() async {
     var data = await AddressRepository().getCountryList();
-    data.countries.forEach((c) => countries_code.add(c.code));
+    data.countries?.forEach((c) => countries_code.add(c.code));
   }
 
   @override
