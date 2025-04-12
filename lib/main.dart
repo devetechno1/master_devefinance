@@ -67,7 +67,7 @@ void main() async {
       debug: kDebugMode, // Optional: set to false to disable printing logs to console
       ignoreSsl:true, // Optional: set to false to disable working with HTTP links
     ),
-  ]);
+  ]);h
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
