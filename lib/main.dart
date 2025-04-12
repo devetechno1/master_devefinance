@@ -16,8 +16,8 @@ import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
 
-import 'custom/aiz_route.dart';
 import 'app_config.dart';
+import 'custom/aiz_route.dart';
 
 import 'helpers/business_setting_helper.dart';
 import 'helpers/main_helpers.dart';
@@ -337,5 +337,3 @@ void _handleDeepLink() async{
     }
   );
 }
-
-// Test Mo Shoraadfadfadfsfdsa
