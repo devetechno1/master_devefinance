@@ -8,13 +8,14 @@ import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
+import 'home/templates/metro.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key, this.go_back = true}) : super(key: key);
@@ -58,7 +59,8 @@ class _MainState extends State<Main> {
 
   void initState() {
     _children = [
-      Home(),
+     // Home(),
+       MetroScreen(),
       CategoryList(
         slug: "",
         name: "",
@@ -79,61 +81,7 @@ class _MainState extends State<Main> {
     super.initState();
   }
 
-  // bool _dialogShowing = false;
-  // Future<bool> willPop() async {
-  //   print(_currentIndex);
-  //   if (_currentIndex != 0) {
-  //     fetchAll();
-  //     setState(() {
-  //       _currentIndex = 0;
-  //     });
-  //   } else {
-  //     // print("Main will back");
-  //     // CommonFunctions(context).appExitDialog();
-
-  //     if (_dialogShowing) {
-  //       return Future.value(false); // Dialog already showing, don't show again
-  //     }
-  //     setState(() {
-  //       _dialogShowing = true;
-  //     });
-
-  //     final shouldPop = (await showDialog<bool>(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext context) {
-  //         return Directionality(
-  //           textDirection:
-  //               app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-  //           child: AlertDialog(
-  //             content:
-  //                 Text(AppLocalizations.of(context)!.do_you_want_close_the_app),
-  //             actions: [
-  //               TextButton(
-  //                   onPressed: () {
-  //                     Platform.isAndroid ? SystemNavigator.pop() : exit(0);
-  //                   },
-  //                   child: Text(AppLocalizations.of(context)!.yes_ucf)),
-  //               TextButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                     // setState(() {
-  //                     //   _dialogShowing =
-  //                     //       false; // Reset flag after dialog is closed
-  //                     // });
-  //                   },
-  //                   child: Text(AppLocalizations.of(context)!.no_ucf)),
-  //             ],
-  //           ),
-  //         );
-  //       },
-  //     ))!;
-
-  //     return shouldPop;
-  //   }
-  //   return Future.value(false);
-
-  // }
+  
   bool _dialogShowing = false;
 
   Future<bool> willPop() async {

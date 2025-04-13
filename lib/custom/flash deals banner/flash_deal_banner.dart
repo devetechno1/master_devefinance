@@ -55,32 +55,8 @@ class FlashDealBanner extends StatelessWidget {
           return Builder(
             builder: (BuildContext context) {
               return Padding(
-                padding: const EdgeInsets.only(
-                    left: 12, right: 0, top: 0, bottom: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white, // background color for container
-                    borderRadius: BorderRadius.circular(10), // rounded corners
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Color(0xff000000).withOpacity(0.1), // shadow color
-                        spreadRadius: 2, // spread radius
-                        blurRadius: 5, // blur radius
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                        10), // round corners for the image too
-                    child: InkWell(
-                      onTap: () => GoRouter.of(context).go('/flash-deal/${i.slug}'),
-                      child: AIZImage.radiusImage(i.banner, 6),
-                      // Display the image with rounded corners
-                    ),
-                  ),
-                ),
+                padding: const EdgeInsetsDirectional.only(start: 12, bottom: 10),
+                child: FlashBannerWidget(bannerLink: i.banner,slug: i.slug),
               );
             },
           );
@@ -106,5 +82,47 @@ class FlashDealBanner extends StatelessWidget {
     else {
       return SizedBox(height: 100);
     }
+  }
+}
+
+class FlashBannerWidget extends StatelessWidget {
+  const FlashBannerWidget({
+    super.key, 
+    required this.bannerLink, 
+    required this.slug, 
+    this.size,
+  });
+  final String? bannerLink;
+  final String? slug;
+  final double? size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        color: Colors.white, // background color for container
+        borderRadius: BorderRadius.circular(10), // rounded corners
+        boxShadow: [
+          BoxShadow(
+            color:
+                Color(0xff000000).withOpacity(0.1), // shadow color
+            spreadRadius: 2, // spread radius
+            blurRadius: 5, // blur radius
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(
+            10), // round corners for the image too
+        child: InkWell(
+          onTap: () => GoRouter.of(context).go('/flash-deal/$slug'),
+          child: AIZImage.radiusImage(bannerLink, 6),
+          // Display the image with rounded corners
+        ),
+      ),
+    );
   }
 }

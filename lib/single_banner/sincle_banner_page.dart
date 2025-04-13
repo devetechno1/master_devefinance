@@ -1,16 +1,20 @@
+import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/single_banner/photo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../custom/lang_text.dart';
-import 'photo_provider.dart'; // Path to your provider file
+
+import '../../../single_banner/model.dart';
+// Path to your provider file
 
 class PhotoWidget extends StatelessWidget {
-  const PhotoWidget();
+  const PhotoWidget(this.slug);
+  final String slug;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Provider.of<PhotoProvider>(context, listen: false).fetchPhotos(),
+    return FutureBuilder<List<SingleBanner>>(
+      future: Provider.of<PhotoProvider>(context, listen: false).fetchPhotos(slug),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return ShimmerHelper()
@@ -24,13 +28,13 @@ class PhotoWidget extends StatelessWidget {
 
         return Consumer<PhotoProvider>(
           builder: (context, photoProvider, child) {
-            if (photoProvider.singleBanner.isEmpty) {
+            if (snapshot.data?.isNotEmpty != true) {
               return SizedBox(); // No photos fallback
               // return Center(
               //     child: Text('No photos available.')); // No photos fallback
             }
 
-            final photoData = photoProvider.singleBanner[0];
+            final photoData = snapshot.data!.first;
 
             return GestureDetector(
               onTap: () async {

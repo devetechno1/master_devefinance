@@ -20,7 +20,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/classified_ads/my_classifi
 import 'package:active_ecommerce_cms_demo_app/screens/coupon/coupons.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/digital_product/digital_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/last_view_product.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/top_selling_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/refund_request.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wholesales_screen.dart';
@@ -370,12 +373,45 @@ class _ProfileState extends State<Profile> {
             thickness: 1,
             color: MyTheme.light_grey,
           ),
-
-          buildBottomVerticalCardListItem(
+           buildBottomVerticalCardListItem(
               "assets/coupon.png", LangText(context).local.coupons_ucf,
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Coupons();
+            }));
+          }),
+            Divider(
+            thickness: 1,
+            color: MyTheme.light_grey,
+          ),
+          //flash_deals
+             Column(
+            children: [
+             if (homeData!.isFlashDealInitial != false)
+              buildBottomVerticalCardListItem(
+              
+                  "assets/flash_deal.png", AppLocalizations.of(context)!.flash_deal_ucf,
+                  onPressed: () {
+
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return FlashDealList();
+                 
+                })
+                );
+              }),
+                   ],
+          ),
+           Divider(
+            thickness: 1,
+            color: MyTheme.light_grey,
+          ),
+          //flash_deals
+          buildBottomVerticalCardListItem(
+              "assets/brands.png", AppLocalizations.of(context)!.brands_ucf,
+              onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Filter(selected_filter: "brands");
             }));
           }),
           Divider(
@@ -697,13 +733,7 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          // if (false)
-          //   buildBottomVerticalCardListItem(
-          //       "assets/blog.png", LangText(context).local.blogs_ucf,
-          //       onPressed: () {
-          //     Navigator.push(context,
-          //         MaterialPageRoute(builder: (context) => BlogListScreen()));
-          //   }),
+         
         ],
       ),
     );
@@ -1092,6 +1122,7 @@ class _ProfileState extends State<Profile> {
           AppLocalizations.of(context)!.your_ordered_all_lower,
           onTap: () => Navigator.push(context, PageAnimation.fadeRoute(OrderList())),
         ),
+       
       ],
     );
   }

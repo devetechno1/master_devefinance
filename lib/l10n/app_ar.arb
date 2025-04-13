@@ -18,6 +18,7 @@
     "search_in_blogs": "ابحث في المدونات...",
     "longitude": "خط الطول",
     "latitude": "خط العرض",
+    "new_products": "منتجات جديده",
     "you_have_to_add_location_here": "يجب عليك إضافة الموقع هنا",
     "you_have_to_add_location_first": "يجب عليك إضافة الموقع أولًا",
     "check_your_WhatsApp_messages_to_retrieve_the_verification_code": "تحقق من رسائل الواتساب الخاصة بك لاستلام رمز التحقق",
@@ -100,6 +101,8 @@
     "top_sellers_ucf": "أفضل البائعين",
     "todays_deal_ucf": "صفقة اليوم",
     "flash_deal_ucf": "عرض سريع",
+    "best_selling":"افضل المبيعات",
+    "flash_sale" :"عرض سريع",
     "featured_categories_ucf": "الفئات المميزة",
     "featured_products_ucf": "المنتجات المميزة",
     "all_products_ucf": "جميع المنتجات",
@@ -628,6 +631,7 @@
     "provide_a_detailed_description": "يرجى تقديم وصف تفصيلي",
     "send_ticket": "إرسال التذكرة",
     "top_products_ucf": "أفضل المنتجات",
+    "top_brands_ucf": "افضل البراندات ",
     "your_categories_ucf": "تصنيفاتك",
     "a": "",
     "sales_stat_ucf": "إحصائيات المبيعات",
@@ -783,5 +787,9 @@
     "all_blogs_ucf": "جميع المدونات",
     "verifyYourAccount": "تحقق من حسابك",
     "invalid_phone_number": "رقم هاتف غير صالح",
-    "pleaseEnsureUs": "يرجى التأكيد لنا"
+    "pleaseEnsureUs": "يرجى التأكيد لنا",
+    "no_best_selling_products_available":"لايوجد افضل مبيعات متاحه",
+   "no_auction_products": "لاتوجد منتجات مزاد حاليا",
+   "error_fetching_todays_deal_products": "خطأ في تحميل منتجات العروض اليومية:"
+
 }

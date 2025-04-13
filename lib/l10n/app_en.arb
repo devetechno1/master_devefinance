@@ -196,10 +196,13 @@
   "my_collection_ucf": "My Collection",
   "do_you_want_close_the_app": "Do you want close the app?",
   "top_categories_ucf": "Top Categories",
+  "top_brands_ucf": "Top brands",
   "brands_ucf": "Brands",
   "top_sellers_ucf": "Top Sellers",
   "todays_deal_ucf": "Todays Deal",
   "flash_deal_ucf": "Flash Deal",
+  "best_selling": "BestSelling",
+  "flash_sale":"Flash Sale",
   "featured_categories_ucf": "Featured Categories",
   "featured_products_ucf": "Featured Products",
   "all_products_ucf": "All Products",
@@ -252,6 +255,7 @@
   "current_package_ucf": "Current Package",
   "upgrade_package_ucf": "Upgrade Package",
   "add_new_products_ucf": "Add New Products",
+  "new_products": "New Products",
   "please_turn_on_your_internet_connection": "Please turn on your internet connection",
   "please_log_in_to_see_the_profile": "Please log in to see the profile",
   "notification_ucf": "Notifications",
@@ -783,5 +787,8 @@
   "a": "",
   "verifyYourAccount": "Verify your account",
   "invalid_phone_number": "Invalid phone number",
-  "pleaseEnsureUs": "Please ensure us"
+  "pleaseEnsureUs": "Please ensure us",
+  "no_best_selling_products_available":"No best-selling products available.",
+  "no_auction_products":"No Auction Products",
+  "error_fetching_todays_deal_products":"Error fetching today's deal products"
 }

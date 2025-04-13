@@ -8,21 +8,20 @@ import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list
 import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 
-import 'package:active_ecommerce_cms_demo_app/single_banner/sincle_banner_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-import '../custom/feature_categories_widget.dart';
-import '../custom/featured_product_horizontal_list_widget.dart';
-import '../custom/home_all_products_2.dart';
-import '../custom/home_banner_one.dart';
-import '../custom/home_carousel_slider.dart';
-import '../custom/home_search_box.dart';
-import '../custom/pirated_widget.dart';
-import '../other_config.dart';
-import '../services/push_notification_service.dart';
+import '../../custom/feature_categories_widget.dart';
+import '../../custom/featured_product_horizontal_list_widget.dart';
+import '../../custom/home_all_products_2.dart';
+import '../../custom/home_banner_one.dart';
+import '../../custom/home_carousel_slider.dart';
+import '../../custom/home_search_box.dart';
+import '../../custom/pirated_widget.dart';
+import '../../other_config.dart';
+import '../../services/push_notification_service.dart';
+import '../../single_banner/sincle_banner_page.dart';
 HomePresenter homeData = HomePresenter();
 
 class Home extends StatefulWidget {
@@ -55,7 +54,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   void change() {
     homeData.onRefresh();
-    homeData.mainScrollListener();
+    homeData.mainScrollListener(context);
     homeData.initPiratedAnimation(this);
   }
 
@@ -192,7 +191,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           //   ),
                           // ])),
 
-                          SliverList(delegate: SliverChildListDelegate(const [PhotoWidget()])),
+                          const SliverToBoxAdapter(child: PhotoWidget('banners-one')),
                           //Featured Products
                           if(homeData.isFeaturedProductInitial || homeData.featuredProductList.length != 0)
                             SliverList(
