@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/data_model/business_setting_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/business_setting_repository.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/home_page_type_enum.dart';
 
 import '../app_config.dart';
 import '../data_model/language_list_response.dart';
@@ -194,6 +195,11 @@ class BusinessSettingHelper {
         case 'minimum_order_quantity':
           {
             minimum_order_quantity.$ = int.parse(element.value?.toString() ?? '0');
+          }
+          break;
+        case 'homepage_select':
+          {
+            AppConfig.selectedHomePageType = HomePageType.fromString(element.value?.toString()).widget;
           }
           break;
 

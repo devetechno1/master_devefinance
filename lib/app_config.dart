@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'screens/home/home.dart';
+
 
 
 // final String this_year = DateTime.now().year.toString();
@@ -48,6 +50,7 @@ class AppConfig {
 
   static const LatLng initPlace = LatLng(30.723003387451172, 31.02609634399414);
 
+  static Widget selectedHomePageType = const Home();
   @override
   String toString() {
     return super.toString();

@@ -15,7 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'home/templates/metro.dart';
+import '../app_config.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key, this.go_back = true}) : super(key: key);
@@ -27,7 +27,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   int _currentIndex = 0;
-  var _children = [];
+  List<Widget> _children = [];
   CartCounter counter = CartCounter();
   BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
 
@@ -59,8 +59,7 @@ class _MainState extends State<Main> {
 
   void initState() {
     _children = [
-     // Home(),
-       MetroScreen(),
+      AppConfig.selectedHomePageType,
       CategoryList(
         slug: "",
         name: "",
