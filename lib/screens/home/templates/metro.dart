@@ -7,7 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/bestSellingWidget.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widets/best_selling_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widets/get_brands_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widets/today_deal.dart';
 import 'package:flutter/material.dart';
