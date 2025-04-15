@@ -25,8 +25,8 @@ import '../widets/autactionProduct.dart';
 
 HomePresenter homeData = HomePresenter();
 
-class MetroScreen extends StatefulWidget {
-  const MetroScreen({
+class MinimaScreen extends StatefulWidget {
+  const MinimaScreen({
     Key? key,
     this.title,
     this.show_back_button = false,
@@ -38,10 +38,10 @@ class MetroScreen extends StatefulWidget {
   final bool go_back;
 
   @override
-  _MetroScreenState createState() => _MetroScreenState();
+  _MinimaScreenState createState() => _MinimaScreenState();
 }
 
-class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin {
+class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
@@ -143,7 +143,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                                     child: Column(
                                       children: [
                                         buildTimerRow(homeData.flashDealRemainingTime),
-//FlashBanner SpecialOffer
+                                        //FlashBanner SpecialOffer
                                         SizedBox(
                                           height: 300,
                                           child: LayoutBuilder(
@@ -179,7 +179,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                                 //const PhotoWidget2(),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                  child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
+                                  child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"), //TODO:# banner
                                 ),
                                  TodaysDealProductsWidget(homePresenter: homeData,),
                               ]
@@ -246,36 +246,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
 
                             //Best Selling
                            // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                            SliverList(
-                              delegate: SliverChildListDelegate([
-                                Container(
-                                  height: 305,
-                                  margin: EdgeInsets.only(top: 12),
-                                  color: MyTheme.accent_color.withOpacity(0.1),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.only(top: 20, start: 20,bottom: 10),
-                                        child: Text(
-                                          AppLocalizations.of(context)!.best_selling,
-                                         // AppLocalizations.of(context)!.featured_products_ucf,
-                                          style: TextStyle(
-                                            color: Color(0xff000000),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(child: BestSellingProductsWidget(
-                                                isVertical: false,
-                                                products: homeData.bestSellingProductList,
-                                                       )       ), //TODO:# bestSellingWidget
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
+                            best(context),
                                                         SliverList(
                               delegate: SliverChildListDelegate([
                                 Container(
@@ -401,6 +372,39 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
         ),
       ),
     );
+  }
+
+  SliverList best(BuildContext context) {
+    return SliverList(
+                            delegate: SliverChildListDelegate([
+                              Container(
+                                height: 305,
+                                margin: EdgeInsets.only(top: 12),
+                                color: MyTheme.accent_color.withOpacity(0.1),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.only(top: 20, start: 20,bottom: 10),
+                                      child: Text(
+                                        AppLocalizations.of(context)!.best_selling,
+                                       // AppLocalizations.of(context)!.featured_products_ucf,
+                                        style: TextStyle(
+                                          color: Color(0xff000000),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(child: BestSellingProductsWidget(
+                                              isVertical: false,
+                                              products: homeData.bestSellingProductList,
+                                                     )       ), //TODO:# bestSellingWidget
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          );
   }
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
