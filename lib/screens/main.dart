@@ -59,7 +59,7 @@ class _MainState extends State<Main> {
 
   void initState() {
     _children = [
-      AppConfig.selectedHomePageType,
+      AppConfig.selectedHomePageType.screen,
       CategoryList(
         slug: "",
         name: "",

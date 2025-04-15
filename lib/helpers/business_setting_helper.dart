@@ -199,7 +199,7 @@ class BusinessSettingHelper {
           break;
         case 'homepage_select':
           {
-            AppConfig.selectedHomePageType = HomePageType.fromString(element.value?.toString()).widget;
+            AppConfig.selectedHomePageType = HomePageType.fromString(element.value?.toString());
           }
           break;
 

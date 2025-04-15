@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'screens/home/home.dart';
+import 'screens/home/home_page_type_enum.dart';
 
 
 
@@ -50,7 +50,7 @@ class AppConfig {
 
   static const LatLng initPlace = LatLng(30.723003387451172, 31.02609634399414);
 
-  static Widget selectedHomePageType = const Home();
+  static HomePageType selectedHomePageType = HomePageType.home;
   @override
   String toString() {
     return super.toString();

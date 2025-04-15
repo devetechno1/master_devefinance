@@ -8,20 +8,20 @@ import 'templates/metro.dart';
 
 
 /// We use [HomePageType] to know home screen selected type by its values, 
-/// that we get from '/api/v2/business-settings' endpoint, 
+/// that we get from '/api/v2/business-settings' endpoint with key 'homepage_select', 
 /// when admin change page you have to hot restart app.
 enum HomePageType {
-  classic('classic'),
-  metro('metro', widget: const MetroScreen()),
-  minima('minima'),
-  megaMart('megamart'),
-  reClassic('re-classic'),
-  home('home', widget: const Home());
+  classic('classic', screen: SizedBox()),
+  metro('metro', screen: const MetroScreen()),
+  minima('minima', screen: SizedBox()),
+  megaMart('megamart', screen: SizedBox()),
+  reClassic('re-classic', screen: SizedBox()),
+  home('home', screen: const Home());
 
   final String typeString;
-  final Widget widget;
+  final Widget screen;
 
-  const HomePageType(this.typeString, {this.widget = const Home()});
+  const HomePageType(this.typeString, {required this.screen});
 
   factory HomePageType.fromString(String? pageType) {
     for (HomePageType type in values) {
