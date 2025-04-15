@@ -42,7 +42,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                     builder: (context) {
                       return CategoryProducts(
                         name: homeData.featuredCategoryList[index].name ?? '',
-                        slug: homeData.featuredCategoryList[index].slug,
+                        slug: homeData.featuredCategoryList[index].slug ?? '',
                       );
                     },
                   ),
@@ -80,7 +80,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                     SizedBox(width: 10),
                     Flexible(
                       child: Text(
-                        homeData.featuredCategoryList[index].name,
+                        homeData.featuredCategoryList[index].name ?? '',
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,

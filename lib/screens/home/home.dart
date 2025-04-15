@@ -15,13 +15,12 @@ import 'package:go_router/go_router.dart';
 import '../../custom/feature_categories_widget.dart';
 import '../../custom/featured_product_horizontal_list_widget.dart';
 import '../../custom/home_all_products_2.dart';
-import '../../custom/home_banner_one.dart';
+import '../../custom/home_banners_list.dart';
 import '../../custom/home_carousel_slider.dart';
 import '../../custom/home_search_box.dart';
 import '../../custom/pirated_widget.dart';
 import '../../other_config.dart';
 import '../../services/push_notification_service.dart';
-import '../../single_banner/sincle_banner_page.dart';
 HomePresenter homeData = HomePresenter();
 
 class Home extends StatefulWidget {
@@ -126,7 +125,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               // SizedBox(height: 16),
 
                               //Home slider one
-                              HomeBannerOne(homeData: homeData),
+                              HomeBannersList(
+                                bannersImagesList: homeData.bannerOneImageList,
+                                isBannersInitial: homeData.isBannerOneInitial,
+                              ),
                             ]),
                           ),
 
@@ -191,7 +193,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           //   ),
                           // ])),
 
-                          const SliverToBoxAdapter(child: PhotoWidget('banners-one')),
                           //Featured Products
                           if(homeData.isFeaturedProductInitial || homeData.featuredProductList.length != 0)
                             SliverList(

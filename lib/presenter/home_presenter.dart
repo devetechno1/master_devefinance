@@ -15,6 +15,8 @@ import 'package:active_ecommerce_cms_demo_app/repositories/sliders_repository.da
 import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
 import 'package:flutter/material.dart';
 
+import '../data_model/category_response.dart';
+
 class HomePresenter extends ChangeNotifier {
   CurrentRemainingTime flashDealRemainingTime =
       CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
@@ -36,6 +38,8 @@ class HomePresenter extends ChangeNotifier {
 
   List<AIZSlider> carouselImageList = [];
   List<AIZSlider> bannerOneImageList = [];
+  List<AIZSlider> bannerTwoImageList = [];
+  List<AIZSlider> bannerThreeImageList = [];
   List<AIZSlider> flashDealBannerImageList = [];
   List<FlashDealResponseDatum> _banners = [];
   List<FlashDealResponseDatum> get banners => [..._banners];
@@ -49,14 +53,14 @@ class HomePresenter extends ChangeNotifier {
   List<SingleBanner> _singleBanner = [];
   List<SingleBanner> get singleBanner => _singleBanner;
 
-  var bannerTwoImageList = [];
-  var featuredCategoryList = [];
+  List<Category> featuredCategoryList = [];
 
   bool isCategoryInitial = true;
   bool isCarouselInitial = true;
   bool isBannerOneInitial = true;
-  bool isFlashDealInitial = true;
   bool isBannerTwoInitial = true;
+  bool isBannerThreeInitial = true;
+  bool isFlashDealInitial = true;
   bool isBannerFlashDeal = true;
   bool isBrandsInitial = true;
   bool isTodayDwal=true;
@@ -99,6 +103,7 @@ bool showTodayDealContainer = false;
     fetchCarouselImages();
     fetchBannerOneImages();
     fetchBannerTwoImages();
+    fetchBannerThreeImags();
     fetchFeaturedCategories();
     fetchFeaturedProducts();
     fetchAllProducts();
@@ -219,32 +224,39 @@ bool showTodayDealContainer = false;
     
   }
 fetchCarouselImages() async {
-  SliderResponse carouselResponse = await SlidersRepository().getSliders();
+  try{
+    SliderResponse carouselResponse = await SlidersRepository().getSliders();
   carouselImageList.clear();
   carouselImageList.addAll(carouselResponse.sliders!);
   isCarouselInitial = false;
+  }catch(e){}
   notifyListeners();
 }
 
   fetchBestSellingProducts() async {
-    final productMini.ProductMiniResponse bestselling = await ProductRepository().getBestSellingProducts();
+try{    
+final productMini.ProductMiniResponse bestselling = await ProductRepository().getBestSellingProducts();
     bestSellingProductList.clear();
     bestSellingProductList.addAll(bestselling.products!);
     isBestSellingProductInitial = false;
+    }catch(e){}
     notifyListeners();
   }
     fetchAuctionProducts() async {
-    final productMini.ProductMiniResponse auction = await AuctionProductsRepository().getAuctionProducts(page:1);
+   try{ final productMini.ProductMiniResponse auction = await AuctionProductsRepository().getAuctionProducts(page:1);
     auctionProductList.clear();
     auctionProductList.addAll(auction.products!);
     isauctionProductInitial = false;
+    }catch(e){}
     notifyListeners();
   }
   fetchBrandsProducts() async {
-    final BrandResponse brands = await BrandRepository().getBrands();
+ try{
+     final BrandResponse brands = await BrandRepository().getBrands();
     brandsList.clear();
     brandsList.addAll(brands.brands!);
     isBrandsInitial = false;
+ }catch(e){}
     notifyListeners();
   }
    fetchTodayDealProducts() async {
@@ -262,17 +274,19 @@ fetchCarouselImages() async {
   }
 
 
-  fetchBannerOneImages() async {
-    var bannerOneResponse = await SlidersRepository().getBannerOneImages();
-    bannerOneImageList.clear();
-    bannerOneImageList.addAll(bannerOneResponse.sliders!);
+  Future<void> fetchBannerOneImages() async {
+    try {
+      final SliderResponse bannerOneResponse = await SlidersRepository().getBannerOneImages();
+      bannerOneImageList.clear();
+      bannerOneImageList.addAll(bannerOneResponse.sliders!);
+    } catch (e) {}
     isBannerOneInitial = false;
     notifyListeners();
   }
 
-  fetchFlashDealBannerImages() async {
+  Future<void> fetchFlashDealBannerImages() async {
     try {
-      var flashDealBannerResponse =
+      final SliderResponse flashDealBannerResponse =
           await SlidersRepository().getFlashDealBanner();
       flashDealBannerImageList.clear();
       flashDealBannerImageList.addAll(flashDealBannerResponse.sliders!);
@@ -283,22 +297,36 @@ fetchCarouselImages() async {
     }
   }
 
-  fetchBannerTwoImages() async {
-    var bannerTwoResponse = await SlidersRepository().getBannerTwoImages();
+  Future<void> fetchBannerTwoImages() async {
+   try{
+     final SliderResponse bannerTwoResponse = await SlidersRepository().getBannerTwoImages();
+    bannerTwoImageList.clear();
     bannerTwoImageList.addAll(bannerTwoResponse.sliders!);
     isBannerTwoInitial = false;
+   }catch(e){}
+    notifyListeners();
+  }
+  Future<void> fetchBannerThreeImags() async {
+try{
+      final SliderResponse bannerThreeResponse = await SlidersRepository().getBannerThreeImages();
+    bannerThreeImageList.clear();
+    bannerThreeImageList.addAll(bannerThreeResponse.sliders!);
+    isBannerThreeInitial = false;
+}catch(e){}
     notifyListeners();
   }
 
-  fetchFeaturedCategories() async {
-    var categoryResponse = await CategoryRepository().getFeturedCategories();
+  Future<void> fetchFeaturedCategories() async {
+ try{
+     var categoryResponse = await CategoryRepository().getFeturedCategories();
     featuredCategoryList.clear();
     featuredCategoryList.addAll(categoryResponse.categories!);
     isCategoryInitial = false;
+ }catch(e){}
     notifyListeners();
   }
 
-  fetchFeaturedProducts() async {
+  Future<void> fetchFeaturedProducts() async {
     try {
       var productResponse = await ProductRepository().getFeaturedProducts(
         page: featuredProductPage,
@@ -322,7 +350,8 @@ fetchCarouselImages() async {
   }
 
   fetchAllProducts() async {
-    var productResponse =
+    try{
+      var productResponse =
         await ProductRepository().getFilteredProducts(page: allProductPage);
     if (productResponse.products != null) {
       allProductList.addAll(productResponse.products!);
@@ -332,6 +361,7 @@ fetchCarouselImages() async {
       totalAllProductData = productResponse.meta!.total;
     }
     showAllLoadingContainer = false;
+    }catch(e){}
     notifyListeners();
   }
 resetBestSellingProducts() {
@@ -359,11 +389,13 @@ resetTodayDeals() {
     carouselImageList.clear();
     bannerOneImageList.clear();
     bannerTwoImageList.clear();
+    bannerThreeImageList.clear();
     featuredCategoryList.clear();
 
     isCarouselInitial = true;
     isBannerOneInitial = true;
     isBannerTwoInitial = true;
+    isBannerThreeInitial = true;
     isCategoryInitial = true;
     cartCount = 0;
 
