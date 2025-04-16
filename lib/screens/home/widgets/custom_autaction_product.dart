@@ -5,10 +5,10 @@ import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.d
 
 
 
-class AuctionProductsListWidget extends StatelessWidget {
+class CustomAuctionProductsListWidget extends StatelessWidget {
   final List<productMini.Product>? products;
 
-  const AuctionProductsListWidget({super.key, this.products});
+  const CustomAuctionProductsListWidget({super.key, this.products});
 
   @override
   Widget build(BuildContext context) {

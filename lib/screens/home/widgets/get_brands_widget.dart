@@ -6,16 +6,16 @@ import 'package:go_router/go_router.dart';
 
 import '../../../data_model/brand_response.dart';
 
-class BrandListWidget extends StatefulWidget {
+class CustomBrandListWidget extends StatefulWidget {
   final HomePresenter homePresenter;
 
-  const BrandListWidget({super.key, required this.homePresenter});
+  const CustomBrandListWidget({super.key, required this.homePresenter});
 
   @override
-  State<BrandListWidget> createState() => _BrandListWidgetState();
+  State<CustomBrandListWidget> createState() => _CustomBrandListWidgetState();
 }
 
-class _BrandListWidgetState extends State<BrandListWidget> {
+class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
 
   @override
   Widget build(BuildContext context) {

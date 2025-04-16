@@ -205,16 +205,17 @@ import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.da
 import 'package:flutter/material.dart';
 
 class MiniProductCard extends StatefulWidget {
-  int? id;
-  String slug;
-  String? image;
-  String? name;
-  String? main_price;
-  String? stroked_price;
-  bool? has_discount;
-  bool? is_wholesale;
-  var discount;
-  MiniProductCard({
+  final int? id;
+  final String slug;
+  final String? image;
+  final String? name;
+  final String? main_price;
+  final String? stroked_price;
+  final bool? has_discount;
+  final bool? is_wholesale;
+  final TextStyle? priceTextStyle;
+  final TextStyle? nameTextStyle;
+  const MiniProductCard({
     Key? key,
     this.id,
     required this.slug,
@@ -223,8 +224,9 @@ class MiniProductCard extends StatefulWidget {
     this.main_price,
     this.stroked_price,
     this.has_discount,
-    this.is_wholesale = false,
-    this.discount,
+    this.is_wholesale = false, 
+    this.priceTextStyle, 
+    this.nameTextStyle,
   }) : super(key: key);
 
   @override
@@ -242,41 +244,39 @@ class _MiniProductCardState extends State<MiniProductCard> {
           );
         }));
       },
-      child: Container(
+      child: SizedBox(
         width: 140,
-        //  decoration: BoxDecorations.buildBoxDecoration_1(),
-
-        child: Stack(children: [
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Container(
-                      width: double.infinity,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder.png',
-                            image: widget.image!,
-                            fit: BoxFit.cover,
-                          ))),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: 1,
+                child: Container(
+                    width: double.infinity,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: FadeInImage.assetNetwork(
+                          placeholder: 'assets/placeholder.png',
+                          image: widget.image!,
+                          fit: BoxFit.cover,
+                        ))),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 12, 8, 6),
+                child: Text(
+                  widget.name!,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: widget.nameTextStyle ?? TextStyle(
+                      color: MyTheme.font_grey_Light,
+                      fontSize: 12,
+                      height: 1.2,
+                      fontWeight: FontWeight.w400),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(8, 12, 8, 6),
-                  child: Text(
-                    widget.name!,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(
-                        color: MyTheme.font_grey_Light,
-                        fontSize: 12,
-                        height: 1.2,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                Padding(
+              ),
+              Flexible(
+                child: Padding(
                   padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: Text(
                     SystemConfig.systemCurrency != null
@@ -285,14 +285,14 @@ class _MiniProductCardState extends State<MiniProductCard> {
                             SystemConfig.systemCurrency!.symbol!)
                         : widget.main_price!,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: widget.priceTextStyle ?? TextStyle(
                         color: Color(0xff000000),
                         fontSize: 16,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-              ]),
-        ]),
+              ),
+            ]),
       ),
     );
   }

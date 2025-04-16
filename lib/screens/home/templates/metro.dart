@@ -7,23 +7,22 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/best_selling_widget.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/get_brands_widget.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/today_deal.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../custom/feature_categories_widget.dart';
-import '../../../custom/featured_product_horizontal_list_widget.dart';
-import '../../../custom/home_all_products_2.dart';
+import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/home_search_box.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
-import '../../../single_banner/sincle_banner_page.dart';
-import '../widets/autactionProduct.dart';
-
-HomePresenter homeData = HomePresenter();
+import '../home.dart';
+import '../widgets/featured_products_list_sliver.dart';
 
 class MetroScreen extends StatefulWidget {
   const MetroScreen({
@@ -166,226 +165,56 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
 
                               ],
                             ]),
-                          ),
-                       
+                          ),                      
                             //move banner 
-
-//SliverList(delegate: SliverChildListDelegate([InkWell(onTap: (){},child: Container()),HomeBannerOne(homeData: homeData),])),
-
                           SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                //PhotoWidget('banners-four'),
-                                //const PhotoWidget2(),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                   child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
                                 ),
-                                 TodaysDealProductsWidget(homePresenter: homeData,),
+                                TodaysDealProductsWidget(homePresenter: homeData,),
                               ]
                             ),
                           ),
+//Featured category-----------------------
+                            const CategoryList(),
+                       
+                            
+                          
+//BannerList---------------------                            
 
-                          if(homeData.isCategoryInitial || homeData.featuredCategoryList.isNotEmpty)...[
-                            SliverList(
-                              delegate: SliverChildListDelegate([
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 18.0, 0.0),
-                                  child: Text(
-                                    AppLocalizations.of(context)!.featured_categories_ucf,
-                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ]),
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerOneImageList,
+                              isBannersInitial: homeData.isBannerOneInitial,
                             ),
+                          ),
+//featuredProducts-----------------------------   
+                          const FeaturedProductsListSliver(),
+//BannerList---------------------                            
                             SliverToBoxAdapter(
-                              child: SizedBox(
-                                height: 175,
-                                child: FeaturedCategoriesWidget(homeData: homeData),
+                              child: HomeBannersList(
+                                bannersImagesList: homeData.bannerTwoImageList,
+                                isBannersInitial: homeData.isBannerTwoInitial,
                               ),
                             ),
-                          ],
 
-                         
-
-                          const SliverToBoxAdapter(child: PhotoWidget('banners-one')),
-
-                          if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                            SliverList(
-                              delegate: SliverChildListDelegate([
-                                Container(
-                                  height: 305,
-                                  margin: EdgeInsets.only(top: 12),
-                                  color: MyTheme.accent_color.withOpacity(0.1),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.only(top: 20, start: 20),
-                                        child: GestureDetector(
-                                      //    onTap:(){ Navigator.of(context).push(MaterialPageRoute(builder: (context) => Flexible(child: FeaturedProductVerticalListWidget(homeData: homeData))));},
-                                          child: Text(
-                                            AppLocalizations.of(context)!.featured_products_ucf,
-                                            style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(child: FeaturedProductHorizontalListWidget(homeData: homeData)), //TODO:# FeaturedPoductHorizontalList
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
-                            //photo
-                            const SliverToBoxAdapter(child: PhotoWidget('banners-two')),
-
-                            //Best Selling
+//Best Selling-------------------
                            // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                            SliverList(
-                              delegate: SliverChildListDelegate([
-                                Container(
-                                  height: 305,
-                                  margin: EdgeInsets.only(top: 12),
-                                  color: MyTheme.accent_color.withOpacity(0.1),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.only(top: 20, start: 20,bottom: 10),
-                                        child: Text(
-                                          AppLocalizations.of(context)!.best_selling,
-                                         // AppLocalizations.of(context)!.featured_products_ucf,
-                                          style: TextStyle(
-                                            color: Color(0xff000000),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(child: BestSellingProductsWidget(
-                                                isVertical: false,
-                                                products: homeData.bestSellingProductList,
-                                                       )       ), //TODO:# bestSellingWidget
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
-                                                        SliverList(
-                              delegate: SliverChildListDelegate([
-                                Container(
-                                  height: 305,
-                                  margin: EdgeInsets.only(top: 12),
-                                  color: MyTheme.accent_color.withOpacity(0.1),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.only(top: 20, start: 20,bottom: 10),
-                                        child: Text(
-                                          AppLocalizations.of(context)!.new_products,
-                                         // AppLocalizations.of(context)!.featured_products_ucf,
-                                          style: TextStyle(
-                                            color: Color(0xff000000),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(child:FeaturedProductHorizontalListWidget(homeData: homeData)), //TODO:# FeaturedProductHorizontalListWidget
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
+                            const BestSellingSectionSliver(),
+//featuredProducts-----------------------------                            
+                            const FeaturedProductsListSliver(),
 
-                          const SliverToBoxAdapter(child: PhotoWidget('banners-three')),
-//auction products
-                      SliverList(
-                            delegate: SliverChildListDelegate([
-                              SingleChildScrollView(
-                                child: Column(
-                                  
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(18.0, 20, 20.0, 0.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsetsDirectional.only( bottom: 10),
-                                            child: Container(
-                                              child: Container(
-                                              //  color: Colors.black,
-                                                width:double.infinity ,
-                                                child: Text(
-                                                  AppLocalizations.of(context)!.auction_product_ucf,
-                                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                      const    PhotoWidget('banners-two'),
-                                        ],
-                                      ),
-                                    ),
-                                    AuctionProductsListWidget(products: homeData.auctionProductList,) //TODO:# AuctionProductList
-                                  ],
-                                ),
-                              ),
-                            ]),
-                          ),
+//auction products----------------------------
+                      AuctionProductsSectionSliver(homeData: homeData,),
+//Brand List ---------------------------
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              Padding(
-                                  padding: const EdgeInsetsDirectional.only(top: 20, start: 20,bottom: 10),
-                                  child: GestureDetector(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                        return Filter(selected_filter: "brands");
-                                      }));
-                                    },
-                                    child: Text(
-                                      AppLocalizations.of(context)!.top_brands_ucf,
-                                     // AppLocalizations.of(context)!.featured_products_ucf,
-                                      style: TextStyle(
-                                        color: Color(0xff000000),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            BrandListWidget(homePresenter: homeData,), //TODO:# BrandListWidget
-                            ]),
-                          ),
-//new products ------------
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(18.0, 20, 20.0, 0.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)!.all_products_ucf,
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                    HomeAllProducts2(context: context, homeData: homeData),
-                                  ],
-                                ),
-                              ),
-                            ]),
-                          ),
+                          BrandListSectionSliver(homeData: homeData,),
+//all products --------------------------
+                          AllProducts(homeData: homeData,),
+                          ///
                         ],
                       ),
                     ),
@@ -402,6 +231,8 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
       ),
     );
   }
+
+
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
     return AppBar(
@@ -528,4 +359,6 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
     return val.padLeft(default_length, '0');
   }
 }
+
+
 

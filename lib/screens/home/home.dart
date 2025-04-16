@@ -5,6 +5,8 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products_list_sliver.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 
@@ -13,7 +15,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../custom/feature_categories_widget.dart';
-import '../../custom/featured_product_horizontal_list_widget.dart';
 import '../../custom/home_all_products_2.dart';
 import '../../custom/home_banners_list.dart';
 import '../../custom/home_carousel_slider.dart';
@@ -157,9 +158,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             SliverToBoxAdapter(
                               child: SizedBox(
                                 height: 175,
-                                child: FeaturedCategoriesWidget(
-                                  homeData: homeData,
-                                ),
+                                child: CategoryList(),
                               ),
                             ),
                           ],
@@ -194,34 +193,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           // ])),
 
                           //Featured Products
-                          if(homeData.isFeaturedProductInitial || homeData.featuredProductList.length != 0)
-                            SliverList(
-                              delegate: SliverChildListDelegate([
-                                Container(
-                                  height: 305,
-                                  margin: EdgeInsets.only(top: 12),
-                                  color: MyTheme.accent_color.withOpacity(0.1),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.only(top: 20, start: 20),
-                                        child: Text(
-                                          AppLocalizations.of(context)!
-                                              .featured_products_ucf,
-                                          style: TextStyle(
-                                            color: Color(0xff000000),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(child: FeaturedProductHorizontalListWidget(homeData: homeData)),
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
+                          const FeaturedProductsListSliver(),
                           //Home Banner Slider Two
                           // SliverList(
                           //   delegate: SliverChildListDelegate([

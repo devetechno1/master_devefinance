@@ -20,7 +20,6 @@ import '../../custom/box_decorations.dart';
 import '../../custom/btn.dart';
 import '../../custom/device_info.dart';
 import '../../custom/lang_text.dart';
-import '../../custom/quantity_input.dart';
 import '../../custom/toast_component.dart';
 import '../../data_model/product_details_response.dart';
 import '../../helpers/color_helper.dart';
@@ -2352,7 +2351,6 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   main_price: _relatedProducts[index].main_price,
                   stroked_price: _relatedProducts[index].stroked_price,
                   is_wholesale: _relatedProducts[index].isWholesale,
-                  discount: _relatedProducts[index].discount,
                   has_discount: _relatedProducts[index].has_discount);
             },
           ),

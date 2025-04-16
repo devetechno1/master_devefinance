@@ -8,6 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/home_page_type_enum.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
+// import 'home/home_page_type_enum.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key, this.go_back = true}) : super(key: key);
@@ -59,6 +61,7 @@ class _MainState extends State<Main> {
 
   void initState() {
     _children = [
+    //   HomePageType.home.screen,
       AppConfig.selectedHomePageType.screen,
       CategoryList(
         slug: "",

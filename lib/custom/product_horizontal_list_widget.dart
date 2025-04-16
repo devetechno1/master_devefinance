@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../helpers/shimmer_helper.dart';
-import '../my_theme.dart';
-import '../presenter/home_presenter.dart';
 import '../ui_elements/mini_product_card.dart';
 
-class FeaturedProductHorizontalListWidget extends StatelessWidget {
-  final HomePresenter homeData;
-  const FeaturedProductHorizontalListWidget({Key? key, required this.homeData})
+import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart' as productMini;
+
+
+class ProductHorizontalListWidget extends StatelessWidget {
+  final bool isProductInitial;
+  final List <productMini.Product> productList;
+  final int numberOfTotalProducts;
+  final void Function() onArriveTheEndOfList;
+  final TextStyle? priceTextStyle;
+  final TextStyle? nameTextStyle;
+  const ProductHorizontalListWidget({Key? key, required this.isProductInitial, required this.productList, required this.numberOfTotalProducts,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (homeData.isFeaturedProductInitial == true &&
-        homeData.featuredProductList.length == 0) {
+    if (isProductInitial && productList.isEmpty) {
       return Padding(
         padding: EdgeInsets.only(right: 20,left: 20, top: 15),
         child: Row(
@@ -44,15 +48,14 @@ class FeaturedProductHorizontalListWidget extends StatelessWidget {
           ],
         ),
       );
-    } else if (homeData.featuredProductList.length > 0) {
+    } else if (productList.length > 0) {
       return Container(
-        height: 230,
+        // height: 230,
         alignment: Alignment.center,
         child: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
-            if (scrollInfo.metrics.pixels ==
-                scrollInfo.metrics.maxScrollExtent) {
-              homeData.fetchFeaturedProducts();
+            if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+              if(numberOfTotalProducts > productList.length) onArriveTheEndOfList();
             }
             return true;
           },
@@ -61,17 +64,16 @@ class FeaturedProductHorizontalListWidget extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(
               width: 12,
             ),
-            itemCount: homeData.totalFeaturedProductData! >
-                    homeData.featuredProductList.length
-                ? homeData.featuredProductList.length + 1
-                : homeData.featuredProductList.length,
+            itemCount:numberOfTotalProducts > productList.length
+              ? productList.length + 1
+              : productList.length,
             scrollDirection: Axis.horizontal,
             //itemExtent: 135,
-      
+                
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             itemBuilder: (context, index) {
-              return (index == homeData.featuredProductList.length)
+              return (index == productList.length)
                   ? SpinKitFadingFour(
                       itemBuilder: (BuildContext context, int index) {
                         return DecoratedBox(
@@ -82,33 +84,28 @@ class FeaturedProductHorizontalListWidget extends StatelessWidget {
                       },
                     )
                   : MiniProductCard(
-                      id: homeData.featuredProductList[index].id,
-                      slug: homeData.featuredProductList[index].slug,
+                      id: productList[index].id,
+                      slug: productList[index].slug ?? '',
                       image:
-                          homeData.featuredProductList[index].thumbnail_image,
-                      name: homeData.featuredProductList[index].name,
+                         productList[index].thumbnail_image,
+                      name:productList[index].name,
                       main_price:
-                          homeData.featuredProductList[index].main_price,
+                        productList[index].main_price,
                       stroked_price:
-                          homeData.featuredProductList[index].stroked_price,
+                          productList[index].stroked_price,
                       has_discount:
-                          homeData.featuredProductList[index].has_discount,
+                          productList[index].has_discount,
                       is_wholesale:
-                          homeData.featuredProductList[index].isWholesale,
-                      discount: homeData.featuredProductList[index].discount,
+                         productList[index].isWholesale,
+                      priceTextStyle: priceTextStyle,
+                      nameTextStyle: nameTextStyle,
                     );
             },
           ),
         ),
       );
     } else {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context)!.no_related_product,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
+      return const SizedBox();
     }
   }
 }

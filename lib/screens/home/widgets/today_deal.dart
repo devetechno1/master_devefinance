@@ -1,8 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 import '../../product/product_details.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 
 class TodaysDealProductsWidget extends StatelessWidget {
   //final List<Product>? products;
@@ -16,13 +14,13 @@ class TodaysDealProductsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (homePresenter.TodayDealList.isEmpty) {
-      return Center(
-        child: Text(
-          LangText(context).local.error_fetching_todays_deal_products,
-        ),
-      );
-    }
+    // if (homePresenter.TodayDealList.isEmpty) {
+    //   return Center(
+    //     child: Text(
+    //       LangText(context).local.error_fetching_todays_deal_products,
+    //     ),
+    //   );
+    // }
 
     return SizedBox(
       height: 250,
