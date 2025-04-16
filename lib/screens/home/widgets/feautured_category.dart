@@ -23,7 +23,7 @@ class CategoryList extends StatelessWidget {
               children: [
              
                 Padding(
-                  padding: const EdgeInsetsDirectional.only( start: 20, bottom: 10),
+                  padding: const EdgeInsetsDirectional.only( top: 10,start: 20, bottom: 1),
                   child: Text(
                     AppLocalizations.of(context)!.featured_categories_ucf,
                     style: const TextStyle(

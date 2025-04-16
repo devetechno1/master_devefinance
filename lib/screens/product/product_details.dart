@@ -2393,7 +2393,6 @@ class _ProductDetailsState extends State<ProductDetails>
                   main_price: _relatedProducts[index].main_price,
                   stroked_price: _relatedProducts[index].stroked_price,
                   is_wholesale: _relatedProducts[index].isWholesale,
-                  discount: _relatedProducts[index].discount,
                   has_discount: _relatedProducts[index].has_discount);
             },
           ),

@@ -23,7 +23,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/last_view_product.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/top_selling_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/refund_request.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wholesales_screen.dart';
@@ -387,7 +386,7 @@ class _ProfileState extends State<Profile> {
           //flash_deals
              Column(
             children: [
-             if (homeData!.isFlashDealInitial != false)
+             if (homeData.isFlashDealInitial != false)
               buildBottomVerticalCardListItem(
               
                   "assets/flash_deal.png", AppLocalizations.of(context)!.flash_deal_ucf,
