@@ -11,11 +11,10 @@ import 'package:active_ecommerce_cms_demo_app/repositories/category_repository.d
 import 'package:active_ecommerce_cms_demo_app/repositories/flash_deal_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/sliders_repository.dart';
-
 import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
 import 'package:flutter/material.dart';
-
 import '../data_model/category_response.dart';
+import '../status/execute_and_handle_remote_errors.dart';
 
 class HomePresenter extends ChangeNotifier {
   CurrentRemainingTime flashDealRemainingTime =
@@ -130,25 +129,27 @@ bool showTodayDealContainer = false;
 
 
   Future<void> fetchBannerFlashDeal() async {
-    try {
+   
       final banners = await SlidersRepository().fetchBanners();
       _banners = banners;
       notifyListeners();
-    } catch (e) {
-      print('Error loading banners: $e');
+    
+
     }
-  }
+  
 
   fetchTodayDealData() async {
-    var deal = await ProductRepository().getTodaysDealProducts();
+    productMini.ProductMiniResponse? deal; 
+    await executeAndHandleErrors(() async => deal = await ProductRepository().getTodaysDealProducts());
+    
     // print(deal.products!.length);
     // if (deal.success! && deal.products!.isNotEmpty) {
     //   isTodayDeal = true;
     //   notifyListeners();
     // }
-    if (deal.success == true &&
-        deal.products != null &&
-        deal.products!.isNotEmpty) {
+    if (deal?.success == true &&
+        deal?.products != null &&
+        deal?.products?.isNotEmpty == true) {
       isTodayDeal = true;
       notifyListeners();
     } else {
@@ -158,16 +159,19 @@ bool showTodayDealContainer = false;
   
 
   fetchFlashDealData() async {
-    FlashDealResponse deal = await FlashDealRepository().getFlashDeals();
+    FlashDealResponse?deal;
+        await executeAndHandleErrors(() async => deal =  await FlashDealRepository().getFlashDeals());
 
-    if (deal.success == true &&
-        deal.flashDeals != null &&
-        deal.flashDeals!.isNotEmpty) {
+
+
+    if (deal?.success == true &&
+        deal?.flashDeals != null &&
+        deal?.flashDeals!.isNotEmpty==true) {
       isFlashDeal = true;
       _banners.clear();
-      _banners.addAll(deal.flashDeals!);
+      _banners.addAll(deal?.flashDeals??[]);
       FlashDealResponseDatum? tempFlashDeal;
-      for (FlashDealResponseDatum e in deal.flashDeals!) {
+      for (FlashDealResponseDatum e in deal!.flashDeals!) {
         if(e.isFeatured){
           tempFlashDeal = e;
           break;
@@ -226,153 +230,162 @@ bool showTodayDealContainer = false;
     
   }
 fetchCarouselImages() async {
-  try{
-    SliderResponse carouselResponse = await SlidersRepository().getSliders();
+ SliderResponse?carouselResponse;
+        await executeAndHandleErrors(() async => carouselResponse =  await SlidersRepository().getSliders());
+
+
   carouselImageList.clear();
-  carouselImageList.addAll(carouselResponse.sliders!);
+  carouselImageList.addAll(carouselResponse?.sliders??[]);
   isCarouselInitial = false;
-  }catch(e){}
+ 
   notifyListeners();
 }
 
   fetchBestSellingProducts() async {
     if(showBestSellingLoadingContainer) return;
-
-    try{    
+      
       showBestSellingLoadingContainer=true;
-      final productMini.ProductMiniResponse bestselling = await ProductRepository().getBestSellingProducts();
+      productMini.ProductMiniResponse?bestselling;
+        await executeAndHandleErrors(() async => bestselling =  await ProductRepository().getBestSellingProducts());
       bestSellingProductList.clear();
-      bestSellingProductList.addAll(bestselling.products!);
+      bestSellingProductList.addAll(bestselling?.products??[]);
       showBestSellingLoadingContainer = false;
       isBestSellingProductInitial = false;
-    }catch(e){}
+    
     notifyListeners();
   }
     fetchAuctionProducts() async {
-   try{ 
-    final productMini.ProductMiniResponse auction = await AuctionProductsRepository().getAuctionProducts(page:1);
+       productMini.ProductMiniResponse?auction;
+        await executeAndHandleErrors(() async => auction =  await AuctionProductsRepository().getAuctionProducts(page:1));
+  
+   
     auctionProductList.clear();
-    auctionProductList.addAll(auction.products!);
-    }catch(e){}
+    auctionProductList.addAll(auction?.products??[]);
+  
     isauctionProductInitial = false;
     notifyListeners();
   }
   fetchBrandsProducts() async {
- try{
-     final BrandResponse brands = await BrandRepository().getBrands();
+  BrandResponse?brands;
+        await executeAndHandleErrors(() async => brands =  await await BrandRepository().getBrands());
+  
     brandsList.clear();
-    brandsList.addAll(brands.brands!);
+    brandsList.addAll(brands?.brands??[]);
     isBrandsInitial = false;
- }catch(e){}
+ 
     notifyListeners();
   }
    fetchTodayDealProducts() async {
-    try{
-    final productMini.ProductMiniResponse deals = await ProductRepository().getTodaysDealProducts();
+    productMini.ProductMiniResponse?deals;
+        await executeAndHandleErrors(() async => deals =   await ProductRepository().getTodaysDealProducts());
     TodayDealList.clear();
-    TodayDealList.addAll(deals.products!);
+    TodayDealList.addAll(deals?.products??[]);
     isTodayDealInitial = false;
     notifyListeners();
-     } catch (e) {
      
 
-    print("Error details: $e");
     }
-  }
+  
 
 
   Future<void> fetchBannerOneImages() async {
-    try {
-      final SliderResponse bannerOneResponse = await SlidersRepository().getBannerOneImages();
+      SliderResponse?bannerOneResponse;
+        await executeAndHandleErrors(() async => bannerOneResponse =   await SlidersRepository().getBannerOneImages());
+  
+     
       bannerOneImageList.clear();
-      bannerOneImageList.addAll(bannerOneResponse.sliders!);
-    } catch (e) {}
+      bannerOneImageList.addAll(bannerOneResponse?.sliders??[]);
+  
     isBannerOneInitial = false;
     notifyListeners();
   }
 
   Future<void> fetchFlashDealBannerImages() async {
-    try {
-      final SliderResponse flashDealBannerResponse =
-          await SlidersRepository().getFlashDealBanner();
+     SliderResponse?flashDealBannerResponse;
+        await executeAndHandleErrors(() async => flashDealBannerResponse =   await SlidersRepository().getFlashDealBanner());
+  
       flashDealBannerImageList.clear();
-      flashDealBannerImageList.addAll(flashDealBannerResponse.sliders!);
+      flashDealBannerImageList.addAll(flashDealBannerResponse?.sliders??[]);
       isFlashDealInitial = false;
       notifyListeners();
-    } catch (e) {
-      print('Error fetching flash deal banners: $e');
+    
+  
     }
-  }
+  
 
   Future<void> fetchBannerTwoImages() async {
-   try{
-     final SliderResponse bannerTwoResponse = await SlidersRepository().getBannerTwoImages();
+       SliderResponse?bannerTwoResponse;
+        await executeAndHandleErrors(() async => bannerTwoResponse =   await SlidersRepository().getBannerTwoImages());
+  
+ 
     bannerTwoImageList.clear();
-    bannerTwoImageList.addAll(bannerTwoResponse.sliders!);
+    bannerTwoImageList.addAll(bannerTwoResponse?.sliders??[]);
     isBannerTwoInitial = false;
-   }catch(e){}
+   
     notifyListeners();
   }
   Future<void> fetchBannerThreeImags() async {
-try{
-      final SliderResponse bannerThreeResponse = await SlidersRepository().getBannerThreeImages();
+       SliderResponse?bannerThreeResponse;
+        await executeAndHandleErrors(() async => bannerThreeResponse =   await SlidersRepository().getBannerThreeImages());
     bannerThreeImageList.clear();
-    bannerThreeImageList.addAll(bannerThreeResponse.sliders!);
+    bannerThreeImageList.addAll(bannerThreeResponse?.sliders??[]);
     isBannerThreeInitial = false;
-}catch(e){}
+
     notifyListeners();
   }
 
   Future<void> fetchFeaturedCategories() async {
- try{
-     var categoryResponse = await CategoryRepository().getFeturedCategories();
+      CategoryResponse?categoryResponse;
+        await executeAndHandleErrors(() async => categoryResponse =   await CategoryRepository().getFeturedCategories());
     featuredCategoryList.clear();
-    featuredCategoryList.addAll(categoryResponse.categories!);
+    featuredCategoryList.addAll(categoryResponse?.categories??[]);
     isCategoryInitial = false;
- }catch(e){}
+ 
     notifyListeners();
   }
 
   Future<void> fetchFeaturedProducts() async {
 
     if(showFeaturedLoadingContainer) return;
-    try {
+    
       showFeaturedLoadingContainer = true;
-
-      final productMini.ProductMiniResponse productResponse = await ProductRepository().getFeaturedProducts(
+  productMini.ProductMiniResponse?productResponse;
+        await executeAndHandleErrors(() async => productResponse =  await ProductRepository().getFeaturedProducts(
         page: featuredProductPage,
-      );
+      ));
+     
 
       featuredProductPage++;
 
-      if (productResponse.products != null) {
-        featuredProductList.addAll(productResponse.products!);
+      if (productResponse?.products != null) {
+        featuredProductList.addAll(productResponse?.products??[]);
       }
 
       isFeaturedProductInitial = false;
 
-      if (productResponse.meta != null) {
-        totalFeaturedProductData = productResponse.meta!.total ?? featuredProductList.length;
+      if (productResponse?.meta != null) {
+        totalFeaturedProductData = productResponse?.meta!.total ?? featuredProductList.length;
       }
 
       showFeaturedLoadingContainer = false;
       notifyListeners();
-    } catch (e) {}
+   
   }
 
   fetchAllProducts() async {
-    try{
-      var productResponse =
-        await ProductRepository().getFilteredProducts(page: allProductPage);
-    if (productResponse.products != null) {
-      allProductList.addAll(productResponse.products!);
+      productMini.ProductMiniResponse?productResponse;
+      await executeAndHandleErrors(()async=>  productResponse= await ProductRepository().getFilteredProducts(page: allProductPage));
+
+
+    if (productResponse?.products != null) {
+      allProductList.addAll(productResponse?.products??[]);
     }
     isAllProductInitial = false;
-    if (productResponse.meta != null) {
-      totalAllProductData = productResponse.meta!.total;
+    if (productResponse?.meta != null) {
+      totalAllProductData = productResponse?.meta!.total;
     }
     showAllLoadingContainer = false;
-    }catch(e){}
+  
     notifyListeners();
   }
 resetBestSellingProducts() {

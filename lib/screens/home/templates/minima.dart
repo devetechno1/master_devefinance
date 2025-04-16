@@ -1,6 +1,7 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/home_banners_list.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -165,10 +166,29 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                           //feature_categories//
 
                       const    CategoryList(),    
+                       SliverToBoxAdapter(
+                              child: HomeBannersList(
+                                bannersImagesList: homeData.bannerTwoImageList,
+                                isBannersInitial: homeData.isBannerTwoInitial,
+                              ),
+                            ),
                       const  FeaturedProductsListSliver(),
+                      SliverToBoxAdapter(
+                              child: HomeBannersList(
+                                bannersImagesList: homeData.bannerTwoImageList,
+                                isBannersInitial: homeData.isBannerTwoInitial,
+                              ),
+                            ),
+
                             //Best Selling
                       const BestSellingSectionSliver(),
                      const NewProductsListSliver(),
+                      SliverToBoxAdapter(
+                              child: HomeBannersList(
+                                bannersImagesList: homeData.bannerTwoImageList,
+                                isBannersInitial: homeData.isBannerTwoInitial,
+                              ),
+                            ),
                                        
 //auction products
                        AuctionProductsSectionSliver(homeData: homeData,),
