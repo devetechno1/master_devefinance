@@ -53,7 +53,7 @@ class HomePresenter extends ChangeNotifier {
   List<SingleBanner> _singleBanner = [];
   List<SingleBanner> get singleBanner => _singleBanner;
 
-  List<Category> featuredCategoryList = [];
+List<Category> featuredCategoryList = [];
 
   bool isCategoryInitial = true;
   bool isCarouselInitial = true;
@@ -67,7 +67,7 @@ class HomePresenter extends ChangeNotifier {
 
 
 bool isBestSellingProductInitial=true;
-int? totalBestSellingProductData;
+int totalBestSellingProductData=0;
 bool showBestSellingLoadingContainer = false;
 
 bool isauctionProductInitial=true;
@@ -81,11 +81,13 @@ int? totalatodayDealData;
 int todayDealPage = 1;
 bool showTodayDealContainer = false;
 
-  var featuredProductList = [];
+  List<productMini.Product> featuredProductList = [];
   bool isFeaturedProductInitial = true;
-  int? totalFeaturedProductData = 0;
+  int totalFeaturedProductData = 0;
   int featuredProductPage = 1;
   bool showFeaturedLoadingContainer = false;
+  int totalCategoryProductData = 0;
+
 
   bool isTodayDeal = false;
   bool isFlashDeal = false;
@@ -234,20 +236,25 @@ fetchCarouselImages() async {
 }
 
   fetchBestSellingProducts() async {
-try{    
-final productMini.ProductMiniResponse bestselling = await ProductRepository().getBestSellingProducts();
-    bestSellingProductList.clear();
-    bestSellingProductList.addAll(bestselling.products!);
-    isBestSellingProductInitial = false;
+    if(showBestSellingLoadingContainer) return;
+
+    try{    
+      showBestSellingLoadingContainer=true;
+      final productMini.ProductMiniResponse bestselling = await ProductRepository().getBestSellingProducts();
+      bestSellingProductList.clear();
+      bestSellingProductList.addAll(bestselling.products!);
+      showBestSellingLoadingContainer = false;
+      isBestSellingProductInitial = false;
     }catch(e){}
     notifyListeners();
   }
     fetchAuctionProducts() async {
-   try{ final productMini.ProductMiniResponse auction = await AuctionProductsRepository().getAuctionProducts(page:1);
+   try{ 
+    final productMini.ProductMiniResponse auction = await AuctionProductsRepository().getAuctionProducts(page:1);
     auctionProductList.clear();
     auctionProductList.addAll(auction.products!);
-    isauctionProductInitial = false;
     }catch(e){}
+    isauctionProductInitial = false;
     notifyListeners();
   }
   fetchBrandsProducts() async {
@@ -327,8 +334,12 @@ try{
   }
 
   Future<void> fetchFeaturedProducts() async {
+
+    if(showFeaturedLoadingContainer) return;
     try {
-      var productResponse = await ProductRepository().getFeaturedProducts(
+      showFeaturedLoadingContainer = true;
+
+      final productMini.ProductMiniResponse productResponse = await ProductRepository().getFeaturedProducts(
         page: featuredProductPage,
       );
 
@@ -341,7 +352,7 @@ try{
       isFeaturedProductInitial = false;
 
       if (productResponse.meta != null) {
-        totalFeaturedProductData = productResponse.meta!.total;
+        totalFeaturedProductData = productResponse.meta!.total ?? featuredProductList.length;
       }
 
       showFeaturedLoadingContainer = false;
