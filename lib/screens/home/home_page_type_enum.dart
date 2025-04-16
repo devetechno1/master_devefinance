@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/screens/home/templates/minima.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
@@ -11,11 +12,11 @@ import 'templates/metro.dart';
 /// that we get from '/api/v2/business-settings' endpoint with key 'homepage_select', 
 /// when admin change page you have to hot restart app.
 enum HomePageType {
-  classic('classic', screen: SizedBox()),
-  metro('metro', screen: const MetroScreen()),
-  minima('minima', screen: SizedBox()),
-  megaMart('megamart', screen: SizedBox()),
-  reClassic('re-classic', screen: SizedBox()),
+  classic('classic', screen: Home()),
+  metro('metro', screen:  MetroScreen()),
+  minima('minima', screen: MinimaScreen()),
+  megaMart('megamart', screen: Home()),
+  reClassic('re-classic', screen: Home()),
   home('home', screen: const Home());
 
   final String typeString;

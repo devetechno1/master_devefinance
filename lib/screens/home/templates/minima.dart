@@ -7,10 +7,10 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/auction_products.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/best_selling_section_sliver.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/brand_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../custom/home_carousel_slider.dart';
@@ -19,8 +19,8 @@ import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
-import '../widets/featured_products_list_sliver.dart';
-import '../widets/new_products_list_sliver.dart';
+import '../widgets/featured_products_list_sliver.dart';
+import '../widgets/new_products_list_sliver.dart';
 
 class MinimaScreen extends StatefulWidget {
   const MinimaScreen({
