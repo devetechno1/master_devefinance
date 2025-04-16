@@ -213,7 +213,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                       AuctionProductsSectionSliver(homeData: homeData,),
 //Brand List ---------------------------
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                          BrandList(context),
+                          BrandListSectionSliver(homeData: homeData,),
 //new products --------------------------
                           NewProductsListSliver()
                           ///

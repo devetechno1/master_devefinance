@@ -174,7 +174,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
 //auction products
                        AuctionProductsSectionSliver(homeData: homeData,),
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                         BrandList(context), //TODO:# BrandListWidget         
+                         BrandListSectionSliver(homeData: homeData,),
 //new products ------------
                         NewProductsListSliver(),
                         ],
