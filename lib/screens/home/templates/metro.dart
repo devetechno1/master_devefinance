@@ -179,11 +179,10 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                             ),
                           ),
 //Featured category-----------------------
-                          if(homeData.isCategoryInitial || homeData.featuredCategoryList.isNotEmpty)...[
-                    const     CategoryList(),
+                            const CategoryList(),
                        
                             
-                          ],
+                          
 //BannerList---------------------                            
 
                           SliverToBoxAdapter(
@@ -193,8 +192,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                             ),
                           ),
 //featuredProducts-----------------------------   
-                          if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                            const FeaturedProductsListSliver(),
+                          const FeaturedProductsListSliver(),
 //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
@@ -215,7 +213,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
                           BrandListSectionSliver(homeData: homeData,),
 //all products --------------------------
-       AllProducts(homeData: homeData,),
+                          AllProducts(homeData: homeData,),
                           ///
                         ],
                       ),
