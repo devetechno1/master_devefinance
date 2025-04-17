@@ -26,7 +26,7 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 305,
-      margin: EdgeInsets.only(top: 12),
+      margin: EdgeInsets.only(top: 10, bottom: 5),
       color: MyTheme.accent_color.withOpacity(0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
