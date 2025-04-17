@@ -7,6 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_brand_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -203,7 +204,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
 
 //Brand List ---------------------------
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                          BrandListSectionSliver(homeData: homeData,),
+                        AllBrandListSectionSliver(homeData: homeData,),
 //auctionProducts------------ 
                                 AuctionProductsSectionSliver(homeData: homeData,),                   
 //all products --------------------------
