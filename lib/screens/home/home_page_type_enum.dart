@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/screens/home/templates/classic.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/templates/megamart.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/templates/minima.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/templates/re_classic.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
@@ -18,8 +19,9 @@ enum HomePageType {
   metro('metro', screen:  MetroScreen()),
   minima('minima', screen: MinimaScreen()),
   megaMart('megamart', screen: MegamartScreen()),
-  reClassic('re-classic', screen: Home()),
-  home('home', screen: const Home());
+  reClassic('re-classic', screen: ReclassictScreen()),
+  home('home', screen:  ReclassictScreen()
+  );
 
   final String typeString;
   final Widget screen;
