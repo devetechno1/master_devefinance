@@ -134,34 +134,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           ),
 
                           //Featured Categories
-                          if(homeData.isCategoryInitial ||  homeData.featuredCategoryList.isNotEmpty)...[
-                            SliverList(
-                              delegate: SliverChildListDelegate([
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 18.0, 0.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .featured_categories_ucf,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
-
-                            SliverToBoxAdapter(
-                              child: SizedBox(
-                                height: 175,
-                                child: CategoryList(),
-                              ),
-                            ),
-                          ],
+                  CategoryList(),
 
                           if (homeData.isFlashDeal)
                             SliverList(
