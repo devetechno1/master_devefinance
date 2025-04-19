@@ -8,8 +8,10 @@ import '../../../data_model/brand_response.dart';
 
 class CustomBrandListWidget extends StatefulWidget {
   final HomePresenter homePresenter;
+    final bool showViewAllButton;
 
-  const CustomBrandListWidget({super.key, required this.homePresenter});
+
+  const CustomBrandListWidget({super.key, required this.homePresenter, required this.showViewAllButton});
 
   @override
   State<CustomBrandListWidget> createState() => _CustomBrandListWidgetState();
@@ -24,13 +26,14 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
     if (brands.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
+    final bool showViewAll = widget.showViewAllButton && brands.length > 8;
 
     return Column(
       children: [
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: brands.length > 8 ? 8 : brands.length,
+          itemCount: showViewAll ? 8 : brands.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 10,
@@ -40,7 +43,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
           itemBuilder: (context, index) {
             final Brands brand = brands[index];
 
-            if(index == 7 && brands.length > 8){
+            if(showViewAll && index == 7){
               return GestureDetector(
                 onTap: () {
                   context.pushNamed('Brands');

@@ -10,8 +10,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BrandListSectionSliver extends StatelessWidget {
   final HomePresenter homeData;
+  final bool showViewAllButton ;
 
-  const BrandListSectionSliver({super.key, required this.homeData});
+  const BrandListSectionSliver({super.key, required this.homeData, this.showViewAllButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class BrandListSectionSliver extends StatelessWidget {
             ),
           ),
         ),
-        CustomBrandListWidget(homePresenter: homeData), // TODO: # BrandListWidget
+        CustomBrandListWidget(homePresenter: homeData,showViewAllButton: showViewAllButton),
       ]),
     );
   }

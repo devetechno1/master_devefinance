@@ -20,8 +20,7 @@ enum HomePageType {
   minima('minima', screen: MinimaScreen()),
   megaMart('megamart', screen: MegamartScreen()),
   reClassic('re-classic', screen: ReclassictScreen()),
-  home('home', screen:  ReclassictScreen()
-  );
+  home('home', screen:  Home());
 
   final String typeString;
   final Widget screen;

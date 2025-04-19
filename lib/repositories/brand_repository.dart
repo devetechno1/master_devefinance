@@ -13,14 +13,14 @@ class BrandRepository {
     return brandResponseFromJson(response.body);
   }
 
-  Future<BrandResponse> getTopBrands({name = "", page = 1}) async {
+  Future<BrandResponse> getTopBrands({String name = "", int page = 1}) async {
     String url = ("${AppConfig.BASE_URL}/brands/top" + "?page=$page&name=$name");
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
     });
     return brandResponseFromJson(response.body);
   }
-  Future<BrandResponse> getBrands({name = "", page = 1}) async {
+  Future<BrandResponse> getBrands({ name = "", int page = 1}) async {
     String url = ("${AppConfig.BASE_URL}/brands" + "?page=$page&name=$name");
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,

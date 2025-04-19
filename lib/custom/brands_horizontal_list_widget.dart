@@ -5,22 +5,21 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../helpers/shimmer_helper.dart';
 import '../ui_elements/mini_product_card.dart';
 
-import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart' as productMini;
 
 
-class ProductHorizontalListWidget extends StatelessWidget {
-  final bool isProductInitial;
-  final List <productMini.Product> productList;
-  final int numberOfTotalProducts;
+class BrandHorizontalListWidget extends StatelessWidget {
+  final bool isBrandsInitial;
+  final List <Brands> brandsList;
+  final int numberOfTotalBrands;
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
-  const ProductHorizontalListWidget({Key? key, required this.isProductInitial, required this.productList, required this.numberOfTotalProducts,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle, List<Brands>? brandtList,})
+  const BrandHorizontalListWidget({Key? key, required this.isBrandsInitial, required this.brandsList, required this.numberOfTotalBrands,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle, List<Brands>? brandtList,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (isProductInitial && productList.isEmpty) {
+    if (isBrandsInitial && brandsList.isEmpty) {
       return Padding(
         padding: EdgeInsets.only(right: 20,left: 20, top: 15),
         child: Row(
@@ -49,14 +48,14 @@ class ProductHorizontalListWidget extends StatelessWidget {
           ],
         ),
       );
-    } else if (productList.length > 0) {
+    } else if (brandsList.length > 0) {
       return Container(
         // height: 230,
         alignment: Alignment.center,
         child: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
             if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-              if(numberOfTotalProducts > productList.length) onArriveTheEndOfList();
+              if(numberOfTotalBrands > brandsList.length) onArriveTheEndOfList();
             }
             return true;
           },
@@ -65,16 +64,16 @@ class ProductHorizontalListWidget extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(
               width: 12,
             ),
-            itemCount:numberOfTotalProducts > productList.length
-              ? productList.length + 1
-              : productList.length,
+            itemCount:numberOfTotalBrands > brandsList.length
+              ? brandsList.length + 1
+              : brandsList.length,
             scrollDirection: Axis.horizontal,
             //itemExtent: 135,
                 
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             itemBuilder: (context, index) {
-              return (index == productList.length)
+              return (index == brandsList.length)
                   ? SpinKitFadingFour(
                       itemBuilder: (BuildContext context, int index) {
                         return DecoratedBox(
@@ -85,19 +84,14 @@ class ProductHorizontalListWidget extends StatelessWidget {
                       },
                     )
                   : MiniProductCard(
-                      id: productList[index].id,
-                      slug: productList[index].slug ?? '',
+                      id: brandsList[index].id,
+                      slug: brandsList[index].slug ?? '',
                       image:
-                         productList[index].thumbnail_image,
-                      name:productList[index].name,
+                         brandsList[index].logo,
+                      name:brandsList[index].name,
                       main_price:
-                        productList[index].main_price,
-                      stroked_price:
-                          productList[index].stroked_price,
-                      has_discount:
-                          productList[index].has_discount,
-                      is_wholesale:
-                         productList[index].isWholesale,
+                        brandsList[index].name,
+                   
                       priceTextStyle: priceTextStyle,
                       nameTextStyle: nameTextStyle,
                     );
