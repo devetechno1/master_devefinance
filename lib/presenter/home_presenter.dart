@@ -86,6 +86,7 @@ bool showTodayDealContainer = false;
   int featuredProductPage = 1;
   bool showFeaturedLoadingContainer = false;
   int totalCategoryProductData = 0;
+  int totalAllBrandsData=0;
 
 
   bool isTodayDeal = false;
@@ -265,16 +266,26 @@ fetchCarouselImages() async {
     isauctionProductInitial = false;
     notifyListeners();
   }
+
   fetchBrandsProducts() async {
-  BrandResponse?brands;
-        await executeAndHandleErrors(() async => brands =  await await BrandRepository().getBrands());
+  BrandResponse?brandsRes;
+        await executeAndHandleErrors(() async => brandsRes =  await await BrandRepository().getBrands());
   
     brandsList.clear();
-    brandsList.addAll(brands?.brands??[]);
+     if (brandsRes?.brands != null) {
+    brandsList.addAll(brandsRes?.brands??[]);
+    }
+
+    if (brandsRes?.brands != null) {
+      totalAllBrandsData = brandsRes?.meta?.total??0;
+    }
+    showAllLoadingContainer = false;
+  
     isBrandsInitial = false;
  
     notifyListeners();
   }
+
    fetchTodayDealProducts() async {
     productMini.ProductMiniResponse?deals;
         await executeAndHandleErrors(() async => deals =   await ProductRepository().getTodaysDealProducts());
@@ -286,7 +297,6 @@ fetchCarouselImages() async {
 
     }
   
-
 
   Future<void> fetchBannerOneImages() async {
       SliderResponse?bannerOneResponse;

@@ -1,26 +1,26 @@
-import 'package:active_ecommerce_cms_demo_app/custom/product_horizontal_list_widget.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/brands_horizontal_list_widget.dart';
+import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 
-class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
-  const CustomHorizontalProductsListSectionWidget({
+class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
+  const CustomHorizontalBrandsListSectionWidget({
     super.key,
     required this.title, 
-    required this.isProductInitial, 
-    required this.productList, 
-    required this.numberOfTotalProducts, 
+    required this.isBrandsInitial, 
+    required this.brandsList, 
+    required this.numberOfTotalBrands, 
     required this.onArriveTheEndOfList, 
     this.priceTextStyle, 
     this.nameTextStyle,
   });
 
   final String title;
-  final bool isProductInitial;
-  final List <Product> productList;
+  final bool isBrandsInitial;
+  final List <Brands> brandsList;
   
 
-  final int numberOfTotalProducts;
+  final int numberOfTotalBrands;
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
@@ -49,13 +49,11 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
             ),
           ),
           Flexible(
-            child: ProductHorizontalListWidget(
-              isProductInitial: isProductInitial, 
-              productList: productList, 
-              numberOfTotalProducts: numberOfTotalProducts ,
+            child: BrandHorizontalListWidget(isBrandsInitial: isBrandsInitial,
+             brandsList:brandsList,
+             numberOfTotalBrands:numberOfTotalBrands ,
               onArriveTheEndOfList: onArriveTheEndOfList,
-              nameTextStyle: nameTextStyle,
-              priceTextStyle: priceTextStyle,
+
             ),
           ),
         ],

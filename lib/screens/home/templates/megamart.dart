@@ -7,7 +7,6 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_brand_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -127,47 +126,44 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                                 ),
                               ),
 
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: Offset(0, 3), // changes position of shadow
-                                  )],
-                                    color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(8.0),
-
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Column(
-                                      children: [
-                                        buildTimerRow(homeData.flashDealRemainingTime),
-                                      //FlashBanner SpecialOffer
-                                        SizedBox(
-                                          height: 300,
-                                          child: LayoutBuilder(
-                                            builder: (context,constrainedBox) {
-                                              return FlashBannerWidget(
-                                                size: constrainedBox.maxWidth,
-                                                
-                                                bannerLink: homeData.flashDeal?.banner, 
-                                                slug: homeData.flashDeal!.slug,
-                                              );
-                                            }
-                                          ),
-                                        ),
-
-                                          
-                                      ],
+                              Container(
+                                width: 300,
+                                margin: const EdgeInsets.symmetric(horizontal: 25),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                )],
+                                  color:  const Color.fromARGB(255, 249, 248, 248),
+                                  borderRadius: BorderRadius.circular(8.0),
+                              
+                                ),
+                                child: Column(
+                                  children: [
+                                    buildTimerRow(homeData.flashDealRemainingTime),
+                                  //FlashBanner SpecialOffer
+                                    SizedBox(
+                                      height: 300,
+                                      child: LayoutBuilder(
+                                        builder: (context,constrainedBox) {
+                                          return FlashBannerWidget(
+                                            size: constrainedBox.maxWidth,
+                                            
+                                            bannerLink: homeData.flashDeal?.banner, 
+                                            slug: homeData.flashDeal!.slug,
+                                          );
+                                        }
+                                      ),
                                     ),
-                                  )),
-                              ),
+                                                              
+                                      
+                                  ],
+                                )),
+                              const SizedBox(height: 30),
 
                               ],
                             ]),
@@ -176,10 +172,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                           SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                  child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                                ),
+                                Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),
                                 TodaysDealProductsWidget(homePresenter: homeData,),
                               ]
                             ),
@@ -204,7 +197,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
 
 //Brand List ---------------------------
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                        AllBrandListSectionSliver(homeData: homeData,),
+                        BrandListSectionSliver(homeData: homeData,showViewAllButton: false),
 //auctionProducts------------ 
                                 AuctionProductsSectionSliver(homeData: homeData,),                   
 //all products --------------------------
@@ -263,7 +256,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
     );
   }
 
-  Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
+  Widget timerCircularContainer(String timeText) {
     return Text(
       timeText,
       style: TextStyle(
@@ -276,70 +269,88 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
   
 
 Widget buildTimerRow(CurrentRemainingTime time) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
-    child: Container(
-      height: 35,
-      color: const Color.fromARGB(255, 33, 90, 188),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        
-        child: Row(
-          children: [
-            const SizedBox(width: 10),
-            Row(
-              children: [
-                
-                timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 3,)),
-                const SizedBox(width: 4),
-                Text(LangText(context).local.days, style: const TextStyle(color: Colors.white, fontSize: 9)),
-              ],
-            ),
-            const SizedBox(width: 10),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Text(':',style: TextStyle(color: Colors.white),),
-                ),
-                timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
-                const SizedBox(width: 4),
-                Text(LangText(context).local.hours, style: const TextStyle(color: Colors.white, fontSize: 9)),
-              ],
-            ),
-            const SizedBox(width: 10),
-            Row(
-              children: [
-                      Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Text(':',style: TextStyle(color: Colors.white),),
-                ),                timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
-                const SizedBox(width: 4),
-                Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.white, fontSize: 9)),
-              ],
-            ),
-            const SizedBox(width: 10),
-            Row(
-              children: [
-                   Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Text(':',style: TextStyle(color: Colors.white),),
-                ),                timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
-                const SizedBox(width: 4),
-                Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.white, fontSize: 9)),
-              ],
-            ),
-            const SizedBox(width: 10),
-            // Row(
-            //   children: [
-            //     Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Colors.white)),
-            //     const SizedBox(width: 3),
-            //     const Icon(Icons.arrow_forward_outlined, size: 10, color: Colors.white),
-            //   ],
-            // ),
-            const SizedBox(width: 10),
-          ],
-        ),
+  return Container(
+    height: 35,
+    margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
+    decoration: BoxDecoration(
+      color: const Color(0xFF215ABC), //TODO## color
+      borderRadius: BorderRadius.circular(5)
+    ),
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      
+      child: Row(
+        children: [
+          const SizedBox(width: 10),
+          // RichText(
+          //   text: TextSpan(
+          //     style: TextStyle(
+          //       color:Colors.white,
+          //       fontSize: 14.0,
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //     children: [
+          //       TextSpan(text: timeText((time.days).toString(), default_length: 3)),
+          //       WidgetSpan(
+          //         alignment: PlaceholderAlignment.top,
+          //         baseline: TextBaseline.ideographic,
+          //         child: Text(LangText(context).local.days, style: const TextStyle(color: Colors.white, fontSize: 9))
+          //       )
+          //     ],
+          //   ),
+          // ),
+          Row(
+            children: [
+              
+              timerCircularContainer(timeText((time.days).toString(), default_length: 3,)),
+              const SizedBox(width: 4),
+              Text(LangText(context).local.days, style: const TextStyle(color: Colors.white, fontSize: 9)),
+            ],
+          ),
+          const SizedBox(width: 10),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Text(':',style: TextStyle(color: Colors.white),),
+              ),
+              timerCircularContainer(timeText((time.hours).toString(), default_length: 2)),
+              const SizedBox(width: 4),
+              Text(LangText(context).local.hours, style: const TextStyle(color: Colors.white, fontSize: 9)),
+            ],
+          ),
+          const SizedBox(width: 10),
+          Row(
+            children: [
+                    Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Text(':',style: TextStyle(color: Colors.white),),
+              ),                timerCircularContainer(timeText((time.min).toString(), default_length: 2)),
+              const SizedBox(width: 4),
+              Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.white, fontSize: 9)),
+            ],
+          ),
+          const SizedBox(width: 10),
+          Row(
+            children: [
+                 Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Text(':',style: TextStyle(color: Colors.white),),
+              ),                timerCircularContainer(timeText((time.sec).toString(), default_length: 2)),
+              const SizedBox(width: 4),
+              Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.white, fontSize: 9)),
+            ],
+          ),
+          const SizedBox(width: 10),
+          // Row(
+          //   children: [
+          //     Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Colors.white)),
+          //     const SizedBox(width: 3),
+          //     const Icon(Icons.arrow_forward_outlined, size: 10, color: Colors.white),
+          //   ],
+          // ),
+          const SizedBox(width: 10),
+        ],
       ),
     ),
   );
