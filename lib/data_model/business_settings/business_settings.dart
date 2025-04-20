@@ -1,58 +1,61 @@
 import 'dart:convert';
 
+import 'package:active_ecommerce_cms_demo_app/helpers/color_helper.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
+import '../../screens/home/home_page_type_enum.dart';
 import 'verification_form.dart';
 
-class BusinessSettings extends Equatable {
-  final String? homeDefaultCurrency;
-  final String? systemDefaultCurrency;
-  final String? currencyFormat;
-  final String? symbolFormat;
-  final String? noOfDecimals;
-  final String? productActivation;
-  final String? vendorSystemActivation;
-  final String? showVendors;
-  final String? cashPayment;
-  final String? payumoneyPayment;
-  final String? bestSelling;
-  final String? paypalSandbox;
-  final String? sslcommerzSandbox;
-  final String? vendorCommission;
+class BusinessSettingsData extends Equatable {
+  final bool? homeDefaultCurrency;
+  final bool? systemDefaultCurrency;
+  final bool? currencyFormat;
+  final bool? symbolFormat;
+  final bool? noOfDecimals;
+  final bool? productActivation;
+  final bool? vendorSystemActivation;
+  final bool? showVendors;
+  final bool? cashPayment;
+  final bool? payumoneyPayment;
+  final bool? bestSelling;
+  final bool? paypalSandbox;
+  final bool? sslcommerzSandbox;
+  final bool? vendorCommission;
   final List<VerificationForm>? verificationForm;
-  final String? googleAnalytics;
-  final String? facebookLogin;
-  final String? googleLogin;
-  final String? twitterLogin;
-  final String? payumoneySandbox;
-  final String? facebookChat;
-  final String? emailVerification;
-  final String? walletSystem;
-  final String? couponSystem;
-  final String? currentVersion;
-  final String? instamojoSandbox;
-  final String? pickupPoint;
-  final String? maintenanceMode;
-  final String? voguepaySandbox;
-  final String? categoryWiseCommission;
-  final String? conversationSystem;
-  final String? guestCheckoutActive;
-  final String? facebookPixel;
-  final String? classifiedProduct;
-  final String? posActivationForSeller;
-  final String? shippingType;
-  final String? flatRateShippingCost;
-  final String? shippingCostAdmin;
-  final String? payhereSandbox;
-  final String? googleRecaptcha;
-  final String? headerLogo;
-  final String? showLanguageSwitcher;
-  final String? showCurrencySwitcher;
-  final String? headerStikcy;
-  final String? footerLogo;
-  final dynamic aboutUsDescription;
-  final String? contactAddress;
-  final String? contactPhone;
+  final bool? googleAnalytics;
+  final bool? facebookLogin;
+  final bool? googleLogin;
+  final bool? twitterLogin;
+  final bool? payumoneySandbox;
+  final bool? facebookChat;
+  final bool? emailVerification;
+  final bool? walletSystem;
+  final bool? couponSystem;
+  final bool? currentVersion;
+  final bool? instamojoSandbox;
+  final bool? pickupPoint;
+  final bool? maintenanceMode;
+  final bool? voguepaySandbox;
+  final bool? categoryWiseCommission;
+  final bool? conversationSystem;
+  final bool? guestCheckoutActive;
+  final bool? facebookPixel;
+  final bool? classifiedProduct;
+  final bool? posActivationForSeller;
+  final bool? shippingType;
+  final bool? flatRateShippingCost;
+  final bool? shippingCostAdmin;
+  final bool? payhereSandbox;
+  final bool? googleRecaptcha;
+  final bool? headerLogo;
+  final bool? showLanguageSwitcher;
+  final bool? showCurrencySwitcher;
+  final bool? headerStikcy;
+  final bool? footerLogo;
+  final String? aboutUsDescription;
+  final dynamic contactAddress;
+  final bool? contactPhone;
   final dynamic contactEmail;
   final dynamic widgetOneLabels;
   final dynamic widgetOneLinks;
@@ -65,55 +68,55 @@ class BusinessSettings extends Equatable {
   final dynamic youtubeLink;
   final dynamic linkedinLink;
   final dynamic paymentMethodImages;
-  final String? homeSliderImages;
-  final String? homeSliderLinks;
-  final String? homeBanner1Images;
-  final String? homeBanner1Links;
-  final String? homeBanner2Images;
-  final String? homeBanner2Links;
-  final String? homeCategories;
-  final String? top10Categories;
-  final String? top10Brands;
-  final String? websiteName;
+  final bool? homeSliderImages;
+  final bool? homeSliderLinks;
+  final bool? homeBanner1Images;
+  final bool? homeBanner1Links;
+  final bool? homeBanner2Images;
+  final bool? homeBanner2Links;
+  final bool? homeCategories;
+  final bool? top10Categories;
+  final bool? top10Brands;
+  final bool? websiteName;
   final dynamic siteMotto;
-  final String? siteIcon;
-  final String? baseColor;
-  final String? baseHovColor;
+  final bool? siteIcon;
+  final Color? baseColor;
+  final Color? baseHovColor;
   final dynamic metaTitle;
   final dynamic metaDescription;
   final dynamic metaKeywords;
   final dynamic metaImage;
   final String? siteName;
-  final String? systemLogoWhite;
-  final String? systemLogoBlack;
+  final bool? systemLogoWhite;
+  final bool? systemLogoBlack;
   final dynamic timezone;
   final dynamic adminLoginBackground;
   final String? iyzicoSandbox;
   final String? decimalSeparator;
   final String? bkashSandbox;
-  final String? headerMenuLabels;
-  final String? headerMenuLinks;
+  final bool? headerMenuLabels;
+  final bool? headerMenuLinks;
   final String? proxypay;
   final String? proxypaySandbox;
   final String? googleMap;
   final String? googleFirebase;
   final String? authorizenetSandbox;
   final dynamic minOrderAmountCheckActivat;
-  final String? minimumOrderAmount;
+  final bool? minimumOrderAmount;
   final String? itemName;
-  final String? aamarpaySandbox;
-  final String? secondaryBaseColor;
-  final String? secondaryBaseHovColor;
+  final bool? aamarpaySandbox;
+  final Color? secondaryBaseColor;
+  final Color? secondaryBaseHovColor;
   final String? headerNavMenuText;
-  final String? homepageSelect;
+  final HomePageType? selectedHomePage;
   final dynamic todaysDealSectionBg;
-  final String? todaysDealSectionBgColor;
-  final String? flashDealBgColor;
+  final Color? todaysDealSectionBgColor;
+  final Color? flashDealBgColor;
   final dynamic flashDealBgFullWidth;
   final String? flashDealBannerMenuText;
-  final String? todaysDealBannerTextColor;
+  final Color? todaysDealBannerTextColor;
   final String? couponBackgroundImage;
-  final String? adminLoginPageImage;
+  final bool? adminLoginPageImage;
   final String? customerLoginPageImage;
   final dynamic customerRegisterPageImage;
   final dynamic sellerLoginPageImage;
@@ -138,50 +141,50 @@ class BusinessSettings extends Equatable {
   final String? featuredCategoriesText;
   final String? guestCheckoutActivation;
   final String? sliderSectionFullWidth;
-  final String? sliderSectionBgColor;
-  final String? homeBanner4Images;
-  final String? homeBanner4Links;
-  final String? homeBanner5Images;
-  final String? homeBanner5Links;
-  final String? homeBanner6Images;
-  final String? homeBanner6Links;
+  final Color? sliderSectionBgColor;
+  final List<String>? homeBanner4Images;
+  final List<String>? homeBanner4Links;
+  final List <String>? homeBanner5Images;
+  final List <String>? homeBanner5Links;
+  final List <String>? homeBanner6Images;
+  final List <String>? homeBanner6Links;
   final String? lastViewedProductActivation;
   final String? customAlertLocation;
   final String? notificationShowType;
-  final String? cuponTextColor;
-  final String? flashDealSectionOutline;
-  final String? flashDealSectionOutlineColor;
-  final String? featuredSectionBgColor;
-  final String? featuredSectionOutline;
-  final String? featuredSectionOutlineColor;
-  final String? bestSellingSectionBgColor;
-  final String? bestSellingSectionOutline;
-  final String? bestSellingSectionOutlineColor;
-  final String? newProductsSectionBgColor;
-  final String? newProductsSectionOutline;
-  final String? newProductsSectionOutlineColor;
-  final String? homeCategoriesSectionBgColor;
-  final String? homeCategoriesContentBgColor;
-  final dynamic homeCategoriesContentOutline;
-  final String? homeCategoriesContentOutlineColor;
-  final String? classifiedSectionBgColor;
-  final String? classifiedSectionOutline;
-  final String? classifiedSectionOutlineColor;
-  final String? sellersSectionBgColor;
-  final dynamic sellersSectionOutline;
-  final String? sellersSectionOutlineColor;
-  final String? brandsSectionBgColor;
-  final String? brandsSectionOutline;
-  final String? brandsSectionOutlineColor;
+  final Color? cuponTextColor;
+  final bool? flashDealSectionOutline;
+  final Color? flashDealSectionOutlineColor;
+  final Color? featuredSectionBgColor;
+  final bool? featuredSectionOutline;
+  final Color? featuredSectionOutlineColor;
+  final Color? bestSellingSectionBgColor;
+  final bool? bestSellingSectionOutline;
+  final Color? bestSellingSectionOutlineColor;
+  final Color? newProductsSectionBgColor;
+  final bool? newProductsSectionOutline;
+  final Color? newProductsSectionOutlineColor;
+  final Color? homeCategoriesSectionBgColor;
+  final Color? homeCategoriesContentBgColor;
+  final bool? homeCategoriesContentOutline;
+  final Color? homeCategoriesContentOutlineColor;
+  final Color? classifiedSectionBgColor;
+  final bool? classifiedSectionOutline;
+  final Color? classifiedSectionOutlineColor;
+  final Color? sellersSectionBgColor;
+  final bool? sellersSectionOutline;
+  final Color? sellersSectionOutlineColor;
+  final Color? brandsSectionBgColor;
+  final bool? brandsSectionOutline;
+  final Color? brandsSectionOutlineColor;
   final String? uploadedImageFormat;
   final String? productExternalLinkForSeller;
   final String? useFloatingButtons;
   final String? sellerCommissionType;
   final String? purchaseCode;
-  final String? auctionSectionBgColor;
-  final String? auctionContentBgColor;
+  final Color? auctionSectionBgColor;
+  final Color? auctionContentBgColor;
   final dynamic auctionSectionOutline;
-  final String? auctionSectionOutlineColor;
+  final Color? auctionSectionOutlineColor;
   final String? clubPointConvertRate;
   final String? toyyibpayPayment;
   final String? toyyibpaySandbox;
@@ -192,7 +195,7 @@ class BusinessSettings extends Equatable {
   final String? phonepePayment;
   final String? phonepeSandbox;
   final dynamic headerScript;
-  final String? footerScript;
+  final bool? footerScript;
   final String? topbarBanner;
   final String? topbarBannerMedium;
   final String? topbarBannerSmall;
@@ -200,55 +203,55 @@ class BusinessSettings extends Equatable {
   final dynamic helplineNumber;
   final dynamic playStoreLink;
   final dynamic appStoreLink;
-  final String? footerTitle;
-  final String? footerDescription;
+  final bool? footerTitle;
+  final bool? footerDescription;
   final String? disableImageOptimization;
   final String? viewProductOutOfStock;
   final String? posAcceptsNegativeQuantity;
-  final String? googleMapLongtitude;
-  final String? googleMapLatitude;
+  final bool? googleMapLongtitude;
+  final bool? googleMapLatitude;
   final String? adminNotifications;
   final String? adminRealertNotification;
   final String? printWidth;
-  final String? todaysDealBanner;
-  final String? todaysDealBannerSmall;
-  final String? todaysDealBgColor;
-  final String? posThermalInvoiceCompanyLogo;
-  final String? posThermalInvoiceCompanyName;
-  final String? posThermalInvoiceCompanyPhone;
-  final String? posThermalInvoiceCompanyEmail;
+  final bool? todaysDealBanner;
+  final bool? todaysDealBannerSmall;
+  final Color? todaysDealBgColor;
+  final bool? posThermalInvoiceCompanyLogo;
+  final bool? posThermalInvoiceCompanyName;
+  final bool? posThermalInvoiceCompanyPhone;
+  final bool? posThermalInvoiceCompanyEmail;
   final dynamic flashDealBanner;
   final dynamic flashDealBannerSmall;
   final dynamic minimumOrderAmountCheck;
   final dynamic minimumOrderQuantityCheck;
-  final String? minimumOrderQuantity;
-  final String? homeBanner3Images;
-  final String? homeBanner3Links;
+  final bool? minimumOrderQuantity;
+  final bool? homeBanner3Images;
+  final bool? homeBanner3Links;
   final String? auctionBannerImage;
   final dynamic classifiedBannerImage;
   final dynamic classifiedBannerImageSmall;
-  final String? topBrands;
+  final bool? topBrands;
   final String? posThermalInvoiceHeadDetailsFs;
   final String? posThermalInvoiceProductTableFs;
   final String? posThermalInvoiceFooterDetailsFs;
   final dynamic useImageWatermark;
   final String? imageWatermarkType;
   final dynamic watermarkImage;
-  final dynamic watermarkText;
+  final String? watermarkText;
   final dynamic watermarkTextSize;
-  final dynamic watermarkTextColor;
+  final Color? watermarkTextColor;
   final String? watermarkPosition;
-  final String? productManageByAdmin;
-  final String? productApproveByAdmin;
-  final String? productQueryActivation;
-  final String? mustOtp;
-  final String? cuponBackgroundColor;
-  final String? cuponTitle;
-  final String? cuponSubtitle;
-  final String? deliveryPickupLongitude;
-  final String? deliveryPickupLatitude;
+  final bool? productManageByAdmin;
+  final bool? productApproveByAdmin;
+  final bool? productQueryActivation;
+  final bool? mustOtp;
+  final Color? cuponBackgroundColor;
+  final bool? cuponTitle;
+  final bool? cuponSubtitle;
+  final double? deliveryPickupLongitude;
+  final double? deliveryPickupLatitude;
 
-  const BusinessSettings({
+  const BusinessSettingsData({
     this.homeDefaultCurrency,
     this.systemDefaultCurrency,
     this.currencyFormat,
@@ -349,7 +352,7 @@ class BusinessSettings extends Equatable {
     this.secondaryBaseColor,
     this.secondaryBaseHovColor,
     this.headerNavMenuText,
-    this.homepageSelect,
+    this.selectedHomePage,
     this.todaysDealSectionBg,
     this.todaysDealSectionBgColor,
     this.flashDealBgColor,
@@ -493,58 +496,58 @@ class BusinessSettings extends Equatable {
     this.deliveryPickupLatitude,
   });
 
-  factory BusinessSettings.fromMap(Map<String, dynamic> data) {
-    return BusinessSettings(
-      homeDefaultCurrency: (data['home_default_currency'] as String?),
-      systemDefaultCurrency: data['system_default_currency'] as String?,
-      currencyFormat: data['currency_format'] as String?,
-      symbolFormat: data['symbol_format'] as String?,
-      noOfDecimals: data['no_of_decimals'] as String?,
-      productActivation: data['product_activation'] as String?,
-      vendorSystemActivation: data['vendor_system_activation'] as String?,
-      showVendors: data['show_vendors'] as String?,
-      cashPayment: data['cash_payment'] as String?,
-      payumoneyPayment: data['payumoney_payment'] as String?,
-      bestSelling: data['best_selling'] as String?,
-      paypalSandbox: data['paypal_sandbox'] as String?,
-      sslcommerzSandbox: data['sslcommerz_sandbox'] as String?,
-      vendorCommission: data['vendor_commission'] as String?,
+  factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
+    return BusinessSettingsData(
+      homeDefaultCurrency: (data['home_default_currency'] as String?)=="1",
+      systemDefaultCurrency: (data['system_default_currency'] as String?)=="1",
+      currencyFormat: (data['currency_format'] as String?)=="1",
+      symbolFormat: (data['symbol_format'] as String?)=="1",
+      noOfDecimals: (data['no_of_decimals'] as String?)=="1",
+      productActivation: (data['product_activation'] as String?)=="1",
+      vendorSystemActivation: (data['vendor_system_activation'] as String?)=="1",
+      showVendors: (data['show_vendors'] as String?)=="1",
+      cashPayment: (data['cash_payment'] as String?)=="1",
+      payumoneyPayment: (data['payumoney_payment'] as String?)=="1",
+      bestSelling: (data['best_selling'] as String?)=="1",
+      paypalSandbox: (data['paypal_sandbox'] as String?)=="1",
+      sslcommerzSandbox: (data['sslcommerz_sandbox'] as String?)=="1",
+      vendorCommission: (data['vendor_commission'] as String?)=="1",
       verificationForm: (data['verification_form'] as List<dynamic>?)
           ?.map((e) => VerificationForm.fromMap(e as Map<String, dynamic>))
           .toList(),
-      googleAnalytics: data['google_analytics'] as String?,
-      facebookLogin: data['facebook_login'] as String?,
-      googleLogin: data['google_login'] as String?,
-      twitterLogin: data['twitter_login'] as String?,
-      payumoneySandbox: data['payumoney_sandbox'] as String?,
-      facebookChat: data['facebook_chat'] as String?,
-      emailVerification: data['email_verification'] as String?,
-      walletSystem: data['wallet_system'] as String?,
-      couponSystem: data['coupon_system'] as String?,
-      currentVersion: data['current_version'] as String?,
-      instamojoSandbox: data['instamojo_sandbox'] as String?,
-      pickupPoint: data['pickup_point'] as String?,
-      maintenanceMode: data['maintenance_mode'] as String?,
-      voguepaySandbox: data['voguepay_sandbox'] as String?,
-      categoryWiseCommission: data['category_wise_commission'] as String?,
-      conversationSystem: data['conversation_system'] as String?,
-      guestCheckoutActive: data['guest_checkout_active'] as String?,
-      facebookPixel: data['facebook_pixel'] as String?,
-      classifiedProduct: data['classified_product'] as String?,
-      posActivationForSeller: data['pos_activation_for_seller'] as String?,
-      shippingType: data['shipping_type'] as String?,
-      flatRateShippingCost: data['flat_rate_shipping_cost'] as String?,
-      shippingCostAdmin: data['shipping_cost_admin'] as String?,
-      payhereSandbox: data['payhere_sandbox'] as String?,
-      googleRecaptcha: data['google_recaptcha'] as String?,
-      headerLogo: data['header_logo'] as String?,
-      showLanguageSwitcher: data['show_language_switcher'] as String?,
-      showCurrencySwitcher: data['show_currency_switcher'] as String?,
-      headerStikcy: data['header_stikcy'] as String?,
-      footerLogo: data['footer_logo'] as String?,
+      googleAnalytics: (data['google_analytics'] as String?)=="1",
+      facebookLogin: (data['facebook_login'] as String?)=="1",
+      googleLogin: (data['google_login'] as String?)=="1",
+      twitterLogin: (data['twitter_login'] as String?)=="1",
+      payumoneySandbox: (data['payumoney_sandbox'] as String?)=="1",
+      facebookChat: (data['facebook_chat'] as String?)=="1",
+      emailVerification: (data['email_verification'] as String?)=="1",
+      walletSystem: (data['wallet_system'] as String?)=="1",
+      couponSystem: (data['coupon_system'] as String?)=="1",
+      currentVersion: (data['current_version'] as String?)=="1",
+      instamojoSandbox: (data['instamojo_sandbox'] as String?)=="1",
+      pickupPoint: (data['pickup_point'] as String?)=="1",
+      maintenanceMode: (data['maintenance_mode'] as String?)=="1",
+      voguepaySandbox: (data['voguepay_sandbox'] as String?)=="1",
+      categoryWiseCommission: (data['category_wise_commission'] as String?)==1,
+      conversationSystem: (data['conversation_system'] as String?)=="1",
+      guestCheckoutActive: (data['guest_checkout_active'] as String?)=="1",
+      facebookPixel: (data['facebook_pixel'] as String?)=="1",
+      classifiedProduct: (data['classified_product'] as String?)=="1",
+      posActivationForSeller: (data['pos_activation_for_seller'] as String?)=="1",
+      shippingType: (data['shipping_type'] as String?)=="1",
+      flatRateShippingCost: (data['flat_rate_shipping_cost'] as String?)=="1",
+      shippingCostAdmin: (data['shipping_cost_admin'] as String?)=="1",
+      payhereSandbox:( data['payhere_sandbox'] as String?)=="1",
+      googleRecaptcha: (data['google_recaptcha'] as String?)=="1",
+      headerLogo: (data['header_logo'] as String?)=="1",
+      showLanguageSwitcher: (data['show_language_switcher'] as String?)=="1",
+      showCurrencySwitcher: (data['show_currency_switcher'] as String?)=="1",
+      headerStikcy: (data['header_stikcy'] as String?)=="1",
+      footerLogo: (data['footer_logo'] as String?)=="1",
       aboutUsDescription: data['about_us_description'] as dynamic,
       contactAddress: data['contact_address'] as String?,
-      contactPhone: data['contact_phone'] as String?,
+      contactPhone: (data['contact_phone'] as String?)=="1",
       contactEmail: data['contact_email'] as dynamic,
       widgetOneLabels: data['widget_one_labels'] as dynamic,
       widgetOneLinks: data['widget_one_links'] as dynamic,
@@ -557,34 +560,34 @@ class BusinessSettings extends Equatable {
       youtubeLink: data['youtube_link'] as dynamic,
       linkedinLink: data['linkedin_link'] as dynamic,
       paymentMethodImages: data['payment_method_images'] as dynamic,
-      homeSliderImages: data['home_slider_images'] as String?,
-      homeSliderLinks: data['home_slider_links'] as String?,
-      homeBanner1Images: data['home_banner1_images'] as String?,
-      homeBanner1Links: data['home_banner1_links'] as String?,
-      homeBanner2Images: data['home_banner2_images'] as String?,
-      homeBanner2Links: data['home_banner2_links'] as String?,
-      homeCategories: data['home_categories'] as String?,
-      top10Categories: data['top10_categories'] as String?,
-      top10Brands: data['top10_brands'] as String?,
-      websiteName: data['website_name'] as String?,
+      homeSliderImages: (data['home_slider_images'] as String?)=="1",
+      homeSliderLinks: (data['home_slider_links'] as String?)=="1",
+      homeBanner1Images: (data['home_banner1_images'] as String?)=="1",
+      homeBanner1Links: (data['home_banner1_links'] as String?)=="1",
+      homeBanner2Images: (data['home_banner2_images'] as String?)=="1",
+      homeBanner2Links: (data['home_banner2_links'] as String?)=="1",
+      homeCategories: (data['home_categories'] as String?)=="1",
+      top10Categories: (data['top10_categories'] as String?)=="1",
+      top10Brands: (data['top10_brands'] as String?)=="1",
+      websiteName: (data['website_name'] as String?)=="1",
       siteMotto: data['site_motto'] as dynamic,
-      siteIcon: data['site_icon'] as String?,
-      baseColor: data['base_color'] as String?,
-      baseHovColor: data['base_hov_color'] as String?,
+      siteIcon: (data['site_icon'] as String?)=="1",
+      baseColor: ColorHelper.stringToColor(data['base_color'] as String?),
+      baseHovColor:ColorHelper.stringToColor (data['base_hov_color'] as String?),
       metaTitle: data['meta_title'] as dynamic,
       metaDescription: data['meta_description'] as dynamic,
       metaKeywords: data['meta_keywords'] as dynamic,
       metaImage: data['meta_image'] as dynamic,
       siteName: data['site_name'] as String?,
-      systemLogoWhite: data['system_logo_white'] as String?,
-      systemLogoBlack: data['system_logo_black'] as String?,
+      systemLogoWhite: (data['system_logo_white'] as String?)=="1",
+      systemLogoBlack: (data['system_logo_black'] as String?)=="1",
       timezone: data['timezone'] as dynamic,
       adminLoginBackground: data['admin_login_background'] as dynamic,
       iyzicoSandbox: data['iyzico_sandbox'] as String?,
       decimalSeparator: data['decimal_separator'] as String?,
       bkashSandbox: data['bkash_sandbox'] as String?,
-      headerMenuLabels: data['header_menu_labels'] as String?,
-      headerMenuLinks: data['header_menu_links'] as String?,
+      headerMenuLabels: (data['header_menu_labels'] as String?)=="1",
+      headerMenuLinks: (data['header_menu_links'] as String?)=="1",
       proxypay: data['proxypay'] as String?,
       proxypaySandbox: data['proxypay_sandbox'] as String?,
       googleMap: data['google_map'] as String?,
@@ -592,22 +595,22 @@ class BusinessSettings extends Equatable {
       authorizenetSandbox: data['authorizenet_sandbox'] as String?,
       minOrderAmountCheckActivat:
           data['min_order_amount_check_activat'] as dynamic,
-      minimumOrderAmount: data['minimum_order_amount'] as String?,
+      minimumOrderAmount: (data['minimum_order_amount'] as String?)=="1",
       itemName: data['item_name'] as String?,
-      aamarpaySandbox: data['aamarpay_sandbox'] as String?,
-      secondaryBaseColor: data['secondary_base_color'] as String?,
-      secondaryBaseHovColor: data['secondary_base_hov_color'] as String?,
+      aamarpaySandbox: (data['aamarpay_sandbox'] as String?)=="1",
+      secondaryBaseColor: ColorHelper.stringToColor(data['secondary_base_color'] as String?),
+      secondaryBaseHovColor: ColorHelper.stringToColor(data['secondary_base_hov_color'] as String?),
       headerNavMenuText: data['header_nav_menu_text'] as String?,
-      homepageSelect: data['homepage_select'] as String?,
-      todaysDealSectionBg: data['todays_deal_section_bg'] as dynamic,
-      todaysDealSectionBgColor: data['todays_deal_section_bg_color'] as String?,
-      flashDealBgColor: data['flash_deal_bg_color'] as String?,
+      selectedHomePage: HomePageType.fromString(data['homepage_select'] as String?),
+      todaysDealSectionBg: (data['todays_deal_section_bg'] as dynamic),
+      todaysDealSectionBgColor: ColorHelper.stringToColor(data['todays_deal_section_bg_color'] as String?),
+      flashDealBgColor: ColorHelper.stringToColor(data['flash_deal_bg_color'] as String?),
       flashDealBgFullWidth: data['flash_deal_bg_full_width'] as dynamic,
       flashDealBannerMenuText: data['flash_deal_banner_menu_text'] as String?,
       todaysDealBannerTextColor:
-          data['todays_deal_banner_text_color'] as String?,
+         ColorHelper.stringToColor (data['todays_deal_banner_text_color'] as String?),
       couponBackgroundImage: data['coupon_background_image'] as String?,
-      adminLoginPageImage: data['admin_login_page_image'] as String?,
+      adminLoginPageImage:  (data['admin_login_page_image'] as String?)=="1",
       customerLoginPageImage: data['customer_login_page_image'] as String?,
       customerRegisterPageImage:
           data['customer_register_page_image'] as dynamic,
@@ -636,68 +639,68 @@ class BusinessSettings extends Equatable {
       featuredCategoriesText: data['featured_categories_text'] as String?,
       guestCheckoutActivation: data['guest_checkout_activation'] as String?,
       sliderSectionFullWidth: data['slider_section_full_width'] as String?,
-      sliderSectionBgColor: data['slider_section_bg_color'] as String?,
-      homeBanner4Images: data['home_banner4_images'] as String?,
-      homeBanner4Links: data['home_banner4_links'] as String?,
-      homeBanner5Images: data['home_banner5_images'] as String?,
-      homeBanner5Links: data['home_banner5_links'] as String?,
-      homeBanner6Images: data['home_banner6_images'] as String?,
-      homeBanner6Links: data['home_banner6_links'] as String?,
+      sliderSectionBgColor: ColorHelper.stringToColor(data['slider_section_bg_color'] as String?),
+      homeBanner4Images: _decodeJsonList(data['home_banner4_images'] as String?),
+      homeBanner4Links: _decodeJsonList(data['home_banner4_links'] as String?),
+      homeBanner5Images: _decodeJsonList(data['home_banner5_images'] as String?),
+      homeBanner5Links: _decodeJsonList(data['home_banner5_links'] as String?),
+      homeBanner6Images: _decodeJsonList(data['home_banner6_images'] as String?),
+      homeBanner6Links: _decodeJsonList(data['home_banner6_links'] as String?),
       lastViewedProductActivation:
           data['last_viewed_product_activation'] as String?,
       customAlertLocation: data['custom_alert_location'] as String?,
       notificationShowType: data['notification_show_type'] as String?,
-      cuponTextColor: data['cupon_text_color'] as String?,
-      flashDealSectionOutline: data['flash_deal_section_outline'] as String?,
+      cuponTextColor: ColorHelper.stringToColor(data['cupon_text_color'] as String?),
+      flashDealSectionOutline: (data['flash_deal_section_outline'] as String?)=="1",
       flashDealSectionOutlineColor:
-          data['flash_deal_section_outline_color'] as String?,
-      featuredSectionBgColor: data['featured_section_bg_color'] as String?,
-      featuredSectionOutline: data['featured_section_outline'] as String?,
+          ColorHelper.stringToColor(data['flash_deal_section_outline_color'] as String?),
+      featuredSectionBgColor: ColorHelper.stringToColor(data['featured_section_bg_color'] as String?),
+      featuredSectionOutline: (data['featured_section_outline'] as String?)=="1",
       featuredSectionOutlineColor:
-          data['featured_section_outline_color'] as String?,
+          ColorHelper.stringToColor(data['featured_section_outline_color'] as String?),
       bestSellingSectionBgColor:
-          data['best_selling_section_bg_color'] as String?,
+          ColorHelper.stringToColor(data['best_selling_section_bg_color'] as String?),
       bestSellingSectionOutline:
-          data['best_selling_section_outline'] as String?,
+          (data['best_selling_section_outline'] as String?)=="1",
       bestSellingSectionOutlineColor:
-          data['best_selling_section_outline_color'] as String?,
+          ColorHelper.stringToColor(data['best_selling_section_outline_color'] as String?),
       newProductsSectionBgColor:
-          data['new_products_section_bg_color'] as String?,
+          ColorHelper.stringToColor(data['new_products_section_bg_color'] as String?),
       newProductsSectionOutline:
-          data['new_products_section_outline'] as String?,
+         ( data['new_products_section_outline'] as String?)=="1",
       newProductsSectionOutlineColor:
-          data['new_products_section_outline_color'] as String?,
+          ColorHelper.stringToColor(data['new_products_section_outline_color'] as String?),
       homeCategoriesSectionBgColor:
-          data['home_categories_section_bg_color'] as String?,
+         ColorHelper.stringToColor (data['home_categories_section_bg_color'] as String?),
       homeCategoriesContentBgColor:
-          data['home_categories_content_bg_color'] as String?,
+          ColorHelper.stringToColor(data['home_categories_content_bg_color'] as String?),
       homeCategoriesContentOutline:
           data['home_categories_content_outline'] as dynamic,
       homeCategoriesContentOutlineColor:
-          data['home_categories_content_outline_color'] as String?,
-      classifiedSectionBgColor: data['classified_section_bg_color'] as String?,
-      classifiedSectionOutline: data['classified_section_outline'] as String?,
+          ColorHelper.stringToColor(data['home_categories_content_outline_color'] as String?),
+      classifiedSectionBgColor: ColorHelper.stringToColor(data['classified_section_bg_color'] as String?),
+      classifiedSectionOutline: (data['dclassified_section_outline'] as String?)=="1",
       classifiedSectionOutlineColor:
-          data['classified_section_outline_color'] as String?,
-      sellersSectionBgColor: data['sellers_section_bg_color'] as String?,
+         ColorHelper.stringToColor( data['classified_section_outline_color'] as String?),
+      sellersSectionBgColor: ColorHelper.stringToColor(data['sellers_section_bg_color'] as String?),
       sellersSectionOutline: data['sellers_section_outline'] as dynamic,
       sellersSectionOutlineColor:
-          data['sellers_section_outline_color'] as String?,
-      brandsSectionBgColor: data['brands_section_bg_color'] as String?,
-      brandsSectionOutline: data['brands_section_outline'] as String?,
+         ColorHelper.stringToColor (data['sellers_section_outline_color'] as String?),
+      brandsSectionBgColor: ColorHelper.stringToColor(data['brands_section_bg_color'] as String?),
+      brandsSectionOutline: (data['brands_section_outline'] as String?)=="1",
       brandsSectionOutlineColor:
-          data['brands_section_outline_color'] as String?,
+          ColorHelper.stringToColor(data['brands_section_outline_color'] as String?),
       uploadedImageFormat: data['uploaded_image_format'] as String?,
       productExternalLinkForSeller:
           data['product_external_link_for_seller'] as String?,
       useFloatingButtons: data['use_floating_buttons'] as String?,
       sellerCommissionType: data['seller_commission_type'] as String?,
       purchaseCode: data['purchase_code'] as String?,
-      auctionSectionBgColor: data['auction_section_bg_color'] as String?,
-      auctionContentBgColor: data['auction_content_bg_color'] as String?,
+      auctionSectionBgColor: ColorHelper.stringToColor(data['auction_section_bg_color'] as String?),
+      auctionContentBgColor: ColorHelper.stringToColor(data['auction_content_bg_color'] as String?),
       auctionSectionOutline: data['auction_section_outline'] as dynamic,
       auctionSectionOutlineColor:
-          data['auction_section_outline_color'] as String?,
+          ColorHelper.stringToColor(data['auction_section_outline_color'] as String?),
       clubPointConvertRate: data['club_point_convert_rate'] as String?,
       toyyibpayPayment: data['toyyibpay_payment'] as String?,
       toyyibpaySandbox: data['toyyibpay_sandbox'] as String?,
@@ -708,7 +711,7 @@ class BusinessSettings extends Equatable {
       phonepePayment: data['phonepe_payment'] as String?,
       phonepeSandbox: data['phonepe_sandbox'] as String?,
       headerScript: data['header_script'] as dynamic,
-      footerScript: data['footer_script'] as String?,
+      footerScript: (data['footer_script'] as String?)=="1",
       topbarBanner: data['topbar_banner'] as String?,
       topbarBannerMedium: data['topbar_banner_medium'] as String?,
       topbarBannerSmall: data['topbar_banner_small'] as String?,
@@ -716,41 +719,41 @@ class BusinessSettings extends Equatable {
       helplineNumber: data['helpline_number'] as dynamic,
       playStoreLink: data['play_store_link'] as dynamic,
       appStoreLink: data['app_store_link'] as dynamic,
-      footerTitle: data['footer_title'] as String?,
-      footerDescription: data['footer_description'] as String?,
+      footerTitle: (data['footer_title'] as String?)=="1",
+      footerDescription: (data['footer_description'] as String?)=="1",
       disableImageOptimization: data['disable_image_optimization'] as String?,
       viewProductOutOfStock: data['view_product_out_of_stock'] as String?,
       posAcceptsNegativeQuantity:
           data['pos_accepts_negative_quantity'] as String?,
-      googleMapLongtitude: data['google_map_longtitude'] as String?,
-      googleMapLatitude: data['google_map_latitude'] as String?,
+      googleMapLongtitude: (data['google_map_longtitude'] as String?)=="1",
+      googleMapLatitude: (data['google_map_latitude'] as String?)=="1",
       adminNotifications: data['admin_notifications'] as String?,
       adminRealertNotification: data['admin_realert_notification'] as String?,
       printWidth: data['print_width'] as String?,
-      todaysDealBanner: data['todays_deal_banner'] as String?,
-      todaysDealBannerSmall: data['todays_deal_banner_small'] as String?,
-      todaysDealBgColor: data['todays_deal_bg_color'] as String?,
+      todaysDealBanner: (data['todays_deal_banner'] as String?)=="1",
+      todaysDealBannerSmall: (data['todays_deal_banner_small'] as String?)=="1",
+      todaysDealBgColor: ColorHelper.stringToColor(data['todays_deal_bg_color'] as String?),
       posThermalInvoiceCompanyLogo:
-          data['pos_thermal_invoice_company_logo'] as String?,
+          (data['pos_thermal_invoice_company_logo'] as String?)=="1",
       posThermalInvoiceCompanyName:
-          data['pos_thermal_invoice_company_name'] as String?,
+          (data['pos_thermal_invoice_company_name'] as String?)=="1",
       posThermalInvoiceCompanyPhone:
-          data['pos_thermal_invoice_company_phone'] as String?,
+          (data['pos_thermal_invoice_company_phone'] as String?)=="1",
       posThermalInvoiceCompanyEmail:
-          data['pos_thermal_invoice_company_email'] as String?,
+          (data['pos_thermal_invoice_company_email'] as String?)=="1",
       flashDealBanner: data['flash_deal_banner'] as dynamic,
       flashDealBannerSmall: data['flash_deal_banner_small'] as dynamic,
       minimumOrderAmountCheck: data['minimum_order_amount_check'] as dynamic,
       minimumOrderQuantityCheck:
           data['minimum_order_quantity_check'] as dynamic,
-      minimumOrderQuantity: data['minimum_order_quantity'] as String?,
-      homeBanner3Images: data['home_banner3_images'] as String?,
-      homeBanner3Links: data['home_banner3_links'] as String?,
+      minimumOrderQuantity: (data['minimum_order_quantity'] as String?)=="1",
+      homeBanner3Images: (data['home_banner3_images'] as String?)=="1",
+      homeBanner3Links: (data['home_banner3_links'] as String?)=="1",
       auctionBannerImage: data['auction_banner_image'] as String?,
       classifiedBannerImage: data['classified_banner_image'] as dynamic,
       classifiedBannerImageSmall:
           data['classified_banner_image_small'] as dynamic,
-      topBrands: data['top_brands'] as String?,
+      topBrands: (data['top_brands'] as String?)=="1",
       posThermalInvoiceHeadDetailsFs:
           data['pos_thermal_invoice_head_details_fs'] as String?,
       posThermalInvoiceProductTableFs:
@@ -764,18 +767,24 @@ class BusinessSettings extends Equatable {
       watermarkTextSize: data['watermark_text_size'] as dynamic,
       watermarkTextColor: data['watermark_text_color'] as dynamic,
       watermarkPosition: data['watermark_position'] as String?,
-      productManageByAdmin: data['product_manage_by_admin'] as String?,
-      productApproveByAdmin: data['product_approve_by_admin'] as String?,
-      productQueryActivation: data['product_query_activation'] as String?,
-      mustOtp: data['must_otp'] as String?,
-      cuponBackgroundColor: data['cupon_background_color'] as String?,
-      cuponTitle: data['cupon_title'] as String?,
-      cuponSubtitle: data['cupon_subtitle'] as String?,
-      deliveryPickupLongitude: data['delivery_pickup_longitude'] as String?,
-      deliveryPickupLatitude: data['delivery_pickup_latitude'] as String?,
+      productManageByAdmin: (data['product_manage_by_admin'] as String?)=="1",
+      productApproveByAdmin: (data['product_approve_by_admin'] as String?)=="1",
+      productQueryActivation: (data['product_query_activation'] as String?)=="1",
+      mustOtp:( data['must_otp'] as String?)=="1",
+     cuponBackgroundColor: ColorHelper.stringToColor(data['cupon_background_color'] as String?),
+
+
+      cuponTitle: (data['cupon_title'] as String?)=="1",
+      cuponSubtitle: (data['cupon_subtitle'] as String?)=="1",
+     deliveryPickupLongitude: double.tryParse(data['delivery_pickup_longitude']?.toString() ?? ''),
+ 
+      deliveryPickupLatitude: double.tryParse(data['delivery_pickup_latitude'] ?.toString() ?? '')
     );
   }
-
+  static List<String>? _decodeJsonList(String? data) {
+    if(data == null) return null;
+  return (json.decode(data) as List).cast<String>();
+}
   // Map<String, dynamic> toMap() => {
   //       'home_default_currency': homeDefaultCurrency,
   //       'system_default_currency': systemDefaultCurrency,
@@ -1025,14 +1034,14 @@ class BusinessSettings extends Equatable {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [BusinessSettings].
-  factory BusinessSettings.fromJson(String data) {
-    return BusinessSettings.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [BusinessSettingsData].
+  factory BusinessSettingsData.fromJson(String data) {
+    return BusinessSettingsData.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [BusinessSettings] to a JSON string.
+  /// Converts [BusinessSettingsData] to a JSON string.
   // String toJson() => json.encode(toMap());
 
   // BusinessSettings copyWith({
@@ -1705,7 +1714,7 @@ class BusinessSettings extends Equatable {
       secondaryBaseColor,
       secondaryBaseHovColor,
       headerNavMenuText,
-      homepageSelect,
+      selectedHomePage,
       todaysDealSectionBg,
       todaysDealSectionBgColor,
       flashDealBgColor,
