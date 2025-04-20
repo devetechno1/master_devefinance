@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HtmlContentWebView extends StatefulWidget {
-  HtmlContentWebView({super.key, required this.html});
-  String html;
+  const HtmlContentWebView({super.key, required this.html});
+  final String html;
 
   @override
   State<HtmlContentWebView> createState() => _HtmlContentWebViewState();

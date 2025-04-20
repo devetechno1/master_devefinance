@@ -5,23 +5,23 @@ import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.da
 import 'package:flutter/material.dart';
 
 class ListProductCard extends StatefulWidget {
-  int? id;
-  String slug;
-  String? image;
-  String? name;
-  String? main_price;
-  String? stroked_price;
-  bool? has_discount;
+  final int? id;
+  final String slug;
+  final String? image;
+  final String? name;
+  final String? mainPrice;
+  final String? strokedPrice;
+  final bool? hasDiscount;
 
-  ListProductCard(
+  const ListProductCard(
       {Key? key,
       this.id,
       required this.slug,
       this.image,
       this.name,
-      this.main_price,
-      this.stroked_price,
-      this.has_discount})
+      this.mainPrice,
+      this.strokedPrice,
+      this.hasDiscount})
       : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class _ListProductCardState extends State<ListProductCard> {
               width: 100,
               height: 100,
               child: ClipRRect(
-                  borderRadius: BorderRadius.horizontal(
+                  borderRadius: const BorderRadius.horizontal(
                       left: Radius.circular(6), right: Radius.zero),
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/placeholder.png',
@@ -57,7 +57,7 @@ class _ListProductCardState extends State<ListProductCard> {
           Flexible(
             child: Container(
               padding:
-                  EdgeInsets.only(top: 10, left: 12, right: 12, bottom: 14),
+                  const EdgeInsets.only(top: 10, left: 12, right: 12, bottom: 14),
               //width: 240,
               height: 100,
               //color: Colors.red,
@@ -71,7 +71,7 @@ class _ListProductCardState extends State<ListProductCard> {
                       widget.name!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           height: 1.6,
@@ -86,24 +86,24 @@ class _ListProductCardState extends State<ListProductCard> {
                       children: [
                         Text(
                           SystemConfig.systemCurrency!.code != null
-                              ? widget.main_price!.replaceAll(
+                              ? widget.mainPrice!.replaceAll(
                                   SystemConfig.systemCurrency!.code!,
                                   SystemConfig.systemCurrency!.symbol!)
-                              : widget.main_price!,
+                              : widget.mainPrice!,
                           textAlign: TextAlign.left,
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.accent_color,
                               fontSize: 16,
                               fontWeight: FontWeight.w700),
                         ),
-                        widget.has_discount!
+                        widget.hasDiscount!
                             ? Text(
                                 SystemConfig.systemCurrency!.code != null
-                                    ? widget.stroked_price!.replaceAll(
+                                    ? widget.strokedPrice!.replaceAll(
                                         SystemConfig.systemCurrency!.code!,
                                         SystemConfig.systemCurrency!.symbol!)
-                                    : widget.stroked_price!,
+                                    : widget.strokedPrice!,
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
                                 style: TextStyle(
