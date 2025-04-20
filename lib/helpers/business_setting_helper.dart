@@ -1,18 +1,28 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:active_ecommerce_cms_demo_app/data_model/business_setting_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/business_setting_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/home_page_type_enum.dart';
 
 import '../app_config.dart';
+import '../data_model/business_settings/business_settings.dart';
 import '../data_model/language_list_response.dart';
 import '../repositories/language_repository.dart';
+
+
+late final BusinessSettingsData businessSettingsData;
 
 class BusinessSettingHelper {
   setBusinessSettingData() async {
     BusinessSettingListResponse businessLists =
         await BusinessSettingRepository().getBusinessSettingList();
+    final Map<String, dynamic> map = {};
 
     businessLists.data!.forEach((element) {
+      map[element.type!] = element.value;
+
       switch (element.type) {
         case 'facebook_login':
           {
@@ -189,39 +199,46 @@ class BusinessSettingHelper {
           break;
         case 'minimum_order_amount':
           {
-            minimum_order_amount.$ = double.parse(element.value?.toString() ?? '0.0');
+            minimum_order_amount.$ =
+                double.parse(element.value?.toString() ?? '0.0');
           }
           break;
         case 'minimum_order_quantity':
           {
-            minimum_order_quantity.$ = int.parse(element.value?.toString() ?? '0');
+            minimum_order_quantity.$ =
+                int.parse(element.value?.toString() ?? '0');
           }
           break;
         case 'homepage_select':
           {
-            AppConfig.selectedHomePageType = HomePageType.fromString(element.value?.toString());
+            AppConfig.selectedHomePageType =
+                HomePageType.fromString(element.value?.toString());
           }
           break;
-
 
         default:
           {}
           break;
       }
     });
+
+    businessSettingsData = BusinessSettingsData.fromMap(map);
+
+    log("business setting : ${jsonEncode(map)}");
   }
 
-  static Future<void> setInitLang()async {
-    final LanguageListResponse langs = await LanguageRepository().getLanguageList();
+  static Future<void> setInitLang() async {
+    final LanguageListResponse langs =
+        await LanguageRepository().getLanguageList();
 
     if (langs.success != true) return;
 
-    if(langs.languages?.length == 1){
+    if (langs.languages?.length == 1) {
       await _setLangConfig(langs.languages!.first);
       return;
     }
     await app_language.load();
-    if(app_language.$ == null){
+    if (app_language.$ == null) {
       for (Language lang in langs.languages ?? []) {
         if (lang.is_default ?? false) {
           await _setLangConfig(lang);
@@ -231,9 +248,10 @@ class BusinessSettingHelper {
     }
   }
 
-  static Future<void> _setLangConfig (Language lang) async{
+  static Future<void> _setLangConfig(Language lang) async {
     AppConfig.default_language = lang.code ?? AppConfig.default_language;
-    AppConfig.mobile_app_code = lang.mobile_app_code ?? AppConfig.mobile_app_code;
+    AppConfig.mobile_app_code =
+        lang.mobile_app_code ?? AppConfig.mobile_app_code;
     AppConfig.app_language_rtl = lang.rtl ?? AppConfig.app_language_rtl;
     app_language.$ = lang.code;
     app_mobile_language.$ = lang.mobile_app_code;
