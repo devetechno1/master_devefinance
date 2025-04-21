@@ -5,11 +5,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../app_config.dart';
 
 class Captcha extends StatefulWidget {
-  Function callback;
-  Function? handleCaptcha;
-  bool isIOS;
+  final Function callback;
+  final Function? handleCaptcha;
+  final bool isIOS;
 
-  Captcha(this.callback, {this.handleCaptcha, this.isIOS = false});
+  const Captcha(this.callback, {this.handleCaptcha, this.isIOS = false});
 
   @override
   State<StatefulWidget> createState() {

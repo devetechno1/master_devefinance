@@ -73,7 +73,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
   ));
@@ -94,12 +94,12 @@ var routes = GoRouter(
         path: '/',
         name: "Home",
         pageBuilder: (BuildContext context, GoRouterState state) =>
-            MaterialPage(child: Index()),
+            const MaterialPage(child: Index()),
         routes: [
           GoRoute(
               path: "customer_products",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: MyClassifiedAds())),
+                  const MaterialPage(child: MyClassifiedAds())),
           GoRoute(
               path: "customer-products",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -121,12 +121,12 @@ var routes = GoRouter(
           GoRoute(
               path: "customer-packages",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: UpdatePackage())),
+                  const MaterialPage(child: UpdatePackage())),
           GoRoute(
               path: "auction_product_bids",
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   MaterialPage(
-                      child: AuthMiddleware(AuctionBiddedProducts()).next())),
+                      child: AuthMiddleware(const AuctionBiddedProducts()).next())),
           GoRoute(
               path: "users/login",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -139,7 +139,7 @@ var routes = GoRouter(
               path: "dashboard",
               name: "Profile",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  AIZRoute.rightTransition(Profile())),
+                  AIZRoute.rightTransition(const Profile())),
           GoRoute(
               path: "auction-products",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -155,7 +155,7 @@ var routes = GoRouter(
               path: "auction/purchase_history",
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   MaterialPage(
-                      child: AuthMiddleware(AuctionPurchaseHistory()).next())),
+                      child: AuthMiddleware(const AuctionPurchaseHistory()).next())),
           GoRoute(
               path: "brand/:slug",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -174,7 +174,7 @@ var routes = GoRouter(
           GoRoute(
               path: "cart",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: AuthMiddleware(Cart()).next())),
+                  MaterialPage(child: AuthMiddleware(const Cart()).next())),
           GoRoute(
               path: "categories",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -205,7 +205,7 @@ var routes = GoRouter(
           GoRoute(
               path: "followed-seller",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: (FollowedSellers()))),
+                  const MaterialPage(child: (FollowedSellers()))),
           GoRoute(
               path: "purchase_history",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -238,7 +238,7 @@ var routes = GoRouter(
           GoRoute(
               path: "coupons",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: (Coupons()))),
+                  const MaterialPage(child: (Coupons()))),
         ])
   ],
 );
@@ -291,7 +291,7 @@ class _MyAppState extends State<MyApp> {
               fontFamily: "PublicSansSerif",
               textTheme: MyTheme.textTheme1,
               fontFamilyFallback: ['NotoSans'],
-              colorScheme: ColorScheme.light(
+              colorScheme: const ColorScheme.light(
                 primary: MyTheme.accent_color,
               ),
               scrollbarTheme: ScrollbarThemeData(
