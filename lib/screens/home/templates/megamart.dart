@@ -168,16 +168,8 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                               ],
                             ]),
                           ),                      
-                            //move banner 
-                          SliverList(
-                            delegate: SliverChildListDelegate(
-                              [
-                                Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),
-                                TodaysDealProductsWidget(homePresenter: homeData,),
-                              ]
-                            ),
-                          ),
-
+                            
+                         //banner
 
 //featuredProducts-----------------------------   
                           const FeaturedProductsListSliver(),
