@@ -16,12 +16,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../helpers/main_helpers.dart';
 
 class PayfastScreen extends StatefulWidget {
-  double? amount;
-  String payment_type;
-  String? payment_method_key;
-  String package_id;
-  int? orderId;
-  PayfastScreen(
+ final double? amount;
+ final String payment_type;
+ final String? payment_method_key;
+ final String package_id;
+ final int? orderId;
+ const PayfastScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -38,7 +38,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
   int? _combined_order_id = 0;
   bool _order_init = false;
 
-  WebViewController _webViewController = WebViewController();
+ final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
   }
 
   payfast() {
-    String _initial_url =
+   final String _initial_url =
         "${AppConfig.BASE_URL}/payfast/initiate?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
 
     print(_initial_url);
@@ -82,7 +82,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
   }
 
   createOrder() async {
-    var orderCreateResponse = await PaymentRepository()
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
@@ -147,7 +147,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Profile();
+            return const Profile();
           }));
         }
       }
@@ -192,7 +192,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_payfast,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

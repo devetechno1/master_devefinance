@@ -16,13 +16,13 @@ import '../../helpers/main_helpers.dart';
 import '../profile.dart';
 
 class PaypalScreen extends StatefulWidget {
-  double? amount;
-  String payment_type;
-  String? payment_method_key;
-  var package_id;
-  int? orderId;
+ final double? amount;
+ final String payment_type;
+ final String? payment_method_key;
+  final package_id;
+final  int? orderId;
 
-  PaypalScreen(
+ const PaypalScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -58,7 +58,7 @@ class _PaypalScreenState extends State<PaypalScreen> {
   }
 
   createOrder() async {
-    var orderCreateResponse = await PaymentRepository()
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
@@ -226,7 +226,7 @@ class _PaypalScreenState extends State<PaypalScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_paypal,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

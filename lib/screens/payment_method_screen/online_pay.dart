@@ -14,13 +14,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OnlinePay extends StatefulWidget {
-  String? title;
-  double? amount;
-  String payment_type;
-  String? payment_method_key;
-  var package_id;
-  int? orderId;
-  OnlinePay(
+final  String? title;
+final  double? amount;
+ final String payment_type;
+ final String? payment_method_key;
+  final package_id;
+ final int? orderId;
+const  OnlinePay(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -53,7 +53,7 @@ class _OnlinePayState extends State<OnlinePay> {
   }
 
   createOrder() async {
-    var orderCreateResponse = await PaymentRepository()
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
@@ -104,7 +104,7 @@ class _OnlinePayState extends State<OnlinePay> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => UpdatePackage(
+                        builder: (context) =>const UpdatePackage(
                               goHome: true,
                             )));
               }
@@ -193,7 +193,7 @@ class _OnlinePayState extends State<OnlinePay> {
       ),
       title: Text(
         widget.title!,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

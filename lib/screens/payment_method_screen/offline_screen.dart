@@ -245,7 +245,7 @@ final  ScrollController _mainScrollController = ScrollController();
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.you_need_to_log_in,
-            style: TextStyle(color: MyTheme.font_grey),
+            style:const TextStyle(color: MyTheme.font_grey),
           )));
     } else {
       return RefreshIndicator(
@@ -267,7 +267,7 @@ final  ScrollController _mainScrollController = ScrollController();
                   ),
                 ),
              const   Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding:  EdgeInsets.symmetric(horizontal: 16.0),
                   child: Divider(
                     height: 24,
                   ),
@@ -392,7 +392,7 @@ final  ScrollController _mainScrollController = ScrollController();
                       color: MyTheme.medium_grey,
                       shape:const RoundedRectangleBorder(
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(8.0))),
+                               BorderRadius.all(Radius.circular(8.0))),
                       child: Text(
                         AppLocalizations.of(context)!.photo_proof_ucf,
                         style:const TextStyle(
@@ -445,7 +445,7 @@ final  ScrollController _mainScrollController = ScrollController();
                       color: MyTheme.accent_color,
                       shape:const RoundedRectangleBorder(
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(8.0))),
+                               BorderRadius.all(Radius.circular(8.0))),
                       child: Text(
                         AppLocalizations.of(context)!.submit_ucf + "",
                         style:const TextStyle(
