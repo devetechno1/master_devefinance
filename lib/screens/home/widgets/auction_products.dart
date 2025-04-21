@@ -1,6 +1,4 @@
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/custom_autaction_product.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/custom_horizontal_products_list_widget.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/custom_horizontal_products_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,8 +18,8 @@ class AuctionProductsSectionSliver extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 20, 20.0, 0.0),
+             const  Padding(
+                padding:  EdgeInsets.fromLTRB(10.0, 20, 20.0, 0.0),
                 child: SizedBox(
                   width: double.infinity,
                                 

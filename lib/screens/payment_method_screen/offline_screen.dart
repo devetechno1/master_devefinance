@@ -21,16 +21,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OfflineScreen extends StatefulWidget {
-  int? order_id;
-  String? paymentInstruction;
-  String? paymentMethod;
+ final int? order_id;
+ final String? paymentInstruction;
+ final String? paymentMethod;
 
-  PaymentFor? offLinePaymentFor;
-  int? offline_payment_id;
+ final PaymentFor? offLinePaymentFor;
+ final int? offline_payment_id;
   final double? rechargeAmount;
-  var packageId;
+  final packageId;
 
-  OfflineScreen(
+ const OfflineScreen(
       {Key? key,
       this.order_id,
       this.paymentInstruction,
@@ -46,11 +46,11 @@ class OfflineScreen extends StatefulWidget {
 }
 
 class _OfflineState extends State<OfflineScreen> {
-  ScrollController _mainScrollController = ScrollController();
+final  ScrollController _mainScrollController = ScrollController();
 
-  TextEditingController _amountController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _trxIdController = TextEditingController();
+ final TextEditingController _amountController = TextEditingController();
+ final TextEditingController _nameController = TextEditingController();
+ final TextEditingController _trxIdController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
   XFile? _photo_file;

@@ -127,7 +127,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   // }
 
   Future<void> onPressBidPlace() async {
-    var bidPlacedResponse = await AuctionProductsRepository().placeBidResponse(
+    final bidPlacedResponse = await AuctionProductsRepository().placeBidResponse(
         _auctionproductDetails.id.toString(), _bidPriceController.text);
 
     if (bidPlacedResponse.result == true) {
@@ -144,10 +144,10 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   }
 
   Future<void> fetchAuctionProductDetails() async {
-    var auctionproductDetailsResponse = await AuctionProductsRepository()
+    final auctionproductDetailsResponse = await AuctionProductsRepository()
         .getAuctionProductsDetails(widget.slug);
 
-    if (auctionproductDetailsResponse.auctionProduct!.length > 0) {
+    if (auctionproductDetailsResponse.auctionProduct!.length>0) {
       _auctionproductDetails = auctionproductDetailsResponse.auctionProduct![0];
       sellerChatTitleController.text =
           auctionproductDetailsResponse.auctionProduct![0].name!;
@@ -508,20 +508,20 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         });
   }
 
-  showLoginWarning() {
+ void showLoginWarning() {
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
     );
   }
 
-  onPressSendMessage() async {
+ void onPressSendMessage() async {
     if (!is_logged_in.$) {
       showLoginWarning();
       return;
     }
     loading();
-    var title = sellerChatTitleController.text.toString();
-    var message = sellerChatMessageController.text.toString();
+    final title = sellerChatTitleController.text.toString();
+    final message = sellerChatMessageController.text.toString();
 
     if (title == "" || message == "") {
       ToastComponent.showDialog(
@@ -530,7 +530,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       return;
     }
 
-    var conversationCreateResponse = await ChatRepository()
+    final conversationCreateResponse = await ChatRepository()
         .getCreateConversationResponse(
             product_id: _auctionproductDetails.id,
             title: title,
@@ -549,7 +549,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     sellerChatMessageController.clear();
     setState(() {});
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
+  await  Navigator.push(context, MaterialPageRoute(builder: (context) {
       return Chat(
         conversation_id: conversationCreateResponse.conversation_id,
         messenger_name: conversationCreateResponse.shop_name,
@@ -609,8 +609,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
                         color: MyTheme.accent_color,
-                        boxShadow: [
-                          const BoxShadow(
+                        boxShadow:const [
+                           BoxShadow(
                             color: MyTheme.accent_color_shadow,
                             blurRadius: 20,
                             spreadRadius: 0.0,
@@ -1114,7 +1114,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     );
   }
 
-  showAlertDialog(BuildContext context) {
+ void showAlertDialog(BuildContext context) {
     // set up the buttons
     TextButton(
       style: TextButton.styleFrom(
@@ -1257,7 +1257,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               ),
             ],
           ),
-          actions: [
+          actions:const [
             // cancelButton,
             // submitBtn,
           ],
@@ -1381,7 +1381,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               endTime: DateTime.now().day +
                   (1000 * _auctionproductDetails.auctionEndDate as int),
               widgetBuilder: (_, CurrentRemainingTime? time) {
-                List _auctionEndTimeList = [];
+            final    List _auctionEndTimeList = [];
                 _auctionEndTimeList
                     .addAll([time!.days, time.hours, time.min, time.sec]);
 
@@ -1390,7 +1390,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   itemCount: _auctionEndTimeList.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const Padding(
-                    padding: const EdgeInsets.all(6.0),
+                    padding:  EdgeInsets.all(6.0),
                     child: Text(":"),
                   ),
                   itemBuilder: (BuildContext context, int index) {
@@ -1606,7 +1606,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             children: <Widget>[
               Builder(
                 builder: (context) {
-                  var controller = ExpandableController.of(context)!;
+                  final controller = ExpandableController.of(context)!;
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
@@ -1627,7 +1627,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     ));
   }
 
-  openPhotoDialog(BuildContext context, path) => showDialog(
+ void openPhotoDialog(BuildContext context, path) => showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -1670,7 +1670,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       );
 
   buildProductImageSection() {
-    if (_productImageList.length == 0) {
+    if (_productImageList.isEmpty) {
       return Row(
         children: [
           Container(
@@ -1730,7 +1730,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      int itemIndex = index;
+                  final    int itemIndex = index;
                       return GestureDetector(
                         onTap: () {
                           _currentImage = itemIndex;
@@ -1788,7 +1788,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   }
 
   Widget buildProductSliderImageSection() {
-    if (_productImageList.length == 0) {
+    if (_productImageList.isEmpty) {
       return ShimmerHelper().buildBasicShimmer(
         height: 190.0,
       );

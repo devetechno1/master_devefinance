@@ -38,7 +38,7 @@ class PiratedWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24),
                 child: Text(
                   LangText(context).local.pirated_app,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style:const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),

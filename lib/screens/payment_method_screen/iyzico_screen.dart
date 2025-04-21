@@ -139,20 +139,20 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       iyzicoPaymentSuccessResponse.message!,
     );
     if (widget.payment_type == "cart_payment") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+    await  Navigator.push(context, MaterialPageRoute(builder: (context) {
         return OrderList(from_checkout: true);
       }));
     } else if (widget.payment_type == "order_re_payment") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+    await  Navigator.push(context, MaterialPageRoute(builder: (context) {
         return OrderList(from_checkout: true);
       }));
     } else if (widget.payment_type == "wallet_payment") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+    await  Navigator.push(context, MaterialPageRoute(builder: (context) {
         return Wallet(from_recharge: true);
       }));
     } else if (widget.payment_type == "customer_package_payment") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return Profile();
+      await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return  const Profile();
       }));
     }
   }
@@ -196,7 +196,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_iyzico,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

@@ -15,12 +15,12 @@ import '../../helpers/shared_value_helper.dart';
 import '../profile.dart';
 
 class BkashScreen extends StatefulWidget {
-  double? amount;
-  String payment_type;
-  String? payment_method_key;
-  var package_id;
-  int? orderId;
-  BkashScreen(
+final  double? amount;
+final  String payment_type;
+ final  String? payment_method_key;
+  final package_id;
+final  int? orderId;
+ const BkashScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -192,7 +192,7 @@ class _BkashScreenState extends State<BkashScreen> {
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Profile();
+            return const Profile();
           }));
         }
       }
@@ -309,7 +309,7 @@ class _BkashScreenState extends State<BkashScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_bkash,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

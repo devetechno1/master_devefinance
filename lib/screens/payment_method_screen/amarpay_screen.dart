@@ -36,13 +36,13 @@ class AmarpayScreen extends StatefulWidget {
 
 class _AmarpayScreenState extends State<AmarpayScreen> {
   //controller
-  WebViewController _webViewController = WebViewController();
+ final WebViewController _webViewController = WebViewController();
 
   int? _combined_order_id = 0;
   bool _order_init = false;
 
   createOrder() async {
-    var orderCreateResponse = await PaymentRepository()
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
@@ -91,7 +91,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Profile();
+            return const Profile();
           }));
         }
       }
@@ -100,7 +100,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
 
   amarpay() {
     // todo:: PUT amar pay initial url here
-    String _initial_url =
+   final String _initial_url =
         "${AppConfig.BASE_URL}/amarpay?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
 
     _webViewController
@@ -190,7 +190,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_amarpay,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

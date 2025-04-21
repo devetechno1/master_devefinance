@@ -41,30 +41,30 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   bool _showCopied = false;
   bool showPhone = false;
   int _currentImage = 0;
-  ScrollController _mainScrollController =
+ final ScrollController _mainScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
-  ScrollController _variantScrollController = ScrollController();
-  ScrollController _imageScrollController = ScrollController();
+ final ScrollController _variantScrollController = ScrollController();
+final  ScrollController _imageScrollController = ScrollController();
 
   double _scrollPosition = 0.0;
 
   Animation? _colorTween;
   late AnimationController _ColorAnimationController;
 
-  CarouselSliderController _carouselController = CarouselSliderController();
+final  CarouselSliderController _carouselController = CarouselSliderController();
 
   //init values
 
-  bool _isInWishList = false;
+final  bool _isInWishList = false;
   var _productDetailsFetched = false;
   ClassifiedProductDetailsResponseDatum? _productDetails = null;
 
-  var _productImageList = [];
+ final  _productImageList = [];
 
   double opacity = 0;
 
-  List<ClassifiedAdsMiniData> _relatedProducts = [];
+final  List<ClassifiedAdsMiniData> _relatedProducts = [];
   bool _relatedProductInit = false;
 
   // @override
@@ -83,7 +83,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   }
 
   Future<void> fetchProductDetails() async {
-    var productDetailsResponse = await ClassifiedProductRepository()
+    final productDetailsResponse = await ClassifiedProductRepository()
         .getClassifiedProductsDetails(widget.slug);
 
     if (productDetailsResponse.data!.length > 0) {
@@ -97,7 +97,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   }
 
   Future<void> fetchRelatedProducts() async {
-    var relatedProductResponse = await ClassifiedProductRepository()
+    final relatedProductResponse = await ClassifiedProductRepository()
         .getClassifiedOtherAds(slug: widget.slug);
 
     _relatedProducts.addAll(relatedProductResponse.data!);
@@ -125,7 +125,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
     setState(() {
       _showCopied = true;
     });
-    Timer timer = Timer(const Duration(seconds: 3), () {
+   final Timer timer = Timer(const Duration(seconds: 3), () {
       setState(() {
         _showCopied = false;
       });
@@ -937,7 +937,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             children: <Widget>[
               Builder(
                 builder: (context) {
-                  var controller = ExpandableController.of(context)!;
+                  final controller = ExpandableController.of(context)!;
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
@@ -959,7 +959,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   }
 
   Widget buildProductsMayLikeList() {
-    if (_relatedProductInit == false && _relatedProducts.length == 0) {
+    if (_relatedProductInit == false && _relatedProducts.isEmpty) {
       return Row(
         children: [
           Padding(
@@ -1059,7 +1059,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
       );
 
   buildProductImageSection() {
-    if (_productImageList.length == 0) {
+    if (_productImageList.isEmpty) {
       return Row(
         children: [
           Container(
@@ -1120,7 +1120,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      int itemIndex = index;
+                 final     int itemIndex = index;
                       return GestureDetector(
                         onTap: () {
                           _currentImage = itemIndex;
@@ -1178,7 +1178,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   }
 
   Widget buildProductSliderImageSection() {
-    if (_productImageList.length == 0) {
+    if (_productImageList.isEmpty) {
       return ShimmerHelper().buildBasicShimmer(
         height: 190.0,
       );
