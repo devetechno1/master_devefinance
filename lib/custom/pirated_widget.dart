@@ -4,8 +4,8 @@ import '../presenter/home_presenter.dart';
 import 'lang_text.dart';
 
 class PiratedWidget extends StatelessWidget {
-  HomePresenter? homeData;
-  PiratedWidget({Key? key, required this.homeData}) : super(key: key);
+  final HomePresenter? homeData;
+  const PiratedWidget({Key? key, required this.homeData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

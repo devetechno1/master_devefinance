@@ -21,7 +21,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class GuestCheckoutAddress extends StatefulWidget {
-  GuestCheckoutAddress({Key? key, this.from_shipping_info = false})
+  const GuestCheckoutAddress({Key? key, this.from_shipping_info = false})
       : super(key: key);
   final bool from_shipping_info;
 

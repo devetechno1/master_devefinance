@@ -17,7 +17,7 @@ class CouponRepository {
     //     jsonEncode({"user_id": "${user_id.$}", "coupon_code": "$coupon_code"});
 
     var post_body;
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       post_body = jsonEncode(
           {"temp_user_id": temp_user_id.$, "coupon_code": "$coupon_code"});
     } else {
@@ -41,7 +41,7 @@ class CouponRepository {
   Future<dynamic> getCouponRemoveResponse() async {
     // var post_body = jsonEncode({"user_id": "${user_id.$}"});
     var post_body;
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       post_body = jsonEncode({"temp_user_id": temp_user_id.$});
     } else {
       post_body = jsonEncode({"user_id": user_id.$});

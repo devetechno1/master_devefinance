@@ -13,7 +13,7 @@ class ImageShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (notificationShowType == 'only_text') {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
 
     if (notificationShowType == 'design_1') {

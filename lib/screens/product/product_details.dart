@@ -398,7 +398,7 @@ class _ProductDetailsState extends State<ProductDetails>
     //   return;
     // }
 
-    if (!guest_checkout_status.$) {
+    if (!AppConfig.businessSettingsData.guestCheckoutStatus) {
       if (is_logged_in.$ == false) {
         print("object $context");
         context.push("/users/login");
@@ -1470,7 +1470,7 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
           Spacer(),
           Visibility(
-            visible: conversation_system_status.$,
+            visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(

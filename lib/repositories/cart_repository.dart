@@ -19,7 +19,7 @@ class CartRepository {
     String url = ("${AppConfig.BASE_URL}/carts");
     var postBody;
 
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       postBody = jsonEncode({"temp_user_id": temp_user_id.$});
     } else {
       postBody = jsonEncode({"user_id": user_id.$});
@@ -40,13 +40,13 @@ class CartRepository {
   // cart count
   Future<dynamic> getCartCount() async {
     var postBody;
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       postBody = jsonEncode({"temp_user_id": temp_user_id.$});
     } else {
       postBody = jsonEncode({"user_id": user_id.$});
     }
 
-    // if (guest_checkout_status.$ && !is_logged_in.$) {
+    // if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
     // var postBody = jsonEncode({"temp_user_id": temp_user_id.$});
     String url = ("${AppConfig.BASE_URL}/cart-count");
     final response = await ApiRequest.post(
@@ -106,7 +106,7 @@ class CartRepository {
       int? id, String? variant, int? user_id, int? quantity) async {
     var post_body;
 
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       post_body = jsonEncode({
         "id": "${id}",
         "variant": variant,
@@ -142,7 +142,7 @@ class CartRepository {
   Future<dynamic> getCartSummaryResponse() async {
     var postBody;
 
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       postBody = jsonEncode({"temp_user_id": temp_user_id.$});
     } else {
       postBody = jsonEncode({"user_id": user_id.$});
