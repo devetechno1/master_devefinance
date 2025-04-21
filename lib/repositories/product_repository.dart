@@ -40,9 +40,9 @@ class ProductRepository {
     const String url = ("${AppConfig.BASE_URL}/products/best-seller");
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
-      "Currency-Code": SystemConfig.systemCurrency!.code!,
+      "Currency-Code": SystemConfig.systemCurrency?.code ?? "",
       "Currency-Exchange-Rate":
-          SystemConfig.systemCurrency!.exchangeRate.toString(),
+          (SystemConfig.systemCurrency?.exchangeRate).toString(),
     });
     return productMiniResponseFromJson(response.body);
   }
