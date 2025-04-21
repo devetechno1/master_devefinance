@@ -92,12 +92,12 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                         slivers: <Widget>[
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : SizedBox(),
-                              SizedBox(height: 10),
+                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
+                              const SizedBox(height: 10),
 
                               // Header Banner
                               HomeCarouselSlider(homeData: homeData, context: context),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
                               // Flash Sale Section
                               if(homeData.flashDeal != null)
@@ -113,7 +113,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                                     children: [
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                       ),
                                        Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
                                     ],
@@ -131,7 +131,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(0, 3), // changes position of shadow
+                                        offset: const Offset(0, 3), // changes position of shadow
                                   )],
                                     color:  const Color.fromARGB(255, 249, 248, 248),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -245,7 +245,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
         padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Filter()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
           },
           child: HomeSearchBox(context: context),
         ),
@@ -278,16 +278,16 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
           child: CircularProgressIndicator(
             value: currentValue / totalValue,
             backgroundColor: const Color.fromARGB(255, 240, 220, 220),
-            valueColor: AlwaysStoppedAnimation<Color>(
-                const Color.fromARGB(255, 255, 80, 80)),
+            valueColor: const AlwaysStoppedAnimation<Color>(
+                Color.fromARGB(255, 255, 80, 80)),
             strokeWidth: 4.0,
             strokeCap: StrokeCap.round,
           ),
         ),
         Text(
           timeText,
-          style: TextStyle(
-            color: const Color.fromARGB(228, 218, 29, 29),
+          style: const TextStyle(
+            color: Color.fromARGB(228, 218, 29, 29),
             fontSize: 10.0,
             fontWeight: FontWeight.w600,
           ),
@@ -302,41 +302,41 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
       child: Row(
         children: [
-          Spacer(),
+          const Spacer(),
 
           Column(
             children: [
               timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 3)),
-              SizedBox(height: 5),
-              Text(LangText(context).local.days, style: TextStyle(color: Colors.grey, fontSize: 10))
+              const SizedBox(height: 5),
+              Text(LangText(context).local.days, style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Column(
             children: [
               timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
-              SizedBox(height: 5),
-              Text(LangText(context).local.hours, style: TextStyle(color: Colors.grey, fontSize: 10))
+              const SizedBox(height: 5),
+              Text(LangText(context).local.hours, style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             children: [
               timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
-              SizedBox(height: 5),
-              Text(LangText(context).local.minutes, style: TextStyle(color: Colors.grey, fontSize: 10))
+              const SizedBox(height: 5),
+              Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Column(
             children: [
               timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
-              SizedBox(height: 5),
-              Text(LangText(context).local.seconds, style: TextStyle(color: Colors.grey, fontSize: 10))
+              const SizedBox(height: 5),
+              Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
-          SizedBox(width: 10),
-          Column(
+          const SizedBox(width: 10),
+          const Column(
             children: [
             ///  Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
               SizedBox(height: 12),
@@ -344,10 +344,10 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
           ),
           Row(
             children: [
-              Text(LangText(context).local.shop_more_ucf, style: TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
-              SizedBox(width: 3),
-              Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
-              SizedBox(width: 10),
+              Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
+              const SizedBox(width: 3),
+              const Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
+              const SizedBox(width: 10),
             ],
           )
         ],

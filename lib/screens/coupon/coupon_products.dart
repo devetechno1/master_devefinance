@@ -69,7 +69,7 @@ class _CouponProductsState extends State<CouponProducts> {
             ),
             IconButton(
               padding: EdgeInsets.zero,
-              constraints: BoxConstraints(),
+              constraints: const BoxConstraints(),
               onPressed: () {
                 if (code != null) {
                   Clipboard.setData(ClipboardData(text: code)).then((_) {
@@ -79,7 +79,7 @@ class _CouponProductsState extends State<CouponProducts> {
                   });
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 color: Colors.black,
                 Icons.copy,
                 size: 18.0,
@@ -93,14 +93,14 @@ class _CouponProductsState extends State<CouponProducts> {
     );
   }
 
-  buildCouponProductList(context) {
+  FutureBuilder<ProductMiniResponse> buildCouponProductList(context) {
     return FutureBuilder(
         future: CouponRepository().getCouponProductList(id: widget.id),
         builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text(LangText(context).local.an_error_occurred));
           } else if (snapshot.hasData) {
-            var productResponse = snapshot.data;
+            final productResponse = snapshot.data;
             if (productResponse?.products == null ||
                 productResponse!.products!.isEmpty) {
               return Center(child: Text(LangText(context).local.no_products_found));
@@ -113,10 +113,10 @@ class _CouponProductsState extends State<CouponProducts> {
                 itemCount: productResponse.products!.length,
                 shrinkWrap: true,
                 padding:
-                    EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
-                physics: NeverScrollableScrollPhysics(),
+                    const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  var product = productResponse.products![index];
+                  final product = productResponse.products![index];
                   return ProductCard(
                     id: product.id,
                     slug: product.slug ?? 'no-slug',
@@ -126,7 +126,7 @@ class _CouponProductsState extends State<CouponProducts> {
                     stroked_price: product.stroked_price,
                     has_discount: product.has_discount ?? false,
                     discount: product.discount,
-                    is_wholesale: product.isWholesale ?? false,
+                    isWholesale: product.isWholesale ?? false,
                   );
                 },
               ),

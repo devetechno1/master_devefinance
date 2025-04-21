@@ -15,7 +15,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer/shimmer.dart';
 
 class Chat extends StatefulWidget {
-  Chat({
+  const Chat({
     Key? key,
     this.conversation_id,
     this.messenger_name,
@@ -58,7 +58,7 @@ class _ChatState extends State<Chat> {
   }
 
   fetchData() async {
-    var messageResponse = await ChatRepository().getMessageResponse(
+    final messageResponse = await ChatRepository().getMessageResponse(
         conversation_id: widget.conversation_id, page: _page);
     _list.addAll(messageResponse.data);
     _isInitial = false;
@@ -93,7 +93,7 @@ class _ChatState extends State<Chat> {
   }
 
   onTapSendMessage() async {
-    var chatText = _chatTextController.text.toString();
+    final chatText = _chatTextController.text.toString();
     _chatTextController.clear();
     //print(chatText);
     if (chatText != "") {
@@ -103,7 +103,7 @@ class _ChatState extends State<Chat> {
       // final String formatted_date = date_formatter.format(now);
       // final String formatted_time = time_formatter.format(now);
 
-      var messageResponse = await ChatRepository().getInserMessageResponse(
+      final messageResponse = await ChatRepository().getInserMessageResponse(
           conversation_id: widget.conversation_id, message: chatText);
       _list = [
         messageResponse.data,
@@ -123,7 +123,7 @@ class _ChatState extends State<Chat> {
   }
 
   get_new_message() async {
-    var messageResponse = await ChatRepository().getNewMessageResponse(
+    final messageResponse = await ChatRepository().getNewMessageResponse(
         conversation_id: widget.conversation_id, last_message_id: _last_id);
 
     _list = [
@@ -192,11 +192,11 @@ class _ChatState extends State<Chat> {
                     width: 40,
                     height: 40,
                     margin:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
+                        const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(35),
                       border: Border.all(
-                          color: Color.fromRGBO(112, 112, 112, .3), width: 1),
+                          color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
                     ),
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(35),
@@ -209,7 +209,7 @@ class _ChatState extends State<Chat> {
                   Container(
                     width: 220,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -218,7 +218,7 @@ class _ChatState extends State<Chat> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.font_grey,
                                 fontSize: 14,
                                 height: 1.6,
@@ -239,13 +239,13 @@ class _ChatState extends State<Chat> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   InkWell(
                     onTap: () {
                       _onRefresh();
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.rotate_left,
                         color: MyTheme.font_grey,
@@ -274,7 +274,7 @@ class _ChatState extends State<Chat> {
                 Container(
                   width: 35,
                   height: 35,
-                  margin: EdgeInsets.only(right: 14),
+                  margin: const EdgeInsets.only(right: 14),
                   child: Stack(
                     children: [
                       UsefulElements.roundImageWithPlaceholder(
@@ -314,25 +314,25 @@ class _ChatState extends State<Chat> {
       ),
       backgroundColor: MyTheme.mainColor,
       leading: Container(
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         child: UsefulElements.backButton(context),
       ),
     );
   }
 
-  buildChatList() {
-    if (_isInitial && _list.length == 0) {
+  Widget buildChatList() {
+    if (_isInitial && _list.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 10, item_height: 100.0));
-    } else if (_list.length > 0) {
+    } else if (_list.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.builder(
           key: lastKey,
           controller: _chatScrollController,
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           reverse: true,
           itemBuilder: (context, index) {
@@ -351,7 +351,7 @@ class _ChatState extends State<Chat> {
     }
   }
 
-  buildChatItem(index) {
+  dynamic buildChatItem(index) {
     return _list[index].user_id == uid
         ? getSenderView(ChatBubbleClipper5(type: BubbleType.sendBubble),
             context, _list[index].message, _list[index].date, _list[index].time)
@@ -376,14 +376,14 @@ class _ChatState extends State<Chat> {
             controller: _chatTextController,
             decoration: InputDecoration(
                 filled: true,
-                fillColor: Color.fromRGBO(251, 251, 251, 1),
+                fillColor: const Color.fromRGBO(251, 251, 251, 1),
                 hintText: AppLocalizations.of(context)!.type_your_message_here,
                 hintStyle:
-                    TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
-                enabledBorder: OutlineInputBorder(
+                    const TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
+                enabledBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(color: MyTheme.textfield_grey, width: 0.5),
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(35.0),
                   ),
                 ),
@@ -394,7 +394,7 @@ class _ChatState extends State<Chat> {
                     Radius.circular(35.0),
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.0)),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0)),
           ),
         ),
         Padding(
@@ -406,14 +406,14 @@ class _ChatState extends State<Chat> {
             child: Container(
               width: 40,
               height: 40,
-              margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
+              margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
               decoration: BoxDecoration(
                 color: MyTheme.accent_color,
                 borderRadius: BorderRadius.circular(35),
                 border: Border.all(
-                    color: Color.fromRGBO(112, 112, 112, .3), width: 1),
+                    color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
               ),
-              child: Center(
+              child: const Center(
                 child: Icon(
                   Icons.send,
                   color: Colors.white,
@@ -427,13 +427,13 @@ class _ChatState extends State<Chat> {
     );
   }
 
-  getSenderView(CustomClipper clipper, BuildContext context, String text,
+  ChatBubble getSenderView(CustomClipper clipper, BuildContext context, String text,
       String date, String time) {
     return ChatBubble(
       elevation: 0.0,
       clipper: clipper,
       alignment: Alignment.topRight,
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       backGroundColor: MyTheme.soft_accent_color,
       child: Container(
         constraints: BoxConstraints(
@@ -444,7 +444,7 @@ class _ChatState extends State<Chat> {
           children: [
             Text(
               text,
-              style: TextStyle(color: MyTheme.font_grey, fontSize: 14),
+              style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
             ),
             Text('$date $time',
                 style: TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
@@ -454,13 +454,13 @@ class _ChatState extends State<Chat> {
     );
   }
 
-  getReceiverView(
+  ChatBubble getReceiverView(
           CustomClipper clipper, BuildContext context, text, date, time) =>
       ChatBubble(
         elevation: 0.0,
         clipper: clipper,
-        backGroundColor: Color.fromRGBO(239, 239, 239, 1),
-        margin: EdgeInsets.only(top: 10),
+        backGroundColor: const Color.fromRGBO(239, 239, 239, 1),
+        margin: const EdgeInsets.only(top: 10),
         child: Container(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.6,
@@ -474,7 +474,7 @@ class _ChatState extends State<Chat> {
                 child: Text(
                   text,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey, fontSize: 13, wordSpacing: 1),
                 ),
               ),
@@ -485,7 +485,7 @@ class _ChatState extends State<Chat> {
         ),
       );
 
-  conversations() {
+  SingleChildScrollView conversations() {
     return SingleChildScrollView(
       reverse: true,
       child: Container(
@@ -547,14 +547,14 @@ class _ChatState extends State<Chat> {
           color: MyTheme.noColor,
         ),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
+          topLeft: const Radius.circular(16),
+          topRight: const Radius.circular(16),
           bottomLeft: _list[index].sendType == "customer"
-              ? Radius.circular(16)
-              : Radius.circular(0),
+              ? const Radius.circular(16)
+              : const Radius.circular(0),
           bottomRight: _list[index].sendType == "customer"
-              ? Radius.circular(0)
-              : Radius.circular(16),
+              ? const Radius.circular(0)
+              : const Radius.circular(16),
         ),
         color: (_list[index].sendType == "customer"
             ? MyTheme.accent_color
@@ -564,7 +564,7 @@ class _ChatState extends State<Chat> {
             color: Colors.black.withOpacity(.08),
             blurRadius: 20,
             spreadRadius: 0.0,
-            offset: Offset(0.0, 10.0),
+            offset: const Offset(0.0, 10.0),
           )
         ],
       ),
@@ -616,7 +616,7 @@ class _ChatState extends State<Chat> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Color(0xffEFEFEF),
+                  color: const Color(0xffEFEFEF),
                 ),
                 child: TextField(
                   controller: _chatTextController,
@@ -624,9 +624,9 @@ class _ChatState extends State<Chat> {
                   decoration: InputDecoration(
                     hintText: "  ${LangText(context).local.type_your_message_here}",
                     hintStyle:
-                        TextStyle(color: Color(0xff999999), fontSize: 12),
+                        const TextStyle(color: Color(0xff999999), fontSize: 12),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(vertical: 15),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 15),
                   ),
                 ),
               ),
@@ -642,7 +642,7 @@ class _ChatState extends State<Chat> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Color(0xffD1D1D1),
+                    color: const Color(0xffD1D1D1),
                     width: 2.0,
                   ),
                 ),
@@ -669,7 +669,7 @@ class _ChatState extends State<Chat> {
     );
   }
 
-  chatShimmer() {
+  SingleChildScrollView chatShimmer() {
     return SingleChildScrollView(
       reverse: true,
       child: Container(
@@ -712,10 +712,10 @@ class _ChatState extends State<Chat> {
               width: 1,
               color: index.isOdd ? MyTheme.accent_color : MyTheme.grey_153),
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-            bottomLeft: index.isOdd ? Radius.circular(16) : Radius.circular(0),
-            bottomRight: index.isOdd ? Radius.circular(0) : Radius.circular(16),
+            topLeft: const Radius.circular(16),
+            topRight: const Radius.circular(16),
+            bottomLeft: index.isOdd ? const Radius.circular(16) : const Radius.circular(0),
+            bottomRight: index.isOdd ? const Radius.circular(0) : const Radius.circular(16),
           ),
           color: (index.isOdd ? MyTheme.accent_color : MyTheme.accent_color),
         ),

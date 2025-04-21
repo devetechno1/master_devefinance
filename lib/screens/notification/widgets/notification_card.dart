@@ -45,7 +45,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
     // print('ontap');
 
     if (widget.type == "App\\Notifications\\CustomNotification") {
-      var url = widget.link?.split(AppConfig.DOMAIN_PATH).last ?? "";
+      final url = widget.link?.split(AppConfig.DOMAIN_PATH).last ?? "";
       GoRouter.of(context).go(url);
     }
 

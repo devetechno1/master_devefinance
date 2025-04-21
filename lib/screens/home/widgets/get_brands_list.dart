@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../custom/lang_text.dart';
 import '../home.dart';
-import 'custom_horizontal_products_list_widget.dart';
 
 // TODO:# change to new products not featured
 

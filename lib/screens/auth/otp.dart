@@ -27,7 +27,7 @@ class Otp extends StatefulWidget {
 
 class _OtpState extends State<Otp> {
   //controllers
-  TextEditingController _verificationCodeController = TextEditingController();
+  final TextEditingController _verificationCodeController = TextEditingController();
   CountdownController countdownController = CountdownController(autoStart: true);
   bool canResend = false;
   @override
@@ -54,7 +54,7 @@ class _OtpState extends State<Otp> {
     setState(() {
       canResend = false;
     });
-    var resendCodeResponse = await AuthRepository().getResendCodeResponse();
+    final resendCodeResponse = await AuthRepository().getResendCodeResponse();
 
     if (resendCodeResponse.result == false) {
       ToastComponent.showDialog(
@@ -67,8 +67,8 @@ class _OtpState extends State<Otp> {
     }
   }
 
-  onPressConfirm() async {
-    var code = _verificationCodeController.text.toString();
+  Future<void> onPressConfirm() async {
+    final code = _verificationCodeController.text.toString();
 
     if (code == "") {
       ToastComponent.showDialog(
@@ -77,7 +77,7 @@ class _OtpState extends State<Otp> {
       return;
     }
 
-    var confirmCodeResponse =
+    final confirmCodeResponse =
         await AuthRepository().getConfirmCodeResponse(code);
 
     if (!(confirmCodeResponse.result)) {
@@ -124,7 +124,7 @@ class _OtpState extends State<Otp> {
                   if (widget.title != null)
                     Text(
                       widget.title!,
-                      style: TextStyle(fontSize: 25, color: MyTheme.font_grey),
+                      style: const TextStyle(fontSize: 25, color: MyTheme.font_grey),
                     ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40.0, bottom: 15),
@@ -171,12 +171,12 @@ class _OtpState extends State<Otp> {
                             child: Btn.basic(
                               minWidth: MediaQuery.of(context).size.width,
                               color: MyTheme.accent_color,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: const BorderRadius.all(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
                                       Radius.circular(12.0))),
                               child: Text(
                                 AppLocalizations.of(context)!.confirm_ucf,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600),
@@ -215,7 +215,7 @@ class _OtpState extends State<Otp> {
                     child: Visibility(
                       visible: !canResend,
                       child: TimerWidget(
-                        duration: Duration(seconds: 20), 
+                        duration: const Duration(seconds: 20), 
                         callback: () {
                             setState(() {
                               countdownController.restart();
@@ -236,7 +236,7 @@ class _OtpState extends State<Otp> {
                         },
                         child: Text(AppLocalizations.of(context)!.logout_ucf,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.accent_color,
                                 decoration: TextDecoration.underline,
                                 fontSize: 13)),
@@ -277,7 +277,7 @@ class TimerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 6, bottom: 2, left: 12, right: 12),
+      padding: const EdgeInsets.only(top: 6, bottom: 2, left: 12, right: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(10),

@@ -16,7 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timer_count_down/timer_controller.dart';
 
 class PasswordOtp extends StatefulWidget {
-  PasswordOtp({Key? key, this.verify_by = "email", this.email_or_code})
+  const PasswordOtp({Key? key, this.verify_by = "email", this.email_or_code})
       : super(key: key);
   final String verify_by;
   final String? email_or_code;
@@ -27,9 +27,9 @@ class PasswordOtp extends StatefulWidget {
 
 class _PasswordOtpState extends State<PasswordOtp> {
   //controllers
-  TextEditingController _codeController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _passwordConfirmController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
   CountdownController countdownController = CountdownController(autoStart: true);
   bool canResend = false;
 
@@ -61,10 +61,10 @@ class _PasswordOtpState extends State<PasswordOtp> {
     super.dispose();
   }
 
-  onPressConfirm() async {
-    var code = _codeController.text.toString();
-    var password = _passwordController.text.toString();
-    var password_confirm = _passwordConfirmController.text.toString();
+  Future<void> onPressConfirm() async {
+    final code = _codeController.text.toString();
+    final password = _passwordController.text.toString();
+    final passwordConfirm = _passwordConfirmController.text.toString();
 
     if (code == "") {
       ToastComponent.showDialog(
@@ -76,7 +76,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
         AppLocalizations.of(context)!.enter_password,
       );
       return;
-    } else if (password_confirm == "") {
+    } else if (passwordConfirm == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.confirm_your_password,
       );
@@ -87,14 +87,14 @@ class _PasswordOtpState extends State<PasswordOtp> {
             .password_must_contain_at_least_6_characters,
       );
       return;
-    } else if (password != password_confirm) {
+    } else if (password != passwordConfirm) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.passwords_do_not_match,
       );
       return;
     }
 
-    var passwordConfirmResponse =
+    final passwordConfirmResponse =
         await AuthRepository().getPasswordConfirmResponse(code, password);
 
     if (passwordConfirmResponse.result == false) {
@@ -116,7 +116,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
     setState(() {
       canResend = false;
     });
-    var passwordResendCodeResponse = await AuthRepository()
+    final passwordResendCodeResponse = await AuthRepository()
         .getPasswordForgetResponse(widget.email_or_code, widget.verify_by);
 
     if (passwordResendCodeResponse.result == false) {
@@ -137,7 +137,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
 
   @override
   Widget build(BuildContext context) {
-    String _verify_by = widget.verify_by; //phone or email
+    final String _verify_by = widget.verify_by; //phone or email
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
@@ -189,7 +189,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     padding: const EdgeInsets.only(bottom: 4.0),
                     child: Text(
                       AppLocalizations.of(context)!.enter_the_code,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.accent_color,
                           fontWeight: FontWeight.w600),
                     ),
@@ -215,7 +215,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     padding: const EdgeInsets.only(bottom: 4.0),
                     child: Text(
                       AppLocalizations.of(context)!.password_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.accent_color,
                           fontWeight: FontWeight.w600),
                     ),
@@ -240,7 +240,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                         Text(
                           AppLocalizations.of(context)!
                               .password_must_contain_at_least_6_characters,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.textfield_grey,
                               fontStyle: FontStyle.italic),
                         )
@@ -251,7 +251,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     padding: const EdgeInsets.only(bottom: 4.0),
                     child: Text(
                       AppLocalizations.of(context)!.retype_password_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.accent_color,
                           fontWeight: FontWeight.w600),
                     ),
@@ -283,12 +283,12 @@ class _PasswordOtpState extends State<PasswordOtp> {
                       child: Btn.basic(
                         minWidth: MediaQuery.of(context).size.width,
                         color: MyTheme.accent_color,
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(12.0))),
+                                BorderRadius.all(Radius.circular(12.0))),
                         child: Text(
                           AppLocalizations.of(context)!.confirm_ucf,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
@@ -319,7 +319,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
               child: Visibility(
                 visible: !canResend,
                 child: TimerWidget(
-                  duration: Duration(seconds: 20), 
+                  duration: const Duration(seconds: 20), 
                   callback: () {
                       setState(() {
                         countdownController.restart();
@@ -343,7 +343,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                   width: _screen_width * (3 / 4),
                   child: Text(LangText(context).local.congratulations_ucf,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.accent_color,
                           fontSize: 20,
                           fontWeight: FontWeight.bold))),
@@ -357,13 +357,13 @@ class _PasswordOtpState extends State<PasswordOtp> {
                           .local
                           .you_have_successfully_changed_your_password,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 13,
                       ))),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: Image.asset(
                 'assets/changed_password.png',
                 width: DeviceInfo(context).width! / 2,
@@ -372,17 +372,17 @@ class _PasswordOtpState extends State<PasswordOtp> {
             Padding(
               padding: const EdgeInsets.only(top: 40.0),
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 45,
                 child: Btn.basic(
                   minWidth: MediaQuery.of(context).size.width,
                   color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(6.0))),
+                          BorderRadius.all(Radius.circular(6.0))),
                   child: Text(
                     AppLocalizations.of(context)!.back_to_Login_ucf,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),

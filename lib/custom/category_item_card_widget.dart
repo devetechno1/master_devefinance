@@ -100,7 +100,7 @@ class CategoryItemCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var itemWidth =
+    final itemWidth =
         ((DeviceInfo(context).width! - 48) / 3); // Adjust spacing between items
     return Container(
       // decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -145,7 +145,7 @@ class CategoryItemCardWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: TextStyle(
+                style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 10,
                   height: 1.4,
@@ -172,7 +172,7 @@ class CategoryGrid extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: GridView.builder(
         itemCount: categoryResponse.categories!.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,

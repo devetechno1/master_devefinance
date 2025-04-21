@@ -150,25 +150,25 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
   /// Method [_generateBottomToolbar] to render bottom toolbar that declared
   /// by user
   List<Widget> _generateBottomToolbar(BuildContext context) {
-    var toolbar = [
+    final toolbar = [
       Expanded(
         child: GestureDetector(
           onTap: () async {
-            String data = await getText();
+            final String data = await getText();
             Clipboard.setData(ClipboardData(text: data));
           },
-          child: Row(
+          child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[Icon(Icons.content_copy), Text('Copy')]),
+              children: <Widget>[Icon(Icons.content_copy), Text('Copy')]),
         ),
       ),
       Expanded(
         child: GestureDetector(
           onTap: () async {
-            ClipboardData data = await (Clipboard.getData(Clipboard.kTextPlain)
+            final ClipboardData data = await (Clipboard.getData(Clipboard.kTextPlain)
                 as FutureOr<ClipboardData>);
 
-            String txtIsi = data.text!
+            final String txtIsi = data.text!
                 .replaceAll("'", '\\"')
                 .replaceAll('"', '\\"')
                 .replaceAll('[', '\\[')
@@ -177,12 +177,12 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
                 .replaceAll('\n\n', '<br/>')
                 .replaceAll('\r', ' ')
                 .replaceAll('\r\n', ' ');
-            String txt = "\$('.note-editable').append( '$txtIsi');";
+            final String txt = "\$('.note-editable').append( '$txtIsi');";
             webViewController!.runJavaScript(txt);
           },
-          child: Row(
+          child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
+              children: <Widget>[
                 Icon(Icons.content_paste),
                 Text('Paste'),
               ]),
@@ -197,9 +197,9 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
           Expanded(
             child: GestureDetector(
               onTap: () => _attach(context),
-              child: Row(
+              child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Icon(Icons.attach_file),
                     Text('Attach')
                   ]),
@@ -221,7 +221,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
 
   /// Call [setText] to set current value in summernote form
   Future<void> setText(String v) async {
-    String txtIsi = v
+    final String txtIsi = v
         .replaceAll("'", '\\"')
         .replaceAll('"', '\\"')
         .replaceAll('[', '\\[')
@@ -230,7 +230,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
         .replaceAll('\n\n', '<br/>')
         .replaceAll('\r', ' ')
         .replaceAll('\r\n', ' ');
-    String txt =
+    final String txt =
         'document.getElementsByClassName(\'note-editable\')[0].innerHTML'
         ' = \'$txtIsi\';';
     webViewController!.runJavaScript(txt);
@@ -254,7 +254,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
 
   /// [setHint] to give placeholder
   void setHint(String? text) {
-    String hint = '\$(".note-placeholder").html("$text");';
+    final String hint = '\$(".note-placeholder").html("$text");';
     webViewController!.runJavaScript('setTimeout(function(){$hint}, 0);');
   }
 
@@ -406,14 +406,14 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
   }
 
   /// [_addImage] to add image in summernote form
-  void _addImage(XFile image) async {
-    String filename = basename(image.path);
-    List<int> imageBytes = await image.readAsBytes();
-    String base64Image =
+  Future<void> _addImage(XFile image) async {
+    final String filename = basename(image.path);
+    final List<int> imageBytes = await image.readAsBytes();
+    final String base64Image =
         '<img width="${widget.widthImage}" src="data:image/png;base64, '
         '${base64Encode(imageBytes)}" data-filename="$filename">';
 
-    String txt = "\$('.note-editable').append( '$base64Image');";
+    final String txt = "\$('.note-editable').append( '$base64Image');";
     webViewController!.runJavaScript(txt);
   }
 }

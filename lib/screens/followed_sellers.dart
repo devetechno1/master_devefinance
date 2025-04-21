@@ -25,10 +25,10 @@ class _FollowedSellersState extends State<FollowedSellers> {
   bool _isShopsInitial = false;
   bool _hasMoreData = true;
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   Future fetchShopData() async {
-    var shopResponse = await ShopRepository().followedList(page: page);
+    final shopResponse = await ShopRepository().followedList(page: page);
     // print(shopResponse.data!.length);
     sellers.addAll(shopResponse.data!);
     _isShopsInitial = true;
@@ -39,7 +39,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
   }
 
   Future removedFollow(id) async {
-    var shopResponse = await ShopRepository().followedRemove(id);
+    final shopResponse = await ShopRepository().followedRemove(id);
 
     if (shopResponse.result) {
       reset();
@@ -95,7 +95,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
           return reset();
         },
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: bodyContainer(),
         ),
       ),
@@ -110,13 +110,13 @@ class _FollowedSellersState extends State<FollowedSellers> {
           //addAutomaticKeepAlives: true,
           itemCount: sellers.length,
           controller: _scrollController,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 14,
               mainAxisSpacing: 14,
               childAspectRatio: 0.7),
-          padding: EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             // 3
@@ -155,7 +155,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   width: double.infinity,
                   height: 100,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.vertical(
+                      borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(16), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
@@ -169,7 +169,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
             ),
             Container(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: Text(
                   sellerInfo.shopName!,
                   textAlign: TextAlign.left,
@@ -196,12 +196,12 @@ class _FollowedSellersState extends State<FollowedSellers> {
                     itemSize: 15.0,
                     itemCount: 5,
                     ratingWidget: RatingWidget(
-                      full: Icon(
+                      full: const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
-                      half: Icon(Icons.star_half),
-                      empty: Icon(Icons.star,
+                      half: const Icon(Icons.star_half),
+                      empty: const Icon(Icons.star,
                           color: Color.fromRGBO(224, 224, 225, 1)),
                     ),
                     onRatingUpdate: (newValue) {}),
@@ -213,13 +213,13 @@ class _FollowedSellersState extends State<FollowedSellers> {
               },
               child: Container(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                   child: Text(
                     LangText(context).local.unfollow_ucf,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color.fromRGBO(230, 46, 4, 1),
                         fontSize: 13,
                         height: 1.6,
@@ -265,9 +265,9 @@ class _FollowedSellersState extends State<FollowedSellers> {
         crossAxisCount: 3,
       ),
       itemCount: 18,
-      padding: EdgeInsets.only(left: 18, right: 18),
+      padding: const EdgeInsets.only(left: 18, right: 18),
       scrollDirection: Axis.vertical,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Container(

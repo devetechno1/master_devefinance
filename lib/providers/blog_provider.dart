@@ -13,7 +13,7 @@ class BlogProvider with ChangeNotifier {
   }
 
   Future<void> fetchBlogs() async {
-    final url = ("${AppConfig.BASE_URL}/blog-list");
+    const url = ("${AppConfig.BASE_URL}/blog-list");
     final response = await http.get(
       Uri.parse(url),
       headers: {

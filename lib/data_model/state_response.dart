@@ -39,7 +39,7 @@ class MyState {
     this.name,
   });
 
-  @override toString() => '$name';
+  @override String toString() => '$name';
 
   int? id;
   int? country_id;

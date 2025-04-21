@@ -103,7 +103,7 @@ var routes = GoRouter(
           GoRoute(
               path: "customer-products",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: ClassifiedAds())),
+                  const MaterialPage(child: ClassifiedAds())),
           GoRoute(
               path: "customer-product/:slug",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -143,7 +143,7 @@ var routes = GoRouter(
           GoRoute(
               path: "auction-products",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: AuctionProducts())),
+                  const MaterialPage(child: AuctionProducts())),
           GoRoute(
               path: "auction-product/:slug",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -167,7 +167,7 @@ var routes = GoRouter(
               path: "brands",
               name: "Brands",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(
+                  const MaterialPage(
                       child: Filter(
                     selected_filter: "brands",
                   ))),
@@ -209,7 +209,7 @@ var routes = GoRouter(
           GoRoute(
               path: "purchase_history",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: (OrderList()))),
+                  const MaterialPage(child: (OrderList()))),
           GoRoute(
               path: "purchase_history/details/:id",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -220,7 +220,7 @@ var routes = GoRouter(
           GoRoute(
               path: "sellers",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(
+                  const MaterialPage(
                       child: (Filter(
                     selected_filter: "sellers",
                   )))),
@@ -290,7 +290,7 @@ class _MyAppState extends State<MyApp> {
               visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: "PublicSansSerif",
               textTheme: MyTheme.textTheme1,
-              fontFamilyFallback: ['NotoSans'],
+              fontFamilyFallback: const ['NotoSans'],
               colorScheme: const ColorScheme.light(
                 primary: MyTheme.accent_color,
               ),
@@ -298,7 +298,7 @@ class _MyAppState extends State<MyApp> {
                 thumbVisibility: WidgetStateProperty.all<bool>(false),
               ),
             ),
-            localizationsDelegates: [
+            localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -319,7 +319,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-void _handleDeepLink() async{
+Future<void> _handleDeepLink() async{
   final appLinks = AppLinks(); // AppLinks is singleton
   final Uri? uri = await appLinks.getInitialLink();
   WidgetsBinding.instance.addPostFrameCallback(

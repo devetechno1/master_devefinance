@@ -15,7 +15,7 @@ class RefundRequest extends StatefulWidget {
 }
 
 class _RefundRequestState extends State<RefundRequest> {
-  ScrollController _xcrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
   List<dynamic> _list = [];
   List<dynamic> _converted_ids = [];
   bool _isInitial = true;
@@ -46,7 +46,7 @@ class _RefundRequestState extends State<RefundRequest> {
   }
 
   fetchData() async {
-    var refundRequestResponse = await RefundRequestRepository()
+    final refundRequestResponse = await RefundRequestRepository()
         .getRefundRequestListResponse(page: _page);
     _list.addAll(refundRequestResponse.refund_requests);
 
@@ -152,23 +152,23 @@ class _RefundRequestState extends State<RefundRequest> {
     );
   }
 
-  buildList() {
-    if (_isInitial && _list.length == 0) {
+  Widget buildList() {
+    if (_isInitial && _list.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 10, item_height: 100.0));
-    } else if (_list.length > 0) {
+    } else if (_list.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 14,
             );
           },
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          padding: EdgeInsets.all(0.0),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(0.0),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildItemCard(index);
@@ -183,7 +183,7 @@ class _RefundRequestState extends State<RefundRequest> {
     }
   }
 
-  buildItemCard(index) {
+  Container buildItemCard(index) {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
@@ -211,7 +211,7 @@ class _RefundRequestState extends State<RefundRequest> {
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         _list[index].order_code,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.accent_color,
                             fontSize: 12,
                             fontWeight: FontWeight.w600),
@@ -223,12 +223,12 @@ class _RefundRequestState extends State<RefundRequest> {
                         color: MyTheme.dark_font_grey,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                   ],
                 )),
-            Spacer(),
+            const Spacer(),
             Container(
                 width: 120,
                 child: Column(
@@ -238,7 +238,7 @@ class _RefundRequestState extends State<RefundRequest> {
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         convertPrice(_list[index].product_price),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.accent_color,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),

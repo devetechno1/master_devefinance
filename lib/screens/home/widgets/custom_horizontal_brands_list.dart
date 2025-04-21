@@ -28,7 +28,7 @@ class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 305,
-      margin: EdgeInsets.only(top: 10, bottom: 5),
+      margin: const EdgeInsets.only(top: 10, bottom: 5),
       color: MyTheme.accent_color.withOpacity(0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,7 @@ class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
             ),
             child: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xff000000),
                 fontSize: 18,
                 fontWeight: FontWeight.w700,

@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 
 class ShopRepository {
   Future<dynamic> getShops({name = "", page = 1}) async {
-    String url = ("${AppConfig.BASE_URL}/shops" + "?page=${page}&name=${name}");
+    final String url = ("${AppConfig.BASE_URL}/shops" + "?page=$page&name=$name");
 
     final response = await ApiRequest.get(
       url: url,
@@ -23,7 +23,7 @@ class ShopRepository {
   }
 
   Future<ShopDetailsResponse> getShopInfo(slug) async {
-    String url = ("${AppConfig.BASE_URL}/shops/details/$slug");
+    final String url = ("${AppConfig.BASE_URL}/shops/details/$slug");
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -36,7 +36,7 @@ class ShopRepository {
 
   Future<ProductMiniResponse> getTopFromThisSellerProducts(
       {int? id = 0}) async {
-    String url = ("${AppConfig.BASE_URL}/shops/products/top/" + id.toString());
+    final String url = ("${AppConfig.BASE_URL}/shops/products/top/" + id.toString());
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -49,7 +49,7 @@ class ShopRepository {
 
   Future<ProductMiniResponse> getNewFromThisSellerProducts(
       {int? id = 0}) async {
-    String url = ("${AppConfig.BASE_URL}/shops/products/new/" + id.toString());
+    final String url = ("${AppConfig.BASE_URL}/shops/products/new/" + id.toString());
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -62,7 +62,7 @@ class ShopRepository {
 
   Future<ProductMiniResponse> getfeaturedFromThisSellerProducts(
       {int? id = 0}) async {
-    String url =
+    final String url =
         ("${AppConfig.BASE_URL}/shops/products/featured/" + id.toString());
     final response = await ApiRequest.get(
       url: url,
@@ -75,7 +75,7 @@ class ShopRepository {
   }
 
   Future<CommonResponse> followedCheck(id) async {
-    String url = ("${AppConfig.BASE_URL}/followed-seller/check/$id");
+    final String url = ("${AppConfig.BASE_URL}/followed-seller/check/$id");
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -88,7 +88,7 @@ class ShopRepository {
   }
 
   Future<CommonResponse> followedAdd(id) async {
-    String url = ("${AppConfig.BASE_URL}/followed-seller/store/$id");
+    final String url = ("${AppConfig.BASE_URL}/followed-seller/store/$id");
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -101,7 +101,7 @@ class ShopRepository {
   }
 
   Future<CommonResponse> followedRemove(id) async {
-    String url = ("${AppConfig.BASE_URL}/followed-seller/remove/$id");
+    final String url = ("${AppConfig.BASE_URL}/followed-seller/remove/$id");
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -114,7 +114,7 @@ class ShopRepository {
   }
 
   Future<FollowedSellersResponse> followedList({page = 1}) async {
-    String url = ("${AppConfig.BASE_URL}/followed-seller?page=$page");
+    final String url = ("${AppConfig.BASE_URL}/followed-seller?page=$page");
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -127,7 +127,7 @@ class ShopRepository {
   }
 
   Future<ShopResponse> topSellers() async {
-    String url = ("${AppConfig.BASE_URL}/seller/top");
+    const String url = ("${AppConfig.BASE_URL}/seller/top");
 
     final response = await ApiRequest.get(
       url: url,

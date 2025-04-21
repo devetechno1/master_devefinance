@@ -23,16 +23,16 @@ class Coupons extends StatefulWidget {
 }
 
 class _CouponsState extends State<Coupons> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   // Initialization variables
   bool _dataFetch = false;
-  List<dynamic> _couponsList = [];
+  final List<dynamic> _couponsList = [];
   int _page = 1;
   int? _totalData = 0;
   bool _showLoadingContainer = false;
 
-  _selectGradient(int index) {
+  LinearGradient _selectGradient(int index) {
     if (index == 0 || (index + 1 > 3 && ((index + 1) % 3) == 1)) {
       return MyTheme.buildLinearGradient1();
     } else if (index == 1 || (index + 1 > 3 && ((index + 1) % 3) == 2)) {
@@ -43,7 +43,7 @@ class _CouponsState extends State<Coupons> {
   }
 
   fetchData() async {
-    var couponRes = await CouponRepository().getCouponResponseList(page: _page);
+    final couponRes = await CouponRepository().getCouponResponseList(page: _page);
     setState(() {
       _couponsList.addAll(couponRes.data ?? []);
       _totalData = couponRes.meta?.total ?? 0;
@@ -139,12 +139,12 @@ class _CouponsState extends State<Coupons> {
       onRefresh: _onPageRefresh,
       child: SingleChildScrollView(
         controller: _scrollController,
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: ListView.separated(
           itemCount: _couponsList.length,
           shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (BuildContext context, int index) => itemSpacer(),
           itemBuilder: (context, index) {
             return buildCouponCard(index);
@@ -160,21 +160,21 @@ class _CouponsState extends State<Coupons> {
       children: [
         Material(
           elevation: 0,
-          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
           child: Container(
             decoration: BoxDecoration(
               gradient: _selectGradient(index),
-              borderRadius: BorderRadius.all(Radius.circular(24.0)),
+              borderRadius: const BorderRadius.all(Radius.circular(24.0)),
             ),
-            padding: EdgeInsets.only(left: 37, right: 25, top: 22, bottom: 1),
+            padding: const EdgeInsets.only(left: 37, right: 25, top: 22, bottom: 1),
             height: 182,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildCouponHeader(index),
-                SizedBox(height: 12.5),
-                MySeparator(color: Colors.white),
-                SizedBox(
+                const SizedBox(height: 12.5),
+                const MySeparator(color: Colors.white),
+                const SizedBox(
                   height: 10.5,
                 ),
                 buildProductImageList(index),
@@ -183,7 +183,7 @@ class _CouponsState extends State<Coupons> {
                   children: [
                     Text(
                       "${LangText(context).local.code}: ${_couponsList[index].code}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 9,
                         fontWeight: FontWeight.bold,
@@ -194,7 +194,7 @@ class _CouponsState extends State<Coupons> {
                     // ),
                     IconButton(
                       padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(),
+                      constraints: const BoxConstraints(),
                       onPressed: () {
                         Clipboard.setData(
                                 ClipboardData(text: _couponsList[index].code!))
@@ -204,7 +204,7 @@ class _CouponsState extends State<Coupons> {
                           );
                         });
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         color: Colors.white,
                         Icons.copy,
                         size: 15.0,
@@ -230,21 +230,21 @@ class _CouponsState extends State<Coupons> {
           children: [
             Text(
               _couponsList[index].shopName,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
           ],
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
           _couponsList[index].discountType == "percent"
               ? "${_couponsList[index].discount}% ${LangText(context).local.off}"
               : "${convertPrice(_couponsList[index].discount.toString())} ${LangText(context).local.off}",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 21,
             fontWeight: FontWeight.bold,
@@ -262,11 +262,11 @@ class _CouponsState extends State<Coupons> {
         if (snapshot.hasError) {
           return Center(child: Text(LangText(context).local.an_error_occurred));
         } else if (snapshot.hasData) {
-          var products = snapshot.data?.products ?? [];
+          final products = snapshot.data?.products ?? [];
           if (products.isEmpty) {
             return Text(
               LangText(context).local.no_products_found,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             );
           }
           return GestureDetector(
@@ -302,14 +302,14 @@ class _CouponsState extends State<Coupons> {
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    const BorderRadius.all(Radius.circular(5)),
                               )));
                 },
               ),
             ),
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );
@@ -322,7 +322,7 @@ class _CouponsState extends State<Coupons> {
         Container(
           height: 40,
           width: 20,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: MyTheme.mainColor,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(30.0),
@@ -330,13 +330,13 @@ class _CouponsState extends State<Coupons> {
             ),
           ),
         ),
-        Expanded(
+        const Expanded(
           child: SizedBox(),
         ),
         Container(
           height: 40,
           width: 20,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: MyTheme.mainColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.0),
@@ -348,7 +348,7 @@ class _CouponsState extends State<Coupons> {
     );
   }
 
-  itemSpacer({double height = 15.0}) => SizedBox(height: height);
+  SizedBox itemSpacer({double height = 15.0}) => SizedBox(height: height);
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(

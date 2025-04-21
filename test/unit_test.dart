@@ -13,6 +13,6 @@ void main() {
   test('Test color converter', () {
     final Color? color = ColorHelper.stringToColor("050");
 
-    expect(color, Color(0xFFFFF050));
+    expect(color, const Color(0xFFFFF050));
   });
 }

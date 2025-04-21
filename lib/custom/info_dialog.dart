@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:one_context/one_context.dart';
 
 class InfoDialog {
-  static show({required String title, Widget? content}) {
+  static Future show({required String title, Widget? content}) {
     return OneContext().showDialog(
       builder: (context) => AlertDialog(
         titlePadding: EdgeInsets.zero,
         title: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: MyTheme.accent_color,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),
           ),
-          padding: EdgeInsets.only(left: 24, top: 8, bottom: 8),
+          padding: const EdgeInsets.only(left: 24, top: 8, bottom: 8),
           child: Text(
             title,
             style: const TextStyle(
@@ -26,7 +26,7 @@ class InfoDialog {
                 color: MyTheme.white),
           ),
         ),
-        content: content ?? Text(""),
+        content: content ?? const Text(""),
         actions: [
           Btn.basic(
             shape:
@@ -34,7 +34,7 @@ class InfoDialog {
             color: MyTheme.grey_153,
             onPressed: () => Navigator.pop(context),
             child: Text(LangText(context).local.ok,
-                style: TextStyle(fontSize: 14, color: MyTheme.white)),
+                style: const TextStyle(fontSize: 14, color: MyTheme.white)),
           ),
         ],
       ),

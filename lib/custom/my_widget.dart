@@ -149,7 +149,7 @@ class MyWidget {
         boxShadow: [
           BoxShadow(
             color: shadowColor,
-            offset: Offset(0, 6),
+            offset: const Offset(0, 6),
             blurRadius: blurSize,
           ),
         ],

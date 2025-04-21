@@ -71,12 +71,12 @@ final  ScrollController _mainScrollController = ScrollController();
     setState(() {});
   }
 
-  onPressSubmit() async {
-    String amount = _amountController.text.toString();
-    String name = _nameController.text.toString();
-    String trx_id = _trxIdController.text.toString();
+  Future<void> onPressSubmit() async {
+    final String amount = _amountController.text.toString();
+    final String name = _nameController.text.toString();
+    final String trxId = _trxIdController.text.toString();
 
-    if (amount == "" || name == "" || trx_id == "") {
+    if (amount == "" || name == "" || trxId == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!
             .amount_name_and_transaction_id_are_necessary,
@@ -92,11 +92,11 @@ final  ScrollController _mainScrollController = ScrollController();
     }
     loading();
     if (widget.offLinePaymentFor == PaymentFor.WalletRecharge) {
-      var submitResponse = await OfflineWalletRechargeRepository()
+      final submitResponse = await OfflineWalletRechargeRepository()
           .getOfflineWalletRechargeResponse(
         amount: amount,
         name: name,
-        trx_id: trx_id,
+        trx_id: trxId,
         photo: _photo_upload_id,
       );
       Navigator.pop(loadingcontext);
@@ -109,16 +109,16 @@ final  ScrollController _mainScrollController = ScrollController();
           submitResponse.message,
         );
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Wallet(from_recharge: true);
+          return const Wallet(from_recharge: true);
         }));
       }
     } else if (widget.offLinePaymentFor == PaymentFor.ManualPayment) {
-      var submitResponse = await OfflinePaymentRepository()
+      final submitResponse = await OfflinePaymentRepository()
           .getOfflinePaymentSubmitResponse(
               order_id: widget.order_id,
               amount: amount,
               name: name,
-              trx_id: trx_id,
+              trx_id: trxId,
               photo: _photo_upload_id);
       Navigator.pop(loadingcontext);
       if (submitResponse.result == false) {
@@ -135,11 +135,11 @@ final  ScrollController _mainScrollController = ScrollController();
         }));
       }
     } else if (widget.offLinePaymentFor == PaymentFor.PackagePay) {
-      var submitResponse = await CustomerPackageRepository()
+      final submitResponse = await CustomerPackageRepository()
           .offlinePackagePayment(
               packageId: widget.packageId,
               method: widget.paymentMethod,
-              trx_id: trx_id,
+              trx_id: trxId,
               photo: _photo_upload_id);
       Navigator.pop(loadingcontext);
       if (submitResponse.result == false) {
@@ -152,13 +152,13 @@ final  ScrollController _mainScrollController = ScrollController();
         );
 
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return UpdatePackage(goHome: true);
+          return const UpdatePackage(goHome: true);
         }));
       }
     }
   }
 
-  onPickPhoto(context) async {
+  Future<void> onPickPhoto(context) async {
     _photo_file = await _picker.pickImage(source: ImageSource.gallery);
 
     if (_photo_file == null) {
@@ -169,10 +169,10 @@ final  ScrollController _mainScrollController = ScrollController();
     }
 
     //return;
-    String base64Image = FileHelper.getBase64FormateFile(_photo_file!.path);
-    String fileName = _photo_file!.path.split("/").last;
+    final String base64Image = FileHelper.getBase64FormateFile(_photo_file!.path);
+    final String fileName = _photo_file!.path.split("/").last;
 
-    var imageUpdateResponse =
+    final imageUpdateResponse =
         await FileRepository().getSimpleImageUploadResponse(
       base64Image,
       fileName,
@@ -231,21 +231,21 @@ final  ScrollController _mainScrollController = ScrollController();
       ),
       title: Text(
         AppLocalizations.of(context)!.make_offline_payment_ucf,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,
     );
   }
 
-  buildBody(context) {
+  Widget buildBody(context) {
     if (is_logged_in == false) {
       return Container(
           height: 100,
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.you_need_to_log_in,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     } else {
       return RefreshIndicator(
@@ -266,8 +266,8 @@ final  ScrollController _mainScrollController = ScrollController();
                     html: widget.paymentInstruction ?? """<p>Heading</p>""",
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Divider(
                     height: 24,
                   ),
@@ -293,7 +293,7 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
                 AppLocalizations.of(context)!.all_marked_fields_are_mandatory,
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.grey_153,
                     fontWeight: FontWeight.w600,
                     fontSize: 14.0),
@@ -304,14 +304,14 @@ final  ScrollController _mainScrollController = ScrollController();
               child: Text(
                 AppLocalizations.of(context)!
                     .correctly_fill_up_the_necessary_information,
-                style: TextStyle(color: MyTheme.grey_153, fontSize: 14.0),
+                style: const TextStyle(color: MyTheme.grey_153, fontSize: 14.0),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.amount_ucf}*",
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.accent_color, fontWeight: FontWeight.w600),
               ),
             ),
@@ -331,7 +331,7 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.name_ucf}*",
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.accent_color, fontWeight: FontWeight.w600),
               ),
             ),
@@ -351,7 +351,7 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.transaction_id_ucf}*",
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.accent_color, fontWeight: FontWeight.w600),
               ),
             ),
@@ -371,7 +371,7 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.photo_proof_ucf}* (${AppLocalizations.of(context)!.only_image_file_allowed})",
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.accent_color, fontWeight: FontWeight.w600),
               ),
             ),
@@ -390,12 +390,12 @@ final  ScrollController _mainScrollController = ScrollController();
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: MyTheme.medium_grey,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(8.0))),
+                              BorderRadius.all(Radius.circular(8.0))),
                       child: Text(
                         AppLocalizations.of(context)!.photo_proof_ucf,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600),
@@ -417,7 +417,7 @@ final  ScrollController _mainScrollController = ScrollController();
             if(_photo_file != null) 
               Center(
                 child: Container(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                   constraints: BoxConstraints(
@@ -429,7 +429,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Container(
@@ -443,12 +443,12 @@ final  ScrollController _mainScrollController = ScrollController();
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: MyTheme.accent_color,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(8.0))),
+                              BorderRadius.all(Radius.circular(8.0))),
                       child: Text(
                         AppLocalizations.of(context)!.submit_ucf + "",
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600),
@@ -475,8 +475,8 @@ final  ScrollController _mainScrollController = ScrollController();
           return AlertDialog(
               content: Row(
             children: [
-              CircularProgressIndicator(),
-              SizedBox(
+              const CircularProgressIndicator(),
+              const SizedBox(
                 width: 10,
               ),
               Text("${AppLocalizations.of(context)!.please_wait_ucf}"),

@@ -47,12 +47,12 @@ class AIZRoute {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin =
-            !(app_language_rtl.$!) ? Offset(-1.0, 0.0) : Offset(1.0, 0.0);
+        final begin =
+            !(app_language_rtl.$!) ? const Offset(-1.0, 0.0) : const Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween =
+        final tween =
             Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
@@ -71,7 +71,7 @@ class AIZRoute {
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween =
+        final tween =
             Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
@@ -82,16 +82,16 @@ class AIZRoute {
     );
   }
 
-  static rightTransition(Widget page) {
+  static CustomTransitionPage rightTransition(Widget page) {
     return CustomTransitionPage(
       child: page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin =
-            !(app_language_rtl.$!) ? Offset(1.0, 0.0) : Offset(-1.0, 0.0);
+        final begin =
+            !(app_language_rtl.$!) ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween =
+        final tween =
             Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(

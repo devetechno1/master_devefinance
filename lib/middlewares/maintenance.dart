@@ -11,7 +11,7 @@ class MaintenanceMiddleware extends Middleware {
   @override
   bool next(http.Response response) {
     try {
-      var jsonData = jsonDecode(response.body);
+      final jsonData = jsonDecode(response.body);
       if (jsonData.runtimeType != List &&
           jsonData['result'] != null &&
           !jsonData['result']) {
@@ -21,7 +21,7 @@ class MaintenanceMiddleware extends Middleware {
               overlayId: "maintenance",
               builder: (context) => Scaffold(
                     body: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       height: DeviceInfo(context).height!,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,12 +29,12 @@ class MaintenanceMiddleware extends Middleware {
                             Image.asset(
                               "assets/maintenance.png",
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 14,
                             ),
                             Text(
                               jsonData['message'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: MyTheme.font_grey),

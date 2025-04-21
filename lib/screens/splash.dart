@@ -48,7 +48,7 @@ class _SplashState extends State<Splash> {
   Future<Widget> loadFromFuture() async {
     // <fetch data from server. ex. login>
 
-    return Future.value(Main());
+    return Future.value(const Main());
   }
 
   @override
@@ -58,12 +58,12 @@ class _SplashState extends State<Splash> {
       seconds: 3,
 
       //comment this
-      navigateAfterSeconds: Main(),
+      navigateAfterSeconds: const Main(),
 
       //navigateAfterFuture: loadFromFuture(), //uncomment this
       title: Text(
         "V " + _packageInfo.version,
-        style: TextStyle(
+        style: const TextStyle(
             fontWeight: FontWeight.bold, fontSize: 14.0, color: Colors.white),
       ),
       useLoader: false,
@@ -140,7 +140,7 @@ class CustomSplashScreen extends StatefulWidget {
 
   /// Use one of the provided factory constructors instead of.
   @protected
-  CustomSplashScreen({
+  const CustomSplashScreen({
     this.loaderColor,
     this.navigateAfterFuture,
     this.seconds,
@@ -344,8 +344,8 @@ class _CustomSplashScreenState extends State<CustomSplashScreen> {
                               ),
                             ),
                             widget.title!,
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 10.0),
                             ),
                             widget.loadingText!
                           ],

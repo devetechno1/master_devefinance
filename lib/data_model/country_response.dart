@@ -40,7 +40,7 @@ class Country {
     this.status,
   });
 
-  @override toString() => '$name';
+  @override String toString() => '$name';
 
   int? id;
   String? code;

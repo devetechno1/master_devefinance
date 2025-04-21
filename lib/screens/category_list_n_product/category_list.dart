@@ -15,7 +15,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../custom/category_item_card_widget.dart';
 
 class CategoryList extends StatefulWidget {
-  CategoryList({
+  const CategoryList({
     Key? key,
     required this.slug,
     required this.name,
@@ -66,9 +66,9 @@ class _CategoryListState extends State<CategoryList> {
 
   Widget buildBody() {
     return Container(
-      color: Color(0xffECF1F5),
+      color: const Color(0xffECF1F5),
       child: CustomScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           SliverList(
             delegate: SliverChildListDelegate(
@@ -107,7 +107,7 @@ class _CategoryListState extends State<CategoryList> {
             ),
       title: Text(
         getAppBarTitle(),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: Color(0xff121423),
             fontWeight: FontWeight.bold),
@@ -118,15 +118,15 @@ class _CategoryListState extends State<CategoryList> {
   }
 
   String getAppBarTitle() {
-    String name = widget.is_top_category
+    final String name = widget.is_top_category
         ? AppLocalizations.of(context)!.top_categories_ucf
         : AppLocalizations.of(context)!.categories_ucf;
 
     return name;
   }
 
-  buildCategoryList() {
-    var data = widget.is_top_category
+  FutureBuilder<CategoryResponse> buildCategoryList() {
+    final data = widget.is_top_category
         ? CategoryRepository().getTopCategories()
         : CategoryRepository().getCategories(parent_id: widget.slug);
     return FutureBuilder(
@@ -146,7 +146,7 @@ class _CategoryListState extends State<CategoryList> {
           );
         } else if (snapshot.hasData) {
           return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisSpacing: 14,
               crossAxisSpacing: 14,
               childAspectRatio: 0.7,
@@ -156,7 +156,7 @@ class _CategoryListState extends State<CategoryList> {
             padding: EdgeInsets.only(
                 left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
             scrollDirection: Axis.vertical,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return CategoryItemCardWidget(
@@ -176,7 +176,7 @@ class _CategoryListState extends State<CategoryList> {
 
   Container buildBottomContainer() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       height: widget.is_base_category ? 0 : 80,
@@ -192,12 +192,12 @@ class _CategoryListState extends State<CategoryList> {
                 child: Btn.basic(
                   minWidth: MediaQuery.of(context).size.width,
                   color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0))),
+                          BorderRadius.all(Radius.circular(8.0))),
                   child: Text(
                     AppLocalizations.of(context)!.all_products_of_ucf + " ",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),

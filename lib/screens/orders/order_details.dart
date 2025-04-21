@@ -157,7 +157,7 @@ final  ScrollController _mainScrollController = ScrollController();
     final orderDetailsResponse =
         await OrderRepository().getOrderDetails(id: widget.id);
 
-    if (orderDetailsResponse!.detailed_orders!.length > 0) {
+    if (orderDetailsResponse!.detailed_orders!.isNotEmpty) {
       _orderDetails = orderDetailsResponse.detailed_orders![0];
       setStepIndex(_orderDetails!.delivery_status);
     }
@@ -239,7 +239,7 @@ final  ScrollController _mainScrollController = ScrollController();
         ));
   }
 
-  _showCancelDialog(id) {
+  dynamic _showCancelDialog(id) {
     return ConfirmDialog.show(
       context,
       title: LangText(context).local.pleaseEnsureUs,
@@ -252,8 +252,8 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  _make_re_payment(String amount) {
-    String currencyPattern = r"^[A-Z]{3}(?:[,.]?)";
+  Future _make_re_payment(String amount) {
+    const String currencyPattern = r"^[A-Z]{3}(?:[,.]?)";
    final String amountWithoutCountryCode = amount.replaceAll(RegExp(r'[^\d.,]+'), '');;
 
 
@@ -301,7 +301,7 @@ final  ScrollController _mainScrollController = ScrollController();
     });
   }
 
-  onTapAskRefund(item_id, item_name, order_code) {
+  Future onTapAskRefund(itemId, itemName, orderCode) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -328,7 +328,7 @@ final  ScrollController _mainScrollController = ScrollController();
                               width: 225,
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(item_name,
+                                child: Text(itemName,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style:const TextStyle(
@@ -348,7 +348,7 @@ final  ScrollController _mainScrollController = ScrollController();
                                     color: MyTheme.font_grey, fontSize: 12)),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(order_code,
+                              child: Text(orderCode,
                                   style:const TextStyle(
                                       color: MyTheme.font_grey, fontSize: 13)),
                             ),
@@ -465,7 +465,7 @@ final  ScrollController _mainScrollController = ScrollController();
                               fontWeight: FontWeight.w600),
                         ),
                         onPressed: () {
-                          onPressSubmitRefund(item_id, setState);
+                          onPressSubmitRefund(itemId, setState);
                         },
                       ),
                     )
@@ -488,7 +488,7 @@ final  ScrollController _mainScrollController = ScrollController();
     });
   }
 
-  onPressSubmitRefund(item_id, setState) async {
+  Future<void> onPressSubmitRefund(itemId, setState) async {
     final reason = _refundReasonController.text.toString();
 
     if (reason == "") {
@@ -497,7 +497,7 @@ final  ScrollController _mainScrollController = ScrollController();
     }
 
     final refundRequestSendResponse = await RefundRequestRepository()
-        .getRefundRequestSendResponse(id: item_id, reason: reason);
+        .getRefundRequestSendResponse(id: itemId, reason: reason);
 
     if (refundRequestSendResponse.result == false) {
       ToastComponent.showDialog(
@@ -602,7 +602,7 @@ final  ScrollController _mainScrollController = ScrollController();
                           left: 18.0, right: 18.0, top: 14.0),
                       child: _orderedItemList.isEmpty && _orderItemsInit
                           ? ShimmerHelper().buildBasicShimmer(height: 100.0)
-                          : (_orderedItemList.length > 0
+                          : (_orderedItemList.isNotEmpty
                               ? buildOrderdProductList()
                               : Container(
                                   height: 100,
@@ -640,7 +640,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  buildBottomSection() {
+  Expanded buildBottomSection() {
     return Expanded(
       child: _orderDetails != null
           ? Column(
@@ -779,7 +779,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  buildTimeLineShimmer() {
+  Column buildTimeLineShimmer() {
     return Column(
       children: [
         Row(
@@ -811,7 +811,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  buildTimeLineTiles() {
+  SizedBox buildTimeLineTiles() {
     return SizedBox(
       height: 200,
       child: Column(
@@ -1085,7 +1085,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  buildOrderDetailsTopCard() {
+  Container buildOrderDetailsTopCard() {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
@@ -1455,7 +1455,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  buildOrderedProductItemsCard(index) {
+  Container buildOrderedProductItemsCard(index) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(14.0),
@@ -1574,7 +1574,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  getRefundRequestLabelColor(status) {
+  Color getRefundRequestLabelColor(status) {
     if (status == 0) {
       return Colors.blue;
     } else if (status == 2) {
@@ -1586,7 +1586,7 @@ final  ScrollController _mainScrollController = ScrollController();
     }
   }
 
-  buildOrderdProductList() {
+  Container buildOrderdProductList() {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: SingleChildScrollView(
@@ -1638,7 +1638,7 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  buildPaymentButtonSection() {
+  Padding buildPaymentButtonSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 20.0),
       child: Row(
@@ -1661,16 +1661,16 @@ final  ScrollController _mainScrollController = ScrollController();
     );
   }
 
-  Container buildPaymentStatusCheckContainer(String? payment_status) {
+  Container buildPaymentStatusCheckContainer(String? paymentStatus) {
     return Container(
       height: 16,
       width: 16,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          color: payment_status == "paid" ? Colors.green : Colors.red),
+          color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
         padding: const EdgeInsets.all(3),
-        child: Icon(payment_status == "paid" ? Icons.check : Icons.check,
+        child: Icon(paymentStatus == "paid" ? Icons.check : Icons.check,
             color: Colors.white, size: 10),
       ),
     );

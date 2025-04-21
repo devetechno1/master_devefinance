@@ -30,20 +30,20 @@ class GuestCheckoutAddress extends StatefulWidget {
 
 class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
   //controllers for add purpose
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _postalCodeController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _cityController = TextEditingController();
-  TextEditingController _stateController = TextEditingController();
-  TextEditingController _countryController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _postalCodeController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
 
   City? _selected_city;
   Country? _selected_country;
   MyState? _selected_state;
 
-  onSelectCountryDuringAdd(country) {
+  void onSelectCountryDuringAdd(country) {
     if (_selected_country != null && country.id == _selected_country!.id) {
       setState(() {
         _countryController.text = country.name;
@@ -62,7 +62,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     });
   }
 
-  onSelectStateDuringAdd(state) {
+  void onSelectStateDuringAdd(state) {
     if (_selected_state != null && state.id == _selected_state!.id) {
       setState(() {
         _stateController.text = state.name;
@@ -78,7 +78,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     });
   }
 
-  onSelectCityDuringAdd(city) {
+  void onSelectCityDuringAdd(city) {
     if (_selected_city != null && city.id == _selected_city!.id) {
       setState(() {
         _cityController.text = city.name;
@@ -104,7 +104,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     phone = _phoneController.text.trim();
   }
 
-  continueToDeliveryInfo() async {
+  Future<void> continueToDeliveryInfo() async {
     FocusManager.instance.primaryFocus?.unfocus();
     if (!requiredFieldVerification()) {
       return;
@@ -112,13 +112,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     Loading.show(context);
     await setValues();
 
-    Map postValue = {};
+    final Map postValue = {};
     postValue.addAll({
       "email": email,
       "phone": phone,
     });
-    var postBody = jsonEncode(postValue);
-    var response =
+    final postBody = jsonEncode(postValue);
+    final response =
         await GuestCheckoutRepository().guestCustomerInfoCheck(postBody);
 
     Loading.close();
@@ -142,7 +142,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         "latitude": null,
         "temp_user_id": temp_user_id.$
       });
-      var postBody = jsonEncode(postValue);
+      final postBody = jsonEncode(postValue);
 
       guestEmail.$ = email!;
       guestEmail.save();
@@ -228,7 +228,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             ),
             child: Text(
               AppLocalizations.of(context)!.continue_to_delivery_info_ucf,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
@@ -250,7 +250,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(AppLocalizations.of(context)!.name_ucf,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -269,7 +269,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(AppLocalizations.of(context)!.email_ucf,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -310,7 +310,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text("${AppLocalizations.of(context)!.country_ucf} *",
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -318,7 +318,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   height: 40,
                   child: TypeAheadField(
                     suggestionsCallback: (name) async {
-                      var countryResponse =
+                      final countryResponse =
                           await AddressRepository().getCountryList(name: name);
                       return countryResponse.countries;
                     },
@@ -337,7 +337,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         dense: true,
                         title: Text(
                           country.name,
-                          style: TextStyle(color: MyTheme.font_grey),
+                          style: const TextStyle(color: MyTheme.font_grey),
                         ),
                       );
                     },
@@ -360,7 +360,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text("${AppLocalizations.of(context)!.state_ucf} *",
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -369,11 +369,11 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   child: TypeAheadField(
                     suggestionsCallback: (name) async {
                       if (_selected_country == null) {
-                        var stateResponse = await AddressRepository()
+                        final stateResponse = await AddressRepository()
                             .getStateListByCountry(); // blank response
                         return stateResponse.states;
                       }
-                      var stateResponse = await AddressRepository()
+                      final stateResponse = await AddressRepository()
                           .getStateListByCountry(
                               country_id: _selected_country!.id, name: name);
                       return stateResponse.states;
@@ -394,7 +394,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         dense: true,
                         title: Text(
                           state.name,
-                          style: TextStyle(color: MyTheme.font_grey),
+                          style: const TextStyle(color: MyTheme.font_grey),
                         ),
                       );
                     },
@@ -417,7 +417,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text("${AppLocalizations.of(context)!.city_ucf} *",
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -435,11 +435,11 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     },
                     suggestionsCallback: (name) async {
                       if (_selected_state == null) {
-                        var cityResponse = await AddressRepository()
+                        final cityResponse = await AddressRepository()
                             .getCityListByState(); // blank response
                         return cityResponse.cities;
                       }
-                      var cityResponse = await AddressRepository()
+                      final cityResponse = await AddressRepository()
                           .getCityListByState(
                               state_id: _selected_state!.id, name: name);
                       return cityResponse.cities;
@@ -460,7 +460,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         dense: true,
                         title: Text(
                           city.name,
-                          style: TextStyle(color: MyTheme.font_grey),
+                          style: const TextStyle(color: MyTheme.font_grey),
                         ),
                       );
                     },
@@ -474,7 +474,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(AppLocalizations.of(context)!.postal_code,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -492,7 +492,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(AppLocalizations.of(context)!.phone_ucf,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
@@ -517,7 +517,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                 textAlign: TextAlign.start,
                 text: TextSpan(
                   text: LangText(context).local.existing_email_address,
-                  style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                  style: const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                   children: <TextSpan>[
                     TextSpan(
                       recognizer: TapGestureRecognizer()
@@ -525,7 +525,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           AIZRoute.push(context, Login());
                         },
                       text: LangText(context).local.login_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -548,20 +548,20 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
       filled: true,
       fillColor: MyTheme.white,
       hintText: hintText,
-      hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+      hintStyle: const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
         borderRadius: const BorderRadius.all(
-          const Radius.circular(8.0),
+          Radius.circular(8.0),
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
         borderRadius: const BorderRadius.all(
-          const Radius.circular(8.0),
+          Radius.circular(8.0),
         ),
       ),
-      contentPadding: EdgeInsets.only(left: 8.0, top: 5.0, bottom: 5.0));
+      contentPadding: const EdgeInsets.only(left: 8.0, top: 5.0, bottom: 5.0));
 }
 
 AppBar buildAppBar(BuildContext context) {

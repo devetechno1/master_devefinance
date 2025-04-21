@@ -26,8 +26,8 @@ class _PasswordForgetState extends State<PasswordForget> {
   String? _phone = "";
   var countries_code = <String?>[];
   //controllers
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
 
   @override
   void initState() {
@@ -46,8 +46,8 @@ class _PasswordForgetState extends State<PasswordForget> {
     super.dispose();
   }
 
-  onPressSendCode() async {
-    var email = _emailController.text.toString();
+  Future<void> onPressSendCode() async {
+    final email = _emailController.text.toString();
 
     if (_send_code_by == 'email' && email == "") {
       ToastComponent.showDialog(
@@ -61,7 +61,7 @@ class _PasswordForgetState extends State<PasswordForget> {
       return;
     }
 
-    var passwordForgetResponse = await AuthRepository()
+    final passwordForgetResponse = await AuthRepository()
         .getPasswordForgetResponse(
             _send_code_by == 'email' ? email : _phone, _send_code_by);
 
@@ -84,7 +84,7 @@ class _PasswordForgetState extends State<PasswordForget> {
   }
 
   fetch_country() async {
-    var data = await AddressRepository().getCountryList();
+    final data = await AddressRepository().getCountryList();
     data.countries?.forEach((c) => countries_code.add(c.code));
   }
 
@@ -99,7 +99,7 @@ class _PasswordForgetState extends State<PasswordForget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Container(
@@ -113,7 +113,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                   _send_code_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.phone_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -142,7 +142,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .or_send_code_via_phone_number,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.accent_color,
                                     fontStyle: FontStyle.italic,
                                     decoration: TextDecoration.underline),
@@ -175,17 +175,17 @@ class _PasswordForgetState extends State<PasswordForget> {
                           onInputValidated: (bool value) {
                             //print(value);
                           },
-                          selectorConfig: SelectorConfig(
+                          selectorConfig: const SelectorConfig(
                             selectorType: PhoneInputSelectorType.DIALOG,
                           ),
                           ignoreBlank: false,
                           autoValidateMode: AutovalidateMode.disabled,
                           selectorTextStyle:
-                              TextStyle(color: MyTheme.font_grey),
+                              const TextStyle(color: MyTheme.font_grey),
                           // initialValue: phoneCode,
                           textFieldController: _phoneNumberController,
                           formatInput: true,
-                          keyboardType: TextInputType.numberWithOptions(
+                          keyboardType: const TextInputType.numberWithOptions(
                               signed: true, decimal: true),
                           inputDecoration:
                               InputDecorations.buildInputDecoration_phone(
@@ -203,7 +203,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                         },
                         child: Text(
                           AppLocalizations.of(context)!.or_send_code_via_email,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.accent_color,
                               fontStyle: FontStyle.italic,
                               decoration: TextDecoration.underline),
@@ -219,14 +219,14 @@ class _PasswordForgetState extends State<PasswordForget> {
                   child: Btn.basic(
                     minWidth: MediaQuery.of(context).size.width,
                     color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: const BorderRadius.all(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
                         Radius.circular(6.0),
                       ),
                     ),
                     child: Text(
                       LangText(context).local.send_code_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,
                           fontWeight: FontWeight.w600),

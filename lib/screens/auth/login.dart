@@ -50,9 +50,9 @@ class _LoginState extends State<Login> {
   String? _phone = "";
 
   //controllers
-  TextEditingController _phoneNumberController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
   }
 
   fetch_country() async {
-    var data = await AddressRepository().getCountryList();
+    final data = await AddressRepository().getCountryList();
     data.countries?.forEach((c) => countries_code.add(c.code));
     setState(() {});
   }
@@ -77,12 +77,12 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
-  onPressedLogin(ctx) async {
+  Future<void> onPressedLogin(ctx) async {
     FocusScope.of(context).unfocus();
 
     Loading.show(context);
-    var email = _emailController.text.toString();
-    var password = _passwordController.text.toString();
+    final email = _emailController.text.toString();
+    final password = _passwordController.text.toString();
 
     if (_login_by == 'email' && email == "") {
       ToastComponent.showDialog(
@@ -101,7 +101,7 @@ class _LoginState extends State<Login> {
       return;
     }
 
-    var loginResponse = await AuthRepository().getLoginResponse(
+    final loginResponse = await AuthRepository().getLoginResponse(
         _login_by == 'email' ? email : _phone, password, _login_by);
     Loading.close();
 
@@ -186,7 +186,7 @@ class _LoginState extends State<Login> {
         // get the user data
         // by default we get the userId, email,name and picture
         final userData = await FacebookAuth.instance.getUserData();
-        var loginResponse = await AuthRepository().getSocialLoginResponse(
+        final loginResponse = await AuthRepository().getSocialLoginResponse(
             "facebook",
             userData['name'].toString(),
             userData['email'].toString(),
@@ -226,15 +226,15 @@ class _LoginState extends State<Login> {
 
       print(googleUser.toString());
 
-      GoogleSignInAuthentication googleSignInAuthentication =
+      final GoogleSignInAuthentication googleSignInAuthentication =
           await googleUser.authentication;
-      String? accessToken = googleSignInAuthentication.accessToken;
+      final String? accessToken = googleSignInAuthentication.accessToken;
 
       // print("displayName ${googleUser.displayName}");
       // print("email ${googleUser.email}");
       // print("googleUser.id ${googleUser.id}");
 
-      var loginResponse = await AuthRepository().getSocialLoginResponse(
+      final loginResponse = await AuthRepository().getSocialLoginResponse(
           "google", googleUser.displayName, googleUser.email, googleUser.id,
           access_token: accessToken);
 
@@ -300,7 +300,7 @@ class _LoginState extends State<Login> {
   // }
 
   String generateNonce([int length = 32]) {
-    final charset =
+    const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
     return List.generate(length, (_) => charset[random.nextInt(charset.length)])
@@ -332,7 +332,7 @@ class _LoginState extends State<Login> {
         nonce: nonce,
       );
 
-      var loginResponse = await AuthRepository().getSocialLoginResponse(
+      final loginResponse = await AuthRepository().getSocialLoginResponse(
           "apple",
           appleCredential.givenName,
           appleCredential.email,

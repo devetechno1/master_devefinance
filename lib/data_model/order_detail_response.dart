@@ -171,27 +171,27 @@ class ShippingAddress {
   String? checkout_type;
 
   factory ShippingAddress.fromJson(Map<String, dynamic> json) => ShippingAddress(
-    name: json["name"] == null ? null : json["name"],
-    email: json["email"] == null ? null : json["email"],
-    address: json["address"] == null ? null : json["address"],
-    country: json["country"] == null ? null : json["country"],
-    state: json["state"] == null ? null : json["state"],
-    city: json["city"] == null ? null : json["city"],
-    postal_code: json["postal_code"] == null ? null : json["postal_code"],
-    phone: json["phone"] == null ? null : json["phone"],
-    checkout_type: json["checkout_type"] == null ? null : json["checkout_type"],
+    name: json["name"],
+    email: json["email"],
+    address: json["address"],
+    country: json["country"],
+    state: json["state"],
+    city: json["city"],
+    postal_code: json["postal_code"],
+    phone: json["phone"],
+    checkout_type: json["checkout_type"],
   );
 
   Map<String, dynamic> toJson() => {
-    "name": name == null ? null : name,
-    "email": email == null ? null : email,
-    "address": address == null ? null : address,
-    "country": country == null ? null : country,
-    "state": state == null ? null : state,
-    "city": city == null ? null : city,
-    "postal_code": postal_code == null ? null : postal_code,
-    "phone": phone == null ? null : phone,
-    "checkout_type": checkout_type == null ? null : checkout_type,
+    "name": name,
+    "email": email,
+    "address": address,
+    "country": country,
+    "state": state,
+    "city": city,
+    "postal_code": postal_code,
+    "phone": phone,
+    "checkout_type": checkout_type,
   };
 }
 
@@ -219,24 +219,24 @@ class PickupPoint {
   DateTime? updatedAt;
 
   factory PickupPoint.fromJson(Map<String, dynamic> json) => PickupPoint(
-    id: json["id"] == null ? null : json["id"],
-    staffId: json["staff_id"] == null ? null : json["staff_id"],
-    name: json["name"] == null ? null : json["name"],
-    address: json["address"] == null ? null : json["address"],
-    phone: json["phone"] == null ? null : json["phone"],
-    pickUpStatus: json["pick_up_status"] == null ? null : json["pick_up_status"],
+    id: json["id"],
+    staffId: json["staff_id"],
+    name: json["name"],
+    address: json["address"],
+    phone: json["phone"],
+    pickUpStatus: json["pick_up_status"],
     cashOnPickupStatus: json["cash_on_pickup_status"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id == null ? null : id,
-    "staff_id": staffId == null ? null : staffId,
-    "name": name == null ? null : name,
-    "address": address == null ? null : address,
-    "phone": phone == null ? null : phone,
-    "pick_up_status": pickUpStatus == null ? null : pickUpStatus,
+    "id": id,
+    "staff_id": staffId,
+    "name": name,
+    "address": address,
+    "phone": phone,
+    "pick_up_status": pickUpStatus,
     "cash_on_pickup_status": cashOnPickupStatus,
     "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
     "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),

@@ -7,7 +7,7 @@ import 'package:flutter_html/flutter_html.dart';
 class BlogDetailsScreen extends StatelessWidget {
   final BlogModel blog;
 
-  BlogDetailsScreen({required this.blog});
+  const BlogDetailsScreen({required this.blog});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class BlogDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           blog.title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         leading: UsefulElements.backButton(context),
         backgroundColor: MyTheme.mainColor,

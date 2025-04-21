@@ -13,7 +13,7 @@ class CustomAuctionProductsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (products == null || products!.isEmpty) {
-      return Center(
+      return const Center(
         child: Text(
           'No auction products available',
        //   LangText(context).local.no_auction_products_available,

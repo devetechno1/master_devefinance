@@ -49,7 +49,7 @@ class HomePresenter extends ChangeNotifier {
 
 
 
-  List<SingleBanner> _singleBanner = [];
+  final List<SingleBanner> _singleBanner = [];
   List<SingleBanner> get singleBanner => _singleBanner;
 
 List<Category> featuredCategoryList = [];
@@ -181,10 +181,10 @@ bool showTodayDealContainer = false;
       flashDeal = tempFlashDeal;
 
       if (flashDeal?.date != null) {
-        DateTime end = DateTime.fromMillisecondsSinceEpoch(flashDeal!.date! * 1000);
-        DateTime now = DateTime.now();
-        int diff = end.difference(now).inMilliseconds;
-        int endTime = diff + now.millisecondsSinceEpoch;
+        final DateTime end = DateTime.fromMillisecondsSinceEpoch(flashDeal!.date! * 1000);
+        final DateTime now = DateTime.now();
+        final int diff = end.difference(now).inMilliseconds;
+        final int endTime = diff + now.millisecondsSinceEpoch;
         startFlashDealCountdown(endTime);
 
       }
@@ -199,7 +199,7 @@ bool showTodayDealContainer = false;
   _flashDealEndTime = DateTime.fromMillisecondsSinceEpoch(endTime);
 
     _flashDealTimer?.cancel();
-    _flashDealTimer = Timer.periodic(Duration(seconds: 1), (_) {
+    _flashDealTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       final now = DateTime.now();
          final remaining = _flashDealEndTime!.difference(now);
 
@@ -242,7 +242,7 @@ fetchCarouselImages() async {
   notifyListeners();
 }
 
-  fetchBestSellingProducts() async {
+  Future<void> fetchBestSellingProducts() async {
     if(showBestSellingLoadingContainer) return;
       
       showBestSellingLoadingContainer=true;
@@ -269,7 +269,7 @@ fetchCarouselImages() async {
 
   fetchBrandsProducts() async {
   BrandResponse?brandsRes;
-        await executeAndHandleErrors(() async => brandsRes =  await await BrandRepository().getBrands());
+        await executeAndHandleErrors(() async => brandsRes =  await BrandRepository().getBrands());
   
     brandsList.clear();
      if (brandsRes?.brands != null) {
@@ -479,7 +479,7 @@ resetTodayDeals() {
 
   initPiratedAnimation(vnc) {
     pirated_logo_controller =
-        AnimationController(vsync: vnc, duration: Duration(milliseconds: 2000));
+        AnimationController(vsync: vnc, duration: const Duration(milliseconds: 2000));
     pirated_logo_animation = Tween(begin: 40.0, end: 60.0).animate(
       CurvedAnimation(
         curve: Curves.bounceOut,

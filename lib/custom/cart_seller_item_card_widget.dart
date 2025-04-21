@@ -31,7 +31,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 width: DeviceInfo(context).width! / 4,
                 height: 120,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.horizontal(
+                    borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(6), right: Radius.zero),
                     child: FadeInImage.assetNetwork(
                       placeholder: 'assets/placeholder.png',
@@ -43,7 +43,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
               //color: Colors.red,
               width: DeviceInfo(context).width! / 3,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +53,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           .productName,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
@@ -74,7 +74,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.accent_color,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700),
@@ -86,7 +86,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               width: 32,
               child: Column(
@@ -127,7 +127,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         cartProvider.onQuantityIncrease(
                             context, sellerIndex, itemIndex);
                       }
-                      return null;
+                      return;
                     },
                     child: Container(
                       width: 24,
@@ -152,7 +152,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           .shopList[sellerIndex].cartItems[itemIndex].quantity
                           .toString(),
                       style:
-                          TextStyle(color: MyTheme.accent_color, fontSize: 16),
+                          const TextStyle(color: MyTheme.accent_color, fontSize: 16),
                     ),
                   ),
                   GestureDetector(
@@ -163,7 +163,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         cartProvider.onQuantityDecrease(
                             context, sellerIndex, itemIndex);
                       }
-                      return null;
+                      return;
                     },
                     child: Container(
                       width: 24,

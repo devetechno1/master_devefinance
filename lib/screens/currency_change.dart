@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'home/home.dart';
 
 class CurrencyChange extends StatefulWidget {
-  CurrencyChange({Key? key}) : super(key: key);
+  const CurrencyChange({Key? key}) : super(key: key);
 
   @override
   _CurrencyChangeState createState() => _CurrencyChangeState();
@@ -93,20 +93,20 @@ class _CurrencyChangeState extends State<CurrencyChange> {
     );
   }
 
-  buildLanguageMethodList() {
+  Consumer<CurrencyPresenter> buildLanguageMethodList() {
     return Consumer<CurrencyPresenter>(
         builder: (context, currencyModel, child) {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 14,
               width: 10,
             );
           },
           itemCount: currencyModel.currencyList.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           //padding: EdgeInsets.symmetric(horizontal: 80),
 
@@ -130,8 +130,8 @@ class _CurrencyChangeState extends State<CurrencyChange> {
                 color: currencyInfo.id == system_currency.$
                     ? MyTheme.accent_color
                     : MyTheme.noColor)),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        duration: Duration(milliseconds: 400),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        duration: const Duration(milliseconds: 400),
         child: Row(
           children: [
             Text(
@@ -139,13 +139,13 @@ class _CurrencyChangeState extends State<CurrencyChange> {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 16,
                   height: 1.6,
                   fontWeight: FontWeight.w400),
             ),
-            Spacer(),
+            const Spacer(),
             if (currencyInfo.id == system_currency.$) buildCheckContainer(true)
           ],
         ),
@@ -160,8 +160,8 @@ class _CurrencyChangeState extends State<CurrencyChange> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0), color: Colors.green),
-            child: Padding(
-              padding: const EdgeInsets.all(3),
+            child: const Padding(
+              padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),
             ),
           )

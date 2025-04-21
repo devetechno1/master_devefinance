@@ -12,7 +12,7 @@ class ShopSquareCard extends StatefulWidget {
   final String? name;
   final double? stars;
 
-  ShopSquareCard({
+  const ShopSquareCard({
     Key? key,
     this.id,
     this.image,
@@ -38,7 +38,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
         );
       },
       child: Container(
-        decoration: BoxDecoration(),
+        decoration: const BoxDecoration(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,24 +50,24 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
-                padding: EdgeInsets.all(35),
+                padding: const EdgeInsets.all(35),
                 child: _buildImage()),
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 _buildName(),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 _buildRating(),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 _buildVisitStoreButton(),
-                SizedBox(
+                const SizedBox(
                   height: 2,
                 )
               ],
@@ -84,7 +84,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       height: 100,
       child: Center(
         child: ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
           child: FadeInImage.assetNetwork(
             placeholder: 'assets/placeholder.png',
             image: widget.image ?? 'assets/placeholder.png',

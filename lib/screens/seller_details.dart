@@ -411,7 +411,7 @@
 //                       main_price: _featuredProducts[index].main_price,
 //                       stroked_price: _featuredProducts[index].stroked_price,
 //                       has_discount: _featuredProducts[index].has_discount,
-//                       is_wholesale: null,
+//                       isWholesale: null,
 //                     ),
 //                   );
 //                 },
@@ -668,7 +668,7 @@
 //             stroked_price: _topProducts[index].stroked_price,
 //             has_discount: _topProducts[index].has_discount,
 //             discount: _topProducts[index].discount,
-//             is_wholesale: _topProducts[index].isWholesale,
+//             isWholesale: _topProducts[index].isWholesale,
 //           );
 //         });
 //   }
@@ -696,7 +696,7 @@
 //               stroked_price: _newArrivalProducts[index].stroked_price,
 //               has_discount: _newArrivalProducts[index].has_discount,
 //               discount: _newArrivalProducts[index].discount,
-//               is_wholesale: _newArrivalProducts[index].isWholesale,
+//               isWholesale: _newArrivalProducts[index].isWholesale,
 //             );
 //           });
 //     } else if (_newArrivalProducts.length == 0) {
@@ -1007,7 +1007,7 @@
 //             stroked_price: _allProductList[index].stroked_price,
 //             has_discount: _allProductList[index].has_discount,
 //             discount: _allProductList[index].discount,
-//             is_wholesale: _allProductList[index].isWholesale,
+//             isWholesale: _allProductList[index].isWholesale,
 //           );
 //         });
 //   }
@@ -1045,24 +1045,24 @@ class SellerDetails extends StatefulWidget {
 }
 
 class _SellerDetailsState extends State<SellerDetails> {
-  ScrollController _mainScrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
   // ScrollController _scrollController = ScrollController();
 
   //init
   int _current_slider = 0;
-  List<dynamic> _carouselImageList = [];
+  final List<dynamic> _carouselImageList = [];
   bool _carouselInit = false;
   Shop? _shopDetails;
 
-  List<dynamic> _newArrivalProducts = [];
+  final List<dynamic> _newArrivalProducts = [];
   bool _newArrivalProductInit = false;
-  List<dynamic> _topProducts = [];
+  final List<dynamic> _topProducts = [];
   bool _topProductInit = false;
-  List<dynamic> _featuredProducts = [];
+  final List<dynamic> _featuredProducts = [];
   bool _featuredProductInit = false;
   bool? _isThisSellerFollowed;
 
-  List<dynamic> _allProductList = [];
+  final List<dynamic> _allProductList = [];
   bool? _isInitialAllProduct;
   int _page = 1;
   // ScrollController _scrollController = ScrollController();
@@ -1094,7 +1094,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
 
   Future addFollow(id) async {
-    var shopResponse = await ShopRepository().followedAdd(_shopDetails?.id);
+    final shopResponse = await ShopRepository().followedAdd(_shopDetails?.id);
     //if(shopResponse.result){
     _isThisSellerFollowed = shopResponse.result;
     setState(() {});
@@ -1103,7 +1103,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
 
   Future removedFollow(id) async {
-    var shopResponse = await ShopRepository().followedRemove(id);
+    final shopResponse = await ShopRepository().followedRemove(id);
 
     if (shopResponse.result) {
       _isThisSellerFollowed = false;
@@ -1115,7 +1115,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   Future checkFollowed() async {
     if (SystemConfig.systemUser != null &&
         SystemConfig.systemUser!.id != null) {
-      var shopResponse =
+      final shopResponse =
           await ShopRepository().followedCheck(_shopDetails?.id ?? 0);
       // print(shopResponse.result);
       // print(shopResponse.message);
@@ -1133,7 +1133,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
 
   fetchAllProductData() async {
-    var productResponse = await ProductRepository().getShopProducts(
+    final productResponse = await ProductRepository().getShopProducts(
       id: _shopDetails?.id ?? 0,
       page: _page,
     );
@@ -1155,7 +1155,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
 
   fetchShopDetails() async {
-    var shopDetailsResponse = await ShopRepository().getShopInfo(widget.slug);
+    final shopDetailsResponse = await ShopRepository().getShopInfo(widget.slug);
 
     //print('ss:' + shopDetailsResponse.toString());
     if (shopDetailsResponse.shop != null) {
@@ -1174,7 +1174,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
 
   fetchNewArrivalProducts() async {
-    var newArrivalProductResponse = await ShopRepository()
+    final newArrivalProductResponse = await ShopRepository()
         .getNewFromThisSellerProducts(id: _shopDetails?.id);
     _newArrivalProducts.addAll(newArrivalProductResponse.products!);
     _newArrivalProductInit = true;
@@ -1183,14 +1183,14 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
 
   fetchTopProducts() async {
-    var topProductResponse = await ShopRepository()
+    final topProductResponse = await ShopRepository()
         .getTopFromThisSellerProducts(id: _shopDetails?.id);
     _topProducts.addAll(topProductResponse.products!);
     _topProductInit = true;
   }
 
   fetchFeaturedProducts() async {
-    var featuredProductResponse = await ShopRepository()
+    final featuredProductResponse = await ShopRepository()
         .getfeaturedFromThisSellerProducts(id: _shopDetails?.id);
     _featuredProducts.addAll(featuredProductResponse.products!);
     _featuredProductInit = true;
@@ -1303,7 +1303,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.top_selling_products_ucf,
-              style: TextStyle(
+              style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
@@ -1329,7 +1329,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.all_products_ucf,
-              style: TextStyle(
+              style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
@@ -1346,7 +1346,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (_featuredProducts.isNotEmpty) buildFeaturedProductsSection(),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         Container(
           color: MyTheme.mainColor,
           child: Column(
@@ -1361,7 +1361,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.new_arrivals_products_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
@@ -1401,7 +1401,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       padding: const EdgeInsets.only(top: 16),
       child: Container(
         height: 296,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: MyTheme.mainColor,
         ),
         child: Column(
@@ -1411,19 +1411,19 @@ class _SellerDetailsState extends State<SellerDetails> {
               padding: const EdgeInsets.only(left: 20.0, top: 20),
               child: Text(
                 LangText(context).local.featured_products_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 0, 0, 0)),
+                    color: Color.fromARGB(255, 0, 0, 0)),
               ),
             ),
             Container(
               height: 240,
-              padding: EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 15),
               width: double.infinity,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 20),
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
@@ -1436,7 +1436,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                         main_price: _featuredProducts[index].main_price,
                         stroked_price: _featuredProducts[index].stroked_price,
                         // has_discount: _featuredProducts[index].has_discount,
-                        is_wholesale: null,
+                        isWholesale: null,
                       ),
                     );
                   },
@@ -1455,11 +1455,11 @@ class _SellerDetailsState extends State<SellerDetails> {
 
   Widget buildFeaturedProductsShimmerSection() {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 20.0,
       ),
       height: 280,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: MyTheme.mainColor,
           image: DecorationImage(image: AssetImage("assets/background_1.png"))),
       child: Column(
@@ -1476,12 +1476,12 @@ class _SellerDetailsState extends State<SellerDetails> {
           ),
           Container(
             height: 239,
-            padding: EdgeInsets.only(top: 10, bottom: 20),
+            padding: const EdgeInsets.only(top: 10, bottom: 20),
             width: double.infinity,
             child: ListView.separated(
               itemCount: 10,
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               itemBuilder: (context, index) {
                 return Container(
                   height: 196,
@@ -1533,7 +1533,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 800),
             height: 30,
             width: DeviceInfo(context).width! / 4,
             decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -1543,7 +1543,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 800),
             height: 30,
             width: DeviceInfo(context).width! / 4,
             decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -1553,7 +1553,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 800),
             height: 30,
             width: DeviceInfo(context).width! / 4,
             decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -1570,7 +1570,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   AnimatedContainer buildTabOptionItem(
       BuildContext context, index, String text) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 800),
       height: 31,
       width: DeviceInfo(context).width! / 3.5,
       decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -1600,7 +1600,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   }
   ///////Top Carosel Slider /////////////
 
-  buildCarouselSlider(context) {
+  Widget buildCarouselSlider(context) {
     if (_shopDetails == null) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
@@ -1608,7 +1608,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           height: 100.0,
         ),
       );
-    } else if (_carouselImageList.length > 0) {
+    } else if (_carouselImageList.isNotEmpty) {
       return Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -1617,7 +1617,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               color: Colors.black.withOpacity(0.2),
               blurRadius: 20,
               spreadRadius: 0.5,
-              offset: Offset(0, 10),
+              offset: const Offset(0, 10),
             ),
           ],
         ),
@@ -1630,8 +1630,8 @@ class _SellerDetailsState extends State<SellerDetails> {
             enableInfiniteScroll: true,
             reverse: false,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 1000),
+            autoPlayInterval: const Duration(seconds: 5),
+            autoPlayAnimationDuration: const Duration(milliseconds: 1000),
             autoPlayCurve: Curves.easeInExpo,
             enlargeCenterPage: false,
             scrollDirection: Axis.horizontal,
@@ -1662,11 +1662,11 @@ class _SellerDetailsState extends State<SellerDetails> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: _carouselImageList.map((url) {
-                          int index = _carouselImageList.indexOf(url);
+                          final int index = _carouselImageList.indexOf(url);
                           return Container(
                             width: 8.0, // Size of the indicator
                             height: 8.0,
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                               vertical: 10.0,
                               horizontal: 4.0,
                             ),
@@ -1676,12 +1676,12 @@ class _SellerDetailsState extends State<SellerDetails> {
                                 color: _current_slider == index
                                     ? Colors
                                         .white // White border for active indicator
-                                    : Color(
+                                    : const Color(
                                         0xffE62E04), // Red border for inactive
                                 width: 1.0, // Width of the border
                               ),
                               color: _current_slider == index
-                                  ? Color(
+                                  ? const Color(
                                       0xffE62E04) // Red fill for active indicator
                                   : Colors
                                       .transparent, // No fill for inactive indicator
@@ -1691,7 +1691,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                                       .withOpacity(0.2), // Shadow color
                                   spreadRadius: 2, // Spread of the shadow
                                   blurRadius: 4, // Blur radius for softness
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 2), // Offset for shadow position
                                 ),
                               ],
@@ -1719,8 +1719,8 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _topProducts.length,
         shrinkWrap: true,
-        padding: EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
             id: _topProducts[index].id,
@@ -1731,25 +1731,25 @@ class _SellerDetailsState extends State<SellerDetails> {
             stroked_price: _topProducts[index].stroked_price,
             has_discount: _topProducts[index].has_discount,
             discount: _topProducts[index].discount,
-            is_wholesale: _topProducts[index].isWholesale,
+            isWholesale: _topProducts[index].isWholesale,
           );
         });
   }
 
   ///New Arrivals Product
   Widget buildNewArrivalProducts(context) {
-    if (!_newArrivalProductInit && _newArrivalProducts.length == 0) {
+    if (!_newArrivalProductInit && _newArrivalProducts.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper().buildProductGridShimmer());
-    } else if (_newArrivalProducts.length > 0) {
+    } else if (_newArrivalProducts.isNotEmpty) {
       return MasonryGridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           itemCount: _newArrivalProducts.length,
           shrinkWrap: true,
-          padding: EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return FeaturedProductCard(
               id: _newArrivalProducts[index].id,
@@ -1760,10 +1760,10 @@ class _SellerDetailsState extends State<SellerDetails> {
               stroked_price: _newArrivalProducts[index].stroked_price,
               has_discount: _newArrivalProducts[index].has_discount,
               discount: _newArrivalProducts[index].discount,
-              is_wholesale: _newArrivalProducts[index].isWholesale,
+              isWholesale: _newArrivalProducts[index].isWholesale,
             );
           });
-    } else if (_newArrivalProducts.length == 0) {
+    } else if (_newArrivalProducts.isEmpty) {
       return Center(
           child: Text(AppLocalizations.of(context)!.no_product_is_available));
     } else {
@@ -1778,8 +1778,8 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _allProductList.length,
         shrinkWrap: true,
-        padding: EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
             id: _allProductList[index].id,
@@ -1790,7 +1790,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             stroked_price: _allProductList[index].stroked_price,
             has_discount: _allProductList[index].has_discount,
             discount: _allProductList[index].discount,
-            is_wholesale: _allProductList[index].isWholesale,
+            isWholesale: _allProductList[index].isWholesale,
           );
         });
   }
@@ -1833,11 +1833,11 @@ class _SellerDetailsState extends State<SellerDetails> {
                     color: Colors.black.withOpacity(.08),
                     blurRadius: 20,
                     spreadRadius: 0.0,
-                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                    offset: const Offset(0.0, 10.0), // shadow direction: bottom right
                   )
                 ],
               ),
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: FadeInImage.assetNetwork(
@@ -1851,7 +1851,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               width: DeviceInfo(context).width! / 2.5,
               height: 60,
               child: Column(
@@ -1862,7 +1862,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                     _shopDetails?.name ?? "",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
@@ -1872,7 +1872,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                     _shopDetails?.address ?? "",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color(0xff6B7377),
                         fontSize: 10,
                         fontWeight: FontWeight.normal),
@@ -1880,19 +1880,19 @@ class _SellerDetailsState extends State<SellerDetails> {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               height: 28,
               width: 91,
               decoration: BoxDecoration(
-                  color: Color(0xffFEF0D7),
+                  color: const Color(0xffFEF0D7),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(.08),
                       blurRadius: 20,
                       spreadRadius: 0.0,
                       offset:
-                          Offset(0.0, 10.0), // shadow direction: bottom right
+                          const Offset(0.0, 10.0), // shadow direction: bottom right
                     )
                   ],
                   borderRadius: BorderRadius.circular(3.0)),
@@ -1960,7 +1960,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           Flexible(
             child: Container(
               //color: Colors.amber,
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               width: DeviceInfo(context).width! / 2,
               height: 60,
               child: Column(
@@ -1986,7 +1986,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         ]);
   }
 
-  buildAppbarShopTitle() {
+  Row buildAppbarShopTitle() {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
       Container(
         width: DeviceInfo(context).width! - 70,
@@ -2014,9 +2014,9 @@ class _SellerDetailsState extends State<SellerDetails> {
           allowHalfRating: true,
           itemCount: 5,
           ratingWidget: RatingWidget(
-            full: Icon(Icons.star, color: Colors.amber),
-            half: Icon(Icons.star_half, color: Colors.amber),
-            empty: Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
+            full: const Icon(Icons.star, color: Colors.amber),
+            half: const Icon(Icons.star_half, color: Colors.amber),
+            empty: const Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
           ),
           //  itemPadding: EdgeInsets.only(right: 4.0),
           onRatingUpdate: (rating) {
@@ -2041,7 +2041,7 @@ class FeaturedProductCard extends StatefulWidget {
   final bool? isWholesale;
   final String? discount;
 
-  FeaturedProductCard({
+  const FeaturedProductCard({
     Key? key,
     this.identifier,
     required this.slug,
@@ -2053,7 +2053,6 @@ class FeaturedProductCard extends StatefulWidget {
     this.has_discount = false,
     this.isWholesale = false,
     this.discount,
-    required is_wholesale,
   }) : super(key: key);
 
   @override
@@ -2105,12 +2104,12 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
                           widget.name ?? LangText(context).local.no_name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: MyTheme.font_grey,
                             fontSize: 14,
                             height: 1.2,
@@ -2120,7 +2119,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                       ),
                       if (widget.has_discount)
                         Padding(
-                          padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                           child: Text(
                             SystemConfig.systemCurrency != null
                                 ? widget.stroked_price?.replaceAll(
@@ -2140,9 +2139,9 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           ),
                         )
                       else
-                        SizedBox(height: 4.0),
+                        const SizedBox(height: 4.0),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                         child: Text(
                           SystemConfig.systemCurrency != null
                               ? widget.main_price?.replaceAll(
@@ -2153,7 +2152,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -2177,14 +2176,14 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         // padding:
                         //     EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         height: 20, width: 48,
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
                           color: MyTheme.accent_color,
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
-                              color: const Color(0x14000000),
+                              color: Color(0x14000000),
                               offset: Offset(-1, 1),
                               blurRadius: 1,
                             ),
@@ -2193,13 +2192,13 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         child: Center(
                           child: Text(
                             widget.discount ?? '',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                               height: 1.8,
                             ),
-                            textHeightBehavior: TextHeightBehavior(
+                            textHeightBehavior: const TextHeightBehavior(
                                 applyHeightToFirstAscent: false),
                             softWrap: false,
                           ),
@@ -2208,8 +2207,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                     if (whole_sale_addon_installed.$ && widget.isWholesale!)
                       Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
+                            const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: const BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(6),
@@ -2217,7 +2216,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0x14000000),
+                              color: Color(0x14000000),
                               offset: Offset(-1, 1),
                               blurRadius: 1,
                             ),
@@ -2225,13 +2224,13 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         ),
                         child: Text(
                           LangText(context).local.wholesale,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
                             height: 1.8,
                           ),
-                          textHeightBehavior: TextHeightBehavior(
+                          textHeightBehavior: const TextHeightBehavior(
                               applyHeightToFirstAscent: false),
                           softWrap: false,
                         ),

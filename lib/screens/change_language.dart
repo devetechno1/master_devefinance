@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import '../data_model/language_list_response.dart';
 
 class ChangeLanguage extends StatefulWidget {
-  ChangeLanguage({Key? key}) : super(key: key);
+  const ChangeLanguage({Key? key}) : super(key: key);
 
   @override
   _ChangeLanguageState createState() => _ChangeLanguageState();
@@ -22,8 +22,8 @@ class ChangeLanguage extends StatefulWidget {
 
 class _ChangeLanguageState extends State<ChangeLanguage> {
   var _selected_index = 0;
-  ScrollController _mainScrollController = ScrollController();
-  List<Language> _list = [];
+  final ScrollController _mainScrollController = ScrollController();
+  final List<Language> _list = [];
   bool _isInitial = true;
 
   @override
@@ -41,11 +41,11 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
   }
 
   fetchList() async {
-    var languageListResponse = await LanguageRepository().getLanguageList();
+    final languageListResponse = await LanguageRepository().getLanguageList();
     _list.addAll(languageListResponse.languages!);
 
     var idx = 0;
-    if (_list.length > 0) {
+    if (_list.isNotEmpty) {
       _list.forEach((lang) {
         if (lang.code == app_language.$) {
           setState(() {
@@ -76,8 +76,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
     fetchList();
   }
 
-  onCouponRemove() async {
-    var couponRemoveResponse =
+  Future<void> onCouponRemove() async {
+    final couponRemoveResponse =
         await CouponRepository().getCouponRemoveResponse();
 
     if (couponRemoveResponse.result == false) {
@@ -171,37 +171,38 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
     );
   }
 
-  buildLanguageMethodList() {
-    if (_isInitial && _list.length == 0) {
+  Widget? buildLanguageMethodList() {
+    if (_isInitial && _list.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 5, item_height: 100.0));
-    } else if (_list.length > 0) {
+    } else if (_list.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 14,
             );
           },
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildPaymentMethodItemCard(index);
           },
         ),
       );
-    } else if (!_isInitial && _list.length == 0) {
+    } else if (!_isInitial && _list.isEmpty) {
       return Container(
           height: 100,
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.no_language_is_added,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
+    return null;
   }
 
   GestureDetector buildPaymentMethodItemCard(index) {
@@ -212,7 +213,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       child: Stack(
         children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(6.0))
@@ -246,13 +247,13 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
                             "${_list[index].name} - ${_list[index].code} - ${_list[index].mobile_app_code}",
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontSize: 12,
                                 height: 1.6,
@@ -287,8 +288,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0), color: Colors.green),
-            child: Padding(
-              padding: const EdgeInsets.all(3),
+            child: const Padding(
+              padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),
             ),
           )

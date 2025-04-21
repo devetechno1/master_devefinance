@@ -280,7 +280,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           "image": "assets/brands.png",
           "onTap": () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Filter(selected_filter: "brands");
+              return const Filter(selected_filter: "brands");
             }));
           },
           "textColor": const Color(0xff263140),
@@ -373,7 +373,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         child: GestureDetector(
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Filter()));
+                  .push(MaterialPageRoute(builder: (context) => const Filter()));
             },
             child: HomeSearchBox(context: context)),
       ),

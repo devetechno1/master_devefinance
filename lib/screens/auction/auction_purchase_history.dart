@@ -57,7 +57,7 @@ class AuctionPurchaseHistory extends StatefulWidget {
 }
 
 class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
-  ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
+  final ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
   int _page = 1;
   bool _isDataFetch = false;
   bool _showMoreProductLoadingContainer = false;
@@ -65,8 +65,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   String _defaultPaymentStatusKey = '';
   String _defaultDeliveryStatusKey = '';
 
-  List<PaymentStatus> _paymentStatusList = PaymentStatus.getPaymentStatusList();
-  List<DeliveryStatus> _deliveryStatusList =
+  final List<PaymentStatus> _paymentStatusList = PaymentStatus.getPaymentStatusList();
+  final List<DeliveryStatus> _deliveryStatusList =
       DeliveryStatus.getDeliveryStatusList();
 
   PaymentStatus? _selectedPaymentStatus;
@@ -126,7 +126,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
 
   List<DropdownMenuItem<PaymentStatus>> buildDropdownPaymentStatusItems(
       List _paymentStatusList) {
-    List<DropdownMenuItem<PaymentStatus>> items = [];
+    final List<DropdownMenuItem<PaymentStatus>> items = [];
     for (PaymentStatus item in _paymentStatusList as Iterable<PaymentStatus>) {
       items.add(
         DropdownMenuItem(
@@ -140,7 +140,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
 
   List<DropdownMenuItem<DeliveryStatus>> buildDropdownDeliveryStatusItems(
       List _deliveryStatusList) {
-    List<DropdownMenuItem<DeliveryStatus>> items = [];
+    final List<DropdownMenuItem<DeliveryStatus>> items = [];
     for (DeliveryStatus item
         in _deliveryStatusList as Iterable<DeliveryStatus>) {
       items.add(
@@ -163,7 +163,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   }
 
   getPurchaseList() async {
-    var purchaseListResponse = await AuctionProductsRepository()
+    final purchaseListResponse = await AuctionProductsRepository()
         .getAuctionPurchaseHistory(
             page: _page,
             payment_status: _selectedPaymentStatus!.option_key,
@@ -220,7 +220,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
     );
   }
 
-  buildAuctionPurchaseList() {
+  RefreshIndicator buildAuctionPurchaseList() {
     return RefreshIndicator(
       color: MyTheme.accent_color,
       backgroundColor: MyTheme.mainColor,
@@ -241,7 +241,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                               height: 14,
                             );
                           },
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             top: 3,
                             left: 20,
                             right: 20,
@@ -604,16 +604,16 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
     );
   }
 
-  buildAppBar(BuildContext context) {
+  PreferredSize buildAppBar(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(98.0),
+      preferredSize: const Size.fromHeight(98.0),
       child: AppBar(
           centerTitle: false,
           backgroundColor: MyTheme.mainColor,
           automaticallyImplyLeading: false,
           scrolledUnderElevation: 0.0,
           actions: [
-            new Container(),
+            Container(),
           ],
           elevation: 0.0,
           titleSpacing: 0,
@@ -635,7 +635,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
     );
   }
 
-  buildBottomAppBar(BuildContext context) {
+  Padding buildBottomAppBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 2),
       child: Row(
@@ -644,21 +644,21 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
           Container(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(3)),
-            padding: EdgeInsets.symmetric(horizontal: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 14),
             height: 36,
             width: MediaQuery.of(context).size.width * .35,
-            child: new DropdownButton<PaymentStatus>(
+            child: DropdownButton<PaymentStatus>(
               isExpanded: true,
-              icon: Icon(Icons.expand_more, color: Colors.black54),
+              icon: const Icon(Icons.expand_more, color: Colors.black54),
               hint: Text(
                 AppLocalizations.of(context)!.all_payments_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
                 ),
               ),
               iconSize: 14,
-              underline: SizedBox(),
+              underline: const SizedBox(),
               value: _selectedPaymentStatus,
               items: _dropdownPaymentStatusItems,
               onChanged: (PaymentStatus? selectedFilter) {
@@ -674,21 +674,21 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
             // decoration: BoxDecorations.buildBoxDecoration_1(),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(3)),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
             width: MediaQuery.of(context).size.width * .35,
-            child: new DropdownButton<DeliveryStatus>(
-              icon: Icon(Icons.expand_more, color: Colors.black54),
+            child: DropdownButton<DeliveryStatus>(
+              icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               hint: Text(
                 AppLocalizations.of(context)!.all_deliveries_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
                 ),
               ),
               iconSize: 14,
-              underline: SizedBox(),
+              underline: const SizedBox(),
               value: _selectedDeliveryStatus,
               items: _dropdownDeliveryStatusItems,
               onChanged: (DeliveryStatus? selectedFilter) {

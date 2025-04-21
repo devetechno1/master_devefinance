@@ -96,13 +96,13 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                             const CategoryList(),
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : SizedBox(),
-                              SizedBox(height: 10),
+                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
+                              const SizedBox(height: 10),
                               //featured
 
                               // Header Banner
                              HomeCarouselSlider(homeData: homeData, context: context),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
                               // Flash Sale Section
                               if(homeData.flashDeal != null)
@@ -118,7 +118,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                                     children: [
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(25, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                       ),
                                        Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
                                     ],
@@ -136,7 +136,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 5,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: const Offset(0, 3), // changes position of shadow
                                 )],
                                   color:  const Color.fromARGB(255, 249, 248, 248),
                                   borderRadius: BorderRadius.circular(8.0),
@@ -233,7 +233,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
         padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Filter()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
           },
           child: HomeSearchBox(context: context),
         ),
@@ -259,7 +259,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
   Widget timerCircularContainer(String timeText) {
     return Text(
       timeText,
-      style: TextStyle(
+      style: const TextStyle(
         color:Colors.white,
         fontSize: 14.0,
         fontWeight: FontWeight.w600,
@@ -310,8 +310,8 @@ Widget buildTimerRow(CurrentRemainingTime time) {
           const SizedBox(width: 10),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
+              const Padding(
+                padding: EdgeInsets.only(right: 10),
                 child: Text(':',style: TextStyle(color: Colors.white),),
               ),
               timerCircularContainer(timeText((time.hours).toString(), default_length: 2)),
@@ -322,8 +322,8 @@ Widget buildTimerRow(CurrentRemainingTime time) {
           const SizedBox(width: 10),
           Row(
             children: [
-                    Padding(
-                padding: const EdgeInsets.only(right: 10),
+                    const Padding(
+                padding: EdgeInsets.only(right: 10),
                 child: Text(':',style: TextStyle(color: Colors.white),),
               ),                timerCircularContainer(timeText((time.min).toString(), default_length: 2)),
               const SizedBox(width: 4),
@@ -333,8 +333,8 @@ Widget buildTimerRow(CurrentRemainingTime time) {
           const SizedBox(width: 10),
           Row(
             children: [
-                 Padding(
-                padding: const EdgeInsets.only(right: 10),
+                 const Padding(
+                padding: EdgeInsets.only(right: 10),
                 child: Text(':',style: TextStyle(color: Colors.white),),
               ),                timerCircularContainer(timeText((time.sec).toString(), default_length: 2)),
               const SizedBox(width: 4),

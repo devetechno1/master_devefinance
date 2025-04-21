@@ -23,7 +23,7 @@ class _NotificationListState extends State<NotificationList> {
   bool isAllSelected = false;
 
   fetch() async {
-    var notificationResponse =
+    final notificationResponse =
         await NotificationRepository().getAllNotification();
     _notificationList.addAll(notificationResponse.data as Iterable);
     _isFetching = false;
@@ -83,7 +83,7 @@ class _NotificationListState extends State<NotificationList> {
                 }
                 // show loading and delete selected notification
                 Loading.show(context);
-                var notificationResponse = await NotificationRepository()
+                final notificationResponse = await NotificationRepository()
                     .notificationBulkDelete(notificationIds);
                 Loading.close();
                 if (notificationResponse.result) {
@@ -110,9 +110,9 @@ class _NotificationListState extends State<NotificationList> {
     );
   }
 
-  buildShowNotificationSection() {
+  Container buildShowNotificationSection() {
     return Container(
-        padding: EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.only(bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +140,7 @@ class _NotificationListState extends State<NotificationList> {
                       },
                     ),
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
             _notificationList.isNotEmpty
                 ? Flexible(
                     child: ListView.separated(

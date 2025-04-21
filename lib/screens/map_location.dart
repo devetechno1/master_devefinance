@@ -63,7 +63,7 @@ class MapLocationState extends State<MapLocation>
   }
 
   Future<void> onTapPickHere() async {
-    var addressUpdateLocationResponse = await AddressRepository()
+    final addressUpdateLocationResponse = await AddressRepository()
         .getAddressUpdateLocationResponse(
             widget.address.id,
             selectedPlace.latitude,
@@ -150,14 +150,14 @@ class MapLocationState extends State<MapLocation>
             //     ))
             //   : 
             Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: const BorderRadius.only(
-                  topLeft: const Radius.circular(8.0),
-                  bottomLeft: const Radius.circular(8.0),
-                  topRight: const Radius.circular(8.0),
-                  bottomRight: const Radius.circular(8.0),
+                  topLeft: Radius.circular(8.0),
+                  bottomLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0),
+                  bottomRight: Radius.circular(8.0),
                 ),
               ),
               child: Row(
@@ -167,7 +167,7 @@ class MapLocationState extends State<MapLocation>
                     child: Container(
                       child: Center(
                         child: formattedAddress == null 
-                        ? CircularProgressIndicator() 
+                        ? const CircularProgressIndicator() 
                         : Padding(
                           padding: const EdgeInsets.only(
                               left: 2.0, right: 2.0),
@@ -185,16 +185,16 @@ class MapLocationState extends State<MapLocation>
                     flex: 1,
                     child: Btn.basic(
                       color: MyTheme.accent_color,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.only(
-                        topLeft: const Radius.circular(4.0),
-                        bottomLeft: const Radius.circular(4.0),
-                        topRight: const Radius.circular(4.0),
-                        bottomRight: const Radius.circular(4.0),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(4.0),
+                        bottomLeft: Radius.circular(4.0),
+                        topRight: Radius.circular(4.0),
+                        bottomRight: Radius.circular(4.0),
                       )),
                       child: Text(
                         LangText(context).local.pick_here,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                       onPressed: onTapPickHere,
                     ),
@@ -211,9 +211,9 @@ class MapLocationState extends State<MapLocation>
                 padding: const EdgeInsets.all(16.0),
                 child: TypeAheadField<Results>(
                   // controller: _countryController,
-                  debounceDuration: Duration(milliseconds: 500),
+                  debounceDuration: const Duration(milliseconds: 500),
                   emptyBuilder: (context) {
-                    return SizedBox();
+                    return const SizedBox();
                   },
                   constraints: BoxConstraints(
                     maxHeight: MediaQuery.sizeOf(context).height * 0.7
@@ -221,7 +221,7 @@ class MapLocationState extends State<MapLocation>
                   focusNode: fieldNode,
                   builder: (context, controller, focusNode) {
                     final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-                      borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5),
+                      borderSide: const BorderSide(color: MyTheme.textfield_grey, width: 0.5),
                       borderRadius: BorderRadius.circular(6),
                     );
                     return TextField(
@@ -231,15 +231,15 @@ class MapLocationState extends State<MapLocation>
                       onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       decoration: InputDecoration(
                         hintText: LangText(context).local.your_delivery_location,
-                        hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+                        hintStyle: const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
                         enabledBorder: outlineInputBorder,
                         focusedBorder: outlineInputBorder,
                         border: outlineInputBorder,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                         filled: true,
                         fillColor: Theme.of(context).scaffoldBackgroundColor,
                         prefixIcon: Icon(Icons.location_on,color: FocusScope.of(context).hasFocus? Theme.of(context).primaryColor : MyTheme.textfield_grey),
-                        suffixIcon: Icon(Icons.search_rounded,color: MyTheme.textfield_grey)
+                        suffixIcon: const Icon(Icons.search_rounded,color: MyTheme.textfield_grey)
                       ),
                     );
                   },
@@ -260,13 +260,13 @@ class MapLocationState extends State<MapLocation>
                       dense: true,
                       title: Row(
                         children: [
-                          Icon(Icons.location_on,color: MyTheme.font_grey),
-                          SizedBox(width: 5),
+                          const Icon(Icons.location_on,color: MyTheme.font_grey),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: Text(
                               result.formattedAddress ?? '',
                               maxLines: 1,
-                              style: TextStyle(color: MyTheme.font_grey,fontSize: 14),
+                              style: const TextStyle(color: MyTheme.font_grey,fontSize: 14),
                               overflow: TextOverflow.ellipsis ,
                             ),
                           ),
@@ -282,7 +282,7 @@ class MapLocationState extends State<MapLocation>
       
           Align(
             child: AnimatedScale(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               scale: isCameraIdle ? 1 : 1.3,
               child: Image.asset(
                 'assets/delivery_map_icon.png',
@@ -530,8 +530,8 @@ class Location {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
+    data['lat'] = lat;
+    data['lng'] = lng;
     return data;
   }
 }
@@ -553,11 +553,11 @@ class Viewport {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.northeast != null) {
-      data['northeast'] = this.northeast!.toJson();
+    if (northeast != null) {
+      data['northeast'] = northeast!.toJson();
     }
-    if (this.southwest != null) {
-      data['southwest'] = this.southwest!.toJson();
+    if (southwest != null) {
+      data['southwest'] = southwest!.toJson();
     }
     return data;
   }

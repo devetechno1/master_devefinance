@@ -14,9 +14,9 @@ class Wishlist extends StatefulWidget {
 }
 
 class _WishlistState extends State<Wishlist> {
-  ScrollController _mainScrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
   bool _wishlistInit = true;
-  List<dynamic> _wishlistItems = [];
+  final List<dynamic> _wishlistItems = [];
 
   //init
   @override
@@ -34,7 +34,7 @@ class _WishlistState extends State<Wishlist> {
   }
 
   fetchWishlistItems() async {
-    var wishlistResponse = await WishListRepository().getUserWishlist();
+    final wishlistResponse = await WishListRepository().getUserWishlist();
     _wishlistItems.addAll(wishlistResponse.wishlist_items);
     _wishlistInit = false;
     setState(() {});
@@ -92,22 +92,22 @@ class _WishlistState extends State<Wishlist> {
     );
   }
 
-  buildWishlist() {
+ Widget buildWishlist() {
     if (is_logged_in.$ == false) {
       return Container(
         height: 100,
         child: Center(
           child: Text(
             AppLocalizations.of(context)!.you_need_to_log_in,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
       );
-    } else if (_wishlistInit == true && _wishlistItems.length == 0) {
+    } else if (_wishlistInit == true && _wishlistItems.isEmpty) {
       return SingleChildScrollView(
         child: ShimmerHelper().buildListShimmer(item_count: 10),
       );
-    } else if (_wishlistItems.length > 0) {
+    } else if (_wishlistItems.isNotEmpty) {
       return WishListGridView(onPopFromProduct: _onPageRefresh, wishlistItems: _wishlistItems);
     } else {
       return Container(
@@ -115,7 +115,7 @@ class _WishlistState extends State<Wishlist> {
         child: Center(
           child: Text(
             AppLocalizations.of(context)!.no_item_is_available,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
       );

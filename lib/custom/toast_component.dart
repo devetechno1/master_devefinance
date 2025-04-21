@@ -14,7 +14,7 @@ class ToastComponent {
       // gravity: gravity != 0 ? gravity : ToastGravity.BOTTOM,
       toastLength: toastLength ?? Toast.LENGTH_LONG,
       gravity: gravity ?? ToastGravity.CENTER,
-      backgroundColor: isError? Theme.of(OneContext().context!).colorScheme.error : color ?? Color.fromRGBO(239, 239, 239, .9),
+      backgroundColor: isError? Theme.of(OneContext().context!).colorScheme.error : color ?? const Color.fromRGBO(239, 239, 239, .9),
       textColor: color != null  || isError? MyTheme.white : MyTheme.font_grey,
       // border: Border(
       //     top: BorderSide(
