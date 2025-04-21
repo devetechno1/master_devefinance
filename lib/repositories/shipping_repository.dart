@@ -10,7 +10,7 @@ class ShippingRepository {
     String url = ("${AppConfig.BASE_URL}/delivery-info");
 
     var post_body;
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       post_body = jsonEncode({"temp_user_id": temp_user_id.$});
     } else {
       post_body = jsonEncode({"user_id": user_id.$});

@@ -190,7 +190,7 @@ class AddressRepository {
     var post_body;
 
     String url = ("${AppConfig.BASE_URL}/shipping_cost");
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       post_body = jsonEncode(
           {"temp_user_id": temp_user_id.$, "seller_list": shipping_type});
     } else {

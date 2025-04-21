@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
 
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
@@ -189,7 +191,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     fetchAll();
   }
 
-  void onPopped(value) async {
+  void onPopped(value) {
     reset();
     fetchAll();
   }
@@ -198,7 +200,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     setState(() {
       _showCopied = true;
     });
-  final  Timer timer = Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       setState(() {
         _showCopied = false;
       });
@@ -561,8 +563,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
- final   SnackBar _addedToCartSnackbar = SnackBar(
+    SnackBar(
       content: Text(
         AppLocalizations.of(context)!.added_to_cart,
         style: const TextStyle(color: MyTheme.font_grey),
@@ -1086,7 +1087,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           ),
           const Spacer(),
           Visibility(
-            visible: conversation_system_status.$,
+            visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecorations.buildCircularButtonDecoration_1(),
@@ -1115,7 +1116,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
  void showAlertDialog(BuildContext context) {
     // set up the buttons
- final   Widget submitBtn = TextButton(
+    TextButton(
       style: TextButton.styleFrom(
         backgroundColor: MyTheme.accent_color,
       ),

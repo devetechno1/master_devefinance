@@ -20,6 +20,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../app_config.dart';
+
 class ShippingInfo extends StatefulWidget {
   final String? guestCheckOutShippingAddress;
 
@@ -52,18 +54,18 @@ class _ShippingInfoState extends State<ShippingInfo> {
     _isFetchDeliveryInfo = true;
 
     _deliveryInfoList.forEach((element) {
-      var shippingOption = carrier_base_shipping.$
+      var shippingOption = AppConfig.businessSettingsData.carrierBaseShipping
           ? ShippingOption.Carrier
           : ShippingOption.HomeDelivery;
       int? shippingId;
-      if (carrier_base_shipping.$ &&
+      if (AppConfig.businessSettingsData.carrierBaseShipping &&
           element.carriers!.data!.isNotEmpty &&
           !(element.cartItems
                   ?.every((element2) => element2.isDigital ?? false) ??
               false)) {
         shippingId = element.carriers!.data!.first.id;
       }
-      print("carrier_base_shipping.${carrier_base_shipping.$}");
+      print("AppConfig.businessSettingsData.carrierBaseShipping{AppConfig.businessSettingsData.carrierBaseShipping}");
 
       _sellerWiseShippingOption.add(
           new SellerWithShipping(element.ownerId, shippingOption, shippingId));
@@ -158,7 +160,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     print(_sellerWiseShippingOptionErrors.length);
     print(jsonEncode(_sellerWiseShippingOption));
 
-    if (_sellerWiseShippingOptionErrors.isNotEmpty && carrier_base_shipping.$) {
+    if (_sellerWiseShippingOptionErrors.isNotEmpty && AppConfig.businessSettingsData.carrierBaseShipping) {
       ToastComponent.showDialog(
         LangText(context).local.please_choose_valid_info,
       );
@@ -255,7 +257,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       ),
       title: Text(
         "${AppLocalizations.of(context)!.shipping_cost_ucf} $_shipping_cost_string",
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -263,7 +265,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
   }
 
   buildHomeDeliveryORCarrier(sellerArrayIndex) {
-    if (carrier_base_shipping.$) {
+    if (AppConfig.businessSettingsData.carrierBaseShipping) {
       return buildCarrierSection(sellerArrayIndex);
     } else {
       return Container();
@@ -276,7 +278,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         child: Center(
             child: Text(
           LangText(context).local.you_need_to_log_in,
-          style: TextStyle(color: MyTheme.font_grey),
+          style: const TextStyle(color: MyTheme.font_grey),
         )));
   }
 
@@ -288,12 +290,12 @@ class _ShippingInfoState extends State<ShippingInfo> {
       return buildCarrierShimmer();
     } else if (_deliveryInfoList[sellerArrayIndex].pickupPoints!.length > 0) {
       return ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
           height: 14,
         ),
         itemCount: _deliveryInfoList[sellerArrayIndex].pickupPoints!.length,
         scrollDirection: Axis.vertical,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return buildPickupPointItemCard(index, sellerArrayIndex);
@@ -306,12 +308,12 @@ class _ShippingInfoState extends State<ShippingInfo> {
         child: Center(
           child: Text(
             AppLocalizations.of(context)!.pickup_point_is_unavailable_ucf,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
       );
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 
   GestureDetector buildPickupPointItemCard(pickupPointIndex, sellerArrayIndex) {
@@ -378,7 +380,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               buildShippingSelectMarkContainer(
                   _sellerWiseShippingOption[sellerArrayIndex].shippingId ==
                       _deliveryInfoList[sellerArrayIndex]
@@ -441,7 +443,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       child: Center(
         child: Text(
           AppLocalizations.of(context)!.carrier_points_is_unavailable_ucf,
-          style: TextStyle(color: MyTheme.font_grey),
+          style: const TextStyle(color: MyTheme.font_grey),
         ),
       ),
     );
@@ -452,11 +454,11 @@ class _ShippingInfoState extends State<ShippingInfo> {
       itemCount: _deliveryInfoList[sellerArrayIndex].carriers!.data!.length,
       scrollDirection: Axis.vertical,
       separatorBuilder: (context, index) {
-        return SizedBox(
+        return const SizedBox(
           height: 14,
         );
       },
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         // if (_sellerWiseShippingOption[sellerArrayIndex].shippingId == 0) {
@@ -514,7 +516,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               MyImage.imageNetworkPlaceholder(
                   height: 75.0,
                   width: 75.0,
-                  radius: BorderRadius.only(
+                  radius: const BorderRadius.only(
                       topLeft: Radius.circular(6),
                       bottomLeft: Radius.circular(6)),
                   url: _deliveryInfoList[sellerArrayIndex]
@@ -541,7 +543,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         _deliveryInfoList[sellerArrayIndex]
                                 .carriers!
@@ -560,7 +562,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                 child: Text(
                   _deliveryInfoList[sellerArrayIndex]
@@ -575,7 +577,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 16,
               )
             ],
@@ -602,8 +604,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0), color: Colors.green),
-            child: Padding(
-              padding: const EdgeInsets.all(3),
+            child: const Padding(
+              padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),
             ),
           )
@@ -624,7 +626,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ),
           child: Text(
             AppLocalizations.of(context)!.proceed_to_checkout,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
@@ -672,14 +674,14 @@ class _ShippingInfoState extends State<ShippingInfo> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          if (carrier_base_shipping.$)
+          if (AppConfig.businessSettingsData.carrierBaseShipping)
             buildCarrierOption(context, sellerIndex)
           else
             buildAddressOption(context, sellerIndex),
-          SizedBox(
+          const SizedBox(
             width: 14,
           ),
-          if (pick_up_status.$) buildPickUpPointOption(context, sellerIndex),
+          if (AppConfig.businessSettingsData.pickupPoint) buildPickUpPointOption(context, sellerIndex),
         ],
       ),
     );
@@ -693,8 +695,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
           : MyTheme.accent_color.withOpacity(0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          side: BorderSide(color: MyTheme.accent_color)),
-      padding: EdgeInsets.only(right: 14),
+          side: const BorderSide(color: MyTheme.accent_color)),
+      padding: const EdgeInsets.only(right: 14),
       onPressed: () {
         setState(() {
           changeShippingOption(ShippingOption.PickUpPoint, sellerIndex);
@@ -750,8 +752,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
           : MyTheme.accent_color.withOpacity(0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          side: BorderSide(color: MyTheme.accent_color)),
-      padding: EdgeInsetsDirectional.only(end: 14),
+          side: const BorderSide(color: MyTheme.accent_color)),
+      padding: const EdgeInsetsDirectional.only(end: 14),
       onPressed: () {
         changeShippingOption(ShippingOption.HomeDelivery, sellerIndex);
       },
@@ -804,8 +806,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
           : MyTheme.accent_color.withOpacity(0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          side: BorderSide(color: MyTheme.accent_color)),
-      padding: EdgeInsets.only(right: 14),
+          side: const BorderSide(color: MyTheme.accent_color)),
+      padding: const EdgeInsets.only(right: 14),
       onPressed: () {
         changeShippingOption(ShippingOption.Carrier, sellerIndex);
       },
@@ -875,7 +877,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.cart_is_empty,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
     return Container();
@@ -886,13 +888,13 @@ class _ShippingInfoState extends State<ShippingInfo> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: ListView.separated(
-          padding: EdgeInsets.only(bottom: 20),
-          separatorBuilder: (context, index) => SizedBox(
+          padding: const EdgeInsets.only(bottom: 20),
+          separatorBuilder: (context, index) => const SizedBox(
             height: 26,
           ),
           itemCount: _deliveryInfoList.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildCartSellerListItem(index, context);
@@ -910,7 +912,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           padding: const EdgeInsets.only(bottom: 12.0),
           child: Text(
             _deliveryInfoList[index].name!,
-            style: TextStyle(
+            style: const TextStyle(
                 color: MyTheme.accent_color,
                 fontWeight: FontWeight.w700,
                 fontSize: 16),
@@ -932,11 +934,11 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       fontSize: 12),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               buildChooseShippingOptions(context, index),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               buildShippingListBody(index),
@@ -949,12 +951,12 @@ class _ShippingInfoState extends State<ShippingInfo> {
   SingleChildScrollView buildCartSellerItemList(seller_index) {
     return SingleChildScrollView(
       child: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
           height: 24,
         ),
         itemCount: _deliveryInfoList[seller_index].cartItems!.length,
         scrollDirection: Axis.vertical,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return buildCartSellerItemCard(index, seller_index);
@@ -973,7 +975,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           child: AspectRatio(
             aspectRatio: 1,
             child: ClipRRect(
-              borderRadius: BorderRadius.horizontal(
+              borderRadius: const BorderRadius.horizontal(
                   left: Radius.circular(6), right: Radius.zero),
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/placeholder.png',
@@ -985,10 +987,10 @@ class _ShippingInfoState extends State<ShippingInfo> {
             ),
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -1000,7 +1002,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         .productName!,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 12,
                         fontWeight: FontWeight.w400),
@@ -1023,7 +1025,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.accent_color,
                           fontSize: 16,
                           fontWeight: FontWeight.w700),

@@ -6,7 +6,6 @@ import '../../../app_config.dart';
 import '../../../custom/box_decorations.dart';
 import '../../../custom/device_info.dart';
 import '../../../custom/lang_text.dart';
-import '../../../helpers/shared_value_helper.dart';
 import '../../orders/order_details.dart';
 import 'image_show.dart';
 
@@ -22,7 +21,7 @@ class NotificationListCard extends StatefulWidget {
   final String? image;
   final bool? isChecked;
   final Function(String, bool) onSelect;
-  NotificationListCard(
+  const NotificationListCard(
       {Key? key,
       this.id,
       this.isChecked,
@@ -66,10 +65,10 @@ class _NotificationListCardState extends State<NotificationListCard> {
       onTap: () => _onTap(context),
       child: Container(
         decoration: BoxDecorations.buildBoxDecoration_1(),
-        margin: EdgeInsets.symmetric(horizontal: 16.0),
+        margin: const EdgeInsets.symmetric(horizontal: 16.0),
         width: DeviceInfo(context).width,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
           child: Row(
             children: [
               Container(
@@ -84,10 +83,10 @@ class _NotificationListCardState extends State<NotificationListCard> {
                 ),
               ),
               ImageShow(
-                notificationShowType: notificationShowType.$,
+                notificationShowType: AppConfig.businessSettingsData.notificationShowType ?? '',
                 image: widget.image ?? "",
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               Expanded(
                 // Wrap the Column with Expanded
                 child: Column(
@@ -114,7 +113,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${widget.orderCode}",
-                                style: TextStyle(color: MyTheme.accent_color),
+                                style: const TextStyle(color: MyTheme.accent_color),
                               ),
                               TextSpan(
                                 text:
@@ -124,7 +123,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                           ),
                         ),
                       ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       '${widget.dateTime}',
                       style: TextStyle(color: MyTheme.medium_grey),

@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../app_config.dart';
+
 class AIZRoute {
   static Otp otpRoute(BuildContext context) => Otp(
     title: AppLocalizations.of(context)!.verifyYourAccount,
@@ -113,7 +115,7 @@ class AIZRoute {
             return false;
           }else{
             if(SystemConfig.systemUser!.phone != null){
-              if(!must_otp.$) return false;
+              if(!AppConfig.businessSettingsData.mustOtp) return false;
             }
             return true;
           }

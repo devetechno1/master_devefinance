@@ -161,10 +161,10 @@ class _LoginState extends State<Login> {
       if (loginResponse.user!.emailVerified!) {
         context.push("/");
       } else {
-        if ((mail_verification_status.$ && _login_by == "email") ||
-            (must_otp.$ && _login_by == "phone")) {
+        if ((AppConfig.businessSettingsData.mailVerificationStatus && _login_by == "email") ||
+            (AppConfig.businessSettingsData.mustOtp && _login_by == "phone")) {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Otp(
+            return const Otp(
               fromRegistration: false ,
                 // verify_by: _register_by,
                 // user_id: signupResponse.user_id,
@@ -204,7 +204,7 @@ class _LoginState extends State<Login> {
 
           AuthHelper().setUserData(loginResponse);
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Main();
+            return const Main();
           }));
           FacebookAuth.instance.logOut();
         }
@@ -248,7 +248,7 @@ class _LoginState extends State<Login> {
         );
         AuthHelper().setUserData(loginResponse);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Main();
+          return const Main();
         }));
       }
       GoogleSignIn().disconnect();
@@ -349,7 +349,7 @@ class _LoginState extends State<Login> {
         );
         AuthHelper().setUserData(loginResponse);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Main();
+          return const Main();
         }));
       }
     } on Exception catch (e) {
@@ -393,7 +393,7 @@ class _LoginState extends State<Login> {
                   _login_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.login_screen_phone,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -422,7 +422,7 @@ class _LoginState extends State<Login> {
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .or_login_with_a_phone,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: MyTheme.accent_color,
                                   fontStyle: FontStyle.italic,
                                 ),
@@ -454,19 +454,19 @@ class _LoginState extends State<Login> {
                           onInputValidated: (bool value) {
                             print(value);
                           },
-                          selectorConfig: SelectorConfig(
+                          selectorConfig: const SelectorConfig(
                             selectorType: PhoneInputSelectorType.DIALOG,
                           ),
                           ignoreBlank: false,
                           autoValidateMode: AutovalidateMode.disabled,
                           selectorTextStyle:
-                              TextStyle(color: MyTheme.font_grey),
-                          textStyle: TextStyle(color: MyTheme.font_grey),
+                              const TextStyle(color: MyTheme.font_grey),
+                          textStyle: const TextStyle(color: MyTheme.font_grey),
                           // initialValue: PhoneNumber(
                           //     isoCode: countries_code[0].toString()),
                           textFieldController: _phoneNumberController,
                           formatInput: true,
-                          keyboardType: TextInputType.numberWithOptions(
+                          keyboardType: const TextInputType.numberWithOptions(
                               signed: true, decimal: true),
                           inputDecoration:
                               InputDecorations.buildInputDecoration_phone(
@@ -484,7 +484,7 @@ class _LoginState extends State<Login> {
                         },
                         child: Text(
                           AppLocalizations.of(context)!.or_login_with_an_email,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: MyTheme.accent_color,
                             fontStyle: FontStyle.italic,
                           ),
@@ -497,7 +497,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -528,7 +528,7 @@ class _LoginState extends State<Login> {
                       child: Text(
                         AppLocalizations.of(context)!
                             .login_screen_forgot_password,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: MyTheme.accent_color,
                           fontStyle: FontStyle.italic,
                         ),
@@ -550,12 +550,12 @@ class _LoginState extends State<Login> {
                     minWidth: MediaQuery.of(context).size.width,
                     height: 50,
                     color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(6.0))),
+                            BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
                       AppLocalizations.of(context)!.login_screen_log_in,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,
                           fontWeight: FontWeight.w600),
@@ -572,7 +572,7 @@ class _LoginState extends State<Login> {
                     child: Text(
                   AppLocalizations.of(context)!
                       .login_screen_or_create_new_account,
-                  style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                  style: const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                 )),
               ),
               Container(
@@ -581,12 +581,12 @@ class _LoginState extends State<Login> {
                   minWidth: MediaQuery.of(context).size.width,
                   height: 50,
                   color: MyTheme.amber,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(6.0))),
+                          BorderRadius.all(Radius.circular(6.0))),
                   child: Text(
                     AppLocalizations.of(context)!.login_screen_sign_up,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
@@ -599,7 +599,7 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-              if (Platform.isIOS && allow_apple_login.$)
+              if (Platform.isIOS && AppConfig.businessSettingsData.allowAppleLogin)
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: SignInWithAppleButton(
@@ -609,13 +609,13 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               Visibility(
-                visible: allow_google_login.$ || allow_facebook_login.$,
+                visible: AppConfig.businessSettingsData.allowGoogleLogin || AppConfig.businessSettingsData.allowFacebookLogin,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Center(
                       child: Text(
                     AppLocalizations.of(context)!.login_screen_login_with,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                   )),
                 ),
               ),
@@ -627,7 +627,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Visibility(
-                          visible: allow_google_login.$,
+                          visible: AppConfig.businessSettingsData.allowGoogleLogin,
                           child: InkWell(
                             onTap: () {
                               onPressedGoogleLogin();
@@ -641,7 +641,7 @@ class _LoginState extends State<Login> {
                         Padding(
                           padding: const EdgeInsets.only(left: 15.0),
                           child: Visibility(
-                            visible: allow_facebook_login.$,
+                            visible: AppConfig.businessSettingsData.allowFacebookLogin,
                             child: InkWell(
                               onTap: () {
                                 onPressedFacebookLogin();
@@ -653,7 +653,7 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-                        // if (allow_twitter_login.$)
+                        // if (AppConfig.businessSettingsData.allow_twitter_login.$)
                         //   Padding(
                         //     padding: const EdgeInsets.only(left: 15.0),
                         //     child: InkWell(

@@ -178,8 +178,8 @@ class _RegistrationState extends State<Registration> {
 
       // context.go("/");
 
-      if ((mail_verification_status.$ && _register_by == "email") ||
-          (must_otp.$ && _register_by == "phone")) {
+      if ((AppConfig.businessSettingsData.mailVerificationStatus&& _register_by == "email") ||
+          (AppConfig.businessSettingsData.mustOtp && _register_by == "phone")) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Otp(
             fromRegistration: true,
@@ -398,7 +398,7 @@ class _RegistrationState extends State<Registration> {
                   ),
                 ),
               ),
-              if (google_recaptcha.$)
+              if (AppConfig.businessSettingsData.googleRecaptcha)
                 Container(
                   height: _isCaptchaShowing ? 350 : 50,
                   width: 300,

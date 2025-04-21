@@ -103,17 +103,17 @@ class _ProfileState extends State<Profile> {
     fetchAll();
   }
 
-  fetchAll() {
+  void fetchAll() {
     fetchCounters();
     getNotificationCount();
   }
 
-  getNotificationCount() async {
+  Future<void> getNotificationCount() async {
     Provider.of<UnReadNotificationCounter>(context, listen: false).getCount();
   }
 
-  fetchCounters() async {
-    var profileCountersResponse =
+  Future<void> fetchCounters() async {
+    final profileCountersResponse =
         await ProfileRepository().getProfileCountersResponse();
 
     _cartCounter = profileCountersResponse.cart_item_count;
@@ -130,9 +130,9 @@ class _ProfileState extends State<Profile> {
     setState(() {});
   }
 
-  deleteAccountReq() async {
+  Future<void> deleteAccountReq() async {
     loading();
-    var response = await AuthRepository().getAccountDeleteResponse();
+    final response = await AuthRepository().getAccountDeleteResponse();
 
     if (response.result) {
       AuthHelper().clearUserData();
@@ -143,23 +143,23 @@ class _ProfileState extends State<Profile> {
   }
 
   String counterText(String txt, {default_length = 3}) {
-    var blank_zeros = default_length == 3 ? "000" : "00";
-    var leading_zeros = "";
+    final blankZeros = default_length == 3 ? "000" : "00";
+    var leadingZeros = "";
     if (default_length == 3 && txt.length == 1) {
-      leading_zeros = "00";
+      leadingZeros = "00";
     } else if (default_length == 3 && txt.length == 2) {
-      leading_zeros = "0";
+      leadingZeros = "0";
     } else if (default_length == 2 && txt.length == 1) {
-      leading_zeros = "0";
+      leadingZeros = "0";
     }
 
-    var newtxt = (txt == "" || txt == null.toString()) ? blank_zeros : txt;
+    var newtxt = (txt == "" || txt == null.toString()) ? blankZeros : txt;
 
     // print(txt + " " + default_length.toString());
     // print(newtxt);
 
     if (default_length > txt.length) {
-      newtxt = leading_zeros + newtxt;
+      newtxt = leadingZeros + newtxt;
     }
     //print(newtxt);
 
@@ -257,11 +257,11 @@ class _ProfileState extends State<Profile> {
               Align(
                 alignment: AlignmentDirectional.topEnd,
                 child: Padding(
-                  padding: EdgeInsetsDirectional.only(end: 18,bottom: 12),
+                  padding: const EdgeInsetsDirectional.only(end: 18,bottom: 12),
                   child: InkWell(
                     onTap: () => Navigator.pop(context),
                     borderRadius: BorderRadius.circular(100),
-                    child: SizedBox(
+                    child: const SizedBox(
                       height: 30,
                       width: 30,
                       child: Icon(
@@ -290,8 +290,8 @@ class _ProfileState extends State<Profile> {
 
   Widget buildBottomVerticalCardList() {
     return Container(
-      margin: EdgeInsets.only(bottom: 120, top: 14),
-      padding: EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+      margin: const EdgeInsets.only(bottom: 120, top: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Column(
         children: [
@@ -339,7 +339,7 @@ class _ProfileState extends State<Profile> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => WholesalesScreen()));
+                          builder: (context) => const WholesalesScreen()));
                 }),
                 Divider(
                   thickness: 1,
@@ -353,7 +353,7 @@ class _ProfileState extends State<Profile> {
               buildBottomVerticalCardListItem("assets/blog.png", LangText(context).local.blog_list_ucf,
                   onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BlogListScreen()));
+                    MaterialPageRoute(builder: (context) => const BlogListScreen()));
               }),
               Divider(
                 thickness: 1,
@@ -376,7 +376,7 @@ class _ProfileState extends State<Profile> {
               "assets/coupon.png", LangText(context).local.coupons_ucf,
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Coupons();
+              return const Coupons();
             }));
           }),
             Divider(
@@ -435,14 +435,14 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-          if (classified_product_status.$)
+          if (AppConfig.businessSettingsData.classifiedProduct)
             Column(
               children: [
                 buildBottomVerticalCardListItem(
                     "assets/my_clissified.png", LangText(context).local.my_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MyClassifiedAds();
+                    return const MyClassifiedAds();
                   }));
                 }),
                 Divider(
@@ -452,7 +452,7 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 /////
-          if (classified_product_status.$)
+          if (AppConfig.businessSettingsData.classifiedProduct)
             Column(
               children: [
                 buildBottomVerticalCardListItem(
@@ -469,14 +469,14 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          if (last_viewed_product_status.$ && is_logged_in.$)
+          if (AppConfig.businessSettingsData.lastViewedProductActivation && is_logged_in.$)
             Column(
               children: [
                 buildBottomVerticalCardListItem("assets/last_view_product.png",
                     LangText(context).local.last_view_product_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return LastViewProduct();
+                    return const LastViewProduct();
                   }));
                 }),
                 Divider(
@@ -507,7 +507,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   height: _auctionExpand
                       ? is_logged_in.$
                           ? 150
@@ -558,7 +558,7 @@ class _ProfileState extends State<Profile> {
                         const SizedBox(height: 10),
                         Flexible(
                           child: AnimatedScale(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             scale: _auctionExpand ? 1 : 0,
                             alignment: app_language_rtl.$ == true? Alignment.centerRight : Alignment.centerLeft,
                             child: Container(
@@ -602,7 +602,7 @@ class _ProfileState extends State<Profile> {
                                           onTap: () => OneContext().push(
                                             MaterialPageRoute(
                                               builder: (_) =>
-                                                  AuctionBiddedProducts(),
+                                                  const AuctionBiddedProducts(),
                                             ),
                                           ),
                                           child: Row(
@@ -630,7 +630,7 @@ class _ProfileState extends State<Profile> {
                                           onTap: () => OneContext().push(
                                             MaterialPageRoute(
                                               builder: (_) =>
-                                                  AuctionPurchaseHistory(),
+                                                  const AuctionPurchaseHistory(),
                                             ),
                                           ),
                                           child: Row(
@@ -668,7 +668,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-          if (vendor_system.$)
+          if (AppConfig.businessSettingsData.classifiedProduct)
             Column(
               children: [
                 buildBottomVerticalCardListItem("assets/shop.png",
@@ -687,14 +687,14 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          if (is_logged_in.$ && (vendor_system.$))
+          if (is_logged_in.$ && (AppConfig.businessSettingsData.classifiedProduct))
             Column(
               children: [
                 buildBottomVerticalCardListItem("assets/follow_seller.png",
                     LangText(context).local.followed_sellers_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return FollowedSellers();
+                    return const FollowedSellers();
                   }));
                 }),
                 Divider(
@@ -777,7 +777,7 @@ class _ProfileState extends State<Profile> {
   // change Language, Edit Profile and Address section
   Widget buildHorizontalSettings() {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -806,13 +806,13 @@ class _ProfileState extends State<Profile> {
                   width: 16,
                   color: MyTheme.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
                   AppLocalizations.of(context)!.currency_ucf,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 10,
                       color: MyTheme.white,
                       fontWeight: FontWeight.w500),
@@ -841,7 +841,7 @@ class _ProfileState extends State<Profile> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return Address();
+                            return const Address();
                           },
                         ),
                       );
@@ -864,7 +864,7 @@ class _ProfileState extends State<Profile> {
             width: 16,
             color: isLogin ? MyTheme.white : MyTheme.blue_grey,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
@@ -880,13 +880,13 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  showLoginWarning() {
+  dynamic showLoginWarning() {
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
     );
   }
 
-  deleteWarningDialog() {
+  Future deleteWarningDialog() {
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -916,7 +916,7 @@ class _ProfileState extends State<Profile> {
 
   Widget buildSettingAndAddonsHorizontalMenu() {
     return Container(
-      margin: EdgeInsets.only(top: 14),
+      margin: const EdgeInsets.only(top: 14),
       width: DeviceInfo(context).width,
       height: 208,
       alignment: Alignment.center,
@@ -924,7 +924,7 @@ class _ProfileState extends State<Profile> {
           color: Colors.white, borderRadius: BorderRadius.circular(6)),
       child: GridView(
         scrollDirection: Axis.horizontal,
-        padding:  EdgeInsets.symmetric(vertical: 2, horizontal: 25),
+        padding:  const EdgeInsets.symmetric(vertical: 2, horizontal: 25),
         physics: const PageScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 50.0,
@@ -934,7 +934,7 @@ class _ProfileState extends State<Profile> {
         shrinkWrap: true,
         cacheExtent: 5.0,
         children: [
-          if (wallet_system_status.$)
+          if (AppConfig.businessSettingsData.walletSystem)
             Container(
               child: buildSettingAndAddonsHorizontalMenuItem(
                   "assets/wallet.png",
@@ -978,14 +978,14 @@ class _ProfileState extends State<Profile> {
                 shape: badges.BadgeShape.circle,
                 badgeColor: MyTheme.accent_color,
                 borderRadius: BorderRadius.circular(10),
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
               ),
               ignorePointer: true,
               badgeContent: Consumer<UnReadNotificationCounter>(
                 builder: (context, notification, child) {
                   return Text(
                     "${notification.unReadNotificationCounter}",
-                    style: TextStyle(fontSize: 10, color: Colors.white),
+                    style: const TextStyle(fontSize: 10, color: Colors.white),
                   );
                 },
               ),
@@ -995,7 +995,7 @@ class _ProfileState extends State<Profile> {
                   is_logged_in.$
                       ? () {
                           Navigator.push(context,
-                                  PageAnimation.fadeRoute(NotificationList()))
+                                  PageAnimation.fadeRoute(const NotificationList()))
                               .then((value) {
                             onPopped(value);
                           });
@@ -1013,7 +1013,7 @@ class _ProfileState extends State<Profile> {
                             context, PageAnimation.fadeRoute(RefundRequest()));
                       }
                     : () => null),
-          if (conversation_system_status.$)
+          if (AppConfig.businessSettingsData.conversationSystem)
             buildSettingAndAddonsHorizontalMenuItem(
                 "assets/messages.png",
                 AppLocalizations.of(context)!.messages_ucf,
@@ -1025,14 +1025,14 @@ class _ProfileState extends State<Profile> {
                     : () => null),
           // if (auction_addon_installed.$)
           if (false)
-            if (classified_product_status.$)
+            if (AppConfig.businessSettingsData.classifiedProduct)
               buildSettingAndAddonsHorizontalMenuItem(
                   "assets/classified_product.png",
                   AppLocalizations.of(context)!.classified_products,
                   is_logged_in.$
                       ? () {
                           Navigator.push(context,
-                              PageAnimation.fadeRoute(MyClassifiedAds()));
+                              PageAnimation.fadeRoute(const MyClassifiedAds()));
                         }
                       : () => null),
 
@@ -1051,7 +1051,7 @@ class _ProfileState extends State<Profile> {
               is_logged_in.$
                   ? () {
                       Navigator.push(
-                          context, PageAnimation.fadeRoute(UploadFile()));
+                          context, PageAnimation.fadeRoute(const UploadFile()));
                     }
                   : () => null),
           // notification and badge contents
@@ -1083,7 +1083,7 @@ class _ProfileState extends State<Profile> {
                   ? MyTheme.dark_font_grey
                   : MyTheme.medium_grey_50,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -1109,7 +1109,7 @@ class _ProfileState extends State<Profile> {
         buildCountersRowItem(
           _cartCounterString,
           AppLocalizations.of(context)!.in_your_cart_all_lower,
-          onTap: () =>  Navigator.push(context, PageAnimation.fadeRoute(Cart(has_bottomnav: false))),
+          onTap: () =>  Navigator.push(context, PageAnimation.fadeRoute(const Cart(has_bottomnav: false))),
         ),
         buildCountersRowItem(
           _wishlistCounterString,
@@ -1133,8 +1133,8 @@ class _ProfileState extends State<Profile> {
       : null,
       borderRadius: BorderRadius.circular(6),
       child: Container(
-        margin: EdgeInsets.only(top: 20),
-        padding: EdgeInsets.symmetric(vertical: 14),
+        margin: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         width: DeviceInfo(context).width! / 3.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
@@ -1151,13 +1151,13 @@ class _ProfileState extends State<Profile> {
                   color: MyTheme.dark_font_grey,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
               title,
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xff3E4447),
               ),
             ),
@@ -1197,7 +1197,7 @@ class _ProfileState extends State<Profile> {
               child: is_logged_in.$
                   ? ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(100.0)),
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
                         image: "${avatar_original.$}",
@@ -1212,18 +1212,18 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           buildUserInfo(),
-          Spacer(),
+          const Spacer(),
           Btn.basic(
-            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
             // 	rgb(50,205,50)
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
-                side: BorderSide(color: MyTheme.white)),
+                side: const BorderSide(color: MyTheme.white)),
             child: Text(
               is_logged_in.$
                   ? AppLocalizations.of(context)!.logout_ucf
                   : LangText(context).local.login_ucf,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 10,
                   fontWeight: FontWeight.w500),
@@ -1248,7 +1248,7 @@ class _ProfileState extends State<Profile> {
             children: [
               Text(
                 "${user_name.$}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     color: MyTheme.white,
                     fontWeight: FontWeight.w600),
@@ -1266,7 +1266,7 @@ class _ProfileState extends State<Profile> {
           )
         : Text(
             LangText(context).local.login_or_reg,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 14,
                 color: MyTheme.white,
                 fontWeight: FontWeight.bold),
@@ -1281,8 +1281,8 @@ class _ProfileState extends State<Profile> {
           return AlertDialog(
               content: Row(
             children: [
-              CircularProgressIndicator(),
-              SizedBox(
+              const CircularProgressIndicator(),
+              const SizedBox(
                 width: 10,
               ),
               Text("${AppLocalizations.of(context)!.please_wait_ucf}"),

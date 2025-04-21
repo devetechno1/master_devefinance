@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_config.dart';
 import '../../custom/cart_seller_item_list_widget.dart';
 import '../../custom/lang_text.dart';
 import '../../presenter/cart_provider.dart';
@@ -97,9 +98,9 @@ class _CartState extends State<_Cart> {
                               text: TextSpan(
                                 style: TextStyle(color: Colors.white),
                                 children: [
-                                  TextSpan(text: '${LangText(context).local.minimum_order_qty_is} ${minimum_order_quantity.$} , '),
+                                  TextSpan(text: '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
                                   TextSpan(text: LangText(context).local.remaining),
-                                  TextSpan(text: ' ${minimum_order_quantity.$ - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
+                                  TextSpan(text: ' ${AppConfig.businessSettingsData.minimumOrderQuantity - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
                                 ]
                               ),
                             ),
@@ -117,9 +118,9 @@ class _CartState extends State<_Cart> {
                               text: TextSpan(
                                 style: TextStyle(color: Colors.white),
                                 children: [
-                                  TextSpan(text: '${LangText(context).local.minimum_order_amount_is} ${minimum_order_amount.$} , '),
+                                  TextSpan(text: '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
                                   TextSpan(text: LangText(context).local.remaining),
-                                  TextSpan(text: ' ${minimum_order_amount.$ - cartProvider.cartTotal} '),
+                                  TextSpan(text: ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
                                 ]
                               ),
                             ),

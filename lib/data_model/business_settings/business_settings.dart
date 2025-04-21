@@ -8,54 +8,55 @@ import '../../screens/home/home_page_type_enum.dart';
 import 'verification_form.dart';
 
 class BusinessSettingsData extends Equatable {
-  final bool? homeDefaultCurrency;
-  final bool? systemDefaultCurrency;
-  final bool? currencyFormat;
-  final bool? symbolFormat;
-  final bool? noOfDecimals;
-  final bool? productActivation;
-  final bool? vendorSystemActivation;
-  final bool? showVendors;
-  final bool? cashPayment;
-  final bool? payumoneyPayment;
-  final bool? bestSelling;
-  final bool? paypalSandbox;
-  final bool? sslcommerzSandbox;
-  final bool? vendorCommission;
+  final bool allowTwitterLogin;
+  final bool allowGoogleLogin;
+  final bool allowFacebookLogin;
+  final bool allowAppleLogin;
+  final bool homeDefaultCurrency;
+  final bool systemDefaultCurrency;
+  final bool currencyFormat;
+  final bool symbolFormat;
+  final bool noOfDecimals;
+  final bool productActivation;
+  final bool vendorSystemActivation;
+  final bool showVendors;
+  final bool cashPayment;
+  final bool payumoneyPayment;
+  final bool bestSelling;
+  final bool paypalSandbox;
+  final bool sslcommerzSandbox;
+  final bool vendorCommission;
   final List<VerificationForm>? verificationForm;
-  final bool? googleAnalytics;
-  final bool? facebookLogin;
-  final bool? googleLogin;
-  final bool? twitterLogin;
-  final bool? payumoneySandbox;
-  final bool? facebookChat;
-  final bool? emailVerification;
-  final bool? walletSystem;
-  final bool? couponSystem;
-  final bool? currentVersion;
-  final bool? instamojoSandbox;
-  final bool? pickupPoint;
-  final bool? maintenanceMode;
-  final bool? voguepaySandbox;
-  final bool? categoryWiseCommission;
-  final bool? conversationSystem;
-  final bool? guestCheckoutActive;
-  final bool? facebookPixel;
-  final bool? classifiedProduct;
-  final bool? posActivationForSeller;
-  final bool? shippingType;
-  final bool? flatRateShippingCost;
-  final bool? shippingCostAdmin;
-  final bool? payhereSandbox;
-  final bool? googleRecaptcha;
-  final bool? headerLogo;
-  final bool? showLanguageSwitcher;
-  final bool? showCurrencySwitcher;
-  final bool? headerStikcy;
-  final bool? footerLogo;
+  final bool googleAnalytics;
+  final bool payumoneySandbox;
+  final bool facebookChat;
+  final bool mailVerificationStatus;
+  final bool walletSystem;
+  final bool couponSystem;
+  final bool currentVersion;
+  final bool instamojoSandbox;
+  final bool pickupPoint;
+  final bool maintenanceMode;
+  final bool voguepaySandbox;
+  final bool categoryWiseCommission;
+  final bool conversationSystem;
+  final bool guestCheckoutActive;
+  final bool facebookPixel;
+  final bool classifiedProduct;
+  final bool posActivationForSeller;
+  final String? shippingType;
+  final bool flatRateShippingCost;
+  final bool shippingCostAdmin;
+  final bool payhereSandbox;
+  final bool googleRecaptcha;
+  final bool headerLogo;
+  final bool showLanguageSwitcher;
+  final bool showCurrencySwitcher;
+  final bool headerStikcy;
+  final bool footerLogo;
   final String? aboutUsDescription;
   final dynamic contactAddress;
-  final bool? contactPhone;
+  final bool contactPhone;
   final dynamic contactEmail;
   final dynamic widgetOneLabels;
   final dynamic widgetOneLinks;
@@ -68,18 +69,18 @@ class BusinessSettingsData extends Equatable {
   final dynamic youtubeLink;
   final dynamic linkedinLink;
   final dynamic paymentMethodImages;
-  final bool? homeSliderImages;
-  final bool? homeSliderLinks;
-  final bool? homeBanner1Images;
-  final bool? homeBanner1Links;
-  final bool? homeBanner2Images;
-  final bool? homeBanner2Links;
-  final bool? homeCategories;
-  final bool? top10Categories;
-  final bool? top10Brands;
-  final bool? websiteName;
+  final bool homeSliderImages;
+  final bool homeSliderLinks;
+  final bool homeBanner1Images;
+  final bool homeBanner1Links;
+  final bool homeBanner2Images;
+  final bool homeBanner2Links;
+  final bool homeCategories;
+  final bool top10Categories;
+  final bool top10Brands;
+  final bool websiteName;
   final dynamic siteMotto;
-  final bool? siteIcon;
+  final bool siteIcon;
   final Color? baseColor;
   final Color? baseHovColor;
   final dynamic metaTitle;
@@ -87,28 +88,28 @@ class BusinessSettingsData extends Equatable {
   final dynamic metaKeywords;
   final dynamic metaImage;
   final String? siteName;
-  final bool? systemLogoWhite;
-  final bool? systemLogoBlack;
+  final bool systemLogoWhite;
+  final bool systemLogoBlack;
   final dynamic timezone;
   final dynamic adminLoginBackground;
   final String? iyzicoSandbox;
   final String? decimalSeparator;
   final String? bkashSandbox;
-  final bool? headerMenuLabels;
-  final bool? headerMenuLinks;
+  final bool headerMenuLabels;
+  final bool headerMenuLinks;
   final String? proxypay;
   final String? proxypaySandbox;
   final String? googleMap;
   final String? googleFirebase;
   final String? authorizenetSandbox;
   final dynamic minOrderAmountCheckActivat;
-  final bool? minimumOrderAmount;
+  final double minimumOrderAmount;
   final String? itemName;
-  final bool? aamarpaySandbox;
+  final bool aamarpaySandbox;
   final Color? secondaryBaseColor;
   final Color? secondaryBaseHovColor;
   final String? headerNavMenuText;
-  final HomePageType? selectedHomePage;
+  final HomePageType selectedHomePage;
   final dynamic todaysDealSectionBg;
   final Color? todaysDealSectionBgColor;
   final Color? flashDealBgColor;
@@ -116,7 +117,7 @@ class BusinessSettingsData extends Equatable {
   final String? flashDealBannerMenuText;
   final Color? todaysDealBannerTextColor;
   final String? couponBackgroundImage;
-  final bool? adminLoginPageImage;
+  final bool adminLoginPageImage;
   final String? customerLoginPageImage;
   final dynamic customerRegisterPageImage;
   final dynamic sellerLoginPageImage;
@@ -139,7 +140,7 @@ class BusinessSettingsData extends Equatable {
   final String? newProductCardBgSubtitle;
   final String? newProductCardText;
   final String? featuredCategoriesText;
-  final String? guestCheckoutActivation;
+  final bool guestCheckoutStatus;
   final String? sliderSectionFullWidth;
   final Color? sliderSectionBgColor;
   final List<String>? homeBanner4Images;
@@ -148,33 +149,33 @@ class BusinessSettingsData extends Equatable {
   final List <String>? homeBanner5Links;
   final List <String>? homeBanner6Images;
   final List <String>? homeBanner6Links;
-  final String? lastViewedProductActivation;
+  final bool lastViewedProductActivation;
   final String? customAlertLocation;
   final String? notificationShowType;
   final Color? cuponTextColor;
-  final bool? flashDealSectionOutline;
+  final bool flashDealSectionOutline;
   final Color? flashDealSectionOutlineColor;
   final Color? featuredSectionBgColor;
-  final bool? featuredSectionOutline;
+  final bool featuredSectionOutline;
   final Color? featuredSectionOutlineColor;
   final Color? bestSellingSectionBgColor;
-  final bool? bestSellingSectionOutline;
+  final bool bestSellingSectionOutline;
   final Color? bestSellingSectionOutlineColor;
   final Color? newProductsSectionBgColor;
-  final bool? newProductsSectionOutline;
+  final bool newProductsSectionOutline;
   final Color? newProductsSectionOutlineColor;
   final Color? homeCategoriesSectionBgColor;
   final Color? homeCategoriesContentBgColor;
-  final bool? homeCategoriesContentOutline;
+  final bool homeCategoriesContentOutline;
   final Color? homeCategoriesContentOutlineColor;
   final Color? classifiedSectionBgColor;
-  final bool? classifiedSectionOutline;
+  final bool classifiedSectionOutline;
   final Color? classifiedSectionOutlineColor;
   final Color? sellersSectionBgColor;
-  final bool? sellersSectionOutline;
+  final bool sellersSectionOutline;
   final Color? sellersSectionOutlineColor;
   final Color? brandsSectionBgColor;
-  final bool? brandsSectionOutline;
+  final bool brandsSectionOutline;
   final Color? brandsSectionOutlineColor;
   final String? uploadedImageFormat;
   final String? productExternalLinkForSeller;
@@ -195,7 +196,7 @@ class BusinessSettingsData extends Equatable {
   final String? phonepePayment;
   final String? phonepeSandbox;
   final dynamic headerScript;
-  final bool? footerScript;
+  final bool footerScript;
   final String? topbarBanner;
   final String? topbarBannerMedium;
   final String? topbarBannerSmall;
@@ -203,34 +204,34 @@ class BusinessSettingsData extends Equatable {
   final dynamic helplineNumber;
   final dynamic playStoreLink;
   final dynamic appStoreLink;
-  final bool? footerTitle;
-  final bool? footerDescription;
+  final bool footerTitle;
+  final bool footerDescription;
   final String? disableImageOptimization;
   final String? viewProductOutOfStock;
   final String? posAcceptsNegativeQuantity;
-  final bool? googleMapLongtitude;
-  final bool? googleMapLatitude;
+  final bool googleMapLongtitude;
+  final bool googleMapLatitude;
   final String? adminNotifications;
   final String? adminRealertNotification;
   final String? printWidth;
-  final bool? todaysDealBanner;
-  final bool? todaysDealBannerSmall;
+  final bool todaysDealBanner;
+  final bool todaysDealBannerSmall;
   final Color? todaysDealBgColor;
-  final bool? posThermalInvoiceCompanyLogo;
-  final bool? posThermalInvoiceCompanyName;
-  final bool? posThermalInvoiceCompanyPhone;
-  final bool? posThermalInvoiceCompanyEmail;
+  final bool posThermalInvoiceCompanyLogo;
+  final bool posThermalInvoiceCompanyName;
+  final bool posThermalInvoiceCompanyPhone;
+  final bool posThermalInvoiceCompanyEmail;
   final dynamic flashDealBanner;
   final dynamic flashDealBannerSmall;
-  final dynamic minimumOrderAmountCheck;
-  final dynamic minimumOrderQuantityCheck;
-  final bool? minimumOrderQuantity;
-  final bool? homeBanner3Images;
-  final bool? homeBanner3Links;
+  final bool minimumOrderAmountCheck;
+  final bool minimumOrderQuantityCheck;
+  final int minimumOrderQuantity;
+  final bool homeBanner3Images;
+  final bool homeBanner3Links;
   final String? auctionBannerImage;
   final dynamic classifiedBannerImage;
   final dynamic classifiedBannerImageSmall;
-  final bool? topBrands;
+  final bool topBrands;
   final String? posThermalInvoiceHeadDetailsFs;
   final String? posThermalInvoiceProductTableFs;
   final String? posThermalInvoiceFooterDetailsFs;
@@ -241,65 +242,69 @@ class BusinessSettingsData extends Equatable {
   final dynamic watermarkTextSize;
   final Color? watermarkTextColor;
   final String? watermarkPosition;
-  final bool? productManageByAdmin;
-  final bool? productApproveByAdmin;
-  final bool? productQueryActivation;
-  final bool? mustOtp;
+  final bool productManageByAdmin;
+  final bool productApproveByAdmin;
+  final bool productQueryActivation;
+  final bool mustOtp;
   final Color? cuponBackgroundColor;
-  final bool? cuponTitle;
-  final bool? cuponSubtitle;
+  final bool cuponTitle;
+  final bool cuponSubtitle;
   final double? deliveryPickupLongitude;
   final double? deliveryPickupLatitude;
 
+
+  bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
+
   const BusinessSettingsData({
-    this.homeDefaultCurrency,
-    this.systemDefaultCurrency,
-    this.currencyFormat,
-    this.symbolFormat,
-    this.noOfDecimals,
-    this.productActivation,
-    this.vendorSystemActivation,
-    this.showVendors,
-    this.cashPayment,
-    this.payumoneyPayment,
-    this.bestSelling,
-    this.paypalSandbox,
-    this.sslcommerzSandbox,
-    this.vendorCommission,
+    this.allowTwitterLogin = false,
+    this.allowGoogleLogin = false,
+    this.allowFacebookLogin = false,
+    this.allowAppleLogin = false,
+    this.homeDefaultCurrency = false,
+    this.systemDefaultCurrency = false,
+    this.currencyFormat = false,
+    this.symbolFormat = false,
+    this.noOfDecimals = false,
+    this.productActivation = false,
+    this.vendorSystemActivation = false,
+    this.showVendors = false,
+    this.cashPayment = false,
+    this.payumoneyPayment = false,
+    this.bestSelling = false,
+    this.paypalSandbox = false,
+    this.sslcommerzSandbox = false,
+    this.vendorCommission = false,
     this.verificationForm,
-    this.googleAnalytics,
-    this.facebookLogin,
-    this.googleLogin,
-    this.twitterLogin,
-    this.payumoneySandbox,
-    this.facebookChat,
-    this.emailVerification,
-    this.walletSystem,
-    this.couponSystem,
-    this.currentVersion,
-    this.instamojoSandbox,
-    this.pickupPoint,
-    this.maintenanceMode,
-    this.voguepaySandbox,
-    this.categoryWiseCommission,
-    this.conversationSystem,
-    this.guestCheckoutActive,
-    this.facebookPixel,
-    this.classifiedProduct,
-    this.posActivationForSeller,
+    this.googleAnalytics = false,
+    this.payumoneySandbox = false,
+    this.facebookChat = false,
+    this.mailVerificationStatus = false,
+    this.walletSystem = false,
+    this.couponSystem = false,
+    this.currentVersion = false,
+    this.instamojoSandbox = false,
+    this.pickupPoint = false,
+    this.maintenanceMode = false,
+    this.voguepaySandbox = false,
+    this.categoryWiseCommission = false,
+    this.conversationSystem = false,
+    this.guestCheckoutActive = false,
+    this.facebookPixel = false,
+    this.classifiedProduct = false,
+    this.posActivationForSeller = false,
     this.shippingType,
-    this.flatRateShippingCost,
-    this.shippingCostAdmin,
-    this.payhereSandbox,
-    this.googleRecaptcha,
-    this.headerLogo,
-    this.showLanguageSwitcher,
-    this.showCurrencySwitcher,
-    this.headerStikcy,
-    this.footerLogo,
+    this.flatRateShippingCost = false,
+    this.shippingCostAdmin = false,
+    this.payhereSandbox = false,
+    this.googleRecaptcha = false,
+    this.headerLogo = false,
+    this.showLanguageSwitcher = false,
+    this.showCurrencySwitcher = false,
+    this.headerStikcy = false,
+    this.footerLogo = false,
     this.aboutUsDescription,
     this.contactAddress,
-    this.contactPhone,
+    this.contactPhone = false,
     this.contactEmail,
     this.widgetOneLabels,
     this.widgetOneLinks,
@@ -312,18 +317,18 @@ class BusinessSettingsData extends Equatable {
     this.youtubeLink,
     this.linkedinLink,
     this.paymentMethodImages,
-    this.homeSliderImages,
-    this.homeSliderLinks,
-    this.homeBanner1Images,
-    this.homeBanner1Links,
-    this.homeBanner2Images,
-    this.homeBanner2Links,
-    this.homeCategories,
-    this.top10Categories,
-    this.top10Brands,
-    this.websiteName,
+    this.homeSliderImages = false,
+    this.homeSliderLinks = false,
+    this.homeBanner1Images = false,
+    this.homeBanner1Links = false,
+    this.homeBanner2Images = false,
+    this.homeBanner2Links = false,
+    this.homeCategories = false,
+    this.top10Categories = false,
+    this.top10Brands = false,
+    this.websiteName = false,
     this.siteMotto,
-    this.siteIcon,
+    this.siteIcon = false,
     this.baseColor,
     this.baseHovColor,
     this.metaTitle,
@@ -331,28 +336,28 @@ class BusinessSettingsData extends Equatable {
     this.metaKeywords,
     this.metaImage,
     this.siteName,
-    this.systemLogoWhite,
-    this.systemLogoBlack,
+    this.systemLogoWhite = false,
+    this.systemLogoBlack = false,
     this.timezone,
     this.adminLoginBackground,
     this.iyzicoSandbox,
     this.decimalSeparator,
     this.bkashSandbox,
-    this.headerMenuLabels,
-    this.headerMenuLinks,
+    this.headerMenuLabels = false,
+    this.headerMenuLinks = false,
     this.proxypay,
     this.proxypaySandbox,
     this.googleMap,
     this.googleFirebase,
     this.authorizenetSandbox,
     this.minOrderAmountCheckActivat,
-    this.minimumOrderAmount,
+    this.minimumOrderAmount = 0.0,
     this.itemName,
-    this.aamarpaySandbox,
+    this.aamarpaySandbox = false,
     this.secondaryBaseColor,
     this.secondaryBaseHovColor,
     this.headerNavMenuText,
-    this.selectedHomePage,
+    this.selectedHomePage = HomePageType.home,
     this.todaysDealSectionBg,
     this.todaysDealSectionBgColor,
     this.flashDealBgColor,
@@ -360,7 +365,7 @@ class BusinessSettingsData extends Equatable {
     this.flashDealBannerMenuText,
     this.todaysDealBannerTextColor,
     this.couponBackgroundImage,
-    this.adminLoginPageImage,
+    this.adminLoginPageImage = false,
     this.customerLoginPageImage,
     this.customerRegisterPageImage,
     this.sellerLoginPageImage,
@@ -383,7 +388,7 @@ class BusinessSettingsData extends Equatable {
     this.newProductCardBgSubtitle,
     this.newProductCardText,
     this.featuredCategoriesText,
-    this.guestCheckoutActivation,
+    this.guestCheckoutStatus = false,
     this.sliderSectionFullWidth,
     this.sliderSectionBgColor,
     this.homeBanner4Images,
@@ -392,33 +397,33 @@ class BusinessSettingsData extends Equatable {
     this.homeBanner5Links,
     this.homeBanner6Images,
     this.homeBanner6Links,
-    this.lastViewedProductActivation,
+    this.lastViewedProductActivation = false,
     this.customAlertLocation,
     this.notificationShowType,
     this.cuponTextColor,
-    this.flashDealSectionOutline,
+    this.flashDealSectionOutline = false,
     this.flashDealSectionOutlineColor,
     this.featuredSectionBgColor,
-    this.featuredSectionOutline,
+    this.featuredSectionOutline = false,
     this.featuredSectionOutlineColor,
     this.bestSellingSectionBgColor,
-    this.bestSellingSectionOutline,
+    this.bestSellingSectionOutline = false,
     this.bestSellingSectionOutlineColor,
     this.newProductsSectionBgColor,
-    this.newProductsSectionOutline,
+    this.newProductsSectionOutline = false,
     this.newProductsSectionOutlineColor,
     this.homeCategoriesSectionBgColor,
     this.homeCategoriesContentBgColor,
-    this.homeCategoriesContentOutline,
+    this.homeCategoriesContentOutline = false,
     this.homeCategoriesContentOutlineColor,
     this.classifiedSectionBgColor,
-    this.classifiedSectionOutline,
+    this.classifiedSectionOutline = false,
     this.classifiedSectionOutlineColor,
     this.sellersSectionBgColor,
-    this.sellersSectionOutline,
+    this.sellersSectionOutline = false,
     this.sellersSectionOutlineColor,
     this.brandsSectionBgColor,
-    this.brandsSectionOutline,
+    this.brandsSectionOutline = false,
     this.brandsSectionOutlineColor,
     this.uploadedImageFormat,
     this.productExternalLinkForSeller,
@@ -439,7 +444,7 @@ class BusinessSettingsData extends Equatable {
     this.phonepePayment,
     this.phonepeSandbox,
     this.headerScript,
-    this.footerScript,
+    this.footerScript = false,
     this.topbarBanner,
     this.topbarBannerMedium,
     this.topbarBannerSmall,
@@ -447,34 +452,34 @@ class BusinessSettingsData extends Equatable {
     this.helplineNumber,
     this.playStoreLink,
     this.appStoreLink,
-    this.footerTitle,
-    this.footerDescription,
+    this.footerTitle = false,
+    this.footerDescription = false,
     this.disableImageOptimization,
     this.viewProductOutOfStock,
     this.posAcceptsNegativeQuantity,
-    this.googleMapLongtitude,
-    this.googleMapLatitude,
+    this.googleMapLongtitude = false,
+    this.googleMapLatitude = false,
     this.adminNotifications,
     this.adminRealertNotification,
     this.printWidth,
-    this.todaysDealBanner,
-    this.todaysDealBannerSmall,
+    this.todaysDealBanner = false,
+    this.todaysDealBannerSmall = false,
     this.todaysDealBgColor,
-    this.posThermalInvoiceCompanyLogo,
-    this.posThermalInvoiceCompanyName,
-    this.posThermalInvoiceCompanyPhone,
-    this.posThermalInvoiceCompanyEmail,
+    this.posThermalInvoiceCompanyLogo = false,
+    this.posThermalInvoiceCompanyName = false,
+    this.posThermalInvoiceCompanyPhone = false,
+    this.posThermalInvoiceCompanyEmail = false,
     this.flashDealBanner,
     this.flashDealBannerSmall,
-    this.minimumOrderAmountCheck,
-    this.minimumOrderQuantityCheck,
-    this.minimumOrderQuantity,
-    this.homeBanner3Images,
-    this.homeBanner3Links,
+    this.minimumOrderAmountCheck = false,
+    this.minimumOrderQuantityCheck = false,
+    this.minimumOrderQuantity = 1,
+    this.homeBanner3Images = false,
+    this.homeBanner3Links = false,
     this.auctionBannerImage,
     this.classifiedBannerImage,
     this.classifiedBannerImageSmall,
-    this.topBrands,
+    this.topBrands = false,
     this.posThermalInvoiceHeadDetailsFs,
     this.posThermalInvoiceProductTableFs,
     this.posThermalInvoiceFooterDetailsFs,
@@ -485,19 +490,23 @@ class BusinessSettingsData extends Equatable {
     this.watermarkTextSize,
     this.watermarkTextColor,
     this.watermarkPosition,
-    this.productManageByAdmin,
-    this.productApproveByAdmin,
-    this.productQueryActivation,
-    this.mustOtp,
+    this.productManageByAdmin = false,
+    this.productApproveByAdmin = false,
+    this.productQueryActivation = false,
+    this.mustOtp = false,
     this.cuponBackgroundColor,
-    this.cuponTitle,
-    this.cuponSubtitle,
+    this.cuponTitle = false,
+    this.cuponSubtitle = false,
     this.deliveryPickupLongitude,
     this.deliveryPickupLatitude,
   });
 
   factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
     return BusinessSettingsData(
+      allowTwitterLogin: (data['twitter_login'] as String?)=="1",
+      allowGoogleLogin: (data['google_login'] as String?)=="1",
+      allowFacebookLogin: (data['facebook_login'] as String?)=="1",
+      allowAppleLogin: (data['apple_login'] as String?)=="1",
       homeDefaultCurrency: (data['home_default_currency'] as String?)=="1",
       systemDefaultCurrency: (data['system_default_currency'] as String?)=="1",
       currencyFormat: (data['currency_format'] as String?)=="1",
@@ -516,12 +525,9 @@ class BusinessSettingsData extends Equatable {
           ?.map((e) => VerificationForm.fromMap(e as Map<String, dynamic>))
           .toList(),
       googleAnalytics: (data['google_analytics'] as String?)=="1",
-      facebookLogin: (data['facebook_login'] as String?)=="1",
-      googleLogin: (data['google_login'] as String?)=="1",
-      twitterLogin: (data['twitter_login'] as String?)=="1",
       payumoneySandbox: (data['payumoney_sandbox'] as String?)=="1",
       facebookChat: (data['facebook_chat'] as String?)=="1",
-      emailVerification: (data['email_verification'] as String?)=="1",
+      mailVerificationStatus: (data['email_verification'] as String?)=="1",
       walletSystem: (data['wallet_system'] as String?)=="1",
       couponSystem: (data['coupon_system'] as String?)=="1",
       currentVersion: (data['current_version'] as String?)=="1",
@@ -535,7 +541,7 @@ class BusinessSettingsData extends Equatable {
       facebookPixel: (data['facebook_pixel'] as String?)=="1",
       classifiedProduct: (data['classified_product'] as String?)=="1",
       posActivationForSeller: (data['pos_activation_for_seller'] as String?)=="1",
-      shippingType: (data['shipping_type'] as String?)=="1",
+      shippingType: data['shipping_type'] as String?,
       flatRateShippingCost: (data['flat_rate_shipping_cost'] as String?)=="1",
       shippingCostAdmin: (data['shipping_cost_admin'] as String?)=="1",
       payhereSandbox:( data['payhere_sandbox'] as String?)=="1",
@@ -595,7 +601,7 @@ class BusinessSettingsData extends Equatable {
       authorizenetSandbox: data['authorizenet_sandbox'] as String?,
       minOrderAmountCheckActivat:
           data['min_order_amount_check_activat'] as dynamic,
-      minimumOrderAmount: (data['minimum_order_amount'] as String?)=="1",
+      minimumOrderAmount: double.parse(data['minimum_order_amount'] as String? ?? '0.0'),
       itemName: data['item_name'] as String?,
       aamarpaySandbox: (data['aamarpay_sandbox'] as String?)=="1",
       secondaryBaseColor: ColorHelper.stringToColor(data['secondary_base_color'] as String?),
@@ -637,7 +643,7 @@ class BusinessSettingsData extends Equatable {
       newProductCardBgSubtitle: data['new_product_card_bg_subtitle'] as String?,
       newProductCardText: data['new_product_card_text'] as String?,
       featuredCategoriesText: data['featured_categories_text'] as String?,
-      guestCheckoutActivation: data['guest_checkout_activation'] as String?,
+      guestCheckoutStatus: (data['guest_checkout_activation'] as String?) == "1",
       sliderSectionFullWidth: data['slider_section_full_width'] as String?,
       sliderSectionBgColor: ColorHelper.stringToColor(data['slider_section_bg_color'] as String?),
       homeBanner4Images: _decodeJsonList(data['home_banner4_images'] as String?),
@@ -646,8 +652,7 @@ class BusinessSettingsData extends Equatable {
       homeBanner5Links: _decodeJsonList(data['home_banner5_links'] as String?),
       homeBanner6Images: _decodeJsonList(data['home_banner6_images'] as String?),
       homeBanner6Links: _decodeJsonList(data['home_banner6_links'] as String?),
-      lastViewedProductActivation:
-          data['last_viewed_product_activation'] as String?,
+      lastViewedProductActivation: "${data['last_viewed_product_activation'] as String?}" == "1",
       customAlertLocation: data['custom_alert_location'] as String?,
       notificationShowType: data['notification_show_type'] as String?,
       cuponTextColor: ColorHelper.stringToColor(data['cupon_text_color'] as String?),
@@ -743,10 +748,9 @@ class BusinessSettingsData extends Equatable {
           (data['pos_thermal_invoice_company_email'] as String?)=="1",
       flashDealBanner: data['flash_deal_banner'] as dynamic,
       flashDealBannerSmall: data['flash_deal_banner_small'] as dynamic,
-      minimumOrderAmountCheck: data['minimum_order_amount_check'] as dynamic,
-      minimumOrderQuantityCheck:
-          data['minimum_order_quantity_check'] as dynamic,
-      minimumOrderQuantity: (data['minimum_order_quantity'] as String?)=="1",
+      minimumOrderAmountCheck: "${data['minimum_order_amount_check']}" == "1",
+      minimumOrderQuantityCheck:"${data['minimum_order_quantity_check']}" == "1",
+      minimumOrderQuantity: int.parse((data['minimum_order_quantity'] as String?) ?? "1"),
       homeBanner3Images: (data['home_banner3_images'] as String?)=="1",
       homeBanner3Links: (data['home_banner3_links'] as String?)=="1",
       auctionBannerImage: data['auction_banner_image'] as String?,
@@ -1630,12 +1634,9 @@ class BusinessSettingsData extends Equatable {
       vendorCommission,
       verificationForm,
       googleAnalytics,
-      facebookLogin,
-      googleLogin,
-      twitterLogin,
       payumoneySandbox,
       facebookChat,
-      emailVerification,
+      mailVerificationStatus,
       walletSystem,
       couponSystem,
       currentVersion,
@@ -1745,7 +1746,7 @@ class BusinessSettingsData extends Equatable {
       newProductCardBgSubtitle,
       newProductCardText,
       featuredCategoriesText,
-      guestCheckoutActivation,
+      guestCheckoutStatus,
       sliderSectionFullWidth,
       sliderSectionBgColor,
       homeBanner4Images,

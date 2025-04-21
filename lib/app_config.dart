@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'screens/home/home_page_type_enum.dart';
+import 'data_model/business_settings/business_settings.dart';
 
 
 
@@ -50,7 +50,8 @@ class AppConfig {
 
   static const LatLng initPlace = LatLng(30.723003387451172, 31.02609634399414);
 
-  static HomePageType selectedHomePageType = HomePageType.home;
+  // static HomePageType selectedHomePageType = HomePageType.home;
+  static BusinessSettingsData businessSettingsData = const BusinessSettingsData();
   @override
   String toString() {
     return super.toString();

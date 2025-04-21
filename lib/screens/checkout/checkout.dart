@@ -32,6 +32,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 
+import '../../app_config.dart';
 import '../../custom/loading.dart';
 import '../../data_model/order_detail_response.dart';
 import '../../helpers/auth_helper.dart';
@@ -64,15 +65,15 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var _selected_payment_method_index = 0;
   String? _selected_payment_method = "";
   String? _selected_payment_method_key = "";
 
-  ScrollController _mainScrollController = ScrollController();
-  TextEditingController _couponController = TextEditingController();
-  var _paymentTypeList = [];
+  final ScrollController _mainScrollController = ScrollController();
+  final TextEditingController _couponController = TextEditingController();
+  final _paymentTypeList = [];
   bool _isInitial = true;
   String? _totalString = ". . .";
   double? _grandTotalValue = 0.00;
@@ -136,7 +137,7 @@ class _CheckoutState extends State<Checkout> {
     return balance;
   }
 
-  fetchAll() {
+  void fetchAll() {
     fetchList();
     fetchSummary();
     if (widget.paymentFor != PaymentFor.Order) {
@@ -285,8 +286,8 @@ class _CheckoutState extends State<Checkout> {
     fetchSummary();
   }
 
-  onPressPlaceOrderOrProceed() async {
-    if (guest_checkout_status.$ && !is_logged_in.$) {
+  Future<void> onPressPlaceOrderOrProceed() async {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
       Loading.show(context);
       // guest checkout user create response
 
@@ -307,7 +308,7 @@ class _CheckoutState extends State<Checkout> {
         // then it goes to guest check address page
         Navigator.pushAndRemoveUntil(OneContext().context!,
             MaterialPageRoute(builder: (context) {
-          return GuestCheckoutAddress();
+          return const GuestCheckoutAddress();
         }), (Route<dynamic> route) => true);
       }
       return;
@@ -668,9 +669,9 @@ class _CheckoutState extends State<Checkout> {
               alignment: Alignment.bottomCenter,
               child: widget.paymentFor == PaymentFor.WalletRecharge ||
                       widget.paymentFor == PaymentFor.PackagePay
-                  ? SizedBox.shrink()
+                  ? const SizedBox.shrink()
                   : Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                       ),
                       height: (widget.paymentFor == PaymentFor.ManualPayment) ||
@@ -688,7 +689,7 @@ class _CheckoutState extends State<Checkout> {
                                         const EdgeInsets.only(bottom: 16.0),
                                     child: buildApplyCouponRow(context),
                                   )
-                                : SizedBox.shrink(),
+                                : const SizedBox.shrink(),
                             CheckoutDetails(showTotal: false, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
                             grandTotalSection(),
                           ],
@@ -717,22 +718,22 @@ class _CheckoutState extends State<Checkout> {
               decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.enter_coupon_code,
                   hintStyle:
-                      TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
+                      const TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
                   enabledBorder: app_language_rtl.$!
-                      ? OutlineInputBorder(
+                      ? const OutlineInputBorder(
                           borderSide: BorderSide(
                               color: MyTheme.textfield_grey, width: 0.5),
-                          borderRadius: const BorderRadius.only(
-                            topRight: const Radius.circular(8.0),
-                            bottomRight: const Radius.circular(8.0),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(8.0),
+                            bottomRight: Radius.circular(8.0),
                           ),
                         )
-                      : OutlineInputBorder(
+                      : const OutlineInputBorder(
                           borderSide: BorderSide(
                               color: MyTheme.textfield_grey, width: 0.5),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: const Radius.circular(8.0),
-                            bottomLeft: const Radius.circular(8.0),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            bottomLeft: Radius.circular(8.0),
                           ),
                         ),
                   focusedBorder: OutlineInputBorder(
@@ -743,7 +744,7 @@ class _CheckoutState extends State<Checkout> {
                       bottomLeft: const Radius.circular(8.0),
                     ),
                   ),
-                  contentPadding: EdgeInsetsDirectional.only(start: 16.0)),
+                  contentPadding: const EdgeInsetsDirectional.only(start: 16.0)),
             ),
           ),
         ),
@@ -755,19 +756,19 @@ class _CheckoutState extends State<Checkout> {
                   minWidth: MediaQuery.of(context).size.width,
                   color: MyTheme.accent_color,
                   shape: app_language_rtl.$!
-                      ? RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.only(
-                          topLeft: const Radius.circular(8.0),
-                          bottomLeft: const Radius.circular(8.0),
+                      ? const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          bottomLeft: Radius.circular(8.0),
                         ))
-                      : RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.only(
-                          topRight: const Radius.circular(8.0),
-                          bottomRight: const Radius.circular(8.0),
+                      : const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(8.0),
+                          bottomRight: Radius.circular(8.0),
                         )),
                   child: Text(
                     AppLocalizations.of(context)!.apply_coupon_all_capital,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
@@ -783,14 +784,14 @@ class _CheckoutState extends State<Checkout> {
                 child: Btn.basic(
                   minWidth: MediaQuery.of(context).size.width,
                   color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: const BorderRadius.only(
-                    topRight: const Radius.circular(8.0),
-                    bottomRight: const Radius.circular(8.0),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(8.0),
+                    bottomRight: Radius.circular(8.0),
                   )),
                   child: Text(
                     AppLocalizations.of(context)!.remove_ucf,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
@@ -821,7 +822,7 @@ class _CheckoutState extends State<Checkout> {
       ),
       title: Text(
         widget.title!,
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -837,13 +838,13 @@ class _CheckoutState extends State<Checkout> {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 16,
             );
           },
           itemCount: _paymentTypeList.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Padding(
@@ -859,7 +860,7 @@ class _CheckoutState extends State<Checkout> {
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.no_payment_method_is_added,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
   }
@@ -873,7 +874,7 @@ class _CheckoutState extends State<Checkout> {
       child: Stack(
         children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             decoration: BoxDecoration(
                     color: Colors.white, borderRadius: BorderRadius.circular(6))
                 .copyWith(
@@ -913,13 +914,13 @@ class _CheckoutState extends State<Checkout> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
                             _paymentTypeList[index].title,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.font_grey,
                                 fontSize: 14,
                                 height: 1.6,
@@ -945,14 +946,14 @@ class _CheckoutState extends State<Checkout> {
 
   Widget buildPaymentMethodCheckContainer(bool check) {
     return AnimatedOpacity(
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
       opacity: check ? 1 : 0,
       child: Container(
         height: 16,
         width: 16,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0), color: Colors.green),
-        child: Icon(Icons.check, color: Colors.white, size: 10),
+        child: const Icon(Icons.check, color: Colors.white, size: 10),
       ),
     );
   }
@@ -978,7 +979,7 @@ class _CheckoutState extends State<Checkout> {
                         ? AppLocalizations.of(context)!.buy_package_ucf
                         : AppLocalizations.of(context)!
                             .place_my_order_all_capital,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
@@ -1005,7 +1006,7 @@ class _CheckoutState extends State<Checkout> {
               padding: const EdgeInsetsDirectional.only(start: 16.0),
               child: Text(
                 AppLocalizations.of(context)!.total_amount_ucf,
-                style: TextStyle(color: MyTheme.font_grey, fontSize: 14),
+                style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
               ),
             ),
             // Visibility(
@@ -1027,11 +1028,11 @@ class _CheckoutState extends State<Checkout> {
             //     ),
             //   ),
             // ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 16.0),
               child: Text(balance(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color,
                       fontSize: 14,
                       fontWeight: FontWeight.w600)),
@@ -1050,8 +1051,8 @@ class _CheckoutState extends State<Checkout> {
         return AlertDialog(
             content: Row(
           children: [
-            CircularProgressIndicator(),
-            SizedBox(
+            const CircularProgressIndicator(),
+            const SizedBox(
               width: 10,
             ),
             Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
@@ -1080,7 +1081,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(2).copyWith(top: 16),
+      contentPadding: const EdgeInsets.all(2).copyWith(top: 16),
       content: CheckoutDetails(showTotal: true, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
       actions: [
         Btn.basic(
@@ -1131,20 +1132,20 @@ class CheckoutDetails extends StatelessWidget {
                     child: Text(
                       AppLocalizations.of(context)!.subtotal_all_capital,
                       textAlign: TextAlign.end,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     SystemConfig.systemCurrency != null
                         ? _subTotalString!.replaceAll(
                             SystemConfig.systemCurrency!.code!,
                             SystemConfig.systemCurrency!.symbol!)
                         : _subTotalString!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
@@ -1161,20 +1162,20 @@ class CheckoutDetails extends StatelessWidget {
                     child: Text(
                       AppLocalizations.of(context)!.tax_all_capital,
                       textAlign: TextAlign.end,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     SystemConfig.systemCurrency != null
                         ? _taxString!.replaceAll(
                             SystemConfig.systemCurrency!.code!,
                             SystemConfig.systemCurrency!.symbol!)
                         : _taxString!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
@@ -1191,20 +1192,20 @@ class CheckoutDetails extends StatelessWidget {
                       AppLocalizations.of(context)!
                           .shipping_cost_all_capital,
                       textAlign: TextAlign.end,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     SystemConfig.systemCurrency != null
                         ? _shippingCostString.replaceAll(
                             SystemConfig.systemCurrency!.code!,
                             SystemConfig.systemCurrency!.symbol!)
                         : _shippingCostString,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
@@ -1220,27 +1221,27 @@ class CheckoutDetails extends StatelessWidget {
                     child: Text(
                       AppLocalizations.of(context)!.discount_all_capital,
                       textAlign: TextAlign.end,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     SystemConfig.systemCurrency != null
                         ? _discountString!.replaceAll(
                             SystemConfig.systemCurrency!.code!,
                             SystemConfig.systemCurrency!.symbol!)
                         : _discountString!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),
                 ],
               )),
-          Divider(
+          const Divider(
             indent: 8.0,
           ),
           if(showTotal)
@@ -1254,20 +1255,20 @@ class CheckoutDetails extends StatelessWidget {
                       AppLocalizations.of(context)!
                           .grand_total_all_capital,
                       textAlign: TextAlign.end,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     SystemConfig.systemCurrency != null
                         ? _totalString!.replaceAll(
                             SystemConfig.systemCurrency!.code!,
                             SystemConfig.systemCurrency!.symbol!)
                         : _totalString!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),

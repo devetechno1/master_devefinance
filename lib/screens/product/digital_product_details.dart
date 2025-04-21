@@ -382,7 +382,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
     //   return;
     // }
 
-    if (!guest_checkout_status.$) {
+    if (!AppConfig.businessSettingsData.guestCheckoutStatus) {
       if (is_logged_in.$ == false) {
         context?.go("/users/login");
         return;
@@ -1461,7 +1461,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           ),
           Spacer(),
           Visibility(
-            visible: conversation_system_status.$,
+            visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(

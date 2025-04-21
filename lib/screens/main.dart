@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/main.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -7,7 +6,8 @@ import 'package:active_ecommerce_cms_demo_app/presenter/bottom_appbar_index.dart
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,8 +38,8 @@ class _MainState extends State<Main> {
   void onTapped(int i) {
     fetchAll();
 
-    if (guest_checkout_status.$ && (i == 2)) {
-    } else if (!guest_checkout_status.$ && (i == 2) && !is_logged_in.$) {
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && (i == 2)) {
+    } else if (!AppConfig.businessSettingsData.guestCheckoutStatus && (i == 2) && !is_logged_in.$) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
       return;
     }
@@ -61,7 +61,7 @@ class _MainState extends State<Main> {
   void initState() {
     _children = [
     //   HomePageType.home.screen,
-      AppConfig.selectedHomePageType.screen,
+      AppConfig.businessSettingsData.selectedHomePage.screen,
       CategoryList(
         slug: "",
         name: "",

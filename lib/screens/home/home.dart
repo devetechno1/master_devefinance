@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -100,8 +102,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             delegate: SliverChildListDelegate([
                               AppConfig.purchase_code == ""
                                   ? PiratedWidget(homeData: homeData)
-                                  : SizedBox(),
-                              SizedBox(height: 10),
+                                  : const SizedBox(),
+                              const SizedBox(height: 10),
 
                               //Header Search
                               // Padding(
@@ -115,7 +117,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 homeData: homeData,
                                 context: context,
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -132,7 +134,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           ),
 
                           //Featured Categories
-                  CategoryList(),
+                  const CategoryList(),
 
                           if (homeData.isFlashDeal)
                             SliverList(
@@ -143,7 +145,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                                   child: Text(
                                     AppLocalizations.of(context)!.flash_deals_ucf,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700),
                                   ),
@@ -191,7 +193,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                           Text(
                                             AppLocalizations.of(context)!
                                                 .all_products_ucf,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w700),
                                           ),
@@ -281,20 +283,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               return Filter(selected_filter: "brands");
             }));
           },
-          "textColor": Color(0xff263140),
+          "textColor": const Color(0xff263140),
           "backgroundColor": const Color(0xffE9EAEB),
         },
-      // Ensure `vendor_system.$` is valid or properly defined
-      if (vendor_system.$)
+      // Ensure `AppConfig.businessSettingsData.classifiedProduct` is valid or properly defined
+      if (AppConfig.businessSettingsData.vendorSystemActivation)
         {
           "title": AppLocalizations.of(context)!.top_sellers_ucf,
           "image": "assets/top_sellers.png",
           "onTap": () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return TopSellers();
+              return const TopSellers();
             }));
           },
-          "textColor": Color(0xff263140),
+          "textColor": const Color(0xff263140),
           "backgroundColor": const Color(0xffE9EAEB),
         },
     ];
@@ -306,7 +308,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         itemCount: menuItems.length,
         itemBuilder: (context, index) {
           final item = menuItems[index];
@@ -314,7 +316,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           return GestureDetector(
             onTap: item['onTap'],
             child: Container(
-              margin: EdgeInsetsDirectional.only(start: 8),
+              margin: const EdgeInsetsDirectional.only(start: 8),
               height: 40,
               width: 106,
               decoration: BoxDecoration(
