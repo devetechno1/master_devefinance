@@ -16,12 +16,12 @@ import '../../helpers/shared_value_helper.dart';
 import '../profile.dart';
 
 class BkashScreen extends StatefulWidget {
-  double? amount;
-  String payment_type;
-  String? payment_method_key;
-  var package_id;
-  int? orderId;
-  BkashScreen(
+ final double? amount;
+ final  String payment_type;
+final  String? payment_method_key;
+  final package_id;
+ final int? orderId;
+ const BkashScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -224,7 +224,7 @@ class _BkashScreenState extends State<BkashScreen> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: showLoading
-              ? Column(
+              ?const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(

@@ -1,8 +1,6 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
-import 'package:active_ecommerce_cms_demo_app/dummy_data/featured_categories.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
@@ -103,7 +101,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                           SliverList(delegate: SliverChildListDelegate([
                             Padding(
                               padding: const EdgeInsets.only(left: 20,bottom: 10),
-                              child: Text(AppLocalizations.of(context)!.todays_deal_ucf, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                              child: Text(AppLocalizations.of(context)!.todays_deal_ucf, style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                             ),
                               TodaysDealProductsWidget(homePresenter: homeData,),
                             
@@ -119,14 +117,14 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                         
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : SizedBox(),
-                              SizedBox(height: 10),
+                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
+                           const   SizedBox(height: 10),
                               //featured
 
                               // Header Banner
                              
                              
-                              SizedBox(height: 16),
+                           const   SizedBox(height: 16),
 
                               // Flash Sale Section
                               if(homeData.flashDeal != null)
@@ -144,7 +142,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                                     children: [
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(25, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                        child: Text(AppLocalizations.of(context)!.flash_sale, style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                       ),
                                        Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
                                     ],
@@ -162,7 +160,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(0, 3), // changes position of shadow
+                                        offset:const Offset(0, 3), // changes position of shadow
                                   )],
                                     color:  const Color.fromARGB(255, 249, 248, 248),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -263,7 +261,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
         padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Filter()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const Filter()));
           },
           child: HomeSearchBox(context: context),
         ),
@@ -289,7 +287,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
   Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
     return Text(
       timeText,
-      style: TextStyle(
+      style:const TextStyle(
         color:Colors.white,
         fontSize: 14.0,
         fontWeight: FontWeight.w600,
@@ -323,8 +321,8 @@ Widget buildTimerRow(CurrentRemainingTime time) {
             ),
           ),
           const SizedBox(width: 10),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
+       const   Padding(
+            padding:  EdgeInsets.only(right: 10),
             child: Text(':'),
           ),
           Container(
@@ -341,8 +339,8 @@ Widget buildTimerRow(CurrentRemainingTime time) {
             ),
           ),
           const SizedBox(width: 10),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
+         const Padding(
+            padding:  EdgeInsets.only(right: 10),
             child: Text(':'),
           ),
           Container(
@@ -358,8 +356,8 @@ Widget buildTimerRow(CurrentRemainingTime time) {
             ),
           ),
           const SizedBox(width: 10),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
+        const  Padding(
+            padding:  EdgeInsets.only(right: 10),
             child: Text(':'),
           ),
           Container(

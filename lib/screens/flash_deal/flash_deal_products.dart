@@ -93,8 +93,8 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
       DateTime end =
           convertTimeStampToDateTime(flashDealInfo!.date!); // YYYY-mm-dd
       DateTime now = DateTime.now();
-      int diff = end.difference(now).inMilliseconds;
-      int endTime = diff + now.millisecondsSinceEpoch;
+    final  int diff = end.difference(now).inMilliseconds;
+    final  int endTime = diff + now.millisecondsSinceEpoch;
 
       void onEnd() {}
 
@@ -105,7 +105,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
   }
 
   DateTime convertTimeStampToDateTime(int timeStamp) {
-    var dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+    final dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
     return dateToTimeStamp;
   }
 
@@ -169,7 +169,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
       title: flashDealInfo != null
           ? Text(
               '${flashDealInfo!.title}',
-              style: TextStyle(
+              style:const TextStyle(
                   color: Color(0xff3E4447),
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
@@ -189,7 +189,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
           if (snapshot.hasError) {
             return Container();
           } else if (snapshot.hasData) {
-            var productResponse = snapshot.data;
+            final productResponse = snapshot.data;
             if (_fullList.length == 0) {
               _fullList.addAll(productResponse!.products!);
               _searchList.addAll(productResponse.products!);
@@ -207,9 +207,9 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                     crossAxisSpacing: 14,
                     itemCount: _searchList.length,
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(
+                    padding:const EdgeInsets.only(
                         top: 16.0, bottom: 10, left: 18, right: 18),
-                    physics: NeverScrollableScrollPhysics(),
+                    physics:const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       // 3
                       return ProductCardBlack(
@@ -258,7 +258,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 right: 0,
                 child: Container(
                   width: DeviceInfo(context).width,
-                  margin: EdgeInsets.symmetric(horizontal: 18),
+                  margin:const EdgeInsets.symmetric(horizontal: 18),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(6),
@@ -266,7 +266,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                         BoxShadow(
                             color: Colors.black.withOpacity(0.16),
                             blurRadius: 20,
-                            offset: Offset(0, 10))
+                            offset:const Offset(0, 10))
                       ]),
                   child: Column(
                     children: [
@@ -275,7 +275,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                             child: time == null
                                 ? Text(
                                     AppLocalizations.of(context)!.ended_ucf,
-                                    style: TextStyle(
+                                    style:const TextStyle(
                                         color: MyTheme.accent_color,
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.w600),
@@ -306,7 +306,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             right: 0,
             child: Container(
               width: DeviceInfo(context).width,
-              margin: EdgeInsets.symmetric(horizontal: 18),
+              margin:const EdgeInsets.symmetric(horizontal: 18),
               decoration: BoxDecorations.buildBoxDecoration_1(),
               child: Container(
                 child: buildTimerRowRowShimmer(),
@@ -344,7 +344,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(width: 5),
+         const SizedBox(width: 5),
           Column(
             children: [
               timerCircularContainer(
@@ -352,16 +352,16 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 365,
                 timeText((time.days ?? 0).toString(), default_length: 3),
               ),
-              SizedBox(
+          const    SizedBox(
                 height: 5,
               ),
               Text(
                 LangText(context).local.days_ucf,
-                style: TextStyle(color: Colors.grey, fontSize: 10),
+                style:const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
           ),
-          SizedBox(
+      const SizedBox(
             width: 10,
           ),
           Column(
@@ -371,16 +371,16 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 24,
                 timeText((time.hours ?? 0).toString(), default_length: 2),
               ),
-              SizedBox(
+            const  SizedBox(
                 height: 5,
               ),
               Text(
                 LangText(context).local.hours,
-                style: TextStyle(color: Colors.grey, fontSize: 10),
+                style:const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
           ),
-          SizedBox(
+       const SizedBox(
             width: 10,
           ),
           Column(
@@ -390,16 +390,16 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 60,
                 timeText((time.min ?? 0).toString(), default_length: 2),
               ),
-              SizedBox(
+            const  SizedBox(
                 height: 5,
               ),
               Text(
                 LangText(context).local.minutes,
-                style: TextStyle(color: Colors.grey, fontSize: 10),
+                style:const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
           ),
-          SizedBox(
+        const  SizedBox(
             width: 10,
           ),
           Column(
@@ -409,16 +409,16 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 60,
                 timeText((time.sec ?? 0).toString(), default_length: 2),
               ),
-              SizedBox(
+             const SizedBox(
                 height: 5,
               ),
               Text(
                 LangText(context).local.seconds,
-                style: TextStyle(color: Colors.grey, fontSize: 10),
+                style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
           ),
-          SizedBox(
+         const SizedBox(
             width: 10,
           ),
           Image.asset(
@@ -426,7 +426,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             height: 20,
             color: MyTheme.golden,
           ),
-          SizedBox(
+         const SizedBox(
             width: 10,
           ),
         ],
@@ -446,16 +446,16 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
           child: CircularProgressIndicator(
             value: currentValue / totalValue,
             backgroundColor: const Color.fromARGB(255, 240, 220, 220),
-            valueColor: AlwaysStoppedAnimation<Color>(
-                const Color.fromARGB(255, 255, 80, 80)),
+            valueColor: const AlwaysStoppedAnimation<Color>(
+                 Color.fromARGB(255, 255, 80, 80)),
             strokeWidth: 4.0,
             strokeCap: StrokeCap.round,
           ),
         ),
         Text(
           timeText,
-          style: TextStyle(
-            color: const Color.fromARGB(228, 218, 29, 29),
+          style:const TextStyle(
+            color:  Color.fromARGB(228, 218, 29, 29),
             fontSize: 10.0,
             fontWeight: FontWeight.w600,
           ),
@@ -471,23 +471,23 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
+      const  SizedBox(
             width: 10,
           ),
           ShimmerHelper().buildCircleShimmer(height: 30, width: 30),
-          SizedBox(
+        const  SizedBox(
             width: 12,
           ),
           ShimmerHelper().buildCircleShimmer(height: 30, width: 30),
-          SizedBox(
+       const   SizedBox(
             width: 10,
           ),
           ShimmerHelper().buildCircleShimmer(height: 30, width: 30),
-          SizedBox(
+        const  SizedBox(
             width: 10,
           ),
           ShimmerHelper().buildCircleShimmer(height: 30, width: 30),
-          SizedBox(
+         const SizedBox(
             width: 10,
           ),
           Image.asset(
@@ -495,7 +495,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             height: 20,
             color: MyTheme.golden,
           ),
-          Spacer()
+        const  Spacer()
         ],
       ),
     );
@@ -503,10 +503,10 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
 
   Widget timerContainer(Widget child) {
     return Container(
-      constraints: BoxConstraints(minWidth: 30, minHeight: 24),
+      constraints:const BoxConstraints(minWidth: 30, minHeight: 24),
       child: child,
       alignment: Alignment.center,
-      padding: EdgeInsets.all(6),
+      padding:const EdgeInsets.all(6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: MyTheme.accent_color,

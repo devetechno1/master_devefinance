@@ -7,9 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/presenter/bottom_appbar_index.dart
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/home_page_type_enum.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,6 +57,7 @@ class _MainState extends State<Main> {
     Provider.of<CartCounter>(context, listen: false).getCount();
   }
 
+  @override
   void initState() {
     _children = [
     //   HomePageType.home.screen,
@@ -73,7 +72,7 @@ class _MainState extends State<Main> {
         from_navigation: true,
         counter: counter,
       ),
-      Profile()
+     const Profile()
     ];
     fetchAll();
     // TODO: implement initState
@@ -155,13 +154,13 @@ class _MainState extends State<Main> {
             onTap: onTapped,
             currentIndex: _currentIndex,
             backgroundColor: Colors.white.withOpacity(0.95),
-            unselectedItemColor: Color.fromRGBO(168, 175, 179, 1),
+            unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
             selectedItemColor: MyTheme.accent_color,
-            selectedLabelStyle: TextStyle(
+            selectedLabelStyle:const TextStyle(
                 fontWeight: FontWeight.w700,
                 color: MyTheme.accent_color,
                 fontSize: 12),
-            unselectedLabelStyle: TextStyle(
+            unselectedLabelStyle:const TextStyle(
                 fontWeight: FontWeight.w400,
                 color: Color.fromRGBO(168, 175, 179, 1),
                 fontSize: 12),
@@ -173,7 +172,7 @@ class _MainState extends State<Main> {
                       "assets/home.png",
                       color: _currentIndex == 0
                           ? MyTheme.accent_color
-                          : Color.fromRGBO(153, 153, 153, 1),
+                          : const Color.fromRGBO(153, 153, 153, 1),
                       height: 16,
                     ),
                   ),
@@ -185,7 +184,7 @@ class _MainState extends State<Main> {
                       "assets/categories.png",
                       color: _currentIndex == 1
                           ? MyTheme.accent_color
-                          : Color.fromRGBO(153, 153, 153, 1),
+                          : const Color.fromRGBO(153, 153, 153, 1),
                       height: 16,
                     ),
                   ),
@@ -198,16 +197,16 @@ class _MainState extends State<Main> {
                         shape: badges.BadgeShape.circle,
                         badgeColor: MyTheme.accent_color,
                         borderRadius: BorderRadius.circular(10),
-                        padding: EdgeInsets.all(5),
+                        padding:const EdgeInsets.all(5),
                       ),
-                      badgeAnimation: badges.BadgeAnimation.slide(
+                      badgeAnimation:const badges.BadgeAnimation.slide(
                         toAnimate: false,
                       ),
                       child: Image.asset(
                         "assets/cart.png",
                         color: _currentIndex == 2
                             ? MyTheme.accent_color
-                            : Color.fromRGBO(153, 153, 153, 1),
+                            :const Color.fromRGBO(153, 153, 153, 1),
                         height: 16,
                       ),
                       badgeContent: Consumer<CartCounter>(
@@ -215,7 +214,7 @@ class _MainState extends State<Main> {
                           return Text(
                             "${cart.cartCounter}",
                             style:
-                                TextStyle(fontSize: 10, color: Colors.white),
+                             const   TextStyle(fontSize: 10, color: Colors.white),
                           );
                         },
                       ),
@@ -229,7 +228,7 @@ class _MainState extends State<Main> {
                     "assets/profile.png",
                     color: _currentIndex == 3
                         ? MyTheme.accent_color
-                        : Color.fromRGBO(153, 153, 153, 1),
+                        : const Color.fromRGBO(153, 153, 153, 1),
                     height: 16,
                   ),
                 ),

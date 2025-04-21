@@ -9,20 +9,20 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../helpers/shared_value_helper.dart';
 
-class BrandProducts extends StatefulWidget {
-  BrandProducts({Key? key, required this.slug}) : super(key: key);
-  String slug;
+ class BrandProducts extends StatefulWidget {
+ const BrandProducts({Key? key, required this.slug}) : super(key: key);
+ final String slug;
 
   @override
   _BrandProductsState createState() => _BrandProductsState();
 }
 
 class _BrandProductsState extends State<BrandProducts> {
-  ScrollController _scrollController = ScrollController();
-  ScrollController _xcrollController = ScrollController();
-  TextEditingController _searchController = TextEditingController();
+ final ScrollController _scrollController = ScrollController();
+ final ScrollController _xcrollController = ScrollController();
+ final TextEditingController _searchController = TextEditingController();
 
-  List<dynamic> _productList = [];
+  final List<dynamic> _productList = [];
   bool _isInitial = true;
   int _page = 1;
   String _searchKey = "";
@@ -56,8 +56,8 @@ class _BrandProductsState extends State<BrandProducts> {
     super.dispose();
   }
 
-  fetchData() async {
-    var productResponse = await ProductRepository()
+ void fetchData() async {
+    final productResponse = await ProductRepository()
         .getBrandProducts(slug: widget.slug, page: _page, name: _searchKey);
     _productList.addAll(productResponse.products!);
     _isInitial = false;
@@ -66,7 +66,7 @@ class _BrandProductsState extends State<BrandProducts> {
     setState(() {});
   }
 
-  reset() {
+void  reset() {
     _productList.clear();
     _isInitial = true;
     _totalData = 0;
@@ -139,14 +139,14 @@ class _BrandProductsState extends State<BrandProducts> {
               hintText:
                   "${AppLocalizations.of(context)!.search_product_here} : ",
               hintStyle:
-                  TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
-              enabledBorder: OutlineInputBorder(
+          const        TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
+              enabledBorder:const OutlineInputBorder(
                 borderSide: BorderSide(color: MyTheme.white, width: 0.0),
               ),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder:const OutlineInputBorder(
                 borderSide: BorderSide(color: MyTheme.white, width: 0.0),
               ),
-              contentPadding: EdgeInsets.all(0.0)),
+              contentPadding:const EdgeInsets.all(0.0)),
         ),
       ),
       elevation: 0.0,
@@ -169,11 +169,11 @@ class _BrandProductsState extends State<BrandProducts> {
   }
 
   buildProductList() {
-    if (_isInitial && _productList.length == 0) {
+    if (_isInitial && _productList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildProductGridShimmer(scontroller: _scrollController));
-    } else if (_productList.length > 0) {
+    } else if (_productList.length>0) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
         backgroundColor: Colors.white,
@@ -190,8 +190,8 @@ class _BrandProductsState extends State<BrandProducts> {
             itemCount: _productList.length,
             shrinkWrap: true,
             padding:
-                EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-            physics: NeverScrollableScrollPhysics(),
+            const    EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               // 3
               return ProductCard(

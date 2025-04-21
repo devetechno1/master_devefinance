@@ -4,8 +4,8 @@ import '../presenter/home_presenter.dart';
 import 'lang_text.dart';
 
 class PiratedWidget extends StatelessWidget {
-  HomePresenter? homeData;
-  PiratedWidget({Key? key, required this.homeData}) : super(key: key);
+  final HomePresenter? homeData;
+  const PiratedWidget({Key? key, required this.homeData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class PiratedWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24),
                 child: Text(
                   LangText(context).local.pirated_app,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style:const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),
