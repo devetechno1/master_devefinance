@@ -365,7 +365,7 @@ class _ProfileState extends State<Profile> {
           buildBottomVerticalCardListItem("assets/download.png",
               LangText(context).local.all_digital_products_ucf, onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DigitalProducts();
+              return const DigitalProducts();
             }));
           }),
           Divider(
@@ -410,7 +410,7 @@ class _ProfileState extends State<Profile> {
               "assets/brands.png", AppLocalizations.of(context)!.brands_ucf,
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Filter(selected_filter: "brands");
+              return const Filter(selected_filter: "brands");
             }));
           }),
           Divider(
@@ -426,7 +426,7 @@ class _ProfileState extends State<Profile> {
                     LangText(context).local.on_auction_products_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AuctionProducts();
+                    return const AuctionProducts();
                   }));
                 }),
                 Divider(
@@ -459,7 +459,7 @@ class _ProfileState extends State<Profile> {
                     "assets/classified_product.png", LangText(context).local.all_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ClassifiedAds();
+                    return const ClassifiedAds();
                   }));
                 }),
                 Divider(
@@ -494,7 +494,7 @@ class _ProfileState extends State<Profile> {
                     LangText(context).local.on_auction_products_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AuctionProducts();
+                    return const AuctionProducts();
                   }));
                 }),
                 Divider(
@@ -571,7 +571,7 @@ class _ProfileState extends State<Profile> {
                                   GestureDetector(
                                     onTap: () => OneContext().push(
                                       MaterialPageRoute(
-                                        builder: (_) => AuctionProducts(),
+                                        builder: (_) => const AuctionProducts(),
                                       ),
                                     ),
                                     child: Row(
@@ -675,7 +675,7 @@ class _ProfileState extends State<Profile> {
                     LangText(context).local.browse_all_sellers_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Filter(
+                    return const Filter(
                       selected_filter: "sellers",
                     );
                   }));
@@ -787,7 +787,7 @@ class _ProfileState extends State<Profile> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return ChangeLanguage();
+                  return const ChangeLanguage();
                 },
               ),
             );
@@ -795,7 +795,7 @@ class _ProfileState extends State<Profile> {
           InkWell(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CurrencyChange();
+                return const CurrencyChange();
               }));
             },
             child: Column(
@@ -939,7 +939,7 @@ class _ProfileState extends State<Profile> {
               child: buildSettingAndAddonsHorizontalMenuItem(
                   "assets/wallet.png",
                   AppLocalizations.of(context)!.my_wallet_ucf, () {
-                Navigator.push(context, PageAnimation.fadeRoute(Wallet()));
+                Navigator.push(context, PageAnimation.fadeRoute(const Wallet()));
               }),
             ),
           buildSettingAndAddonsHorizontalMenuItem(
@@ -948,7 +948,7 @@ class _ProfileState extends State<Profile> {
               is_logged_in.$
                   ? () {
                       Navigator.push(
-                          context, PageAnimation.fadeRoute(OrderList()));
+                          context, PageAnimation.fadeRoute(const OrderList()));
                     }
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
@@ -1042,7 +1042,7 @@ class _ProfileState extends State<Profile> {
               is_logged_in.$
                   ? () {
                       Navigator.push(context,
-                          PageAnimation.fadeRoute(PurchasedDigitalProducts()));
+                          PageAnimation.fadeRoute(const PurchasedDigitalProducts()));
                     }
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
@@ -1119,7 +1119,7 @@ class _ProfileState extends State<Profile> {
         buildCountersRowItem(
           _orderCounterString,
           AppLocalizations.of(context)!.your_ordered_all_lower,
-          onTap: () => Navigator.push(context, PageAnimation.fadeRoute(OrderList())),
+          onTap: () => Navigator.push(context, PageAnimation.fadeRoute(const OrderList())),
         ),
        
       ],

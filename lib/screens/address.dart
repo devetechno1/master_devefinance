@@ -30,24 +30,24 @@ class Address extends StatefulWidget {
 }
 
 class _AddressState extends State<Address> {
-  ScrollController _mainScrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
 
   int? _default_shipping_address = 0;
 
   bool _isInitial = true;
-  List<res.Address> _shippingAddressList = [];
+  final List<res.Address> _shippingAddressList = [];
 
 
   //for update purpose
-  List<TextEditingController> _addressControllerListForUpdate = [];
-  List<TextEditingController> _postalCodeControllerListForUpdate = [];
-  List<TextEditingController> _phoneControllerListForUpdate = [];
-  List<TextEditingController> _cityControllerListForUpdate = [];
-  List<TextEditingController> _stateControllerListForUpdate = [];
-  List<TextEditingController> _countryControllerListForUpdate = [];
-  List<City?> _selected_city_list_for_update = [];
-  List<MyState?> _selected_state_list_for_update = [];
-  List<Country> _selected_country_list_for_update = [];
+  final List<TextEditingController> _addressControllerListForUpdate = [];
+  final List<TextEditingController> _postalCodeControllerListForUpdate = [];
+  final List<TextEditingController> _phoneControllerListForUpdate = [];
+  final List<TextEditingController> _cityControllerListForUpdate = [];
+  final List<TextEditingController> _stateControllerListForUpdate = [];
+  final List<TextEditingController> _countryControllerListForUpdate = [];
+  final List<City?> _selected_city_list_for_update = [];
+  final List<MyState?> _selected_state_list_for_update = [];
+  final List<Country> _selected_country_list_for_update = [];
 
   @override
   void initState() {
@@ -67,12 +67,12 @@ class _AddressState extends State<Address> {
 
   Future fetchShippingAddressList() async {
     // print("enter fetchShippingAddressList");
-    res.AddressResponse addressResponse = await AddressRepository().getAddressList();
+    final res.AddressResponse addressResponse = await AddressRepository().getAddressList();
     _shippingAddressList.addAll(addressResponse.addresses ?? []);
     setState(() {
       _isInitial = false;
     });
-    if (_shippingAddressList.length > 0) {
+    if (_shippingAddressList.isNotEmpty) {
       // var count = 0;
       _shippingAddressList.forEach((address) {
         if (address.set_default == 1) {
@@ -149,8 +149,8 @@ class _AddressState extends State<Address> {
     fetchAll();
   }
 
-  onAddressSwitch(index) async {
-    var addressMakeDefaultResponse =
+  Future<void> onAddressSwitch(index) async {
+    final addressMakeDefaultResponse =
         await AddressRepository().getAddressMakeDefaultResponse(index);
 
     if (addressMakeDefaultResponse.result == false) {
@@ -173,7 +173,7 @@ class _AddressState extends State<Address> {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-              contentPadding: EdgeInsets.only(
+              contentPadding: const EdgeInsets.only(
                   top: 16.0, left: 2.0, right: 2.0, bottom: 2.0),
               content: Padding(
                 padding:
@@ -182,7 +182,7 @@ class _AddressState extends State<Address> {
                   AppLocalizations.of(context)!
                       .are_you_sure_to_remove_this_address,
                   maxLines: 3,
-                  style: TextStyle(color: MyTheme.font_grey, fontSize: 14),
+                  style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
                 ),
               ),
               actions: [
@@ -210,8 +210,8 @@ class _AddressState extends State<Address> {
             ));
   }
 
-  confirmDelete(id) async {
-    var addressDeleteResponse =
+  Future<void> confirmDelete(id) async {
+    final addressDeleteResponse =
         await AddressRepository().getAddressDeleteResponse(id);
 
     if (addressDeleteResponse.result == false) {
@@ -282,7 +282,7 @@ class _AddressState extends State<Address> {
                   child: Btn.minWidthFixHeight(
                     minWidth: MediaQuery.of(context).size.width - 16,
                     height: 90,
-                    color: Color(0xffFEF0D7),
+                    color: const Color(0xffFEF0D7),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         side: BorderSide(
@@ -296,7 +296,7 @@ class _AddressState extends State<Address> {
                               color: MyTheme.dark_font_grey,
                               fontWeight: FontWeight.bold),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.add_sharp,
                           color: MyTheme.accent_color,
                           size: 30,
@@ -312,7 +312,7 @@ class _AddressState extends State<Address> {
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: buildAddressList(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 )
               ]))
@@ -337,23 +337,23 @@ class _AddressState extends State<Address> {
   InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
     return InputDecoration(
         filled: true,
-        fillColor: Color(0xffF6F7F8),
+        fillColor: const Color(0xffF6F7F8),
         hintText: hintText,
-        hintStyle: TextStyle(fontSize: 12.0, color: Color(0xff999999)),
+        hintStyle: const TextStyle(fontSize: 12.0, color: Color(0xff999999)),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
           borderRadius: const BorderRadius.all(
-            const Radius.circular(6.0),
+            Radius.circular(6.0),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
           borderRadius: const BorderRadius.all(
-            const Radius.circular(6.0),
+            Radius.circular(6.0),
           ),
         ),
         contentPadding:
-            EdgeInsetsDirectional.only(start: 8.0, top: 6.0, bottom: 6.0));
+            const EdgeInsetsDirectional.only(start: 8.0, top: 6.0, bottom: 6.0));
   }
 
   Future buildShowUpdateFormDialog(BuildContext context, index) {
@@ -396,14 +396,14 @@ class _AddressState extends State<Address> {
         children: [
           Text(
             AppLocalizations.of(context)!.addresses_of_user,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 16,
                 color: Color(0xff3E4447),
                 fontWeight: FontWeight.bold),
           ),
           Text(
             "* ${AppLocalizations.of(context)!.tap_on_an_address_to_make_it_default}",
-            style: TextStyle(fontSize: 12, color: Color(0xff6B7377)),
+            style: const TextStyle(fontSize: 12, color: Color(0xff6B7377)),
           ),
         ],
       ),
@@ -412,7 +412,7 @@ class _AddressState extends State<Address> {
     );
   }
 
-  buildAddressList() {
+  Widget? buildAddressList() {
     // print("is Initial: ${_isInitial}");
     if (is_logged_in == false) {
       return Container(
@@ -420,38 +420,39 @@ class _AddressState extends State<Address> {
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.you_need_to_log_in,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
-    } else if (_isInitial && _shippingAddressList.length == 0) {
+    } else if (_isInitial && _shippingAddressList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 5, item_height: 100.0));
-    } else if (_shippingAddressList.length > 0) {
+    } else if (_shippingAddressList.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 16,
             );
           },
           itemCount: _shippingAddressList.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildAddressItemCard(index);
           },
         ),
       );
-    } else if (!_isInitial && _shippingAddressList.length == 0) {
+    } else if (!_isInitial && _shippingAddressList.isEmpty) {
       return Container(
           height: 100,
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.no_address_is_added,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
+    return null;
   }
 
   InkWell buildAddressItemCard(int index) {
@@ -468,7 +469,7 @@ class _AddressState extends State<Address> {
         }
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecorations.buildBoxDecoration_1().copyWith(
             border: Border.all(
                 color:
@@ -513,8 +514,8 @@ class _AddressState extends State<Address> {
                   _shippingAddressList[index].location_available != true
                       ? Center(
                           child: Container(
-                            margin: EdgeInsets.only(bottom: 8),
-                            padding: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.only(bottom: 8),
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 3, horizontal: 9),
                             decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.error,
@@ -524,7 +525,7 @@ class _AddressState extends State<Address> {
                                   .you_have_to_add_location_here,
                               maxLines: 2,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -559,7 +560,7 @@ class _AddressState extends State<Address> {
     );
   }
 
-  buildBottomAppBar(BuildContext context) {
+  Visibility buildBottomAppBar(BuildContext context) {
     return Visibility(
       visible: widget.from_shipping_info,
       child: BottomAppBar(
@@ -575,7 +576,7 @@ class _AddressState extends State<Address> {
             ),
             child: Text(
               AppLocalizations.of(context)!.back_to_shipping_info,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
@@ -591,10 +592,10 @@ class _AddressState extends State<Address> {
 
   Widget showOptions({required int listIndex,int? productId}) {
     return PopupMenuButton<MenuOptions>(
-      offset: Offset(-25, 0),
+      offset: const Offset(-25, 0),
       child: Container(
         width: 45,
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         alignment: AlignmentDirectional.topEnd,
         child: Image.asset("assets/more.png",
             width: 4, height: 16, fit: BoxFit.contain, color: MyTheme.grey_153),
@@ -642,8 +643,8 @@ class LineData extends StatelessWidget {
             width: 75,
             child: Text(
               name,
-              style: TextStyle(
-                  color: const Color(0xff6B7377),
+              style: const TextStyle(
+                  color: Color(0xff6B7377),
                   fontWeight: FontWeight.normal),
             ),
           ),
@@ -687,12 +688,12 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   MyState? _selected_state;
 
     //controllers for add purpose
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _postalCodeController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _cityController = TextEditingController();
-  TextEditingController _stateController = TextEditingController();
-  TextEditingController _countryController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _postalCodeController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
   
   String _phone = "";
   bool _isValidPhoneNumber = false;
@@ -700,7 +701,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   PhoneNumber initialValue = PhoneNumber(isoCode: AppConfig.default_country);
   
   Future<void> fetch_country() async {
-    var data = await AddressRepository().getCountryList();
+    final data = await AddressRepository().getCountryList();
     data.countries?.forEach((c) => countries_code.add(c.code));
     setState(() {});
   }
@@ -723,9 +724,9 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   }
 
   
-  void _onAddressAdd() async {
-    String address = _addressController.text.toString();
-    String postal_code = _postalCodeController.text.toString();
+  Future<void> _onAddressAdd() async {
+    final String address = _addressController.text.toString();
+    final String postalCode = _postalCodeController.text.toString();
     // var phone = _phoneController.text.toString();
 
     if (address.trim() == "") {
@@ -772,12 +773,12 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       return;
     }
 
-    var addressAddResponse = await AddressRepository().getAddressAddResponse(
+    final addressAddResponse = await AddressRepository().getAddressAddResponse(
         address: address,
         country_id: _selected_country!.id,
         state_id: _selected_state!.id,
         city_id: _selected_city!.id,
-        postal_code: postal_code,
+        postal_code: postalCode,
         phone: _phone);
 
     if (addressAddResponse.result == false) {
@@ -799,7 +800,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     widget.choosePlace(i);
   }
 
-    onSelectCountryDuringAdd(country) {
+    void onSelectCountryDuringAdd(country) {
     if (_selected_country != null && country.id == _selected_country!.id) {
       setState(() {
         _countryController.text = country.name;
@@ -818,7 +819,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     });
   }
 
-  onSelectStateDuringAdd(state) {
+  void onSelectStateDuringAdd(state) {
     if (_selected_state != null && state.id == _selected_state!.id) {
       setState(() {
         _stateController.text = state.name;
@@ -834,7 +835,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     });
   }
 
-  onSelectCityDuringAdd(City city) {
+  void onSelectCityDuringAdd(City city) {
     if (_selected_city != null && city.id == _selected_city!.id) {
       setState(() {
         _cityController.text = city.name!;
@@ -871,9 +872,9 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     return AlertDialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        insetPadding: EdgeInsets.symmetric(horizontal: 10),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 10),
         contentPadding:
-            EdgeInsets.only(top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
+            const EdgeInsets.only(top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
         content: Container(
           width: 400,
           child: SingleChildScrollView(
@@ -884,7 +885,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: Text("${AppLocalizations.of(context)!.address_ucf} *",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -905,7 +906,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text("${AppLocalizations.of(context)!.country_ucf} *",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -925,7 +926,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         );
                       },
                       suggestionsCallback: (name) async {
-                        var countryResponse = await AddressRepository()
+                        final countryResponse = await AddressRepository()
                             .getCountryList(name: name);
                         return countryResponse.countries;
                       },
@@ -945,7 +946,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           dense: true,
                           title: Text(
                             country.name,
-                            style: TextStyle(color: MyTheme.font_grey),
+                            style: const TextStyle(color: MyTheme.font_grey),
                           ),
                         );
                       },
@@ -956,7 +957,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text("${AppLocalizations.of(context)!.state_ucf} *",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -977,11 +978,11 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                       controller: _stateController,
                       suggestionsCallback: (name) async {
                         if (_selected_country == null) {
-                          var stateResponse = await AddressRepository()
+                          final stateResponse = await AddressRepository()
                               .getStateListByCountry(); // blank response
                           return stateResponse.states;
                         }
-                        var stateResponse = await AddressRepository()
+                        final stateResponse = await AddressRepository()
                             .getStateListByCountry(
                                 country_id: _selected_country!.id, name: name);
                         return stateResponse.states;
@@ -1002,7 +1003,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           dense: true,
                           title: Text(
                             state.name,
-                            style: TextStyle(color: MyTheme.font_grey),
+                            style: const TextStyle(color: MyTheme.font_grey),
                           ),
                         );
                       },
@@ -1013,7 +1014,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text("${AppLocalizations.of(context)!.city_ucf} *",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -1027,11 +1028,11 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
                       suggestionsCallback: (name) async {
                         if (_selected_state == null) {
-                          CityResponse cityResponse = await AddressRepository()
+                          final CityResponse cityResponse = await AddressRepository()
                               .getCityListByState(); // blank response
                           return cityResponse.cities;
                         }
-                        CityResponse cityResponse = await AddressRepository()
+                        final CityResponse cityResponse = await AddressRepository()
                             .getCityListByState(
                                 state_id: _selected_state!.id, name: name);
                         return cityResponse.cities;
@@ -1053,7 +1054,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           dense: true,
                           title: Text(
                             city.name,
-                            style: TextStyle(color: MyTheme.font_grey),
+                            style: const TextStyle(color: MyTheme.font_grey),
                           ),
                         );
                       },
@@ -1072,7 +1073,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -1105,15 +1106,15 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                       _isValidPhoneNumber = value;
                       setState(() {});
                     },
-                    selectorConfig: SelectorConfig(
+                    selectorConfig: const SelectorConfig(
                         selectorType: PhoneInputSelectorType.DIALOG),
                     ignoreBlank: false,
                     autoValidateMode: AutovalidateMode.disabled,
-                    selectorTextStyle: TextStyle(color: MyTheme.font_grey),
-                    textStyle: TextStyle(color: MyTheme.font_grey),
+                    selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
+                    textStyle: const TextStyle(color: MyTheme.font_grey),
                     textFieldController: _phoneController,
                     formatInput: true,
-                    keyboardType: TextInputType.numberWithOptions(signed: true),
+                    keyboardType: const TextInputType.numberWithOptions(signed: true),
                     inputDecoration:
                         InputDecorations.buildInputDecoration_phone(
                             hint_text: "01XXX XXX XXX"),
@@ -1123,7 +1124,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(AppLocalizations.of(context)!.postal_code,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -1152,13 +1153,13 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 child: Btn.minWidthFixHeight(
                   minWidth: 75,
                   height: 40,
-                  color: Color.fromRGBO(253, 253, 253, 1),
+                  color: const Color.fromRGBO(253, 253, 253, 1),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6.0),
                       side: BorderSide(color: MyTheme.light_grey, width: 1)),
                   child: Text(
                     LangText(context).local.close_ucf,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.accent_color,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -1169,7 +1170,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   },
                 ),
               ),
-              SizedBox(width: 1),
+              const SizedBox(width: 1),
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 28.0),
                 child: Btn.minWidthFixHeight(
@@ -1181,7 +1182,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                   child: Text(
                     LangText(context).local.continue_ucf,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -1250,7 +1251,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
   PhoneNumber initialValue = PhoneNumber(isoCode: AppConfig.default_country);
   
   Future<void> fetch_country() async {
-    var data = await AddressRepository().getCountryList();
+    final data = await AddressRepository().getCountryList();
     data.countries?.forEach((c) => countries_code.add(c.code));
     setState(() {});
   }
@@ -1280,9 +1281,9 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
   }
 
 
-  onAddressUpdate(int id) async {
-    String address = _addressController.text.toString();
-    String postal_code = _postalCodeController.text.toString();
+  Future<void> onAddressUpdate(int id) async {
+    final String address = _addressController.text.toString();
+    final String postalCode = _postalCodeController.text.toString();
 
     if (address == "") {
       ToastComponent.showDialog(
@@ -1325,14 +1326,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
       return;
     }
 
-    var addressUpdateResponse = await AddressRepository()
+    final addressUpdateResponse = await AddressRepository()
         .getAddressUpdateResponse(
             id: id,
             address: address,
             country_id: _selected_country!.id,
             state_id: _selected_state!.id,
             city_id: _selected_city!.id,
-            postal_code: postal_code,
+            postal_code: postalCode,
             phone: _phone);
 
     if (addressUpdateResponse.result == false) {
@@ -1352,7 +1353,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
     widget.afterUpdatingAnAddress();
   }
 
-  onSelectCountryDuringUpdate(country) {
+  void onSelectCountryDuringUpdate(country) {
     if (country.id == _selected_country?.id) {
       setState(() {
         _countryController.text = country.name;
@@ -1371,7 +1372,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
     });
   }
 
-  onSelectStateDuringUpdate(state) {
+  void onSelectStateDuringUpdate(state) {
     if (_selected_state != null &&
         state.id == _selected_state!.id) {
       setState(() {
@@ -1388,7 +1389,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
     });
   }
 
-  onSelectCityDuringUpdate(city) {
+  void onSelectCityDuringUpdate(city) {
     if (_selected_city != null &&
         city.id == _selected_city!.id) {
       setState(() {
@@ -1424,8 +1425,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: 10),
-      contentPadding: EdgeInsets.only(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+      contentPadding: const EdgeInsets.only(
           top: 36.0, left: 36.0, right: 36.0, bottom: 2.0),
       content: Container(
         width: 400,
@@ -1438,7 +1439,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                     "${AppLocalizations.of(context)!.address_ucf} *",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
@@ -1459,7 +1460,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                     "${AppLocalizations.of(context)!.country_ucf} *",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
@@ -1469,7 +1470,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   child: TypeAheadField(
                     controller: _countryController,
                     suggestionsCallback: (name) async {
-                      var countryResponse = await AddressRepository()
+                      final countryResponse = await AddressRepository()
                           .getCountryList(name: name);
                       return countryResponse.countries;
                     },
@@ -1498,7 +1499,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         dense: true,
                         title: Text(
                           country.name,
-                          style: TextStyle(color: MyTheme.font_grey),
+                          style: const TextStyle(color: MyTheme.font_grey),
                         ),
                       );
                     },
@@ -1512,7 +1513,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                     "${AppLocalizations.of(context)!.state_ucf} *",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
@@ -1522,7 +1523,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   child: TypeAheadField(
                     controller: _stateController,
                     suggestionsCallback: (name) async {
-                      var stateResponse = await AddressRepository()
+                      final stateResponse = await AddressRepository()
                           .getStateListByCountry(
                               country_id:_selected_country?.id,
                               name: name);
@@ -1553,7 +1554,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         dense: true,
                         title: Text(
                           state.name,
-                          style: TextStyle(color: MyTheme.font_grey),
+                          style: const TextStyle(color: MyTheme.font_grey),
                         ),
                       );
                     },
@@ -1567,7 +1568,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                     "${AppLocalizations.of(context)!.city_ucf} *",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
@@ -1579,12 +1580,12 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                     suggestionsCallback: (name) async {
                       if (_selected_state ==
                           null) {
-                        CityResponse cityResponse =
+                        final CityResponse cityResponse =
                             await AddressRepository()
                                 .getCityListByState(); // blank response
                         return cityResponse.cities;
                       }
-                      CityResponse cityResponse =
+                      final CityResponse cityResponse =
                           await AddressRepository().getCityListByState(
                               state_id: _selected_state?.id,
                               name: name);
@@ -1615,7 +1616,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         dense: true,
                         title: Text(
                           city.name!,
-                          style: TextStyle(color: MyTheme.font_grey),
+                          style: const TextStyle(color: MyTheme.font_grey),
                         ),
                       );
                     },
@@ -1628,7 +1629,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff3E4447),
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
@@ -1661,15 +1662,15 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                       _isValidPhoneNumber = value;
                       setState(() {});
                     },
-                    selectorConfig: SelectorConfig(
+                    selectorConfig: const SelectorConfig(
                         selectorType: PhoneInputSelectorType.DIALOG),
                     ignoreBlank: false,
                     autoValidateMode: AutovalidateMode.disabled,
-                    selectorTextStyle: TextStyle(color: MyTheme.font_grey),
-                    textStyle: TextStyle(color: MyTheme.font_grey),
+                    selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
+                    textStyle: const TextStyle(color: MyTheme.font_grey),
                     textFieldController: _phoneController,
                     formatInput: true,
-                    keyboardType: TextInputType.numberWithOptions(signed: true),
+                    keyboardType: const TextInputType.numberWithOptions(signed: true),
                     inputDecoration:
                         InputDecorations.buildInputDecoration_phone(
                             hint_text: "01XXX XXX XXX"),
@@ -1679,7 +1680,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(AppLocalizations.of(context)!.postal_code,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
@@ -1708,14 +1709,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               child: Btn.minWidthFixHeight(
                 minWidth: 75,
                 height: 40,
-                color: Color.fromRGBO(253, 253, 253, 1),
+                color: const Color.fromRGBO(253, 253, 253, 1),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6.0),
                     side: BorderSide(
                         color: MyTheme.light_grey, width: 1.0)),
                 child: Text(
                   AppLocalizations.of(context)!.close_all_capital,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontSize: 13),
                 ),
                 onPressed: () {
@@ -1723,7 +1724,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 },
               ),
             ),
-            SizedBox(width: 1),
+            const SizedBox(width: 1),
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 28.0),
               child: Btn.minWidthFixHeight(
@@ -1735,7 +1736,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.update_all_capital,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),

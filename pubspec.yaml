@@ -33,6 +33,49 @@ dependencies:
   geocoding: ^3.0.0
   timer_count_down: ^2.2.2
   url_launcher: ^6.3.1
+  google_maps_flutter: any
+  http: any
+  fluttertoast: any
+  provider: any
+  go_router: any
+  one_context: any
+  flutter_rating_bar: any
+  webview_flutter: any
+  flutter_downloader: any
+  path_provider: any
+  permission_handler: any
+  shimmer: any
+  flutter_staggered_grid_view: any
+  carousel_slider: any
+  expandable: any
+  flutter_countdown_timer: any
+  flutter_html: any
+  photo_view: any
+  share_plus: any
+  badges: any
+  route_transitions: any
+  flutter_chat_bubble: any
+  crypto: any
+  firebase_messaging: any
+  flutter_facebook_auth: any
+  google_sign_in: any
+  intl_phone_number_input: any
+  sign_in_with_apple: any
+  validators: any
+  flip_card: any
+  flutter_typeahead: any
+  package_info_plus: any
+  file_picker: any
+  image_picker: any
+  timeline_tile: any
+  firebase_core: any
+  shared_value: any
+  equatable: any
+  flutter_spinkit: any
+  cached_network_image: any
+  path: any
+  intl: any
+  flutter_local_notifications: any
 dependency_overrides:
   badges: ^3.1.2
   # bordered_text: ^2.0.0

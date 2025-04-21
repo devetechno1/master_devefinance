@@ -11,7 +11,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../repositories/auction_products_repository.dart';
 
 class AuctionProducts extends StatefulWidget {
-  AuctionProducts({
+  const AuctionProducts({
     Key? key,
   }) : super(key: key);
 
@@ -20,12 +20,12 @@ class AuctionProducts extends StatefulWidget {
 }
 
 class _AuctionProductsState extends State<AuctionProducts> {
-  ScrollController _mainScrollController = ScrollController();
-  ScrollController _xcrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
 
   //init
   bool _dataFetch = false;
-  List<dynamic> _auctionProductItems = [];
+  final List<dynamic> _auctionProductItems = [];
   int _page = 1;
   int? _totalData = 0;
 
@@ -65,7 +65,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
   }
 
   fetchData() async {
-    var auctionProductResponse =
+    final auctionProductResponse =
         await AuctionProductsRepository().getAuctionProducts(page: _page);
     _auctionProductItems.addAll(auctionProductResponse.products!);
     _totalData = auctionProductResponse.meta!.total;
@@ -152,7 +152,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
           .buildProductGridShimmer(scontroller: _mainScrollController);
     }
 
-    if (_auctionProductItems.length == 0) {
+    if (_auctionProductItems.isEmpty) {
       return Center(
         child: Text(LangText(context).local.no_data_is_available),
       );
@@ -162,15 +162,15 @@ class _AuctionProductsState extends State<AuctionProducts> {
       onRefresh: _onPageRefresh,
       child: SingleChildScrollView(
         controller: _xcrollController,
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: MasonryGridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           itemCount: _auctionProductItems.length,
           shrinkWrap: true,
-          padding: EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3
             return ProductCard(
@@ -181,7 +181,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
                 name: _auctionProductItems[index].name,
                 main_price: _auctionProductItems[index].main_price,
                 stroked_price: _auctionProductItems[index].stroked_price,
-                is_wholesale: false,
+                isWholesale: false,
                 // discount: _auctionlProductItems[index].discount,
                 has_discount: false);
           },

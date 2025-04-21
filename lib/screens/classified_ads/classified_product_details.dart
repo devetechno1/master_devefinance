@@ -86,7 +86,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
     final productDetailsResponse = await ClassifiedProductRepository()
         .getClassifiedProductsDetails(widget.slug);
 
-    if (productDetailsResponse.data!.length > 0) {
+    if (productDetailsResponse.data!.isNotEmpty) {
       _productDetails = productDetailsResponse.data!.first;
       _productDetails!.photos!.data!.forEach((element) {
         _productImageList.add(element.url);
@@ -132,7 +132,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
     });
   }
 
-  onPressShare(context) {
+  Future onPressShare(context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -875,7 +875,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
     );
   }
 
-  buildBrandRow() {
+ Widget? buildBrandRow() {
     return _productDetails!.brand!.id! > 0
         ? InkWell(
             onTap: () {
@@ -983,7 +983,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
         ],
       );
-    } else if (_relatedProductInit && _relatedProducts.length > 0) {
+    } else if (_relatedProductInit && _relatedProducts.isNotEmpty) {
       return SizedBox(
         height: 248,
         child: ListView.separated(
@@ -1016,7 +1016,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
     }
   }
 
-  openPhotoDialog(BuildContext context, path) => showDialog(
+  Future openPhotoDialog(BuildContext context, path) => showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -1058,7 +1058,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
         },
       );
 
-  buildProductImageSection() {
+  Row buildProductImageSection() {
     if (_productImageList.isEmpty) {
       return Row(
         children: [

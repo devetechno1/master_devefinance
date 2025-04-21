@@ -14,14 +14,14 @@ class BrandHorizontalListWidget extends StatelessWidget {
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
-  const BrandHorizontalListWidget({Key? key, required this.isBrandsInitial, required this.brandsList, required this.numberOfTotalBrands,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle, List<Brands>? brandtList,})
+  const BrandHorizontalListWidget({Key? key, required this.isBrandsInitial, required this.brandsList, required this.numberOfTotalBrands,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (isBrandsInitial && brandsList.isEmpty) {
       return Padding(
-        padding: EdgeInsets.only(right: 20,left: 20, top: 15),
+        padding: const EdgeInsets.only(right: 20,left: 20, top: 15),
         child: Row(
           children: [
             Expanded(
@@ -48,7 +48,7 @@ class BrandHorizontalListWidget extends StatelessWidget {
           ],
         ),
       );
-    } else if (brandsList.length > 0) {
+    } else if (brandsList.isNotEmpty) {
       return Container(
         // height: 230,
         alignment: Alignment.center,
@@ -60,8 +60,8 @@ class BrandHorizontalListWidget extends StatelessWidget {
             return true;
           },
           child: ListView.separated(
-            padding: EdgeInsets.only(right: 20,left: 20, top: 15),
-            separatorBuilder: (context, index) => SizedBox(
+            padding: const EdgeInsets.only(right: 20,left: 20, top: 15),
+            separatorBuilder: (context, index) => const SizedBox(
               width: 12,
             ),
             itemCount:numberOfTotalBrands > brandsList.length
@@ -76,7 +76,7 @@ class BrandHorizontalListWidget extends StatelessWidget {
               return (index == brandsList.length)
                   ? SpinKitFadingFour(
                       itemBuilder: (BuildContext context, int index) {
-                        return DecoratedBox(
+                        return const DecoratedBox(
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),

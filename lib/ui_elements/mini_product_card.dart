@@ -14,7 +14,7 @@
 //   String? main_price;
 //   String? stroked_price;
 //   bool? has_discount;
-//   bool? is_wholesale;
+//   bool? isWholesale;
 //   var discount;
 //   MiniProductCard({
 //     Key? key,
@@ -25,7 +25,7 @@
 //     this.main_price,
 //     this.stroked_price,
 //     this.has_discount,
-//     this.is_wholesale = false,
+//     this.isWholesale = false,
 //     this.discount,
 //   }) : super(key: key);
 
@@ -154,7 +154,7 @@
 //                     ),
 //                   Visibility(
 //                     visible: whole_sale_addon_installed.$,
-//                     child: widget.is_wholesale!
+//                     child: widget.isWholesale!
 //                         ? Container(
 //                             padding: EdgeInsets.symmetric(
 //                                 horizontal: 12, vertical: 4),
@@ -212,7 +212,7 @@ class MiniProductCard extends StatefulWidget {
   final String? main_price;
   final String? stroked_price;
   final bool? has_discount;
-  final bool? is_wholesale;
+  final bool? isWholesale;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
   const MiniProductCard({
@@ -224,7 +224,7 @@ class MiniProductCard extends StatefulWidget {
     this.main_price,
     this.stroked_price,
     this.has_discount,
-    this.is_wholesale = false, 
+    this.isWholesale = false, 
     this.priceTextStyle, 
     this.nameTextStyle,
   }) : super(key: key);
@@ -263,12 +263,12 @@ class _MiniProductCardState extends State<MiniProductCard> {
                         ))),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(8, 12, 8, 6),
+                padding: const EdgeInsets.fromLTRB(8, 12, 8, 6),
                 child: Text(
                   widget.name!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: widget.nameTextStyle ?? TextStyle(
+                  style: widget.nameTextStyle ?? const TextStyle(
                       color: MyTheme.font_grey_Light,
                       fontSize: 12,
                       height: 1.2,
@@ -277,7 +277,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
               ),
               Flexible(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: Text(
                     SystemConfig.systemCurrency != null
                         ? widget.main_price!.replaceAll(
@@ -285,7 +285,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
                             SystemConfig.systemCurrency!.symbol!)
                         : widget.main_price!,
                     maxLines: 1,
-                    style: widget.priceTextStyle ?? TextStyle(
+                    style: widget.priceTextStyle ?? const TextStyle(
                         color: Color(0xff000000),
                         fontSize: 16,
                         fontWeight: FontWeight.bold),

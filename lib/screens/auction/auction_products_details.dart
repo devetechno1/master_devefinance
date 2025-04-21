@@ -147,7 +147,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     final auctionproductDetailsResponse = await AuctionProductsRepository()
         .getAuctionProductsDetails(widget.slug);
 
-    if (auctionproductDetailsResponse.auctionProduct!.length>0) {
+    if (auctionproductDetailsResponse.auctionProduct!.isNotEmpty) {
       _auctionproductDetails = auctionproductDetailsResponse.auctionProduct![0];
       sellerChatTitleController.text =
           auctionproductDetailsResponse.auctionProduct![0].name!;
@@ -325,7 +325,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         });
   }
 
-  onTapSellerChat() {
+  Future onTapSellerChat() {
     return showDialog(
         context: context,
         builder: (_) => Directionality(
@@ -514,7 +514,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     );
   }
 
- void onPressSendMessage() async {
+ Future<void> onPressSendMessage() async {
     if (!is_logged_in.$) {
       showLoginWarning();
       return;
@@ -1545,7 +1545,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     );
   }
 
-  buildBrandRow() {
+ Widget? buildBrandRow() {
     return (_auctionproductDetails.brand?.id != null &&
             _auctionproductDetails.brand!.id! > 0)
         ? InkWell(
@@ -1669,7 +1669,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         },
       );
 
-  buildProductImageSection() {
+  Row buildProductImageSection() {
     if (_productImageList.isEmpty) {
       return Row(
         children: [

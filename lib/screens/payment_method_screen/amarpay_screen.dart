@@ -41,7 +41,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
   int? _combined_order_id = 0;
   bool _order_init = false;
 
-  createOrder() async {
+  Future<void> createOrder() async {
     final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
@@ -78,15 +78,15 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
         );
         if (widget.payment_type == "cart_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "order_re_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "wallet_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Wallet(from_recharge: true);
+            return const Wallet(from_recharge: true);
           }));
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
@@ -101,7 +101,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
   amarpay() {
     // todo:: PUT amar pay initial url here
    final String _initial_url =
-        "${AppConfig.BASE_URL}/amarpay?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
+        "${AppConfig.BASE_URL}/amarpay?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
 
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -151,7 +151,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
   }
 
   // body
-  buildBody() {
+ Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

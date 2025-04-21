@@ -13,7 +13,7 @@ import '../../data_model/classified_ads_response.dart';
 import '../../repositories/classified_product_repository.dart';
 
 class ClassifiedAds extends StatefulWidget {
-  ClassifiedAds({
+  const ClassifiedAds({
     Key? key,
   }) : super(key: key);
 
@@ -22,11 +22,11 @@ class ClassifiedAds extends StatefulWidget {
 }
 
 class _ClassifiedAdsState extends State<ClassifiedAds> {
-  ScrollController _mainScrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
 
   //init
   bool _dataFetch = false;
-  List<ClassifiedAdsMiniData> _classifiedProducts = [];
+  final List<ClassifiedAdsMiniData> _classifiedProducts = [];
   int page = 1;
 
   @override
@@ -74,11 +74,11 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
     );
   }
 
-  bool? shouldProductBoxBeVisible(product_name, search_key) {
-    if (search_key == "") {
+  bool? shouldProductBoxBeVisible(productName, searchKey) {
+    if (searchKey == "") {
       return true; //do not check if the search key is empty
     }
-    return StringHelper().stringContains(product_name, search_key);
+    return StringHelper().stringContains(productName, searchKey);
   }
 
   AppBar buildAppBar(BuildContext context) {

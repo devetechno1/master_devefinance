@@ -55,7 +55,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
     }
   }
 
-  createOrder() async {
+  Future<void> createOrder() async {
     final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
@@ -74,7 +74,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
     getSetInitialUrl();
   }
 
-  getSetInitialUrl() async {
+  Future<void> getSetInitialUrl() async {
     final flutterwaveUrlResponse = await PaymentRepository()
         .getFlutterwaveUrlResponse(widget.payment_type, _combined_order_id,
             widget.package_id, widget.amount, widget.orderId!);
@@ -149,15 +149,15 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
 
         if (widget.payment_type == "cart_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "order_re_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "wallet_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Wallet(from_recharge: true);
+            return const Wallet(from_recharge: true);
           }));
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
@@ -169,7 +169,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
     });
   }
 
-  buildBody() {
+ Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

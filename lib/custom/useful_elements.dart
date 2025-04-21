@@ -7,7 +7,7 @@ import '../my_theme.dart';
 import '../screens/main.dart';
 
 class UsefulElements {
-  static backButton(context, {color = 'black'}) {
+  static IconButton backButton(context, {color = 'black'}) {
     return IconButton(
       padding: EdgeInsets.zero,
       icon: Icon(
@@ -19,7 +19,7 @@ class UsefulElements {
     );
   }
 
-  static backIcon(context, {color = 'black'}) {
+  static Icon backIcon(context, {color = 'black'}) {
     return Icon(
         app_language_rtl.$!
             ? CupertinoIcons.arrow_right
@@ -27,8 +27,8 @@ class UsefulElements {
         color: color == 'white' ? Colors.white : MyTheme.dark_font_grey);
   }
 
-  static backToMain(context, {color = 'black', go_back = true}) {
-    if(!go_back) return SizedBox();
+  static Widget backToMain(context, {color = 'black', go_back = true}) {
+    if(!go_back) return const SizedBox();
     return IconButton(
       icon: Icon(app_language_rtl.$!
               ? CupertinoIcons.arrow_right

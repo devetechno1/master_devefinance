@@ -404,7 +404,7 @@ class CartProvider extends ChangeNotifier {
     );
   }
 
-  void confirmDelete(BuildContext context, String cartId) async {
+  Future<void> confirmDelete(BuildContext context, String cartId) async {
     final cartDeleteResponse =
         await CartRepository().getCartDeleteResponse(int.parse(cartId));
 
@@ -430,10 +430,10 @@ class CartProvider extends ChangeNotifier {
     process(context, mode: "proceed_to_shipping");
   }
 
-  void process(BuildContext context, {required String mode}) async {
+  Future<void> process(BuildContext context, {required String mode}) async {
     final cartIds = [];
     final cartQuantities = [];
-    if (_shopList.length > 0) {
+    if (_shopList.isNotEmpty) {
       _shopList.forEach((shop) {
         if (shop.cartItems.length > 0) {
           shop.cartItems.forEach((cartItem) {
@@ -444,7 +444,7 @@ class CartProvider extends ChangeNotifier {
       });
     }
 
-    if (cartIds.length == 0) {
+    if (cartIds.isEmpty) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.cart_is_empty,
       );

@@ -162,11 +162,11 @@ class _CheckoutState extends State<Checkout> {
           : "order";
     });
 
-    var paymentTypeResponseList = await PaymentRepository()
+    final paymentTypeResponseList = await PaymentRepository()
         .getPaymentResponseList(list: widget.list, mode: mode);
 
     _paymentTypeList.addAll(paymentTypeResponseList);
-    if (_paymentTypeList.length > 0) {
+    if (_paymentTypeList.isNotEmpty) {
       _selected_payment_method = _paymentTypeList[0].payment_type;
       _selected_payment_method_key = _paymentTypeList[0].payment_type_key;
     }
@@ -174,12 +174,12 @@ class _CheckoutState extends State<Checkout> {
     setState(() {});
   }
 
-  fetchSummary() async {
+  Future<void> fetchSummary() async {
     print('in fetch summery');
     if(widget.paymentFor == PaymentFor.ManualPayment || widget.paymentFor == PaymentFor.OrderRePayment){
-      OrderDetailResponse? orderDetailsResponse = await OrderRepository().getOrderDetails(id: widget.order_id);
+      final OrderDetailResponse? orderDetailsResponse = await OrderRepository().getOrderDetails(id: widget.order_id);
 
-      DetailedOrder? details = orderDetailsResponse?.detailed_orders?.firstOrNull;
+      final DetailedOrder? details = orderDetailsResponse?.detailed_orders?.firstOrNull;
 
       if (details != null) {
         _subTotalString = details.subtotal;
@@ -198,7 +198,7 @@ class _CheckoutState extends State<Checkout> {
       return;
     }
         
-    var cartSummaryResponse = await CartRepository().getCartSummaryResponse();
+    final cartSummaryResponse = await CartRepository().getCartSummaryResponse();
 
     if (cartSummaryResponse != null) {
       _subTotalString = cartSummaryResponse.sub_total;
@@ -249,17 +249,17 @@ class _CheckoutState extends State<Checkout> {
     fetchAll();
   }
 
-  onCouponApply() async {
-    var coupon_code = _couponController.text.toString();
-    if (coupon_code == "") {
+  Future<void> onCouponApply() async {
+    final couponCode = _couponController.text.toString();
+    if (couponCode == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.enter_coupon_code,
       );
       return;
     }
 
-    var couponApplyResponse =
-        await CouponRepository().getCouponApplyResponse(coupon_code);
+    final couponApplyResponse =
+        await CouponRepository().getCouponApplyResponse(couponCode);
     if (couponApplyResponse.result == false) {
       ToastComponent.showDialog(
         couponApplyResponse.message,
@@ -271,8 +271,8 @@ class _CheckoutState extends State<Checkout> {
     fetchSummary();
   }
 
-  onCouponRemove() async {
-    var couponRemoveResponse =
+  Future<void> onCouponRemove() async {
+    final couponRemoveResponse =
         await CouponRepository().getCouponRemoveResponse();
 
     if (couponRemoveResponse.result == false) {
@@ -291,7 +291,7 @@ class _CheckoutState extends State<Checkout> {
       Loading.show(context);
       // guest checkout user create response
 
-      var guestUserAccountCreateResponse = await GuestCheckoutRepository()
+      final guestUserAccountCreateResponse = await GuestCheckoutRepository()
           .guestUserAccountCreate(widget.guestCheckOutShippingAddress);
       Loading.close();
 
@@ -550,8 +550,8 @@ class _CheckoutState extends State<Checkout> {
     }
   }
 
-  pay_by_wallet() async {
-    var orderCreateResponse = await PaymentRepository()
+  Future<void> pay_by_wallet() async {
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromWallet(
             _selected_payment_method_key, _grandTotalValue);
 
@@ -564,13 +564,13 @@ class _CheckoutState extends State<Checkout> {
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrderList(from_checkout: true);
+      return const OrderList(from_checkout: true);
     }));
   }
 
-  pay_by_cod() async {
+  Future<void> pay_by_cod() async {
     loading();
-    var orderCreateResponse = await PaymentRepository()
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromCod(_selected_payment_method_key);
     Navigator.of(loadingcontext).pop();
     if (orderCreateResponse.result == false) {
@@ -582,13 +582,13 @@ class _CheckoutState extends State<Checkout> {
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrderList(from_checkout: true);
+      return const OrderList(from_checkout: true);
     }));
   }
 
-  pay_by_manual_payment() async {
+  Future<void> pay_by_manual_payment() async {
     loading();
-    var orderCreateResponse = await PaymentRepository()
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromManualPayment(_selected_payment_method_key);
     Navigator.pop(loadingcontext);
     if (orderCreateResponse.result == false) {
@@ -600,7 +600,7 @@ class _CheckoutState extends State<Checkout> {
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrderList(from_checkout: true);
+      return const OrderList(from_checkout: true);
     }));
   }
 
@@ -740,8 +740,8 @@ class _CheckoutState extends State<Checkout> {
                     borderSide:
                         BorderSide(color: MyTheme.medium_grey, width: 0.5),
                     borderRadius: const BorderRadius.only(
-                      topLeft: const Radius.circular(8.0),
-                      bottomLeft: const Radius.circular(8.0),
+                      topLeft: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
                     ),
                   ),
                   contentPadding: const EdgeInsetsDirectional.only(start: 16.0)),
@@ -829,12 +829,12 @@ class _CheckoutState extends State<Checkout> {
     );
   }
 
-  buildPaymentMethodList() {
-    if (_isInitial && _paymentTypeList.length == 0) {
+ Widget? buildPaymentMethodList() {
+    if (_isInitial && _paymentTypeList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 5, item_height: 100.0));
-    } else if (_paymentTypeList.length > 0) {
+    } else if (_paymentTypeList.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
@@ -854,7 +854,7 @@ class _CheckoutState extends State<Checkout> {
           },
         ),
       );
-    } else if (!_isInitial && _paymentTypeList.length == 0) {
+    } else if (!_isInitial && _paymentTypeList.isEmpty) {
       return Container(
           height: 100,
           child: Center(
@@ -863,6 +863,7 @@ class _CheckoutState extends State<Checkout> {
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
+    return null;
   }
 
 /////Method card paypal,Strip,Bkash,etc//////////

@@ -20,12 +20,12 @@ class ColorHelper {
   /// Color? color = ColorHelper.hexToColor("#ff5733");
   /// ```
 
-/*******  c2c38926-3e9e-430a-9f31-9320365ca54b  *******/
+/// *****  c2c38926-3e9e-430a-9f31-9320365ca54b  ******
   static Color? stringToColor(String? hexColor) {
     hexColor = hexColor?.replaceAll("#", "").trim();
     if(hexColor == null || hexColor.length < 3) return null;
 
-    for (int i = hexColor.length; i < 6; i++) hexColor = "F${hexColor}";
+    for (int i = hexColor.length; i < 6; i++) hexColor = "F$hexColor";
     
 
     hexColor = "0xFF${hexColor.toString()}";

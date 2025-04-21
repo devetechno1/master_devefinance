@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         height: 72,
                         width: 72,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                         decoration: BoxDecoration(
                             color: MyTheme.white,
                             borderRadius: BorderRadius.circular(8)),
@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: Text(
                       AppConfig.appNameOnAppLang(context),
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14.0,
                           color: Colors.white),
@@ -94,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   Text(
                     "V " + _packageInfo.version,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14.0,
                       color: Colors.white,

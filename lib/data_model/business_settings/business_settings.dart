@@ -679,8 +679,7 @@ class BusinessSettingsData extends Equatable {
          ColorHelper.stringToColor (data['home_categories_section_bg_color'] as String?),
       homeCategoriesContentBgColor:
           ColorHelper.stringToColor(data['home_categories_content_bg_color'] as String?),
-      homeCategoriesContentOutline:
-          data['home_categories_content_outline'] as dynamic,
+      homeCategoriesContentOutline: data['home_categories_content_outline'] == '1',
       homeCategoriesContentOutlineColor:
           ColorHelper.stringToColor(data['home_categories_content_outline_color'] as String?),
       classifiedSectionBgColor: ColorHelper.stringToColor(data['classified_section_bg_color'] as String?),
@@ -688,7 +687,7 @@ class BusinessSettingsData extends Equatable {
       classifiedSectionOutlineColor:
          ColorHelper.stringToColor( data['classified_section_outline_color'] as String?),
       sellersSectionBgColor: ColorHelper.stringToColor(data['sellers_section_bg_color'] as String?),
-      sellersSectionOutline: data['sellers_section_outline'] as dynamic,
+      sellersSectionOutline: data['sellers_section_outline'] == '1',
       sellersSectionOutlineColor:
          ColorHelper.stringToColor (data['sellers_section_outline_color'] as String?),
       brandsSectionBgColor: ColorHelper.stringToColor(data['brands_section_bg_color'] as String?),

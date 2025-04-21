@@ -38,7 +38,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
   int? _combined_order_id = 0;
   bool _order_init = false;
 
- final WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -54,8 +54,8 @@ class _PayfastScreenState extends State<PayfastScreen> {
   }
 
   payfast() {
-   final String _initial_url =
-        "${AppConfig.BASE_URL}/payfast/initiate?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
+    final String _initial_url =
+        "${AppConfig.BASE_URL}/payfast/initiate?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
 
     print(_initial_url);
 
@@ -81,7 +81,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
       ..loadRequest(Uri.parse(_initial_url), headers: commonHeader);
   }
 
-  createOrder() async {
+  Future<void> createOrder() async {
     final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
@@ -133,16 +133,16 @@ class _PayfastScreenState extends State<PayfastScreen> {
         if (widget.payment_type == "cart_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "order_re_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "wallet_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Wallet(from_recharge: true);
+            return const Wallet(from_recharge: true);
           }));
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
@@ -154,7 +154,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
     });
   }
 
-  buildBody() {
+ Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {
@@ -192,7 +192,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_payfast,
-        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

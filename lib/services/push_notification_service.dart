@@ -51,12 +51,12 @@ class PushNotificationService {
         return;
       }
       //(Map<String, dynamic> message) async => _showMessage(message);
-      RemoteNotification? notification = event.notification;
+      final RemoteNotification? notification = event.notification;
 
       final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
       flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
 
-      final DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings(
+      const DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
         requestSoundPermission: true,
@@ -64,9 +64,9 @@ class PushNotificationService {
 
 
       final AndroidNotification? android = notification?.android;
-      final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@drawable/notification_icon'); 
+      const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@drawable/notification_icon'); 
 
-      final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+      const InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
       BigPictureStyleInformation? bigPictureStyle;
       FilePathAndroidBitmap? image;
@@ -92,7 +92,7 @@ class PushNotificationService {
           largeIcon: image,
         );
       
-      final DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails();
+      const DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails();
 
       
 
@@ -131,7 +131,7 @@ class PushNotificationService {
 
   static Future<void> updateDeviceToken() async {
     if (is_logged_in.$) {
-      String fcmToken = await _fcm.getToken() ?? '';
+      final String fcmToken = await _fcm.getToken() ?? '';
       print("fcmToken $fcmToken");
     
       await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
@@ -211,9 +211,9 @@ class _dialogImageBody extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(message.notification!.body!),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Image.network(

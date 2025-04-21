@@ -46,15 +46,15 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
 
   //MenuOptions _menuOptionSelected = MenuOptions.Published;
 
-  ScrollController _scrollController =
-      new ScrollController(initialScrollOffset: 0);
+  final ScrollController _scrollController =
+      ScrollController(initialScrollOffset: 0);
 
   // double variables
   double mHeight = 0.0, mWidht = 0.0;
   int _page = 1;
 
   getProductList() async {
-    var productResponse = await ClassifiedProductRepository()
+    final productResponse = await ClassifiedProductRepository()
         .getOwnClassifiedProducts(page: _page);
     if (productResponse.data!.isEmpty) {
       ToastComponent.showDialog(
@@ -68,7 +68,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
   }
 
   getUserInfo() async {
-    var userInfoRes = await ProfileRepository().getUserInfoResponse();
+    final userInfoRes = await ProfileRepository().getUserInfoResponse();
     if (userInfoRes.data.isNotEmpty) {
       _userInfo = userInfoRes.data.first;
       _remainingProduct = _userInfo!.remainingUploads.toString();
@@ -80,7 +80,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
 
   deleteProduct(int? id) async {
     loading();
-    var response = await ClassifiedProductRepository()
+    final response = await ClassifiedProductRepository()
         .getDeleteClassifiedProductResponse(id);
     Navigator.pop(loadingContext!);
     if (response.result) {
@@ -93,7 +93,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
 
   productStatusChange(int? index, bool value, setState, id) async {
     loading();
-    var response = await ClassifiedProductRepository()
+    final response = await ClassifiedProductRepository()
         .getStatusChangeClassifiedProductResponse(id, value ? 1 : 0);
     Navigator.pop(loadingContext!);
     if (response.result) {
@@ -150,7 +150,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         showDeleteWarningDialog(productId);
         break;
       case 2:
-        bool? result = await Navigator.push(
+        final bool? result = await Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) =>
@@ -579,8 +579,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                           topLeft: Radius.circular(6.0),
                           bottomRight: Radius.circular(6.0),
                         ),
-                        boxShadow: [
-                          const BoxShadow(
+                        boxShadow: const [
+                          BoxShadow(
                             color: Color(0x14000000),
                             offset: Offset(-1, 1),
                             blurRadius: 1,

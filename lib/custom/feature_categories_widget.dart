@@ -27,7 +27,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         controller: homeData.featuredCategoryScrollController,
         itemCount: homeData.featuredCategoryList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1, // Ensures square boxes
             crossAxisSpacing: 12,
@@ -57,10 +57,10 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0xff000000).withOpacity(0.1),
+                                color: const Color(0xff000000).withOpacity(0.1),
                                 spreadRadius: 1,
                                 blurRadius: 15,
-                                offset: Offset(0, 6),
+                                offset: const Offset(0, 6),
                               ),
                             ],
                           ),
@@ -77,7 +77,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                           //      image: DecorationImage(
                           //          image: AssetImage('assets/p1.PNG'),
                         )),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Flexible(
                       child: Text(
                         homeData.featuredCategoryList[index].name ?? '',
@@ -85,7 +85,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         softWrap: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: MyTheme.font_grey,
                         ),
@@ -103,7 +103,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
         child: Center(
           child: Text(
             LangText(context).local.no_category_found,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
       );

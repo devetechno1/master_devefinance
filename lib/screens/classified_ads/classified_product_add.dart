@@ -474,7 +474,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
-  buildMedia() {
+  GestureDetector buildMedia() {
     return GestureDetector(
       onTap: () {
         _mediaExpanded = !_mediaExpanded;
@@ -818,7 +818,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
-  buildPrice() {
+  GestureDetector buildPrice() {
     return GestureDetector(
       onTap: () {
         _priceExpanded = !_priceExpanded;
@@ -1012,7 +1012,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
-  buildCommonSingleField(title, Widget child, {isMandatory = false}) {
+  Column buildCommonSingleField(title, Widget child, {isMandatory = false}) {
     return Column(
       children: [
         Row(
@@ -1315,7 +1315,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
-  summerNote(title) {
+  Column summerNote(title) {
     if (productDescriptionKey.currentState != null) {
       productDescriptionKey.currentState!.getText().then((value) {
         description = value;
@@ -1350,7 +1350,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
- void pickGalleryImages() async {
+ Future<void> pickGalleryImages() async {
     final tmp = productGalleryImages;
    final List<FileInfo>? images = await Navigator.push(
         context,

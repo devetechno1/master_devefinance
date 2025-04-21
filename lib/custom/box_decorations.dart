@@ -25,7 +25,7 @@ class BoxDecorations {
           color: Colors.black.withOpacity(.08),
           blurRadius: 20,
           spreadRadius: 0.0,
-          offset: Offset(0.0, 10.0), // shadow direction: bottom right
+          offset: const Offset(0.0, 10.0), // shadow direction: bottom right
         )
       ],
     );
@@ -34,7 +34,7 @@ class BoxDecorations {
   static BoxDecoration buildCartCircularButtonDecoration() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(16.0),
-      color: Color.fromRGBO(229, 241, 248, 1),
+      color: const Color.fromRGBO(229, 241, 248, 1),
     );
   }
 
@@ -47,7 +47,7 @@ class BoxDecorations {
           color: Colors.black.withOpacity(.08),
           blurRadius: 20,
           spreadRadius: 0.0,
-          offset: Offset(0.0, 10.0), // shadow direction: bottom right
+          offset: const Offset(0.0, 10.0), // shadow direction: bottom right
         )
       ],
     );
@@ -62,7 +62,7 @@ class BoxDecorations {
           color: Colors.black.withOpacity(.08),
           blurRadius: 20,
           spreadRadius: 0,
-          offset: Offset(0.0, 10.0), // shadow direction: bottom right
+          offset: const Offset(0.0, 10.0), // shadow direction: bottom right
         )
       ],
     );

@@ -17,10 +17,10 @@ class Clubpoint extends StatefulWidget {
 }
 
 class _ClubpointState extends State<Clubpoint> {
-  ScrollController _xcrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
 
-  List<dynamic> _list = [];
-  List<dynamic> _converted_ids = [];
+  final List<dynamic> _list = [];
+  final List<dynamic> _converted_ids = [];
   bool _isInitial = true;
   int _page = 1;
   int? _totalData = 0;
@@ -43,7 +43,7 @@ class _ClubpointState extends State<Clubpoint> {
   }
 
   fetchData() async {
-    var clubpointResponse =
+    final clubpointResponse =
         await ClubpointRepository().getClubPointListResponse(page: _page);
     setState(() {
       _list.addAll(clubpointResponse.clubpoints ?? []);
@@ -69,17 +69,17 @@ class _ClubpointState extends State<Clubpoint> {
     fetchData();
   }
 
-  onPressConvert(item_id, SnackBar _convertedSnackbar) async {
-    if (item_id == null) return;
+  Future<void> onPressConvert(itemId, SnackBar _convertedSnackbar) async {
+    if (itemId == null) return;
 
-    var clubpointToWalletResponse =
-        await ClubpointRepository().getClubpointToWalletResponse(item_id);
+    final clubpointToWalletResponse =
+        await ClubpointRepository().getClubpointToWalletResponse(itemId);
     if (clubpointToWalletResponse.result == false) {
       ToastComponent.showDialog(clubpointToWalletResponse.message);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(_convertedSnackbar);
       setState(() {
-        _converted_ids.add(item_id);
+        _converted_ids.add(itemId);
       });
     }
   }
@@ -91,11 +91,11 @@ class _ClubpointState extends State<Clubpoint> {
 
   @override
   Widget build(BuildContext context) {
-    SnackBar _convertedSnackbar = SnackBar(
+    final SnackBar _convertedSnackbar = SnackBar(
       content: Text(
         AppLocalizations.of(context)?.points_converted_to_wallet ??
             "Points converted to wallet",
-        style: TextStyle(color: MyTheme.font_grey),
+        style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
@@ -104,7 +104,7 @@ class _ClubpointState extends State<Clubpoint> {
             "SHOW WALLET",
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Wallet();
+            return const Wallet();
           })).then((value) {
             onPopped(value);
           });
@@ -190,7 +190,7 @@ class _ClubpointState extends State<Clubpoint> {
     );
   }
 
-  buildList(SnackBar _convertedSnackbar) {
+  Widget buildList(SnackBar _convertedSnackbar) {
     if (_isInitial && _list.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
@@ -198,11 +198,11 @@ class _ClubpointState extends State<Clubpoint> {
     } else if (_list.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(height: 16),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          padding: EdgeInsets.all(0.0),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(0.0),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildItemCard(index, _convertedSnackbar);
@@ -288,17 +288,17 @@ class _ClubpointState extends State<Clubpoint> {
                 children: [
                   Text(
                     item.convertible_club_point?.toString() ?? "0",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 16,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   item.convert_status == 1 || _converted_ids.contains(item.id)
                       ? Text(
                           AppLocalizations.of(context)?.done_all_capital ??
                               "DONE",
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.grey_153,
                               fontSize: 12,
                               fontWeight: FontWeight.bold),
@@ -307,7 +307,7 @@ class _ClubpointState extends State<Clubpoint> {
                           ? Text(
                               AppLocalizations.of(context)?.refunded_ucf ??
                                   "Refunded",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: MyTheme.grey_153,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold),
@@ -321,7 +321,7 @@ class _ClubpointState extends State<Clubpoint> {
                                   AppLocalizations.of(context)
                                           ?.convert_now_ucf ??
                                       "CONVERT NOW",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 10),
                                 ),
                                 onPressed: () {

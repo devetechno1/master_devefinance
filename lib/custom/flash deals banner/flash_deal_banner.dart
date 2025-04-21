@@ -72,7 +72,7 @@ class FlashDealBanner extends StatelessWidget {
         child: Center(
           child: Text(
             AppLocalizations.of(context)!.no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
       );
@@ -80,7 +80,7 @@ class FlashDealBanner extends StatelessWidget {
 
     // Default container if no condition matches
     else {
-      return SizedBox(height: 100);
+      return const SizedBox(height: 100);
     }
   }
 }
@@ -107,10 +107,10 @@ class FlashBannerWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color:
-                Color(0xff000000).withOpacity(0.1), // shadow color
+                const Color(0xff000000).withOpacity(0.1), // shadow color
             spreadRadius: 2, // spread radius
             blurRadius: 5, // blur radius
-            offset: Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
       ),

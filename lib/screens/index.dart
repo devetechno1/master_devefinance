@@ -44,7 +44,7 @@ class _IndexState extends State<Index> {
   void initState() {
     // TODO: implement initState
     getSharedValueHelperData().then((value) {
-      Future.delayed(Duration(seconds: 3)).then((value) {
+      Future.delayed(const Duration(seconds: 3)).then((value) {
         SystemConfig.isShownSplashScreed = true;
         Provider.of<LocaleProvider>(context, listen: false)
             .setLocale(app_mobile_language.$!);
@@ -62,7 +62,7 @@ class _IndexState extends State<Index> {
           ? Main(
               go_back: widget.goBack,
             )
-          : SplashScreen(),
+          : const SplashScreen(),
     );
   }
 }

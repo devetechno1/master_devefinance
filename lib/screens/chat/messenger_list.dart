@@ -14,9 +14,9 @@ class MessengerList extends StatefulWidget {
 }
 
 class _MessengerListState extends State<MessengerList> {
-  ScrollController _xcrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
 
-  List<dynamic> _list = [];
+  final List<dynamic> _list = [];
   bool _isInitial = true;
   int _page = 1;
   int? _totalData = 0;
@@ -41,7 +41,7 @@ class _MessengerListState extends State<MessengerList> {
   }
 
   fetchData() async {
-    var conversatonResponse =
+    final conversatonResponse =
         await ChatRepository().getConversationResponse(page: _page);
     _list.addAll(conversatonResponse.conversation_item_list);
     _isInitial = false;
@@ -140,18 +140,18 @@ class _MessengerListState extends State<MessengerList> {
     );
   }
 
-  buildMessengerList() {
-    if (_isInitial && _list.length == 0) {
+  Widget buildMessengerList() {
+    if (_isInitial && _list.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 10, item_height: 100.0));
-    } else if (_list.length > 0) {
+    } else if (_list.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.builder(
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          padding: EdgeInsets.all(0.0),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(0.0),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Padding(
@@ -169,7 +169,7 @@ class _MessengerListState extends State<MessengerList> {
     }
   }
 
-  buildMessengerItemCard(index) {
+  GestureDetector buildMessengerItemCard(index) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -191,7 +191,7 @@ class _MessengerListState extends State<MessengerList> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(35),
               border: Border.all(
-                  color: Color.fromRGBO(112, 112, 112, .3), width: 1),
+                  color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
               //shape: BoxShape.rectangle,
             ),
             child: ClipRRect(
@@ -211,7 +211,7 @@ class _MessengerListState extends State<MessengerList> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -220,7 +220,7 @@ class _MessengerListState extends State<MessengerList> {
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.font_grey,
                             fontSize: 13,
                             height: 1.6,
@@ -242,7 +242,7 @@ class _MessengerListState extends State<MessengerList> {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Icon(

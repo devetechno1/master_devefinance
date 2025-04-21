@@ -20,7 +20,7 @@ class BlogListScreen extends StatefulWidget {
 
 class _BlogListScreenState extends State<BlogListScreen> {
   bool _showSearchBar = false;
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +39,9 @@ class _BlogListScreenState extends State<BlogListScreen> {
           child: AnimatedContainer(
             //color: MyTheme.textfield_grey,
 
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
           ),
-          preferredSize: Size.fromHeight(0.0)),
+          preferredSize: const Size.fromHeight(0.0)),
       title: buildAppBarTitle(context),
       elevation: 0.0,
       titleSpacing: 0,
@@ -57,12 +57,12 @@ class _BlogListScreenState extends State<BlogListScreen> {
         crossFadeState: _showSearchBar
             ? CrossFadeState.showSecond
             : CrossFadeState.showFirst,
-        duration: Duration(milliseconds: 500));
+        duration: const Duration(milliseconds: 500));
   }
 
   Container buildAppBarTitleOption(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 37),
+      padding: const EdgeInsets.symmetric(horizontal: 37),
       child: Row(
         children: [
           Container(
@@ -70,16 +70,16 @@ class _BlogListScreenState extends State<BlogListScreen> {
             child: UsefulElements.backButton(context, color: "black"),
           ),
           Container(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             width: DeviceInfo(context).width! / 2,
             child: Text(
               AppLocalizations.of(context)!.all_blogs_ucf,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           SizedBox(
               width: 20,
               child: GestureDetector(
@@ -95,7 +95,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
 
   Container buildAppBarSearchOption(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 18),
+      padding: const EdgeInsets.symmetric(horizontal: 18),
       width: DeviceInfo(context).width,
       height: 40,
       child: TextField(
@@ -110,7 +110,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
               _showSearchBar = false;
               setState(() {});
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.clear,
               color: MyTheme.grey_153,
             ),
@@ -119,20 +119,20 @@ class _BlogListScreenState extends State<BlogListScreen> {
           fillColor: MyTheme.white.withOpacity(0.6),
           hintText: LangText(context).local.search_in_blogs //widget.category_name!
           ,
-          hintStyle: TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
+          hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius: BorderRadius.circular(6)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius: BorderRadius.circular(6)),
-          contentPadding: EdgeInsets.all(8.0),
+          contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
     );
   }
 
-  buildBlogList(context) {
+  FutureBuilder<void> buildBlogList(context) {
     return FutureBuilder(
         future: Provider.of<BlogProvider>(context, listen: false).fetchBlogs(),
         builder: (context, snapshot) {
@@ -143,7 +143,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
             return Consumer<BlogProvider>(
                 builder: (context, blogProvider, child) {
               return MasonryGridView.count(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 crossAxisCount: 2,
                 itemCount: blogProvider.blogs.length,
                 crossAxisSpacing: 10,

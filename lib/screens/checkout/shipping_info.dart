@@ -25,7 +25,7 @@ import '../../app_config.dart';
 class ShippingInfo extends StatefulWidget {
   final String? guestCheckOutShippingAddress;
 
-  ShippingInfo({
+  const ShippingInfo({
     Key? key,
     this.guestCheckOutShippingAddress,
   }) : super(key: key);
@@ -35,8 +35,8 @@ class ShippingInfo extends StatefulWidget {
 }
 
 class _ShippingInfoState extends State<ShippingInfo> {
-  ScrollController _mainScrollController = ScrollController();
-  List<SellerWithShipping> _sellerWiseShippingOption = [];
+  final ScrollController _mainScrollController = ScrollController();
+  final List<SellerWithShipping> _sellerWiseShippingOption = [];
   List<DeliveryInfoResponse> _deliveryInfoList = [];
   String? _shipping_cost_string = ". . .";
   // Boolean variables
@@ -54,7 +54,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     _isFetchDeliveryInfo = true;
 
     _deliveryInfoList.forEach((element) {
-      var shippingOption = AppConfig.businessSettingsData.carrierBaseShipping
+      final shippingOption = AppConfig.businessSettingsData.carrierBaseShipping
           ? ShippingOption.Carrier
           : ShippingOption.HomeDelivery;
       int? shippingId;
@@ -68,7 +68,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       print("AppConfig.businessSettingsData.carrierBaseShipping{AppConfig.businessSettingsData.carrierBaseShipping}");
 
       _sellerWiseShippingOption.add(
-          new SellerWithShipping(element.ownerId, shippingOption, shippingId));
+          SellerWithShipping(element.ownerId, shippingOption, shippingId));
     });
     getSetShippingCost();
     setState(() {});
@@ -144,10 +144,10 @@ class _ShippingInfoState extends State<ShippingInfo> {
     setState(() {});
   }
 
-  onPressProceed(context) async {
+  Future<void> onPressProceed(context) async {
     var shippingCostResponse;
 
-    var _sellerWiseShippingOptionErrors =
+    final _sellerWiseShippingOptionErrors =
         _sellerWiseShippingOption.where((element) {
       print(element.shippingId);
       if ((element.shippingId == 0 || element.shippingId == null) &&
@@ -264,7 +264,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     );
   }
 
-  buildHomeDeliveryORCarrier(sellerArrayIndex) {
+  Widget buildHomeDeliveryORCarrier(sellerArrayIndex) {
     if (AppConfig.businessSettingsData.carrierBaseShipping) {
       return buildCarrierSection(sellerArrayIndex);
     } else {
@@ -286,9 +286,9 @@ class _ShippingInfoState extends State<ShippingInfo> {
     // if (is_logged_in.$ == false) {
     //   return buildLoginWarning();
     // } else
-    if (_isFetchDeliveryInfo && _deliveryInfoList.length == 0) {
+    if (_isFetchDeliveryInfo && _deliveryInfoList.isEmpty) {
       return buildCarrierShimmer();
-    } else if (_deliveryInfoList[sellerArrayIndex].pickupPoints!.length > 0) {
+    } else if (_deliveryInfoList[sellerArrayIndex].pickupPoints!.isNotEmpty) {
       return ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(
           height: 14,
@@ -302,7 +302,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         },
       );
     } else if (_isFetchDeliveryInfo &&
-        _deliveryInfoList[sellerArrayIndex].pickupPoints!.length == 0) {
+        _deliveryInfoList[sellerArrayIndex].pickupPoints!.isEmpty) {
       return Container(
         height: 100,
         child: Center(
@@ -430,7 +430,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     // } else
     if (!_isFetchDeliveryInfo) {
       return buildCarrierShimmer();
-    } else if (_deliveryInfoList[sellerArrayIndex].carriers!.data!.length > 0) {
+    } else if (_deliveryInfoList[sellerArrayIndex].carriers!.data!.isNotEmpty) {
       return Container(child: buildCarrierListView(sellerArrayIndex));
     } else {
       return buildCarrierNoData();
@@ -865,13 +865,13 @@ class _ShippingInfoState extends State<ShippingInfo> {
     //           )));
     // }
     // else
-    if (_isFetchDeliveryInfo && _deliveryInfoList.length == 0) {
+    if (_isFetchDeliveryInfo && _deliveryInfoList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 5, item_height: 100.0));
-    } else if (_deliveryInfoList.length > 0) {
+    } else if (_deliveryInfoList.isNotEmpty) {
       return buildCartSellerListBody();
-    } else if (_isFetchDeliveryInfo && _deliveryInfoList.length == 0) {
+    } else if (_isFetchDeliveryInfo && _deliveryInfoList.isEmpty) {
       return Container(
           height: 100,
           child: Center(
@@ -948,24 +948,24 @@ class _ShippingInfoState extends State<ShippingInfo> {
     );
   }
 
-  SingleChildScrollView buildCartSellerItemList(seller_index) {
+  SingleChildScrollView buildCartSellerItemList(sellerIndex) {
     return SingleChildScrollView(
       child: ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(
           height: 24,
         ),
-        itemCount: _deliveryInfoList[seller_index].cartItems!.length,
+        itemCount: _deliveryInfoList[sellerIndex].cartItems!.length,
         scrollDirection: Axis.vertical,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return buildCartSellerItemCard(index, seller_index);
+          return buildCartSellerItemCard(index, sellerIndex);
         },
       ),
     );
   }
 
-  buildCartSellerItemCard(itemIndex, sellerIndex) {
+  Container buildCartSellerItemCard(itemIndex, sellerIndex) {
     return Container(
       height: 100,
       decoration: BoxDecorations.buildBoxDecoration_1(),

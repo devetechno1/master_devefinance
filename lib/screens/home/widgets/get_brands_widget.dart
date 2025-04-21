@@ -66,7 +66,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                           Positioned.fill(
                             child: ColoredBox(
                               color: Theme.of(context).primaryColor.withValues(alpha: 0.8),
-                              child: Icon(Icons.more_horiz_outlined, color: Colors.white),
+                              child: const Icon(Icons.more_horiz_outlined, color: Colors.white),
                             ),
                           )
                         ],

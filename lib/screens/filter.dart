@@ -59,7 +59,7 @@ class _FilterState extends State<Filter> {
  final ScrollController _brandScrollController = ScrollController();
  final  ScrollController _shopScrollController = ScrollController();
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   ScrollController? _scrollController;
   WhichFilter? _selectedFilter;
@@ -71,9 +71,9 @@ class _FilterState extends State<Filter> {
  final  List<dynamic> _selectedCategories = [];
  final  List<dynamic> _selectedBrands = [];
 
-  final TextEditingController _searchController = new TextEditingController();
-  final TextEditingController _minPriceController = new TextEditingController();
-  final TextEditingController _maxPriceController = new TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _minPriceController = TextEditingController();
+  final TextEditingController _maxPriceController = TextEditingController();
 
   //--------------------
 final  List<dynamic> _filterBrandList = [];
@@ -326,10 +326,10 @@ final  List<dynamic> _productList = [];
   }
 
   List<DropdownMenuItem<WhichFilter>> buildDropdownWhichFilterItems(
-      List which_filter_list) {
+      List whichFilterList) {
    final List<DropdownMenuItem<WhichFilter>> items = [];
     for (WhichFilter which_filter_item
-        in which_filter_list as Iterable<WhichFilter>) {
+        in whichFilterList as Iterable<WhichFilter>) {
       items.add(
         DropdownMenuItem(
           value: which_filter_item,
@@ -420,7 +420,7 @@ final  List<dynamic> _productList = [];
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         actions: [
-          new Container(),
+          Container(),
         ],
         centerTitle: false,
         flexibleSpace: Padding(
@@ -444,7 +444,7 @@ final  List<dynamic> _productList = [];
                     horizontal: BorderSide(color: MyTheme.light_grey, width: 1))),
             padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
-            child: new DropdownButton<WhichFilter>(
+            child: DropdownButton<WhichFilter>(
               dropdownColor: Colors.white,
               borderRadius: BorderRadius.circular(5),
               icon:const Icon(Icons.expand_more_rounded, size: 18),
@@ -816,7 +816,7 @@ final  List<dynamic> _productList = [];
         ]);
   }
 
-  buildFilterDrawer() {
+  Directionality buildFilterDrawer() {
     return Directionality(
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
@@ -933,7 +933,7 @@ final  List<dynamic> _productList = [];
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      _filterCategoryList.length == 0
+                      _filterCategoryList.isEmpty
                           ? Container(
                               height: 100,
                               child: Center(
@@ -1105,12 +1105,12 @@ final  List<dynamic> _productList = [];
     );
   }
 
-  buildProductScrollableList() {
-    if (_isProductInitial && _productList.length == 0) {
+  Widget buildProductScrollableList() {
+    if (_isProductInitial && _productList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildProductGridShimmer(scontroller: _scrollController));
-    } else if (_productList.length > 0) {
+    } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: MyTheme.accent_color,
@@ -1149,7 +1149,7 @@ final  List<dynamic> _productList = [];
                     stroked_price: _productList[index].stroked_price,
                     has_discount: _productList[index].has_discount,
                     discount: _productList[index].discount,
-                    is_wholesale: _productList[index].isWholesale,
+                    isWholesale: _productList[index].isWholesale,
                   );
                 },
               )
@@ -1177,12 +1177,12 @@ final  List<dynamic> _productList = [];
     );
   }
 
-  buildBrandScrollableList() {
-    if (_isBrandInitial && _brandList.length == 0) {
+  Widget buildBrandScrollableList() {
+    if (_isBrandInitial && _brandList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildSquareGridShimmer(scontroller: _scrollController));
-    } else if (_brandList.length > 0) {
+    } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: MyTheme.accent_color,
@@ -1246,13 +1246,13 @@ final  List<dynamic> _productList = [];
     );
   }
 
-  buildShopScrollableList() {
-    if (_isShopInitial && _shopList.length == 0) {
+  Widget buildShopScrollableList() {
+    if (_isShopInitial && _shopList.isEmpty) {
       return SingleChildScrollView(
           controller: _scrollController,
           child: ShimmerHelper()
               .buildSquareGridShimmer(scontroller: _scrollController));
-    } else if (_shopList.length > 0) {
+    } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: MyTheme.accent_color,

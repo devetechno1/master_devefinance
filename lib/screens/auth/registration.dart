@@ -36,7 +36,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  String _register_by =  otp_addon_installed.$ ? "phone" : "email"; //phone or email
+  final String _register_by =  otp_addon_installed.$ ? "phone" : "email"; //phone or email
   String initialCountry = 'EG';
 
   List<String?> countries_code = <String?>[];
@@ -47,11 +47,11 @@ class _RegistrationState extends State<Registration> {
   String googleRecaptchaKey = "";
 
   //controllers
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _passwordConfirmController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _RegistrationState extends State<Registration> {
   }
 
   fetch_country() async {
-    var data = await AddressRepository().getCountryList();
+    final data = await AddressRepository().getCountryList();
     data.countries?.forEach((c) => countries_code.add(c.code));
     setState(() {});
   }
@@ -76,12 +76,12 @@ class _RegistrationState extends State<Registration> {
     super.dispose();
   }
 
-  onPressSignUp() async {
+  Future<void> onPressSignUp() async {
 
-    var name = _nameController.text.toString();
-    var email = _emailController.text.toString();
-    var password = _passwordController.text.toString();
-    var password_confirm = _passwordConfirmController.text.toString();
+    final name = _nameController.text.toString();
+    final email = _emailController.text.toString();
+    final password = _passwordController.text.toString();
+    final passwordConfirm = _passwordConfirmController.text.toString();
 
     if (name == "") {
       ToastComponent.showDialog(
@@ -103,7 +103,7 @@ class _RegistrationState extends State<Registration> {
         AppLocalizations.of(context)!.enter_password,
       );
       return;
-    } else if (password_confirm == "") {
+    } else if (passwordConfirm == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.confirm_your_password,
       );
@@ -114,7 +114,7 @@ class _RegistrationState extends State<Registration> {
             .password_must_contain_at_least_6_characters,
       );
       return;
-    } else if (password != password_confirm) {
+    } else if (password != passwordConfirm) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.passwords_do_not_match,
       );
@@ -122,11 +122,11 @@ class _RegistrationState extends State<Registration> {
     }
     Loading.show(context);
 
-    var signupResponse = await AuthRepository().getSignupResponse(
+    final signupResponse = await AuthRepository().getSignupResponse(
         name,
         _register_by == 'email' ? email : _phone,
         password,
-        password_confirm,
+        passwordConfirm,
         _register_by,
         googleRecaptchaKey);
     Loading.close();
@@ -166,7 +166,7 @@ class _RegistrationState extends State<Registration> {
           sound: true,
         );
 
-        String? fcmToken = await _fcm.getToken();
+        final String? fcmToken = await _fcm.getToken();
 
         print("--fcm token--");
         print("fcmToken $fcmToken");
@@ -181,7 +181,7 @@ class _RegistrationState extends State<Registration> {
       if ((AppConfig.businessSettingsData.mailVerificationStatus&& _register_by == "email") ||
           (AppConfig.businessSettingsData.mustOtp && _register_by == "phone")) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Otp(
+          return const Otp(
             fromRegistration: true,
               // verify_by: _register_by,
               // user_id: signupResponse.user_id,
@@ -218,7 +218,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.name_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -240,7 +240,7 @@ class _RegistrationState extends State<Registration> {
                   _register_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.phone_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -301,18 +301,18 @@ class _RegistrationState extends State<Registration> {
                           onInputValidated: (bool value) {
                             print(value);
                           },
-                          selectorConfig: SelectorConfig(
+                          selectorConfig: const SelectorConfig(
                             selectorType: PhoneInputSelectorType.DIALOG,
                           ),
                           ignoreBlank: false,
                           autoValidateMode: AutovalidateMode.disabled,
                           selectorTextStyle:
-                              TextStyle(color: MyTheme.font_grey),
+                              const TextStyle(color: MyTheme.font_grey),
                           // initialValue: PhoneNumber(
                           //     isoCode: countries_code[0].toString()),
                           textFieldController: _phoneNumberController,
                           formatInput: true,
-                          keyboardType: TextInputType.numberWithOptions(
+                          keyboardType: const TextInputType.numberWithOptions(
                               signed: true, decimal: true),
                           inputDecoration:
                               InputDecorations.buildInputDecoration_phone(
@@ -344,7 +344,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -368,7 +368,7 @@ class _RegistrationState extends State<Registration> {
                     Text(
                       AppLocalizations.of(context)!
                           .password_must_contain_at_least_6_characters,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.textfield_grey,
                           fontStyle: FontStyle.italic),
                     )
@@ -379,7 +379,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.retype_password_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -440,7 +440,7 @@ class _RegistrationState extends State<Registration> {
                         child: RichText(
                             maxLines: 2,
                             text: TextSpan(
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12),
                                 children: [
                                   TextSpan(
@@ -461,10 +461,10 @@ class _RegistrationState extends State<Registration> {
                                                     )));
                                       },
                                     style:
-                                        TextStyle(color: MyTheme.accent_color),
+                                        const TextStyle(color: MyTheme.accent_color),
                                     text: " ${AppLocalizations.of(context)!.terms_conditions_ucf}",
                                   ),
-                                  TextSpan(
+                                  const TextSpan(
                                     text: " &",
                                   ),
                                   TextSpan(
@@ -483,7 +483,7 @@ class _RegistrationState extends State<Registration> {
                                       },
                                     text: " ${AppLocalizations.of(context)!.privacy_policy_ucf}",
                                     style:
-                                        TextStyle(color: MyTheme.accent_color),
+                                        const TextStyle(color: MyTheme.accent_color),
                                   )
                                 ])),
                       ),
@@ -499,12 +499,12 @@ class _RegistrationState extends State<Registration> {
                     minWidth: MediaQuery.of(context).size.width,
                     height: 50,
                     color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(6.0))),
+                            BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
                       AppLocalizations.of(context)!.sign_up_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
@@ -525,15 +525,15 @@ class _RegistrationState extends State<Registration> {
                     Center(
                         child: Text(
                       AppLocalizations.of(context)!.already_have_an_account,
-                      style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                      style: const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                     )),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     InkWell(
                       child: Text(
                         AppLocalizations.of(context)!.log_in,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.accent_color,
                             fontSize: 14,
                             fontWeight: FontWeight.w600),

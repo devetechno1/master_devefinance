@@ -18,7 +18,7 @@ class Captcha extends StatefulWidget {
 }
 
 class CaptchaState extends State<Captcha> {
-  WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
   double zoomValue = 2;
 
   @override
@@ -58,7 +58,7 @@ class CaptchaState extends State<Captcha> {
               //like here, the message is just being printed
               //in Run/LogCat window of android studio
               // print("message.message");
-              bool value = message.message == "true";
+              final bool value = message.message == "true";
               widget.handleCaptcha!(value);
               // widget.callback(message.message);
               //Navigator.of(context).pop();
@@ -123,7 +123,7 @@ class CaptchaState extends State<Captcha> {
   <body>
     <div id="wrap">
 	
-	<iframe id="scaled-frame" src="${url}/google-recaptcha" allowfullscreen></iframe>
+	<iframe id="scaled-frame" src="$url/google-recaptcha" allowfullscreen></iframe>
     </div>
   </body>
 </html>

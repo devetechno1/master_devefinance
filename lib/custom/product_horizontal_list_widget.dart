@@ -1,4 +1,3 @@
-import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -15,14 +14,14 @@ class ProductHorizontalListWidget extends StatelessWidget {
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
-  const ProductHorizontalListWidget({Key? key, required this.isProductInitial, required this.productList, required this.numberOfTotalProducts,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle, List<Brands>? brandtList,})
+  const ProductHorizontalListWidget({Key? key, required this.isProductInitial, required this.productList, required this.numberOfTotalProducts,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (isProductInitial && productList.isEmpty) {
       return Padding(
-        padding: EdgeInsets.only(right: 20,left: 20, top: 15),
+        padding: const EdgeInsets.only(right: 20,left: 20, top: 15),
         child: Row(
           children: [
             Expanded(
@@ -49,7 +48,7 @@ class ProductHorizontalListWidget extends StatelessWidget {
           ],
         ),
       );
-    } else if (productList.length > 0) {
+    } else if (productList.isNotEmpty) {
       return Container(
         // height: 230,
         alignment: Alignment.center,
@@ -61,8 +60,8 @@ class ProductHorizontalListWidget extends StatelessWidget {
             return true;
           },
           child: ListView.separated(
-            padding: EdgeInsets.only(right: 20,left: 20, top: 15),
-            separatorBuilder: (context, index) => SizedBox(
+            padding: const EdgeInsets.only(right: 20,left: 20, top: 15),
+            separatorBuilder: (context, index) => const SizedBox(
               width: 12,
             ),
             itemCount:numberOfTotalProducts > productList.length
@@ -77,7 +76,7 @@ class ProductHorizontalListWidget extends StatelessWidget {
               return (index == productList.length)
                   ? SpinKitFadingFour(
                       itemBuilder: (BuildContext context, int index) {
-                        return DecoratedBox(
+                        return const DecoratedBox(
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
@@ -96,7 +95,7 @@ class ProductHorizontalListWidget extends StatelessWidget {
                           productList[index].stroked_price,
                       has_discount:
                           productList[index].has_discount,
-                      is_wholesale:
+                      isWholesale:
                          productList[index].isWholesale,
                       priceTextStyle: priceTextStyle,
                       nameTextStyle: nameTextStyle,

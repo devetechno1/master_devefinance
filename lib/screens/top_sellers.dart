@@ -21,7 +21,7 @@ class _TopSellersState extends State<TopSellers> {
   bool isInit = false;
 
   getTopSellers() async {
-    ShopResponse response = await ShopRepository().topSellers();
+    final ShopResponse response = await ShopRepository().topSellers();
     isInit = true;
     if (response.shops != null) {
       topSellers.addAll(response.shops!);
@@ -57,7 +57,7 @@ class _TopSellersState extends State<TopSellers> {
       body: RefreshIndicator(
         onRefresh: onRefresh,
         child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: buildTopSellerList(context)),
       ),
     );
@@ -89,13 +89,13 @@ class _TopSellersState extends State<TopSellers> {
         //addAutomaticKeepAlives: true,
         itemCount: topSellers.length,
         controller: _scrollController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
             childAspectRatio: 0.68),
-        padding: EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           // 3

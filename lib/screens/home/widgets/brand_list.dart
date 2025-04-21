@@ -23,7 +23,7 @@ class BrandListSectionSliver extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Filter(selected_filter: "brands");
+                return const Filter(selected_filter: "brands");
               }));
             },
             child: Text(

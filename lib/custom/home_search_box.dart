@@ -11,13 +11,13 @@ class HomeSearchBox extends StatelessWidget {
       height: 34,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Color(0xffE4E3E8),
+        color: const Color(0xffE4E3E8),
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(255, 63, 63, 63).withOpacity(.12),
             blurRadius: 15,
             spreadRadius: 0.4,
-            offset: Offset(0.0, 5.0),
+            offset: const Offset(0.0, 5.0),
           )
         ],
       ),
@@ -29,14 +29,14 @@ class HomeSearchBox extends StatelessWidget {
             Image.asset(
               'assets/search.png',
               height: 16,
-              color: Color(0xff7B7980),
+              color: const Color(0xff7B7980),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
               AppConfig.search_bar_text(context),
-              style: TextStyle(fontSize: 13.0, color: Color(0xff7B7980)),
+              style: const TextStyle(fontSize: 13.0, color: Color(0xff7B7980)),
             ),
           ],
         ),

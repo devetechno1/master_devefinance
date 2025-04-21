@@ -490,7 +490,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
     );
   }
 
-  buildMedia() {
+  GestureDetector buildMedia() {
     return GestureDetector(
       onTap: () {
         _mediaExpanded = !_mediaExpanded;
@@ -834,7 +834,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
     );
   }
 
-  buildPrice() {
+  GestureDetector buildPrice() {
     return GestureDetector(
       onTap: () {
         _priceExpanded = !_priceExpanded;
@@ -1028,7 +1028,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
     );
   }
 
-  buildCommonSingleField(title, Widget child, {isMandatory = false}) {
+  Column buildCommonSingleField(title, Widget child, {isMandatory = false}) {
     return Column(
       children: [
         Row(
@@ -1337,7 +1337,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
     );
   }
 
-  summerNote(title) {
+  Column summerNote(title) {
     if (productDescriptionKey.currentState != null) {
       productDescriptionKey.currentState!.getText().then((value) {
         description = value;

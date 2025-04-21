@@ -136,7 +136,7 @@ class AuthScreen {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 12),
                               width: 72,
                               height: 72,
@@ -153,7 +153,7 @@ class AuthScreen {
                         padding: const EdgeInsets.only(bottom: 20.0, top: 10),
                         child: Text(
                           headerText,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.white,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
@@ -163,7 +163,7 @@ class AuthScreen {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
                           decoration:
                               BoxDecorations.buildBoxDecoration_1(radius: 16),
                           child: child,
@@ -189,7 +189,7 @@ class AuthScreen {
                         .withOpacity(0.7), // Optional background color
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.close,
                     color: Colors.white,
                     size: 24,

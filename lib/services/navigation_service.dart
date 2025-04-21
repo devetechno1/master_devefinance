@@ -19,7 +19,7 @@ class NavigationService {
         launchUrl(uri!);
       }
     }else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar( content: Text('Invalid URL')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar( content: Text('Invalid URL')));
     }
   }
 

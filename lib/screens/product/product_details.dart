@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
 
 import 'package:badges/badges.dart' as badges;
@@ -60,11 +62,11 @@ class _ProductDetailsState extends State<ProductDetails>
   bool _showCopied = false;
   String? _appbarPriceString = ". . .";
   int _currentImage = 0;
-  ScrollController _mainScrollController =
+  final ScrollController _mainScrollController =
       ScrollController(initialScrollOffset: 0.0);
-  ScrollController _colorScrollController = ScrollController();
-  ScrollController _variantScrollController = ScrollController();
-  ScrollController _imageScrollController = ScrollController();
+  final ScrollController _colorScrollController = ScrollController();
+  final ScrollController _variantScrollController = ScrollController();
+  final ScrollController _imageScrollController = ScrollController();
   TextEditingController sellerChatTitleController = TextEditingController();
   TextEditingController sellerChatMessageController = TextEditingController();
 
@@ -78,7 +80,7 @@ class _ProductDetailsState extends State<ProductDetails>
   double webViewHeight = 50.0;
   late double initHeight = webViewHeight;
 
-  CarouselSliderController _carouselController = CarouselSliderController();
+  final CarouselSliderController _carouselController = CarouselSliderController();
   late BuildContext loadingcontext;
 
   //init values
@@ -86,10 +88,10 @@ class _ProductDetailsState extends State<ProductDetails>
   bool _isInWishList = false;
   var _productDetailsFetched = false;
   DetailedProduct? _productDetails;
-  var _productImageList = [];
-  var _colorList = [];
+  final _productImageList = [];
+  final _colorList = [];
   int _selectedColorIndex = 0;
-  var _selectedChoices = [];
+  final _selectedChoices = [];
   var _choiceString = "";
   String? _variant = "";
   String? _totalPrice = "...";
@@ -101,9 +103,9 @@ class _ProductDetailsState extends State<ProductDetails>
 
   double opacity = 0;
 
-  List<dynamic> _relatedProducts = [];
+  final List<dynamic> _relatedProducts = [];
   bool _relatedProductInit = false;
-  List<dynamic> _topProducts = [];
+  final List<dynamic> _topProducts = [];
   bool _topProductInit = false;
 
   @override
@@ -124,7 +126,7 @@ class _ProductDetailsState extends State<ProductDetails>
     quantityText.text = "${_quantity ?? 0}";
     controller;
     _ColorAnimationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 0));
+        AnimationController(vsync: this, duration: const Duration(seconds: 0));
 
     _colorTween = ColorTween(begin: Colors.transparent, end: Colors.white)
         .animate(_ColorAnimationController);
@@ -176,10 +178,10 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   fetchProductDetails() async {
-    var productDetailsResponse = await ProductRepository()
+    final productDetailsResponse = await ProductRepository()
         .getProductDetails(slug: widget.slug, userId: user_id.$);
 
-    if (productDetailsResponse.detailed_products!.length > 0) {
+    if (productDetailsResponse.detailed_products!.isNotEmpty) {
       _productDetails = productDetailsResponse.detailed_products![0];
       sellerChatTitleController.text =
           productDetailsResponse.detailed_products![0].name!;
@@ -191,7 +193,7 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   fetchRelatedProducts() async {
-    var relatedProductResponse =
+    final relatedProductResponse =
         await ProductRepository().getFrequentlyBoughProducts(slug: widget.slug);
     _relatedProducts.addAll(relatedProductResponse.products!);
     _relatedProductInit = true;
@@ -200,7 +202,7 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   fetchTopProducts() async {
-    var topProductResponse = await ProductRepository()
+    final topProductResponse = await ProductRepository()
         .getTopFromThisSellerProducts(slug: widget.slug);
     _topProducts.addAll(topProductResponse.products!);
     _topProductInit = true;
@@ -218,8 +220,8 @@ class _ProductDetailsState extends State<ProductDetails>
         _productImageList.add(photo.path);
       });
 
-      _productDetails!.choice_options!.forEach((choice_opiton) {
-        _selectedChoices.add(choice_opiton.options![0]);
+      _productDetails!.choice_options!.forEach((choiceOpiton) {
+        _selectedChoices.add(choiceOpiton.options![0]);
       });
       _productDetails!.colors!.forEach((color) {
         _colorList.add(color);
@@ -250,7 +252,7 @@ class _ProductDetailsState extends State<ProductDetails>
   // }
 
   fetchWishListCheckInfo() async {
-    var wishListCheckResponse =
+    final wishListCheckResponse =
         await WishListRepository().isProductInUserWishList(
       product_slug: widget.slug,
     );
@@ -265,7 +267,7 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   addToWishList() async {
-    var wishListCheckResponse =
+    final wishListCheckResponse =
         await WishListRepository().add(product_slug: widget.slug);
 
     //print("p&u:" + widget.slug.toString() + " | " + _user_id.toString());
@@ -274,7 +276,7 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   removeFromWishList() async {
-    var wishListCheckResponse =
+    final wishListCheckResponse =
         await WishListRepository().remove(product_slug: widget.slug);
 
     //print("p&u:" + widget.slug.toString() + " | " + _user_id.toString());
@@ -282,7 +284,7 @@ class _ProductDetailsState extends State<ProductDetails>
     setState(() {});
   }
 
-  onWishTap() {
+  void onWishTap() {
     if (is_logged_in.$ == false) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.you_need_to_log_in,
@@ -306,13 +308,13 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   fetchAndSetVariantWiseInfo({bool change_appbar_string = true}) async {
-    var color_string = _colorList.length > 0
+    final colorString = _colorList.isNotEmpty
         ? _colorList[_selectedColorIndex].toString().replaceAll("#", "")
         : "";
 
-    var variantResponse = await ProductRepository().getVariantWiseInfo(
+    final variantResponse = await ProductRepository().getVariantWiseInfo(
         slug: widget.slug,
-        color: color_string,
+        color: colorString,
         variants: _choiceString,
         qty: _quantity);
     _stock = variantResponse.variantData!.stock;
@@ -389,7 +391,7 @@ class _ProductDetailsState extends State<ProductDetails>
     addToCart(mode: "buy_now", context: context);
   }
 
-  addToCart({mode, required BuildContext context, snackbar = null}) async {
+  Future<void> addToCart({mode, required BuildContext context, snackbar = null}) async {
     // if (is_logged_in.$ == false) {
     //   // ToastComponent.showDialog(AppLocalizations.of(context).common_login_warning, context,
     //   //     gravity: Toast.center, duration: Toast.lengthLong);
@@ -406,7 +408,7 @@ class _ProductDetailsState extends State<ProductDetails>
       }
     }
 
-    var cartAddResponse = await CartRepository().getCartAddResponse(
+    final cartAddResponse = await CartRepository().getCartAddResponse(
         _productDetails?.id, _variant, user_id.$, _quantity);
 
     temp_user_id.$ = cartAddResponse.tempUserId;
@@ -428,7 +430,7 @@ class _ProductDetailsState extends State<ProductDetails>
         fetchAll();
       } else if (mode == 'buy_now') {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Cart(has_bottomnav: false);
+          return const Cart(has_bottomnav: false);
         })).then((value) {
           onPopped(value);
         });
@@ -436,30 +438,30 @@ class _ProductDetailsState extends State<ProductDetails>
     }
   }
 
-  onPopped(value) async {
+  void onPopped(value) {
     reset();
     fetchAll();
   }
 
-  onCopyTap(setState) {
+  void onCopyTap(setState) {
     setState(() {
       _showCopied = true;
     });
-    Timer timer = Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       setState(() {
         _showCopied = false;
       });
     });
   }
 
-  onPressShare(context) {
+  Future onPressShare(context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (context, StateSetter setState) {
             return AlertDialog(
-              insetPadding: EdgeInsets.symmetric(horizontal: 10),
-              contentPadding: EdgeInsets.only(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+              contentPadding: const EdgeInsets.only(
                   top: 36.0, left: 36.0, right: 36.0, bottom: 2.0),
               content: Container(
                 width: 400,
@@ -473,11 +475,11 @@ class _ProductDetailsState extends State<ProductDetails>
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
-                          color: Color.fromRGBO(253, 253, 253, 1),
+                          color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               side:
-                                  BorderSide(color: Colors.black, width: 1.0)),
+                                  const BorderSide(color: Colors.black, width: 1.0)),
                           child: Text(
                             AppLocalizations.of(context)!.copy_product_link_ucf,
                             style: TextStyle(
@@ -520,10 +522,10 @@ class _ProductDetailsState extends State<ProductDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               side:
-                                  BorderSide(color: Colors.black, width: 1.0)),
+                                  const BorderSide(color: Colors.black, width: 1.0)),
                           child: Text(
                             AppLocalizations.of(context)!.share_options_ucf,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           onPressed: () async{
 
@@ -541,19 +543,19 @@ class _ProductDetailsState extends State<ProductDetails>
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? EdgeInsets.only(left: 8.0)
-                          : EdgeInsets.only(right: 8.0),
+                          ? const EdgeInsets.only(left: 8.0)
+                          : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
-                        color: Color.fromRGBO(253, 253, 253, 1),
+                        color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
                           LangText(context).local.close_all_capital,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
                         ),
@@ -570,15 +572,15 @@ class _ProductDetailsState extends State<ProductDetails>
         });
   }
 
-  onTapSellerChat() {
+  Future onTapSellerChat() {
     return showDialog(
         context: context,
         builder: (_) => Directionality(
               textDirection:
                   app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
               child: AlertDialog(
-                insetPadding: EdgeInsets.symmetric(horizontal: 10),
-                contentPadding: EdgeInsets.only(
+                insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: const EdgeInsets.only(
                     top: 36.0, left: 36.0, right: 36.0, bottom: 2.0),
                 content: Container(
                   width: 400,
@@ -590,7 +592,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(AppLocalizations.of(context)!.title_ucf,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
@@ -603,27 +605,27 @@ class _ProductDetailsState extends State<ProductDetails>
                               decoration: InputDecoration(
                                   hintText: AppLocalizations.of(context)!
                                       .enter_title_ucf,
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: MyTheme.textfield_grey,
                                         width: 0.5),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(8.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0),
                                     ),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: MyTheme.textfield_grey,
                                         width: 1.0),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(8.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0),
                                     ),
                                   ),
                                   contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 8.0)),
+                                      const EdgeInsets.symmetric(horizontal: 8.0)),
                             ),
                           ),
                         ),
@@ -631,7 +633,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                               "${AppLocalizations.of(context)!.message_ucf} *",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
@@ -646,26 +648,26 @@ class _ProductDetailsState extends State<ProductDetails>
                               decoration: InputDecoration(
                                   hintText: AppLocalizations.of(context)!
                                       .enter_message_ucf,
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: MyTheme.textfield_grey,
                                         width: 0.5),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(8.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0),
                                     ),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: MyTheme.textfield_grey,
                                         width: 1.0),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(8.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0),
                                     ),
                                   ),
-                                  contentPadding: EdgeInsets.only(
+                                  contentPadding: const EdgeInsets.only(
                                       right: 16.0,
                                       left: 8.0,
                                       top: 16.0,
@@ -686,14 +688,14 @@ class _ProductDetailsState extends State<ProductDetails>
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 30,
-                          color: Color.fromRGBO(253, 253, 253, 1),
+                          color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             AppLocalizations.of(context)!.close_all_capital,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyTheme.font_grey,
                             ),
                           ),
@@ -702,7 +704,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 1,
                       ),
                       Padding(
@@ -717,7 +719,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             AppLocalizations.of(context)!.send_all_capital,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
@@ -743,8 +745,8 @@ class _ProductDetailsState extends State<ProductDetails>
           return AlertDialog(
               content: Row(
             children: [
-              CircularProgressIndicator(),
-              SizedBox(
+              const CircularProgressIndicator(),
+              const SizedBox(
                 width: 10,
               ),
               Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
@@ -753,20 +755,20 @@ class _ProductDetailsState extends State<ProductDetails>
         });
   }
 
-  showLoginWarning() {
+  dynamic showLoginWarning() {
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
     );
   }
 
-  onPressSendMessage() async {
+  Future<void> onPressSendMessage() async {
     if (!is_logged_in.$) {
       showLoginWarning();
       return;
     }
     loading();
-    var title = sellerChatTitleController.text.toString();
-    var message = sellerChatMessageController.text.toString();
+    final title = sellerChatTitleController.text.toString();
+    final message = sellerChatMessageController.text.toString();
 
     if (title == "" || message == "") {
       ToastComponent.showDialog(
@@ -775,7 +777,7 @@ class _ProductDetailsState extends State<ProductDetails>
       return;
     }
 
-    var conversationCreateResponse = await ChatRepository()
+    final conversationCreateResponse = await ChatRepository()
         .getCreateConversationResponse(
             product_id: _productDetails!.id, title: title, message: message);
 
@@ -806,10 +808,10 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   Widget build(BuildContext context) {
-    SnackBar _addedToCartSnackbar = SnackBar(
+    final SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         AppLocalizations.of(context)!.added_to_cart,
-        style: TextStyle(color: MyTheme.font_grey),
+        style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
@@ -817,7 +819,7 @@ class _ProductDetailsState extends State<ProductDetails>
         label: AppLocalizations.of(context)!.show_cart_all_capital,
         onPressed: () {
           Navigator.push(OneContext().context!, MaterialPageRoute(builder: (context) {
-            return Cart(has_bottomnav: false);
+            return const Cart(has_bottomnav: false);
           })).then((value) {
             onPopped(value);
           });
@@ -852,9 +854,9 @@ class _ProductDetailsState extends State<ProductDetails>
                   expandedHeight: 355.0,
                   title: AnimatedOpacity(
                       opacity: _scrollPosition > 250 ? 1 : 0,
-                      duration: Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 200),
                       child: Container(
-                          padding: EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.only(left: 8),
                           width: DeviceInfo(context).width! / 2,
                           child: Text(
                             "${_productDetails != null ? _productDetails!.name : ''}",
@@ -900,13 +902,13 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                               // Show product name in appbar
 
-                              Spacer(),
+                              const Spacer(),
                               // Cart button at top
                               InkWell(
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return Cart(has_bottomnav: false);
+                                    return const Cart(has_bottomnav: false);
                                   })).then((value) {
                                     onPopped(value);
                                   });
@@ -916,7 +918,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                       .buildCircularButtonDecoration_for_productDetails(),
                                   width: 32,
                                   height: 32,
-                                  padding: EdgeInsets.all(2),
+                                  padding: const EdgeInsets.all(2),
                                   child: badges.Badge(
                                     position: badges.BadgePosition.topEnd(
                                       top: -6,
@@ -927,7 +929,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                       badgeColor: MyTheme.accent_color,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    badgeAnimation: badges.BadgeAnimation.slide(
+                                    badgeAnimation: const badges.BadgeAnimation.slide(
                                       toAnimate: true,
                                     ),
                                     stackFit: StackFit.loose,
@@ -942,7 +944,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                       builder: (context, cart, child) {
                                         return Text(
                                           "${cart.cartCounter}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 12,
                                               color: Colors.white),
                                         );
@@ -951,7 +953,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 15),
+                              const SizedBox(width: 15),
                               InkWell(
                                 onTap: () {
                                   onPressShare(context);
@@ -961,12 +963,12 @@ class _ProductDetailsState extends State<ProductDetails>
                                   color: MyTheme.dark_font_grey,
                                 ),
                               ),
-                              SizedBox(width: 15),
+                              const SizedBox(width: 15),
                               InkWell(
                                 onTap: onWishTap,
                                 borderRadius: BorderRadius.circular(100),
                                 child: _isInWishList 
-                                ? TappableIconWidget(
+                                ? const TappableIconWidget(
                                   icon:  Icons.favorite,
                                   color: Color.fromRGBO(230, 46, 4, 1),
                                 )
@@ -996,7 +998,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             color: Colors.black.withOpacity(.08),
                             blurRadius: 20,
                             spreadRadius: 0.0,
-                            offset: Offset(
+                            offset: const Offset(
                                 0.0, 0.0), // shadow direction: bottom right
                           )
                         ],
@@ -1013,7 +1015,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 _productDetails != null
                                     ? Text(
                                         _productDetails!.name!,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Color(0xff3E4447),
                                             fontWeight: FontWeight.bold,
                                             fontFamily: 'Public Sans',
@@ -1023,7 +1025,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     : ShimmerHelper().buildBasicShimmer(
                                         height: 30.0,
                                       ),
-                                SizedBox(height: 13),
+                                const SizedBox(height: 13),
                                 _productDetails != null
                                     ? buildRatingAndWishButtonRow()
                                     : ShimmerHelper().buildBasicShimmer(
@@ -1037,13 +1039,13 @@ class _ProductDetailsState extends State<ProductDetails>
                                       : ShimmerHelper().buildBasicShimmer(
                                           height: 30.0,
                                         ),
-                                SizedBox(height: 12),
+                                const SizedBox(height: 12),
                                 _productDetails != null
                                     ? buildMainPriceRow()
                                     : ShimmerHelper().buildBasicShimmer(
                                         height: 30.0,
                                       ),
-                                SizedBox(height: 14),
+                                const SizedBox(height: 14),
                                 Visibility(
                                   visible: club_point_addon_installed.$,
                                   child: _productDetails != null
@@ -1052,7 +1054,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                           height: 30.0,
                                         ),
                                 ),
-                                SizedBox(height: 9),
+                                const SizedBox(height: 9),
                                 _productDetails != null
                                     ? buildBrandRow()
                                     : ShimmerHelper().buildBasicShimmer(
@@ -1070,20 +1072,20 @@ class _ProductDetailsState extends State<ProductDetails>
                             padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
                             child: Column(
                               children: [
-                                SizedBox(height: 11),
+                                const SizedBox(height: 11),
 
                                 _productDetails != null
                                     ? buildChoiceOptionList()
                                     : buildVariantShimmers(),
 
                                 _productDetails != null
-                                    ? (_colorList.length > 0
+                                    ? (_colorList.isNotEmpty
                                         ? buildColorRow()
                                         : Container())
                                     : ShimmerHelper().buildBasicShimmer(
                                         height: 30.0,
                                       ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
 
@@ -1093,7 +1095,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   child: _productDetails != null
                                       ? _productDetails!.wholesale!.isNotEmpty
                                           ? buildWholeSaleQuantityPrice()
-                                          : SizedBox.shrink()
+                                          : const SizedBox.shrink()
                                       : ShimmerHelper().buildBasicShimmer(
                                           height: 30.0,
                                         ),
@@ -1107,7 +1109,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 27,
                           ),
                           Padding(
@@ -1118,7 +1120,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     height: 30.0,
                                   ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           )
                         ],
@@ -1141,7 +1143,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 spreadRadius: 0,
                                 blurRadius: 16,
                                 offset:
-                                    Offset(0, 0), // changes position of shadow
+                                    const Offset(0, 0), // changes position of shadow
                               ),
                             ],
                           ),
@@ -1158,7 +1160,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 ),
                                 child: Text(
                                   AppLocalizations.of(context)!.description_ucf,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color(0xff3E4447),
                                       fontFamily: 'Public Sans',
                                       fontSize: 13,
@@ -1188,13 +1190,13 @@ class _ProductDetailsState extends State<ProductDetails>
                         if (_productDetails?.downloads != null)
                           Column(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               InkWell(
                                 onTap: () async {
                                   print(_productDetails?.downloads);
-                                  var url = Uri.parse(
+                                  final url = Uri.parse(
                                       _productDetails?.downloads ?? "");
                                   print(url);
                                   launchUrl(url,
@@ -1220,7 +1222,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Image.asset(
                                           "assets/arrow.png",
                                           height: 11,
@@ -1233,7 +1235,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ],
                           ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         InkWell(
@@ -1264,7 +1266,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   color: Colors.black.withOpacity(0.08),
                                   spreadRadius: 0,
                                   blurRadius: 16,
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 0), // changes position of shadow
                                 ),
                               ],
@@ -1280,16 +1282,16 @@ class _ProductDetailsState extends State<ProductDetails>
                                 children: [
                                   Text(
                                     AppLocalizations.of(context)!.video_ucf,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Color(0xff3E4447),
                                         fontSize: 13,
                                         fontFamily: 'Public Sans',
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Image.asset(
                                     "assets/arrow.png",
-                                    color: Color(0xff6B7377),
+                                    color: const Color(0xff6B7377),
                                     height: 11,
                                     width: 20,
                                   ),
@@ -1298,7 +1300,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         InkWell(
@@ -1319,7 +1321,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   color: Colors.black.withOpacity(0.08),
                                   spreadRadius: 0,
                                   blurRadius: 16,
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 0), // changes position of shadow
                                 ),
                               ],
@@ -1335,13 +1337,13 @@ class _ProductDetailsState extends State<ProductDetails>
                                 children: [
                                   Text(
                                     AppLocalizations.of(context)!.reviews_ucf,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Color(0xff3E4447),
                                         fontFamily: 'Public Sans',
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Image.asset(
                                     "assets/arrow.png",
                                     height: 11,
@@ -1366,7 +1368,7 @@ class _ProductDetailsState extends State<ProductDetails>
                       child: Text(
                         AppLocalizations.of(context)!
                             .products_you_may_also_like,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontFamily: 'Roboto',
                             fontSize: 18,
@@ -1389,7 +1391,7 @@ class _ProductDetailsState extends State<ProductDetails>
                       ),
                       child: Text(
                         AppLocalizations.of(context)!.top_selling_products_ucf,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
@@ -1408,8 +1410,8 @@ class _ProductDetailsState extends State<ProductDetails>
   Widget buildSellerRow(BuildContext context) {
     //print("sl:" +  _productDetails!.shop_logo);
     return Container(
-      color: Color(0xffF6F7F8),
-      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      color: const Color(0xffF6F7F8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       child: Row(
         children: [
           _productDetails!.added_by == "admin"
@@ -1425,15 +1427,15 @@ class _ProductDetailsState extends State<ProductDetails>
                   },
                   child: Padding(
                     padding: app_language_rtl.$!
-                        ? EdgeInsets.only(left: 8.0)
-                        : EdgeInsets.only(right: 8.0),
+                        ? const EdgeInsets.only(left: 8.0)
+                        : const EdgeInsets.only(right: 8.0),
                     child: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
                         border: Border.all(
-                            color: Color.fromRGBO(112, 112, 112, 0.298),
+                            color: const Color.fromRGBO(112, 112, 112, 0.298),
                             width: 1),
                         //shape: BoxShape.rectangle,
                       ),
@@ -1454,13 +1456,13 @@ class _ProductDetailsState extends State<ProductDetails>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context)!.seller_ucf,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color(0xff6B7377),
                         fontFamily: 'Public Sans',
                         fontSize: 10)),
                 Text(
                   _productDetails!.shop_name!,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Color(0xff3E4447),
                       fontSize: 10,
                       fontWeight: FontWeight.bold),
@@ -1468,11 +1470,11 @@ class _ProductDetailsState extends State<ProductDetails>
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Visibility(
             visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(36.0),
                   color: Colors.white,
@@ -1482,7 +1484,7 @@ class _ProductDetailsState extends State<ProductDetails>
                       blurRadius: 20,
                       spreadRadius: 0.0,
                       offset:
-                          Offset(0.0, 10.0), // shadow direction: bottom right
+                          const Offset(0.0, 10.0), // shadow direction: bottom right
                     )
                   ],
                 ),
@@ -1500,7 +1502,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           onTapSellerChat();
                         },
                         child: Image.asset('assets/chat.png',
-                            height: 16, width: 16, color: Color(0xff6B7377))),
+                            height: 16, width: 16, color: const Color(0xff6B7377))),
                   ],
                 )),
           )
@@ -1512,20 +1514,20 @@ class _ProductDetailsState extends State<ProductDetails>
   Widget buildTotalPriceRow() {
     return Container(
       height: 40,
-      color: Color(0xffFEF0D7),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      color: const Color(0xffFEF0D7),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           Container(
             child: Padding(
               padding: app_language_rtl.$!
-                  ? EdgeInsets.only(left: 8.0)
-                  : EdgeInsets.only(right: 8.0),
+                  ? const EdgeInsets.only(left: 8.0)
+                  : const EdgeInsets.only(right: 8.0),
               child: Container(
                 width: 75,
                 child: Text(
                   AppLocalizations.of(context)!.total_price_ucf,
-                  style: TextStyle(color: Color(0xff6B7377), fontSize: 10),
+                  style: const TextStyle(color: Color(0xff6B7377), fontSize: 10),
                 ),
               ),
             ),
@@ -1539,7 +1541,7 @@ class _ProductDetailsState extends State<ProductDetails>
                       SystemConfig.systemCurrency!.symbol!)
                   : SystemConfig.systemCurrency!.symbol! +
                       _totalPrice.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: MyTheme.accent_color,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600),
@@ -1555,13 +1557,13 @@ class _ProductDetailsState extends State<ProductDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? EdgeInsets.only(left: 8.0)
-              : EdgeInsets.only(right: 8.0),
+              ? const EdgeInsets.only(left: 8.0)
+              : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 75,
             child: Text(
               AppLocalizations.of(context)!.quantity_ucf,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff6B7377), fontFamily: 'Public Sans'),
             ),
           ),
@@ -1574,7 +1576,7 @@ class _ProductDetailsState extends State<ProductDetails>
             mainAxisSize: MainAxisSize.max,
             children: [
               buildQuantityDownButton(),
-              SizedBox(
+              const SizedBox(
                 width: 1,
               ),
               Container(
@@ -1594,7 +1596,7 @@ class _ProductDetailsState extends State<ProductDetails>
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Text(
             "$_stock_txt",
-            style: TextStyle(color: Color(0xff6B7377), fontSize: 14),
+            style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
           ),
         ),
       ],
@@ -1619,29 +1621,29 @@ class _ProductDetailsState extends State<ProductDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 )
@@ -1654,29 +1656,29 @@ class _ProductDetailsState extends State<ProductDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 )
@@ -1688,13 +1690,13 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildChoiceOptionList() {
+  ListView buildChoiceOptionList() {
     return ListView.builder(
       itemCount: _productDetails!.choice_options!.length,
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
@@ -1704,7 +1706,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildChoiceOpiton(choice_options, choice_options_index) {
+  Padding buildChoiceOpiton(choiceOptions, choiceOptionsIndex) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         0.0,
@@ -1717,13 +1719,13 @@ class _ProductDetailsState extends State<ProductDetails>
         children: [
           Padding(
             padding: app_language_rtl.$!
-                ? EdgeInsets.only(left: 8.0)
-                : EdgeInsets.only(right: 8.0),
+                ? const EdgeInsets.only(left: 8.0)
+                : const EdgeInsets.only(right: 8.0),
             child: Container(
               width: 75,
               child: Text(
-                choice_options[choice_options_index].title,
-                style: TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
+                choiceOptions[choiceOptionsIndex].title,
+                style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
               ),
             ),
           ),
@@ -1733,16 +1735,16 @@ class _ProductDetailsState extends State<ProductDetails>
               controller: _variantScrollController,
               child: Wrap(
                 children: List.generate(
-                    choice_options[choice_options_index].options.length,
+                    choiceOptions[choiceOptionsIndex].options.length,
                     (index) => Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Container(
                           width: 75,
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: buildChoiceItem(
-                              choice_options[choice_options_index]
+                              choiceOptions[choiceOptionsIndex]
                                   .options[index],
-                              choice_options_index,
+                              choiceOptionsIndex,
                               index),
                         ))),
               ),
@@ -1753,19 +1755,19 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildChoiceItem(option, choice_options_index, index) {
+  Padding buildChoiceItem(option, choiceOptionsIndex, index) {
     return Padding(
       padding: app_language_rtl.$!
-          ? EdgeInsets.only(left: 8.0)
-          : EdgeInsets.only(right: 8.0),
+          ? const EdgeInsets.only(left: 8.0)
+          : const EdgeInsets.only(right: 8.0),
       child: InkWell(
         onTap: () {
-          _onVariantChange(choice_options_index, option);
+          _onVariantChange(choiceOptionsIndex, option);
         },
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-                color: _selectedChoices[choice_options_index] == option
+                color: _selectedChoices[choiceOptionsIndex] == option
                     ? MyTheme.accent_color
                     : MyTheme.noColor,
                 width: 1.5),
@@ -1776,7 +1778,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 color: Colors.black.withOpacity(0.12),
                 blurRadius: 6,
                 spreadRadius: 1,
-                offset: Offset(0.0, 3.0), // shadow direction: bottom right
+                offset: const Offset(0.0, 3.0), // shadow direction: bottom right
               )
             ],
           ),
@@ -1787,9 +1789,9 @@ class _ProductDetailsState extends State<ProductDetails>
               child: Text(
                 option,
                 style: TextStyle(
-                    color: _selectedChoices[choice_options_index] == option
+                    color: _selectedChoices[choiceOptionsIndex] == option
                         ? MyTheme.accent_color
-                        : Color.fromRGBO(224, 224, 225, 1),
+                        : const Color.fromRGBO(224, 224, 225, 1),
                     fontSize: 12.0,
                     fontWeight: FontWeight.w600),
               ),
@@ -1800,18 +1802,18 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildColorRow() {
+  Row buildColorRow() {
     return Row(
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? EdgeInsets.only(left: 8.0)
-              : EdgeInsets.only(right: 8.0),
+              ? const EdgeInsets.only(left: 8.0)
+              : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 75,
             child: Text(
               AppLocalizations.of(context)!.color_ucf,
-              style: TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
+              style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
             ),
           ),
         ),
@@ -1825,7 +1827,7 @@ class _ProductDetailsState extends State<ProductDetails>
             controller: _colorScrollController,
             child: ListView.separated(
               separatorBuilder: (context, index) {
-                return SizedBox(
+                return const SizedBox(
                   width: 10,
                 );
               },
@@ -1853,7 +1855,7 @@ class _ProductDetailsState extends State<ProductDetails>
         _onColorChange(index);
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         width: _selectedColorIndex == index ? 28 : 20,
         height: _selectedColorIndex == index ? 28 : 20,
         decoration: BoxDecoration(
@@ -1866,14 +1868,14 @@ class _ProductDetailsState extends State<ProductDetails>
                         _selectedColorIndex == index ? 0.25 : 0.12),
                     blurRadius: 10,
                     spreadRadius: 2.0,
-                    offset: Offset(0.0, 6.0), // shadow direction: bottom right
+                    offset: const Offset(0.0, 6.0), // shadow direction: bottom right
                   )
                 : BoxShadow(
                     color: Colors.black.withOpacity(
                         _selectedColorIndex == index ? 0.25 : 0.16),
                     blurRadius: 6,
                     spreadRadius: 0.0,
-                    offset: Offset(0.0, 3.0),
+                    offset: const Offset(0.0, 3.0),
                   )
           ],
         ),
@@ -1886,7 +1888,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildColorCheckerContainer() {
+  Padding buildColorCheckerContainer() {
     return Padding(
         padding: const EdgeInsets.all(6),
         child: /*Icon(Icons.check, color: Colors.white, size: 16),*/
@@ -1920,14 +1922,14 @@ class _ProductDetailsState extends State<ProductDetails>
             DataCell(
               Text(
                 '${_productDetails!.wholesale![index].minQty.toString()}',
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color.fromRGBO(152, 152, 153, 1), fontSize: 12),
               ),
             ),
             DataCell(
               Text(
                 '${_productDetails!.wholesale![index].maxQty.toString()}',
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color.fromRGBO(152, 152, 153, 1), fontSize: 12),
               ),
             ),
@@ -1935,7 +1937,7 @@ class _ProductDetailsState extends State<ProductDetails>
               Text(
                 convertPrice(
                     _productDetails!.wholesale![index].price.toString()),
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color.fromRGBO(152, 152, 153, 1), fontSize: 12),
               ),
             ),
@@ -1947,14 +1949,14 @@ class _ProductDetailsState extends State<ProductDetails>
 
   Widget buildClubPointRow() {
     return Container(
-      constraints: BoxConstraints(maxWidth: 120),
+      constraints: const BoxConstraints(maxWidth: 120),
       //width: ,
       decoration: BoxDecoration(
           //border: Border.all(color: MyTheme.golden, width: 1),
           borderRadius: BorderRadius.circular(6.0),
           color:
               //Colors.red,),
-              Color(0xffFFF4E8)),
+              const Color(0xffFFF4E8)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
         child: Row(
@@ -1967,12 +1969,12 @@ class _ProductDetailsState extends State<ProductDetails>
                   width: 18,
                   height: 12,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
                   AppLocalizations.of(context)!.club_point_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Color(0xff6B7377),
                       fontSize: 10,
                       fontFamily: 'Public Sans',
@@ -1982,7 +1984,7 @@ class _ProductDetailsState extends State<ProductDetails>
             ),
             Text(
               _productDetails!.earn_point.toString(),
-              style: TextStyle(color: Color(0xffF7941D), fontSize: 12.0),
+              style: const TextStyle(color: Color(0xffF7941D), fontSize: 12.0),
             ),
           ],
         ),
@@ -1999,7 +2001,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   SystemConfig.systemCurrency!.symbol)
               : _singlePriceString,
           // _singlePriceString,
-          style: TextStyle(
+          style: const TextStyle(
               color: MyTheme.accent_color,
               fontFamily: 'Public Sans',
               fontSize: 16.0,
@@ -2008,14 +2010,14 @@ class _ProductDetailsState extends State<ProductDetails>
         Visibility(
           visible: _productDetails!.has_discount!,
           child: Padding(
-            padding: EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 8.0),
             child: Text(
                 SystemConfig.systemCurrency != null
                     ? _productDetails!.stroked_price!.replaceAll(
                         SystemConfig.systemCurrency!.code!,
                         SystemConfig.systemCurrency!.symbol!)
                     : _productDetails!.stroked_price!,
-                style: TextStyle(
+                style: const TextStyle(
                   decoration: TextDecoration.lineThrough,
                   color: Color(0xffA8AFB3),
                   fontFamily: 'Public Sans',
@@ -2027,10 +2029,10 @@ class _ProductDetailsState extends State<ProductDetails>
         Visibility(
           visible: _productDetails!.has_discount!,
           child: Padding(
-            padding: EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 8.0),
             child: Text(
               "${_productDetails!.discount}",
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 12, color: Colors.red, fontWeight: FontWeight.bold),
             ),
           ),
@@ -2038,7 +2040,7 @@ class _ProductDetailsState extends State<ProductDetails>
         Text(
           "/${_productDetails!.unit}",
           // _singlePriceString,
-          style: TextStyle(
+          style: const TextStyle(
               color: MyTheme.accent_color,
               fontSize: 16.0,
               fontWeight: FontWeight.w600),
@@ -2071,7 +2073,7 @@ class _ProductDetailsState extends State<ProductDetails>
               padding: const EdgeInsets.only(top: 22.0),
               child: Text(
                 _appbarPriceString!,
-                style: TextStyle(fontSize: 16, color: MyTheme.font_grey),
+                style: const TextStyle(fontSize: 16, color: MyTheme.font_grey),
               ),
             )),
       ),
@@ -2120,7 +2122,7 @@ class _ProductDetailsState extends State<ProductDetails>
       backgroundColor: Colors.transparent,
       label: '',
       icon: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: 23,
           right: 14,
         ),
@@ -2135,7 +2137,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   color: color,
                   blurRadius: 20,
                   spreadRadius: 0.0,
-                  offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                  offset: const Offset(0.0, 10.0), // shadow direction: bottom right
                 )
               ],
             ),
@@ -2143,7 +2145,7 @@ class _ProductDetailsState extends State<ProductDetails>
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
@@ -2155,7 +2157,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildRatingAndWishButtonRow() {
+  Row buildRatingAndWishButtonRow() {
     return Row(
       children: [
         RatingBar(
@@ -2166,11 +2168,11 @@ class _ProductDetailsState extends State<ProductDetails>
           allowHalfRating: false,
           itemCount: 5,
           ratingWidget: RatingWidget(
-            full: Icon(Icons.star, color: Colors.amber),
-            half: Icon(Icons.star_half, color: Colors.amber),
-            empty: Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
+            full: const Icon(Icons.star, color: Colors.amber),
+            half: const Icon(Icons.star_half, color: Colors.amber),
+            empty: const Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
           ),
-          itemPadding: EdgeInsets.only(right: 1.0),
+          itemPadding: const EdgeInsets.only(right: 1.0),
           onRatingUpdate: (rating) {
             //print(rating);
           },
@@ -2179,7 +2181,7 @@ class _ProductDetailsState extends State<ProductDetails>
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
             "(" + _productDetails!.rating_count.toString() + ")",
-            style: TextStyle(
+            style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
         ),
@@ -2187,14 +2189,14 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildShippingTime() {
+  Row buildShippingTime() {
     return Row(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
             LangText(context).local.estimate_shipping_time_ucf,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
         ),
@@ -2202,7 +2204,7 @@ class _ProductDetailsState extends State<ProductDetails>
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
             "${_productDetails!.estShippingTime}  ${LangText(context).local.days_ucf}",
-            style: TextStyle(
+            style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
         ),
@@ -2210,7 +2212,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  buildBrandRow() {
+ Widget buildBrandRow() {
     return _productDetails!.brand!.id! > 0
         ? InkWell(
             onTap: () {
@@ -2224,13 +2226,13 @@ class _ProductDetailsState extends State<ProductDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? EdgeInsets.only(left: 8.0)
-                      : EdgeInsets.only(right: 8.0),
+                      ? const EdgeInsets.only(left: 8.0)
+                      : const EdgeInsets.only(right: 8.0),
                   child: Container(
                     width: 75,
                     child: Text(
                       AppLocalizations.of(context)!.brand_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff6B7377),
                           fontSize: 10,
                           fontFamily: 'Public Sans'),
@@ -2241,7 +2243,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Text(
                     _productDetails!.brand!.name!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontFamily: 'Public Sans',
                         fontWeight: FontWeight.bold,
@@ -2254,7 +2256,7 @@ class _ProductDetailsState extends State<ProductDetails>
         : Container();
   }
 
-  buildExpandableDescription() {
+  Container buildExpandableDescription() {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -2290,15 +2292,15 @@ class _ProductDetailsState extends State<ProductDetails>
                 webViewHeight == initHeight
                     ? LangText(context).local.view_more
                     : LangText(context).local.less,
-                style: TextStyle(color: Color(0xff0077B6)),
+                style: const TextStyle(color: Color(0xff0077B6)),
               ))
         ],
       ),
     );
   }
 
-  buildTopSellingProductList() {
-    if (_topProductInit == false && _topProducts.length == 0) {
+  Widget buildTopSellingProductList() {
+    if (_topProductInit == false && _topProducts.isEmpty) {
       return Column(
         children: [
           Padding(
@@ -2318,13 +2320,13 @@ class _ProductDetailsState extends State<ProductDetails>
               )),
         ],
       );
-    } else if (_topProducts.length > 0) {
+    } else if (_topProducts.isNotEmpty) {
       return ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(height: 16),
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
         itemCount: _topProducts.length,
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.all(16),
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return TopSellingProductsCard(
@@ -2344,25 +2346,25 @@ class _ProductDetailsState extends State<ProductDetails>
               child: Text(
                   AppLocalizations.of(context)!
                       .no_top_selling_products_from_this_seller,
-                  style: TextStyle(color: MyTheme.font_grey))));
+                  style: const TextStyle(color: MyTheme.font_grey))));
     }
   }
 
-  buildProductsMayLikeList() {
-    if (_relatedProductInit == false && _relatedProducts.length == 0) {
+  Widget buildProductsMayLikeList() {
+    if (_relatedProductInit == false && _relatedProducts.isEmpty) {
       return Row(
         children: [
           Padding(
               padding: app_language_rtl.$!
-                  ? EdgeInsets.only(left: 8.0)
-                  : EdgeInsets.only(right: 8.0),
+                  ? const EdgeInsets.only(left: 8.0)
+                  : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
           Padding(
               padding: app_language_rtl.$!
-                  ? EdgeInsets.only(left: 8.0)
-                  : EdgeInsets.only(right: 8.0),
+                  ? const EdgeInsets.only(left: 8.0)
+                  : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
@@ -2373,12 +2375,12 @@ class _ProductDetailsState extends State<ProductDetails>
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
         ],
       );
-    } else if (_relatedProducts.length > 0) {
+    } else if (_relatedProducts.isNotEmpty) {
       return SingleChildScrollView(
         child: SizedBox(
           height: 248,
           child: ListView.separated(
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
               width: 16,
             ),
             padding: const EdgeInsets.all(16),
@@ -2392,7 +2394,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   name: _relatedProducts[index].name,
                   main_price: _relatedProducts[index].main_price,
                   stroked_price: _relatedProducts[index].stroked_price,
-                  is_wholesale: _relatedProducts[index].isWholesale,
+                  isWholesale: _relatedProducts[index].isWholesale,
                   has_discount: _relatedProducts[index].has_discount);
             },
           ),
@@ -2404,12 +2406,12 @@ class _ProductDetailsState extends State<ProductDetails>
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.no_related_product,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
   }
 
-  buildQuantityUpButton() => Container(
+  Container buildQuantityUpButton() => Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle, // This makes the container a perfect circle
           color: Colors.white,
@@ -2418,7 +2420,7 @@ class _ProductDetailsState extends State<ProductDetails>
               color: Colors.black.withOpacity(.16),
               blurRadius: 6,
               spreadRadius: 0.0,
-              offset: Offset(0.0, 3.0), // shadow direction: bottom right
+              offset: const Offset(0.0, 3.0), // shadow direction: bottom right
             ),
           ],
         ),
@@ -2437,7 +2439,7 @@ class _ProductDetailsState extends State<ProductDetails>
             }),
       );
 
-  buildQuantityDownButton() => Container(
+  Container buildQuantityDownButton() => Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle, // This makes the container a perfect circle
         color: Colors.white,
@@ -2446,13 +2448,13 @@ class _ProductDetailsState extends State<ProductDetails>
             color: Colors.black.withOpacity(.16),
             blurRadius: 6,
             spreadRadius: 0.0,
-            offset: Offset(0.0, 3.0), // shadow direction: bottom right
+            offset: const Offset(0.0, 3.0), // shadow direction: bottom right
           ),
         ],
       ),
       width: 30,
       child: IconButton(
-          icon: Center(
+          icon: const Center(
               child: Icon(Icons.remove, size: 16, color: Color(0xff707070))),
           onPressed: () {
             if (_quantity! > 1) {
@@ -2464,8 +2466,8 @@ class _ProductDetailsState extends State<ProductDetails>
             }
           }));
 
-  buildProductImageSection() {
-    if (_productImageList.length == 0) {
+  Row buildProductImageSection() {
+    if (_productImageList.isEmpty) {
       return Row(
         children: [
           Container(
@@ -2518,14 +2520,14 @@ class _ProductDetailsState extends State<ProductDetails>
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!
-                    ? EdgeInsets.only(left: 8.0)
-                    : EdgeInsets.only(right: 8.0),
+                    ? const EdgeInsets.only(left: 8.0)
+                    : const EdgeInsets.only(right: 8.0),
                 child: ListView.builder(
                     itemCount: _productImageList.length,
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      int itemIndex = index;
+                      final int itemIndex = index;
                       return GestureDetector(
                         onTap: () {
                           _currentImage = itemIndex;
@@ -2535,14 +2537,14 @@ class _ProductDetailsState extends State<ProductDetails>
                         child: Container(
                           width: 50,
                           height: 50,
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               vertical: 4.0, horizontal: 2.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                                 color: _currentImage == itemIndex
                                     ? MyTheme.accent_color
-                                    : Color.fromRGBO(112, 112, 112, .3),
+                                    : const Color.fromRGBO(112, 112, 112, .3),
                                 width: _currentImage == itemIndex ? 2 : 1),
                             //shape: BoxShape.rectangle,
                           ),
@@ -2582,7 +2584,7 @@ class _ProductDetailsState extends State<ProductDetails>
     }
   }
 
-  openPhotoDialog(BuildContext context, path) => showDialog(
+  Future openPhotoDialog(BuildContext context, path) => showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -2599,7 +2601,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   child: Container(
                     decoration: ShapeDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(25),
                           bottomRight: Radius.circular(25),
@@ -2611,7 +2613,7 @@ class _ProductDetailsState extends State<ProductDetails>
                     width: 40,
                     height: 40,
                     child: IconButton(
-                      icon: Icon(Icons.clear, color: MyTheme.white),
+                      icon: const Icon(Icons.clear, color: MyTheme.white),
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pop();
                       },

@@ -8,7 +8,7 @@ class CommonWebviewScreen extends StatefulWidget {
   final String url;
   final String page_name;
 
-  CommonWebviewScreen({Key? key, this.url = "", this.page_name = ""})
+  const CommonWebviewScreen({Key? key, this.url = "", this.page_name = ""})
       : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class CommonWebviewScreen extends StatefulWidget {
 }
 
 class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
-  WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
     );
   }
 
-  buildBody() {
+  SizedBox buildBody() {
     return SizedBox.expand(
       child: Container(
         child: WebViewWidget(controller: _webViewController, layoutDirection: direction),
@@ -72,7 +72,7 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
       ),
       title: Text(
         "${widget.page_name}",
-        style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
       titleSpacing: 0,

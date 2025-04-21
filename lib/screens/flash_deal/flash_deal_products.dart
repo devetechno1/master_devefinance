@@ -20,7 +20,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../custom/lang_text.dart';
 
 class FlashDealProducts extends StatefulWidget {
-  FlashDealProducts({
+  const FlashDealProducts({
     Key? key,
     required this.slug,
   }) : super(key: key);
@@ -65,34 +65,34 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
   //   return newtxt;
   // }
   String timeText(String txt, {default_length = 3}) {
-    var blank_zeros = default_length == 3 ? "000" : "00";
-    var leading_zeros = "";
+    final blankZeros = default_length == 3 ? "000" : "00";
+    var leadingZeros = "";
     if (default_length == 3 && txt.length == 1) {
-      leading_zeros = "00";
+      leadingZeros = "00";
     } else if (default_length == 3 && txt.length == 2) {
-      leading_zeros = "0";
+      leadingZeros = "0";
     } else if (default_length == 2 && txt.length == 1) {
-      leading_zeros = "0";
+      leadingZeros = "0";
     }
 
-    var newtxt = (txt == "" || txt == null.toString()) ? blank_zeros : txt;
+    var newtxt = (txt == "" || txt == null.toString()) ? blankZeros : txt;
 
     if (default_length > txt.length) {
-      newtxt = leading_zeros + newtxt;
+      newtxt = leadingZeros + newtxt;
     }
 
     return newtxt;
   }
 
   getInfo() async {
-    var res = await FlashDealRepository().getFlashDealInfo(widget.slug);
+    final res = await FlashDealRepository().getFlashDealInfo(widget.slug);
     print(res.toJson());
     if (res.flashDeals?.isNotEmpty ?? false) {
       flashDealInfo = res.flashDeals?.first;
 
-      DateTime end =
+      final DateTime end =
           convertTimeStampToDateTime(flashDealInfo!.date!); // YYYY-mm-dd
-      DateTime now = DateTime.now();
+      final DateTime now = DateTime.now();
     final  int diff = end.difference(now).inMilliseconds;
     final  int endTime = diff + now.millisecondsSinceEpoch;
 
@@ -119,16 +119,16 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
     super.initState();
   }
 
-  _buildSearchList(search_key) async {
+  _buildSearchList(searchKey) async {
     _searchList.clear();
     //print(_fullList.length);
 
-    if (search_key.isEmpty) {
+    if (searchKey.isEmpty) {
       _searchList.addAll(_fullList);
       setState(() {});
     } else {
       for (var i = 0; i < _fullList.length; i++) {
-        if (StringHelper().stringContains(_fullList[i].name, search_key)!) {
+        if (StringHelper().stringContains(_fullList[i].name, searchKey)!) {
           _searchList.add(_fullList[i]);
           setState(() {});
         }
@@ -149,11 +149,11 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
     );
   }
 
-  bool? shouldProductBoxBeVisible(product_name, search_key) {
-    if (search_key == "") {
+  bool? shouldProductBoxBeVisible(productName, searchKey) {
+    if (searchKey == "") {
       return true; //do not check if the search key is empty
     }
-    return StringHelper().stringContains(product_name, search_key);
+    return StringHelper().stringContains(productName, searchKey);
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -181,7 +181,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
     );
   }
 
-  buildProductList(context) {
+  FutureBuilder<productMini.ProductMiniResponse> buildProductList(context) {
     return FutureBuilder(
         future: _future,
         builder:
@@ -190,7 +190,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             return Container();
           } else if (snapshot.hasData) {
             final productResponse = snapshot.data;
-            if (_fullList.length == 0) {
+            if (_fullList.isEmpty) {
               _fullList.addAll(productResponse!.products!);
               _searchList.addAll(productResponse.products!);
             }
@@ -221,7 +221,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                         stroked_price: _searchList[index].stroked_price,
                         has_discount: _searchList[index].has_discount!,
                         discount: _searchList[index].discount,
-                        is_wholesale: _searchList[index].isWholesale,
+                        isWholesale: _searchList[index].isWholesale ?? false,
                       );
                     },
                   ),
@@ -293,7 +293,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
     );
   }
 
-  headerShimmer() {
+  Container headerShimmer() {
     return Container(
       // color: MyTheme.amber,
       height: 215,

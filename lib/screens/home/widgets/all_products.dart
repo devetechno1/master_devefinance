@@ -22,7 +22,7 @@ class AllProducts extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(18.0, 20, 20.0, 0.0),
               child: Text(
                 AppLocalizations.of(context)!.all_products_ucf,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
             ),
             HomeAllProducts2( homeData: homeData),

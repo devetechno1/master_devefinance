@@ -39,10 +39,10 @@ class _BkashScreenState extends State<BkashScreen> {
   String? _initial_url = "";
   bool _initial_url_fetched = false;
 
-  String? _token = "";
+  final String? _token = "";
   bool showLoading = false;
 
-  WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -58,8 +58,8 @@ class _BkashScreenState extends State<BkashScreen> {
     }
   }
 
-  createOrder() async {
-    var orderCreateResponse = await PaymentRepository()
+  Future<void> createOrder() async {
+    final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
@@ -113,7 +113,7 @@ class _BkashScreenState extends State<BkashScreen> {
 
   bkash() {
     _initial_url =
-        ("${AppConfig.BASE_URL}/bkash/begin?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}");
+        ("${AppConfig.BASE_URL}/bkash/begin?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}");
 
     _initial_url_fetched = true;
     setState(() {});
@@ -178,16 +178,16 @@ class _BkashScreenState extends State<BkashScreen> {
         if (widget.payment_type == "cart_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "order_re_payment") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OrderList(from_checkout: true);
+            return const OrderList(from_checkout: true);
           }));
         } else if (widget.payment_type == "wallet_payment") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Wallet(from_recharge: true);
+            return const Wallet(from_recharge: true);
           }));
         } else if (widget.payment_type == "customer_package_payment") {
           Navigator.pushReplacement(context,
@@ -265,7 +265,7 @@ class _BkashScreenState extends State<BkashScreen> {
   //   }
   // }
 
-  buildBody() {
+ Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

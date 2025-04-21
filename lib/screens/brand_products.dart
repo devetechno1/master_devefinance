@@ -56,7 +56,7 @@ class _BrandProductsState extends State<BrandProducts> {
     super.dispose();
   }
 
- void fetchData() async {
+ Future<void> fetchData() async {
     final productResponse = await ProductRepository()
         .getBrandProducts(slug: widget.slug, page: _page, name: _searchKey);
     _productList.addAll(productResponse.products!);
@@ -168,12 +168,12 @@ void  reset() {
     );
   }
 
-  buildProductList() {
+  Widget buildProductList() {
     if (_isInitial && _productList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildProductGridShimmer(scontroller: _scrollController));
-    } else if (_productList.length>0) {
+    } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
         backgroundColor: Colors.white,
@@ -203,7 +203,7 @@ void  reset() {
                 stroked_price: _productList[index].stroked_price,
                 has_discount: _productList[index].has_discount,
                 discount: _productList[index].discount,
-                is_wholesale: _productList[index].isWholesale,
+                isWholesale: _productList[index].isWholesale,
               );
             },
           ),

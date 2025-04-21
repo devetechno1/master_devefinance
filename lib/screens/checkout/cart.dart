@@ -40,7 +40,7 @@ class Cart extends StatelessWidget {
 }
 
 class _Cart extends StatefulWidget {
-  _Cart(
+  const _Cart(
       {Key? key,
       this.has_bottomnav,
       this.from_navigation = false,
@@ -96,7 +96,7 @@ class _CartState extends State<_Cart> {
                             fit: BoxFit.scaleDown,
                             child: RichText(
                               text: TextSpan(
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                                 children: [
                                   TextSpan(text: '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
                                   TextSpan(text: LangText(context).local.remaining),
@@ -116,7 +116,7 @@ class _CartState extends State<_Cart> {
                             fit: BoxFit.scaleDown,
                             child: RichText(
                               text: TextSpan(
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                                 children: [
                                   TextSpan(text: '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
                                   TextSpan(text: LangText(context).local.remaining),
@@ -149,7 +149,7 @@ class _CartState extends State<_Cart> {
 
   Container buildBottomContainer(cartProvider) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: MyTheme.mainColor,
       ),
 
@@ -177,11 +177,11 @@ class _CartState extends State<_Cart> {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(cartProvider.cartTotalString,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.accent_color,
                             fontSize: 14,
                             fontWeight: FontWeight.w600)),
@@ -202,41 +202,41 @@ class _CartState extends State<_Cart> {
                       border: Border.all(color: MyTheme.accent_color, width: 1),
                       borderRadius: app_language_rtl.$!
                           ? const BorderRadius.only(
-                              topLeft: const Radius.circular(6.0),
-                              bottomLeft: const Radius.circular(6.0),
-                              topRight: const Radius.circular(6.0),
-                              bottomRight: const Radius.circular(6.0),
+                              topLeft: Radius.circular(6.0),
+                              bottomLeft: Radius.circular(6.0),
+                              topRight: Radius.circular(6.0),
+                              bottomRight: Radius.circular(6.0),
                             )
                           : const BorderRadius.only(
-                              topLeft: const Radius.circular(6.0),
-                              bottomLeft: const Radius.circular(6.0),
-                              topRight: const Radius.circular(6.0),
-                              bottomRight: const Radius.circular(6.0),
+                              topLeft: Radius.circular(6.0),
+                              bottomLeft: Radius.circular(6.0),
+                              topRight: Radius.circular(6.0),
+                              bottomRight: Radius.circular(6.0),
                             ),
                     ),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: MyTheme.accent_color,
                       shape: app_language_rtl.$!
-                          ? RoundedRectangleBorder(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: const Radius.circular(6.0),
-                                bottomLeft: const Radius.circular(6.0),
-                                topRight: const Radius.circular(0.0),
-                                bottomRight: const Radius.circular(0.0),
+                          ? const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(6.0),
+                                bottomLeft: Radius.circular(6.0),
+                                topRight: Radius.circular(0.0),
+                                bottomRight: Radius.circular(0.0),
                               ),
                             )
-                          : RoundedRectangleBorder(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: const Radius.circular(0.0),
-                                bottomLeft: const Radius.circular(0.0),
-                                topRight: const Radius.circular(6.0),
-                                bottomRight: const Radius.circular(6.0),
+                          : const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0.0),
+                                bottomLeft: Radius.circular(0.0),
+                                topRight: Radius.circular(6.0),
+                                bottomRight: Radius.circular(6.0),
                               ),
                             ),
                       child: Text(
                         AppLocalizations.of(context)!.proceed_to_shipping_ucf,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 13,
                             fontWeight: FontWeight.w700),
@@ -274,7 +274,7 @@ class _CartState extends State<_Cart> {
     );
   }
 
-  buildCartSellerList(cartProvider, context) {
+ Widget? buildCartSellerList(cartProvider, context) {
     if (cartProvider.isInitial && cartProvider.shopList.length == 0) {
       return SingleChildScrollView(
           child: ShimmerHelper()
@@ -282,12 +282,12 @@ class _CartState extends State<_Cart> {
     } else if (cartProvider.shopList.length > 0) {
       return SingleChildScrollView(
         child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(
+          separatorBuilder: (context, index) => const SizedBox(
             height: 26,
           ),
           itemCount: cartProvider.shopList.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Column(
@@ -304,13 +304,13 @@ class _CartState extends State<_Cart> {
                             fontWeight: FontWeight.bold,
                             fontSize: 12),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                         cartProvider.shopList[index].subTotal.replaceAll(
                                 SystemConfig.systemCurrency!.code,
                                 SystemConfig.systemCurrency!.symbol) ??
                             '',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.accent_color,
                             fontWeight: FontWeight.bold,
                             fontSize: 12),
@@ -334,8 +334,9 @@ class _CartState extends State<_Cart> {
           child: Center(
               child: Text(
             AppLocalizations.of(context)!.cart_is_empty,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
+    return null;
   }
 }

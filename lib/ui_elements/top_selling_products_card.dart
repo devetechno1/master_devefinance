@@ -50,7 +50,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
               BoxShadow(
                   color: Colors.black.withOpacity(0.08),
                   blurRadius: 16,
-                  offset: Offset(0, 0))
+                  offset: const Offset(0, 0))
             ]),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
@@ -58,7 +58,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
               width: 90,
               height: 90,
               child: ClipRRect(
-                  borderRadius: BorderRadius.horizontal(
+                  borderRadius: const BorderRadius.horizontal(
                       left: Radius.circular(6), right: Radius.zero),
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/placeholder.png',
@@ -68,7 +68,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
           Flexible(
             child: Container(
               padding:
-                  EdgeInsets.only(top: 14, left: 14, right: 34, bottom: 14),
+                  const EdgeInsets.only(top: 14, left: 14, right: 34, bottom: 14),
               //width: 240,
               height: 90,
               //color: Colors.red,
@@ -82,7 +82,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                       widget.name!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xff6B7377),
                           fontFamily: 'Public Sans',
                           fontSize: 12,
@@ -104,12 +104,12 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                               : widget.main_price!,
                           textAlign: TextAlign.left,
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.accent_color,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 18,
                         ),
                         widget.has_discount!
@@ -121,7 +121,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                                     : widget.stroked_price!,
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     fontFamily: 'Public Sans',
                                     color: Color(0xffA8AFB3),

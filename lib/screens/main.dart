@@ -62,7 +62,7 @@ class _MainState extends State<Main> {
     _children = [
     //   HomePageType.home.screen,
       AppConfig.businessSettingsData.selectedHomePage.screen,
-      CategoryList(
+      const CategoryList(
         slug: "",
         name: "",
         is_base_category: true,

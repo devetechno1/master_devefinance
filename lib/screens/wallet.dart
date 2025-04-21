@@ -16,7 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../helpers/main_helpers.dart';
 
 class Wallet extends StatefulWidget {
-  Wallet({Key? key, this.from_recharge = false}) : super(key: key);
+  const Wallet({Key? key, this.from_recharge = false}) : super(key: key);
   final bool from_recharge;
 
   @override
@@ -26,14 +26,14 @@ class Wallet extends StatefulWidget {
 class _WalletState extends State<Wallet> {
   final _amountValidator = RegExInputFormatter.withRegex(
       '^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
-  ScrollController _mainScrollController = ScrollController();
-  TextEditingController _amountController = TextEditingController();
+  final ScrollController _mainScrollController = ScrollController();
+  final TextEditingController _amountController = TextEditingController();
 
   GlobalKey appBarKey = GlobalKey();
 
   dynamic _balanceDetails = null;
 
-  List<dynamic> _rechargeList = [];
+  final List<dynamic> _rechargeList = [];
   bool _rechargeListInit = true;
   int _rechargePage = 1;
   int? _totalRechargeData = 0;
@@ -67,7 +67,7 @@ class _WalletState extends State<Wallet> {
   }
 
   fetchBalanceDetails() async {
-    var balanceDetailsResponse = await WalletRepository().getBalance();
+    final balanceDetailsResponse = await WalletRepository().getBalance();
 
     _balanceDetails = balanceDetailsResponse;
 
@@ -75,7 +75,7 @@ class _WalletState extends State<Wallet> {
   }
 
   fetchRechargeList() async {
-    var rechageListResponse =
+    final rechageListResponse =
         await WalletRepository().getRechargeList(page: _rechargePage);
 
     if (rechageListResponse.result) {
@@ -103,17 +103,17 @@ class _WalletState extends State<Wallet> {
     fetchAll();
   }
 
-  onPressProceed() {
-    var amount_String = _amountController.text.toString();
+  void onPressProceed() {
+    final amountString = _amountController.text.toString();
 
-    if (amount_String == "") {
+    if (amountString == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.amount_cannot_be_empty,
       );
       return;
     }
 
-    var amount = double.parse(amount_String);
+    final amount = double.parse(amountString);
 
     Navigator.of(context, rootNavigator: true).pop();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -131,7 +131,7 @@ class _WalletState extends State<Wallet> {
       onWillPop: () {
         if (widget.from_recharge) {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Main();
+            return const Main();
           }));
         } else {
           Navigator.of(context).pop();
@@ -199,7 +199,7 @@ class _WalletState extends State<Wallet> {
           onPressed: () {
             if (widget.from_recharge) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Main();
+                return const Main();
               }));
             } else {
               return Navigator.of(context).pop();
@@ -219,10 +219,10 @@ class _WalletState extends State<Wallet> {
     );
   }
 
-  buildRechargeList() {
-    if (_rechargeListInit && _rechargeList.length == 0) {
+  Widget buildRechargeList() {
+    if (_rechargeListInit && _rechargeList.isEmpty) {
       return SingleChildScrollView(child: buildRechargeListShimmer());
-    } else if (_rechargeList.length > 0) {
+    } else if (_rechargeList.isNotEmpty) {
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +242,7 @@ class _WalletState extends State<Wallet> {
               padding: EdgeInsets.zero,
               itemCount: _rechargeList.length,
               scrollDirection: Axis.vertical,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
@@ -262,7 +262,7 @@ class _WalletState extends State<Wallet> {
     }
   }
 
-  buildRechargeListShimmer() {
+  Column buildRechargeListShimmer() {
     return Column(
       children: [
         Padding(
@@ -291,7 +291,7 @@ class _WalletState extends State<Wallet> {
       height: 100,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(8)),
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
@@ -334,7 +334,7 @@ class _WalletState extends State<Wallet> {
                     ),
                   ],
                 )),
-            Spacer(),
+            const Spacer(),
             Container(
               width: 120,
               child: Column(
@@ -342,12 +342,12 @@ class _WalletState extends State<Wallet> {
                 children: [
                   Text(
                     convertPrice(_rechargeList[index].amount),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -365,9 +365,9 @@ class _WalletState extends State<Wallet> {
     );
   }
 
-  getFormattedRechargeListIndex(int index) {
-    int num = index + 1;
-    var txt = num.toString().length == 1
+  String getFormattedRechargeListIndex(int index) {
+    final int num = index + 1;
+    final txt = num.toString().length == 1
         ? "# 0" + num.toString()
         : "#" + num.toString();
     return txt;
@@ -391,7 +391,7 @@ class _WalletState extends State<Wallet> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
                   AppLocalizations.of(context)!.wallet_balance_ucf,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
                       fontWeight: FontWeight.w600),
@@ -401,13 +401,13 @@ class _WalletState extends State<Wallet> {
                 padding: const EdgeInsets.only(top: 6.0),
                 child: Text(
                   convertPrice(_balanceDetails.balance),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 "${AppLocalizations.of(context)!.last_recharged} : ${_balanceDetails.last_recharged}",
                 style: TextStyle(
@@ -416,7 +416,7 @@ class _WalletState extends State<Wallet> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Spacer()
+              const Spacer()
             ],
           ),
         ),
@@ -424,7 +424,7 @@ class _WalletState extends State<Wallet> {
           width: DeviceInfo(context).width! / 2.3,
           height: 90,
           decoration: BoxDecoration(
-            color: Color(0xffFEF0D7), // Background color
+            color: const Color(0xffFEF0D7), // Background color
             border: Border.all(color: Colors.amber.shade700, width: 1),
             borderRadius: BorderRadius.circular(10), // Set border radius here
           ),
@@ -434,8 +434,8 @@ class _WalletState extends State<Wallet> {
             child: Btn.basic(
               minWidth: MediaQuery.of(context).size.width,
               color: MyTheme.amber,
-              shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
                     Radius.circular(5.0)), // Adjust if needed
               ),
               child: Column(
@@ -443,14 +443,14 @@ class _WalletState extends State<Wallet> {
                 children: [
                   Text(
                     "${AppLocalizations.of(context)!.recharge_wallet_ucf}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 14),
+                  const SizedBox(height: 14),
                   Image.asset(
                     "assets/add.png",
                     height: 20,
@@ -480,9 +480,9 @@ class _WalletState extends State<Wallet> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6.0),
           ),
-          insetPadding: EdgeInsets.symmetric(horizontal: 10),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 10),
           contentPadding:
-              EdgeInsets.only(top: 36.0, left: 20.0, right: 22.0, bottom: 2.0),
+              const EdgeInsets.only(top: 36.0, left: 20.0, right: 22.0, bottom: 2.0),
           content: Container(
             width: 400,
             child: SingleChildScrollView(
@@ -506,31 +506,31 @@ class _WalletState extends State<Wallet> {
                         controller: _amountController,
                         autofocus: false,
                         keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                            const TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [_amountValidator],
                         decoration: InputDecoration(
                             fillColor: MyTheme.light_grey,
                             filled: true,
                             hintText:
                                 AppLocalizations.of(context)!.enter_amount_ucf,
-                            hintStyle: TextStyle(
+                            hintStyle: const TextStyle(
                                 fontSize: 12.0, color: MyTheme.textfield_grey),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: MyTheme.noColor, width: 0.0),
                               borderRadius: const BorderRadius.all(
-                                const Radius.circular(8.0),
+                                Radius.circular(8.0),
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: MyTheme.noColor, width: 0.0),
                               borderRadius: const BorderRadius.all(
-                                const Radius.circular(8.0),
+                                Radius.circular(8.0),
                               ),
                             ),
                             contentPadding:
-                                EdgeInsets.symmetric(horizontal: 8.0)),
+                                const EdgeInsets.symmetric(horizontal: 8.0)),
                       ),
                     ),
                   )
@@ -546,14 +546,14 @@ class _WalletState extends State<Wallet> {
                 Btn.minWidthFixHeight(
                   minWidth: 75,
                   height: 30,
-                  color: Color.fromRGBO(253, 253, 253, 1),
+                  color: const Color.fromRGBO(253, 253, 253, 1),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6.0),
                       side:
-                          BorderSide(color: MyTheme.accent_color, width: 1.0)),
+                          const BorderSide(color: MyTheme.accent_color, width: 1.0)),
                   child: Text(
                     AppLocalizations.of(context)!.close_ucf,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyTheme.accent_color,
                     ),
@@ -562,7 +562,7 @@ class _WalletState extends State<Wallet> {
                     Navigator.of(context, rootNavigator: true).pop();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 14,
                 ),
                 Padding(
@@ -576,7 +576,7 @@ class _WalletState extends State<Wallet> {
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.proceed_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,
                           fontWeight: FontWeight.normal),

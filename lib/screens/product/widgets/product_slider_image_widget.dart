@@ -25,7 +25,7 @@ class ProductSliderImageWidget extends StatefulWidget {
 class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
   @override
   Widget build(BuildContext context) {
-    if (widget.productImageList!.length == 0) {
+    if (widget.productImageList!.isEmpty) {
       return ShimmerHelper().buildBasicShimmer(
         height: 190.0,
       );
@@ -37,8 +37,8 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
             viewportFraction: 1,
             initialPage: 0,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 1000),
+            autoPlayInterval: const Duration(seconds: 5),
+            autoPlayAnimationDuration: const Duration(milliseconds: 1000),
             autoPlayCurve: Curves.easeInExpo,
             enlargeCenterPage: false,
             scrollDirection: Axis.horizontal,
@@ -71,7 +71,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                         ),
                       ),
                       Align(
-                        alignment: Alignment(0.0, 0.9),
+                        alignment: const Alignment(0.0, 0.9),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
@@ -79,13 +79,13 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                             (index) => Container(
                               width: 8.0,
                               height: 8.0,
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 4.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: widget.currentImage == index
                                     ? Colors.black.withOpacity(0.5)
-                                    : Color(0xff484848).withOpacity(0.5),
+                                    : const Color(0xff484848).withOpacity(0.5),
                               ),
                             ),
                           ),
@@ -102,7 +102,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
     }
   }
 
-  openPhotoDialog(BuildContext context, path) => showDialog(
+  Future openPhotoDialog(BuildContext context, path) => showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -119,7 +119,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                   child: Container(
                     decoration: ShapeDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(25),
                           bottomRight: Radius.circular(25),
@@ -131,7 +131,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                     width: 40,
                     height: 40,
                     child: IconButton(
-                      icon: Icon(Icons.clear, color: MyTheme.white),
+                      icon: const Icon(Icons.clear, color: MyTheme.white),
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pop();
                       },

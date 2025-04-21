@@ -15,7 +15,7 @@ class VideoDescription extends StatefulWidget {
 }
 
 class _VideoDescriptionState extends State<VideoDescription> {
-  WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
     );
   }
 
-  buildBody() {
+  SizedBox buildBody() {
     return SizedBox.expand(
       child: Container(
         child: Stack(
@@ -76,7 +76,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
               child: Container(
                 decoration: ShapeDecoration(
                   color: MyTheme.medium_grey_50,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(25),
                       bottomRight: Radius.circular(25),

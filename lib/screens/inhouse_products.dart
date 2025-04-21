@@ -18,17 +18,17 @@ class InhouseProducts extends StatefulWidget {
 }
 
 class _InhouseProductsState extends State<InhouseProducts> {
-  ScrollController _scrollController = ScrollController();
-  ScrollController _xcrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
 
-  List<dynamic> _inhouseProductList = [];
+  final List<dynamic> _inhouseProductList = [];
   bool _isFetch = true;
   int _page = 1;
   int? _totalData = 0;
   bool _showLoadingContainer = false;
 
   fetchData() async {
-    var productResponse =
+    final productResponse =
         await ProductRepository().getInHouseProducts(page: _page);
     _inhouseProductList.addAll(productResponse.products!);
     _isFetch = false;
@@ -133,12 +133,12 @@ class _InhouseProductsState extends State<InhouseProducts> {
     );
   }
 
-  buildInhouserProductList(context) {
-    if (_isFetch && _inhouseProductList.length == 0) {
+  Widget buildInhouserProductList(context) {
+    if (_isFetch && _inhouseProductList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildProductGridShimmer(scontroller: _scrollController));
-    } else if (_inhouseProductList.length > 0) {
+    } else if (_inhouseProductList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
         backgroundColor: Colors.white,
@@ -155,8 +155,8 @@ class _InhouseProductsState extends State<InhouseProducts> {
             itemCount: _inhouseProductList.length,
             shrinkWrap: true,
             padding:
-                EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
-            physics: NeverScrollableScrollPhysics(),
+                const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ProductCard(
                 id: _inhouseProductList[index].id,
@@ -167,7 +167,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
                 stroked_price: _inhouseProductList[index].stroked_price,
                 has_discount: _inhouseProductList[index].has_discount,
                 discount: _inhouseProductList[index].discount,
-                is_wholesale: _inhouseProductList[index].isWholesale,
+                isWholesale: _inhouseProductList[index].isWholesale,
               );
             },
           ),

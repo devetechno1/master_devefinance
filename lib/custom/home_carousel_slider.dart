@@ -29,7 +29,7 @@ class HomeCarouselSlider extends StatelessWidget {
               color: Colors.black.withOpacity(0.2),
               blurRadius: 30,
               spreadRadius: 0.5,
-              offset: Offset(0, 10),
+              offset: const Offset(0, 10),
             ),
           ],
         ),
@@ -40,8 +40,8 @@ class HomeCarouselSlider extends StatelessWidget {
             initialPage: 0,
             enableInfiniteScroll: true,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 1000),
+            autoPlayInterval: const Duration(seconds: 5),
+            autoPlayAnimationDuration: const Duration(milliseconds: 1000),
             autoPlayCurve: Curves.easeInExpo,
             enlargeCenterPage: false,
             scrollDirection: Axis.horizontal,
@@ -56,7 +56,7 @@ class HomeCarouselSlider extends StatelessWidget {
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {
-                      var url = i.url?.split(AppConfig.DOMAIN_PATH).last ?? "";
+                      final url = i.url?.split(AppConfig.DOMAIN_PATH).last ?? "";
                       print(url);
                       GoRouter.of(context).go(url);
                     },

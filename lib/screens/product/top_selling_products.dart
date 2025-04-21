@@ -52,7 +52,7 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
     );
   }
 
-  buildProductList(context) {
+  FutureBuilder<ProductMiniResponse> buildProductList(context) {
     return FutureBuilder(
         future: ProductRepository().getBestSellingProducts(),
         builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
@@ -62,7 +62,7 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
             //print(snapshot.error.toString());
             return Container();
           } else if (snapshot.hasData) {
-            var productResponse = snapshot.data;
+            final productResponse = snapshot.data;
             //print(productResponse.toString());
             return SingleChildScrollView(
               child: MasonryGridView.count(
@@ -72,8 +72,8 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
                 itemCount: productResponse!.products!.length,
                 shrinkWrap: true,
                 padding:
-                    EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
-                physics: NeverScrollableScrollPhysics(),
+                    const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   // 3
                   return ProductCard(
@@ -87,7 +87,7 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
                     has_discount:
                         productResponse.products![index].has_discount!,
                     discount: productResponse.products![index].discount,
-                    is_wholesale: productResponse.products![index].isWholesale,
+                    isWholesale: productResponse.products![index].isWholesale,
                   );
                 },
               ),

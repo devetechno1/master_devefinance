@@ -49,7 +49,7 @@ class DeliveryStatus {
 }
 
 class OrderList extends StatefulWidget {
-  OrderList({Key? key, this.from_checkout = false}) : super(key: key);
+  const OrderList({Key? key, this.from_checkout = false}) : super(key: key);
   final bool from_checkout;
 
   @override
@@ -57,11 +57,11 @@ class OrderList extends StatefulWidget {
 }
 
 class _OrderListState extends State<OrderList> {
-  ScrollController _scrollController = ScrollController();
-  ScrollController _xcrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
 
-  List<PaymentStatus> _paymentStatusList = PaymentStatus.getPaymentStatusList();
-  List<DeliveryStatus> _deliveryStatusList =
+  final List<PaymentStatus> _paymentStatusList = PaymentStatus.getPaymentStatusList();
+  final List<DeliveryStatus> _deliveryStatusList =
       DeliveryStatus.getDeliveryStatusList();
 
   PaymentStatus? _selectedPaymentStatus;
@@ -71,7 +71,7 @@ class _OrderListState extends State<OrderList> {
   List<DropdownMenuItem<DeliveryStatus>>? _dropdownDeliveryStatusItems;
 
   //------------------------------------
-  List<dynamic> _orderList = [];
+  final List<dynamic> _orderList = [];
   bool _isInitial = true;
   int _page = 1;
   int? _totalData = 0;
@@ -164,7 +164,7 @@ class _OrderListState extends State<OrderList> {
   }
 
   fetchData() async {
-    var orderResponse = await OrderRepository().getOrderList(
+    final orderResponse = await OrderRepository().getOrderList(
         page: _page,
         payment_status: _selectedPaymentStatus!.option_key,
         delivery_status: _selectedDeliveryStatus!.option_key);
@@ -178,7 +178,7 @@ class _OrderListState extends State<OrderList> {
 
   List<DropdownMenuItem<PaymentStatus>> buildDropdownPaymentStatusItems(
       List _paymentStatusList) {
-    List<DropdownMenuItem<PaymentStatus>> items = [];
+    final List<DropdownMenuItem<PaymentStatus>> items = [];
     for (PaymentStatus item in _paymentStatusList as Iterable<PaymentStatus>) {
       items.add(
         DropdownMenuItem(
@@ -192,7 +192,7 @@ class _OrderListState extends State<OrderList> {
 
   List<DropdownMenuItem<DeliveryStatus>> buildDropdownDeliveryStatusItems(
       List _deliveryStatusList) {
-    List<DropdownMenuItem<DeliveryStatus>> items = [];
+    final List<DropdownMenuItem<DeliveryStatus>> items = [];
     for (DeliveryStatus item
         in _deliveryStatusList as Iterable<DeliveryStatus>) {
       items.add(
@@ -246,7 +246,7 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
-  buildBottomAppBar(BuildContext context) {
+  Padding buildBottomAppBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 0),
       child: Row(
@@ -256,21 +256,21 @@ class _OrderListState extends State<OrderList> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             height: 36,
             width: MediaQuery.of(context).size.width * .4,
-            child: new DropdownButton<PaymentStatus>(
+            child: DropdownButton<PaymentStatus>(
               dropdownColor: Colors.white,
               borderRadius: BorderRadius.circular(6),
-              icon: Icon(Icons.expand_more, color: Colors.black54),
+              icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
-              padding: EdgeInsets.symmetric(horizontal: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               hint: Text(
                 AppLocalizations.of(context)!.all_payments_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
                 ),
               ),
               iconSize: 14,
-              underline: SizedBox(),
+              underline: const SizedBox(),
               value: _selectedPaymentStatus,
               items: _dropdownPaymentStatusItems,
               onChanged: (PaymentStatus? selectedFilter) {
@@ -286,21 +286,21 @@ class _OrderListState extends State<OrderList> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             height: 36,
             width: MediaQuery.of(context).size.width * .4,
-            child: new DropdownButton<DeliveryStatus>(
+            child: DropdownButton<DeliveryStatus>(
               dropdownColor: Colors.white,
               borderRadius: BorderRadius.circular(6),
-              icon: Icon(Icons.expand_more, color: Colors.black54),
+              icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
-              padding: EdgeInsets.symmetric(horizontal: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               hint: Text(
                 AppLocalizations.of(context)!.all_deliveries_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
                 ),
               ),
               iconSize: 14,
-              underline: SizedBox(),
+              underline: const SizedBox(),
               value: _selectedDeliveryStatus,
               items: _dropdownDeliveryStatusItems,
               onChanged: (DeliveryStatus? selectedFilter) {
@@ -317,16 +317,16 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
-  buildAppBar(BuildContext context) {
+  PreferredSize buildAppBar(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(104.0),
+      preferredSize: const Size.fromHeight(104.0),
       child: AppBar(
           centerTitle: false,
           backgroundColor: MyTheme.mainColor,
           scrolledUnderElevation: 0.0,
           automaticallyImplyLeading: false,
           actions: [
-            new Container(),
+            Container(),
           ],
           elevation: 0.0,
           titleSpacing: 0,
@@ -359,7 +359,7 @@ class _OrderListState extends State<OrderList> {
               onPressed: () {
                 if (widget.from_checkout) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Main();
+                    return const Main();
                   }));
                 } else {
                   return Navigator.of(context).pop();
@@ -379,14 +379,14 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
-  buildOrderListList() {
-    if (_isInitial && _orderList.length == 0) {
+  Widget buildOrderListList() {
+    if (_isInitial && _orderList.isEmpty) {
       return SingleChildScrollView(
           child: ListView.builder(
         controller: _scrollController,
         itemCount: 10,
         scrollDirection: Axis.vertical,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Padding(
@@ -404,7 +404,7 @@ class _OrderListState extends State<OrderList> {
           );
         },
       ));
-    } else if (_orderList.length > 0) {
+    } else if (_orderList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
         backgroundColor: Colors.white,
@@ -415,14 +415,14 @@ class _OrderListState extends State<OrderList> {
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
           child: ListView.separated(
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
               height: 14,
             ),
             padding:
                 const EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 0),
             itemCount: _orderList.length,
             scrollDirection: Axis.vertical,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return GestureDetector(
@@ -447,7 +447,7 @@ class _OrderListState extends State<OrderList> {
     }
   }
 
-  buildOrderListItemCard(int index) {
+  Container buildOrderListItemCard(int index) {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
@@ -459,7 +459,7 @@ class _OrderListState extends State<OrderList> {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
                 _orderList[index].code,
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.accent_color,
                     fontSize: 13,
                     fontWeight: FontWeight.w600),
@@ -472,10 +472,10 @@ class _OrderListState extends State<OrderList> {
                   Text(_orderList[index].date,
                       style: TextStyle(
                           color: MyTheme.dark_font_grey, fontSize: 12)),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     convertPrice(_orderList[index].grand_total),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.accent_color,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
@@ -525,16 +525,16 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
-  Container buildPaymentStatusCheckContainer(String payment_status) {
+  Container buildPaymentStatusCheckContainer(String paymentStatus) {
     return Container(
       height: 16,
       width: 16,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          color: payment_status == "paid" ? Colors.green : Colors.red),
+          color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
         padding: const EdgeInsets.all(3),
-        child: Icon(payment_status == "paid" ? Icons.check : Icons.check,
+        child: Icon(paymentStatus == "paid" ? Icons.check : Icons.check,
             color: Colors.white, size: 10),
       ),
     );
