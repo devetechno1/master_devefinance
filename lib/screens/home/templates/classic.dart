@@ -171,10 +171,10 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                           SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                  child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                //   child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
+                                // ),
                                 TodaysDealProductsWidget(homePresenter: homeData,),
                               ]
                             ),

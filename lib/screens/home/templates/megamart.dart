@@ -172,7 +172,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                           SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),
+                                // Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),
                                 TodaysDealProductsWidget(homePresenter: homeData,),
                               ]
                             ),
