@@ -273,7 +273,7 @@ Widget buildTimerRow(CurrentRemainingTime time) {
     height: 35,
     margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
     decoration: BoxDecoration(
-      color: const Color(0xFF215ABC), //TODO## color
+      color: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(5)
     ),
     child: SingleChildScrollView(

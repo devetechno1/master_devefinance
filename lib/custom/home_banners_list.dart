@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../data_model/slider_response.dart';
-import '../helpers/shimmer_helper.dart';
 import '../services/navigation_service.dart';
 import 'aiz_image.dart';
+import 'dynamic_size_image_banner.dart';
 
 class HomeBannersList extends StatelessWidget {
   final bool isBannersInitial;
@@ -24,16 +24,13 @@ class HomeBannersList extends StatelessWidget {
   Widget build(BuildContext context) {
     // When data is loading and no images are available
     if (isBannersInitial && bannersImagesList.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
-        child: ShimmerHelper().buildBasicShimmer(height: 120),
-      );
+      return const LoadingImageBannerWidget();
     }
 
     // When banner images are available
     else if (bannersImagesList.isNotEmpty) {
       if(bannersImagesList.length == 1){
-        return _DynamicSizeImageBanner(
+        return DynamicSizeImageBanner(
           urlToOpen: bannersImagesList.first.url,
           photo: bannersImagesList.first.photo,
         );
@@ -51,7 +48,6 @@ class HomeBannersList extends StatelessWidget {
           autoPlay: canScroll,
         ),
         items: bannersImagesList.map((i) {
-          print('Image URL: ${i.photo}');
           return Container(
             margin: const EdgeInsetsDirectional.only(start: 12, bottom: 10),
             decoration: BoxDecoration(
@@ -79,52 +75,5 @@ class HomeBannersList extends StatelessWidget {
     } else {
       return const SizedBox();
     }
-  }
-}
-
-class _DynamicSizeImageBanner extends StatefulWidget {
-  final String? urlToOpen;
-  final String? photo;
-
-  const _DynamicSizeImageBanner({
-    Key? key,
-    required this.urlToOpen,
-    required this.photo,
-  }) : super(key: key);
-
-  @override
-  State<_DynamicSizeImageBanner> createState() => _DynamicSizeImageBannerState();
-}
-
-class _DynamicSizeImageBannerState extends State<_DynamicSizeImageBanner> {
-  double? _aspectRatio;
-
-  @override
-  void initState() {
-    super.initState();
-    _getImageSize();
-  }
-
-  void _getImageSize() {
-    final Image image = Image.network(widget.photo ?? '');
-    image.image.resolve(const ImageConfiguration()).addListener(
-      ImageStreamListener((ImageInfo info, bool _) {
-        setState(() {
-          _aspectRatio = info.image.width / info.image.height;
-        });
-      }),
-    );
-  }
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => NavigationService.handleUrls(widget.urlToOpen, context),
-      child: _aspectRatio == null
-          ? const Center(child: CircularProgressIndicator())
-          : AspectRatio(
-              aspectRatio: _aspectRatio!,
-              child: AIZImage.radiusImage(widget.photo, 0),
-            ),
-    );
   }
 }

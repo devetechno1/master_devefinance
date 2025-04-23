@@ -210,8 +210,8 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
 //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
+                                bannersImagesList: homeData.bannerThreeImageList,
+                                isBannersInitial: homeData.isBannerThreeInitial,
                               ),
                             ),
 

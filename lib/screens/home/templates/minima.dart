@@ -168,8 +168,8 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                       const    CategoryList(),    
                        SliverToBoxAdapter(
                               child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
+                                bannersImagesList: homeData.bannerOneImageList,
+                                isBannersInitial: homeData.isBannerOneInitial,
                               ),
                             ),
                       const  FeaturedProductsListSliver(),
@@ -185,8 +185,8 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                      const NewProductsListSliver(),
                       SliverToBoxAdapter(
                               child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
+                                bannersImagesList: homeData.bannerThreeImageList,
+                                isBannersInitial: homeData.isBannerThreeInitial,
                               ),
                             ),
                                        

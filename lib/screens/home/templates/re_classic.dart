@@ -109,8 +109,8 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                           //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
+                                bannersImagesList: homeData.bannerOneImageList,
+                                isBannersInitial: homeData.isBannerOneInitial,
                               ),
                             ),
                            
@@ -217,8 +217,8 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
 //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
+                                bannersImagesList: homeData.bannerThreeImageList,
+                                isBannersInitial: homeData.isBannerThreeInitial,
                               ),
                             ),
 //auctionProducts------------ 
