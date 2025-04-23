@@ -17,11 +17,11 @@ class HomeBannersList extends StatelessWidget {
       required this.isBannersInitial,
       required this.bannersImagesList, 
       this.aspectRatio = 2, 
-      this.viewportFraction = 0.5})
+      this.viewportFraction = 0.49})
       : super(key: key);
 
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     // When data is loading and no images are available
     if (isBannersInitial && bannersImagesList.isEmpty) {
       return Padding(
@@ -34,15 +34,9 @@ class HomeBannersList extends StatelessWidget {
     // When banner images are available
     else if (bannersImagesList.isNotEmpty) {
       if(bannersImagesList.length == 1){
-        return Align(
-          child: AspectRatio(
-            aspectRatio: 6,
-            child: _BannerWidget(
-                urlToOpen: bannersImagesList.first.url,
-                photo: bannersImagesList.first.photo,
-                bannerRadius: 0,
-              ),
-          ),
+        return _DynamicSizeImageBanner(
+          urlToOpen: bannersImagesList.first.url,
+          photo: bannersImagesList.first.photo,
         );
       }
       final bool canScroll = bannersImagesList.length > 2;
@@ -75,9 +69,9 @@ class HomeBannersList extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: _BannerWidget(
-                urlToOpen: i.url,
-                photo: i.photo,
+              child: InkWell(
+                onTap: () => NavigationService.handleUrls(i.url, context),
+                child: AIZImage.radiusImage(i.photo, 6),
               ),
             ),
           );
@@ -89,21 +83,49 @@ class HomeBannersList extends StatelessWidget {
   }
 }
 
-class _BannerWidget extends StatelessWidget {
-  const _BannerWidget({
-    required this.urlToOpen, 
-    required this.photo,
-    this.bannerRadius = 6,
-  });
+class _DynamicSizeImageBanner extends StatefulWidget {
   final String? urlToOpen;
   final String? photo;
-  final double bannerRadius;
 
+  const _DynamicSizeImageBanner({
+    Key? key,
+    required this.urlToOpen,
+    required this.photo,
+  }) : super(key: key);
+
+  @override
+  State<_DynamicSizeImageBanner> createState() => _DynamicSizeImageBannerState();
+}
+
+class _DynamicSizeImageBannerState extends State<_DynamicSizeImageBanner> {
+  double? _aspectRatio;
+
+  @override
+  void initState() {
+    super.initState();
+    _getImageSize();
+  }
+
+  void _getImageSize() {
+    final Image image = Image.network(widget.photo ?? '');
+    image.image.resolve(const ImageConfiguration()).addListener(
+      ImageStreamListener((ImageInfo info, bool _) {
+        setState(() {
+          _aspectRatio = info.image.width / info.image.height;
+        });
+      }),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => NavigationService.handleUrls(urlToOpen, context),
-      child: AIZImage.radiusImage(photo, bannerRadius),
+      onTap: () => NavigationService.handleUrls(widget.urlToOpen, context),
+      child: _aspectRatio == null
+          ? const Center(child: CircularProgressIndicator())
+          : AspectRatio(
+              aspectRatio: _aspectRatio!,
+              child: AIZImage.radiusImage(widget.photo, 0),
+            ),
     );
   }
 }
