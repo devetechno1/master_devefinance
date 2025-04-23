@@ -594,7 +594,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               ? Container(
                   padding:
                       const EdgeInsets.only(left: 18, right: 18, bottom: 10, top: 10),
-                  color: MyTheme.white.withOpacity(0.9),
+                  color: MyTheme.white.withValues(alpha: 0.9),
                   child: InkWell(
                     onTap: () {
                       is_logged_in.$
@@ -646,7 +646,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               slivers: <Widget>[
                 SliverAppBar(
                   elevation: 0,
-                  backgroundColor: Colors.white.withOpacity(opacity),
+                  backgroundColor: Colors.white.withValues(alpha: opacity),
                   pinned: true,
                   automaticallyImplyLeading: false,
                   //titleSpacing: 0,
@@ -1846,7 +1846,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                       shape: BoxShape.circle,
                                       color: _currentImage == index
                                           ? MyTheme.font_grey
-                                          : Colors.grey.withOpacity(0.2),
+                                          : Colors.grey.withValues(alpha: 0.2),
                                     ),
                                   ))),
                     ),

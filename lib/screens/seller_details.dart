@@ -1614,7 +1614,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 20,
               spreadRadius: 0.5,
               offset: const Offset(0, 10),
@@ -1688,7 +1688,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black
-                                      .withOpacity(0.2), // Shadow color
+                                      .withValues(alpha: 0.2), // Shadow color
                                   spreadRadius: 2, // Spread of the shadow
                                   blurRadius: 4, // Blur radius for softness
                                   offset: const Offset(
@@ -1830,7 +1830,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                 borderRadius: BorderRadius.circular(6),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(.08),
+                    color: Colors.black.withValues(alpha: .08),
                     blurRadius: 20,
                     spreadRadius: 0.0,
                     offset: const Offset(0.0, 10.0), // shadow direction: bottom right
@@ -1888,7 +1888,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                   color: const Color(0xffFEF0D7),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(.08),
+                      color: Colors.black.withValues(alpha: .08),
                       blurRadius: 20,
                       spreadRadius: 0.0,
                       offset:

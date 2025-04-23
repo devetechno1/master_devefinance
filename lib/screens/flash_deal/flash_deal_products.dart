@@ -264,7 +264,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                       borderRadius: BorderRadius.circular(6),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.black.withOpacity(0.16),
+                            color: Colors.black.withValues(alpha: 0.16),
                             blurRadius: 20,
                             offset:const Offset(0, 10))
                       ]),

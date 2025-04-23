@@ -25,8 +25,7 @@ class HomeBannersList extends StatelessWidget {
     // When data is loading and no images are available
     if (isBannersInitial && bannersImagesList.isEmpty) {
       return Padding(
-        padding:
-            const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
+        padding: const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
         child: ShimmerHelper().buildBasicShimmer(height: 120),
       );
     }
@@ -60,7 +59,7 @@ class HomeBannersList extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xff000000).withOpacity(0.1),
+                  color: const Color(0xff000000).withValues(alpha: 0.1),
                   spreadRadius: 2,
                   blurRadius: 5,
                   offset: const Offset(0, 3),

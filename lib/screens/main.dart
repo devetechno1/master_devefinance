@@ -153,7 +153,7 @@ class _MainState extends State<Main> {
             type: BottomNavigationBarType.fixed,
             onTap: onTapped,
             currentIndex: _currentIndex,
-            backgroundColor: Colors.white.withOpacity(0.95),
+            backgroundColor: Colors.white.withValues(alpha: 0.95),
             unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
             selectedItemColor: MyTheme.accent_color,
             selectedLabelStyle:const TextStyle(

@@ -417,7 +417,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-        backgroundColor: MyTheme.white.withOpacity(0.95),
+        backgroundColor: MyTheme.white.withValues(alpha: 0.95),
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         actions: [
@@ -786,7 +786,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                           boxShadow: [
                             BoxShadow(
                               color: const Color.fromARGB(255, 63, 63, 63)
-                                  .withOpacity(.12),
+                                  .withValues(alpha: .12),
                               blurRadius: 10,
                               spreadRadius: 0.4,
                               offset: const Offset(0.0, 3.0),

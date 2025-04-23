@@ -296,7 +296,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
               slivers: <Widget>[
                 SliverAppBar(
                   elevation: 0,
-                  backgroundColor: Colors.white.withOpacity(opacity),
+                  backgroundColor: Colors.white.withValues(alpha: opacity),
                   pinned: true,
                   automaticallyImplyLeading: false,
                   title: Row(
@@ -1236,7 +1236,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                                       shape: BoxShape.circle,
                                       color: _currentImage == index
                                           ? MyTheme.font_grey
-                                          : Colors.grey.withOpacity(0.2),
+                                          : Colors.grey.withValues(alpha: 0.2),
                                     ),
                                   ))),
                     ),

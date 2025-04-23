@@ -975,7 +975,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(.08),
+                            color: Colors.black.withValues(alpha: .08),
                             blurRadius: 20,
                             spreadRadius: 0.0,
                             offset: const Offset(
@@ -1119,7 +1119,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.08),
+                                color: Colors.black.withValues(alpha: 0.08),
                                 spreadRadius: 0,
                                 blurRadius: 16,
                                 offset:
@@ -1243,7 +1243,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.08),
+                                  color: Colors.black.withValues(alpha: 0.08),
                                   spreadRadius: 0,
                                   blurRadius: 16,
                                   offset: const Offset(
@@ -1298,7 +1298,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.08),
+                                  color: Colors.black.withValues(alpha: 0.08),
                                   spreadRadius: 0,
                                   blurRadius: 16,
                                   offset: const Offset(
@@ -1470,7 +1470,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(.08),
+                      color: Colors.black.withValues(alpha: .08),
                       blurRadius: 20,
                       spreadRadius: 0.0,
                       offset:
@@ -1714,7 +1714,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             color: MyTheme.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.12),
+                color: Colors.black.withValues(alpha: 0.12),
                 blurRadius: 6,
                 spreadRadius: 1,
                 offset: const Offset(0.0, 3.0), // shadow direction: bottom right
@@ -1803,14 +1803,14 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           boxShadow: [
             _selectedColorIndex == index
                 ? BoxShadow(
-                    color: Colors.black.withOpacity(
+                    color: Colors.black.withValues(alpha: 
                         _selectedColorIndex == index ? 0.25 : 0.12),
                     blurRadius: 10,
                     spreadRadius: 2.0,
                     offset: const Offset(0.0, 6.0), // shadow direction: bottom right
                   )
                 : BoxShadow(
-                    color: Colors.black.withOpacity(
+                    color: Colors.black.withValues(alpha: 
                         _selectedColorIndex == index ? 0.25 : 0.16),
                     blurRadius: 6,
                     spreadRadius: 0.0,
@@ -2034,7 +2034,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
   Widget buildBottomAppBar(BuildContext context, _addedToCartSnackbar) {
     return BottomNavigationBar(
-      backgroundColor: MyTheme.white.withOpacity(0.9),
+      backgroundColor: MyTheme.white.withValues(alpha: 0.9),
       items: [
         BottomNavigationBarItem(
           backgroundColor: Colors.transparent,
@@ -2374,7 +2374,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.16),
+              color: Colors.black.withValues(alpha: .16),
               blurRadius: 6,
               spreadRadius: 0.0,
               offset: const Offset(0.0, 3.0), // shadow direction: bottom right
@@ -2402,7 +2402,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(.16),
+            color: Colors.black.withValues(alpha: .16),
             blurRadius: 6,
             spreadRadius: 0.0,
             offset: const Offset(0.0, 3.0), // shadow direction: bottom right

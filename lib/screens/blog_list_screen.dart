@@ -116,7 +116,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
             ),
           ),
           filled: true,
-          fillColor: MyTheme.white.withOpacity(0.6),
+          fillColor: MyTheme.white.withValues(alpha: 0.6),
           hintText: LangText(context).local.search_in_blogs //widget.category_name!
           ,
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
@@ -181,8 +181,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
-                                      Colors.white.withOpacity(0.5),
-                                      Colors.black.withOpacity(0.5)
+                                      Colors.white.withValues(alpha: 0.5),
+                                      Colors.black.withValues(alpha: 0.5)
                                     ],
                                   ),
                                 ),

@@ -107,7 +107,7 @@ class FlashBannerWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color:
-                const Color(0xff000000).withOpacity(0.1), // shadow color
+                const Color(0xff000000).withValues(alpha: 0.1), // shadow color
             spreadRadius: 2, // spread radius
             blurRadius: 5, // blur radius
             offset: const Offset(0, 3), // changes position of shadow

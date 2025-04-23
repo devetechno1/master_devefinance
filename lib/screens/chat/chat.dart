@@ -561,7 +561,7 @@ class _ChatState extends State<Chat> {
             : Colors.white),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(.08),
+            color: Colors.black.withValues(alpha: .08),
             blurRadius: 20,
             spreadRadius: 0.0,
             offset: const Offset(0.0, 10.0),
@@ -607,7 +607,7 @@ class _ChatState extends State<Chat> {
         padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
         height: 60,
         width: double.infinity,
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         child: Row(
           children: <Widget>[
             Expanded(

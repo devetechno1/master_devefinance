@@ -279,7 +279,7 @@ class TimerWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 6, bottom: 2, left: 12, right: 12),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withOpacity(0.3),
+        color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Countdown(

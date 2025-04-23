@@ -185,7 +185,7 @@ class _ProductReviewsState extends State<ProductReviews> {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
-          decoration: BoxDecoration(color: Colors.white54.withOpacity(0.6)),
+          decoration: BoxDecoration(color: Colors.white54.withValues(alpha: 0.6)),
           height: 120,
           //color: Colors.white,
           child: Padding(

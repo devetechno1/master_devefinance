@@ -234,7 +234,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
             ),
           ),
           filled: true,
-          fillColor: MyTheme.white.withOpacity(0.6),
+          fillColor: MyTheme.white.withValues(alpha: 0.6),
           hintText: "${AppLocalizations.of(context)!.search_products_from} : " +
               "" //widget.category_name!
           ,

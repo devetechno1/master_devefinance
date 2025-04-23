@@ -186,7 +186,7 @@ class AuthScreen {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.red
-                        .withOpacity(0.7), // Optional background color
+                        .withValues(alpha: 0.7), // Optional background color
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(

@@ -426,7 +426,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                                 width: _hasFocus ? 0.5 : 0.2),
                             boxShadow: [
                               BoxShadow(
-                                color: MyTheme.blue_grey.withOpacity(0.15),
+                                color: MyTheme.blue_grey.withValues(alpha: 0.15),
                                 blurRadius: 20,
                                 spreadRadius: 0.0,
                                 offset: const Offset(0.0,
@@ -922,7 +922,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                                 width: 0.1),
                             boxShadow: [
                               BoxShadow(
-                                color: MyTheme.white.withOpacity(0.15),
+                                color: MyTheme.white.withValues(alpha: 0.15),
                                 blurRadius: 20,
                                 spreadRadius: 0.0,
                                 offset: const Offset(0.0,
@@ -1113,7 +1113,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               width: 0.2),
           boxShadow: [
             BoxShadow(
-              color: MyTheme.white.withOpacity(0.15),
+              color: MyTheme.white.withValues(alpha: 0.15),
               blurRadius: 20,
               spreadRadius: 0.0,
               offset: const Offset(0.0, 10.0), // shadow direction: bottom right
@@ -1172,7 +1172,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               width: 0.2),
           boxShadow: [
             BoxShadow(
-              color: MyTheme.white.withOpacity(0.15),
+              color: MyTheme.white.withValues(alpha: 0.15),
               blurRadius: 20,
               spreadRadius: 0.0,
               offset: const Offset(0.0, 10.0), // shadow direction: bottom right
@@ -1227,7 +1227,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               width: 0.2),
           boxShadow: [
             BoxShadow(
-              color: MyTheme.white.withOpacity(0.15),
+              color: MyTheme.white.withValues(alpha: 0.15),
               blurRadius: 20,
               spreadRadius: 0.0,
               offset: const Offset(0.0, 10.0), // shadow direction: bottom right

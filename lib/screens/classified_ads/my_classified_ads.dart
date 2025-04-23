@@ -339,7 +339,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                 borderRadius: BorderRadius.circular(6),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
+                    color: Colors.black.withValues(alpha: 0.08),
                     spreadRadius: 0.5,
                     blurRadius: 20,
                     offset: const Offset(0, 10),
@@ -399,7 +399,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                     borderRadius: BorderRadius.circular(6),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
+                        color: Colors.black.withValues(alpha: 0.08),
                         spreadRadius: 0.5,
                         blurRadius: 20,
                         offset: const Offset(0, 10),
@@ -501,7 +501,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
             borderRadius: BorderRadius.circular(6),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.08),
+                color: Colors.black.withValues(alpha: 0.08),
                 //   spreadRadius: 0.5,
                 blurRadius: 20,
                 offset: const Offset(0, 10),

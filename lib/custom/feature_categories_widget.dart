@@ -57,7 +57,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xff000000).withOpacity(0.1),
+                                color: const Color(0xff000000).withValues(alpha: 0.1),
                                 spreadRadius: 1,
                                 blurRadius: 15,
                                 offset: const Offset(0, 6),

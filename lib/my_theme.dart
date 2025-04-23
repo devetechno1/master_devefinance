@@ -76,7 +76,7 @@ class MyTheme {
 
   static BoxShadow commonShadow() {
     return BoxShadow(
-      color: Colors.black.withOpacity(0.08),
+      color: Colors.black.withValues(alpha: 0.08),
       blurRadius: 20,
       spreadRadius: 0.0,
       offset: const Offset(0.0, 10.0),

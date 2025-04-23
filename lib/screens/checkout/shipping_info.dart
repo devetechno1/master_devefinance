@@ -692,7 +692,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       color: _sellerWiseShippingOption[sellerIndex].shippingOption ==
               ShippingOption.PickUpPoint
           ? MyTheme.accent_color
-          : MyTheme.accent_color.withOpacity(0.1),
+          : MyTheme.accent_color.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
           side: const BorderSide(color: MyTheme.accent_color)),
@@ -749,7 +749,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       color: _sellerWiseShippingOption[sellerIndex].shippingOption ==
               ShippingOption.HomeDelivery
           ? MyTheme.accent_color
-          : MyTheme.accent_color.withOpacity(0.1),
+          : MyTheme.accent_color.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
           side: const BorderSide(color: MyTheme.accent_color)),
@@ -803,7 +803,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       color: _sellerWiseShippingOption[sellerIndex].shippingOption ==
               ShippingOption.Carrier
           ? MyTheme.accent_color
-          : MyTheme.accent_color.withOpacity(0.1),
+          : MyTheme.accent_color.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
           side: const BorderSide(color: MyTheme.accent_color)),

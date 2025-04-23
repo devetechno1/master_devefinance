@@ -42,10 +42,8 @@ class AppConfig {
   static String default_country = "EG";
 
   //configure this
-  static const bool HTTPS =
-      true; //if you are using localhost , set this to false
-  static const DOMAIN_PATH =
-      "3partsgroup.com"; //use only domain name without http:// or https://
+  static const bool HTTPS = true; //if you are using localhost , set this to false
+  static const DOMAIN_PATH = "devefinance.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";

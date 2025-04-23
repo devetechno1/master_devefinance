@@ -26,10 +26,12 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
   final TextStyle? nameTextStyle;
   @override
   Widget build(BuildContext context) {
+    if(!isProductInitial && productList.isEmpty) return const SizedBox();
     return Container(
       height: 305,
+      width: double.maxFinite,
       margin: const EdgeInsets.only(top: 10, bottom: 5),
-      color: MyTheme.accent_color.withOpacity(0.1),
+      color: MyTheme.accent_color.withValues(alpha: 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

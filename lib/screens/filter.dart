@@ -416,7 +416,7 @@ final  List<dynamic> _productList = [];
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-        backgroundColor: MyTheme.mainColor.withOpacity(0.95),
+        backgroundColor: MyTheme.mainColor.withValues(alpha: 0.95),
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         actions: [
