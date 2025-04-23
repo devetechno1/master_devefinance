@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 class CurrencyPresenter extends ChangeNotifier {
   List<CurrencyInfo> currencyList = [];
 
-  fetchListData() async {
+  Future<void> fetchListData() async {
+    try{
     currencyList.clear();
     final res = await CurrencyRepository().getListResponse();
     print("res.data ${system_currency.$}");
@@ -33,5 +34,9 @@ class CurrencyPresenter extends ChangeNotifier {
       }
     });
     notifyListeners();
+    }catch (e, stackTrace) {
+      print("Error in fetchListData: $e");
+      print("StackTrace: $stackTrace");
+    }
   }
 }

@@ -21,7 +21,7 @@ class HomeBannersList extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     // When data is loading and no images are available
     if (isBannersInitial && bannersImagesList.isEmpty) {
       return Padding(
@@ -33,18 +33,32 @@ class HomeBannersList extends StatelessWidget {
 
     // When banner images are available
     else if (bannersImagesList.isNotEmpty) {
+      if(bannersImagesList.length == 1){
+        return Align(
+          child: AspectRatio(
+            aspectRatio: 6,
+            child: _BannerWidget(
+                urlToOpen: bannersImagesList.first.url,
+                photo: bannersImagesList.first.photo,
+                bannerRadius: 0,
+              ),
+          ),
+        );
+      }
+      final bool canScroll = bannersImagesList.length > 2;
+
       return CarouselSlider(
         options: CarouselOptions(
           aspectRatio: aspectRatio,
           viewportFraction: viewportFraction,
-          initialPage: 0,
-          // padEnds: false,
-          enlargeCenterPage: true,
-          enlargeStrategy: CenterPageEnlargeStrategy.height,
-          enableInfiniteScroll: true,
-          autoPlay: true,
+          initialPage: 0,  
+          padEnds: false,
+          enlargeCenterPage: false,
+          enableInfiniteScroll: canScroll,
+          autoPlay: canScroll,
         ),
         items: bannersImagesList.map((i) {
+          print('Image URL: ${i.photo}');
           return Container(
             margin: const EdgeInsetsDirectional.only(start: 12, bottom: 10),
             decoration: BoxDecoration(
@@ -61,9 +75,9 @@ class HomeBannersList extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: InkWell(
-                onTap: () => NavigationService.handleUrls(i.url, context),
-                child: AIZImage.radiusImage(i.photo, 6),
+              child: _BannerWidget(
+                urlToOpen: i.url,
+                photo: i.photo,
               ),
             ),
           );
@@ -72,5 +86,24 @@ class HomeBannersList extends StatelessWidget {
     } else {
       return const SizedBox();
     }
+  }
+}
+
+class _BannerWidget extends StatelessWidget {
+  const _BannerWidget({
+    required this.urlToOpen, 
+    required this.photo,
+    this.bannerRadius = 6,
+  });
+  final String? urlToOpen;
+  final String? photo;
+  final double bannerRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => NavigationService.handleUrls(urlToOpen, context),
+      child: AIZImage.radiusImage(photo, bannerRadius),
+    );
   }
 }
