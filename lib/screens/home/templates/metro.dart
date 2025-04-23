@@ -181,6 +181,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
 //Featured category-----------------------
                             const CategoryList(),
                   
+                  
 //BannerList---------------------                            
 
                           SliverToBoxAdapter(
