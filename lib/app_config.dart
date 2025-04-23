@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,6 +19,10 @@ class AppConfig {
   static const String app_name_en = "Devefinance Store";
   /// This get the name of the application in deviceLocale
   static String appNameOnDeviceLang = PlatformDispatcher.instance.locale.languageCode == 'ar' ? app_name_ar : app_name_en;
+  
+  
+  static bool isDebugMode = kDebugMode;
+  static bool turnDevicePreviewOn = isDebugMode;
 
   /// This get the name of the application in appLocal
   static String appNameOnAppLang(BuildContext context)=> Localizations.localeOf(context).languageCode == 'ar' ? app_name_ar : app_name_en;
@@ -40,7 +45,7 @@ class AppConfig {
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
   static const DOMAIN_PATH =
-      "devefinance.com"; //use only domain name without http:// or https://
+      "3partsgroup.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";

@@ -15,6 +15,7 @@ import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
+import 'package:device_preview/device_preview.dart';
 
 import 'app_config.dart';
 import 'custom/aiz_route.dart';
@@ -79,8 +80,13 @@ void main() async {
   ));
 
   runApp(
-    SharedValue.wrapApp(
-      MyApp(),
+    DevicePreview(
+      enabled: AppConfig.turnDevicePreviewOn,
+      builder: (context) {
+        return SharedValue.wrapApp(
+          MyApp(),
+        );
+      }
     ),
   );
 }
@@ -283,7 +289,10 @@ class _MyAppState extends State<MyApp> {
             routerConfig: routes,
             title: AppConfig.appNameOnDeviceLang,
             debugShowCheckedModeBanner: false,
-            builder: OneContext().builder,
+            builder: (context, child) {
+              if(AppConfig.turnDevicePreviewOn) child = DevicePreview.appBuilder(context, child);
+              return OneContext().builder(context, child);
+            },
             theme: ThemeData(
               primaryColor: MyTheme.accent_color,
               scaffoldBackgroundColor: MyTheme.white,
