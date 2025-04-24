@@ -14,9 +14,9 @@ class InputDecorations {
             Radius.circular(6.0),
           ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: MyTheme.accent_color, width: 0.5),
-          borderRadius: BorderRadius.all(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: MyTheme.primaryColor, width: 0.5),
+          borderRadius: const BorderRadius.all(
             Radius.circular(6.0),
           ),
         ),
@@ -33,9 +33,9 @@ class InputDecorations {
               topRight: Radius.circular(6.0),
               bottomRight: Radius.circular(6.0)),
         ),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: MyTheme.accent_color, width: 0.5),
-            borderRadius: BorderRadius.only(
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: MyTheme.primaryColor, width: 0.5),
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(6.0),
                 bottomRight: Radius.circular(6.0))),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0));

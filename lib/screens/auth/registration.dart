@@ -218,8 +218,8 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.name_ucf,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               Padding(
@@ -240,8 +240,8 @@ class _RegistrationState extends State<Registration> {
                   _register_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.phone_ucf,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               if (_register_by == "email")
@@ -344,8 +344,8 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               Padding(
@@ -379,8 +379,8 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.retype_password_ucf,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               Padding(
@@ -460,8 +460,7 @@ class _RegistrationState extends State<Registration> {
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
                                                     )));
                                       },
-                                    style:
-                                        const TextStyle(color: MyTheme.accent_color),
+                                    style: TextStyle(color: Theme.of(context).primaryColor),
                                     text: " ${AppLocalizations.of(context)!.terms_conditions_ucf}",
                                   ),
                                   const TextSpan(
@@ -482,8 +481,7 @@ class _RegistrationState extends State<Registration> {
                                                     )));
                                       },
                                     text: " ${AppLocalizations.of(context)!.privacy_policy_ucf}",
-                                    style:
-                                        const TextStyle(color: MyTheme.accent_color),
+                                    style: TextStyle(color: Theme.of(context).primaryColor),
                                   )
                                 ])),
                       ),
@@ -498,7 +496,7 @@ class _RegistrationState extends State<Registration> {
                   child: Btn.minWidthFixHeight(
                     minWidth: MediaQuery.of(context).size.width,
                     height: 50,
-                    color: MyTheme.accent_color,
+                    color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(6.0))),
@@ -533,8 +531,8 @@ class _RegistrationState extends State<Registration> {
                     InkWell(
                       child: Text(
                         AppLocalizations.of(context)!.log_in,
-                        style: const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.w600),
                       ),

@@ -19,8 +19,6 @@ class BestSellingSectionSliver extends StatelessWidget {
               productList: homeData.bestSellingProductList, 
               numberOfTotalProducts: homeData.totalBestSellingProductData, 
               onArriveTheEndOfList: homeData.fetchBestSellingProducts,
-              nameTextStyle: const TextStyle(fontSize: 12,fontWeight: FontWeight.w500),
-              priceTextStyle: TextStyle(fontSize: 13, color: Colors.blueAccent.shade700,fontWeight: FontWeight.bold),
             );
           }),
     );

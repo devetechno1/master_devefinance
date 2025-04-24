@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       width: DeviceInfo(context).height,
       height: DeviceInfo(context).height,
-      color: MyTheme.splash_screen_color,
+      color: Theme.of(context).primaryColor,
       child: InkWell(
         child: Stack(
           // mainAxisAlignment: MainAxisAlignment.start,
@@ -68,10 +68,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
-                        height: 72,
-                        width: 72,
+                        height: 100,
+                        width: 100,
                         padding:
-                            const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                            const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                             color: MyTheme.white,
                             borderRadius: BorderRadius.circular(8)),

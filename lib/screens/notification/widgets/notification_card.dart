@@ -75,7 +75,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                 height: 30,
                 width: 30,
                 child: Checkbox(
-                  activeColor: MyTheme.accent_color,
+                  activeColor: Theme.of(context).primaryColor,
                   value: widget.isChecked,
                   onChanged: (value) {
                     widget.onSelect(widget.id!, value ?? false);
@@ -99,7 +99,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                         "${widget.notificationText}",
                         style: TextStyle(
                             color: (widget.link != '' && widget.link != null)
-                                ? MyTheme.accent_color
+                                ? Theme.of(context).primaryColor
                                 : Colors.black,
                             fontSize: 16),
                       ),
@@ -113,7 +113,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${widget.orderCode}",
-                                style: const TextStyle(color: MyTheme.accent_color),
+                                style: TextStyle(color: Theme.of(context).primaryColor),
                               ),
                               TextSpan(
                                 text:

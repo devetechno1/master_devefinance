@@ -31,7 +31,7 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
       height: 305,
       width: double.maxFinite,
       margin: const EdgeInsets.only(top: 10, bottom: 5),
-      color: MyTheme.accent_color.withValues(alpha: 0.1),
+      color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

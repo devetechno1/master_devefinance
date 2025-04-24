@@ -170,8 +170,8 @@ class _ProductCardState extends State<ProductCard> {
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: const TextStyle(
-                            color: MyTheme.accent_color,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
@@ -195,7 +195,7 @@ class _ProductCardState extends State<ProductCard> {
                         width: 48,
                         margin: const EdgeInsets.only(top: 8, right: 8, bottom: 15),
                         decoration: BoxDecoration(
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: const [
                             BoxShadow(

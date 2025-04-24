@@ -42,7 +42,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
           body: Stack(
             children: [
               RefreshIndicator(
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
                 backgroundColor: Colors.white,
                 onRefresh: () {
                   return Provider.of<CurrencyPresenter>(context, listen: false)
@@ -128,7 +128,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
         decoration: BoxDecorations.buildBoxDecoration_1().copyWith(
             border: Border.all(
                 color: currencyInfo.id == system_currency.$
-                    ? MyTheme.accent_color
+                    ? Theme.of(context).primaryColor
                     : MyTheme.noColor)),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         duration: const Duration(milliseconds: 400),

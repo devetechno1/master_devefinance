@@ -452,7 +452,7 @@ final  ScrollController _mainScrollController = ScrollController();
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
-                        color: MyTheme.accent_color,
+                        color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             side: BorderSide(
@@ -525,7 +525,7 @@ final  ScrollController _mainScrollController = ScrollController();
             onPopped(value);
           });
         },
-        textColor: MyTheme.accent_color,
+        textColor: Theme.of(context).primaryColor,
         disabledTextColor: Colors.grey,
       ),
     ));
@@ -560,7 +560,7 @@ final  ScrollController _mainScrollController = ScrollController();
           backgroundColor: Colors.white,
           appBar: buildAppBar(context),
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(
@@ -766,8 +766,8 @@ final  ScrollController _mainScrollController = ScrollController();
                       const  Spacer(),
                         Text(
                           convertPrice(_orderDetails!.grand_total!),
-                          style:const TextStyle(
-                              color: MyTheme.accent_color,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
                         ),
@@ -1118,8 +1118,8 @@ final  ScrollController _mainScrollController = ScrollController();
                 children: [
                   Text(
                     _orderDetails!.code!,
-                    style:const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),
@@ -1342,8 +1342,8 @@ final  ScrollController _mainScrollController = ScrollController();
                     children: [
                       Text(
                         convertPrice(_orderDetails!.grand_total!),
-                        style:const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
@@ -1440,7 +1440,7 @@ final  ScrollController _mainScrollController = ScrollController();
                       borderRadius: BorderRadius.circular(8)),
                   padding:const EdgeInsets.symmetric(vertical: 10),
                   minWidth: DeviceInfo(context).width,
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   onPressed: () {
                     // _showCancelDialog(_orderDetails!.id);
                     _make_re_payment(_orderDetails!.grand_total ?? '');
@@ -1502,8 +1502,8 @@ final  ScrollController _mainScrollController = ScrollController();
                 const  Spacer(),
                   Text(
                     convertPrice(_orderedItemList[index].price),
-                    style:const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),
@@ -1526,16 +1526,16 @@ final  ScrollController _mainScrollController = ScrollController();
                         children: [
                           Text(
                             AppLocalizations.of(context)!.ask_for_refund_ucf,
-                            style:const TextStyle(
-                                color: MyTheme.accent_color,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline),
                           ),
-                        const  Padding(
-                            padding:  EdgeInsets.only(left: 2.0),
+                         Padding(
+                            padding:  const EdgeInsets.only(left: 2.0),
                             child: Icon(
                               Icons.rotate_left,
-                              color: MyTheme.accent_color,
+                              color: Theme.of(context).primaryColor,
                               size: 14,
                             ),
                           )

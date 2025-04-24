@@ -222,7 +222,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
           child: Btn.minWidthFixHeight(
             minWidth: MediaQuery.of(context).size.width,
             height: 50,
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0.0),
             ),
@@ -525,8 +525,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           AIZRoute.push(context, Login());
                         },
                       text: LangText(context).local.login_ucf,
-                      style: const TextStyle(
-                        color: MyTheme.accent_color,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),

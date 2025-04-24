@@ -32,13 +32,14 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
       children: [
         GridView.builder(
           shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           physics: const NeverScrollableScrollPhysics(),
           itemCount: showViewAll ? 8 : brands.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 0.8,
+            childAspectRatio: 0.9,
           ),
           itemBuilder: (context, index) {
             final Brands brand = brands[index];
@@ -104,13 +105,14 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Text(
-                    
-                    brand.name ?? '',
-                    style: const TextStyle(fontSize: 12,),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  SizedBox(
+                    child: Text(
+                      brand.name ?? '',
+                      style: const TextStyle(fontSize: 12,),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),

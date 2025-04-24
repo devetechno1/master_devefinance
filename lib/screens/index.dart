@@ -21,7 +21,7 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   Future<String?> getSharedValueHelperData() async {
     await BusinessSettingHelper.setInitLang();
-    await BusinessSettingHelper().setBusinessSettingData();
+    await BusinessSettingHelper().setBusinessSettingData(context);
     Provider.of<CurrencyPresenter>(context, listen: false).fetchListData();
     access_token.load().whenComplete(() {
       AuthHelper().fetch_and_set();

@@ -80,7 +80,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                 return Stack(
                   children: [
                     RefreshIndicator(
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       backgroundColor: Colors.white,
                       onRefresh: homeData.onRefresh,
                       displacement: 0,

@@ -104,8 +104,8 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                               : widget.main_price!,
                           textAlign: TextAlign.left,
                           maxLines: 1,
-                          style: const TextStyle(
-                              color: MyTheme.accent_color,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),

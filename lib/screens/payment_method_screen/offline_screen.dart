@@ -231,7 +231,7 @@ final  ScrollController _mainScrollController = ScrollController();
       ),
       title: Text(
         AppLocalizations.of(context)!.make_offline_payment_ucf,
-        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -249,7 +249,7 @@ final  ScrollController _mainScrollController = ScrollController();
           )));
     } else {
       return RefreshIndicator(
-        color: MyTheme.accent_color,
+        color: Theme.of(context).primaryColor,
         backgroundColor: Colors.white,
         onRefresh: _onPageRefresh,
         displacement: 10,
@@ -311,8 +311,8 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.amount_ucf}*",
-                style: const TextStyle(
-                    color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
@@ -331,8 +331,8 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.name_ucf}*",
-                style: const TextStyle(
-                    color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
@@ -351,8 +351,8 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.transaction_id_ucf}*",
-                style: const TextStyle(
-                    color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
@@ -371,8 +371,8 @@ final  ScrollController _mainScrollController = ScrollController();
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
                 "${AppLocalizations.of(context)!.photo_proof_ucf}* (${AppLocalizations.of(context)!.only_image_file_allowed})",
-                style: const TextStyle(
-                    color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
               ),
             ),
             Row(
@@ -442,7 +442,7 @@ final  ScrollController _mainScrollController = ScrollController();
                             const BorderRadius.all(Radius.circular(8.0))),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(8.0))),

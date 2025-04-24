@@ -222,7 +222,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
 
   RefreshIndicator buildAuctionPurchaseList() {
     return RefreshIndicator(
-      color: MyTheme.accent_color,
+      color: Theme.of(context).primaryColor,
       backgroundColor: MyTheme.mainColor,
       displacement: 0,
       onRefresh: _onRefresh,
@@ -439,8 +439,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   _purchaseList[index].code!,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color,
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
                       fontSize: 13,
                       fontWeight: FontWeight.bold),
                 ),
@@ -540,8 +540,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
           ),
           Text(
             convertPrice(_purchaseList[index].amount!),
-            style: const TextStyle(
-                color: MyTheme.accent_color,
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           )

@@ -74,7 +74,7 @@ class _WishlistState extends State<Wishlist> {
           backgroundColor: MyTheme.mainColor,
           appBar: buildAppBar(context),
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(

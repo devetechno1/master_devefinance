@@ -393,8 +393,8 @@ class _LoginState extends State<Login> {
                   _login_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.login_screen_phone,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               if (_login_by == "email")
@@ -422,8 +422,8 @@ class _LoginState extends State<Login> {
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .or_login_with_a_phone,
-                                style: const TextStyle(
-                                  color: MyTheme.accent_color,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),
@@ -484,8 +484,8 @@ class _LoginState extends State<Login> {
                         },
                         child: Text(
                           AppLocalizations.of(context)!.or_login_with_an_email,
-                          style: const TextStyle(
-                            color: MyTheme.accent_color,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontStyle: FontStyle.italic,
                           ),
                         ),
@@ -497,8 +497,8 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               Padding(
@@ -528,8 +528,8 @@ class _LoginState extends State<Login> {
                       child: Text(
                         AppLocalizations.of(context)!
                             .login_screen_forgot_password,
-                        style: const TextStyle(
-                          color: MyTheme.accent_color,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontStyle: FontStyle.italic,
                         ),
                       ),
@@ -549,7 +549,7 @@ class _LoginState extends State<Login> {
                   child: Btn.minWidthFixHeight(
                     minWidth: MediaQuery.of(context).size.width,
                     height: 50,
-                    color: MyTheme.accent_color,
+                    color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(6.0))),
@@ -586,8 +586,8 @@ class _LoginState extends State<Login> {
                           BorderRadius.all(Radius.circular(6.0))),
                   child: Text(
                     AppLocalizations.of(context)!.login_screen_sign_up,
-                    style: const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
                   ),

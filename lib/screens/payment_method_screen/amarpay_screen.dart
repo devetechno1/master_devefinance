@@ -16,12 +16,12 @@ import '../profile.dart';
 import '../wallet.dart';
 
 class AmarpayScreen extends StatefulWidget {
-  double? amount;
-  String payment_type;
-  String? payment_method_key;
-  var package_id;
-  int? orderId;
-  AmarpayScreen({
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
+  final package_id;
+  final int? orderId;
+  const AmarpayScreen({
     Key? key,
     this.amount = 0.00,
     this.orderId = 0,
@@ -190,7 +190,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_amarpay,
-        style:const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

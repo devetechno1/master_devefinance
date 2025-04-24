@@ -80,7 +80,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                 return Stack(
                   children: [
                     RefreshIndicator(
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       backgroundColor: Colors.white,
                       onRefresh: homeData.onRefresh,
                       displacement: 0,

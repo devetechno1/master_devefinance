@@ -286,7 +286,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
       child: Scaffold(
           extendBody: true,
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(
@@ -693,7 +693,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
         const Spacer(),
         Material(
           elevation: 8,
-          color: MyTheme.accent_color,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(50),
           child: IconButton(
               onPressed: () {
@@ -713,8 +713,8 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
       children: [
         Text(
           _productDetails!.unitPrice!,
-          style: const TextStyle(
-              color: MyTheme.accent_color,
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 16.0,
               fontWeight: FontWeight.w600),
         ),
@@ -779,8 +779,8 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
             padding: const EdgeInsets.only(left: 5.0),
             child: Text(
               _productDetails!.unitPrice!,
-              style: const TextStyle(
-                  color: MyTheme.accent_color,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600),
             ),
@@ -1136,7 +1136,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                                 color: _currentImage == itemIndex
-                                    ? MyTheme.accent_color
+                                    ? Theme.of(context).primaryColor
                                     : const Color.fromRGBO(112, 112, 112, .3),
                                 width: _currentImage == itemIndex ? 2 : 1),
                             //shape: BoxShape.rectangle,

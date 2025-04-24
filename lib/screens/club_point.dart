@@ -109,7 +109,7 @@ class _ClubpointState extends State<Clubpoint> {
             onPopped(value);
           });
         },
-        textColor: MyTheme.accent_color,
+        textColor: Theme.of(context).primaryColor,
         disabledTextColor: Colors.grey,
       ),
     );
@@ -123,7 +123,7 @@ class _ClubpointState extends State<Clubpoint> {
         body: Stack(
           children: [
             RefreshIndicator(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               backgroundColor: Colors.white,
               onRefresh: _onRefresh,
               displacement: 0,
@@ -288,8 +288,8 @@ class _ClubpointState extends State<Clubpoint> {
                 children: [
                   Text(
                     item.convertible_club_point?.toString() ?? "0",
-                    style: const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.bold),
                   ),
@@ -316,7 +316,7 @@ class _ClubpointState extends State<Clubpoint> {
                               height: 24,
                               width: 80,
                               child: Btn.basic(
-                                color: MyTheme.accent_color,
+                                color: Theme.of(context).primaryColor,
                                 child: Text(
                                   AppLocalizations.of(context)
                                           ?.convert_now_ucf ??

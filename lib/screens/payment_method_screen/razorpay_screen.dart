@@ -224,7 +224,7 @@ class _RazorpayScreenState extends State<RazorpayScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_razorpay,
-        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

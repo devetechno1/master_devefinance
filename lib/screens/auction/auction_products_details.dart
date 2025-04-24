@@ -465,7 +465,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 30,
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               side: BorderSide(
@@ -579,7 +579,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             onPopped(value);
           });
         },
-        textColor: MyTheme.accent_color,
+        textColor: Theme.of(context).primaryColor,
         disabledTextColor: Colors.grey,
       ),
     );
@@ -608,7 +608,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
-                        color: MyTheme.accent_color,
+                        color: Theme.of(context).primaryColor,
                         boxShadow:const [
                            BoxShadow(
                             color: MyTheme.accent_color_shadow,
@@ -636,7 +636,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   ))
               : ShimmerHelper().buildBasicShimmer(height: 30.0, width: 60),
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(
@@ -1118,7 +1118,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     // set up the buttons
     TextButton(
       style: TextButton.styleFrom(
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       child: Text(
         AppLocalizations.of(context)!.submit_ucf,
@@ -1234,7 +1234,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       children: [
                         TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: MyTheme.accent_color,
+                            backgroundColor: Theme.of(context).primaryColor,
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.submit_ucf,
@@ -1292,8 +1292,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             padding: const EdgeInsets.only(left: 5.0),
             child: Text(
               _auctionproductDetails.currencySymbol.toString(),
-              style: const TextStyle(
-                  color: MyTheme.accent_color,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600),
             ),
@@ -1746,7 +1746,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                                 color: _currentImage == itemIndex
-                                    ? MyTheme.accent_color
+                                    ? Theme.of(context).primaryColor
                                     : const Color.fromRGBO(112, 112, 112, .3),
                                 width: _currentImage == itemIndex ? 2 : 1),
                             //shape: BoxShape.rectangle,

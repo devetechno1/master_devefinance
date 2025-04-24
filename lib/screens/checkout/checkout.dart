@@ -638,7 +638,7 @@ class _CheckoutState extends State<Checkout> {
         body: Stack(
           children: [
             RefreshIndicator(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               backgroundColor: Colors.white,
               onRefresh: _onRefresh,
               displacement: 0,
@@ -754,7 +754,7 @@ class _CheckoutState extends State<Checkout> {
                 height: 42,
                 child: Btn.basic(
                   minWidth: MediaQuery.of(context).size.width,
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   shape: app_language_rtl.$!
                       ? const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
@@ -783,7 +783,7 @@ class _CheckoutState extends State<Checkout> {
                 height: 42,
                 child: Btn.basic(
                   minWidth: MediaQuery.of(context).size.width,
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                     topRight: Radius.circular(8.0),
@@ -822,7 +822,7 @@ class _CheckoutState extends State<Checkout> {
       ),
       title: Text(
         widget.title!,
-        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -882,7 +882,7 @@ class _CheckoutState extends State<Checkout> {
                     border: Border.all(
                         color: _selected_payment_method_key ==
                                 _paymentTypeList[index].payment_type_key
-                            ? MyTheme.accent_color
+                            ? Theme.of(context).primaryColor
                             : MyTheme.light_grey,
                         width: _selected_payment_method_key ==
                                 _paymentTypeList[index].payment_type_key
@@ -967,7 +967,7 @@ class _CheckoutState extends State<Checkout> {
         child: Btn.minWidthFixHeight(
           minWidth: MediaQuery.of(context).size.width,
           height: 50,
-          color: MyTheme.accent_color,
+          color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -1033,8 +1033,8 @@ class _CheckoutState extends State<Checkout> {
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 16.0),
               child: Text(balance(),
-                  style: const TextStyle(
-                      color: MyTheme.accent_color,
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w600)),
             ),
@@ -1269,8 +1269,8 @@ class CheckoutDetails extends StatelessWidget {
                             SystemConfig.systemCurrency!.code!,
                             SystemConfig.systemCurrency!.symbol!)
                         : _totalString!,
-                    style: const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),

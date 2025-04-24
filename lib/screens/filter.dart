@@ -753,7 +753,7 @@ final  List<dynamic> _productList = [];
                             suggestion.query,
                             style: TextStyle(
                                 color: suggestion.type != "search"
-                                    ? MyTheme.accent_color
+                                    ? Theme.of(context).primaryColor
                                     : MyTheme.font_grey),
                           ),
                           subtitle: Text(subtitle,
@@ -1113,7 +1113,7 @@ final  List<dynamic> _productList = [];
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
         onRefresh: _onProductListRefresh,
         child: SingleChildScrollView(
           controller: _productScrollController,
@@ -1185,7 +1185,7 @@ final  List<dynamic> _productList = [];
     } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
         onRefresh: _onBrandListRefresh,
         child: SingleChildScrollView(
           controller: _brandScrollController,
@@ -1255,7 +1255,7 @@ final  List<dynamic> _productList = [];
     } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
         onRefresh: _onShopListRefresh,
         child: SingleChildScrollView(
           controller: _shopScrollController,

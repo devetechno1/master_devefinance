@@ -405,7 +405,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                             border: Border.all(
                                 color: _hasFocus
                                     ? MyTheme.textfield_grey
-                                    : MyTheme.accent_color,
+                                    : Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
                                 width: _hasFocus ? 0.5 : 0.2),
                             boxShadow: [
@@ -748,7 +748,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           child: MyWidget().myContainer(
             width: DeviceInfo(context).width!,
             height: 36,
-            borderColor: MyTheme.accent_color,
+            borderColor: Theme.of(context).primaryColor,
             borderWith: 0.2,
             borderRadius: 6.0,
             child: Row(
@@ -901,7 +901,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
-                                color: MyTheme.accent_color,
+                                color: Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
                                 width: 0.1),
                             boxShadow: [
@@ -943,7 +943,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                         child: TextButton(
                             style: ButtonStyle(
                               backgroundColor:
-                                  WidgetStateProperty.all(MyTheme.accent_color),
+                                  WidgetStateProperty.all(Theme.of(context).primaryColor),
                               shape: WidgetStateProperty.all<
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
@@ -990,10 +990,10 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 fillColor: MyTheme.white,
                 hintStyle:
                 const    TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
-                enabledBorder:const OutlineInputBorder(
+                enabledBorder:OutlineInputBorder(
                   borderSide:
-                      BorderSide(color: MyTheme.accent_color, width: 0.2),
-                  borderRadius:  BorderRadius.all(
+                      BorderSide(color: Theme.of(context).primaryColor, width: 0.2),
+                  borderRadius: const BorderRadius.all(
                      Radius.circular(6.0),
                   ),
                 ),
@@ -1093,7 +1093,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
               width: 0.2),
           boxShadow:const [],
@@ -1145,7 +1145,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
               width: 0.2),
           boxShadow: [
@@ -1200,7 +1200,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           borderRadius: BorderRadius.circular(6),
           // color: MyTheme.light_grey,
           border: Border.all(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
               width: 0.2),
           boxShadow: [
@@ -1394,7 +1394,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   width: DeviceInfo(context).width!,
                   height: 36,
                   borderRadius: 6.0,
-                  borderColor: MyTheme.accent_color,
+                  borderColor: Theme.of(context).primaryColor,
                   borderWith: 0.2,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

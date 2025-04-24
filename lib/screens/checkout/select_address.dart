@@ -46,7 +46,7 @@ class _SelectAddressState extends State<SelectAddress> {
             bottomNavigationBar:
                 buildBottomAppBar(context, selectAddressProvider),
             body: RefreshIndicator(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               backgroundColor: Colors.white,
               onRefresh: () => selectAddressProvider.onRefresh(context),
               displacement: 0,
@@ -97,10 +97,10 @@ class _SelectAddressState extends State<SelectAddress> {
               LangText(context)
                   .local
                   .to_add_or_edit_addresses_go_to_address_page,
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 14,
                   decoration: TextDecoration.underline,
-                  color: MyTheme.accent_color),
+                  color: Theme.of(context).primaryColor),
             ),
           ),
         ),
@@ -124,7 +124,7 @@ class _SelectAddressState extends State<SelectAddress> {
       ),
       title: Text(
         "${LangText(context).local.shipping_cost_ucf}",
-        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -195,7 +195,7 @@ class _SelectAddressState extends State<SelectAddress> {
         shape: RoundedRectangleBorder(
           side: selectAddressProvider.selectedShippingAddress ==
                   selectAddressProvider.shippingAddressList[index].id
-              ? const BorderSide(color: MyTheme.accent_color, width: 2.0)
+              ? BorderSide(color: Theme.of(context).primaryColor, width: 2.0)
               : BorderSide(color: MyTheme.light_grey, width: 1.0),
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -490,7 +490,7 @@ class _SelectAddressState extends State<SelectAddress> {
         child: Btn.minWidthFixHeight(
           minWidth: MediaQuery.of(context).size.width,
           height: 50,
-          color: MyTheme.accent_color,
+          color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
           ),

@@ -81,7 +81,7 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                 return Stack(
                   children: [
                     RefreshIndicator(
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       backgroundColor: Colors.white,
                       onRefresh: homeData.onRefresh,
                       displacement: 0,

@@ -712,7 +712,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 30,
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               side: BorderSide(
@@ -824,7 +824,7 @@ class _ProductDetailsState extends State<ProductDetails>
             onPopped(value);
           });
         },
-        textColor: MyTheme.accent_color,
+        textColor: Theme.of(context).primaryColor,
         disabledTextColor: Colors.grey,
       ),
     );
@@ -837,7 +837,7 @@ class _ProductDetailsState extends State<ProductDetails>
           backgroundColor: MyTheme.mainColor,
           bottomNavigationBar: buildBottomAppBar(_addedToCartSnackbar),
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(
@@ -926,7 +926,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     ),
                                     badgeStyle: badges.BadgeStyle(
                                       shape: badges.BadgeShape.circle,
-                                      badgeColor: MyTheme.accent_color,
+                                      badgeColor: Theme.of(context).primaryColor,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     badgeAnimation: const badges.BadgeAnimation.slide(
@@ -1541,8 +1541,8 @@ class _ProductDetailsState extends State<ProductDetails>
                       SystemConfig.systemCurrency!.symbol!)
                   : SystemConfig.systemCurrency!.symbol! +
                       _totalPrice.toString(),
-              style: const TextStyle(
-                  color: MyTheme.accent_color,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600),
             ),
@@ -1768,7 +1768,7 @@ class _ProductDetailsState extends State<ProductDetails>
           decoration: BoxDecoration(
             border: Border.all(
                 color: _selectedChoices[choiceOptionsIndex] == option
-                    ? MyTheme.accent_color
+                    ? Theme.of(context).primaryColor
                     : MyTheme.noColor,
                 width: 1.5),
             borderRadius: BorderRadius.circular(3.0),
@@ -1790,7 +1790,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 option,
                 style: TextStyle(
                     color: _selectedChoices[choiceOptionsIndex] == option
-                        ? MyTheme.accent_color
+                        ? Theme.of(context).primaryColor
                         : const Color.fromRGBO(224, 224, 225, 1),
                     fontSize: 12.0,
                     fontWeight: FontWeight.w600),
@@ -2001,8 +2001,8 @@ class _ProductDetailsState extends State<ProductDetails>
                   SystemConfig.systemCurrency!.symbol)
               : _singlePriceString,
           // _singlePriceString,
-          style: const TextStyle(
-              color: MyTheme.accent_color,
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontFamily: 'Public Sans',
               fontSize: 16.0,
               fontWeight: FontWeight.bold),
@@ -2040,8 +2040,8 @@ class _ProductDetailsState extends State<ProductDetails>
         Text(
           "/${_productDetails!.unit}",
           // _singlePriceString,
-          style: const TextStyle(
-              color: MyTheme.accent_color,
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 16.0,
               fontWeight: FontWeight.w600),
         ),
@@ -2099,7 +2099,7 @@ class _ProductDetailsState extends State<ProductDetails>
       items: [
         bottomTap(context,
             text: AppLocalizations.of(context)!.add_to_cart_ucf,
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             shadowColor: MyTheme.accent_color_shadow,
             onTap: () => onPressAddToCart(context, _addedToCartSnackbar)),
         bottomTap(context,
@@ -2543,7 +2543,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                                 color: _currentImage == itemIndex
-                                    ? MyTheme.accent_color
+                                    ? Theme.of(context).primaryColor
                                     : const Color.fromRGBO(112, 112, 112, .3),
                                 width: _currentImage == itemIndex ? 2 : 1),
                             //shape: BoxShape.rectangle,

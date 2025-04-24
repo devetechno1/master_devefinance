@@ -220,7 +220,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
 
   RefreshIndicator buildBody(BuildContext context) {
     return RefreshIndicator(
-      color: MyTheme.accent_color,
+      color: Theme.of(context).primaryColor,
       backgroundColor: Colors.white,
       onRefresh: _onRefresh,
       displacement: 0,
@@ -257,7 +257,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       ),
       title: Text(
         "${AppLocalizations.of(context)!.shipping_cost_ucf} $_shipping_cost_string",
-        style: const TextStyle(fontSize: 16, color: MyTheme.accent_color),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -337,7 +337,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                     _deliveryInfoList[sellerArrayIndex]
                         .pickupPoints![pickupPointIndex]
                         .id
-                ? Border.all(color: MyTheme.accent_color, width: 1.0)
+                ? Border.all(color: Theme.of(context).primaryColor, width: 1.0)
                 : Border.all(color: MyTheme.light_grey, width: 1.0)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -498,7 +498,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         .carriers!
                         .data![carrierIndex]
                         .id
-                ? Border.all(color: MyTheme.accent_color, width: 1.0)
+                ? Border.all(color: Theme.of(context).primaryColor, width: 1.0)
                 : Border.all(color: MyTheme.light_grey, width: 1.0)),
         child: buildCarrierInfoItemChildren(carrierIndex, sellerArrayIndex),
       ),
@@ -620,7 +620,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         child: Btn.minWidthFixHeight(
           minWidth: MediaQuery.of(context).size.width,
           height: 50,
-          color: MyTheme.accent_color,
+          color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
           ),
@@ -691,11 +691,11 @@ class _ShippingInfoState extends State<ShippingInfo> {
     return Btn.basic(
       color: _sellerWiseShippingOption[sellerIndex].shippingOption ==
               ShippingOption.PickUpPoint
-          ? MyTheme.accent_color
-          : MyTheme.accent_color.withValues(alpha: 0.1),
+          ? Theme.of(context).primaryColor
+          : Theme.of(context).primaryColor.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          side: const BorderSide(color: MyTheme.accent_color)),
+          side: BorderSide(color: Theme.of(context).primaryColor)),
       padding: const EdgeInsets.only(right: 14),
       onPressed: () {
         setState(() {
@@ -712,7 +712,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 fillColor: WidgetStateProperty.resolveWith((states) {
                   if (!states.contains(WidgetState.selected)) {
-                    return MyTheme.accent_color;
+                    return Theme.of(context).primaryColor;
                   }
                   return MyTheme.white;
                 }),
@@ -731,7 +731,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       _sellerWiseShippingOption[sellerIndex].shippingOption ==
                               ShippingOption.PickUpPoint
                           ? MyTheme.white
-                          : MyTheme.accent_color,
+                          : Theme.of(context).primaryColor,
                   fontWeight:
                       _sellerWiseShippingOption[sellerIndex].shippingOption ==
                               ShippingOption.PickUpPoint
@@ -748,11 +748,11 @@ class _ShippingInfoState extends State<ShippingInfo> {
     return Btn.basic(
       color: _sellerWiseShippingOption[sellerIndex].shippingOption ==
               ShippingOption.HomeDelivery
-          ? MyTheme.accent_color
-          : MyTheme.accent_color.withValues(alpha: 0.1),
+          ? Theme.of(context).primaryColor
+          : Theme.of(context).primaryColor.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          side: const BorderSide(color: MyTheme.accent_color)),
+          side: BorderSide(color: Theme.of(context).primaryColor)),
       padding: const EdgeInsetsDirectional.only(end: 14),
       onPressed: () {
         changeShippingOption(ShippingOption.HomeDelivery, sellerIndex);
@@ -767,7 +767,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               fillColor: WidgetStateProperty.resolveWith((states) {
                 if (!states.contains(WidgetState.selected)) {
-                  return MyTheme.accent_color;
+                  return Theme.of(context).primaryColor;
                 }
                 return MyTheme.white;
               }),
@@ -785,7 +785,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       _sellerWiseShippingOption[sellerIndex].shippingOption ==
                               ShippingOption.HomeDelivery
                           ? MyTheme.white
-                          : MyTheme.accent_color,
+                          : Theme.of(context).primaryColor,
                   fontWeight:
                       _sellerWiseShippingOption[sellerIndex].shippingOption ==
                               ShippingOption.HomeDelivery
@@ -802,11 +802,11 @@ class _ShippingInfoState extends State<ShippingInfo> {
     return Btn.basic(
       color: _sellerWiseShippingOption[sellerIndex].shippingOption ==
               ShippingOption.Carrier
-          ? MyTheme.accent_color
-          : MyTheme.accent_color.withValues(alpha: 0.1),
+          ? Theme.of(context).primaryColor
+          : Theme.of(context).primaryColor.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          side: const BorderSide(color: MyTheme.accent_color)),
+          side: BorderSide(color: Theme.of(context).primaryColor)),
       padding: const EdgeInsets.only(right: 14),
       onPressed: () {
         changeShippingOption(ShippingOption.Carrier, sellerIndex);
@@ -821,7 +821,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 fillColor: WidgetStateProperty.resolveWith((states) {
                   if (!states.contains(WidgetState.selected)) {
-                    return MyTheme.accent_color;
+                    return Theme.of(context).primaryColor;
                   }
                   return MyTheme.white;
                 }),
@@ -839,7 +839,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       _sellerWiseShippingOption[sellerIndex].shippingOption ==
                               ShippingOption.Carrier
                           ? MyTheme.white
-                          : MyTheme.accent_color,
+                          : Theme.of(context).primaryColor,
                   fontWeight:
                       _sellerWiseShippingOption[sellerIndex].shippingOption ==
                               ShippingOption.Carrier
@@ -912,8 +912,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
           padding: const EdgeInsets.only(bottom: 12.0),
           child: Text(
             _deliveryInfoList[index].name!,
-            style: const TextStyle(
-                color: MyTheme.accent_color,
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 16),
           ),
@@ -1025,8 +1025,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      style: const TextStyle(
-                          color: MyTheme.accent_color,
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w700),
                     );

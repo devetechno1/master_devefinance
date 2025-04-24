@@ -170,7 +170,7 @@ class _OtpState extends State<Otp> {
                                     Radius.circular(12.0))),
                             child: Btn.basic(
                               minWidth: MediaQuery.of(context).size.width,
-                              color: MyTheme.accent_color,
+                              color: Theme.of(context).primaryColor,
                               shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(12.0))),
@@ -205,7 +205,7 @@ class _OtpState extends State<Otp> {
                       child: Text(AppLocalizations.of(context)!.resend_code_ucf,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: canResend? MyTheme.accent_color : Theme.of(context).disabledColor,
+                              color: canResend? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
                               decoration: TextDecoration.underline,
                               fontSize: 13)),
                     ),
@@ -236,8 +236,8 @@ class _OtpState extends State<Otp> {
                         },
                         child: Text(AppLocalizations.of(context)!.logout_ucf,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: MyTheme.accent_color,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
                                 decoration: TextDecoration.underline,
                                 fontSize: 13)),
                       ),

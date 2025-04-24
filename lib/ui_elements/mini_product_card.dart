@@ -285,8 +285,8 @@ class _MiniProductCardState extends State<MiniProductCard> {
                             SystemConfig.systemCurrency!.symbol!)
                         : widget.main_price!,
                     maxLines: 1,
-                    style: widget.priceTextStyle ?? const TextStyle(
-                        color: Color(0xff000000),
+                    style: widget.priceTextStyle ?? TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.bold),
                   ),

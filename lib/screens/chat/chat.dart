@@ -408,7 +408,7 @@ class _ChatState extends State<Chat> {
               height: 40,
               margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
               decoration: BoxDecoration(
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(35),
                 border: Border.all(
                     color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
@@ -557,7 +557,7 @@ class _ChatState extends State<Chat> {
               : const Radius.circular(16),
         ),
         color: (_list[index].sendType == "customer"
-            ? MyTheme.accent_color
+            ? Theme.of(context).primaryColor
             : Colors.white),
         boxShadow: [
           BoxShadow(
@@ -657,7 +657,7 @@ class _ChatState extends State<Chat> {
                     color: Colors.white,
                     size: 18,
                   ),
-                  backgroundColor: MyTheme.accent_color,
+                  backgroundColor: Theme.of(context).primaryColor,
                   elevation: 0,
                   shape: const CircleBorder(),
                 ),
@@ -710,14 +710,14 @@ class _ChatState extends State<Chat> {
         decoration: BoxDecoration(
           border: Border.all(
               width: 1,
-              color: index.isOdd ? MyTheme.accent_color : MyTheme.grey_153),
+              color: index.isOdd ? Theme.of(context).primaryColor : MyTheme.grey_153),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(16),
             topRight: const Radius.circular(16),
             bottomLeft: index.isOdd ? const Radius.circular(16) : const Radius.circular(0),
             bottomRight: index.isOdd ? const Radius.circular(0) : const Radius.circular(16),
           ),
-          color: (index.isOdd ? MyTheme.accent_color : MyTheme.accent_color),
+          color: (index.isOdd ? Theme.of(context).primaryColor : Theme.of(context).primaryColor),
         ),
         child: Stack(
           children: [

@@ -297,7 +297,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           )));
     } else {
       return RefreshIndicator(
-        color: MyTheme.accent_color,
+        color: Theme.of(context).primaryColor,
         backgroundColor: Colors.white,
         onRefresh: _onPageRefresh,
         displacement: 10,
@@ -435,10 +435,10 @@ class _ProfileEditState extends State<ProfileEdit> {
           child: Center(
             child: Text(
               LangText(context).local.password_changes_ucf,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'Public Sans',
                 fontSize: 16,
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
               ),
               textHeightBehavior:
@@ -479,8 +479,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                     enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: MyTheme.accent_color),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Theme.of(context).primaryColor),
                     ),
                     suffixIcon: InkWell(
                       onTap: () {
@@ -491,7 +491,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                         _showPassword
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
-                        color: MyTheme.accent_color,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
@@ -502,8 +502,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                 child: Text(
                   AppLocalizations.of(context)!
                       .password_must_contain_at_least_6_characters,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontStyle: FontStyle.italic),
                 ),
               )
             ],
@@ -536,8 +536,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                       enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: MyTheme.accent_color),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Theme.of(context).primaryColor),
                       ),
                       suffixIcon: InkWell(
                         onTap: () {
@@ -548,7 +548,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           _showConfirmPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                         ),
                       )),
             ),
@@ -565,7 +565,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               width: 129,
               height: 42,
               decoration: BoxDecoration(
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(8)),
               child: Text(
                 textAlign: TextAlign.center,
@@ -624,8 +624,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: MyTheme.accent_color),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
                 ),
               ),
             ),
@@ -744,7 +744,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               width: 129,
               height: 42,
               decoration: BoxDecoration(
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(8)),
               child: Text(
                 textAlign: TextAlign.center,

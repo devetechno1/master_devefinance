@@ -1230,7 +1230,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           appBar: buildAppBar(context),
           //bottomNavigationBar: buildBottomAppBar(context),
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(
@@ -1576,7 +1576,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Btn.basic(
         padding: EdgeInsets.zero,
-        color: tabOptionIndex == index ? MyTheme.accent_color : MyTheme.white,
+        color: tabOptionIndex == index ? Theme.of(context).primaryColor : MyTheme.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
         ),
@@ -2179,7 +2179,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         margin: const EdgeInsets.only(
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: const [
                             BoxShadow(
