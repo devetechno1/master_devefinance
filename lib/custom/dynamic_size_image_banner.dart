@@ -7,11 +7,13 @@ import 'aiz_image.dart';
 class DynamicSizeImageBanner extends StatefulWidget {
   final String? urlToOpen;
   final String? photo;
+  final double radius;
 
   const DynamicSizeImageBanner({
     Key? key,
     required this.urlToOpen,
-    required this.photo,
+    required this.photo, 
+    this.radius = 0,
   }) : super(key: key);
 
   @override
@@ -45,7 +47,7 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
           ? const LoadingImageBannerWidget()
           : AspectRatio(
               aspectRatio: _aspectRatio!,
-              child: AIZImage.radiusImage(widget.photo, 0),
+              child: AIZImage.radiusImage(widget.photo, widget.radius),
             ),
     );
   }

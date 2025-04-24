@@ -172,18 +172,9 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                                       children: [
                                         buildTimerRow(homeData.flashDealRemainingTime),
                                       //FlashBanner SpecialOffer
-                                        SizedBox(
-                                          height: 300,
-                                          child: LayoutBuilder(
-                                            builder: (context,constrainedBox) {
-                                              return FlashBannerWidget(
-                                                size: constrainedBox.maxWidth,
-                                                
-                                                bannerLink: homeData.flashDeal?.banner, 
-                                                slug: homeData.flashDeal!.slug,
-                                              );
-                                            }
-                                          ),
+                                        FlashBannerWidget(
+                                          bannerLink: homeData.flashDeal?.banner, 
+                                          slug: homeData.flashDeal!.slug,
                                         ),
 
                                           
