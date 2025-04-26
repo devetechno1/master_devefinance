@@ -1,24 +1,18 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/context_ex.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_data_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
@@ -105,60 +99,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                               const SizedBox(height: 10),
 
                               // Flash Sale Section
-                              if(homeData.flashDeal != null)
-                              ...[
-
-                              GestureDetector(
-                                onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return FlashDealList();
-                                }));},
-                                child: ColoredBox(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                      ),
-                                       Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Center(
-                                child: Container(
-                                  width: context.isPhoneWidth ? double.maxFinite : 300,
-                                  margin: context.isPhoneWidth ? null : const EdgeInsets.symmetric(horizontal: 25),
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withValues(alpha: 0.5),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: const Offset(0, 3), // changes position of shadow
-                                      ),
-                                    ],
-                                    color:  AppConfig.businessSettingsData.flashDealBgColor ?? const Color(0xFFF9F8F8),
-                                    borderRadius: context.isPhoneWidth ? null : BorderRadius.circular(8.0),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 10),
-                                      buildTimerRow(homeData.flashDealRemainingTime),
-                                      const SizedBox(height: 15),
-                                      FlashBannerWidget(
-                                        bannerLink: homeData.flashDeal?.banner, 
-                                        slug: homeData.flashDeal!.slug,
-                                      ),
-                                      const SizedBox(height: 10),
-                                    ],
-                                  )),
-                              ),
-                              const SizedBox(height: 30),
-
-                              ],
+                               const FlashSale(iscircle: false),
                             ]),
                           ),                      
                             //move banner 
@@ -211,30 +152,9 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
       ),
     );
   }
+}
 
-Widget buildTimerRow(CurrentRemainingTime time) {
-  return Container(
-    height: 35,
-    margin: const EdgeInsets.symmetric(horizontal: 10.0),
-    decoration: BoxDecoration(
-      color: Theme.of(context).primaryColor,
-      borderRadius: BorderRadius.circular(5)
-    ),
-    child: SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        children: [
-          RowTimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true),
-          RowTimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours),
-          RowTimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes),
-          RowTimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds),
-        ],
-      ),
-    ),
-  );
-}
-}
+
 
 
 

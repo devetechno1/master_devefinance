@@ -1,11 +1,9 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -16,7 +14,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
@@ -24,6 +21,7 @@ import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
+import '../widgets/flash_sale.dart';
 
 class ClassicScreen extends StatefulWidget {
   const ClassicScreen({
@@ -100,59 +98,7 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                               HomeCarouselSlider(homeData: homeData, context: context),
                               const SizedBox(height: 16),
 
-                              // Flash Sale Section
-                              if(homeData.flashDeal != null)
-                              ...[
-
-                              GestureDetector(
-                                onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return FlashDealList();
-                                }));},
-                                child: ColoredBox(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(25, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                      ),
-                                       Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withValues(alpha: 0.5),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: const Offset(0, 3), // changes position of shadow
-                                  )],
-                                    color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(8.0),
-
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Column(
-                                      children: [
-                                        buildTimerRow(homeData.flashDealRemainingTime),
-                                        FlashBannerWidget(
-                                          bannerLink: homeData.flashDeal?.banner, 
-                                          slug: homeData.flashDeal!.slug,
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                              ),
-
-                              ],
+                        const FlashSale(iscircle: true),                          
                             ]),
                           ),                      
                             //move banner 
@@ -167,12 +113,12 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                               ]
                             ),
                           ),
-//Featured category-----------------------
+                              //Featured category-----------------------
                             const CategoryList(),
                        
                             
                           
-//BannerList---------------------                            
+                            //BannerList---------------------                            
 
                           SliverToBoxAdapter(
                             child: HomeBannersList(
@@ -180,9 +126,9 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                               isBannersInitial: homeData.isBannerOneInitial,
                             ),
                           ),
-//featuredProducts-----------------------------   
+                            //featuredProducts-----------------------------   
                           const FeaturedProductsListSliver(),
-//BannerList---------------------                            
+                          //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
                                 bannersImagesList: homeData.bannerTwoImageList,
@@ -190,12 +136,12 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                               ),
                             ),
 
-//Best Selling-------------------
+                          //Best Selling-------------------
                            // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                             const BestSellingSectionSliver(),
-//newProducts-----------------------------                            
+                          //newProducts-----------------------------                            
                             const NewProductsListSliver(),
-//BannerList---------------------                            
+                          //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
                                 bannersImagesList: homeData.bannerThreeImageList,
@@ -204,12 +150,12 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                             ),
 
 
-//auction products----------------------------
+                          //auction products----------------------------
                       AuctionProductsSectionSliver(homeData: homeData,),
-//Brand List ---------------------------
+                          //Brand List ---------------------------
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
                           BrandListSectionSliver(homeData: homeData,),
-//all products --------------------------
+                          //all products --------------------------
                           AllProducts(homeData: homeData,),
                           ///
                         ],
