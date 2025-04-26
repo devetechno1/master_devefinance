@@ -1,6 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/custom/brands_horizontal_list_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
-import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {

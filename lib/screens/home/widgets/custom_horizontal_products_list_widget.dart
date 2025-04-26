@@ -1,5 +1,4 @@
 import 'package:active_ecommerce_cms_demo_app/custom/product_horizontal_list_widget.dart';
-import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 

@@ -100,8 +100,6 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                             delegate: SliverChildListDelegate([
                               AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
                               const SizedBox(height: 10),
-                              //featured
-
                               // Header Banner
                              HomeCarouselSlider(homeData: homeData, context: context),
                               const SizedBox(height: 10),
@@ -167,16 +165,15 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                           SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                // Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),
-                                TodaysDealProductsWidget(homePresenter: homeData,),
+                          TodaysDealProductsWidget(homePresenter: homeData,),
                               ]
                             ),
                           ),
 
 
-//featuredProducts-----------------------------   
+                        //featuredProducts-----------------------------   
                           const FeaturedProductsListSliver(),
-//BannerList---------------------                            
+                        //BannerList---------------------                            
                             SliverToBoxAdapter(
                               child: HomeBannersList(
                                 bannersImagesList: homeData.bannerTwoImageList,
@@ -184,18 +181,18 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                               ),
                             ),
 
-//Best Selling-------------------
+                       //Best Selling-------------------
                            // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                             const BestSellingSectionSliver(),
-//newProducts-----------------------------                            
+                      //newProducts-----------------------------                            
                             const NewProductsListSliver(),
 
-//Brand List ---------------------------
+                      //Brand List ---------------------------
                           if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
                         BrandListSectionSliver(homeData: homeData,showViewAllButton: false),
-//auctionProducts------------ 
+                      //auctionProducts------------ 
                                 AuctionProductsSectionSliver(homeData: homeData,),                   
-//all products --------------------------
+                      //all products --------------------------
                           AllProducts(homeData: homeData,),
                           ///
                         ],
