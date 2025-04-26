@@ -101,7 +101,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                           const  FlashSale(iscircle: true)
+                              const  FlashSale(iscircle: true)
                             ]),
                           ),                      
                             //move banner 

@@ -12,6 +12,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_data_widget.dart';
@@ -129,63 +130,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
                            const   SizedBox(height: 16),
 
                               // Flash Sale Section
-                              if(homeData.flashDeal != null)
-                              ...[
-                                
-
-                              GestureDetector(
-                                onTap: (){
-                                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return FlashDealList();
-                                }));},
-                                child: ColoredBox(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(25, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                      ),
-                                       Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withValues(alpha: 0.5),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset:const Offset(0, 3), // changes position of shadow
-                                  )],
-                                    color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(8.0),
-
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Column(
-                                      children: [
-                                        buildTimerRow(homeData.flashDealRemainingTime),
-                                      //FlashBanner SpecialOffer
-                                        FlashBannerWidget(
-                                          bannerLink: homeData.flashDeal?.banner, 
-                                          slug: homeData.flashDeal!.slug,
-                                        ),
-
-                                          
-                                      ],
-                                    ),
-                                  )),
-                              ),
-
-                              ],
+                           const FlashSale(iscircle: false)
                             ]),
                           ), 
                              //featuredProducts-----------------------------   
@@ -246,48 +191,48 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
 
   
 
-Widget buildTimerRow(CurrentRemainingTime time) {
-  return Container(
-    height: 35,
-    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(5)
-    ),
-    child: SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Container(
-        color: Colors.white,
-        child: Row(
-          children: [
-            Container(
-              width: 50,
-              color: Theme.of(context).primaryColor,
-              child: RowTimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true)),
-            const  SizedBox(width: 20,),
-            Container(
-              width: 50,
-              color: Theme.of(context).primaryColor,
-              child: RowTimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours, isFirst: true)),
-           const   SizedBox(width: 20,),
-            Container(
-              width: 60,
-              color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes, isFirst: true)),
-         const   SizedBox(width: 20,),
-            Container(
-              width: 60,
-              color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds, isFirst: true)),
+// Widget buildTimerRow(CurrentRemainingTime time) {
+//   return Container(
+//     height: 35,
+//     margin: const EdgeInsets.symmetric(horizontal: 5.0),
+//     decoration: BoxDecoration(
+//       color: Colors.white,
+//       borderRadius: BorderRadius.circular(5)
+//     ),
+//     child: SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       padding: const EdgeInsets.symmetric(horizontal: 10),
+//       child: Container(
+//         color: Colors.white,
+//         child: Row(
+//           children: [
+//             Container(
+//               width: 50,
+//               color: Theme.of(context).primaryColor,
+//               child: RowTimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true)),
+//             const  SizedBox(width: 20,),
+//             Container(
+//               width: 50,
+//               color: Theme.of(context).primaryColor,
+//               child: RowTimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours, isFirst: true)),
+//            const   SizedBox(width: 20,),
+//             Container(
+//               width: 60,
+//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes, isFirst: true)),
+//          const   SizedBox(width: 20,),
+//             Container(
+//               width: 60,
+//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds, isFirst: true)),
         
-          ],
-        ),
-      ),
-    ),
-  );
-}
-  String timeText(String val, {int default_length = 2}) {
-    return val.padLeft(default_length, '0');
-  }
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
+//   String timeText(String val, {int default_length = 2}) {
+//     return val.padLeft(default_length, '0');
+ // }
 }
 
 

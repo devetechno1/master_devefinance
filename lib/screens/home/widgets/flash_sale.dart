@@ -19,64 +19,69 @@ class FlashSale extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-    if(homeData.flashDeal == null) return const SizedBox();
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FlashDealList();
-          }));},
-          child: ColoredBox(
-            color: Colors.transparent,
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
-                  child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
-                  Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
-              ],
+    
+    return  ListenableBuilder(listenable: homeData,
+       builder: (context, child) {
+        if(homeData.flashDeal == null) return const SizedBox();
+          return Column(
+            
+            children: [
+              
+              GestureDetector(
+      onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return FlashDealList();
+      }));},
+      child: ColoredBox(
+        color: Colors.transparent,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
+              child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             ),
-          ),
+              Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
+          ],
         ),
-        
-        Center(
-          child: ListenableBuilder(listenable: homeData,
-           builder: (context, child) {
-            return Container(
-              width: context.isPhoneWidth ? double.maxFinite : 300,
-              margin: context.isPhoneWidth ? null : const EdgeInsets.symmetric(horizontal: 25),
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withValues(alpha: 0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                color:  AppConfig.businessSettingsData.flashDealBgColor ?? const Color(0xFFF9F8F8),
-                borderRadius: context.isPhoneWidth ? null : BorderRadius.circular(8.0),
+      ),
               ),
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  buildTimerRow(homeData.flashDealRemainingTime),
-                  const SizedBox(height: 15),
-                  FlashBannerWidget(
-                    bannerLink: homeData.flashDeal?.banner, 
-                    slug: homeData.flashDeal!.slug,
-                  ),
-                  const SizedBox(height: 10),
-                ],
-            ));
-          }),
-        ),
-        const SizedBox(height: 30),
-      ],
-    );
-  }
+              
+              
+                 Center(
+                   child: Container(
+                    width: context.isPhoneWidth ? double.maxFinite : 300,
+                    margin: context.isPhoneWidth ? null : const EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withValues(alpha: 0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      color:  AppConfig.businessSettingsData.flashDealBgColor ?? const Color(0xFFF9F8F8),
+                      borderRadius: context.isPhoneWidth ? null : BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        buildTimerRow(homeData.flashDealRemainingTime),
+                        const SizedBox(height: 15),
+                        FlashBannerWidget(
+                          bannerLink: homeData.flashDeal?.banner, 
+                          slug: homeData.flashDeal!.slug,
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                                   )),
+                 ),
+              
+              const SizedBox(height: 30),
+            ],
+          );
+        }
+        );}
    String timeText(String val, {int default_length = 2}) {
     return val.padLeft(default_length, '0');
   }
