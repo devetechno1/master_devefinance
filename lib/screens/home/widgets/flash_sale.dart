@@ -85,46 +85,93 @@ class FlashSale extends StatelessWidget {
       builder: (context) {
         if(iscircle)  {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-            child: Row(
-              children: [
-              const Spacer(),
-                TimeCircularContainer(
-                  currentValue: time.days,
-                totalValue: 365,
-                timeText:timeText((time.days).toString(), default_length: 3),
-                timeType: LangText(context).local.days,),
-                const SizedBox(width: 10,),
-                TimeCircularContainer(
-                  currentValue: time.hours,
-                  totalValue: 24,
-                  timeText:timeText((time.hours).toString(), default_length: 3),
-                  timeType: LangText(context).local.hours,),
-                  const SizedBox(width: 10,),
-                TimeCircularContainer(
-                  currentValue: time.min,
-                  totalValue: 60,
-                  timeText:timeText((time.min).toString(), default_length: 2),
-                  timeType: LangText(context).local.minutes,),
-                  const  SizedBox(width: 15,),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
+            child: SingleChildScrollView(
+              child: Row(
+                
+                children: [
+               const Spacer(),
+               //const SizedBox(width: 20,),
                   TimeCircularContainer(
-                    currentValue: time.sec,
+                    currentValue: time.days,
+                  totalValue: 365,
+                  timeText:timeText((time.days).toString(), default_length: 3),
+                  timeType: LangText(context).local.days,),
+                  const SizedBox(width: 10,),
+                  TimeCircularContainer(
+                    currentValue: time.hours,
+                    totalValue: 24,
+                    timeText:timeText((time.hours).toString(), default_length: 3),
+                    timeType: LangText(context).local.hours,),
+                    const SizedBox(width: 10,),
+                  TimeCircularContainer(
+                    currentValue: time.min,
                     totalValue: 60,
-                    timeText:timeText((time.sec).toString(), default_length: 2),
-                    timeType: LangText(context).local.seconds,),
-                  const  SizedBox(width: 10,),
-          
-                Flexible(
-                  child: Row(
-                    children: [
-                      Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
-                      const SizedBox(width: 3),
-                      const Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
-                      const SizedBox(width: 10),
-                    ],
-                  ),
-                )
-              ],
+                    timeText:timeText((time.min).toString(), default_length: 2),
+                    timeType: LangText(context).local.minutes,),
+                    const  SizedBox(width: 15,),
+                    TimeCircularContainer(
+                      currentValue: time.sec,
+                      totalValue: 60,
+                      timeText:timeText((time.sec).toString(), default_length: 2),
+                      timeType: LangText(context).local.seconds,),
+                    const  SizedBox(width: 10,),
+                    Flexible(
+                      child: RichText(text: TextSpan(text:LangText(context).local.shop_more_ucf,
+                       style: const TextStyle(
+                            fontSize: 10,
+                            color: Color.fromARGB(255, 68, 71, 73),
+                          ),
+                          
+                      children: const [
+                        
+                        WidgetSpan(
+                          child:  Icon(
+                            Icons.arrow_forward_outlined,
+                            size: 10,
+                            color: Color.fromARGB(255, 68, 71, 73),
+                          ),
+                        ),
+                      ]
+                       ),
+                      
+                      
+                      ),
+                      
+                      
+                      )
+                    
+                        
+                //   Flexible(
+                //     flex: 2,
+                //   child: Row(
+                //    // mainAxisSize: MainAxisSize.min,
+                //     children: [
+                //       Flexible(
+                //         flex: 2,
+                //         child: Text(
+                //           LangText(context).local.shop_more_ucf,
+                //           //overflow: TextOverflow.clip, // عشان لو كبر الكلام
+                //           style: const TextStyle(
+                //             fontSize: 10,
+                //             color: Color.fromARGB(255, 68, 71, 73),
+                //           ),
+                //         ),
+                //       ),
+                //       const SizedBox(width: 3),
+                //       const Icon(
+                //         Icons.arrow_forward_outlined,
+                //         size: 10,
+                //         color: Color.fromARGB(255, 68, 71, 73),
+                //       ),
+                //       const SizedBox(width: 10),
+                //     ],
+                //   ),
+                // ),
+              
+            
+                ],
+              ),
             ),
           );
         }
