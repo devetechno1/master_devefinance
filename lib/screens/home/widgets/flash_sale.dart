@@ -6,7 +6,6 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/circle_timer_flash_sale.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_circular_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_data_widget.dart';
 import 'package:flutter/material.dart';
