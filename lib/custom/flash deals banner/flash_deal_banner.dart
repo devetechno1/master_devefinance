@@ -1,12 +1,12 @@
-import 'package:active_ecommerce_cms_demo_app/custom/aiz_image.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 
+import '../../app_config.dart';
+import '../dynamic_size_image_banner.dart';
 import '../lang_text.dart';
 
 class FlashDealBanner extends StatelessWidget {
@@ -90,39 +90,42 @@ class FlashBannerWidget extends StatelessWidget {
     super.key, 
     required this.bannerLink, 
     required this.slug, 
-    this.size,
   });
   final String? bannerLink;
   final String? slug;
-  final double? size;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: size,
-      width: size,
-      decoration: BoxDecoration(
-        color: Colors.white, // background color for container
-        borderRadius: BorderRadius.circular(10), // rounded corners
-        boxShadow: [
-          BoxShadow(
-            color:
-                const Color(0xff000000).withValues(alpha: 0.1), // shadow color
-            spreadRadius: 2, // spread radius
-            blurRadius: 5, // blur radius
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(
-            10), // round corners for the image too
-        child: InkWell(
-          onTap: () => GoRouter.of(context).go('/flash-deal/$slug'),
-          child: AIZImage.radiusImage(bannerLink, 6),
-          // Display the image with rounded corners
-        ),
-      ),
+    return DynamicSizeImageBanner(
+      urlToOpen: "${AppConfig.RAW_BASE_URL}/flash-deal/$slug",
+      photo: bannerLink,
+      radius: 10,
     );
+    // return Container(
+    //   height: size,
+    //   width: size,
+    //   decoration: BoxDecoration(
+    //     color: Colors.white, // background color for container
+    //     borderRadius: BorderRadius.circular(10), // rounded corners
+    //     boxShadow: [
+    //       BoxShadow(
+    //         color:
+    //             const Color(0xff000000).withValues(alpha: 0.1), // shadow color
+    //         spreadRadius: 2, // spread radius
+    //         blurRadius: 5, // blur radius
+    //         offset: const Offset(0, 3), // changes position of shadow
+    //       ),
+    //     ],
+    //   ),
+    //   child: ClipRRect(
+    //     borderRadius: BorderRadius.circular(
+    //         10), // round corners for the image too
+    //     child: InkWell(
+    //       onTap: () => GoRouter.of(context).go('/flash-deal/$slug'),
+    //       child: AIZImage.radiusImage(bannerLink, 6),
+    //       // Display the image with rounded corners
+    //     ),
+    //   ),
+    // );
   }
 }

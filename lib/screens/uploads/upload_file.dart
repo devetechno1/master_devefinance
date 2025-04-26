@@ -389,7 +389,7 @@ class _UploadFileState extends State<UploadFile> {
         width: DeviceInfo(context).width!,
         borderRadius: 10,
         bgColor: MyTheme.white,
-        borderColor: MyTheme.accent_color,
+        borderColor: Theme.of(context).primaryColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

@@ -74,7 +74,7 @@ class _CartState extends State<_Cart> {
         body: Stack(
           children: [
             RefreshIndicator(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               backgroundColor: Colors.white,
               onRefresh: () => cartProvider.onRefresh(context),
               displacement: 0,
@@ -91,7 +91,7 @@ class _CartState extends State<_Cart> {
                           height: cartProvider.isMinOrderQuantityNotEnough ? 25:0,
                           width: double.maxFinite,
                           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 3),
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: RichText(
@@ -111,7 +111,7 @@ class _CartState extends State<_Cart> {
                           height: cartProvider.isMinOrderAmountNotEnough?25:0,
                           width: double.maxFinite,
                           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 3),
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: RichText(
@@ -181,8 +181,8 @@ class _CartState extends State<_Cart> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(cartProvider.cartTotalString,
-                        style: const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.w600)),
                   ),
@@ -199,7 +199,7 @@ class _CartState extends State<_Cart> {
                     // width: (MediaQuery.of(context).size.width - 48) * (2 / 3),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: MyTheme.accent_color, width: 1),
+                      border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                       borderRadius: app_language_rtl.$!
                           ? const BorderRadius.only(
                               topLeft: Radius.circular(6.0),
@@ -216,7 +216,7 @@ class _CartState extends State<_Cart> {
                     ),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       shape: app_language_rtl.$!
                           ? const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -310,8 +310,8 @@ class _CartState extends State<_Cart> {
                                 SystemConfig.systemCurrency!.code,
                                 SystemConfig.systemCurrency!.symbol) ??
                             '',
-                        style: const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 12),
                       ),

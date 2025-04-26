@@ -122,7 +122,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           body: Stack(
             children: [
               RefreshIndicator(
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
                 backgroundColor: Colors.white,
                 onRefresh: _onRefresh,
                 displacement: 0,
@@ -220,7 +220,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                 .copyWith(
                     border: Border.all(
                         color: _selected_index == index
-                            ? MyTheme.accent_color
+                            ? Theme.of(context).primaryColor
                             : MyTheme.light_grey,
                         width: _selected_index == index ? 1.0 : 0.0)),
             child: Row(

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/main.dart';
-import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
@@ -155,10 +154,10 @@ class _MainState extends State<Main> {
             currentIndex: _currentIndex,
             backgroundColor: Colors.white.withValues(alpha: 0.95),
             unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
-            selectedItemColor: MyTheme.accent_color,
-            selectedLabelStyle:const TextStyle(
+            selectedItemColor: Theme.of(context).primaryColor,
+            selectedLabelStyle:TextStyle(
                 fontWeight: FontWeight.w700,
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
                 fontSize: 12),
             unselectedLabelStyle:const TextStyle(
                 fontWeight: FontWeight.w400,
@@ -171,7 +170,7 @@ class _MainState extends State<Main> {
                     child: Image.asset(
                       "assets/home.png",
                       color: _currentIndex == 0
-                          ? MyTheme.accent_color
+                          ? Theme.of(context).primaryColor
                           : const Color.fromRGBO(153, 153, 153, 1),
                       height: 16,
                     ),
@@ -183,7 +182,7 @@ class _MainState extends State<Main> {
                     child: Image.asset(
                       "assets/categories.png",
                       color: _currentIndex == 1
-                          ? MyTheme.accent_color
+                          ? Theme.of(context).primaryColor
                           : const Color.fromRGBO(153, 153, 153, 1),
                       height: 16,
                     ),
@@ -195,7 +194,7 @@ class _MainState extends State<Main> {
                     child: badges.Badge(
                       badgeStyle: badges.BadgeStyle(
                         shape: badges.BadgeShape.circle,
-                        badgeColor: MyTheme.accent_color,
+                        badgeColor: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(10),
                         padding:const EdgeInsets.all(5),
                       ),
@@ -205,7 +204,7 @@ class _MainState extends State<Main> {
                       child: Image.asset(
                         "assets/cart.png",
                         color: _currentIndex == 2
-                            ? MyTheme.accent_color
+                            ? Theme.of(context).primaryColor
                             :const Color.fromRGBO(153, 153, 153, 1),
                         height: 16,
                       ),
@@ -227,7 +226,7 @@ class _MainState extends State<Main> {
                   child: Image.asset(
                     "assets/profile.png",
                     color: _currentIndex == 3
-                        ? MyTheme.accent_color
+                        ? Theme.of(context).primaryColor
                         : const Color.fromRGBO(153, 153, 153, 1),
                     height: 16,
                   ),

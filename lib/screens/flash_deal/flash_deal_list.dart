@@ -193,8 +193,8 @@ class _FlashDealListState extends State<FlashDealList> {
                             child: time == null
                                 ? Text(
                                     AppLocalizations.of(context)!.ended_ucf,
-                                    style: const TextStyle(
-                                        color: MyTheme.accent_color,
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.w600),
                                   )
@@ -326,9 +326,9 @@ class _FlashDealListState extends State<FlashDealList> {
             child: Text(
               convertPrice(flashDealResponse.flashDeals[flashDealIndex].products
                   .products[productIndex].price),
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 13,
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold),
             ),
           )
@@ -621,7 +621,7 @@ class _FlashDealListState extends State<FlashDealList> {
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        color: MyTheme.accent_color,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

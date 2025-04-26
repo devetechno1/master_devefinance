@@ -113,8 +113,8 @@ class _PasswordForgetState extends State<PasswordForget> {
                   _send_code_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.phone_ucf,
-                  style: const TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
                 ),
               ),
               if (_send_code_by == "email")
@@ -142,8 +142,8 @@ class _PasswordForgetState extends State<PasswordForget> {
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .or_send_code_via_phone_number,
-                                style: const TextStyle(
-                                    color: MyTheme.accent_color,
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
                                     fontStyle: FontStyle.italic,
                                     decoration: TextDecoration.underline),
                               ),
@@ -203,8 +203,8 @@ class _PasswordForgetState extends State<PasswordForget> {
                         },
                         child: Text(
                           AppLocalizations.of(context)!.or_send_code_via_email,
-                          style: const TextStyle(
-                              color: MyTheme.accent_color,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
                               fontStyle: FontStyle.italic,
                               decoration: TextDecoration.underline),
                         ),
@@ -218,7 +218,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                   height: 45,
                   child: Btn.basic(
                     minWidth: MediaQuery.of(context).size.width,
-                    color: MyTheme.accent_color,
+                    color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(6.0),

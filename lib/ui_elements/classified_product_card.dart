@@ -99,8 +99,8 @@ class _ClassifiedAdsCardState extends State<ClassifiedAdsCard>
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w700),
                       ),
@@ -119,7 +119,7 @@ class _ClassifiedAdsCardState extends State<ClassifiedAdsCard>
                     decoration: BoxDecoration(
                       color: widget.condition == "new"
                           ? MyTheme.golden
-                          : MyTheme.accent_color,
+                          : Theme.of(context).primaryColor,
                       borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(6.0),
                         bottomLeft: Radius.circular(6.0),

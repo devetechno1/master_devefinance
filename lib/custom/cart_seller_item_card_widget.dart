@@ -74,8 +74,8 @@ class CartSellerItemCardWidget extends StatelessWidget {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: const TextStyle(
-                                color: MyTheme.accent_color,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -139,7 +139,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         color: cartProvider.shopList[sellerIndex]
                                     .cartItems[itemIndex].auctionProduct ==
                                 0
-                            ? MyTheme.accent_color
+                            ? Theme.of(context).primaryColor
                             : MyTheme.grey_153,
                         size: 12,
                       ),
@@ -152,7 +152,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           .shopList[sellerIndex].cartItems[itemIndex].quantity
                           .toString(),
                       style:
-                          const TextStyle(color: MyTheme.accent_color, fontSize: 16),
+                          TextStyle(color: Theme.of(context).primaryColor, fontSize: 16),
                     ),
                   ),
                   GestureDetector(
@@ -175,7 +175,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         color: cartProvider.shopList[sellerIndex]
                                     .cartItems[itemIndex].auctionProduct ==
                                 0
-                            ? MyTheme.accent_color
+                            ? Theme.of(context).primaryColor
                             : MyTheme.grey_153,
                         size: 12,
                       ),

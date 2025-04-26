@@ -406,7 +406,7 @@ class _OrderListState extends State<OrderList> {
       ));
     } else if (_orderList.isNotEmpty) {
       return RefreshIndicator(
-        color: MyTheme.accent_color,
+        color: Theme.of(context).primaryColor,
         backgroundColor: Colors.white,
         displacement: 0,
         onRefresh: _onRefresh,
@@ -459,8 +459,8 @@ class _OrderListState extends State<OrderList> {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
                 _orderList[index].code,
-                style: const TextStyle(
-                    color: MyTheme.accent_color,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor,
                     fontSize: 13,
                     fontWeight: FontWeight.w600),
               ),
@@ -475,8 +475,8 @@ class _OrderListState extends State<OrderList> {
                   const Spacer(),
                   Text(
                     convertPrice(_orderList[index].grand_total),
-                    style: const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   )

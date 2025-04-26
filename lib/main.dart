@@ -32,6 +32,7 @@ import 'presenter/select_address_provider.dart';
 import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
 import 'providers/locale_provider.dart';
+import 'providers/theme_provider.dart';
 import 'screens/auction/auction_bidded_products.dart';
 import 'screens/auction/auction_products.dart';
 import 'screens/auction/auction_products_details.dart';
@@ -271,6 +272,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => CartCounter()),
         ChangeNotifierProvider(create: (context) => SelectAddressProvider()),
         ChangeNotifierProvider(create: (context) => UnReadNotificationCounter()),
@@ -285,6 +287,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, provider, snapshot) {
+          final ThemeProvider theme = Provider.of<ThemeProvider>(context,listen: true);
           return MaterialApp.router(
             routerConfig: routes,
             title: AppConfig.appNameOnDeviceLang,
@@ -294,14 +297,15 @@ class _MyAppState extends State<MyApp> {
               return OneContext().builder(context, child);
             },
             theme: ThemeData(
-              primaryColor: MyTheme.accent_color,
+              primaryColor: theme.primary,
               scaffoldBackgroundColor: MyTheme.white,
               visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: "PublicSansSerif",
               textTheme: MyTheme.textTheme1,
               fontFamilyFallback: const ['NotoSans'],
-              colorScheme: const ColorScheme.light(
-                primary: MyTheme.accent_color,
+              colorScheme: ColorScheme.light(
+                primary: theme.primary,
+                secondary: theme.secondary,
               ),
               scrollbarTheme: ScrollbarThemeData(
                 thumbVisibility: WidgetStateProperty.all<bool>(false),

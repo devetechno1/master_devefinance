@@ -81,8 +81,8 @@ class BusinessSettingsData extends Equatable {
   final bool websiteName;
   final dynamic siteMotto;
   final bool siteIcon;
-  final Color? baseColor;
-  final Color? baseHovColor;
+  final Color? primaryColor;
+  final Color? primaryHovColor;
   final dynamic metaTitle;
   final dynamic metaDescription;
   final dynamic metaKeywords;
@@ -106,8 +106,8 @@ class BusinessSettingsData extends Equatable {
   final double minimumOrderAmount;
   final String? itemName;
   final bool aamarpaySandbox;
-  final Color? secondaryBaseColor;
-  final Color? secondaryBaseHovColor;
+  final Color? secondaryColor;
+  final Color? secondaryHovColor;
   final String? headerNavMenuText;
   final HomePageType selectedHomePage;
   final dynamic todaysDealSectionBg;
@@ -329,8 +329,8 @@ class BusinessSettingsData extends Equatable {
     this.websiteName = false,
     this.siteMotto,
     this.siteIcon = false,
-    this.baseColor,
-    this.baseHovColor,
+    this.primaryColor,
+    this.primaryHovColor,
     this.metaTitle,
     this.metaDescription,
     this.metaKeywords,
@@ -354,8 +354,8 @@ class BusinessSettingsData extends Equatable {
     this.minimumOrderAmount = 0.0,
     this.itemName,
     this.aamarpaySandbox = false,
-    this.secondaryBaseColor,
-    this.secondaryBaseHovColor,
+    this.secondaryColor,
+    this.secondaryHovColor,
     this.headerNavMenuText,
     this.selectedHomePage = HomePageType.home,
     this.todaysDealSectionBg,
@@ -578,8 +578,8 @@ class BusinessSettingsData extends Equatable {
       websiteName: (data['website_name'] as String?)=="1",
       siteMotto: data['site_motto'] as dynamic,
       siteIcon: (data['site_icon'] as String?)=="1",
-      baseColor: ColorHelper.stringToColor(data['base_color'] as String?),
-      baseHovColor:ColorHelper.stringToColor (data['base_hov_color'] as String?),
+      primaryColor: ColorHelper.stringToColor(data['base_color'] as String?),
+      primaryHovColor:ColorHelper.stringToColor (data['base_hov_color'] as String?),
       metaTitle: data['meta_title'] as dynamic,
       metaDescription: data['meta_description'] as dynamic,
       metaKeywords: data['meta_keywords'] as dynamic,
@@ -604,8 +604,8 @@ class BusinessSettingsData extends Equatable {
       minimumOrderAmount: double.parse(data['minimum_order_amount'] as String? ?? '0.0'),
       itemName: data['item_name'] as String?,
       aamarpaySandbox: (data['aamarpay_sandbox'] as String?)=="1",
-      secondaryBaseColor: ColorHelper.stringToColor(data['secondary_base_color'] as String?),
-      secondaryBaseHovColor: ColorHelper.stringToColor(data['secondary_base_hov_color'] as String?),
+      secondaryColor: ColorHelper.stringToColor(data['secondary_base_color'] as String?),
+      secondaryHovColor: ColorHelper.stringToColor(data['secondary_base_hov_color'] as String?),
       headerNavMenuText: data['header_nav_menu_text'] as String?,
       selectedHomePage: HomePageType.fromString(data['homepage_select'] as String?),
       todaysDealSectionBg: (data['todays_deal_section_bg'] as dynamic),
@@ -1686,8 +1686,8 @@ class BusinessSettingsData extends Equatable {
       websiteName,
       siteMotto,
       siteIcon,
-      baseColor,
-      baseHovColor,
+      primaryColor,
+      primaryHovColor,
       metaTitle,
       metaDescription,
       metaKeywords,
@@ -1711,8 +1711,8 @@ class BusinessSettingsData extends Equatable {
       minimumOrderAmount,
       itemName,
       aamarpaySandbox,
-      secondaryBaseColor,
-      secondaryBaseHovColor,
+      secondaryColor,
+      secondaryHovColor,
       headerNavMenuText,
       selectedHomePage,
       todaysDealSectionBg,

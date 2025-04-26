@@ -191,7 +191,7 @@ class _CategoryListState extends State<CategoryList> {
                 height: 40,
                 child: Btn.basic(
                   minWidth: MediaQuery.of(context).size.width,
-                  color: MyTheme.accent_color,
+                  color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.all(Radius.circular(8.0))),

@@ -175,7 +175,7 @@ void  reset() {
               .buildProductGridShimmer(scontroller: _scrollController));
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
-        color: MyTheme.accent_color,
+        color: Theme.of(context).primaryColor,
         backgroundColor: Colors.white,
         displacement: 0,
         onRefresh: _onRefresh,

@@ -201,7 +201,7 @@ class _ProfileState extends State<Profile> {
           Container(
               height: DeviceInfo(context).height! / 1.6,
               width: DeviceInfo(context).width,
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               alignment: Alignment.topRight,
               child: Image.asset(
                 "assets/background_1.png",
@@ -218,7 +218,7 @@ class _ProfileState extends State<Profile> {
 
   RefreshIndicator buildBody() {
     return RefreshIndicator(
-      color: MyTheme.accent_color,
+      color: Theme.of(context).primaryColor,
       onRefresh: _onPageRefresh,
       displacement: 10,
       child: buildBodyChildren(),
@@ -976,7 +976,7 @@ class _ProfileState extends State<Profile> {
               position: badges.BadgePosition.topEnd(top: 2, end: 20),
               badgeStyle: badges.BadgeStyle(
                 shape: badges.BadgeShape.circle,
-                badgeColor: MyTheme.accent_color,
+                badgeColor: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(10),
                 padding: const EdgeInsets.all(5),
               ),
@@ -1189,7 +1189,7 @@ class _ProfileState extends State<Profile> {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: MyTheme.white, width: 1),
                 //shape: BoxShape.rectangle,

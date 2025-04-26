@@ -87,7 +87,7 @@ class _RefundRequestState extends State<RefundRequest> {
         body: Stack(
           children: [
             RefreshIndicator(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               backgroundColor: Colors.white,
               onRefresh: _onRefresh,
               displacement: 0,
@@ -211,8 +211,8 @@ class _RefundRequestState extends State<RefundRequest> {
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         _list[index].order_code,
-                        style: const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600),
                       ),
@@ -238,8 +238,8 @@ class _RefundRequestState extends State<RefundRequest> {
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         convertPrice(_list[index].product_price),
-                        style: const TextStyle(
-                            color: MyTheme.accent_color,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),

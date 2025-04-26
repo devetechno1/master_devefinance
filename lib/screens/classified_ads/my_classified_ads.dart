@@ -257,7 +257,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
               width: DeviceInfo(context).width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: MyTheme.accent_color, width: 1),
+                border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                 color: const Color(0xffFBEAE6),
               ),
               child: InkWell(
@@ -293,9 +293,9 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         ),
                         Text(
                           _currentPackageName!,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 10,
-                              color: MyTheme.accent_color,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -305,16 +305,16 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                       children: [
                         Text(
                           LangText(context).local.upgrade_package_ucf,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 12,
-                              color: MyTheme.accent_color,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           width: 8,
                         ),
                         Image.asset("assets/next_arrow.png",
-                            color: MyTheme.accent_color,
+                            color: Theme.of(context).primaryColor,
                             height: 9.08,
                             width: 7),
                       ],
@@ -345,7 +345,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                     offset: const Offset(0, 10),
                   )
                 ],
-                color: MyTheme.accent_color,
+                color: Theme.of(context).primaryColor,
               ),
               height: 75,
               width: mWidht / 2 - 23,
@@ -418,7 +418,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         LangText(context).local.add_new_products_ucf,
                         style: CommonFunctions.dashboardBoxText(context)
                             .copyWith(
-                                color: MyTheme.accent_color,
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold),
                       ),
@@ -426,7 +426,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         height: 5,
                       ),
                       Image.asset("assets/add.png",
-                          color: MyTheme.accent_color, height: 18, width: 18),
+                          color: Theme.of(context).primaryColor, height: 18, width: 18),
                     ],
                   ),
                 )),
@@ -444,10 +444,10 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         children: [
           Text(
             LangText(context).local.all_products_ucf,
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: MyTheme.accent_color),
+                color: Theme.of(context).primaryColor),
           ),
           const SizedBox(
             height: 10,
@@ -574,7 +574,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                       decoration: BoxDecoration(
                         color: condition == "new"
                             ? MyTheme.golden
-                            : MyTheme.accent_color,
+                            : Theme.of(context).primaryColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(6.0),
                           bottomRight: Radius.circular(6.0),

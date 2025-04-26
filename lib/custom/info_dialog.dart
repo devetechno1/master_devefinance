@@ -10,9 +10,9 @@ class InfoDialog {
       builder: (context) => AlertDialog(
         titlePadding: EdgeInsets.zero,
         title: Container(
-          decoration: const BoxDecoration(
-            color: MyTheme.accent_color,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),

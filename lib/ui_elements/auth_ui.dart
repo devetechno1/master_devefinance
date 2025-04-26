@@ -116,7 +116,7 @@ class AuthScreen {
             Container(
               height: DeviceInfo(context).height! / 3,
               width: DeviceInfo(context).width,
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               alignment: Alignment.topRight,
               child: Image.asset(
                 "assets/background_1.png",

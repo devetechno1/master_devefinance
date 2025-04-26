@@ -145,7 +145,7 @@ class _WalletState extends State<Wallet> {
           backgroundColor: MyTheme.mainColor,
           appBar: buildAppBar(context),
           body: RefreshIndicator(
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             backgroundColor: MyTheme.mainColor,
             onRefresh: _onPageRefresh,
             displacement: 10,
@@ -342,8 +342,8 @@ class _WalletState extends State<Wallet> {
                 children: [
                   Text(
                     convertPrice(_rechargeList[index].amount),
-                    style: const TextStyle(
-                        color: MyTheme.accent_color,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   ),
@@ -383,7 +383,7 @@ class _WalletState extends State<Wallet> {
           width: DeviceInfo(context).width! / 2.3,
           height: 90,
           decoration: BoxDecoration(
-              color: MyTheme.accent_color,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(10)),
           child: Column(
             children: [
@@ -550,12 +550,12 @@ class _WalletState extends State<Wallet> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6.0),
                       side:
-                          const BorderSide(color: MyTheme.accent_color, width: 1.0)),
+                          BorderSide(color: Theme.of(context).primaryColor, width: 1.0)),
                   child: Text(
                     AppLocalizations.of(context)!.close_ucf,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   onPressed: () {
@@ -570,7 +570,7 @@ class _WalletState extends State<Wallet> {
                   child: Btn.minWidthFixHeight(
                     minWidth: 75,
                     height: 30,
-                    color: MyTheme.accent_color,
+                    color: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6.0),
                     ),

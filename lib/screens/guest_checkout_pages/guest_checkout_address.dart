@@ -419,7 +419,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         appBar: buildAppBar(context),
         bottomNavigationBar: buildBottomAppBar(context),
         body: RefreshIndicator(
-          color: MyTheme.accent_color,
+          color: Theme.of(context).primaryColor,
           backgroundColor: Colors.white,
           onRefresh: _onRefresh,
           displacement: 0,
@@ -449,9 +449,9 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                               color: MyTheme.dark_font_grey,
                               fontWeight: FontWeight.bold),
                         ),
-                        const Icon(
+                        Icon(
                           Icons.add_sharp,
-                          color: MyTheme.accent_color,
+                          color: Theme.of(context).primaryColor,
                           size: 30,
                         ),
                       ],
@@ -822,8 +822,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 color: MyTheme.light_grey, width: 1)),
                         child: Text(
                           LangText(context).local.close_ucf,
-                          style: const TextStyle(
-                            color: MyTheme.accent_color,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -841,7 +841,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 40,
-                        color: MyTheme.accent_color,
+                        color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.0),
                         ),
@@ -1132,8 +1132,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
                           AppLocalizations.of(context)!.close_all_capital,
-                          style: const TextStyle(
-                              color: MyTheme.accent_color, fontSize: 13),
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor, fontSize: 13),
                         ),
                         onPressed: () {
                           Navigator.of(context, rootNavigator: true).pop();
@@ -1148,7 +1148,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 40,
-                        color: MyTheme.accent_color,
+                        color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.0),
                         ),
@@ -1262,7 +1262,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             border: Border.all(
                 color:
                     _default_shipping_address == _shippingAddressList[index].id
-                        ? MyTheme.accent_color
+                        ? Theme.of(context).primaryColor
                         : MyTheme.light_grey,
                 width:
                     _default_shipping_address == _shippingAddressList[index].id
@@ -1467,7 +1467,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
           child: Btn.minWidthFixHeight(
             minWidth: MediaQuery.of(context).size.width,
             height: 50,
-            color: MyTheme.accent_color,
+            color: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0.0),
             ),

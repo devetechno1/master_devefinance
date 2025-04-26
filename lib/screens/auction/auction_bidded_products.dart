@@ -309,10 +309,10 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("",
+                      Text("",
                           style: TextStyle(
                               fontSize: 12,
-                              color: MyTheme.accent_color,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w400)),
                       Row(
                         children: [
@@ -322,7 +322,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                                 style: TextButton.styleFrom(
                                   foregroundColor: MyTheme.noColor,
                                   backgroundColor: isBuyable!
-                                      ? MyTheme.accent_color
+                                      ? Theme.of(context).primaryColor
                                       : MyTheme.noColor,
                                   disabledForegroundColor: Colors.blue,
                                 ),
@@ -332,7 +332,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                                       fontSize: 12,
                                       color: isBuyable
                                           ? MyTheme.white
-                                          : MyTheme.accent_color),
+                                          : Theme.of(context).primaryColor),
                                 ),
                                 onPressed: () {
                                   if (isBuyable) {

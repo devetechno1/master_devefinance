@@ -194,7 +194,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 decoration: BoxDecoration(
-                    color: MyTheme.accent_color,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(6)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: InkWell(
@@ -238,9 +238,9 @@ class _UpdatePackageState extends State<UpdatePackage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.check_circle,
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       size: 11,
                     ),
                     Text(

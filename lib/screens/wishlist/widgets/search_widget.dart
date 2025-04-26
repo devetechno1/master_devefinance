@@ -762,7 +762,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                           suggestion.query,
                           style: TextStyle(
                               color: suggestion.type != "search"
-                                  ? MyTheme.accent_color
+                                  ? Theme.of(context).primaryColor
                                   : MyTheme.font_grey),
                         ),
                         subtitle: Text(subtitle,
@@ -1109,7 +1109,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
         onRefresh: _onProductListRefresh,
         child: SingleChildScrollView(
           controller: _productScrollController,
@@ -1181,7 +1181,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
         onRefresh: _onBrandListRefresh,
         child: SingleChildScrollView(
           controller: _brandScrollController,
@@ -1251,7 +1251,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
-        backgroundColor: MyTheme.accent_color,
+        backgroundColor: Theme.of(context).primaryColor,
         onRefresh: _onShopListRefresh,
         child: SingleChildScrollView(
           controller: _shopScrollController,

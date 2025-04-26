@@ -2,7 +2,9 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/context_ex.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
@@ -81,7 +83,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                 return Stack(
                   children: [
                     RefreshIndicator(
-                      color: MyTheme.accent_color,
+                      color: MyTheme.primaryColor,
                       backgroundColor: Colors.white,
                       onRefresh: homeData.onRefresh,
                       displacement: 0,
@@ -126,43 +128,36 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                                 ),
                               ),
 
-                              Container(
-                                width: 300,
-                                margin: const EdgeInsets.symmetric(horizontal: 25),
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withValues(alpha: 0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 3), // changes position of shadow
-                                )],
-                                  color:  const Color.fromARGB(255, 249, 248, 248),
-                                  borderRadius: BorderRadius.circular(8.0),
-                              
-                                ),
-                                child: Column(
-                                  children: [
-                                    buildTimerRow(homeData.flashDealRemainingTime),
-                                  //FlashBanner SpecialOffer
-                                    SizedBox(
-                                      height: 300,
-                                      child: LayoutBuilder(
-                                        builder: (context,constrainedBox) {
-                                          return FlashBannerWidget(
-                                            size: constrainedBox.maxWidth,
-                                            
-                                            bannerLink: homeData.flashDeal?.banner, 
-                                            slug: homeData.flashDeal!.slug,
-                                          );
-                                        }
+                              Center(
+                                child: Container(
+                                  width: context.isPhoneWidth ? double.maxFinite : 300,
+                                  margin: context.isPhoneWidth ? null : const EdgeInsets.symmetric(horizontal: 25),
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withValues(alpha: 0.5),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: const Offset(0, 3), // changes position of shadow
                                       ),
-                                    ),
-                                                              
-                                      
-                                  ],
-                                )),
+                                    ],
+                                    color:  AppConfig.businessSettingsData.flashDealBgColor ?? const Color(0xFFF9F8F8),
+                                    borderRadius: context.isPhoneWidth ? null : BorderRadius.circular(8.0),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      buildTimerRow(homeData.flashDealRemainingTime),
+                                      const SizedBox(height: 15),
+                                      FlashBannerWidget(
+                                        bannerLink: homeData.flashDeal?.banner, 
+                                        slug: homeData.flashDeal!.slug,
+                                      ),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  )),
+                              ),
                               const SizedBox(height: 30),
 
                               ],
@@ -256,109 +251,74 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
     );
   }
 
-  Widget timerCircularContainer(String timeText) {
-    return Text(
-      timeText,
-      style: const TextStyle(
-        color:Colors.white,
-        fontSize: 14.0,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-  
-
 Widget buildTimerRow(CurrentRemainingTime time) {
   return Container(
     height: 35,
-    margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
+    margin: const EdgeInsets.symmetric(horizontal: 10.0),
     decoration: BoxDecoration(
       color: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(5)
     ),
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          const SizedBox(width: 10),
-          // RichText(
-          //   text: TextSpan(
-          //     style: TextStyle(
-          //       color:Colors.white,
-          //       fontSize: 14.0,
-          //       fontWeight: FontWeight.w600,
-          //     ),
-          //     children: [
-          //       TextSpan(text: timeText((time.days).toString(), default_length: 3)),
-          //       WidgetSpan(
-          //         alignment: PlaceholderAlignment.top,
-          //         baseline: TextBaseline.ideographic,
-          //         child: Text(LangText(context).local.days, style: const TextStyle(color: Colors.white, fontSize: 9))
-          //       )
-          //     ],
-          //   ),
-          // ),
-          Row(
-            children: [
-              
-              timerCircularContainer(timeText((time.days).toString(), default_length: 3,)),
-              const SizedBox(width: 4),
-              Text(LangText(context).local.days, style: const TextStyle(color: Colors.white, fontSize: 9)),
-            ],
-          ),
-          const SizedBox(width: 10),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: Text(':',style: TextStyle(color: Colors.white),),
-              ),
-              timerCircularContainer(timeText((time.hours).toString(), default_length: 2)),
-              const SizedBox(width: 4),
-              Text(LangText(context).local.hours, style: const TextStyle(color: Colors.white, fontSize: 9)),
-            ],
-          ),
-          const SizedBox(width: 10),
-          Row(
-            children: [
-                    const Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: Text(':',style: TextStyle(color: Colors.white),),
-              ),                timerCircularContainer(timeText((time.min).toString(), default_length: 2)),
-              const SizedBox(width: 4),
-              Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.white, fontSize: 9)),
-            ],
-          ),
-          const SizedBox(width: 10),
-          Row(
-            children: [
-                 const Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: Text(':',style: TextStyle(color: Colors.white),),
-              ),                timerCircularContainer(timeText((time.sec).toString(), default_length: 2)),
-              const SizedBox(width: 4),
-              Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.white, fontSize: 9)),
-            ],
-          ),
-          const SizedBox(width: 10),
-          // Row(
-          //   children: [
-          //     Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Colors.white)),
-          //     const SizedBox(width: 3),
-          //     const Icon(Icons.arrow_forward_outlined, size: 10, color: Colors.white),
-          //   ],
-          // ),
-          const SizedBox(width: 10),
+          TimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true),
+          TimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours),
+          TimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes),
+          TimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds),
         ],
       ),
     ),
   );
 }
-  String timeText(String val, {int default_length = 2}) {
-    return val.padLeft(default_length, '0');
-  }
 }
 
 
 
+
+class TimeDataWidget extends StatelessWidget {
+  const TimeDataWidget({super.key, required this.time, this.isFirst = false, required this.timeType});
+  final String time;
+  final String timeType;
+  final bool isFirst;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          color:Colors.white,
+          fontSize: 14.0,
+          fontWeight: FontWeight.w600,
+        ),
+        children: [
+          if(!isFirst) const TextSpan(text: '  :  '),
+          TextSpan(text: time.timeText()),
+          const WidgetSpan(child: SizedBox(width: 4)),
+          TextSpan(text: timeType, style: const TextStyle(color:Colors.white, fontSize: 9)),
+        ],
+      ),
+    );
+    // return Row(
+    //   children: [
+    //     if(!isFirst)  const Padding(
+    //       padding: EdgeInsets.symmetric(horizontal: 10),
+    //       child: Text(':',style: TextStyle(color: Colors.white)),
+    //     ),
+    //     Text(
+    //       time.timeText(),
+    //       style: const TextStyle(
+    //         color:Colors.white,
+    //         fontSize: 14.0,
+    //         fontWeight: FontWeight.w600,
+    //       ),
+    //     ),
+    //     const SizedBox(width: 4),
+    //     Text( timeType, style: const TextStyle(color: Colors.white, fontSize: 9)),
+    //   ],
+    // );
+  }
+}

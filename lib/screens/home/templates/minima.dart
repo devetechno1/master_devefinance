@@ -80,7 +80,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                 return Stack(
                   children: [
                     RefreshIndicator(
-                      color: MyTheme.accent_color,
+                      color: Theme.of(context).primaryColor,
                       backgroundColor: Colors.white,
                       onRefresh: homeData.onRefresh,
                       displacement: 0,
@@ -142,19 +142,10 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                                       children: [
                                       //  buildTimerRow(homeData.flashDealRemainingTime),
                                         //FlashBanner SpecialOffer
-                                        SizedBox(
-                                          height: 300,
-                                          child: LayoutBuilder(
-                                            builder: (context,constrainedBox) {
-                                              return FlashBannerWidget(
-                                                size: constrainedBox.maxWidth,
-                                                
-                                                bannerLink: homeData.flashDeal?.banner, 
-                                                slug: homeData.flashDeal!.slug,
-                                              );
-                                            }
-                                          ),
-                                        ), 
+                                        FlashBannerWidget(
+                                          bannerLink: homeData.flashDeal?.banner, 
+                                          slug: homeData.flashDeal!.slug,
+                                        ),
                                       ],
                                     ),
                                   )),
