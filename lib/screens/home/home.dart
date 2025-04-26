@@ -7,6 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
@@ -78,7 +79,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: buildAppBar(34, context),
+            appBar: BuildAppBar(statusBarHeight: 34, context: context,),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -360,25 +361,25 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      scrolledUnderElevation: 0.0,
-      centerTitle: false,
-      elevation: 0,
-      flexibleSpace: Padding(
-        padding:
-            const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        child: GestureDetector(
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const Filter()));
-            },
-            child: HomeSearchBox(context: context)),
-      ),
-    );
-  }
+  // AppBar buildAppBar(double statusBarHeight, BuildContext context) {
+  //   return AppBar(
+  //     automaticallyImplyLeading: false,
+  //     backgroundColor: Colors.white,
+  //     scrolledUnderElevation: 0.0,
+  //     centerTitle: false,
+  //     elevation: 0,
+  //     flexibleSpace: Padding(
+  //       padding:
+  //           const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+  //       child: GestureDetector(
+  //           onTap: () {
+  //             Navigator.of(context)
+  //                 .push(MaterialPageRoute(builder: (context) => const Filter()));
+  //           },
+  //           child: HomeSearchBox(context: context)),
+  //     ),
+  //   );
+  // }
   // AppBar buildAppBar(double statusBarHeight, BuildContext context) {
   //   return AppBar(
   //     automaticallyImplyLeading: false,
