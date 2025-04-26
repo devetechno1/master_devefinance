@@ -39,14 +39,17 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
   }
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => NavigationService.handleUrls(widget.urlToOpen, context),
-      child: _aspectRatio == null
-          ? const LoadingImageBannerWidget()
-          : AspectRatio(
-              aspectRatio: _aspectRatio!,
-              child: AIZImage.radiusImage(widget.photo, 0),
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: InkWell(
+        onTap: () => NavigationService.handleUrls(widget.urlToOpen, context),
+        child: _aspectRatio == null
+            ? const LoadingImageBannerWidget()
+            : AspectRatio(
+                aspectRatio: _aspectRatio!,
+                child: AIZImage.radiusImage(widget.photo, 0),
+              ),
+      ),
     );
   }
 }

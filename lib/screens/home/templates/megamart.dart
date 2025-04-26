@@ -102,7 +102,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
 
                               // Header Banner
                              HomeCarouselSlider(homeData: homeData, context: context),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 10),
 
                               // Flash Sale Section
                               if(homeData.flashDeal != null)
@@ -117,7 +117,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
                                   child: Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(25, 10, 10, 10),
+                                        padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
                                         child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                       ),
                                        Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),

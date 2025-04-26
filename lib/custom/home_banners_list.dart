@@ -37,40 +37,42 @@ class HomeBannersList extends StatelessWidget {
       }
       final bool canScroll = bannersImagesList.length > 2;
 
-      return CarouselSlider(
-        options: CarouselOptions(
-          aspectRatio: aspectRatio,
-          viewportFraction: viewportFraction,
-          initialPage: 0,  
-          padEnds: false,
-          enlargeCenterPage: false,
-          enableInfiniteScroll: canScroll,
-          autoPlay: canScroll,
-        ),
-        items: bannersImagesList.map((i) {
-          return Container(
-            margin: const EdgeInsetsDirectional.only(start: 12, bottom: 10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xff000000).withValues(alpha: 0.1),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: InkWell(
-                onTap: () => NavigationService.handleUrls(i.url, context),
-                child: AIZImage.radiusImage(i.photo, 6),
+      return Center(
+        child: CarouselSlider(
+          options: CarouselOptions(
+            aspectRatio: aspectRatio,
+            viewportFraction: viewportFraction,
+            initialPage: 0,  
+            padEnds: false,
+            enlargeCenterPage: false,
+            enableInfiniteScroll: canScroll,
+            autoPlay: canScroll,
+          ),
+          items: bannersImagesList.map((i) {
+            return Container(
+              margin: const EdgeInsetsDirectional.only(start: 10, bottom: 10,top: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xff000000).withValues(alpha: 0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
-            ),
-          );
-        }).toList(),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: InkWell(
+                  onTap: () => NavigationService.handleUrls(i.url, context),
+                  child: AIZImage.radiusImage(i.photo, 6),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
       );
     } else {
       return const SizedBox();

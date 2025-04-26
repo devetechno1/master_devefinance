@@ -44,7 +44,7 @@ class TodaysDealProductsWidget extends StatelessWidget {
                   },
             child: Container(
               width: 160,
-              margin: const EdgeInsetsDirectional.only(end: 8),
+              margin: const EdgeInsetsDirectional.only(end: 8,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
