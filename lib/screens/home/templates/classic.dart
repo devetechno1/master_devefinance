@@ -7,10 +7,12 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/guest_checkout_pages/old_guest.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
@@ -18,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
-import '../../../custom/home_search_box.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
@@ -73,7 +74,7 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: buildAppBar(34, context),
+            appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -231,24 +232,24 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
 
 
 
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      scrolledUnderElevation: 0.0,
-      centerTitle: false,
-      elevation: 0,
-      flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
-          },
-          child: HomeSearchBox(context: context),
-        ),
-      ),
-    );
-  }
+  // AppBar buildAppBar(double statusBarHeight, BuildContext context) {
+  //   return AppBar(
+  //     automaticallyImplyLeading: false,
+  //     backgroundColor: Colors.white,
+  //     scrolledUnderElevation: 0.0,
+  //     centerTitle: false,
+  //     elevation: 0,
+  //     flexibleSpace: Padding(
+  //       padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+  //       child: GestureDetector(
+  //         onTap: () {
+  //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
+  //         },
+  //         child: HomeSearchBox(context: context),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Container buildProductLoadingContainer(HomePresenter homeData) {
     return Container(

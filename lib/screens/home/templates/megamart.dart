@@ -4,7 +4,6 @@ import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flas
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/context_ex.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
@@ -13,8 +12,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_data_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -75,7 +76,7 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: buildAppBar(34, context),
+            appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -215,27 +216,6 @@ class _MegamartScreenState extends State<MegamartScreen> with TickerProviderStat
     );
   }
 
-
-
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      scrolledUnderElevation: 0.0,
-      centerTitle: false,
-      elevation: 0,
-      flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
-          },
-          child: HomeSearchBox(context: context),
-        ),
-      ),
-    );
-  }
-
   Container buildProductLoadingContainer(HomePresenter homeData) {
     return Container(
       height: homeData.showAllLoadingContainer ? 36 : 0,
@@ -264,10 +244,10 @@ Widget buildTimerRow(CurrentRemainingTime time) {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          TimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true),
-          TimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours),
-          TimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes),
-          TimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds),
+          RowTimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true),
+          RowTimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours),
+          RowTimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes),
+          RowTimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds),
         ],
       ),
     ),
@@ -278,47 +258,5 @@ Widget buildTimerRow(CurrentRemainingTime time) {
 
 
 
-class TimeDataWidget extends StatelessWidget {
-  const TimeDataWidget({super.key, required this.time, this.isFirst = false, required this.timeType});
-  final String time;
-  final String timeType;
-  final bool isFirst;
 
-  @override
-  Widget build(BuildContext context) {
 
-    return RichText(
-      text: TextSpan(
-        style: const TextStyle(
-          color:Colors.white,
-          fontSize: 14.0,
-          fontWeight: FontWeight.w600,
-        ),
-        children: [
-          if(!isFirst) const TextSpan(text: '  :  '),
-          TextSpan(text: time.timeText()),
-          const WidgetSpan(child: SizedBox(width: 4)),
-          TextSpan(text: timeType, style: const TextStyle(color:Colors.white, fontSize: 9)),
-        ],
-      ),
-    );
-    // return Row(
-    //   children: [
-    //     if(!isFirst)  const Padding(
-    //       padding: EdgeInsets.symmetric(horizontal: 10),
-    //       child: Text(':',style: TextStyle(color: Colors.white)),
-    //     ),
-    //     Text(
-    //       time.timeText(),
-    //       style: const TextStyle(
-    //         color:Colors.white,
-    //         fontSize: 14.0,
-    //         fontWeight: FontWeight.w600,
-    //       ),
-    //     ),
-    //     const SizedBox(width: 4),
-    //     Text( timeType, style: const TextStyle(color: Colors.white, fontSize: 9)),
-    //   ],
-    // );
-  }
-}

@@ -1,6 +1,7 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
@@ -10,8 +11,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_data_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -72,7 +75,7 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: buildAppBar(34, context),
+            appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -241,25 +244,6 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
 
 
 
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      scrolledUnderElevation: 0.0,
-      centerTitle: false,
-      elevation: 0,
-      flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const Filter()));
-          },
-          child: HomeSearchBox(context: context),
-        ),
-      ),
-    );
-  }
-
   Container buildProductLoadingContainer(HomePresenter homeData) {
     return Container(
       height: homeData.showAllLoadingContainer ? 36 : 0,
@@ -274,107 +258,43 @@ class _ReclassictScreenState extends State<ReclassictScreen> with TickerProvider
       ),
     );
   }
-
-  Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
-    return Text(
-      timeText,
-      style:const TextStyle(
-        color:Colors.white,
-        fontSize: 14.0,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
   
 
 Widget buildTimerRow(CurrentRemainingTime time) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
+  return Container(
+    height: 35,
+    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(5)
+    ),
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      
-      child: Row(
-        children: [
-          const SizedBox(width: 10),
-          Container(
-                  color: const Color.fromARGB(255, 33, 90, 188),
-                  width: 30,
-
-            child: Row(
-              children: [
-                
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 2,)),
-                ),
-          
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-       const   Padding(
-            padding:  EdgeInsets.only(right: 10),
-            child: Text(':'),
-          ),
-          Container(
-                  color: const Color.fromARGB(255, 33, 90, 188),
-                  width: 30,
-
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
-                ),
-                              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-         const Padding(
-            padding:  EdgeInsets.only(right: 10),
-            child: Text(':'),
-          ),
-          Container(
-      color: const Color.fromARGB(255, 33, 90, 188),
-      width: 33,
-            child: Row(
-              children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
-                        ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-        const  Padding(
-            padding:  EdgeInsets.only(right: 10),
-            child: Text(':'),
-          ),
-          Container(
-      color: const Color.fromARGB(255, 33, 90, 188),
-      width: 33,
-            child: Row(
-              children: [
-                   Padding(
-                     padding: const EdgeInsets.only(left: 8),
-                     child: timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
-                   ),
-                const SizedBox(width: 4),
-             //   Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.white, fontSize: 9)),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-          // Row(
-          //   children: [
-          //     Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Colors.white)),
-          //     const SizedBox(width: 3),
-          //     const Icon(Icons.arrow_forward_outlined, size: 10, color: Colors.white),
-          //   ],
-          // ),
-          const SizedBox(width: 10),
-        ],
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Container(
+        color: Colors.white,
+        child: Row(
+          children: [
+            Container(
+              width: 50,
+              color: Theme.of(context).primaryColor,
+              child: RowTimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true)),
+            const  SizedBox(width: 20,),
+            Container(
+              width: 50,
+              color: Theme.of(context).primaryColor,
+              child: RowTimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours, isFirst: true)),
+           const   SizedBox(width: 20,),
+            Container(
+              width: 60,
+              color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes, isFirst: true)),
+         const   SizedBox(width: 20,),
+            Container(
+              width: 60,
+              color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds, isFirst: true)),
+        
+          ],
+        ),
       ),
     ),
   );

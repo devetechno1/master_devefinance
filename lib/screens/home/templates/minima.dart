@@ -12,6 +12,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -72,7 +73,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: buildAppBar(34, context),
+            appBar: BuildAppBar( statusBarHeight: 34, context: context,),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -204,24 +205,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
     );
   }
 
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      scrolledUnderElevation: 0.0,
-      centerTitle: false,
-      elevation: 0,
-      flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
-          },
-          child: HomeSearchBox(context: context),
-        ),
-      ),
-    );
-  }
+  
 
   Container buildProductLoadingContainer(HomePresenter homeData) {
     return Container(
