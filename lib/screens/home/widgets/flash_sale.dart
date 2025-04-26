@@ -121,6 +121,7 @@ class FlashSale extends StatelessWidget {
                        style: const TextStyle(
                             fontSize: 10,
                             color: Color.fromARGB(255, 68, 71, 73),
+                            fontWeight: FontWeight.bold
                           ),
                           
                       children: const [
@@ -130,6 +131,7 @@ class FlashSale extends StatelessWidget {
                             Icons.arrow_forward_outlined,
                             size: 10,
                             color: Color.fromARGB(255, 68, 71, 73),
+                            
                           ),
                         ),
                       ]

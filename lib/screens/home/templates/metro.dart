@@ -12,6 +12,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
@@ -100,61 +101,7 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                              if(homeData.flashDeal != null)
-                              ...[
-
-                              GestureDetector(
-                                onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return FlashDealList();
-                                }));},
-                                child: ColoredBox(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                      ),
-                                       Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withValues(alpha: 0.5),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: const Offset(0, 3), // changes position of shadow
-                                  )],
-                                    color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(8.0),
-
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Column(
-                                      children: [
-                                        buildTimerRow(homeData.flashDealRemainingTime),
-//FlashBanner SpecialOffer
-                                        FlashBannerWidget(
-                                          bannerLink: homeData.flashDeal?.banner, 
-                                          slug: homeData.flashDeal!.slug,
-                                        ),
-
-                                          
-                                      ],
-                                    ),
-                                  )),
-                              ),
-
-                              ],
+                           const  FlashSale(iscircle: true)
                             ]),
                           ),                      
                             //move banner 
@@ -227,97 +174,97 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
 
 
 
-  Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        SizedBox(
-          width: 30,
-          height: 30,
-          child: CircularProgressIndicator(
-            value: currentValue / totalValue,
-            backgroundColor: const Color.fromARGB(255, 240, 220, 220),
-            valueColor: const AlwaysStoppedAnimation<Color>(
-                Color.fromARGB(255, 255, 80, 80)),
-            strokeWidth: 4.0,
-            strokeCap: StrokeCap.round,
-          ),
-        ),
-        Text(
-          timeText,
-          style: const TextStyle(
-            color: Color.fromARGB(228, 218, 29, 29),
-            fontSize: 10.0,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
+  //   return Stack(
+  //     alignment: Alignment.center,
+  //     children: [
+  //       SizedBox(
+  //         width: 30,
+  //         height: 30,
+  //         child: CircularProgressIndicator(
+  //           value: currentValue / totalValue,
+  //           backgroundColor: const Color.fromARGB(255, 240, 220, 220),
+  //           valueColor: const AlwaysStoppedAnimation<Color>(
+  //               Color.fromARGB(255, 255, 80, 80)),
+  //           strokeWidth: 4.0,
+  //           strokeCap: StrokeCap.round,
+  //         ),
+  //       ),
+  //       Text(
+  //         timeText,
+  //         style: const TextStyle(
+  //           color: Color.fromARGB(228, 218, 29, 29),
+  //           fontSize: 10.0,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
   
 
-  Widget buildTimerRow(CurrentRemainingTime time) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-      child: Row(
-        children: [
-          const Spacer(),
+  // Widget buildTimerRow(CurrentRemainingTime time) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+  //     child: Row(
+  //       children: [
+  //         const Spacer(),
 
-          Column(
-            children: [
-              timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 3)),
-              const SizedBox(height: 5),
-              Text(LangText(context).local.days, style: const TextStyle(color: Colors.grey, fontSize: 10))
-            ],
-          ),
-          const SizedBox(width: 12),
-          Column(
-            children: [
-              timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
-              const SizedBox(height: 5),
-              Text(LangText(context).local.hours, style: const TextStyle(color: Colors.grey, fontSize: 10))
-            ],
-          ),
-          const SizedBox(width: 10),
-          Column(
-            children: [
-              timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
-              const SizedBox(height: 5),
-              Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.grey, fontSize: 10))
-            ],
-          ),
-          const SizedBox(width: 5),
-          Column(
-            children: [
-              timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
-              const SizedBox(height: 5),
-              Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.grey, fontSize: 10))
-            ],
-          ),
-          const SizedBox(width: 10),
-          const Column(
-            children: [
-            ///  Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
-              SizedBox(height: 12),
-            ],
-          ),
-          Row(
-            children: [
-              Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
-              const SizedBox(width: 3),
-              const Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
-              const SizedBox(width: 10),
-            ],
-          )
-        ],
-      ),
-    );
-  }
+  //         Column(
+  //           children: [
+  //             timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 3)),
+  //             const SizedBox(height: 5),
+  //             Text(LangText(context).local.days, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //           ],
+  //         ),
+  //         const SizedBox(width: 12),
+  //         Column(
+  //           children: [
+  //             timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
+  //             const SizedBox(height: 5),
+  //             Text(LangText(context).local.hours, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //           ],
+  //         ),
+  //         const SizedBox(width: 10),
+  //         Column(
+  //           children: [
+  //             timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
+  //             const SizedBox(height: 5),
+  //             Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //           ],
+  //         ),
+  //         const SizedBox(width: 5),
+  //         Column(
+  //           children: [
+  //             timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
+  //             const SizedBox(height: 5),
+  //             Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //           ],
+  //         ),
+  //         const SizedBox(width: 10),
+  //         const Column(
+  //           children: [
+  //           ///  Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
+  //             SizedBox(height: 12),
+  //           ],
+  //         ),
+  //         Row(
+  //           children: [
+  //             Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
+  //             const SizedBox(width: 3),
+  //             const Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
+  //             const SizedBox(width: 10),
+  //           ],
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  String timeText(String val, {int default_length = 2}) {
-    return val.padLeft(default_length, '0');
-  }
-}
+//   String timeText(String val, {int default_length = 2}) {
+//     return val.padLeft(default_length, '0');
+//   }
+ }
 
 
 
