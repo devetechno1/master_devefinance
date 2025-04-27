@@ -84,6 +84,8 @@
   "loading_countries_ucf": "Loading Countries ...",
   "loading_states_ucf": "Loading governorate ...",
   "loading_cities_ucf": "Loading Cities ...",
+  "check_your_internet_connection": "Check your internet connection",
+  "success_internet_connection":"Success internet connection",
   "select_a_country_first": "Select a country first",
   "select_a_state_first": "Select a Governorate first",
   "edit_ucf": "Edit",
