@@ -115,6 +115,7 @@ class BusinessSettingsData extends Equatable {
   final Color? flashDealBgColor;
   final dynamic flashDealBgFullWidth;
   final String? flashDealBannerMenuText;
+  final bool isLightFlashDealTextColor;
   final Color? todaysDealBannerTextColor;
   final String? couponBackgroundImage;
   final bool adminLoginPageImage;
@@ -305,6 +306,7 @@ class BusinessSettingsData extends Equatable {
     this.aboutUsDescription,
     this.contactAddress,
     this.contactPhone = false,
+    this.isLightFlashDealTextColor = false,
     this.contactEmail,
     this.widgetOneLabels,
     this.widgetOneLinks,
@@ -613,6 +615,7 @@ class BusinessSettingsData extends Equatable {
       flashDealBgColor: ColorHelper.stringToColor(data['flash_deal_bg_color'] as String?),
       flashDealBgFullWidth: data['flash_deal_bg_full_width'] as dynamic,
       flashDealBannerMenuText: data['flash_deal_banner_menu_text'] as String?,
+      isLightFlashDealTextColor: (data['flash_deal_banner_menu_text'] as String?) == "light",
       todaysDealBannerTextColor:
          ColorHelper.stringToColor (data['todays_deal_banner_text_color'] as String?),
       couponBackgroundImage: data['coupon_background_image'] as String?,

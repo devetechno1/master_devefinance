@@ -21,8 +21,8 @@ import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 
-class ReclassictScreen extends StatefulWidget {
-  const ReclassictScreen({
+class ReClassicScreen extends StatefulWidget {
+  const ReClassicScreen({
     Key? key,
     this.title,
     this.show_back_button = false,
@@ -34,10 +34,10 @@ class ReclassictScreen extends StatefulWidget {
   final bool go_back;
 
   @override
-  _ReclassictScreenState createState() => _ReclassictScreenState();
+  _ReClassicScreenState createState() => _ReClassicScreenState();
 }
 
-class _ReclassictScreenState extends State<ReclassictScreen> with TickerProviderStateMixin {
+class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {

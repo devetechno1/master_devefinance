@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart' as productMini;
@@ -468,9 +466,9 @@ resetTodayDeals() {
     mainScrollController.addListener(() {
       if (mainScrollController.positions.isNotEmpty &&
           mainScrollController.positions.first.pixels ==
-              mainScrollController.positions.first.maxScrollExtent) {
+              mainScrollController.positions.first.maxScrollExtent && (totalAllProductData ?? 10000) > allProductList.length) {
         allProductPage++;
-        ToastComponent.showDialog(LangText(context).local.loading_more_products_ucf);
+        // ToastComponent.showDialog(LangText(context).local.loading_more_products_ucf);
         showAllLoadingContainer = true;
         fetchAllProducts();
       }

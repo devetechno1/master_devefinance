@@ -22,15 +22,19 @@ class HomeAllProducts2 extends StatelessWidget {
           child: ShimmerHelper().buildProductGridShimmer(
               scontroller: homeData!.allProductScrollController));
     } else if (homeData!.allProductList.isNotEmpty) {
+      final bool isLoadingMore = homeData!.allProductList.length < (homeData!.totalAllProductData ?? 0);
       return MasonryGridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
-          itemCount: homeData!.allProductList.length,
+          itemCount:  isLoadingMore? homeData!.allProductList.length + 2 : homeData!.allProductList.length,
           shrinkWrap: true,
           padding: const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
+            if (index > homeData!.allProductList.length - 1) {
+              return ShimmerHelper().buildBasicShimmer(height: 200);
+            }
             return ProductCardBlack(
               id: homeData!.allProductList[index].id,
               slug: homeData!.allProductList[index].slug,

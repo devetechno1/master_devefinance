@@ -17,7 +17,7 @@ class TimeCircularContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.square(
-      dimension: 40,
+      dimension: 50,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -37,6 +37,7 @@ class TimeCircularContainer extends StatelessWidget {
             right: 4,
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   timeText,
@@ -47,7 +48,10 @@ class TimeCircularContainer extends StatelessWidget {
                   ),
                 ),
                // SizedBox(width: 12,),
-                Flexible(child: FittedBox(fit: BoxFit.scaleDown, child: Text(timeType, style: TextStyle(color:Theme.of(context).primaryColor, fontSize: 7)))),
+                Flexible(child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: FittedBox(fit: BoxFit.scaleDown, child: Text(timeType, style: TextStyle(color:Theme.of(context).primaryColor, fontSize: 7))),
+                )),
               ],
             ),
           ),

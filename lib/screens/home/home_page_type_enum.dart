@@ -15,12 +15,12 @@ import 'templates/metro.dart';
 /// that we get from '/api/v2/business-settings' endpoint with key 'homepage_select', 
 /// when admin change page you have to hot restart app.
 enum HomePageType {
-  classic('classic', screen: const ClassicScreen()),
-  metro('metro', screen:  const MetroScreen()),
-  minima('minima', screen: const MinimaScreen()),
-  megaMart('megamart', screen: const MegamartScreen()),
-  reClassic('re-classic', screen: const ReclassictScreen()),
-  home('home', screen: const Home());
+  classic('classic', screen: ClassicScreen()),
+  metro('metro', screen: MetroScreen()),
+  minima('minima', screen: MinimaScreen()),
+  megaMart('megamart', screen: MegamartScreen()),
+  reClassic('re-classic', screen: ReClassicScreen()),
+  home('home', screen: Home());
 
   final String typeString;
   final Widget screen;
