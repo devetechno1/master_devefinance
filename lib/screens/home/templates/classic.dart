@@ -1,9 +1,6 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';

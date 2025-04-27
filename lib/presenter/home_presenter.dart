@@ -468,9 +468,9 @@ resetTodayDeals() {
     mainScrollController.addListener(() {
       if (mainScrollController.positions.isNotEmpty &&
           mainScrollController.positions.first.pixels ==
-              mainScrollController.positions.first.maxScrollExtent) {
+              mainScrollController.positions.first.maxScrollExtent && (totalAllProductData ?? 10000) > allProductList.length) {
         allProductPage++;
-        ToastComponent.showDialog(LangText(context).local.loading_more_products_ucf);
+        // ToastComponent.showDialog(LangText(context).local.loading_more_products_ucf);
         showAllLoadingContainer = true;
         fetchAllProducts();
       }

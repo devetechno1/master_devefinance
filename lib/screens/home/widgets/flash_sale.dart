@@ -28,7 +28,8 @@ class FlashSale extends StatelessWidget {
             children: [
               
               GestureDetector(
-      onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
+      onTap: (){
+         Navigator.push(context, MaterialPageRoute(builder: (context) {
         return FlashDealList();
       }));},
       child: ColoredBox(
@@ -36,7 +37,7 @@ class FlashSale extends StatelessWidget {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
+              padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
               child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             ),
               Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
@@ -48,8 +49,7 @@ class FlashSale extends StatelessWidget {
               
                  Center(
                    child: Container(
-                    width: context.isPhoneWidth ? double.maxFinite : 300,
-                    margin: context.isPhoneWidth ? null : const EdgeInsets.symmetric(horizontal: 25),
+                    width: context.isPhoneWidth ? double.maxFinite : 350,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -72,7 +72,6 @@ class FlashSale extends StatelessWidget {
                           bannerLink: homeData.flashDeal?.banner, 
                           slug: homeData.flashDeal!.slug,
                         ),
-                        const SizedBox(height: 10),
                       ],
                                    )),
                  ),
@@ -91,94 +90,117 @@ class FlashSale extends StatelessWidget {
         if(iscircle)  {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
-            child: SingleChildScrollView(
-              child: Row(
-                
-                children: [
-               const Spacer(),
-               //const SizedBox(width: 20,),
-                  TimeCircularContainer(
-                    currentValue: time.days,
-                  totalValue: 365,
-                  timeText:timeText((time.days).toString(), default_length: 3),
-                  timeType: LangText(context).local.days,),
-                  const SizedBox(width: 10,),
-                  TimeCircularContainer(
-                    currentValue: time.hours,
-                    totalValue: 24,
-                    timeText:timeText((time.hours).toString(), default_length: 3),
-                    timeType: LangText(context).local.hours,),
-                    const SizedBox(width: 10,),
-                  TimeCircularContainer(
-                    currentValue: time.min,
-                    totalValue: 60,
-                    timeText:timeText((time.min).toString(), default_length: 2),
-                    timeType: LangText(context).local.minutes,),
-                    const  SizedBox(width: 15,),
-                    TimeCircularContainer(
-                      currentValue: time.sec,
-                      totalValue: 60,
-                      timeText:timeText((time.sec).toString(), default_length: 2),
-                      timeType: LangText(context).local.seconds,),
-                    const  SizedBox(width: 10,),
-                    Flexible(
-                      child: RichText(text: TextSpan(text:LangText(context).local.shop_more_ucf,
-                       style: const TextStyle(
-                            fontSize: 10,
-                            color: Color.fromARGB(255, 68, 71, 73),
-                            fontWeight: FontWeight.bold
-                          ),
-                          
-                      children: const [
-                        
-                        WidgetSpan(
-                          child:  Icon(
-                            Icons.arrow_forward_outlined,
-                            size: 10,
-                            color: Color.fromARGB(255, 68, 71, 73),
-                            
-                          ),
-                        ),
-                      ]
-                       ),
-                      
-                      
-                      ),
-                      
-                      
-                      )
-                    
-                        
-                //   Flexible(
-                //     flex: 2,
-                //   child: Row(
-                //    // mainAxisSize: MainAxisSize.min,
-                //     children: [
-                //       Flexible(
-                //         flex: 2,
-                //         child: Text(
-                //           LangText(context).local.shop_more_ucf,
-                //           //overflow: TextOverflow.clip, // عشان لو كبر الكلام
-                //           style: const TextStyle(
-                //             fontSize: 10,
-                //             color: Color.fromARGB(255, 68, 71, 73),
-                //           ),
-                //         ),
-                //       ),
-                //       const SizedBox(width: 3),
-                //       const Icon(
-                //         Icons.arrow_forward_outlined,
-                //         size: 10,
-                //         color: Color.fromARGB(255, 68, 71, 73),
-                //       ),
-                //       const SizedBox(width: 10),
-                //     ],
-                //   ),
-                // ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               
+              children: [
+            // const Spacer(),
+             //const SizedBox(width: 20,),
+                Row(
+                  children: [
+                    TimeCircularContainer(
+                      currentValue: time.days,
+                      totalValue: 365,
+                      timeText:timeText((time.days).toString(), default_length: 3),
+                      timeType: LangText(context).local.days,
+                    ),
+                    const SizedBox(width: 10),
+                    TimeCircularContainer(
+                      currentValue: time.hours,
+                      totalValue: 24,
+                      timeText:timeText((time.hours).toString(), default_length: 3),
+                      timeType: LangText(context).local.hours,),
+                      const SizedBox(width: 10,),
+                    TimeCircularContainer(
+                      currentValue: time.min,
+                      totalValue: 60,
+                      timeText:timeText((time.min).toString(), default_length: 2),
+                      timeType: LangText(context).local.minutes,),
+                      const  SizedBox(width: 15,),
+                      TimeCircularContainer(
+                        currentValue: time.sec,
+                        totalValue: 60,
+                        timeText:timeText((time.sec).toString(), default_length: 2),
+                        timeType: LangText(context).local.seconds,),
+                  ],
+                ),
+                  Flexible(
+                    child: Builder(
+                      builder: (context) {
+                        final Color textColor = AppConfig.businessSettingsData.isLightFlashDealTextColor? Colors.white : Colors.black ;
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(width: 10,),
+                            Flexible(
+                              child: GestureDetector(
+                                onTap:() {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return FlashDealList();
+                               }));
+                                  
+                                },
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: textColor,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                    children: [
+                                      TextSpan(text: LangText(context).local.shop_more_ucf),
+                                      WidgetSpan(
+                                        alignment: PlaceholderAlignment.middle,
+                                        child:  Padding(
+                                          padding: const EdgeInsetsDirectional.only(start: 4.0),
+                                          child: Icon(
+                                            Icons.arrow_forward_outlined,
+                                            size: 16,
+                                            color: textColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ]
+                                 ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    ),
+                  )
+                  
+                      
+              //   Flexible(
+              //     flex: 2,
+              //   child: Row(
+              //    // mainAxisSize: MainAxisSize.min,
+              //     children: [
+              //       Flexible(
+              //         flex: 2,
+              //         child: Text(
+              //           LangText(context).local.shop_more_ucf,
+              //           //overflow: TextOverflow.clip, // عشان لو كبر الكلام
+              //           style: const TextStyle(
+              //             fontSize: 10,
+              //             color: Color.fromARGB(255, 68, 71, 73),
+              //           ),
+              //         ),
+              //       ),
+              //       const SizedBox(width: 3),
+              //       const Icon(
+              //         Icons.arrow_forward_outlined,
+              //         size: 10,
+              //         color: Color.fromARGB(255, 68, 71, 73),
+              //       ),
+              //       const SizedBox(width: 10),
+              //     ],
+              //   ),
+              // ),
             
-                ],
-              ),
+                        
+              ],
             ),
           );
         }

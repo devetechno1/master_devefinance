@@ -18,7 +18,7 @@ enum HomePageType {
   classic('classic', screen: ClassicScreen()),
   metro('metro', screen:  MetroScreen()),
   minima('minima', screen: MinimaScreen()),
-  megaMart('megamart', screen: MetroScreen()),
+  megaMart('megamart', screen: MegamartScreen()),
   reClassic('re-classic', screen: ReclassictScreen()),
   home('home', screen:  Home());
 
