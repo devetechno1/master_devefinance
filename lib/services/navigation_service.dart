@@ -8,19 +8,24 @@ import '../app_config.dart';
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static void handleUrls(String? url, [BuildContext? context]) {
+  static Future<void> handleUrls(String? url, [BuildContext? context]) async {
     if(url?.isNotEmpty != true) return;
     context ??= OneContext().context!;
     final Uri? uri = Uri.tryParse(url ?? '');
-    if(uri?.hasAbsolutePath ?? false){
-      if(uri?.host ==  AppConfig.DOMAIN_PATH){
-        context.push(uri!.path);
+    try {
+      if(uri?.hasAbsolutePath ?? false){
+        if(uri?.host ==  AppConfig.DOMAIN_PATH){
+          context.push(uri!.path);
+        }else{
+          await launchUrl(uri!);
+        }
       }else{
-        launchUrl(uri!);
+        throw 'uri does not has absolute path';
       }
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar( content: Text('Invalid URL')));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar( content: Text('Invalid URL')));      
     }
+
   }
 
 /*

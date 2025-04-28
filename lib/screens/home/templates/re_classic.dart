@@ -20,6 +20,7 @@ import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
+import '../widgets/whatsapp_floating_widget.dart';
 
 class ReClassicScreen extends StatefulWidget {
   const ReClassicScreen({
@@ -69,6 +70,8 @@ class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderSt
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
+         floatingActionButton: whatsappFloatingButtonWidget,
+
             appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(

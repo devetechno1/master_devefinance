@@ -23,6 +23,7 @@ import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/new_products_list_sliver.dart';
+import '../widgets/whatsapp_floating_widget.dart';
 
 class MinimaScreen extends StatefulWidget {
   const MinimaScreen({
@@ -72,6 +73,8 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
+         floatingActionButton: whatsappFloatingButtonWidget,
+
             appBar: BuildAppBar( statusBarHeight: 34, context: context,),
             backgroundColor: Colors.white,
             body: ListenableBuilder(

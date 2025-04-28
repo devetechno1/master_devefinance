@@ -10,6 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_cat
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/whatsapp_floating_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
@@ -68,6 +69,7 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
+          floatingActionButton: whatsappFloatingButtonWidget,
             appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
