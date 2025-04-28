@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -26,21 +27,21 @@ class BrandHorizontalListWidget extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
                       width: (MediaQuery.of(context).size.width - 64) / 3)),
             ),
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
                       width: (MediaQuery.of(context).size.width - 64) / 3)),
             ),
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
                       width: (MediaQuery.of(context).size.width - 160) / 3)),

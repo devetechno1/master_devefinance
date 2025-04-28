@@ -116,7 +116,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(14.0),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

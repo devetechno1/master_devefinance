@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 
 import '../app_config.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -23,7 +24,7 @@ class NavigationService {
         throw 'uri does not has absolute path';
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar( content: Text('Invalid URL')));      
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar( content: Text(AppLocalizations.of(context)!.invalidURL)));      
     }
 
   }

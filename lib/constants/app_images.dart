@@ -40,7 +40,6 @@ abstract final class AppImages {
   static const String wallet= "$_assetDir/wallet.png";
   static const String orders= "$_assetDir/orders.png";
   static const String heart= "$_assetDir/heart.png";
-
   static const String points = "$_assetDir/points.png";
   static const String notification = "$_assetDir/notification.png";
   static const String refund = "$_assetDir/refund.png";

@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,7 @@ class ShimmerHelper {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: Shimmer.fromColors(
             baseColor: MyTheme.shimmer_base,
             highlightColor: MyTheme.shimmer_highlighted,
@@ -164,7 +165,7 @@ class ShimmerHelper {
       mainAxisExtent = 100.0,
       controller}) {
     return GridView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         scrollDirection: Axis.horizontal,
         controller: controller,
         itemCount: item_count,
@@ -191,7 +192,7 @@ class ShimmerHelper {
       int itemCount = 10,
       double itemHeight = 120}) {
     return ListView.separated(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
       separatorBuilder: (context, index) => SizedBox(
         width: separationWidth,
       ),

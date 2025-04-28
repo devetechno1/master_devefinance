@@ -28,6 +28,7 @@
   "minutes": "Minutes",
   "hours": "Hours",
   "days": "Days",
+  "invalidURL": "Invalid URL",
   "my_classified_ads_ucf": "My Classified Ads",
   "all_classified_ads_ucf": "All Classified Ads",
   "privacy_policy_ucf": "Privacy Policy",

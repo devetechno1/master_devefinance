@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -138,7 +139,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
           Visibility(
             visible: widget.showBottomToolbar,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding:const  EdgeInsets.all(AppDimensions.paddingDefualt),
               child: Row(children: _generateBottomToolbar(context)),
             ),
           )
