@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import '../presenter/home_presenter.dart';
@@ -28,7 +29,7 @@ class PiratedWidget extends StatelessWidget {
                     animation: homeData!.pirated_logo_animation,
                     builder: (context, child) {
                       return Image.asset(
-                        "assets/pirated_square.png",
+                        AppImages.piratedSquare,
                         height: homeData!.pirated_logo_animation.value,
                         color: Colors.white,
                       );

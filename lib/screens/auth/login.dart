@@ -634,7 +634,7 @@ class _LoginState extends State<Login> {
                             },
                             child: Container(
                               width: 28,
-                              child: Image.asset("assets/google_logo.png"),
+                              child: Image.asset(AppImages.google),
                             ),
                           ),
                         ),
@@ -648,7 +648,7 @@ class _LoginState extends State<Login> {
                               },
                               child: Container(
                                 width: 28,
-                                child: Image.asset("assets/facebook_logo.png"),
+                                child: Image.asset(AppImages.facebook),
                               ),
                             ),
                           ),

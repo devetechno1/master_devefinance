@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
+
 class CartSeller {
   String? id;
   String? name;
@@ -27,7 +29,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     name: "HP Spectre x360 13-AE517TU 8th Gen Intel Core i7 8550U",
     price: 548.00,
     quantity:2,
-    image: "dummy_assets/p1.jpeg",
+    image: AppImages.p1,
   ),
   CartSellerItem(
     id: "2",
@@ -35,7 +37,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     name: "Makeup Cosmetic Puff Smooth Beauty Foundation",
     price: 15.00,
     quantity:1,
-    image: "dummy_assets/p2.jpeg",
+    image: AppImages.p2,
   ),
   CartSellerItem(
     id: "3",
@@ -44,7 +46,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
         "Apple Macbook Air (2017) Dual Core Intel Core i5 (1.8-2.9GHz, 8GB 1600MHz LPDDR3, 256GB PCIe Onboard SSD)",
     price: 1200.00,
     quantity:4,
-    image: "dummy_assets/p3.jpeg",
+    image: AppImages.p3,
   ),
   CartSellerItem(
     id: "4",
@@ -52,7 +54,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     name: "Chelsea Crew Black Label Ollie Tan Leather High Heel",
     price: 7.00,
     quantity:10,
-    image: "dummy_assets/p4.jpeg",
+    image: AppImages.p4,
   ),
 ];
 
@@ -64,7 +66,7 @@ List<CartSellerItem> cartSellerItemsList_2 = [
         "Women Lady Leather Handbag Shoulder Satchel Ladies Bag Evening Tote Purse Hot",
     price: 200.00,
     quantity:1,
-    image: "dummy_assets/p5.jpeg",
+    image: AppImages.p5,
   ),
   CartSellerItem(
     id: "6",
@@ -72,7 +74,7 @@ List<CartSellerItem> cartSellerItemsList_2 = [
     name: "New football shoes for Football Boots Nike Phantom ",
     price: 340.00,
     quantity:3,
-    image: "dummy_assets/p6.jpeg",
+    image: AppImages.p6,
   ),
 ];
 
@@ -84,7 +86,7 @@ List<CartSellerItem> cartSellerItemsList_3 = [
         "LUENX Aviator Sunglasses for Men Women Polarized - UV 400 Protection with case 60MM",
     price: 45.00,
     quantity: 5,
-    image: "dummy_assets/p7.jpeg",
+    image: AppImages.p7,
   ),
 ];
 

@@ -811,7 +811,7 @@
 //               child: ClipRRect(
 //                 borderRadius: BorderRadius.circular(5),
 //                 child: FadeInImage.assetNetwork(
-//                   placeholder: 'assets/placeholder.png',
+//                   placeholder: 'AppImages.placeholder',
 //                   image: _shopDetails?.logo ?? "",
 //                   fit: BoxFit.cover,
 //                   imageErrorBuilder: (BuildContext, Object, StackTrace) {
@@ -1012,6 +1012,7 @@
 //         });
 //   }
 // }
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
@@ -1461,7 +1462,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       height: 280,
       decoration: const BoxDecoration(
           color: MyTheme.mainColor,
-          image: DecorationImage(image: AssetImage("assets/background_1.png"))),
+          image: DecorationImage(image: AssetImage(AppImages.backgroundOne))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1651,7 +1652,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                       width: double.infinity,
                       child: ClipRRect(
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder_rectangle.png',
+                          placeholder: AppImages.placeholderRectangle,
                           image: i,
                           fit: BoxFit.cover,
                         ),
@@ -1841,11 +1842,11 @@ class _SellerDetailsState extends State<SellerDetails> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
+                  placeholder: AppImages.placeholder,
                   image: _shopDetails?.logo ?? "",
                   fit: BoxFit.cover,
                   imageErrorBuilder: (BuildContext, Object, StackTrace) {
-                    return Image.asset('assets/placeholder_rectangle.png');
+                    return Image.asset(AppImages.placeholderRectangle);
                   },
                 ),
               ),
@@ -2090,8 +2091,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                       clipBehavior: Clip.hardEdge,
                       borderRadius: BorderRadius.circular(10),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
-                        image: widget.image ?? 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
+                        image: widget.image ?? AppImages.placeholder,
                         fit: BoxFit.cover,
                       ),
                     ),

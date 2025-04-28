@@ -96,6 +96,7 @@
 //     );
 //   }
 // }
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -119,7 +120,7 @@ class AuthScreen {
               color: Theme.of(context).primaryColor,
               alignment: Alignment.topRight,
               child: Image.asset(
-                "assets/background_1.png",
+               AppImages.backgroundOne,
               ),
             ),
             // CustomScrollView
@@ -144,7 +145,7 @@ class AuthScreen {
                                   color: MyTheme.white,
                                   borderRadius: BorderRadius.circular(8)),
                               child: Image.asset(
-                                  'assets/login_registration_form_logo.png'),
+                                  AppImages.loginRegisteration),
                             ),
                           ],
                         ),

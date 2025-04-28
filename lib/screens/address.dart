@@ -597,7 +597,7 @@ class _AddressState extends State<Address> {
         width: 45,
         padding: const EdgeInsets.symmetric(horizontal: 15),
         alignment: AlignmentDirectional.topEnd,
-        child: Image.asset("assets/more.png",
+        child: Image.asset(AppImages.more,
             width: 4, height: 16, fit: BoxFit.contain, color: MyTheme.grey_153),
       ),
       onSelected: (MenuOptions result) {

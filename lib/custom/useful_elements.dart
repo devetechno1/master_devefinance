@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -74,7 +75,7 @@ class UsefulElements {
           borderRadius: borderRadius,
           child: url != null && url.isNotEmpty
               ? FadeInImage.assetNetwork(
-                  placeholder: "assets/placeholder.png",
+                  placeholder: AppImages.placeholder,
                   image: url,
                   imageErrorBuilder: (context, object, stackTrace) {
                     return Container(
@@ -83,7 +84,7 @@ class UsefulElements {
                       decoration: BoxDecoration(
                           borderRadius: borderRadius,
                           image: const DecorationImage(
-                              image: AssetImage("assets/placeholder.png"),
+                              image: AssetImage(AppImages.placeholder),
                               fit: BoxFit.cover)),
                     );
                   },
@@ -97,7 +98,7 @@ class UsefulElements {
                   decoration: BoxDecoration(
                       borderRadius: borderRadius,
                       image: const DecorationImage(
-                          image: AssetImage("assets/placeholder.png"),
+                          image: AssetImage(AppImages.placeholder),
                           fit: BoxFit.cover)),
                 ),
         ),

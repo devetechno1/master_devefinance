@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/followed_sellers_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -158,12 +159,12 @@ class _FollowedSellersState extends State<FollowedSellers> {
                       borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(16), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
                         image: sellerInfo.shopLogo!,
                         fit: BoxFit.scaleDown,
                         imageErrorBuilder: (BuildContext errorContext,
                             Object obj, StackTrace? st) {
-                          return Image.asset('assets/placeholder.png');
+                          return Image.asset(AppImages.placeholder);
                         },
                       ))),
             ),

@@ -118,7 +118,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                                         padding: const EdgeInsetsDirectional.fromSTEB(22, 10, 10, 10),
                                         child: Text(AppLocalizations.of(context)!.flash_deal_ucf, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                       ),
-                                       Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
+                                       Image.asset(AppImages.flashDeal, height: 20, color: MyTheme.golden),
                                     ],
                                   ),
                                 ),

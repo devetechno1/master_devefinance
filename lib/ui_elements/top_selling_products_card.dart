@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                   borderRadius: const BorderRadius.horizontal(
                       left: Radius.circular(6), right: Radius.zero),
                   child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
+                    placeholder:AppImages.placeholder,
                     image: widget.image!,
                     fit: BoxFit.cover,
                   ))),

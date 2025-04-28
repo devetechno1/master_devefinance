@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/system_config.dart';
@@ -34,7 +35,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(6), right: Radius.zero),
                     child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/placeholder.png',
+                      placeholder: AppImages.placeholder,
                       image: cartProvider.shopList[sellerIndex]
                           .cartItems[itemIndex].productThumbnailImage,
                       fit: BoxFit.contain,
@@ -105,7 +106,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 14.0),
                       child: Image.asset(
-                        'assets/trash.png',
+                       AppImages.trash,
                         height: 16,
                         color: Colors.red,
                       ),

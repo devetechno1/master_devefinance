@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -197,7 +198,7 @@ class _MessengerListState extends State<MessengerList> {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(35),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
+                  placeholder: AppImages.placeholder,
                   image: _list[index].shop_logo,
                   fit: BoxFit.contain,
                 )),

@@ -40,7 +40,7 @@ class FlashSale extends StatelessWidget {
               padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
               child: Text(AppLocalizations.of(context)!.flash_sale, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             ),
-              Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
+              Image.asset(AppImages.flashDeal, height: 20, color: MyTheme.golden),
           ],
         ),
       ),

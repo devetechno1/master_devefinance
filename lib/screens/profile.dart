@@ -204,7 +204,7 @@ class _ProfileState extends State<Profile> {
               color: Theme.of(context).primaryColor,
               alignment: Alignment.topRight,
               child: Image.asset(
-                "assets/background_1.png",
+                AppImages.backgroundOne,
               )),
           Scaffold(
             backgroundColor: Colors.transparent,
@@ -319,7 +319,7 @@ class _ProfileState extends State<Profile> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildBottomVerticalCardListItem("assets/products.png",
+              buildBottomVerticalCardListItem(AppImages.products,
                   LangText(context).local.top_selling_products_ucf,
                   onPressed: () {
                 AIZRoute.push(context, TopSellingProducts());
@@ -335,7 +335,7 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildBottomVerticalCardListItem(
-                    "assets/wholesale.png", LangText(context).local.wholesale_product, onPressed: () {
+                    AppImages.wholeSale, LangText(context).local.wholesale_product, onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -350,7 +350,7 @@ class _ProfileState extends State<Profile> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildBottomVerticalCardListItem("assets/blog.png", LangText(context).local.blog_list_ucf,
+              buildBottomVerticalCardListItem(AppImages.blog, LangText(context).local.blog_list_ucf,
                   onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const BlogListScreen()));
@@ -362,7 +362,7 @@ class _ProfileState extends State<Profile> {
             ],
           ),
 
-          buildBottomVerticalCardListItem("assets/download.png",
+          buildBottomVerticalCardListItem(AppImages.download,
               LangText(context).local.all_digital_products_ucf, onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const DigitalProducts();
@@ -373,7 +373,7 @@ class _ProfileState extends State<Profile> {
             color: MyTheme.light_grey,
           ),
            buildBottomVerticalCardListItem(
-              "assets/coupon.png", LangText(context).local.coupons_ucf,
+              AppImages.coupon, LangText(context).local.coupons_ucf,
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const Coupons();
@@ -389,7 +389,7 @@ class _ProfileState extends State<Profile> {
              if (homeData.isFlashDealInitial != false)
               buildBottomVerticalCardListItem(
               
-                  "assets/flash_deal.png", AppLocalizations.of(context)!.flash_deal_ucf,
+                  AppImages.flashDeal, AppLocalizations.of(context)!.flash_deal_ucf,
                   onPressed: () {
 
 
@@ -407,7 +407,7 @@ class _ProfileState extends State<Profile> {
           ),
           //flash_deals
           buildBottomVerticalCardListItem(
-              "assets/brands.png", AppLocalizations.of(context)!.brands_ucf,
+              AppImages.brands, AppLocalizations.of(context)!.brands_ucf,
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const Filter(selected_filter: "brands");
@@ -422,7 +422,7 @@ class _ProfileState extends State<Profile> {
           if (false)
             Column(
               children: [
-                buildBottomVerticalCardListItem("assets/auction.png",
+                buildBottomVerticalCardListItem(AppImages.auction,
                     LangText(context).local.on_auction_products_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -439,7 +439,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(
-                    "assets/my_clissified.png", LangText(context).local.my_classified_ads_ucf,
+                    AppImages.myClassified, LangText(context).local.my_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MyClassifiedAds();
@@ -456,7 +456,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(
-                    "assets/classified_product.png", LangText(context).local.all_classified_ads_ucf,
+                    AppImages.classifiedProduct, LangText(context).local.all_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ClassifiedAds();
@@ -472,7 +472,7 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.lastViewedProductActivation && is_logged_in.$)
             Column(
               children: [
-                buildBottomVerticalCardListItem("assets/last_view_product.png",
+                buildBottomVerticalCardListItem(AppImages.lastViewProduct,
                     LangText(context).local.last_view_product_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -490,7 +490,7 @@ class _ProfileState extends State<Profile> {
           if (false)
             Column(
               children: [
-                buildBottomVerticalCardListItem("assets/auction.png",
+                buildBottomVerticalCardListItem(AppImages.auction,
                     LangText(context).local.on_auction_products_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -531,7 +531,7 @@ class _ProfileState extends State<Profile> {
                                   Padding(
                                     padding: const EdgeInsetsDirectional.only(end: 24.0),
                                     child: Image.asset(
-                                      "assets/auction.png",
+                                      AppImages.auction,
                                       height: 16,
                                       width: 16,
                                       color: MyTheme.dark_font_grey,
@@ -671,7 +671,7 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.classifiedProduct)
             Column(
               children: [
-                buildBottomVerticalCardListItem("assets/shop.png",
+                buildBottomVerticalCardListItem(AppImages.shop,
                     LangText(context).local.browse_all_sellers_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -690,7 +690,7 @@ class _ProfileState extends State<Profile> {
           if (is_logged_in.$ && (AppConfig.businessSettingsData.classifiedProduct))
             Column(
               children: [
-                buildBottomVerticalCardListItem("assets/follow_seller.png",
+                buildBottomVerticalCardListItem(AppImages.followSeller,
                     LangText(context).local.followed_sellers_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -704,7 +704,7 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          buildBottomVerticalCardListItem("assets/delete.png",
+          buildBottomVerticalCardListItem(AppImages.delete,
                 LangText(context).local.privacy_policy_ucf, onPressed: () {
                 Navigator.push(
                   context,
@@ -725,7 +725,7 @@ class _ProfileState extends State<Profile> {
           if (is_logged_in.$)
             Column(
               children: [
-                buildBottomVerticalCardListItem("assets/delete.png",
+                buildBottomVerticalCardListItem(AppImages.delete,
                     LangText(context).local.delete_my_account, onPressed: () {
                   deleteWarningDialog();
                 }),
@@ -781,7 +781,7 @@ class _ProfileState extends State<Profile> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          buildHorizontalSettingItem(true, "assets/language.png",
+          buildHorizontalSettingItem(true, AppImages.language,
               AppLocalizations.of(context)!.language_ucf, () {
             Navigator.push(
               context,
@@ -801,7 +801,7 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/currency.png",
+                  AppImages.currency,
                   height: 16,
                   width: 16,
                   color: MyTheme.white,
@@ -822,7 +822,7 @@ class _ProfileState extends State<Profile> {
           ),
           buildHorizontalSettingItem(
               is_logged_in.$,
-              "assets/edit.png",
+              AppImages.edit,
               AppLocalizations.of(context)!.edit_profile_ucf,
               is_logged_in.$
                   ? () {
@@ -833,7 +833,7 @@ class _ProfileState extends State<Profile> {
                   : () => showLoginWarning()),
           buildHorizontalSettingItem(
               is_logged_in.$,
-              "assets/location.png",
+              AppImages.location,
               AppLocalizations.of(context)!.address_ucf,
               is_logged_in.$
                   ? () {
@@ -937,13 +937,13 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.walletSystem)
             Container(
               child: buildSettingAndAddonsHorizontalMenuItem(
-                  "assets/wallet.png",
+                  AppImages.wallet,
                   AppLocalizations.of(context)!.my_wallet_ucf, () {
                 Navigator.push(context, PageAnimation.fadeRoute(const Wallet()));
               }),
             ),
           buildSettingAndAddonsHorizontalMenuItem(
-              "assets/orders.png",
+              AppImages.orders,
               AppLocalizations.of(context)!.orders_ucf,
               is_logged_in.$
                   ? () {
@@ -952,7 +952,7 @@ class _ProfileState extends State<Profile> {
                     }
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
-              "assets/heart.png",
+              AppImages.heart,
               AppLocalizations.of(context)!.my_wishlist_ucf,
               is_logged_in.$
                   ? () {
@@ -962,7 +962,7 @@ class _ProfileState extends State<Profile> {
                   : () => null),
           if (club_point_addon_installed.$)
             buildSettingAndAddonsHorizontalMenuItem(
-                "assets/points.png",
+                AppImages.points,
                 AppLocalizations.of(context)!.club_point_ucf,
                 is_logged_in.$
                     ? () {
@@ -990,7 +990,7 @@ class _ProfileState extends State<Profile> {
                 },
               ),
               child: buildSettingAndAddonsHorizontalMenuItem(
-                  "assets/notification.png",
+                  AppImages.notification,
                   AppLocalizations.of(context)!.notification_ucf,
                   is_logged_in.$
                       ? () {
@@ -1005,7 +1005,7 @@ class _ProfileState extends State<Profile> {
           ),
           if (refund_addon_installed.$)
             buildSettingAndAddonsHorizontalMenuItem(
-                "assets/refund.png",
+                AppImages.refund,
                 AppLocalizations.of(context)!.refund_requests_ucf,
                 is_logged_in.$
                     ? () {
@@ -1015,7 +1015,7 @@ class _ProfileState extends State<Profile> {
                     : () => null),
           if (AppConfig.businessSettingsData.conversationSystem)
             buildSettingAndAddonsHorizontalMenuItem(
-                "assets/messages.png",
+                AppImages.messages,
                 AppLocalizations.of(context)!.messages_ucf,
                 is_logged_in.$
                     ? () {
@@ -1027,7 +1027,7 @@ class _ProfileState extends State<Profile> {
           if (false)
             if (AppConfig.businessSettingsData.classifiedProduct)
               buildSettingAndAddonsHorizontalMenuItem(
-                  "assets/classified_product.png",
+                  AppImages.classifiedProduct,
                   AppLocalizations.of(context)!.classified_products,
                   is_logged_in.$
                       ? () {
@@ -1037,7 +1037,7 @@ class _ProfileState extends State<Profile> {
                       : () => null),
 
           buildSettingAndAddonsHorizontalMenuItem(
-              "assets/download.png",
+              AppImages.download,
               AppLocalizations.of(context)!.downloads_ucf,
               is_logged_in.$
                   ? () {
@@ -1046,7 +1046,7 @@ class _ProfileState extends State<Profile> {
                     }
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
-              "assets/upload.png",
+              AppImages.upload,
               AppLocalizations.of(context)!.upload_file_ucf,
               is_logged_in.$
                   ? () {
@@ -1199,12 +1199,12 @@ class _ProfileState extends State<Profile> {
                       clipBehavior: Clip.hardEdge,
                       borderRadius: const BorderRadius.all(Radius.circular(100.0)),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
                         image: "${avatar_original.$}",
                         fit: BoxFit.fill,
                       ))
                   : Image.asset(
-                      'assets/profile_placeholder.png',
+                      AppImages.profilePlaceholder,
                       height: 48,
                       width: 48,
                       fit: BoxFit.fitHeight,

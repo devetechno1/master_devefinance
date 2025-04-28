@@ -1147,7 +1147,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                                   /*Image.asset(
                                         singleProduct.product_images[index])*/
                                   FadeInImage.assetNetwork(
-                                placeholder: 'assets/placeholder.png',
+                                placeholder: AppImages.placeholder,
                                 image: _productImageList[index],
                                 fit: BoxFit.contain,
                               )),
@@ -1166,7 +1166,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
               width: MediaQuery.of(context).size.width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder_rectangle.png',
+                placeholder: AppImages.placeholderRectangle,
                 image: _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
               )),

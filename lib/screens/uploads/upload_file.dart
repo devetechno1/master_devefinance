@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -544,7 +545,7 @@ class _UploadFileState extends State<UploadFile> {
             width: 35,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.topRight,
-            child: Image.asset("assets/more.png",
+            child: Image.asset(AppImages.more,
                 width: 3,
                 height: 15,
                 fit: BoxFit.contain,

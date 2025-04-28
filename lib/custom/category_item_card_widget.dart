@@ -46,7 +46,7 @@
 //                       topRight: Radius.circular(6),
 //                       topLeft: Radius.circular(6)),
 //                   child: FadeInImage.assetNetwork(
-//                     placeholder: 'assets/placeholder.png',
+//                     placeholder: 'AppImages.placeholder',
 //                     image: categoryResponse.categories![index].banner!,
 //                     fit: BoxFit.cover,
 //                     height: itemWidth,
@@ -80,6 +80,7 @@
 //   }
 // }
 
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import '../data_model/category_response.dart';
@@ -129,7 +130,7 @@ class CategoryItemCardWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
+                  placeholder: AppImages.placeholder,
                   image: categoryResponse.categories![index].coverImage ?? '',
                   //  image: categoryResponse.categories![index].banner!,
                   fit: BoxFit.cover,

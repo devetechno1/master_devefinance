@@ -276,7 +276,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                     Row(
                       children: [
                         Image.asset(
-                          "assets/package.png",
+                          AppImages.package,
                           height: 20,
                           width: 20,
                         ),
@@ -313,7 +313,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         const SizedBox(
                           width: 8,
                         ),
-                        Image.asset("assets/next_arrow.png",
+                        Image.asset(AppImages.nextArrow,
                             color: Theme.of(context).primaryColor,
                             height: 9.08,
                             width: 7),
@@ -425,7 +425,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                       const SizedBox(
                         height: 5,
                       ),
-                      Image.asset("assets/add.png",
+                      Image.asset(AppImages.add,
                           color: Theme.of(context).primaryColor, height: 18, width: 18),
                     ],
                   ),
@@ -656,7 +656,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
             width: 35,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.topRight,
-            child: Image.asset("assets/more.png",
+            child: Image.asset(AppImages.more,
                 width: 3,
                 height: 15,
                 fit: BoxFit.contain,

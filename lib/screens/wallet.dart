@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
@@ -452,7 +453,7 @@ class _WalletState extends State<Wallet> {
                   ),
                   const SizedBox(height: 14),
                   Image.asset(
-                    "assets/add.png",
+                    AppImages.add,
                     height: 20,
                     width: 20,
                   ),

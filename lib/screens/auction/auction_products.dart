@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -134,7 +135,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
             GestureDetector(
               onTap: () {},
               child: Image.asset(
-                'assets/search.png',
+                AppImages.search,
                 height: 20,
               ),
             ),

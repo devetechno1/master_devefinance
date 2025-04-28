@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -321,7 +322,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
   Container buildFlashDealBanner() {
     return Container(
       child: FadeInImage.assetNetwork(
-        placeholder: 'assets/placeholder_rectangle.png',
+        placeholder: AppImages.placeholderRectangle,
         image: flashDealInfo?.banner ?? "",
         fit: BoxFit.cover,
         width: DeviceInfo(context).width,
@@ -422,7 +423,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             width: 10,
           ),
           Image.asset(
-            "assets/flash_deal.png",
+            AppImages.flashDeal,
             height: 20,
             color: MyTheme.golden,
           ),
@@ -491,7 +492,8 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             width: 10,
           ),
           Image.asset(
-            "assets/flash_deal.png",
+            AppImages.flashDeal,
+    
             height: 20,
             color: MyTheme.golden,
           ),

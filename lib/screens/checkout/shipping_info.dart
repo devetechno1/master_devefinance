@@ -978,7 +978,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               borderRadius: const BorderRadius.horizontal(
                   left: Radius.circular(6), right: Radius.zero),
               child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder.png',
+                placeholder: AppImages.placeholder,
                 image: _deliveryInfoList[sellerIndex]
                     .cartItems![itemIndex]
                     .productThumbnailImage!,

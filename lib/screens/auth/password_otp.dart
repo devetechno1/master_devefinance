@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
@@ -365,7 +366,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Image.asset(
-                'assets/changed_password.png',
+                AppImages.changedPassword,
                 width: DeviceInfo(context).width! / 2,
               ),
             ),

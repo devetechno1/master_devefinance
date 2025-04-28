@@ -73,8 +73,8 @@ class _PurchasedDigitalProductCardState
                 clipBehavior: Clip.hardEdge,
                 borderRadius: BorderRadius.circular(10),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
-                  image: widget.image ?? 'assets/placeholder.png',
+                  placeholder: AppImages.placeholder,
+                  image: widget.image ?? AppImages.placeholder,
                   fit: BoxFit.cover,
                 ),
               ),

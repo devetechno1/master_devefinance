@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/aiz_route.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
@@ -1498,7 +1499,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             width: 45,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.topRight,
-            child: Image.asset("assets/more.png",
+            child: Image.asset(AppImages.more,
                 width: 4,
                 height: 16,
                 fit: BoxFit.contain,

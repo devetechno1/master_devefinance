@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -87,7 +88,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
                     _showSearchBar = true;
                     setState(() {});
                   },
-                  child: Image.asset('assets/search.png')))
+                  child: Image.asset(AppImages.search)))
         ],
       ),
     );

@@ -1442,7 +1442,7 @@ class _ProductDetailsState extends State<ProductDetails>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(6.0),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
                           image: _productDetails!.shop_logo!,
                           fit: BoxFit.cover,
                         ),
@@ -2554,7 +2554,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   /*Image.asset(
                                         singleProduct.product_images[index])*/
                                   FadeInImage.assetNetwork(
-                                placeholder: 'assets/placeholder.png',
+                                placeholder: AppImages.placeholder,
                                 image: _productImageList[index],
                                 fit: BoxFit.contain,
                               )),
@@ -2573,7 +2573,7 @@ class _ProductDetailsState extends State<ProductDetails>
               width: MediaQuery.of(context).size.width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder_rectangle.png',
+                placeholder: AppImages.placeholderRectangle,
                 image: _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
               )),

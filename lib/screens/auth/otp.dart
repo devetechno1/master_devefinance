@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
@@ -113,7 +114,7 @@ class _OtpState extends State<Otp> {
               width: _screen_width,
               height: 200,
               child: Image.asset(
-                  "assets/splash_login_registration_background_image.png"),
+                 AppImages.splashLoginRegisterationBackground),
             ),
             Container(
               width: double.infinity,
@@ -132,7 +133,7 @@ class _OtpState extends State<Otp> {
                       width: 75,
                       height: 75,
                       child: Image.asset(
-                          'assets/login_registration_form_logo.png'),
+                          AppImages.loginRegisteration),
                     ),
                   ),
                   Container(

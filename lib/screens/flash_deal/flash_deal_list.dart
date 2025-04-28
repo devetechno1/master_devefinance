@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
@@ -311,7 +312,7 @@ class _FlashDealListState extends State<FlashDealList> {
               height: 46,
               width: 44,
               child: FadeInImage(
-                placeholder: const AssetImage("assets/placeholder.png"),
+                placeholder: const AssetImage(AppImages.placeholder),
                 image: NetworkImage(
                   flashDealResponse.flashDeals[flashDealIndex].products
                       .products[productIndex].image,

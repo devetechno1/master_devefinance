@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -262,8 +263,8 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                         clipBehavior: Clip.hardEdge,
                         borderRadius: BorderRadius.circular(10),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
-                          image: widget.image ?? 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
+                          image: widget.image ?? AppImages.placeholder,
                           fit: BoxFit.cover,
                         ),
                       ),

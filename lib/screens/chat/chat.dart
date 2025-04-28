@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -201,7 +202,7 @@ class _ChatState extends State<Chat> {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(35),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
                           image: widget.messenger_image!,
                           fit: BoxFit.contain,
                         )),

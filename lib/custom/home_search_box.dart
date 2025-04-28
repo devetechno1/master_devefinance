@@ -27,7 +27,7 @@ class HomeSearchBox extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/search.png',
+              AppImages.search,
               height: 16,
               color: const Color(0xff7B7980),
             ),

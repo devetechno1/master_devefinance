@@ -902,7 +902,7 @@ class _CheckoutState extends State<Checkout> {
                           fit: BoxFit.fitWidth,
                         ),*/
                               FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder.png',
+                            placeholder: AppImages.placeholder,
                             image: _paymentTypeList[index].payment_type ==
                                     "manual_payment"
                                 ? _paymentTypeList[index].image

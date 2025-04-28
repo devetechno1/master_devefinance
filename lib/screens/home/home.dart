@@ -252,7 +252,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       if (homeData.isTodayDeal)
         {
           "title": AppLocalizations.of(context)!.todays_deal_ucf,
-          "image": "assets/todays_deal.png",
+          "image": AppImages.todayDeal,
           "onTap": () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return TodaysDealProducts();
@@ -264,7 +264,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       if (homeData.isFlashDeal)
         {
           "title": AppLocalizations.of(context)!.flash_deal_ucf,
-          "image": "assets/flash_deal.png",
+          "image": AppImages.flashDeal,
           "onTap": () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return FlashDealList();
@@ -276,7 +276,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       if(homeData.isBrands)
         {
           "title": AppLocalizations.of(context)!.brands_ucf,
-          "image": "assets/brands.png",
+          "image": AppImages.brands,
           "onTap": () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const Filter(selected_filter: "brands");
@@ -289,7 +289,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       if (AppConfig.businessSettingsData.vendorSystemActivation)
         {
           "title": AppLocalizations.of(context)!.top_sellers_ucf,
-          "image": "assets/top_sellers.png",
+          "image": AppImages.TopSellers,
           "onTap": () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const TopSellers();

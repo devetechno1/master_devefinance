@@ -285,7 +285,7 @@ class MapLocationState extends State<MapLocation>
               duration: const Duration(milliseconds: 200),
               scale: isCameraIdle ? 1 : 1.3,
               child: Image.asset(
-                'assets/delivery_map_icon.png',
+                AppImages.deliveryMapIcon,
                 height: 60,
               ),
             ),

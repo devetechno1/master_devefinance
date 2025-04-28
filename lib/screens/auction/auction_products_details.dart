@@ -859,7 +859,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                    AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -903,7 +903,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                    AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -947,7 +947,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                   AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -991,7 +991,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                    AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -1058,7 +1058,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(6.0),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
                           image: _auctionproductDetails.shopLogo,
                           fit: BoxFit.cover,
                         ),
@@ -1104,7 +1104,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
                           onTapSellerChat();
                         },
-                        child: Image.asset('assets/chat.png',
+                        child: Image.asset(AppImages.chat,
                             height: 16, width: 16, color: MyTheme.dark_grey)),
                   ],
                 )),
@@ -1757,7 +1757,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   /*Image.asset(
                                         singleProduct.product_images[index])*/
                                   FadeInImage.assetNetwork(
-                                placeholder: 'assets/placeholder.png',
+                                placeholder: AppImages.placeholder,
                                 image: _productImageList[index],
                                 fit: BoxFit.contain,
                               )),
@@ -1776,7 +1776,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               width: MediaQuery.of(context).size.width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder_rectangle.png',
+                placeholder: AppImages.placeholderRectangle,
                 image: _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
               )),
@@ -1826,7 +1826,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           height: double.infinity,
                           width: double.infinity,
                           child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder_rectangle.png',
+                            placeholder: AppImages.placeholderRectangle,
                             image: i,
                             fit: BoxFit.fitHeight,
                           )),

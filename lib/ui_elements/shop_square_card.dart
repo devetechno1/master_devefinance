@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/seller_details.dart';
 import 'package:flutter/material.dart';
@@ -86,8 +87,8 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
         child: ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
           child: FadeInImage.assetNetwork(
-            placeholder: 'assets/placeholder.png',
-            image: widget.image ?? 'assets/placeholder.png',
+            placeholder: AppImages.placeholder,
+            image: widget.image ?? AppImages.placeholder,
             fit: BoxFit.cover,
           ),
         ),

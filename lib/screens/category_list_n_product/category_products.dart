@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/category_response.dart';
@@ -283,7 +284,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
                         image: _subCategoryList[index].coverImage ??'',
                         fit: BoxFit.cover,
                       ),

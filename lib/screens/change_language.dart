@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -237,7 +238,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                           fit: BoxFit.fitWidth,
                         ),*/
                               FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder.png',
+                            placeholder: AppImages.placeholder,
                             image: _list[index].image ?? '',
                             fit: BoxFit.fitWidth,
                           ))),
