@@ -163,7 +163,7 @@ class _CartState extends State<_Cart> {
               height: 40,
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                   color: MyTheme.soft_accent_color),
               child: Row(
                 children: [
@@ -202,16 +202,16 @@ class _CartState extends State<_Cart> {
                       border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                       borderRadius: app_language_rtl.$!
                           ? const BorderRadius.only(
-                              topLeft: Radius.circular(6.0),
-                              bottomLeft: Radius.circular(6.0),
-                              topRight: Radius.circular(6.0),
-                              bottomRight: Radius.circular(6.0),
+                              topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
                             )
                           : const BorderRadius.only(
-                              topLeft: Radius.circular(6.0),
-                              bottomLeft: Radius.circular(6.0),
-                              topRight: Radius.circular(6.0),
-                              bottomRight: Radius.circular(6.0),
+                              topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
                             ),
                     ),
                     child: Btn.basic(
@@ -220,8 +220,8 @@ class _CartState extends State<_Cart> {
                       shape: app_language_rtl.$!
                           ? const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(6.0),
-                                bottomLeft: Radius.circular(6.0),
+                                topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                                bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                                 topRight: Radius.circular(0.0),
                                 bottomRight: Radius.circular(0.0),
                               ),
@@ -230,8 +230,8 @@ class _CartState extends State<_Cart> {
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0.0),
                                 bottomLeft: Radius.circular(0.0),
-                                topRight: Radius.circular(6.0),
-                                bottomRight: Radius.circular(6.0),
+                                topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                                bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
                               ),
                             ),
                       child: Text(
@@ -294,7 +294,7 @@ class _CartState extends State<_Cart> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 14.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                   child: Row(
                     children: [
                       Text(

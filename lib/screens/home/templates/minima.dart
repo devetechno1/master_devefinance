@@ -136,7 +136,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                                         offset: const Offset(0, 3), // changes position of shadow
                                   )],
                                     color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
 
                                   ),
                                   child: Padding(

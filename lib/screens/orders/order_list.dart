@@ -259,7 +259,7 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: DropdownButton<PaymentStatus>(
               dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -289,7 +289,7 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: DropdownButton<DeliveryStatus>(
               dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -457,7 +457,7 @@ class _OrderListState extends State<OrderList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 _orderList[index].code,
                 style: TextStyle(
@@ -467,7 +467,7 @@ class _OrderListState extends State<OrderList> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: Row(
                 children: [
                   Text(_orderList[index].date,
@@ -485,7 +485,7 @@ class _OrderListState extends State<OrderList> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: Row(
                 children: [
                   Text(
@@ -531,7 +531,7 @@ class _OrderListState extends State<OrderList> {
       height: 16,
       width: 16,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
           color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),

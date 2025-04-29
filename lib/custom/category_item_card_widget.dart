@@ -43,8 +43,8 @@
 //                 constraints: BoxConstraints(maxHeight: itemWidth - 28),
 //                 child: ClipRRect(
 //                   borderRadius: BorderRadius.only(
-//                       topRight: Radius.circular(6),
-//                       topLeft: Radius.circular(6)),
+//                       topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+//                       topLeft: Radius.circular(AppDimensions.radiusaHalfsmall)),
 //                   child: FadeInImage.assetNetwork(
 //                     placeholder: 'AppImages.placeholder',
 //                     image: categoryResponse.categories![index].banner!,
@@ -124,11 +124,11 @@ class CategoryItemCardWidget extends StatelessWidget {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: Colors.white),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), color: Colors.white),
               width: itemWidth,
               height: itemWidth,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: categoryResponse.categories![index].coverImage ?? '',

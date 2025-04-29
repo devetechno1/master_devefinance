@@ -157,7 +157,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   height: 100,
                   child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16), bottom: Radius.zero),
+                          top: Radius.circular(AppDimensions.radiusDefualt), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: sellerInfo.shopLogo!,
@@ -185,7 +185,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 15,
                 child: RatingBar(
@@ -244,7 +244,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.amber),
                       color: MyTheme.amber,
-                      borderRadius: BorderRadius.circular(6)),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
                   child: Text(
                     LangText(context).local.visit_store_ucf,
                     style: TextStyle(

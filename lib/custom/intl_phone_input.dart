@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_number_input/src/models/country_list.dart';
@@ -517,8 +518,8 @@ class CustomSelectorButton extends StatelessWidget {
                 color: backgroundColor ?? Colors.white,
                 border: Border.all(color: MyTheme.textfield_grey, width: .5),
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5.0),
-                    bottomLeft: Radius.circular(5.0))),
+                    topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                    bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall))),
             child: TextButton(
               key: const Key(TestHelper.DropdownButtonKeyValue),
               style: TextButton.styleFrom(
@@ -527,8 +528,8 @@ class CustomSelectorButton extends StatelessWidget {
                 backgroundColor: backgroundColor ?? Colors.white,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  bottomLeft: Radius.circular(5.0),
+                  topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                  bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                 )),
               ),
               onPressed: countries.isNotEmpty &&
@@ -615,7 +616,7 @@ class CustomSelectorButton extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12), topRight: Radius.circular(12))),
+              topLeft: Radius.circular(AppDimensions.radiusNormal), topRight: Radius.circular(AppDimensions.radiusNormal))),
       builder: (BuildContext context) {
         return AnimatedPadding(
           padding:
@@ -632,8 +633,8 @@ class CustomSelectorButton extends StatelessWidget {
                     color: Theme.of(context).canvasColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
+                        topLeft: Radius.circular(AppDimensions.radiusNormal),
+                        topRight: Radius.circular(AppDimensions.radiusNormal),
                       ),
                     ),
                   ),

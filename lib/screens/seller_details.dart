@@ -552,7 +552,7 @@
 //         padding: EdgeInsets.zero,
 //         color: tabOptionIndex == index ? MyTheme.accent_color : MyTheme.white,
 //         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(6),
+//           borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
 //         ),
 //         onPressed: () {
 //           tabOptionIndex = index;
@@ -611,7 +611,7 @@
 //                       padding: EdgeInsets.symmetric(horizontal: 18.0),
 //                       decoration: BoxDecorations.buildBoxDecoration_1(),
 //                       child: ClipRRect(
-//                           borderRadius: BorderRadius.all(Radius.circular(6)),
+//                           borderRadius: BorderRadius.all(Radius.circular(AppDimensions.radiusaHalfsmall)),
 //                           child: FadeInImage.assetNetwork(
 //                             placeholder: 'assets/placeholder_rectangle.png',
 //                             image: i,
@@ -731,7 +731,7 @@
 //                               height: 40.0,
 //                               width: DeviceInfo(context).width! - 70),
 //                           /*Padding(
-//                         padding: const EdgeInsets.only(left: 8.0),
+//                         padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
 //                         child: Column(
 //                           crossAxisAlignment: CrossAxisAlignment.start,
 //                           children: [
@@ -809,7 +809,7 @@
 //               height: 60,
 //               decoration: BoxDecorations.buildBoxDecoration_1(),
 //               child: ClipRRect(
-//                 borderRadius: BorderRadius.circular(5),
+//                 borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
 //                 child: FadeInImage.assetNetwork(
 //                   placeholder: 'AppImages.placeholder',
 //                   image: _shopDetails?.logo ?? "",
@@ -861,7 +861,7 @@
 //                     ? MyTheme.green_light
 //                     : MyTheme.amber,
 //                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(6),
+//                     borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
 //                     side: BorderSide(
 //                         color: _isThisSellerFollowed != null &&
 //                                 _isThisSellerFollowed!
@@ -912,7 +912,7 @@
 //             height: 60,
 //             decoration: BoxDecorations.buildBoxDecoration_1(),
 //             child: ClipRRect(
-//               borderRadius: BorderRadius.circular(5),
+//               borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
 //               child: ShimmerHelper().buildBasicShimmer(height: 60, width: 60),
 //             ),
 //           ),
@@ -1579,7 +1579,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         padding: EdgeInsets.zero,
         color: tabOptionIndex == index ? Theme.of(context).primaryColor : MyTheme.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
         ),
         onPressed: () {
           tabOptionIndex = index;
@@ -1828,7 +1828,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               //  decoration: BoxDecorations.buildBoxDecoration_1(),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: .08),
@@ -1840,7 +1840,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               ),
               padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _shopDetails?.logo ?? "",
@@ -1852,7 +1852,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               width: DeviceInfo(context).width! / 2.5,
               height: 60,
               child: Column(
@@ -1896,14 +1896,14 @@ class _SellerDetailsState extends State<SellerDetails> {
                           const Offset(0.0, 10.0), // shadow direction: bottom right
                     )
                   ],
-                  borderRadius: BorderRadius.circular(3.0)),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)),
               child: Btn.basic(
                 padding: EdgeInsets.zero,
                 color: _isThisSellerFollowed != null && _isThisSellerFollowed!
                     ? MyTheme.green_light
                     : MyTheme.amber,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     side: BorderSide(
                         color: _isThisSellerFollowed != null &&
                                 _isThisSellerFollowed!
@@ -1954,14 +1954,14 @@ class _SellerDetailsState extends State<SellerDetails> {
             height: 60,
             decoration: BoxDecorations.buildBoxDecoration_1(),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               child: ShimmerHelper().buildBasicShimmer(height: 60, width: 60),
             ),
           ),
           Flexible(
             child: Container(
               //color: Colors.amber,
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               width: DeviceInfo(context).width! / 2,
               height: 60,
               child: Column(
@@ -2089,7 +2089,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                     width: double.infinity,
                     child: ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: widget.image ?? AppImages.placeholder,
@@ -2181,7 +2181,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),
@@ -2212,8 +2212,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         decoration: const BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(6),
-                            bottomLeft: Radius.circular(6),
+                            topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                            bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                           ),
                           boxShadow: [
                             BoxShadow(

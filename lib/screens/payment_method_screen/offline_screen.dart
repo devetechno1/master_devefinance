@@ -291,7 +291,7 @@ final  ScrollController _mainScrollController = ScrollController();
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 AppLocalizations.of(context)!.all_marked_fields_are_mandatory,
                 style: const TextStyle(
@@ -301,7 +301,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 AppLocalizations.of(context)!
                     .correctly_fill_up_the_necessary_information,
@@ -309,7 +309,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.amount_ucf}*",
                 style: TextStyle(
@@ -317,7 +317,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -329,7 +329,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.name_ucf}*",
                 style: TextStyle(
@@ -337,7 +337,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -349,7 +349,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.transaction_id_ucf}*",
                 style: TextStyle(
@@ -357,7 +357,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -369,7 +369,7 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.photo_proof_ucf}* (${AppLocalizations.of(context)!.only_image_file_allowed})",
                 style: TextStyle(
@@ -387,13 +387,13 @@ final  ScrollController _mainScrollController = ScrollController();
                         border:
                             Border.all(color: MyTheme.textfield_grey, width: 1),
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(8.0))),
+                            const BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: MyTheme.medium_grey,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(8.0))),
+                              BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
                       child: Text(
                         AppLocalizations.of(context)!.photo_proof_ucf,
                         style: const TextStyle(
@@ -420,7 +420,7 @@ final  ScrollController _mainScrollController = ScrollController();
                 child: Container(
                   margin: const EdgeInsets.all(8),
                   clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
                   constraints: BoxConstraints(
                     maxHeight: MediaQuery.sizeOf(context).shortestSide * .5,
                     maxWidth: MediaQuery.sizeOf(context).shortestSide * .5,
@@ -440,13 +440,13 @@ final  ScrollController _mainScrollController = ScrollController();
                         border:
                             Border.all(color: MyTheme.textfield_grey, width: 1),
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(8.0))),
+                            const BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: Theme.of(context).primaryColor,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(8.0))),
+                              BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
                       child: Text(
                         AppLocalizations.of(context)!.submit_ucf + "",
                         style: const TextStyle(

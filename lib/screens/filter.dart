@@ -447,7 +447,7 @@ final  List<dynamic> _productList = [];
             height: 36,
             child: DropdownButton<WhichFilter>(
               dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               icon:const Icon(Icons.expand_more_rounded, size: 18),
               hint: Text(
                 AppLocalizations.of(context)!.products_ucf,
@@ -789,14 +789,14 @@ final  List<dynamic> _productList = [];
                                 borderSide: BorderSide(
                                     color: MyTheme.noColor, width: 0.5),
                                 borderRadius: const BorderRadius.all(
-                                   Radius.circular(8.0),
+                                   Radius.circular(AppDimensions.radiusSmall),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: MyTheme.noColor, width: 1.0),
                                 borderRadius: const BorderRadius.all(
-                                   Radius.circular(8.0),
+                                   Radius.circular(AppDimensions.radiusSmall),
                                 ),
                               ),
                               contentPadding: const EdgeInsetsDirectional.only(
@@ -835,7 +835,7 @@ final  List<dynamic> _productList = [];
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                           AppLocalizations.of(context)!.price_range_ucf,
                           style:const TextStyle(
@@ -846,7 +846,7 @@ final  List<dynamic> _productList = [];
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -865,7 +865,7 @@ final  List<dynamic> _productList = [];
                                           color: MyTheme.textfield_grey,
                                           width: 1.0),
                                       borderRadius:  BorderRadius.all(
-                                         Radius.circular(4.0),
+                                         Radius.circular(AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     focusedBorder:const OutlineInputBorder(
@@ -873,7 +873,7 @@ final  List<dynamic> _productList = [];
                                           color: MyTheme.textfield_grey,
                                           width: 2.0),
                                       borderRadius:  BorderRadius.all(
-                                         Radius.circular(4.0),
+                                         Radius.circular(AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     contentPadding:const EdgeInsets.all(4.0)),
@@ -882,7 +882,7 @@ final  List<dynamic> _productList = [];
                           ),
                        const   Text(" - "),
                           Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -901,7 +901,7 @@ final  List<dynamic> _productList = [];
                                           color: MyTheme.textfield_grey,
                                           width: 1.0),
                                       borderRadius:  BorderRadius.all(
-                                         Radius.circular(4.0),
+                                         Radius.circular(AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     focusedBorder:const OutlineInputBorder(
@@ -909,7 +909,7 @@ final  List<dynamic> _productList = [];
                                           color: MyTheme.textfield_grey,
                                           width: 2.0),
                                       borderRadius:  BorderRadius.all(
-                                         Radius.circular(4.0),
+                                         Radius.circular(AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     contentPadding:const EdgeInsets.all(4.0)),

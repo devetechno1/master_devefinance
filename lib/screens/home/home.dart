@@ -120,7 +120,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               const SizedBox(height: 16),
 
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
+                                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                                 child: MenuItemList(),
                               ),
                               // SizedBox(height: 16),
@@ -320,7 +320,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //             height: 40,
   //             width: 106,
   //             decoration: BoxDecoration(
-  //               borderRadius: BorderRadius.circular(10),
+  //               borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
   //               color: item['backgroundColor'],
   //             ),
   //             child: Center(

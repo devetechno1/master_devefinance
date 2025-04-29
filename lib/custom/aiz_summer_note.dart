@@ -128,7 +128,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
       height: widget.height ?? MediaQuery.of(context).size.height,
       decoration: widget.decoration ??
           BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radiusSmallExtra)),
             border: Border.all(color: const Color(0xffececec), width: 1),
           ),
       child: Column(
@@ -271,7 +271,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
             size: 20,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 4),
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
             child: Text(
               title,
               style: const TextStyle(

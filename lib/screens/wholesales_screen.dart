@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -192,7 +193,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       width: double.infinity,
                       child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image ?? AppImages.placeholder,
@@ -209,8 +210,8 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                           decoration: const BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(6),
-                              bottomLeft: Radius.circular(6),
+                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -317,7 +318,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                         margin: const EdgeInsets.only(top: 8, right: 8, bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),

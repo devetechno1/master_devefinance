@@ -332,7 +332,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               //     url: avatar_original.$,
               //     height: 80.0,
               //     width: 80.0,
-              //     borderRadius: BorderRadius.circular(60),
+              //     borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtraLarge),
               //     elevation: 8.0),
 
               Container(
@@ -340,13 +340,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                 height: 80,
                 decoration: BoxDecoration(
                   boxShadow: [MyTheme.commonShadow()],
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
 
                   //shape: BoxShape.rectangle,
                 ),
                 child: ClipRRect(
                     clipBehavior: Clip.hardEdge,
-                    borderRadius: const BorderRadius.all(Radius.circular(100.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radiusVeryEtra)),
                     child: FadeInImage.assetNetwork(
                       placeholder: AppImages.placeholder,
                       image: "${avatar_original.$}",
@@ -385,7 +385,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     height: 24,
                     decoration: BoxDecoration(
                       boxShadow: [MyTheme.commonShadow()],
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
 
                       //shape: BoxShape.rectangle,
                     ),
@@ -449,7 +449,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
           child: Text(
             AppLocalizations.of(context)!.new_password_ucf,
             style: const TextStyle(
@@ -459,7 +459,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -510,7 +510,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
           child: Text(
             AppLocalizations.of(context)!.retype_password_ucf,
             style: TextStyle(
@@ -520,7 +520,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
           child: Container(
             decoration: BoxDecorations.buildBoxDecoration_with_shadow(),
             height: 36,
@@ -566,7 +566,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               height: 42,
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
               child: Text(
                 textAlign: TextAlign.center,
                 LangText(context).local.save_changes,
@@ -597,7 +597,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
           child: Text(
             AppLocalizations.of(context)!.name_ucf,
             style: const TextStyle(
@@ -607,11 +607,11 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 14.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 boxShadow: [MyTheme.commonShadow()]),
             height: 36,
             child: TextField(
@@ -632,7 +632,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
           child: Text(
             AppLocalizations.of(context)!.phone_ucf,
             style: const TextStyle(
@@ -645,7 +645,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           margin: const EdgeInsets.only(bottom: 14.0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
             boxShadow: [MyTheme.commonShadow()],
           ),
           height: 36,
@@ -686,7 +686,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               child: Text(
                 AppLocalizations.of(context)!.email_ucf,
                 style: const TextStyle(
@@ -696,11 +696,11 @@ class _ProfileEditState extends State<ProfileEdit> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 14.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
               child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                       boxShadow: [MyTheme.commonShadow()]),
                   height: 36,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -745,7 +745,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               height: 42,
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
               child: Text(
                 textAlign: TextAlign.center,
                 LangText(context).local.update_profile_ucf,

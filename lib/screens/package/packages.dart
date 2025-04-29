@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
@@ -195,7 +196,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
                 width: DeviceInfo(context).width! / 2,
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(6)),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: InkWell(
                     onTap: () {

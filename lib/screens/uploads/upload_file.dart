@@ -433,7 +433,7 @@ class _UploadFileState extends State<UploadFile> {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(255, 255, 255, 0),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     border: Border.all(
                         color: const Color.fromRGBO(255, 255, 255, 0),
                         width: 0.0),
@@ -470,7 +470,7 @@ class _UploadFileState extends State<UploadFile> {
                 Container(
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(255, 255, 255, 0),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     border: Border.all(
                         color: const Color.fromRGBO(255, 255, 255, 0),
                         width: 0.0),
@@ -526,7 +526,7 @@ class _UploadFileState extends State<UploadFile> {
         height: 16,
         width: 16,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0), color: Colors.green),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
         child: const Padding(
           padding: EdgeInsets.all(3),
           child: Icon(Icons.check, color: Colors.white, size: 10),

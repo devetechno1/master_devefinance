@@ -224,7 +224,7 @@ class _ClubpointState extends State<Clubpoint> {
     return Container(
       height: 91,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(6)),
+          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Row(

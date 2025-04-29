@@ -260,7 +260,7 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsetsDirectional.only(end: 18,bottom: 12),
                   child: InkWell(
                     onTap: () => Navigator.pop(context),
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
                     child: const SizedBox(
                       height: 30,
                       width: 30,
@@ -921,7 +921,7 @@ class _ProfileState extends State<Profile> {
       height: 208,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(6)),
+          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: GridView(
         scrollDirection: Axis.horizontal,
         padding:  const EdgeInsets.symmetric(vertical: 2, horizontal: 25),
@@ -977,7 +977,7 @@ class _ProfileState extends State<Profile> {
               badgeStyle: badges.BadgeStyle(
                 shape: badges.BadgeShape.circle,
                 badgeColor: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                 padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
               ),
               ignorePointer: true,
@@ -1131,13 +1131,13 @@ class _ProfileState extends State<Profile> {
       onTap: is_logged_in.$ && onTap != null
       ?  () => onTap.call().then((_) => onPopped(null))
       : null,
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       child: Container(
         margin: const EdgeInsets.only(top: 20),
         padding: const EdgeInsets.symmetric(vertical: 14),
         width: DeviceInfo(context).width! / 3.5,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           color: MyTheme.white,
         ),
         child: Column(
@@ -1190,14 +1190,14 @@ class _ProfileState extends State<Profile> {
               height: 48,
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
                 border: Border.all(color: MyTheme.white, width: 1),
                 //shape: BoxShape.rectangle,
               ),
               child: is_logged_in.$
                   ? ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: const BorderRadius.all(Radius.circular(100.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radiusVeryEtra)),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: "${avatar_original.$}",
@@ -1217,7 +1217,7 @@ class _ProfileState extends State<Profile> {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
             // 	rgb(50,205,50)
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 side: const BorderSide(color: MyTheme.white)),
             child: Text(
               is_logged_in.$

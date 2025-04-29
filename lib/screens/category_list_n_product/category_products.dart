@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -242,10 +243,10 @@ class _CategoryProductsState extends State<CategoryProducts> {
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(6)),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(6)),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
@@ -272,7 +273,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
               ),
             );
           },
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
           child: SizedBox(
             width: 80,
             child: Column(
@@ -282,7 +283,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: _subCategoryList[index].coverImage ??'',

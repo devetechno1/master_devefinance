@@ -247,7 +247,7 @@ class _WalletState extends State<Wallet> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 14.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                   child: buildRechargeListItemCard(index),
                 );
               },
@@ -291,7 +291,7 @@ class _WalletState extends State<Wallet> {
     return Container(
       height: 100,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(8)),
+          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingNormal),
@@ -385,7 +385,7 @@ class _WalletState extends State<Wallet> {
           height: 90,
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(10)),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusNormal)),
           child: Column(
             children: [
               Padding(
@@ -427,7 +427,7 @@ class _WalletState extends State<Wallet> {
           decoration: BoxDecoration(
             color: const Color(0xffFEF0D7), // Background color
             border: Border.all(color: Colors.amber.shade700, width: 1),
-            borderRadius: BorderRadius.circular(10), // Set border radius here
+            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), // Set border radius here
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(
@@ -479,7 +479,7 @@ class _WalletState extends State<Wallet> {
         child: AlertDialog(
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6.0),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           ),
           insetPadding: const EdgeInsets.symmetric(horizontal: 10),
           contentPadding:
@@ -492,7 +492,7 @@ class _WalletState extends State<Wallet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Text(AppLocalizations.of(context)!.amount_ucf,
                         style: TextStyle(
                             color: MyTheme.dark_font_grey,
@@ -500,7 +500,7 @@ class _WalletState extends State<Wallet> {
                             fontWeight: FontWeight.bold)),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Container(
                       height: 40,
                       child: TextField(
@@ -520,14 +520,14 @@ class _WalletState extends State<Wallet> {
                               borderSide: BorderSide(
                                   color: MyTheme.noColor, width: 0.0),
                               borderRadius: const BorderRadius.all(
-                                Radius.circular(8.0),
+                                Radius.circular(AppDimensions.radiusSmall),
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: MyTheme.noColor, width: 0.0),
                               borderRadius: const BorderRadius.all(
-                                Radius.circular(8.0),
+                                Radius.circular(AppDimensions.radiusSmall),
                               ),
                             ),
                             contentPadding:
@@ -549,7 +549,7 @@ class _WalletState extends State<Wallet> {
                   height: 30,
                   color: const Color.fromRGBO(253, 253, 253, 1),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                       side:
                           BorderSide(color: Theme.of(context).primaryColor, width: 1.0)),
                   child: Text(
@@ -573,7 +573,7 @@ class _WalletState extends State<Wallet> {
                     height: 30,
                     color: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.proceed_ucf,

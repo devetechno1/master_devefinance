@@ -61,12 +61,18 @@ class FlashSale extends StatelessWidget {
                         ),
                       ],
                       color:  AppConfig.businessSettingsData.flashDealBgColor ?? const Color(0xFFF9F8F8),
-                      borderRadius: context.isPhoneWidth ? null : BorderRadius.circular(8.0),
+                      borderRadius: context.isPhoneWidth ? null : BorderRadius.circular(AppDimensions.radiusSmall),
                     ),
                     child: Column(
                       children: [
                         const SizedBox(height: 10),
-                        buildTimerRow(homeData.flashDealRemainingTime),
+                       // any of them > 0 then show timer : sizedBox
+                       (homeData.flashDealRemainingTime.days > 0 ||
+                        homeData.flashDealRemainingTime.hours > 0 ||
+                        homeData.flashDealRemainingTime.min > 0 ||
+                         homeData.flashDealRemainingTime.sec > 0)
+                          ? buildTimerRow(homeData.flashDealRemainingTime)
+                          : const SizedBox.shrink(),
                         const SizedBox(height: 15),
                         FlashBannerWidget(
                           bannerLink: homeData.flashDeal?.banner, 
@@ -209,7 +215,7 @@ class FlashSale extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 10.0),
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(5)
+            borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

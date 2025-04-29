@@ -79,7 +79,7 @@ return Container(
           height: 40,
           width: 106,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
             color: item.backgroundColor,
           ),
           child: Center(

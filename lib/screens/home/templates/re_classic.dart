@@ -194,7 +194,7 @@ class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderSt
 //     margin: const EdgeInsets.symmetric(horizontal: 5.0),
 //     decoration: BoxDecoration(
 //       color: Colors.white,
-//       borderRadius: BorderRadius.circular(5)
+//       borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)
 //     ),
 //     child: SingleChildScrollView(
 //       scrollDirection: Axis.horizontal,

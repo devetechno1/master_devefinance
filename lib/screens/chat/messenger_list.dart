@@ -184,20 +184,20 @@ class _MessengerListState extends State<MessengerList> {
         }));
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Container(
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(35),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
               border: Border.all(
                   color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
               //shape: BoxShape.rectangle,
             ),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _list[index].shop_logo,

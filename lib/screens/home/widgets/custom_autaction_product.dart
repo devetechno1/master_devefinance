@@ -1,4 +1,5 @@
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_details.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart' as productMini;
@@ -44,7 +45,7 @@ class CustomAuctionProductsListWidget extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
               leading: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                 child: Image.network(
                   product.thumbnail_image ?? '',
                   width: 60,

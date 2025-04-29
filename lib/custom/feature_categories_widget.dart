@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
@@ -66,7 +67,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                             ],
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                             child: FadeInImage.assetNetwork(
                               placeholder: AppImages.placeholder,
                               image: homeData

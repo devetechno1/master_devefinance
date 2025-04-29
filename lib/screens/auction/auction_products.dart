@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -121,7 +122,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
       centerTitle: false,
       leading: UsefulElements.backButton(context),
       title: Padding(
-        padding: const EdgeInsets.only(right: 37),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingveryLarge),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

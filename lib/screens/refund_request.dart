@@ -198,7 +198,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Text(
                         _list[index].product_name,
                         textAlign: TextAlign.start,
@@ -209,7 +209,7 @@ class _RefundRequestState extends State<RefundRequest> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Text(
                         _list[index].order_code,
                         style: TextStyle(
@@ -236,7 +236,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Text(
                         convertPrice(_list[index].product_price),
                         style: TextStyle(

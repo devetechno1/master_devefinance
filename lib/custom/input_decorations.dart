@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +12,13 @@ class InputDecorations {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.2),
           borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
+            Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.primaryColor, width: 0.5),
           borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
+            Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 14.0));
@@ -30,21 +31,21 @@ class InputDecorations {
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5),
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(6.0),
-              bottomRight: Radius.circular(6.0)),
+              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+              bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall)),
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: MyTheme.primaryColor, width: 0.5),
             borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(6.0),
-                bottomRight: Radius.circular(6.0))),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0));
+                topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall))),
+        contentPadding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt));
   }
 
   static InputDecoration buildInputDecoration_with_border(String hintText) {
     final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
       borderSide: const BorderSide(color: MyTheme.textfield_grey, width: 0.5),
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
     );
     return InputDecoration(
         hintText: hintText,

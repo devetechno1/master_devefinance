@@ -71,7 +71,7 @@ class _PurchasedDigitalProductCardState
               width: double.infinity,
               child: ClipRRect(
                 clipBehavior: Clip.hardEdge,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: widget.image ?? AppImages.placeholder,
@@ -102,7 +102,7 @@ class _PurchasedDigitalProductCardState
               margin: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
                 color: const Color(0xffE5411C),
-                borderRadius: BorderRadius.circular(3.0),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
               ),
               child: Center(
                 child: Text(

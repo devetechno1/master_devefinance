@@ -195,7 +195,7 @@ class _CategoryListState extends State<CategoryList> {
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.all(Radius.circular(8.0))),
+                          BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
                   child: Text(
                     AppLocalizations.of(context)!.all_products_of_ucf + " ",
                     style: const TextStyle(

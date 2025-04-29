@@ -96,17 +96,19 @@ class FlashBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+ 
     return DynamicSizeImageBanner(
       urlToOpen: "${AppConfig.RAW_BASE_URL}/flash-deal/$slug",
       photo: bannerLink,
       radius: 10,
     );
+    
     // return Container(
     //   height: size,
     //   width: size,
     //   decoration: BoxDecoration(
     //     color: Colors.white, // background color for container
-    //     borderRadius: BorderRadius.circular(10), // rounded corners
+    //     borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), // rounded corners
     //     boxShadow: [
     //       BoxShadow(
     //         color:

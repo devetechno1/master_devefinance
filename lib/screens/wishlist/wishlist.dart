@@ -161,7 +161,7 @@ class _WishlistState extends State<Wishlist> {
   //           child: Card(
   //             shape: RoundedRectangleBorder(
   //               side: new BorderSide(color: MyTheme.light_grey, width: 1.0),
-  //               borderRadius: BorderRadius.circular(16.0),
+  //               borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
   //             ),
   //             elevation: 0.0,
   //             child: Row(
@@ -172,7 +172,7 @@ class _WishlistState extends State<Wishlist> {
   //                       height: 100,
   //                       child: ClipRRect(
   //                           borderRadius: BorderRadius.horizontal(
-  //                               left: Radius.circular(16), right: Radius.zero),
+  //                               left: Radius.circular(AppDimensions.radiusDefualt), right: Radius.zero),
   //                           child: FadeInImage.assetNetwork(
   //                             placeholder: 'AppImages.placeholder',
   //                             image:

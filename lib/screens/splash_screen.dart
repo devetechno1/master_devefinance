@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                             color: MyTheme.white,
-                            borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
                         child: Image.asset(
                           AppImages.splashScreenLogo,
                           filterQuality: FilterQuality.low,
@@ -83,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                     child: Text(
                       AppConfig.appNameOnAppLang(context),
                       style: const TextStyle(

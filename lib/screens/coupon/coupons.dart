@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -160,11 +161,11 @@ class _CouponsState extends State<Coupons> {
       children: [
         Material(
           elevation: 0,
-          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.RadiusExtraMedium)),
           child: Container(
             decoration: BoxDecoration(
               gradient: _selectGradient(index),
-              borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+              borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radius)),
             ),
             padding: const EdgeInsets.only(left: 37, right: 25, top: 22, bottom: 1),
             height: 182,
@@ -284,7 +285,7 @@ class _CouponsState extends State<Coupons> {
                 itemCount: products.length.clamp(0, 3),
                 itemBuilder: (context, i) {
                   return Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child:
                           // Image.network(
                           //   products[i].thumbnail_image!,
@@ -302,7 +303,7 @@ class _CouponsState extends State<Coupons> {
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
+                                    const BorderRadius.all(Radius.circular(AppDimensions.radiusSmallExtra)),
                               )));
                 },
               ),
@@ -325,8 +326,8 @@ class _CouponsState extends State<Coupons> {
           decoration: const BoxDecoration(
             color: MyTheme.mainColor,
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30.0),
-              bottomRight: Radius.circular(30.0),
+              topRight: Radius.circular(AppDimensions.RadiusExtraMedium),
+              bottomRight: Radius.circular(AppDimensions.RadiusExtraMedium),
             ),
           ),
         ),
@@ -339,8 +340,8 @@ class _CouponsState extends State<Coupons> {
           decoration: const BoxDecoration(
             color: MyTheme.mainColor,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              bottomLeft: Radius.circular(30.0),
+              topLeft: Radius.circular(AppDimensions.RadiusExtraMedium),
+              bottomLeft: Radius.circular(AppDimensions.RadiusExtraMedium),
             ),
           ),
         ),

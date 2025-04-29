@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
@@ -61,7 +62,7 @@ class _ClassifiedAdsCardState extends State<ClassifiedAdsCard>
                     child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
                         borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(6), bottom: Radius.zero),
+                            top: Radius.circular(AppDimensions.radiusaHalfsmall), bottom: Radius.zero),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image!,
@@ -122,8 +123,8 @@ class _ClassifiedAdsCardState extends State<ClassifiedAdsCard>
                           ? MyTheme.golden
                           : Theme.of(context).primaryColor,
                       borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(6.0),
-                        bottomLeft: Radius.circular(6.0),
+                        topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                        bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                       ),
                       boxShadow: const [
                         BoxShadow(

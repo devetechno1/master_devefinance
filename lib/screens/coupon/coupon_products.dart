@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +57,7 @@ class _CouponProductsState extends State<CouponProducts> {
         ),
       ),
       title: Padding(
-        padding: const EdgeInsets.only(right: 18.0),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingMedium),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

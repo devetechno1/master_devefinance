@@ -258,7 +258,7 @@ class _ProductReviewsState extends State<ProductReviews> {
 
   Padding buildProductReviewsItem(index) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -267,13 +267,13 @@ class _ProductReviewsState extends State<ProductReviews> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 border: Border.all(
                     color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
                 //shape: BoxShape.rectangle,
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _reviewList[index].avatar,
@@ -286,7 +286,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                 Container(
                   width: 180,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -304,7 +304,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                               fontWeight: FontWeight.w600),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 4.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                           child: Text(
                             _reviewList[index].time,
                             style: TextStyle(color: MyTheme.medium_grey),
@@ -455,14 +455,14 @@ class _ProductReviewsState extends State<ProductReviews> {
                       borderSide:
                           BorderSide(color: MyTheme.textfield_grey, width: 0.5),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(35.0),
+                        Radius.circular(AppDimensions.radiusVeryLarge),
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: MyTheme.medium_grey, width: 0.5),
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(35.0),
+                        Radius.circular(AppDimensions.radiusVeryLarge),
                       ),
                     ),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 16.0)),
@@ -480,7 +480,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                   margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(35),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                     border: Border.all(
                         color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
                     //shape: BoxShape.rectangle,

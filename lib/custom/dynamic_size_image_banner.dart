@@ -41,6 +41,9 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
   }
   @override
   Widget build(BuildContext context) {
+     if (widget.photo == null || widget.photo!.isEmpty) {
+      return const SizedBox();
+    }
     return InkWell(
       onTap: () => NavigationService.handleUrls(widget.urlToOpen, context),
       child: _aspectRatio == null

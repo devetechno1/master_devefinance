@@ -196,12 +196,12 @@ class _ChatState extends State<Chat> {
                     margin:
                         const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(35),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                       border: Border.all(
                           color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
                     ),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(35),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.messenger_image!,
@@ -211,7 +211,7 @@ class _ChatState extends State<Chat> {
                   Container(
                     width: 220,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -286,7 +286,7 @@ class _ChatState extends State<Chat> {
                           width: 35.0,
                           height: 35.0,
                           fit: BoxFit.cover,
-                          borderRadius: BorderRadius.circular(16)),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt)),
                     ],
                   ),
                 ),
@@ -339,7 +339,7 @@ class _ChatState extends State<Chat> {
           reverse: true,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: buildChatItem(index),
             );
           },
@@ -386,14 +386,14 @@ class _ChatState extends State<Chat> {
                   borderSide:
                       BorderSide(color: MyTheme.textfield_grey, width: 0.5),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(35.0),
+                    Radius.circular(AppDimensions.radiusVeryLarge),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(color: MyTheme.medium_grey, width: 0.5),
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(35.0),
+                    Radius.circular(AppDimensions.radiusVeryLarge),
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16.0)),
@@ -411,7 +411,7 @@ class _ChatState extends State<Chat> {
               margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 border: Border.all(
                     color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
               ),
@@ -549,14 +549,14 @@ class _ChatState extends State<Chat> {
           color: MyTheme.noColor,
         ),
         borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(16),
-          topRight: const Radius.circular(16),
+          topLeft: const Radius.circular(AppDimensions.radiusDefualt),
+          topRight: const Radius.circular(AppDimensions.radiusDefualt),
           bottomLeft: _list[index].sendType == "customer"
-              ? const Radius.circular(16)
+              ? const Radius.circular(AppDimensions.radiusDefualt)
               : const Radius.circular(0),
           bottomRight: _list[index].sendType == "customer"
               ? const Radius.circular(0)
-              : const Radius.circular(16),
+              : const Radius.circular(AppDimensions.radiusDefualt),
         ),
         color: (_list[index].sendType == "customer"
             ? Theme.of(context).primaryColor
@@ -586,7 +586,7 @@ class _ChatState extends State<Chat> {
                 ),
               )),
           Padding(
-            padding: const EdgeInsets.only(bottom: 15.0),
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
             child: Text(
               " " + _list[index].message.toString(),
               style: TextStyle(
@@ -617,7 +617,7 @@ class _ChatState extends State<Chat> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 height: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
                   color: const Color(0xffEFEFEF),
                 ),
                 child: TextField(
@@ -714,10 +714,10 @@ class _ChatState extends State<Chat> {
               width: 1,
               color: index.isOdd ? Theme.of(context).primaryColor : MyTheme.grey_153),
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(16),
-            topRight: const Radius.circular(16),
-            bottomLeft: index.isOdd ? const Radius.circular(16) : const Radius.circular(0),
-            bottomRight: index.isOdd ? const Radius.circular(0) : const Radius.circular(16),
+            topLeft: const Radius.circular(AppDimensions.radiusDefualt),
+            topRight: const Radius.circular(AppDimensions.radiusDefualt),
+            bottomLeft: index.isOdd ? const Radius.circular(AppDimensions.radiusDefualt) : const Radius.circular(0),
+            bottomRight: index.isOdd ? const Radius.circular(0) : const Radius.circular(AppDimensions.radiusDefualt),
           ),
           color: (index.isOdd ? Theme.of(context).primaryColor : Theme.of(context).primaryColor),
         ),
@@ -736,7 +736,7 @@ class _ChatState extends State<Chat> {
                   ),
                 )),
             Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
               child: Text(
                 "    ",
                 style: TextStyle(
