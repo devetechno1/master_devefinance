@@ -390,7 +390,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       //shape: BoxShape.rectangle,
                     ),
                     child: Btn.basic(
-                      padding: const EdgeInsets.all(0),
+                     // padding: const EdgeInsets.all(0),
                       child: const Icon(
                         Icons.edit,
                         color: Color(0xff3E4447),

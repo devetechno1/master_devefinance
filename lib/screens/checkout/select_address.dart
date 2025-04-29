@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -59,7 +60,7 @@ class _SelectAddressState extends State<SelectAddress> {
                     SliverList(
                         delegate: SliverChildListDelegate([
                       Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child: buildShippingInfoList(
                               selectAddressProvider, context)),
                       buildAddOrEditAddress(context, selectAddressProvider),
@@ -92,7 +93,7 @@ class _SelectAddressState extends State<SelectAddress> {
             });
           },
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(AppDimensions.paddingsmall),
             child: Text(
               LangText(context)
                   .local
@@ -201,7 +202,7 @@ class _SelectAddressState extends State<SelectAddress> {
         ),
         elevation: 0.0,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
           child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

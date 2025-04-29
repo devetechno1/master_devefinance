@@ -150,7 +150,7 @@ class MapLocationState extends State<MapLocation>
             //     ))
             //   : 
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: const BorderRadius.only(
@@ -208,7 +208,7 @@ class MapLocationState extends State<MapLocation>
             child: Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                 child: TypeAheadField<Results>(
                   // controller: _countryController,
                   debounceDuration: const Duration(milliseconds: 500),

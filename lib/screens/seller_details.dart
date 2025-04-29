@@ -1604,7 +1604,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   Widget buildCarouselSlider(context) {
     if (_shopDetails == null) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: ShimmerHelper().buildBasicShimmer(
           height: 100.0,
         ),
@@ -1838,7 +1838,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                   )
                 ],
               ),
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: FadeInImage.assetNetwork(

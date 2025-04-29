@@ -978,7 +978,7 @@ class _ProfileState extends State<Profile> {
                 shape: badges.BadgeShape.circle,
                 badgeColor: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(10),
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
               ),
               ignorePointer: true,
               badgeContent: Consumer<UnReadNotificationCounter>(

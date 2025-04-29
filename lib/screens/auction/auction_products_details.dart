@@ -1089,7 +1089,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           Visibility(
             visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(AppDimensions.paddingNormal),
                 decoration: BoxDecorations.buildCircularButtonDecoration_1(),
                 child: Row(
                   children: [
@@ -1395,7 +1395,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(AppDimensions.paddinghalfsmall),
                       child: Text(
                         '${_auctionEndTimeList[index] ?? 00}',
                         style: const TextStyle(color: Colors.white, fontSize: 12),

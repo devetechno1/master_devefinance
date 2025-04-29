@@ -340,7 +340,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 ? Border.all(color: Theme.of(context).primaryColor, width: 1.0)
                 : Border.all(color: MyTheme.light_grey, width: 1.0)),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
           child: buildPickUpPointInfoItemChildren(
               pickupPointIndex, sellerArrayIndex),
         ),

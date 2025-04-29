@@ -1090,7 +1090,7 @@ final  ScrollController _mainScrollController = ScrollController();
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1459,7 +1459,7 @@ final  ScrollController _mainScrollController = ScrollController();
   Container buildOrderedProductItemsCard(index) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1670,7 +1670,7 @@ final  ScrollController _mainScrollController = ScrollController();
           borderRadius: BorderRadius.circular(16.0),
           color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
-        padding: const EdgeInsets.all(3),
+        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
         child: Icon(paymentStatus == "paid" ? Icons.check : Icons.check,
             color: Colors.white, size: 10),
       ),

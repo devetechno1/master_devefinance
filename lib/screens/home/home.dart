@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/menu_item_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 
@@ -120,7 +121,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 16.0),
-                                child: buildHomeMenu(context, homeData),
+                                child: MenuItemList(),
                               ),
                               // SizedBox(height: 16),
 
@@ -234,130 +235,130 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  Widget buildHomeMenu(BuildContext context, HomePresenter homeData) {
-    // Check if the menu is loading (assuming both deals are false when data is not available)
-    // if (!homeData.isFlashDeal && !homeData.isTodayDeal) {
-    //   return Container(
-    //     height: 40,
-    //     child: ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
-    //       crossAxisSpacing: 12.0,
-    //       mainAxisSpacing: 12.0,
-    //       item_count: 4, // Adjust as needed
-    //       mainAxisExtent: 40.0, // Height of each item
-    //     ),
-    //   );
-    // }
+  // Widget buildHomeMenu(BuildContext context, HomePresenter homeData) {
+  //   // Check if the menu is loading (assuming both deals are false when data is not available)
+  //   // if (!homeData.isFlashDeal && !homeData.isTodayDeal) {
+  //   //   return Container(
+  //   //     height: 40,
+  //   //     child: ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
+  //   //       crossAxisSpacing: 12.0,
+  //   //       mainAxisSpacing: 12.0,
+  //   //       item_count: 4, // Adjust as needed
+  //   //       mainAxisExtent: 40.0, // Height of each item
+  //   //     ),
+  //   //   );
+  //   // }
 
-    final List<Map<String, dynamic>> menuItems = [
-      if (homeData.isTodayDeal)
-        {
-          "title": AppLocalizations.of(context)!.todays_deal_ucf,
-          "image": AppImages.todayDeal,
-          "onTap": () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return TodaysDealProducts();
-            }));
-          },
-          "textColor": Colors.white,
-          "backgroundColor": const Color(0xffE62D05),
-        },
-      if (homeData.isFlashDeal)
-        {
-          "title": AppLocalizations.of(context)!.flash_deal_ucf,
-          "image": AppImages.flashDeal,
-          "onTap": () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return FlashDealList();
-            }));
-          },
-          "textColor": Colors.white,
-          "backgroundColor": const Color(0xffF6941C),
-        },
-      if(homeData.isBrands)
-        {
-          "title": AppLocalizations.of(context)!.brands_ucf,
-          "image": AppImages.brands,
-          "onTap": () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const Filter(selected_filter: "brands");
-            }));
-          },
-          "textColor": const Color(0xff263140),
-          "backgroundColor": const Color(0xffE9EAEB),
-        },
-      // Ensure `AppConfig.businessSettingsData.classifiedProduct` is valid or properly defined
-      if (AppConfig.businessSettingsData.vendorSystemActivation)
-        {
-          "title": AppLocalizations.of(context)!.top_sellers_ucf,
-          "image": AppImages.TopSellers,
-          "onTap": () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const TopSellers();
-            }));
-          },
-          "textColor": const Color(0xff263140),
-          "backgroundColor": const Color(0xffE9EAEB),
-        },
-    ];
+  //   final List<Map<String, dynamic>> menuItems = [
+  //     if (homeData.isTodayDeal)
+  //       {
+  //         "title": AppLocalizations.of(context)!.todays_deal_ucf,
+  //         "image": AppImages.todayDeal,
+  //         "onTap": () {
+  //           Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //             return TodaysDealProducts();
+  //           }));
+  //         },
+  //         "textColor": Colors.white,
+  //         "backgroundColor": const Color(0xffE62D05),
+  //       },
+  //     if (homeData.isFlashDeal)
+  //       {
+  //         "title": AppLocalizations.of(context)!.flash_deal_ucf,
+  //         "image": AppImages.flashDeal,
+  //         "onTap": () {
+  //           Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //             return FlashDealList();
+  //           }));
+  //         },
+  //         "textColor": Colors.white,
+  //         "backgroundColor": const Color(0xffF6941C),
+  //       },
+  //     if(homeData.isBrands)
+  //       {
+  //         "title": AppLocalizations.of(context)!.brands_ucf,
+  //         "image": AppImages.brands,
+  //         "onTap": () {
+  //           Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //             return const Filter(selected_filter: "brands");
+  //           }));
+  //         },
+  //         "textColor": const Color(0xff263140),
+  //         "backgroundColor": const Color(0xffE9EAEB),
+  //       },
+  //     // Ensure `AppConfig.businessSettingsData.classifiedProduct` is valid or properly defined
+  //     if (AppConfig.businessSettingsData.vendorSystemActivation)
+  //       {
+  //         "title": AppLocalizations.of(context)!.top_sellers_ucf,
+  //         "image": AppImages.TopSellers,
+  //         "onTap": () {
+  //           Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //             return const TopSellers();
+  //           }));
+  //         },
+  //         "textColor": const Color(0xff263140),
+  //         "backgroundColor": const Color(0xffE9EAEB),
+  //       },
+  //   ];
     
 
-    if(menuItems.isEmpty) return const SizedBox();
+  //   if(menuItems.isEmpty) return const SizedBox();
 
-    return Container(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        itemCount: menuItems.length,
-        itemBuilder: (context, index) {
-          final item = menuItems[index];
+  //   return Container(
+  //     height: 40,
+  //     child: ListView.builder(
+  //       scrollDirection: Axis.horizontal,
+  //       padding: const EdgeInsets.symmetric(horizontal: 12),
+  //       itemCount: menuItems.length,
+  //       itemBuilder: (context, index) {
+  //         final item = menuItems[index];
 
-          return GestureDetector(
-            onTap: item['onTap'],
-            child: Container(
-              margin: const EdgeInsetsDirectional.only(start: 8),
-              height: 40,
-              width: 106,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: item['backgroundColor'],
-              ),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 16,
-                        width: 16,
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          item['image'],
-                          color: item['textColor'],
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        item['title'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: item['textColor'],
-                          fontWeight: FontWeight.w300,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  //         return GestureDetector(
+  //           onTap: item['onTap'],
+  //           child: Container(
+  //             margin: const EdgeInsetsDirectional.only(start: 8),
+  //             height: 40,
+  //             width: 106,
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: item['backgroundColor'],
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   Padding(
+  //                     padding: const EdgeInsets.all(5.0),
+  //                     child: Container(
+  //                       height: 16,
+  //                       width: 16,
+  //                       alignment: Alignment.center,
+  //                       child: Image.asset(
+  //                         item['image'],
+  //                         color: item['textColor'],
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   Flexible(
+  //                     child: Text(
+  //                       item['title'],
+  //                       textAlign: TextAlign.center,
+  //                       style: TextStyle(
+  //                         color: item['textColor'],
+  //                         fontWeight: FontWeight.w300,
+  //                         fontSize: 10,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   // AppBar buildAppBar(double statusBarHeight, BuildContext context) {
   //   return AppBar(

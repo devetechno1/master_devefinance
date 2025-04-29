@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/main_helpers.dart';
@@ -451,7 +452,7 @@ class _OrderListState extends State<OrderList> {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -533,7 +534,7 @@ class _OrderListState extends State<OrderList> {
           borderRadius: BorderRadius.circular(16.0),
           color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
-        padding: const EdgeInsets.all(3),
+        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
         child: Icon(paymentStatus == "paid" ? Icons.check : Icons.check,
             color: Colors.white, size: 10),
       ),

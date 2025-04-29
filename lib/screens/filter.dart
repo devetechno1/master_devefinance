@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -829,7 +830,7 @@ final  List<dynamic> _productList = [];
               Container(
                 height: 100,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

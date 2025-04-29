@@ -651,7 +651,7 @@ class _CheckoutState extends State<Checkout> {
                     delegate: SliverChildListDelegate(
                       [
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child: buildPaymentMethodList(),
                         ),
                         Container(
@@ -680,7 +680,7 @@ class _CheckoutState extends State<Checkout> {
                           : 292,
                       //color: Colors.white,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                         child: Column(
                           children: [
                             widget.paymentFor == PaymentFor.Order
@@ -895,7 +895,7 @@ class _CheckoutState extends State<Checkout> {
                       width: 100,
                       height: 63,
                       child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child:
                               /*Image.asset(
                           _paymentTypeList[index].image,
@@ -1000,7 +1000,7 @@ class _CheckoutState extends State<Checkout> {
         color: MyTheme.soft_accent_color,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
         child: Row(
           children: [
             Padding(

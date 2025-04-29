@@ -137,7 +137,7 @@ class ShimmerHelper {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           childAspectRatio: 1),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(AppDimensions.paddingsmall),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {

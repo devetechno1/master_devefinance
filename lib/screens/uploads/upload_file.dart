@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:file_picker/file_picker.dart';
@@ -283,7 +284,7 @@ class _UploadFileState extends State<UploadFile> {
           controller: mainScrollController,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, crossAxisSpacing: 12),
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppDimensions.paddingNormal),
           itemCount: _images.length,
           itemBuilder: (context, index) {
             return buildImageItem(index);

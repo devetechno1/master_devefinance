@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -231,7 +232,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                       width: 50,
                       height: 50,
                       child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child:
                               /*Image.asset(
                           _list[index].image,

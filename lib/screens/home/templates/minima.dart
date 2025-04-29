@@ -140,7 +140,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
 
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                                     child: Column(
                                       children: [
                                       //  buildTimerRow(homeData.flashDealRemainingTime),

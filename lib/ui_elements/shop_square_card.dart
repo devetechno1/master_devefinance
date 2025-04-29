@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/seller_details.dart';
@@ -51,7 +52,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
-                padding: const EdgeInsets.all(35),
+                padding: const EdgeInsets.all(AppDimensions.paddingveryLarge),
                 child: _buildImage()),
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,

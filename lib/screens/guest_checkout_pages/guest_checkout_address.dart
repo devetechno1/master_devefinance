@@ -498,7 +498,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     children: [
 //////////////////////////////////////////////name
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                         child: Text(
                             "${AppLocalizations.of(context)!.name_ucf} *",
                             style: const TextStyle(
@@ -524,7 +524,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ////
                       //////////////////////////////////////////////email
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                         child: Text(
                             "${AppLocalizations.of(context)!.email_ucf} *",
                             style: const TextStyle(
@@ -549,7 +549,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       //////////////////////////////////
 
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                         child: Text(
                             "${AppLocalizations.of(context)!.address_ucf} *",
                             style: const TextStyle(
@@ -1272,7 +1272,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

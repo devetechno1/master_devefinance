@@ -267,19 +267,19 @@ class _WalletState extends State<Wallet> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: ShimmerHelper().buildBasicShimmer(height: 75.0),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: ShimmerHelper().buildBasicShimmer(height: 75.0),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: ShimmerHelper().buildBasicShimmer(height: 75.0),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: ShimmerHelper().buildBasicShimmer(height: 75.0),
         )
       ],
@@ -294,7 +294,7 @@ class _WalletState extends State<Wallet> {
           color: Colors.white, borderRadius: BorderRadius.circular(8)),
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingNormal),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

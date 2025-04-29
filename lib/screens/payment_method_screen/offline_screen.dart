@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
@@ -261,7 +262,7 @@ final  ScrollController _mainScrollController = ScrollController();
             SliverList(
               delegate: SliverChildListDelegate([
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: HtmlContentWebView(
                     html: widget.paymentInstruction ?? """<p>Heading</p>""",
                   ),
@@ -408,7 +409,7 @@ final  ScrollController _mainScrollController = ScrollController();
                 ),
                 _photo_path != ""
                     ? Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmall),
                         child: Text(AppLocalizations.of(context)!.selected_ucf),
                       )
                     : Container()

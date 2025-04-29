@@ -50,7 +50,7 @@ class FlashSale extends StatelessWidget {
                  Center(
                    child: Container(
                     width: context.isPhoneWidth ? double.maxFinite : 350,
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(

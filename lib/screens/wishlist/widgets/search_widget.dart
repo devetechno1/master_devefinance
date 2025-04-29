@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -825,7 +826,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               Container(
                 height: 100,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

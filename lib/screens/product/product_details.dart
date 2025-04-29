@@ -918,7 +918,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                       .buildCircularButtonDecoration_for_productDetails(),
                                   width: 32,
                                   height: 32,
-                                  padding: const EdgeInsets.all(2),
+                                  padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                                   child: badges.Badge(
                                     position: badges.BadgePosition.topEnd(
                                       top: -6,
@@ -1008,7 +1008,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(14),
+                            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1474,7 +1474,7 @@ class _ProductDetailsState extends State<ProductDetails>
           Visibility(
             visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(AppDimensions.paddingNormal),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(36.0),
                   color: Colors.white,
@@ -1890,7 +1890,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   Padding buildColorCheckerContainer() {
     return Padding(
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.all(AppDimensions.paddinghalfsmall),
         child: /*Icon(Icons.check, color: Colors.white, size: 16),*/
             Image.asset(
           "assets/white_tick.png",
@@ -2325,7 +2325,7 @@ class _ProductDetailsState extends State<ProductDetails>
         separatorBuilder: (context, index) => const SizedBox(height: 16),
         itemCount: _topProducts.length,
         scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
@@ -2383,7 +2383,7 @@ class _ProductDetailsState extends State<ProductDetails>
             separatorBuilder: (context, index) => const SizedBox(
               width: 16,
             ),
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
             itemCount: _relatedProducts.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {

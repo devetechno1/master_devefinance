@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
@@ -399,7 +400,7 @@ class _ChatState extends State<Chat> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: GestureDetector(
             onTap: () {
               onTapSendMessage();

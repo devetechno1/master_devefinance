@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
@@ -619,7 +620,7 @@ class _FlashDealListState extends State<FlashDealList> {
       constraints: const BoxConstraints(minWidth: 30, minHeight: 24),
       child: child,
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(AppDimensions.paddinghalfsmall),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: Theme.of(context).primaryColor,

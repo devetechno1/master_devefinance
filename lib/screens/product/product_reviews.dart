@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
@@ -157,7 +158,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                     SliverList(
                       delegate: SliverChildListDelegate([
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child: buildProductReviewsList(),
                         ),
                         Container(
@@ -468,7 +469,7 @@ class _ProductReviewsState extends State<ProductReviews> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               child: GestureDetector(
                 onTap: () {
                   onTapReviewSubmit(context);
