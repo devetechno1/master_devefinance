@@ -192,7 +192,7 @@ class _OtpState extends State<Otp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                     child: Text(AppLocalizations.of(context)!.check_your_WhatsApp_messages_to_retrieve_the_verification_code,
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -212,7 +212,7 @@ class _OtpState extends State<Otp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40, bottom: 60),
+                    padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge, bottom: 60),
                     child: Visibility(
                       visible: !canResend,
                       child: TimerWidget(
@@ -229,7 +229,7 @@ class _OtpState extends State<Otp> {
                   ),
                   // SizedBox(height: 15,),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
                     child: Center(
                       child: InkWell(
                         onTap: () {

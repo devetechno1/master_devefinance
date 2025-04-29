@@ -290,7 +290,7 @@ class _ProfileState extends State<Profile> {
 
   Widget buildBottomVerticalCardList() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 120, top: 14),
+      margin: const EdgeInsets.only(bottom: 120, top: AppDimensions.paddingNormal),
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Column(
@@ -514,7 +514,7 @@ class _ProfileState extends State<Profile> {
                           : 80
                       : 40,
                   alignment: Alignment.topCenter,
-                  padding: const EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
                   child: InkWell(
                     onTap: () {
                       _auctionExpand = !_auctionExpand;
@@ -777,7 +777,7 @@ class _ProfileState extends State<Profile> {
   // change Language, Edit Profile and Address section
   Widget buildHorizontalSettings() {
     return Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: AppDimensions.paddingLarge),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -916,7 +916,7 @@ class _ProfileState extends State<Profile> {
 
   Widget buildSettingAndAddonsHorizontalMenu() {
     return Container(
-      margin: const EdgeInsets.only(top: 14),
+      margin: const EdgeInsets.only(top: AppDimensions.paddingNormal),
       width: DeviceInfo(context).width,
       height: 208,
       alignment: Alignment.center,
@@ -973,7 +973,7 @@ class _ProfileState extends State<Profile> {
           Container(
             child: badges.Badge(
               showBadge: is_logged_in.$,
-              position: badges.BadgePosition.topEnd(top: 2, end: 20),
+              position: badges.BadgePosition.topEnd(top: 2, end: AppDimensions.paddingLarge),
               badgeStyle: badges.BadgeStyle(
                 shape: badges.BadgeShape.circle,
                 badgeColor: Theme.of(context).primaryColor,
@@ -1133,7 +1133,7 @@ class _ProfileState extends State<Profile> {
       : null,
       borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       child: Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: AppDimensions.paddingLarge),
         padding: const EdgeInsets.symmetric(vertical: 14),
         width: DeviceInfo(context).width! / 3.5,
         decoration: BoxDecoration(

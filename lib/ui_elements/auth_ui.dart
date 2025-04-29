@@ -152,7 +152,7 @@ class AuthScreen {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0, top: 10),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingLarge, top: AppDimensions.paddingsupsmall),
                         child: Text(
                           headerText,
                           style: const TextStyle(

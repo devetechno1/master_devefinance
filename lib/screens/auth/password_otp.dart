@@ -273,7 +273,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40.0),
+                    padding: const EdgeInsets.only(top: AppDimensions.paddingveryLarge),
                     child: Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -316,7 +316,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 40, bottom: 60),
+              padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge, bottom: 60),
               child: Visibility(
                 visible: !canResend,
                 child: TimerWidget(
@@ -364,14 +364,14 @@ class _PasswordOtpState extends State<PasswordOtp> {
                       ))),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
               child: Image.asset(
                 AppImages.changedPassword,
                 width: DeviceInfo(context).width! / 2,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 40.0),
+              padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 45,

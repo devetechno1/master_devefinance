@@ -100,7 +100,7 @@ class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderSt
                           const CategoryList(),
                           SliverList(delegate: SliverChildListDelegate([
                             Padding(
-                              padding: const EdgeInsets.only(left: 20,bottom: 10),
+                              padding: const EdgeInsets.only(left: AppDimensions.paddingLarge,bottom: 10),
                               child: Text(AppLocalizations.of(context)!.todays_deal_ucf, style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                             ),
                               TodaysDealProductsWidget(homePresenter: homeData,),

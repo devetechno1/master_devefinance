@@ -483,7 +483,7 @@ class _AddressState extends State<Address> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingDefualt).copyWith(bottom: 8),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt).copyWith(bottom: AppDimensions.paddingsmall),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -514,7 +514,7 @@ class _AddressState extends State<Address> {
                   _shippingAddressList[index].location_available != true
                       ? Center(
                           child: Container(
-                            margin: const EdgeInsets.only(bottom: 8),
+                            margin: const EdgeInsets.only(bottom:  AppDimensions.paddingsmall),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 3, horizontal: 9),
                             decoration: BoxDecoration(
@@ -874,7 +874,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt)),
         insetPadding: const EdgeInsets.symmetric(horizontal: 10),
         contentPadding:
-            const EdgeInsets.only(top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
+            const EdgeInsets.only(top: AppDimensions.paddingLarge, left: AppDimensions.paddingLarge, right: AppDimensions.paddingLarge, bottom: 2.0),
         content: Container(
           width: 400,
           child: SingleChildScrollView(
@@ -1635,7 +1635,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                           fontSize: 12)),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom: 16.0),
+                  margin: const EdgeInsets.only(bottom:  AppDimensions.paddingDefualt),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),

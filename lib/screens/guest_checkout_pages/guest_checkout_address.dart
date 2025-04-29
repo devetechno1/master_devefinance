@@ -885,7 +885,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
-        contentPadding: const EdgeInsets.only(left: 8.0, top: 6.0, bottom: 6.0));
+        contentPadding: const EdgeInsets.only(left:AppDimensions.paddingsmall, top: 6.0, bottom: 6.0));
   }
 
   Future buildShowUpdateFormDialog(BuildContext context, index) {

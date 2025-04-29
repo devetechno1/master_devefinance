@@ -543,7 +543,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
                       child: Text(
                         _deliveryInfoList[sellerArrayIndex]
                                 .carriers!
@@ -925,7 +925,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 18.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingMedium),
                 child: Text(
                   LangText(context).local.choose_delivery_ucf,
                   style: TextStyle(

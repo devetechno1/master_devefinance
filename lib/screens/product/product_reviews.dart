@@ -319,7 +319,7 @@ class _ProductReviewsState extends State<ProductReviews> {
             const Spacer(),
             Padding(
                 padding:
-                    const EdgeInsets.only(top: 0.0, bottom: 0.0, left: 16.0),
+                    const EdgeInsets.only(top: 0.0, bottom: 0.0, left: AppDimensions.paddingDefualt),
                 child: Container(
                   child: RatingBar(
                     itemSize: 12.0,
@@ -411,7 +411,7 @@ class _ProductReviewsState extends State<ProductReviews> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall),
           child: RatingBar.builder(
             itemSize: 20.0,
             initialRating: _my_rating,

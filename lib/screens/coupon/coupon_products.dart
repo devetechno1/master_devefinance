@@ -114,7 +114,7 @@ class _CouponProductsState extends State<CouponProducts> {
                 itemCount: productResponse.products!.length,
                 shrinkWrap: true,
                 padding:
-                    const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final product = productResponse.products![index];

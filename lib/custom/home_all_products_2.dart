@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -29,7 +30,7 @@ class HomeAllProducts2 extends StatelessWidget {
           crossAxisSpacing: 14,
           itemCount:  isLoadingMore? homeData!.allProductList.length + 2 : homeData!.allProductList.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             if (index > homeData!.allProductList.length - 1) {

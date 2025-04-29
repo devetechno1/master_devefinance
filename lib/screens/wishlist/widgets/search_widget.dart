@@ -452,8 +452,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             isExpanded: true,
             icon: Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(right: 18.0)
-                  : const EdgeInsets.only(left: 18.0),
+                  ? const EdgeInsets.only(right: AppDimensions.paddingMedium)
+                  : const EdgeInsets.only(left: AppDimensions.paddingMedium),
               child: const Icon(Icons.expand_more, color: Colors.black54),
             ),
             hint: Text(
@@ -1029,7 +1029,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   ListView buildFilterBrandsList() {
     return ListView(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
@@ -1060,7 +1060,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   ListView buildFilterCategoryList() {
     return ListView(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
@@ -1132,7 +1132,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
                 padding:
-                    const EdgeInsets.only(top: 10, bottom: 10, left: 18, right: 18),
+                    const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1206,7 +1206,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     mainAxisSpacing: 14,
                     childAspectRatio: 1),
                 padding:
-                    const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1276,7 +1276,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     mainAxisSpacing: 14,
                     childAspectRatio: 0.7),
                 padding:
-                    const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1325,6 +1325,6 @@ class _SearchWidgetState extends State<SearchWidget> {
             Radius.circular(AppDimensions.radiusSmall),
           ),
         ),
-        contentPadding: const EdgeInsets.only(left: 8.0, top: 10.0, bottom: 15.0));
+        contentPadding: const EdgeInsets.only(left: AppDimensions.paddingsmall, top: 10.0, bottom: 15.0));
   }
 }

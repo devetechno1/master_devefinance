@@ -186,7 +186,7 @@ class _CategoryListState extends State<CategoryList> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: Container(
                 width: (MediaQuery.of(context).size.width - 32),
                 height: 40,

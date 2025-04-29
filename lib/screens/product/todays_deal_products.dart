@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -80,7 +81,7 @@ class _TodaysDealProductsState extends State<TodaysDealProducts> {
                 itemCount: productResponse!.products!.length,
                 shrinkWrap: true,
                 padding:
-                    const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ProductCard(

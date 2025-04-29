@@ -270,7 +270,7 @@ class _UploadFileState extends State<UploadFile> {
         children: List.generate(
             5,
             (index) => Container(
-                margin: const EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: AppDimensions.paddingLarge),
                 child: ShimmerHelper().buildBasicShimmer(
                     height: 96, width: DeviceInfo(context).width!))),
       ),
@@ -332,7 +332,7 @@ class _UploadFileState extends State<UploadFile> {
         children: [
           MyWidget().productContainer(
             width: DeviceInfo(context).width!,
-            margin: const EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: AppDimensions.paddingLarge),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             height: 170,
             borderColor: MyTheme.grey_153,
@@ -367,7 +367,7 @@ class _UploadFileState extends State<UploadFile> {
           ),
           if (_selectedImages!
               .any((element) => element.id == _images[index].id))
-            Positioned(top: 10, right: 10, child: buildCheckContainer()),
+            Positioned(top: AppDimensions.paddingsupsmall, right: AppDimensions.paddingsupsmall, child: buildCheckContainer()),
           if (!widget.canMultiSelect && !widget.canSelect)
             Positioned(
                 top: 10,
@@ -422,7 +422,7 @@ class _UploadFileState extends State<UploadFile> {
         buildUploadFileContainer(context),
         Container(
           height: 40,
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(

@@ -323,7 +323,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               BoxShadow(color: MyTheme.white),
             ],
           ),
-          padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -495,7 +495,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               ),
             ],
           ),
-          padding:const EdgeInsets.only(top: 10, left: 5, right: 5),
+          padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _mediaExpanded ? 200 : 40,
           child: Column(
@@ -839,7 +839,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               ),
             ],
           ),
-          padding:const EdgeInsets.only(top: 10, left: 5, right: 5),
+          padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _priceExpanded ? 200 : 40,
           child: Column(
@@ -1194,7 +1194,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     return buildCommonSingleField(
       title,
       Container(
-        padding: const EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 10),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 8, left: AppDimensions.paddingsupsmall, right: AppDimensions.paddingsupsmall),
         alignment: Alignment.centerLeft,
         constraints: BoxConstraints(minWidth: DeviceInfo(context).width!),
         decoration: BoxDecoration(

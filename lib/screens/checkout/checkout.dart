@@ -1082,7 +1082,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(2).copyWith(top: 16),
+      contentPadding: const EdgeInsets.all(2).copyWith(top: AppDimensions.paddingDefualt),
       content: CheckoutDetails(showTotal: true, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
       actions: [
         Btn.basic(

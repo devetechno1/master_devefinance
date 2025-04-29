@@ -316,7 +316,7 @@ class _ChatState extends State<Chat> {
       ),
       backgroundColor: MyTheme.mainColor,
       leading: Container(
-        margin: const EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: AppDimensions.paddingsupsmall),
         child: UsefulElements.backButton(context),
       ),
     );
@@ -435,7 +435,7 @@ class _ChatState extends State<Chat> {
       elevation: 0.0,
       clipper: clipper,
       alignment: Alignment.topRight,
-      margin: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
       backGroundColor: MyTheme.soft_accent_color,
       child: Container(
         constraints: BoxConstraints(
@@ -462,7 +462,7 @@ class _ChatState extends State<Chat> {
         elevation: 0.0,
         clipper: clipper,
         backGroundColor: const Color.fromRGBO(239, 239, 239, 1),
-        margin: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
         child: Container(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.6,
@@ -496,7 +496,7 @@ class _ChatState extends State<Chat> {
           reverse: true,
           itemCount: _list.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Container(
@@ -542,7 +542,7 @@ class _ChatState extends State<Chat> {
         minWidth: 80,
         maxWidth: DeviceInfo(context).width! / 1.6,
       ),
-      padding: const EdgeInsets.only(top: 8, bottom: 3, right: 10, left: 10),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: 3, right: 10, left: 10),
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
@@ -606,7 +606,7 @@ class _ChatState extends State<Chat> {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Container(
-        padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
+        padding: const EdgeInsets.only(left: AppDimensions.paddingLarge, bottom: 10, top: 10),
         height: 60,
         width: double.infinity,
         color: Colors.white.withValues(alpha: 0.95),
@@ -680,7 +680,7 @@ class _ChatState extends State<Chat> {
           reverse: true,
           itemCount: 10,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             //print(_messages[index+1].year.toString());
@@ -708,7 +708,7 @@ class _ChatState extends State<Chat> {
           minWidth: 150,
           maxWidth: DeviceInfo(context).width! / 1.6,
         ),
-        padding: const EdgeInsets.only(top: 8, bottom: 3, right: 10, left: 10),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: 3, right: 10, left: 10),
         decoration: BoxDecoration(
           border: Border.all(
               width: 1,

@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -94,7 +95,7 @@ class _TopSellersState extends State<TopSellers> {
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
             childAspectRatio: 0.68),
-        padding: const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {

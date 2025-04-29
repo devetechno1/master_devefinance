@@ -90,7 +90,7 @@ class ShimmerHelper {
         crossAxisSpacing: 14,
         itemCount: item_count,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: 10, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return Shimmer.fromColors(

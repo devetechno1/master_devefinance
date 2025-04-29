@@ -1,4 +1,5 @@
- import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
+ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/get_brands_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class BrandListSectionSliver extends StatelessWidget {
     return SliverList(
       delegate: SliverChildListDelegate([
         Padding(
-          padding: const EdgeInsetsDirectional.only(top: 20, start: 20, bottom: 10),
+          padding: const EdgeInsetsDirectional.only(top: AppDimensions.paddingLarge, start: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall),
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {

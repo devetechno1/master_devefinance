@@ -340,7 +340,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
             itemCount: _productList.length,
             shrinkWrap: true,
             padding:
-                const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+                const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               // 3

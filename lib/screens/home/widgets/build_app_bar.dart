@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_search_box.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget
     centerTitle: false,
     elevation: 0,
     flexibleSpace: Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
       child: GestureDetector(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter())),
         child: HomeSearchBox(context: context),

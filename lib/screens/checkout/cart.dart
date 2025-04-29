@@ -192,7 +192,7 @@ class _CartState extends State<_Cart> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
                   child: Container(
                     height: 58,
                     width: (MediaQuery.of(context).size.width - 48),

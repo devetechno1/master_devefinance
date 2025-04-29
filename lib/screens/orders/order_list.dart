@@ -338,7 +338,7 @@ class _OrderListState extends State<OrderList> {
                 Padding(
                   padding: MediaQuery.of(context).viewPadding.top >
                           30 //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                      ? const EdgeInsets.only(top: 36.0)
+                      ? const EdgeInsets.only(top: AppDimensions.paddingveryLarge)
                       : const EdgeInsets.only(top: 14.0),
                   child: buildTopAppBarContainer(),
                 ),
@@ -420,7 +420,7 @@ class _OrderListState extends State<OrderList> {
               height: 14,
             ),
             padding:
-                const EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 0),
+                const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 0),
             itemCount: _orderList.length,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),

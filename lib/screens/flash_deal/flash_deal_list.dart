@@ -341,7 +341,7 @@ class _FlashDealListState extends State<FlashDealList> {
 
   Widget buildFlashDealsProductItemShimmer() {
     return Container(
-      margin: const EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: AppDimensions.paddingsupsmall),
       height: 50,
       width: 136,
       decoration: BoxDecoration(

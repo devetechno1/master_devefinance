@@ -25,7 +25,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
     } else if (homeData.featuredCategoryList.isNotEmpty) {
       return GridView.builder(
         padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 11, bottom: 24),
+            const EdgeInsets.only(left: AppDimensions.paddingLarge, right: AppDimensions.paddingLarge, top: 11, bottom: 24),
         scrollDirection: Axis.horizontal,
         controller: homeData.featuredCategoryScrollController,
         itemCount: homeData.featuredCategoryList.length,

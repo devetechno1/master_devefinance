@@ -413,7 +413,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   Padding buildProfileForm(context) {
     return Padding(
       padding:
-          const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+          const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: AppDimensions.paddingDefualt, right: AppDimensions.paddingDefualt),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,7 +431,7 @@ class _ProfileEditState extends State<ProfileEdit> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 22.0, bottom: 10),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall),
           child: Center(
             child: Text(
               LangText(context).local.password_changes_ucf,
@@ -498,7 +498,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 4.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingsmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!
                       .password_must_contain_at_least_6_characters,
@@ -587,7 +587,7 @@ class _ProfileEditState extends State<ProfileEdit> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 13.0),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
           child: Text(
             AppLocalizations.of(context)!.basic_information_ucf,
             style: const TextStyle(
@@ -642,7 +642,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(bottom: 14.0),
+          margin: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),

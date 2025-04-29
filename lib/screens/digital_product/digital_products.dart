@@ -386,7 +386,7 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       Container(
                         height: 20,
                         width: 48,
-                        margin: const EdgeInsets.only(top: 8, right: 8, bottom: 15),
+                        margin: const EdgeInsets.only(top: AppDimensions.paddingsmall, right: AppDimensions.paddingsmall, bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),

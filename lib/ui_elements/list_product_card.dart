@@ -59,7 +59,7 @@ class _ListProductCardState extends State<ListProductCard> {
           Flexible(
             child: Container(
               padding:
-                  const EdgeInsets.only(top: 10, left: 12, right: 12, bottom: 14),
+                  const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 12, right: 12, bottom: 14),
               //width: 240,
               height: 100,
               //color: Colors.red,

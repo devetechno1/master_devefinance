@@ -1136,7 +1136,7 @@ final  List<dynamic> _productList = [];
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
                 padding:
-                 const   EdgeInsets.only(top: 10, bottom: 10, left: 18, right: 18),
+                 const   EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics:const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1210,7 +1210,7 @@ final  List<dynamic> _productList = [];
                     mainAxisSpacing: 14,
                     childAspectRatio: 1),
                 padding:
-                 const   EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+                 const   EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics:const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1280,7 +1280,7 @@ final  List<dynamic> _productList = [];
                     mainAxisSpacing: 14,
                     childAspectRatio: 0.7),
                 padding:
-                 const   EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+                 const   EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {

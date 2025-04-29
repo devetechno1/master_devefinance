@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -120,7 +121,7 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
           crossAxisSpacing: 14,
           itemCount: _classifiedProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3

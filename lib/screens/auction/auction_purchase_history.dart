@@ -322,7 +322,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   //                   children: [
   //                     Padding(
   //                       padding: app_language_rtl.$!
-  //                           ? const EdgeInsets.only(left: 8.0)
+  //                           ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
   //                           : const EdgeInsets.only(right: 8.0),
   //                       // child: const Icon(
   //                       //   Icons.calendar_today_outlined,
@@ -344,7 +344,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   //                   children: [
   //                     Padding(
   //                       padding: app_language_rtl.$!
-  //                           ? const EdgeInsets.only(left: 8.0)
+  //                           ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
   //                           : const EdgeInsets.only(right: 8.0),
   //                       // child: const Icon(
   //                       //   Icons.credit_card,
@@ -387,7 +387,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   //                 children: [
   //                   Padding(
   //                     padding: app_language_rtl.$!
-  //                         ? const EdgeInsets.only(left: 8.0)
+  //                         ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
   //                         : const EdgeInsets.only(right: 8.0),
   //                     // child: const Icon(
   //                     //   Icons.local_shipping_outlined,
@@ -452,7 +452,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: 8.0)
+                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       // child: const Icon(
                       //   Icons.calendar_today_outlined,
@@ -474,7 +474,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: 8.0)
+                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       // child: const Icon(
                       //   Icons.credit_card,
@@ -517,7 +517,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 children: [
                   Padding(
                     padding: app_language_rtl.$!
-                        ? const EdgeInsets.only(left: 8.0)
+                        ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                         : const EdgeInsets.only(right: 8.0),
                     // child: const Icon(
                     //   Icons.local_shipping_outlined,
@@ -625,7 +625,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 Padding(
                   padding: MediaQuery.of(context).viewPadding.top >
                           30 //MediaQuery.of(context).viewPadding.top is the status bar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                      ? const EdgeInsets.only(top: 36.0)
+                      ? const EdgeInsets.only(top: AppDimensions.paddingveryLarge)
                       : const EdgeInsets.only(top: 14.0),
                   child: buildTopAppBarContainer(),
                 ),

@@ -60,7 +60,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w400),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 23.0),
+                      padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                       child: Row(
                         children: [
                           Text(
@@ -147,7 +147,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom:AppDimensions.paddingsmall),
                     child: Text(
                       cartProvider
                           .shopList[sellerIndex].cartItems[itemIndex].quantity

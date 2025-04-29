@@ -417,7 +417,7 @@ class _RegistrationState extends State<Registration> {
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -490,7 +490,7 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingextraLarge),
                 child: Container(
                   height: 45,
                   child: Btn.minWidthFixHeight(
@@ -516,7 +516,7 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

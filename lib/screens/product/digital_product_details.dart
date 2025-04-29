@@ -525,7 +525,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: 8.0)
+                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
@@ -1127,7 +1127,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               ),
                             ],
                           ),
-                          //  margin: EdgeInsets.only(top: 10),
+                          //  margin: EdgeInsets.only(top: AppDimensions.paddingsupsmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -1417,7 +1417,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   },
                   child: Padding(
                     padding: app_language_rtl.$!
-                        ? const EdgeInsets.only(left: 8.0)
+                        ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                         : const EdgeInsets.only(right: 8.0),
                     child: Container(
                       width: 30,
@@ -1511,7 +1511,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           Container(
             child: Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: Container(
                 width: 75,
@@ -1555,33 +1555,33 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -1590,33 +1590,33 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -1658,7 +1658,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         children: [
           Padding(
             padding: app_language_rtl.$!
-                ? const EdgeInsets.only(left: 8.0)
+                ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                 : const EdgeInsets.only(right: 8.0),
             child: Container(
               width: 75,
@@ -1697,7 +1697,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   Padding buildChoiceItem(option, choiceOptionsIndex, index) {
     return Padding(
       padding: app_language_rtl.$!
-          ? const EdgeInsets.only(left: 8.0)
+          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
           : const EdgeInsets.only(right: 8.0),
       child: InkWell(
         onTap: () {
@@ -1746,7 +1746,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: 8.0)
+              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 75,
@@ -2009,7 +2009,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         child: Container(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.only(top: 22.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
               child: Text(
                 _appbarPriceString!,
                 style: const TextStyle(fontSize: 16, color: MyTheme.font_grey),
@@ -2179,7 +2179,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: Container(
                     width: 75,
@@ -2257,17 +2257,17 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
       return Column(
         children: [
           Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 75.0,
               )),
           Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 75.0,
               )),
           Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 75.0,
               )),
@@ -2281,7 +2281,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           ),
           itemCount: _topProducts.length,
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -2313,14 +2313,14 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         children: [
           Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
           Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
@@ -2477,7 +2477,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!
-                    ? const EdgeInsets.only(left: 8.0)
+                    ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                     : const EdgeInsets.only(right: 8.0),
                 child: ListView.builder(
                     itemCount: _productImageList.length,

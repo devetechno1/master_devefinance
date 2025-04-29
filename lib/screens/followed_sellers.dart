@@ -116,7 +116,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
               crossAxisSpacing: 14,
               mainAxisSpacing: 14,
               childAspectRatio: 0.7),
-          padding: const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -266,7 +266,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
         crossAxisCount: 3,
       ),
       itemCount: 18,
-      padding: const EdgeInsets.only(left: 18, right: 18),
+      padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium),
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,

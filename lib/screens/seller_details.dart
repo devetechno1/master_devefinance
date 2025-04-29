@@ -738,7 +738,7 @@
 //                             ShimmerHelper()
 //                                 .buildBasicShimmer(height: 25.0, width: 150.0),
 //                             Padding(
-//                               padding: const EdgeInsets.only(top: 8.0),
+//                               padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
 //                               child: ShimmerHelper().buildBasicShimmer(
 //                                   height: 20.0, width: 100.0),
 //                             ),
@@ -821,7 +821,7 @@
 //               ),
 //             ),
 //             Container(
-//               padding: EdgeInsets.only(left: 10),
+//               padding: EdgeInsets.only(left: AppDimensions.paddingsupsmall),
 //               width: DeviceInfo(context).width! / 2.5,
 //               height: 60,
 //               child: Column(
@@ -919,7 +919,7 @@
 //           Flexible(
 //             child: Container(
 //               //color: Colors.amber,
-//               padding: EdgeInsets.only(left: 10),
+//               padding: EdgeInsets.only(left: AppDimensions.paddingsupsmall),
 //               width: DeviceInfo(context).width! / 2,
 //               height: 60,
 //               child: Column(
@@ -1399,7 +1399,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 //////Featured Products///////////
   Widget buildFeaturedProductsSection() {
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
       child: Container(
         height: 296,
         decoration: const BoxDecoration(
@@ -1409,7 +1409,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 20),
+              padding: const EdgeInsets.only(left: AppDimensions.paddingLarge, top: AppDimensions.paddingLarge),
               child: Text(
                 LangText(context).local.featured_products_ucf,
                 style: const TextStyle(
@@ -1420,11 +1420,11 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
             Container(
               height: 240,
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
               width: double.infinity,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: AppDimensions.paddingLarge),
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
@@ -1467,7 +1467,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 18.0, top: 20),
+            padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, top: 20),
             child: Column(
               children: [
                 ShimmerHelper()
@@ -1477,7 +1477,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           ),
           Container(
             height: 239,
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 20),
             width: double.infinity,
             child: ListView.separated(
               itemCount: 10,
@@ -1720,7 +1720,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _topProducts.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1749,7 +1749,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisSpacing: 14,
           itemCount: _newArrivalProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return FeaturedProductCard(
@@ -1779,7 +1779,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _allProductList.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(

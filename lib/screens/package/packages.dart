@@ -133,7 +133,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
   ListView buildList() {
     return _isFetchAllData
         ? ListView.separated(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
             separatorBuilder: (context, index) {
               return const SizedBox(
                 height: 10,
@@ -191,7 +191,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 decoration: BoxDecoration(
@@ -233,7 +233,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 child: Row(

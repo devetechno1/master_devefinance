@@ -538,7 +538,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingextraLarge),
                 child: Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -601,7 +601,7 @@ class _LoginState extends State<Login> {
               ),
               if (Platform.isIOS && AppConfig.businessSettingsData.allowAppleLogin)
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                   child: SignInWithAppleButton(
                     onPressed: () async {
                       signInWithApple();
@@ -611,7 +611,7 @@ class _LoginState extends State<Login> {
               Visibility(
                 visible: AppConfig.businessSettingsData.allowGoogleLogin || AppConfig.businessSettingsData.allowFacebookLogin,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                   child: Center(
                       child: Text(
                     AppLocalizations.of(context)!.login_screen_login_with,
