@@ -21,10 +21,10 @@ class NavigationService {
           await launchUrl(uri!);
         }
       }else{
-        throw 'uri does not has absolute path';
+        throw AppLocalizations.of(context)!.invalidURL;
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar( content: Text(AppLocalizations.of(context)!.invalidURL)));      
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar( content: Text(e.toString())));      
     }
 
   }
