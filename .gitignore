@@ -55,5 +55,34 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# for test or work in app
+
 /test.json
+
+/lib/core/utils/config/locale/generated/intl/
+
+
+
+# iOS related
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Flutter/ephemeral/
+ios/.symlinks/
+ios/Pods/
+ios/Podfile.lock
+ios/.generated/
+ios/.dart_tool/
+ios/build/
+
+# Xcode related
+ios/Runner.xcodeproj/project.xcworkspace/
+ios/Runner.xcodeproj/xcuserdata/
+ios/Runner.xcworkspace/xcuserdata/
+*.xcuserstate
+
+# Temporary or local files
+*.orig
+*.tmp
+*.lock
+
