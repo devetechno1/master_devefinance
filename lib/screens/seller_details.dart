@@ -552,7 +552,7 @@
 //         padding: EdgeInsets.zero,
 //         color: tabOptionIndex == index ? MyTheme.accent_color : MyTheme.white,
 //         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(6),
+//           borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
 //         ),
 //         onPressed: () {
 //           tabOptionIndex = index;
@@ -611,7 +611,7 @@
 //                       padding: EdgeInsets.symmetric(horizontal: 18.0),
 //                       decoration: BoxDecorations.buildBoxDecoration_1(),
 //                       child: ClipRRect(
-//                           borderRadius: BorderRadius.all(Radius.circular(6)),
+//                           borderRadius: BorderRadius.all(Radius.circular(AppDimensions.radiusaHalfsmall)),
 //                           child: FadeInImage.assetNetwork(
 //                             placeholder: 'assets/placeholder_rectangle.png',
 //                             image: i,
@@ -731,14 +731,14 @@
 //                               height: 40.0,
 //                               width: DeviceInfo(context).width! - 70),
 //                           /*Padding(
-//                         padding: const EdgeInsets.only(left: 8.0),
+//                         padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
 //                         child: Column(
 //                           crossAxisAlignment: CrossAxisAlignment.start,
 //                           children: [
 //                             ShimmerHelper()
 //                                 .buildBasicShimmer(height: 25.0, width: 150.0),
 //                             Padding(
-//                               padding: const EdgeInsets.only(top: 8.0),
+//                               padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
 //                               child: ShimmerHelper().buildBasicShimmer(
 //                                   height: 20.0, width: 100.0),
 //                             ),
@@ -809,9 +809,9 @@
 //               height: 60,
 //               decoration: BoxDecorations.buildBoxDecoration_1(),
 //               child: ClipRRect(
-//                 borderRadius: BorderRadius.circular(5),
+//                 borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
 //                 child: FadeInImage.assetNetwork(
-//                   placeholder: 'assets/placeholder.png',
+//                   placeholder: 'AppImages.placeholder',
 //                   image: _shopDetails?.logo ?? "",
 //                   fit: BoxFit.cover,
 //                   imageErrorBuilder: (BuildContext, Object, StackTrace) {
@@ -821,7 +821,7 @@
 //               ),
 //             ),
 //             Container(
-//               padding: EdgeInsets.only(left: 10),
+//               padding: EdgeInsets.only(left: AppDimensions.paddingsupsmall),
 //               width: DeviceInfo(context).width! / 2.5,
 //               height: 60,
 //               child: Column(
@@ -861,7 +861,7 @@
 //                     ? MyTheme.green_light
 //                     : MyTheme.amber,
 //                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(6),
+//                     borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
 //                     side: BorderSide(
 //                         color: _isThisSellerFollowed != null &&
 //                                 _isThisSellerFollowed!
@@ -912,14 +912,14 @@
 //             height: 60,
 //             decoration: BoxDecorations.buildBoxDecoration_1(),
 //             child: ClipRRect(
-//               borderRadius: BorderRadius.circular(5),
+//               borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
 //               child: ShimmerHelper().buildBasicShimmer(height: 60, width: 60),
 //             ),
 //           ),
 //           Flexible(
 //             child: Container(
 //               //color: Colors.amber,
-//               padding: EdgeInsets.only(left: 10),
+//               padding: EdgeInsets.only(left: AppDimensions.paddingsupsmall),
 //               width: DeviceInfo(context).width! / 2,
 //               height: 60,
 //               child: Column(
@@ -1012,6 +1012,7 @@
 //         });
 //   }
 // }
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
@@ -1398,7 +1399,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 //////Featured Products///////////
   Widget buildFeaturedProductsSection() {
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
       child: Container(
         height: 296,
         decoration: const BoxDecoration(
@@ -1408,7 +1409,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 20),
+              padding: const EdgeInsets.only(left: AppDimensions.paddingLarge, top: AppDimensions.paddingLarge),
               child: Text(
                 LangText(context).local.featured_products_ucf,
                 style: const TextStyle(
@@ -1419,11 +1420,11 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
             Container(
               height: 240,
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
               width: double.infinity,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: AppDimensions.paddingLarge),
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
@@ -1461,12 +1462,12 @@ class _SellerDetailsState extends State<SellerDetails> {
       height: 280,
       decoration: const BoxDecoration(
           color: MyTheme.mainColor,
-          image: DecorationImage(image: AssetImage("assets/background_1.png"))),
+          image: DecorationImage(image: AssetImage(AppImages.backgroundOne))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 18.0, top: 20),
+            padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, top: 20),
             child: Column(
               children: [
                 ShimmerHelper()
@@ -1476,7 +1477,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           ),
           Container(
             height: 239,
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 20),
             width: double.infinity,
             child: ListView.separated(
               itemCount: 10,
@@ -1578,7 +1579,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         padding: EdgeInsets.zero,
         color: tabOptionIndex == index ? Theme.of(context).primaryColor : MyTheme.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
         ),
         onPressed: () {
           tabOptionIndex = index;
@@ -1603,7 +1604,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   Widget buildCarouselSlider(context) {
     if (_shopDetails == null) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: ShimmerHelper().buildBasicShimmer(
           height: 100.0,
         ),
@@ -1651,7 +1652,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                       width: double.infinity,
                       child: ClipRRect(
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder_rectangle.png',
+                          placeholder: AppImages.placeholderRectangle,
                           image: i,
                           fit: BoxFit.cover,
                         ),
@@ -1719,7 +1720,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _topProducts.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1748,7 +1749,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisSpacing: 14,
           itemCount: _newArrivalProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return FeaturedProductCard(
@@ -1778,7 +1779,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _allProductList.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1827,7 +1828,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               //  decoration: BoxDecorations.buildBoxDecoration_1(),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: .08),
@@ -1837,21 +1838,21 @@ class _SellerDetailsState extends State<SellerDetails> {
                   )
                 ],
               ),
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
+                  placeholder: AppImages.placeholder,
                   image: _shopDetails?.logo ?? "",
                   fit: BoxFit.cover,
                   imageErrorBuilder: (BuildContext, Object, StackTrace) {
-                    return Image.asset('assets/placeholder_rectangle.png');
+                    return Image.asset(AppImages.placeholderRectangle);
                   },
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               width: DeviceInfo(context).width! / 2.5,
               height: 60,
               child: Column(
@@ -1895,14 +1896,14 @@ class _SellerDetailsState extends State<SellerDetails> {
                           const Offset(0.0, 10.0), // shadow direction: bottom right
                     )
                   ],
-                  borderRadius: BorderRadius.circular(3.0)),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)),
               child: Btn.basic(
                 padding: EdgeInsets.zero,
                 color: _isThisSellerFollowed != null && _isThisSellerFollowed!
                     ? MyTheme.green_light
                     : MyTheme.amber,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     side: BorderSide(
                         color: _isThisSellerFollowed != null &&
                                 _isThisSellerFollowed!
@@ -1953,14 +1954,14 @@ class _SellerDetailsState extends State<SellerDetails> {
             height: 60,
             decoration: BoxDecorations.buildBoxDecoration_1(),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               child: ShimmerHelper().buildBasicShimmer(height: 60, width: 60),
             ),
           ),
           Flexible(
             child: Container(
               //color: Colors.amber,
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               width: DeviceInfo(context).width! / 2,
               height: 60,
               child: Column(
@@ -2088,10 +2089,10 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                     width: double.infinity,
                     child: ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
-                        image: widget.image ?? 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
+                        image: widget.image ?? AppImages.placeholder,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -2180,7 +2181,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),
@@ -2211,8 +2212,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         decoration: const BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(6),
-                            bottomLeft: Radius.circular(6),
+                            topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                            bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                           ),
                           boxShadow: [
                             BoxShadow(

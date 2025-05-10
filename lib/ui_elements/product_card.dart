@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
@@ -69,10 +71,10 @@ class _ProductCardState extends State<ProductCard> {
                       width: double.infinity,
                       child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
-                          image: widget.image ?? 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
+                          image: widget.image ?? AppImages.placeholder,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -88,8 +90,8 @@ class _ProductCardState extends State<ProductCard> {
                           decoration: const BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(6),
-                              bottomLeft: Radius.circular(6),
+                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -193,10 +195,10 @@ class _ProductCardState extends State<ProductCard> {
                       Container(
                         height: 20,
                         width: 48,
-                        margin: const EdgeInsets.only(top: 8, right: 8, bottom: 15),
+                        margin: const EdgeInsets.only(top: AppDimensions.paddingsmall, right: AppDimensions.paddingsmall, bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),

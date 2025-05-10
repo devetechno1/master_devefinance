@@ -57,7 +57,7 @@
 //                               height: 72,
 //                               decoration: BoxDecoration(
 //                                   color: MyTheme.white,
-//                                   borderRadius: BorderRadius.circular(8)),
+//                                   borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
 //                               child: Image.asset(
 //                                   'assets/login_registration_form_logo.png'),
 //                             ),
@@ -96,6 +96,8 @@
 //     );
 //   }
 // }
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -119,7 +121,7 @@ class AuthScreen {
               color: Theme.of(context).primaryColor,
               alignment: Alignment.topRight,
               child: Image.asset(
-                "assets/background_1.png",
+               AppImages.backgroundOne,
               ),
             ),
             // CustomScrollView
@@ -142,15 +144,15 @@ class AuthScreen {
                               height: 72,
                               decoration: BoxDecoration(
                                   color: MyTheme.white,
-                                  borderRadius: BorderRadius.circular(8)),
+                                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
                               child: Image.asset(
-                                  'assets/login_registration_form_logo.png'),
+                                  AppImages.loginRegisteration),
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0, top: 10),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingLarge, top: AppDimensions.paddingsupsmall),
                         child: Text(
                           headerText,
                           style: const TextStyle(
@@ -183,7 +185,7 @@ class AuthScreen {
                   Navigator.of(context).pop();
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppDimensions.paddingsmall),
                   decoration: BoxDecoration(
                     color: Colors.red
                         .withValues(alpha: 0.7), // Optional background color

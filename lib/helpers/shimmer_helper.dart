@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class ShimmerHelper {
         crossAxisSpacing: 14,
         itemCount: item_count,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+        padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: 10, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
@@ -136,12 +137,12 @@ class ShimmerHelper {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           childAspectRatio: 1),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(AppDimensions.paddingsmall),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
           child: Shimmer.fromColors(
             baseColor: MyTheme.shimmer_base,
             highlightColor: MyTheme.shimmer_highlighted,
@@ -164,7 +165,7 @@ class ShimmerHelper {
       mainAxisExtent = 100.0,
       controller}) {
     return GridView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         scrollDirection: Axis.horizontal,
         controller: controller,
         itemCount: item_count,
@@ -191,7 +192,7 @@ class ShimmerHelper {
       int itemCount = 10,
       double itemHeight = 120}) {
     return ListView.separated(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
       separatorBuilder: (context, index) => SizedBox(
         width: separationWidth,
       ),

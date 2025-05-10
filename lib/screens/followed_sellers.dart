@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/followed_sellers_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -115,7 +116,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
               crossAxisSpacing: 14,
               mainAxisSpacing: 14,
               childAspectRatio: 0.7),
-          padding: const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -156,14 +157,14 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   height: 100,
                   child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16), bottom: Radius.zero),
+                          top: Radius.circular(AppDimensions.radiusDefualt), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
                         image: sellerInfo.shopLogo!,
                         fit: BoxFit.scaleDown,
                         imageErrorBuilder: (BuildContext errorContext,
                             Object obj, StackTrace? st) {
-                          return Image.asset('assets/placeholder.png');
+                          return Image.asset(AppImages.placeholder);
                         },
                       ))),
             ),
@@ -184,7 +185,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 15,
                 child: RatingBar(
@@ -243,7 +244,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.amber),
                       color: MyTheme.amber,
-                      borderRadius: BorderRadius.circular(6)),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
                   child: Text(
                     LangText(context).local.visit_store_ucf,
                     style: TextStyle(
@@ -265,7 +266,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
         crossAxisCount: 3,
       ),
       itemCount: 18,
-      padding: const EdgeInsets.only(left: 18, right: 18),
+      padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium),
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,

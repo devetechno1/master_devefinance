@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -78,8 +79,8 @@ class _VideoDescriptionState extends State<VideoDescription> {
                   color: MyTheme.medium_grey_50,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(25),
-                      bottomRight: Radius.circular(25),
+                      topRight: Radius.circular(AppDimensions.radius),
+                      bottomRight: Radius.circular(AppDimensions.radius),
                     ),
                   ),
                 ),

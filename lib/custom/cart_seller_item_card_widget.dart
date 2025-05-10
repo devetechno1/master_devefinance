@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/system_config.dart';
@@ -23,7 +24,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
     return Container(
       height: 120,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(6)),
+          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -32,9 +33,9 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 height: 120,
                 child: ClipRRect(
                     borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(6), right: Radius.zero),
+                        left: Radius.circular(AppDimensions.radiusaHalfsmall), right: Radius.zero),
                     child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/placeholder.png',
+                      placeholder: AppImages.placeholder,
                       image: cartProvider.shopList[sellerIndex]
                           .cartItems[itemIndex].productThumbnailImage,
                       fit: BoxFit.contain,
@@ -59,7 +60,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w400),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 23.0),
+                      padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                       child: Row(
                         children: [
                           Text(
@@ -103,9 +104,9 @@ class CartSellerItemCardWidget extends StatelessWidget {
                       );
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 14.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                       child: Image.asset(
-                        'assets/trash.png',
+                       AppImages.trash,
                         height: 16,
                         color: Colors.red,
                       ),
@@ -115,7 +116,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(14.0),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -146,7 +147,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom:AppDimensions.paddingsmall),
                     child: Text(
                       cartProvider
                           .shopList[sellerIndex].cartItems[itemIndex].quantity

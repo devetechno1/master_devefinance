@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/shimmer_helper.dart';
@@ -41,6 +42,9 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
   }
   @override
   Widget build(BuildContext context) {
+     if (widget.photo == null || widget.photo!.isEmpty) {
+      return const SizedBox();
+    }
     return InkWell(
       onTap: () => NavigationService.handleUrls(widget.urlToOpen, context),
       child: _aspectRatio == null
@@ -59,7 +63,7 @@ class LoadingImageBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
+      padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 20),
       child: ShimmerHelper().buildBasicShimmer(height: 120),
     );
   }

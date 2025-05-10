@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/middlewares/middleware.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -27,7 +28,7 @@ class MaintenanceMiddleware extends Middleware {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              "assets/maintenance.png",
+                              AppImages.maintenance,
                             ),
                             const SizedBox(
                               height: 14,

@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
+
 class SingleProduct {
   String? image;
   List<String>? product_images;
@@ -38,13 +40,13 @@ class Seller {
 }
 
 Seller seller =
-    Seller(shop_name: "UGG Australia", shop_image: "dummy_assets/s8.jpg");
+    Seller(shop_name: "UGG Australia", shop_image: AppImages.s8);
 
 List<String> my_product_images = [
-  'dummy_assets/pi1.jpg',
-  'dummy_assets/pi2.jpg',
-  'dummy_assets/pi3.jpg',
-  'dummy_assets/pi4.jpg',
+  AppImages.pi1,
+  AppImages.pi2,
+AppImages.pi3,
+  AppImages.pi4,
 ];
 
 String description = """ Brand: Apple

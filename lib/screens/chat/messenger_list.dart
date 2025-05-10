@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -87,7 +89,7 @@ class _MessengerListState extends State<MessengerList> {
                   SliverList(
                     delegate: SliverChildListDelegate([
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                         child: buildMessengerList(),
                       ),
                     ]),
@@ -150,7 +152,7 @@ class _MessengerListState extends State<MessengerList> {
         child: ListView.builder(
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.all(0.0),
+         // padding: const EdgeInsets.all(0.0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -182,22 +184,22 @@ class _MessengerListState extends State<MessengerList> {
         }));
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Container(
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(35),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
               border: Border.all(
                   color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
               //shape: BoxShape.rectangle,
             ),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
+                  placeholder: AppImages.placeholder,
                   image: _list[index].shop_logo,
                   fit: BoxFit.contain,
                 )),
@@ -244,7 +246,7 @@ class _MessengerListState extends State<MessengerList> {
           ),
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
             child: Icon(
               Icons.arrow_forward_ios_rounded,
               color: MyTheme.medium_grey,

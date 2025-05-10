@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class HomeBannersList extends StatelessWidget {
               margin: const EdgeInsetsDirectional.only(start: 10, bottom: 10,top: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0xff000000).withValues(alpha: 0.1),
@@ -64,7 +65,7 @@ class HomeBannersList extends StatelessWidget {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                 child: InkWell(
                   onTap: () => NavigationService.handleUrls(i.url, context),
                   child: AIZImage.radiusImage(i.photo, 6),

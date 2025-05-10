@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/brand_products.dart';
@@ -38,9 +40,9 @@ class _BrandSquareCardState extends State<BrandSquareCard> {
                   //width: double.infinity,
                   child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16), bottom: Radius.zero),
+                          top: Radius.circular(AppDimensions.radiusDefualt), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
                         image: widget.image!,
                         fit: BoxFit.cover,
                       ))),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/aiz_route.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
@@ -382,7 +383,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     height: 90,
                     color: const Color(0xffFEF0D7),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                         side: BorderSide(
                             color: Colors.amber.shade600, width: 1.0)),
                     child: Column(
@@ -429,7 +430,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             return AlertDialog(
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt)),
               insetPadding: const EdgeInsets.symmetric(horizontal: 10),
               contentPadding: const EdgeInsets.only(
                   top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
@@ -442,7 +443,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     children: [
 //////////////////////////////////////////////name
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                         child: Text(
                             "${AppLocalizations.of(context)!.name_ucf} *",
                             style: const TextStyle(
@@ -451,7 +452,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -468,7 +469,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ////
                       //////////////////////////////////////////////email
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                         child: Text(
                             "${AppLocalizations.of(context)!.email_ucf} *",
                             style: const TextStyle(
@@ -477,7 +478,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -493,7 +494,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       //////////////////////////////////
 
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                         child: Text(
                             "${AppLocalizations.of(context)!.address_ucf} *",
                             style: const TextStyle(
@@ -502,7 +503,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -518,7 +519,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.country_ucf} *",
                             style: const TextStyle(
@@ -527,7 +528,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -575,7 +576,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.state_ucf} *",
                             style: const TextStyle(
@@ -584,7 +585,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -639,7 +640,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.city_ucf} *",
                             style: const TextStyle(
@@ -648,7 +649,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -704,7 +705,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(AppLocalizations.of(context)!.postal_code,
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
@@ -712,7 +713,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -726,7 +727,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(AppLocalizations.of(context)!.phone_ucf,
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
@@ -734,7 +735,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -756,13 +757,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 40,
                         color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1)),
                         child: Text(
@@ -782,13 +783,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       width: 1,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 28.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingextraLarge),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 40,
                         color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                         ),
                         child: Text(
                           LangText(context).local.add_ucf,
@@ -820,16 +821,16 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
           borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
+            Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
           borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
+            Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
-        contentPadding: const EdgeInsets.only(left: 8.0, top: 6.0, bottom: 6.0));
+        contentPadding: const EdgeInsets.only(left: AppDimensions.paddingsmall, top: 6.0, bottom: 6.0));
   }
 
   Future buildShowUpdateFormDialog(BuildContext context, index) {
@@ -850,14 +851,14 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.address_ucf} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 55,
                           child: TextField(
@@ -873,14 +874,14 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.country_ucf} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -916,14 +917,14 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.state_ucf} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -964,14 +965,14 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(
                             "${AppLocalizations.of(context)!.city_ucf} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -1017,13 +1018,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(AppLocalizations.of(context)!.postal_code,
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -1038,13 +1039,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Text(AppLocalizations.of(context)!.phone_ucf,
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -1066,13 +1067,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 40,
                         color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
@@ -1089,13 +1090,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       width: 1,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 28.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingextraLarge),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 40,
                         color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                         ),
                         child: Text(
                           AppLocalizations.of(context)!.update_all_capital,
@@ -1216,12 +1217,12 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1248,7 +1249,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1275,7 +1276,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1302,7 +1303,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1329,7 +1330,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1356,7 +1357,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1443,7 +1444,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             width: 45,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.topRight,
-            child: Image.asset("assets/more.png",
+            child: Image.asset(AppImages.more,
                 width: 4,
                 height: 16,
                 fit: BoxFit.contain,

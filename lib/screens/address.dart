@@ -284,7 +284,7 @@ class _AddressState extends State<Address> {
                     height: 90,
                     color: const Color(0xffFEF0D7),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                         side: BorderSide(
                             color: Colors.amber.shade600, width: 1.0)),
                     child: Column(
@@ -343,13 +343,13 @@ class _AddressState extends State<Address> {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
           borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
+            Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
           borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
+            Radius.circular(AppDimensions.radiusaHalfsmall),
           ),
         ),
         contentPadding:
@@ -457,7 +457,7 @@ class _AddressState extends State<Address> {
 
   InkWell buildAddressItemCard(int index) {
     return InkWell(
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       onTap: () {
         if (_shippingAddressList[index].location_available != true) {
           _choosePlace(_shippingAddressList[index]);
@@ -483,7 +483,7 @@ class _AddressState extends State<Address> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0).copyWith(bottom: 8),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt).copyWith(bottom: AppDimensions.paddingsmall),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -514,12 +514,12 @@ class _AddressState extends State<Address> {
                   _shippingAddressList[index].location_available != true
                       ? Center(
                           child: Container(
-                            margin: const EdgeInsets.only(bottom: 8),
+                            margin: const EdgeInsets.only(bottom:  AppDimensions.paddingsmall),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 3, horizontal: 9),
                             decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.error,
-                                borderRadius: BorderRadius.circular(5)),
+                                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
                             child: Text(
                               AppLocalizations.of(context)!
                                   .you_have_to_add_location_here,
@@ -597,7 +597,7 @@ class _AddressState extends State<Address> {
         width: 45,
         padding: const EdgeInsets.symmetric(horizontal: 15),
         alignment: AlignmentDirectional.topEnd,
-        child: Image.asset("assets/more.png",
+        child: Image.asset(AppImages.more,
             width: 4, height: 16, fit: BoxFit.contain, color: MyTheme.grey_153),
       ),
       onSelected: (MenuOptions result) {
@@ -635,7 +635,7 @@ class LineData extends StatelessWidget {
   Widget build(BuildContext context) {
     if (body?.isNotEmpty != true) return const SizedBox();
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -871,10 +871,10 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
         backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt)),
         insetPadding: const EdgeInsets.symmetric(horizontal: 10),
         contentPadding:
-            const EdgeInsets.only(top: 23.0, left: 20.0, right: 20.0, bottom: 2.0),
+            const EdgeInsets.only(top: AppDimensions.paddingLarge, left: AppDimensions.paddingLarge, right: AppDimensions.paddingLarge, bottom: 2.0),
         content: Container(
           width: 400,
           child: SingleChildScrollView(
@@ -883,7 +883,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                   child: Text("${AppLocalizations.of(context)!.address_ucf} *",
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -891,7 +891,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 14.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                   child: Container(
                     height: 40,
                     child: TextField(
@@ -904,7 +904,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Text("${AppLocalizations.of(context)!.country_ucf} *",
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -912,7 +912,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 14.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                   child: Container(
                     height: 40,
                     child: TypeAheadField(
@@ -955,7 +955,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Text("${AppLocalizations.of(context)!.state_ucf} *",
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -963,7 +963,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                   child: Container(
                     height: 40,
                     child: TypeAheadField(
@@ -1012,7 +1012,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Text("${AppLocalizations.of(context)!.city_ucf} *",
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -1020,7 +1020,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                   child: Container(
                     height: 40,
                     child: TypeAheadField(
@@ -1071,7 +1071,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -1082,7 +1082,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   margin: const EdgeInsets.only(bottom: 16.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     // boxShadow: [MyTheme.commonShadow()],
                   ),
                   height: 40,
@@ -1122,7 +1122,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Text(AppLocalizations.of(context)!.postal_code,
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -1130,7 +1130,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                   child: Container(
                     height: 40,
                     child: TextField(
@@ -1149,13 +1149,13 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Btn.minWidthFixHeight(
                   minWidth: 75,
                   height: 40,
                   color: const Color.fromRGBO(253, 253, 253, 1),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                       side: BorderSide(color: MyTheme.light_grey, width: 1)),
                   child: Text(
                     LangText(context).local.close_ucf,
@@ -1178,7 +1178,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   height: 40,
                   color: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                   ),
                   child: Text(
                     LangText(context).local.continue_ucf,
@@ -1436,14 +1436,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(
                     "${AppLocalizations.of(context)!.address_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 55,
                   child: TextField(
@@ -1457,14 +1457,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(
                     "${AppLocalizations.of(context)!.country_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1510,14 +1510,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(
                     "${AppLocalizations.of(context)!.state_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1565,14 +1565,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(
                     "${AppLocalizations.of(context)!.city_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1627,7 +1627,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
                       style: const TextStyle(
                           color: Color(0xff3E4447),
@@ -1635,10 +1635,10 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                           fontSize: 12)),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom: 16.0),
+                  margin: const EdgeInsets.only(bottom:  AppDimensions.paddingDefualt),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     // boxShadow: [MyTheme.commonShadow()],
                   ),
                   height: 40,
@@ -1678,13 +1678,13 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(AppLocalizations.of(context)!.postal_code,
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -1705,13 +1705,13 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Btn.minWidthFixHeight(
                 minWidth: 75,
                 height: 40,
                 color: const Color.fromRGBO(253, 253, 253, 1),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     side: BorderSide(
                         color: MyTheme.light_grey, width: 1.0)),
                 child: Text(
@@ -1732,7 +1732,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 height: 40,
                 color: Theme.of(context).primaryColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.update_all_capital,

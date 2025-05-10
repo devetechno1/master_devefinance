@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/brands_horizontal_list_widget.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 305,
-      margin: const EdgeInsets.only(top: 10, bottom: 5),
+      margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 5),
       color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

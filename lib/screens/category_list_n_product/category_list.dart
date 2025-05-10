@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -181,11 +182,11 @@ class _CategoryListState extends State<CategoryList> {
       ),
       height: widget.is_base_category ? 0 : 80,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: Container(
                 width: (MediaQuery.of(context).size.width - 32),
                 height: 40,
@@ -194,7 +195,7 @@ class _CategoryListState extends State<CategoryList> {
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.all(Radius.circular(8.0))),
+                          BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
                   child: Text(
                     AppLocalizations.of(context)!.all_products_of_ucf + " ",
                     style: const TextStyle(

@@ -23,6 +23,7 @@ import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/new_products_list_sliver.dart';
+import '../widgets/whatsapp_floating_widget.dart';
 
 class MinimaScreen extends StatefulWidget {
   const MinimaScreen({
@@ -72,6 +73,8 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
+         floatingActionButton: whatsappFloatingButtonWidget,
+
             appBar: BuildAppBar( statusBarHeight: 34, context: context,),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
@@ -115,7 +118,7 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                                         padding: const EdgeInsetsDirectional.fromSTEB(22, 10, 10, 10),
                                         child: Text(AppLocalizations.of(context)!.flash_deal_ucf, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                       ),
-                                       Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
+                                       Image.asset(AppImages.flashDeal, height: 20, color: MyTheme.golden),
                                     ],
                                   ),
                                 ),
@@ -133,11 +136,11 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                                         offset: const Offset(0, 3), // changes position of shadow
                                   )],
                                     color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
 
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
                                     child: Column(
                                       children: [
                                       //  buildTimerRow(homeData.flashDealRemainingTime),

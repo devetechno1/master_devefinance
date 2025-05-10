@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -260,10 +262,10 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       width: double.infinity,
                       child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
-                          image: widget.image ?? 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
+                          image: widget.image ?? AppImages.placeholder,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -279,8 +281,8 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                           decoration: const BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(6),
-                              bottomLeft: Radius.circular(6),
+                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -384,10 +386,10 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       Container(
                         height: 20,
                         width: 48,
-                        margin: const EdgeInsets.only(top: 8, right: 8, bottom: 15),
+                        margin: const EdgeInsets.only(top: AppDimensions.paddingsmall, right: AppDimensions.paddingsmall, bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),

@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/currency_response.dart';
@@ -57,7 +58,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
                     SliverList(
                       delegate: SliverChildListDelegate([
                         Padding(
-                          padding: const EdgeInsets.all(18.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingMedium),
                           child: buildLanguageMethodList(),
                         ),
                       ]),
@@ -159,7 +160,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
             height: 16,
             width: 16,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0), color: Colors.green),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),

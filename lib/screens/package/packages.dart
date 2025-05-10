@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
@@ -132,7 +133,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
   ListView buildList() {
     return _isFetchAllData
         ? ListView.separated(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
             separatorBuilder: (context, index) {
               return const SizedBox(
                 height: 10,
@@ -190,12 +191,12 @@ class _UpdatePackageState extends State<UpdatePackage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(6)),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: InkWell(
                     onTap: () {
@@ -232,7 +233,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 child: Row(

@@ -22,7 +22,7 @@ class HomeBannerThree extends StatelessWidget {
         homeData!.bannerOneImageList.isEmpty) {
       return Padding(
           padding:
-              const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
+              const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
     } else if (homeData!.bannerOneImageList.isNotEmpty) {
       return Container(

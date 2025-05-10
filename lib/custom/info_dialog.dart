@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -13,8 +14,8 @@ class InfoDialog {
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(4),
-              topRight: Radius.circular(4),
+              topLeft: Radius.circular(AppDimensions.radiusSmallExtra),
+              topRight: Radius.circular(AppDimensions.radiusSmallExtra),
             ),
           ),
           padding: const EdgeInsets.only(left: 24, top: 8, bottom: 8),
@@ -30,7 +31,7 @@ class InfoDialog {
         actions: [
           Btn.basic(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
             color: MyTheme.grey_153,
             onPressed: () => Navigator.pop(context),
             child: Text(LangText(context).local.ok,

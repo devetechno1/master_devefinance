@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -64,7 +66,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                           height: double.infinity,
                           width: double.infinity,
                           child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder_rectangle.png',
+                            placeholder: AppImages.placeholderRectangle,
                             image: i,
                             fit: BoxFit.fitHeight,
                           ),
@@ -121,10 +123,10 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                       color: MyTheme.medium_grey_50,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(25),
-                          bottomRight: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(AppDimensions.radius),
+                          bottomRight: Radius.circular(AppDimensions.radius),
+                          topRight: Radius.circular(AppDimensions.radius),
+                          topLeft: Radius.circular(AppDimensions.radius),
                         ),
                       ),
                     ),

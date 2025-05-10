@@ -108,7 +108,7 @@ class _PasswordForgetState extends State<PasswordForget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                 child: Text(
                   _send_code_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
@@ -119,7 +119,7 @@ class _PasswordForgetState extends State<PasswordForget> {
               ),
               if (_send_code_by == "email")
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -154,7 +154,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                 )
               else
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -213,7 +213,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(top: 40.0),
+                padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
                 child: Container(
                   height: 45,
                   child: Btn.basic(
@@ -221,7 +221,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(6.0),
+                        Radius.circular(AppDimensions.radiusaHalfsmall),
                       ),
                     ),
                     child: Text(

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -268,7 +270,7 @@ class _UploadFileState extends State<UploadFile> {
         children: List.generate(
             5,
             (index) => Container(
-                margin: const EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: AppDimensions.paddingLarge),
                 child: ShimmerHelper().buildBasicShimmer(
                     height: 96, width: DeviceInfo(context).width!))),
       ),
@@ -282,7 +284,7 @@ class _UploadFileState extends State<UploadFile> {
           controller: mainScrollController,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, crossAxisSpacing: 12),
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppDimensions.paddingNormal),
           itemCount: _images.length,
           itemBuilder: (context, index) {
             return buildImageItem(index);
@@ -330,7 +332,7 @@ class _UploadFileState extends State<UploadFile> {
         children: [
           MyWidget().productContainer(
             width: DeviceInfo(context).width!,
-            margin: const EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: AppDimensions.paddingLarge),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             height: 170,
             borderColor: MyTheme.grey_153,
@@ -365,7 +367,7 @@ class _UploadFileState extends State<UploadFile> {
           ),
           if (_selectedImages!
               .any((element) => element.id == _images[index].id))
-            Positioned(top: 10, right: 10, child: buildCheckContainer()),
+            Positioned(top: AppDimensions.paddingsupsmall, right: AppDimensions.paddingsupsmall, child: buildCheckContainer()),
           if (!widget.canMultiSelect && !widget.canSelect)
             Positioned(
                 top: 10,
@@ -420,7 +422,7 @@ class _UploadFileState extends State<UploadFile> {
         buildUploadFileContainer(context),
         Container(
           height: 40,
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -431,7 +433,7 @@ class _UploadFileState extends State<UploadFile> {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(255, 255, 255, 0),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     border: Border.all(
                         color: const Color.fromRGBO(255, 255, 255, 0),
                         width: 0.0),
@@ -468,7 +470,7 @@ class _UploadFileState extends State<UploadFile> {
                 Container(
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(255, 255, 255, 0),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     border: Border.all(
                         color: const Color.fromRGBO(255, 255, 255, 0),
                         width: 0.0),
@@ -524,7 +526,7 @@ class _UploadFileState extends State<UploadFile> {
         height: 16,
         width: 16,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0), color: Colors.green),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
         child: const Padding(
           padding: EdgeInsets.all(3),
           child: Icon(Icons.check, color: Colors.white, size: 10),
@@ -544,7 +546,7 @@ class _UploadFileState extends State<UploadFile> {
             width: 35,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.topRight,
-            child: Image.asset("assets/more.png",
+            child: Image.asset(AppImages.more,
                 width: 3,
                 height: 15,
                 fit: BoxFit.contain,

@@ -149,13 +149,13 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75.0,
                           height: 26.0,
                           color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                               side:
                                   const BorderSide(color: Colors.black, width: 1.0)),
                           child: Text(
@@ -174,7 +174,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                       ),
                       _showCopied
                           ? Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
+                              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                               child: Text(
                                 AppLocalizations.of(context)!.copied_ucf,
                                 style: TextStyle(
@@ -183,13 +183,13 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                             )
                           : Container(),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75.0,
                           height: 26.0,
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                               side:
                                   const BorderSide(color: Colors.black, width: 1.0)),
                           child: Text(
@@ -212,14 +212,14 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: 8.0)
+                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
                         color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
@@ -400,7 +400,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                                 ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 14),
+                          padding: const EdgeInsets.only(top: AppDimensions.paddingNormal),
                           child: _productDetails != null
                               ? buildSellerRow(context)
                               : ShimmerHelper().buildBasicShimmer(
@@ -435,7 +435,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                       children: [
                         Container(
                           color: MyTheme.white,
-                          margin: const EdgeInsets.only(top: 10),
+                          margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -763,7 +763,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
           Container(
             child: Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: Container(
                 width: 75,
@@ -776,7 +776,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 5.0),
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
             child: Text(
               _productDetails!.unitPrice!,
               style: TextStyle(
@@ -801,33 +801,33 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -836,33 +836,33 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -887,7 +887,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: Container(
                     width: 75,
@@ -964,14 +964,14 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
         children: [
           Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
           Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
@@ -990,7 +990,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
           separatorBuilder: (context, index) => const SizedBox(
             width: 16,
           ),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
           itemCount: _relatedProducts.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
@@ -1035,10 +1035,10 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                       color: MyTheme.medium_grey_50,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(25),
-                          bottomRight: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(AppDimensions.radius),
+                          bottomRight: Radius.circular(AppDimensions.radius),
+                          topRight: Radius.circular(AppDimensions.radius),
+                          topLeft: Radius.circular(AppDimensions.radius),
                         ),
                       ),
                     ),
@@ -1067,22 +1067,22 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
@@ -1091,7 +1091,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 190.0,
               ),
@@ -1113,7 +1113,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!
-                    ? const EdgeInsets.only(left: 8.0)
+                    ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                     : const EdgeInsets.only(right: 8.0),
                 child: ListView.builder(
                     itemCount: _productImageList.length,
@@ -1133,7 +1133,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                           margin: const EdgeInsets.symmetric(
                               vertical: 4.0, horizontal: 2.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                             border: Border.all(
                                 color: _currentImage == itemIndex
                                     ? Theme.of(context).primaryColor
@@ -1142,12 +1142,12 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
                             //shape: BoxShape.rectangle,
                           ),
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                               child:
                                   /*Image.asset(
                                         singleProduct.product_images[index])*/
                                   FadeInImage.assetNetwork(
-                                placeholder: 'assets/placeholder.png',
+                                placeholder: AppImages.placeholder,
                                 image: _productImageList[index],
                                 fit: BoxFit.contain,
                               )),
@@ -1166,7 +1166,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
               width: MediaQuery.of(context).size.width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder_rectangle.png',
+                placeholder: AppImages.placeholderRectangle,
                 image: _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
               )),

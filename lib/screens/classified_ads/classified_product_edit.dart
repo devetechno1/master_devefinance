@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/category.dart';
 import 'package:flutter/material.dart';
 import '../../custom/aiz_summer_note.dart';
@@ -331,14 +332,14 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(255, 255, 255, 0),
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
             border: Border.all(
                 color: const Color.fromRGBO(255, 255, 255, 0), width: 0.0),
             boxShadow: const [
               BoxShadow(color: MyTheme.white),
             ],
           ),
-          padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -416,7 +417,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 18, vertical: 10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                             color: MyTheme.white,
                             border: Border.all(
                                 color: _hasFocus
@@ -501,7 +502,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(255, 255, 255, 0),
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
             border: Border.all(
                 color: const Color.fromRGBO(255, 255, 255, 0), width: 0.0),
             boxShadow:const [
@@ -510,7 +511,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               ),
             ],
           ),
-          padding:const EdgeInsets.only(top: 10, left: 5, right: 5),
+          padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _mediaExpanded ? 200 : 40,
           child: Column(
@@ -637,7 +638,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               onChosenFile(chooseFile.first);
             }
           },
-          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           child: MyWidget().myContainer(
             width: DeviceInfo(context).width!.toDouble(),
             height: 36,
@@ -647,7 +648,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                   child: Text(
                     AppLocalizations.of(context)!.choose_file,
                     style:const TextStyle(fontSize: 12, color: MyTheme.grey_153),
@@ -695,7 +696,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                   height: 15,
                   width: 15,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(AppDimensions.RadiusExtraMedium),
                       color: MyTheme.white),
                   // remove the selected file button
                   child: InkWell(
@@ -771,7 +772,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                   child: Text(
                     AppLocalizations.of(context)!.choose_file,
                     style:const TextStyle(fontSize: 12, color: MyTheme.grey_153),
@@ -803,7 +804,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               ),
               MyWidget.imageWithPlaceholder(
                   border: Border.all(width: 0.5, color: MyTheme.light_grey),
-                  radius: BorderRadius.circular(5),
+                  radius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
                   height: 50.0,
                   width: 50.0,
                   url: selectedFile.url),
@@ -814,7 +815,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                   height: 15,
                   width: 15,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(AppDimensions.RadiusExtraMedium),
                       color: MyTheme.light_grey),
                   child: InkWell(
                     onTap: () {
@@ -845,7 +846,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(255, 255, 255, 0),
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
             border: Border.all(
                 color: const Color.fromRGBO(255, 255, 255, 0), width: 0.0),
             boxShadow:const [
@@ -854,7 +855,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
               ),
             ],
           ),
-          padding:const EdgeInsets.only(top: 10, left: 5, right: 5),
+          padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _priceExpanded ? 200 : 40,
           child: Column(
@@ -915,7 +916,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                           height: 150,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                             border: Border.all(
                                 color: Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
@@ -963,7 +964,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                               shape: WidgetStateProperty.all<
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                                   side:const BorderSide(color: Colors.red),
                                 ),
                               ),
@@ -1010,14 +1011,14 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                   borderSide:
                       BorderSide(color: Theme.of(context).primaryColor, width: 0.2),
                   borderRadius: const BorderRadius.all(
-                     Radius.circular(6.0),
+                     Radius.circular(AppDimensions.radiusaHalfsmall),
                   ),
                 ),
                 focusedBorder:const OutlineInputBorder(
                   borderSide:
                       BorderSide(color: MyTheme.textfield_grey, width: 0.5),
                   borderRadius:  BorderRadius.all(
-                     Radius.circular(6.0),
+                     Radius.circular(AppDimensions.radiusaHalfsmall),
                   ),
                 ),
                 contentPadding:const EdgeInsets.symmetric(horizontal: 16.0)),
@@ -1106,7 +1107,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
         height: 40,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           border: Border.all(
               color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
@@ -1121,7 +1122,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
           ],
         ),
         child: DropdownButton<CommonDropDownItem>(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
           dropdownColor: Colors.white,
           menuMaxHeight: 300,
           isDense: true,
@@ -1165,7 +1166,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
         height: 36,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           border: Border.all(
               color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
@@ -1215,11 +1216,11 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
     return buildCommonSingleField(
       title,
       Container(
-        padding:const EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 10),
+        padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 8, left: AppDimensions.paddingsupsmall, right: AppDimensions.paddingsupsmall),
         alignment: Alignment.centerLeft,
         constraints: BoxConstraints(minWidth: DeviceInfo(context).width!),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           // color: MyTheme.light_grey,
           border: Border.all(
               color: Theme.of(context).primaryColor,
@@ -1271,7 +1272,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
             return Container(
                 decoration: BoxDecoration(
                     color: MyTheme.white,
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
                     border: Border.all(width: 2, color: MyTheme.grey_153)),
                 constraints: BoxConstraints(
                     maxWidth: (DeviceInfo(context).width! - 50) / 4),
@@ -1411,7 +1412,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                 pickGalleryImages();
               },
               // shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(6)),
+              //     borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
               child: MyWidget().myContainer(
                   width: DeviceInfo(context).width!,
                   height: 36,
@@ -1422,7 +1423,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 14.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
                         child: Text(
                           AppLocalizations.of(context)!.choose_file,
                           style:
@@ -1465,7 +1466,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                       height: 15,
                       width: 15,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(AppDimensions.RadiusExtraMedium),
                           color: MyTheme.white),
                       child: InkWell(
                         onTap: () {

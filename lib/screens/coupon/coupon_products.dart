@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +57,7 @@ class _CouponProductsState extends State<CouponProducts> {
         ),
       ),
       title: Padding(
-        padding: const EdgeInsets.only(right: 18.0),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingMedium),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -113,7 +114,7 @@ class _CouponProductsState extends State<CouponProducts> {
                 itemCount: productResponse.products!.length,
                 shrinkWrap: true,
                 padding:
-                    const EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final product = productResponse.products![index];

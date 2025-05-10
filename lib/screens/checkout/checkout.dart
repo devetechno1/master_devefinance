@@ -651,7 +651,7 @@ class _CheckoutState extends State<Checkout> {
                     delegate: SliverChildListDelegate(
                       [
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child: buildPaymentMethodList(),
                         ),
                         Container(
@@ -680,7 +680,7 @@ class _CheckoutState extends State<Checkout> {
                           : 292,
                       //color: Colors.white,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                         child: Column(
                           children: [
                             widget.paymentFor == PaymentFor.Order
@@ -724,24 +724,24 @@ class _CheckoutState extends State<Checkout> {
                           borderSide: BorderSide(
                               color: MyTheme.textfield_grey, width: 0.5),
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(8.0),
-                            bottomRight: Radius.circular(8.0),
+                            topRight: Radius.circular(AppDimensions.radiusSmall),
+                            bottomRight: Radius.circular(AppDimensions.radiusSmall),
                           ),
                         )
                       : const OutlineInputBorder(
                           borderSide: BorderSide(
                               color: MyTheme.textfield_grey, width: 0.5),
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8.0),
-                            bottomLeft: Radius.circular(8.0),
+                            topLeft: Radius.circular(AppDimensions.radiusSmall),
+                            bottomLeft: Radius.circular(AppDimensions.radiusSmall),
                           ),
                         ),
                   focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: MyTheme.medium_grey, width: 0.5),
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      bottomLeft: Radius.circular(8.0),
+                      topLeft: Radius.circular(AppDimensions.radiusSmall),
+                      bottomLeft: Radius.circular(AppDimensions.radiusSmall),
                     ),
                   ),
                   contentPadding: const EdgeInsetsDirectional.only(start: 16.0)),
@@ -758,13 +758,13 @@ class _CheckoutState extends State<Checkout> {
                   shape: app_language_rtl.$!
                       ? const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          bottomLeft: Radius.circular(8.0),
+                          topLeft: Radius.circular(AppDimensions.radiusSmall),
+                          bottomLeft: Radius.circular(AppDimensions.radiusSmall),
                         ))
                       : const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8.0),
-                          bottomRight: Radius.circular(8.0),
+                          topRight: Radius.circular(AppDimensions.radiusSmall),
+                          bottomRight: Radius.circular(AppDimensions.radiusSmall),
                         )),
                   child: Text(
                     AppLocalizations.of(context)!.apply_coupon_all_capital,
@@ -786,8 +786,8 @@ class _CheckoutState extends State<Checkout> {
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
+                    topRight: Radius.circular(AppDimensions.radiusSmall),
+                    bottomRight: Radius.circular(AppDimensions.radiusSmall),
                   )),
                   child: Text(
                     AppLocalizations.of(context)!.remove_ucf,
@@ -877,7 +877,7 @@ class _CheckoutState extends State<Checkout> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 400),
             decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(6))
+                    color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall))
                 .copyWith(
                     border: Border.all(
                         color: _selected_payment_method_key ==
@@ -895,14 +895,14 @@ class _CheckoutState extends State<Checkout> {
                       width: 100,
                       height: 63,
                       child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child:
                               /*Image.asset(
                           _paymentTypeList[index].image,
                           fit: BoxFit.fitWidth,
                         ),*/
                               FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder.png',
+                            placeholder: AppImages.placeholder,
                             image: _paymentTypeList[index].payment_type ==
                                     "manual_payment"
                                 ? _paymentTypeList[index].image
@@ -915,7 +915,7 @@ class _CheckoutState extends State<Checkout> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                           child: Text(
                             _paymentTypeList[index].title,
                             textAlign: TextAlign.left,
@@ -953,7 +953,7 @@ class _CheckoutState extends State<Checkout> {
         height: 16,
         width: 16,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0), color: Colors.green),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
         child: const Icon(Icons.check, color: Colors.white, size: 10),
       ),
     );
@@ -969,7 +969,7 @@ class _CheckoutState extends State<Checkout> {
           height: 50,
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
           ),
           child: Text(
             widget.paymentFor == PaymentFor.WalletRecharge
@@ -996,11 +996,11 @@ class _CheckoutState extends State<Checkout> {
       height: 40,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
         color: MyTheme.soft_accent_color,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
         child: Row(
           children: [
             Padding(
@@ -1082,7 +1082,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(2).copyWith(top: 16),
+      contentPadding: const EdgeInsets.all(2).copyWith(top: AppDimensions.paddingDefualt),
       content: CheckoutDetails(showTotal: true, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
       actions: [
         Btn.basic(
@@ -1125,7 +1125,7 @@ class CheckoutDetails extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Container(
@@ -1155,7 +1155,7 @@ class CheckoutDetails extends StatelessWidget {
               )),
           
           Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Container(
@@ -1184,7 +1184,7 @@ class CheckoutDetails extends StatelessWidget {
                 ],
               )),
           Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Container(
@@ -1214,7 +1214,7 @@ class CheckoutDetails extends StatelessWidget {
                 ],
               )),
           Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Container(
@@ -1247,7 +1247,7 @@ class CheckoutDetails extends StatelessWidget {
           ),
           if(showTotal)
           Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Container(

@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/seller_details.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +51,8 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
                 width: 170,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                padding: const EdgeInsets.all(35),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusNormal)),
+                padding: const EdgeInsets.all(AppDimensions.paddingveryLarge),
                 child: _buildImage()),
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -84,10 +86,10 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       height: 100,
       child: Center(
         child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(AppDimensions.radiusDefualt)),
           child: FadeInImage.assetNetwork(
-            placeholder: 'assets/placeholder.png',
-            image: widget.image ?? 'assets/placeholder.png',
+            placeholder: AppImages.placeholder,
+            image: widget.image ?? AppImages.placeholder,
             fit: BoxFit.cover,
           ),
         ),
@@ -139,7 +141,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.amber),
         color: MyTheme.amber,
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       ),
       child: Text(
         LangText(context).local.visit_store_ucf,

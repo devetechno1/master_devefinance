@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_products.dart';
@@ -23,7 +25,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
     } else if (homeData.featuredCategoryList.isNotEmpty) {
       return GridView.builder(
         padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 11, bottom: 24),
+            const EdgeInsets.only(left: AppDimensions.paddingLarge, right: AppDimensions.paddingLarge, top: 11, bottom: 24),
         scrollDirection: Axis.horizontal,
         controller: homeData.featuredCategoryScrollController,
         itemCount: homeData.featuredCategoryList.length,
@@ -65,9 +67,9 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                             ],
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                             child: FadeInImage.assetNetwork(
-                              placeholder: 'assets/placeholder.png',
+                              placeholder: AppImages.placeholder,
                               image: homeData
                                   .featuredCategoryList[index].coverImage ??'',
                               fit: BoxFit.cover,

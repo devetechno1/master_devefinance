@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
+
 class AReview {
   String? name;
   String image;
@@ -7,7 +9,7 @@ class AReview {
 
   AReview(
       {this.name,
-      this.image = "dummy_assets/profile_image_joya_ahsan.jpg",
+      this.image = AppImages.profileImageJoyaAhsan,
       this.text,
       this.date = "21-01-2021",
       this.rating});

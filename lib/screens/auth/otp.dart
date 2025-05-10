@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
@@ -113,7 +114,7 @@ class _OtpState extends State<Otp> {
               width: _screen_width,
               height: 200,
               child: Image.asset(
-                  "assets/splash_login_registration_background_image.png"),
+                 AppImages.splashLoginRegisterationBackground),
             ),
             Container(
               width: double.infinity,
@@ -132,7 +133,7 @@ class _OtpState extends State<Otp> {
                       width: 75,
                       height: 75,
                       child: Image.asset(
-                          'assets/login_registration_form_logo.png'),
+                          AppImages.loginRegisteration),
                     ),
                   ),
                   Container(
@@ -141,7 +142,7 @@ class _OtpState extends State<Otp> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -167,13 +168,13 @@ class _OtpState extends State<Otp> {
                                 border: Border.all(
                                     color: MyTheme.textfield_grey, width: 1),
                                 borderRadius: const BorderRadius.all(
-                                    Radius.circular(12.0))),
+                                    Radius.circular(AppDimensions.radiusNormal))),
                             child: Btn.basic(
                               minWidth: MediaQuery.of(context).size.width,
                               color: Theme.of(context).primaryColor,
                               shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
-                                      Radius.circular(12.0))),
+                                      Radius.circular(AppDimensions.radiusNormal))),
                               child: Text(
                                 AppLocalizations.of(context)!.confirm_ucf,
                                 style: const TextStyle(
@@ -191,7 +192,7 @@ class _OtpState extends State<Otp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                     child: Text(AppLocalizations.of(context)!.check_your_WhatsApp_messages_to_retrieve_the_verification_code,
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -211,7 +212,7 @@ class _OtpState extends State<Otp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40, bottom: 60),
+                    padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge, bottom: 60),
                     child: Visibility(
                       visible: !canResend,
                       child: TimerWidget(
@@ -228,7 +229,7 @@ class _OtpState extends State<Otp> {
                   ),
                   // SizedBox(height: 15,),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
                     child: Center(
                       child: InkWell(
                         onTap: () {
@@ -280,7 +281,7 @@ class TimerWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 6, bottom: 2, left: 12, right: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
       ),
       child: Countdown(
         controller: controller,

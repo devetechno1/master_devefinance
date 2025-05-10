@@ -150,14 +150,14 @@ class MapLocationState extends State<MapLocation>
             //     ))
             //   : 
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(8.0),
-                  bottomLeft: Radius.circular(8.0),
-                  topRight: Radius.circular(8.0),
-                  bottomRight: Radius.circular(8.0),
+                  topLeft: Radius.circular(AppDimensions.radiusSmall),
+                  bottomLeft: Radius.circular(AppDimensions.radiusSmall),
+                  topRight: Radius.circular(AppDimensions.radiusSmall),
+                  bottomRight: Radius.circular(AppDimensions.radiusSmall),
                 ),
               ),
               child: Row(
@@ -187,10 +187,10 @@ class MapLocationState extends State<MapLocation>
                       color: Theme.of(context).primaryColor,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        bottomLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                        bottomRight: Radius.circular(4.0),
+                        topLeft: Radius.circular(AppDimensions.radiusSmallExtra),
+                        bottomLeft: Radius.circular(AppDimensions.radiusSmallExtra),
+                        topRight: Radius.circular(AppDimensions.radiusSmallExtra),
+                        bottomRight: Radius.circular(AppDimensions.radiusSmallExtra),
                       )),
                       child: Text(
                         LangText(context).local.pick_here,
@@ -208,7 +208,7 @@ class MapLocationState extends State<MapLocation>
             child: Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                 child: TypeAheadField<Results>(
                   // controller: _countryController,
                   debounceDuration: const Duration(milliseconds: 500),
@@ -222,7 +222,7 @@ class MapLocationState extends State<MapLocation>
                   builder: (context, controller, focusNode) {
                     final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
                       borderSide: const BorderSide(color: MyTheme.textfield_grey, width: 0.5),
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     );
                     return TextField(
                       controller: controller,
@@ -285,7 +285,7 @@ class MapLocationState extends State<MapLocation>
               duration: const Duration(milliseconds: 200),
               scale: isCameraIdle ? 1 : 1.3,
               child: Image.asset(
-                'assets/delivery_map_icon.png',
+                AppImages.deliveryMapIcon,
                 height: 60,
               ),
             ),
@@ -360,10 +360,10 @@ class MapLocationState extends State<MapLocation>
                 rightPosition: 16.0,
                 width: 500,
                 borderRadius: const BorderRadius.only(
-                  topLeft: const Radius.circular(8.0),
-                  bottomLeft: const Radius.circular(8.0),
-                  topRight: const Radius.circular(8.0),
-                  bottomRight: const Radius.circular(8.0),
+                  topLeft: const Radius.circular(AppDimensions.radiusSmall),
+                  bottomLeft: const Radius.circular(AppDimensions.radiusSmall),
+                  topRight: const Radius.circular(AppDimensions.radiusSmall),
+                  bottomRight: const Radius.circular(AppDimensions.radiusSmall),
                 ),
                 child: state == SearchingState.Searching
                     ? Center(
@@ -398,10 +398,10 @@ class MapLocationState extends State<MapLocation>
                                 color: MyTheme.accent_color,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: const BorderRadius.only(
-                                  topLeft: const Radius.circular(4.0),
-                                  bottomLeft: const Radius.circular(4.0),
-                                  topRight: const Radius.circular(4.0),
-                                  bottomRight: const Radius.circular(4.0),
+                                  topLeft: const Radius.circular(AppDimensions.radiusSmallExtra),
+                                  bottomLeft: const Radius.circular(AppDimensions.radiusSmallExtra),
+                                  topRight: const Radius.circular(AppDimensions.radiusSmallExtra),
+                                  bottomRight: const Radius.circular(AppDimensions.radiusSmallExtra),
                                 )),
                                 child: Text(
                                   AppLocalizations.of(context)!.pick_here,

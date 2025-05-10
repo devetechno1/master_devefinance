@@ -1,5 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:flutter/material.dart';
+import '../../../constants/app_dimensions.dart';
 import '../../product/product_details.dart';
 
 class TodaysDealProductsWidget extends StatelessWidget {
@@ -51,7 +52,7 @@ class TodaysDealProductsWidget extends StatelessWidget {
                   AspectRatio(
                     aspectRatio: 1,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                       child: Image.network(
                         product.thumbnail_image ?? '',
                         fit: BoxFit.cover,

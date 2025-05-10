@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -8,7 +9,7 @@ class AIZImage {
       imageUrl: url,
       progressIndicatorBuilder: (context, string, progress) {
         return Image.asset(
-          "assets/placeholder_rectangle.png",
+          AppImages.placeholderRectangle,
           fit: BoxFit.cover,
         );
       },
@@ -18,7 +19,7 @@ class AIZImage {
       // progressIndicatorBuilder: (context, url, downloadProgress) =>
       //     CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) => Image.asset(
-        "assets/placeholder_rectangle.png",
+        AppImages.placeholderRectangle,
         fit: BoxFit.cover,
       ),
     );

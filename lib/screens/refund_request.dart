@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -99,7 +100,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   SliverList(
                     delegate: SliverChildListDelegate([
                       Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
                         child: buildList(),
                       ),
                     ]),
@@ -167,7 +168,7 @@ class _RefundRequestState extends State<RefundRequest> {
           },
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.all(0.0),
+          //padding: const EdgeInsets.all(0.0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -187,7 +188,7 @@ class _RefundRequestState extends State<RefundRequest> {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -197,7 +198,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Text(
                         _list[index].product_name,
                         textAlign: TextAlign.start,
@@ -208,7 +209,7 @@ class _RefundRequestState extends State<RefundRequest> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Text(
                         _list[index].order_code,
                         style: TextStyle(
@@ -235,7 +236,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                       child: Text(
                         convertPrice(_list[index].product_price),
                         style: TextStyle(

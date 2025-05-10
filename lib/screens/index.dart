@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/addons_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/business_setting_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/check_internet.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/currency_presenter.dart';
@@ -39,9 +40,10 @@ class _IndexState extends State<Index> {
 
     return app_mobile_language.$;
   }
-
+    
   @override
   void initState() {
+   InternetHelper.listenToConnectivityChanges(context);
     // TODO: implement initState
     getSharedValueHelperData().then((value) {
       Future.delayed(const Duration(seconds: 3)).then((value) {

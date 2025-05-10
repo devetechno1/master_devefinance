@@ -388,7 +388,7 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                 child: Text(
                   _login_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
@@ -399,7 +399,7 @@ class _LoginState extends State<Login> {
               ),
               if (_login_by == "email")
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -434,7 +434,7 @@ class _LoginState extends State<Login> {
                 )
               else
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -494,7 +494,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
                   style: TextStyle(
@@ -502,7 +502,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -538,21 +538,21 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingextraLarge),
                 child: Container(
                   height: 45,
                   decoration: BoxDecoration(
                       border:
                           Border.all(color: MyTheme.textfield_grey, width: 1),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(12.0))),
+                          const BorderRadius.all(Radius.circular(AppDimensions.radiusNormal))),
                   child: Btn.minWidthFixHeight(
                     minWidth: MediaQuery.of(context).size.width,
                     height: 50,
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius:
-                            BorderRadius.all(Radius.circular(6.0))),
+                            BorderRadius.all(Radius.circular(AppDimensions.radiusaHalfsmall))),
                     child: Text(
                       AppLocalizations.of(context)!.login_screen_log_in,
                       style: const TextStyle(
@@ -583,7 +583,7 @@ class _LoginState extends State<Login> {
                   color: MyTheme.amber,
                   shape: const RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.all(Radius.circular(6.0))),
+                          BorderRadius.all(Radius.circular(AppDimensions.radiusaHalfsmall))),
                   child: Text(
                     AppLocalizations.of(context)!.login_screen_sign_up,
                     style: TextStyle(
@@ -601,7 +601,7 @@ class _LoginState extends State<Login> {
               ),
               if (Platform.isIOS && AppConfig.businessSettingsData.allowAppleLogin)
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                   child: SignInWithAppleButton(
                     onPressed: () async {
                       signInWithApple();
@@ -611,7 +611,7 @@ class _LoginState extends State<Login> {
               Visibility(
                 visible: AppConfig.businessSettingsData.allowGoogleLogin || AppConfig.businessSettingsData.allowFacebookLogin,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                   child: Center(
                       child: Text(
                     AppLocalizations.of(context)!.login_screen_login_with,
@@ -634,12 +634,12 @@ class _LoginState extends State<Login> {
                             },
                             child: Container(
                               width: 28,
-                              child: Image.asset("assets/google_logo.png"),
+                              child: Image.asset(AppImages.google),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                           child: Visibility(
                             visible: AppConfig.businessSettingsData.allowFacebookLogin,
                             child: InkWell(
@@ -648,14 +648,14 @@ class _LoginState extends State<Login> {
                               },
                               child: Container(
                                 width: 28,
-                                child: Image.asset("assets/facebook_logo.png"),
+                                child: Image.asset(AppImages.facebook),
                               ),
                             ),
                           ),
                         ),
                         // if (AppConfig.businessSettingsData.allow_twitter_login.$)
                         //   Padding(
-                        //     padding: const EdgeInsets.only(left: 15.0),
+                        //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                         //     child: InkWell(
                         //       onTap: () {
                         //         onPressedTwitterLogin();
@@ -668,7 +668,7 @@ class _LoginState extends State<Login> {
                         //   ),
                         /* if (Platform.isIOS)
                           Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                             // visible: true,
                             child: A(
                               onTap: () async {

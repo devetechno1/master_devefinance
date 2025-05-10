@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 class MyImage{
@@ -25,7 +26,7 @@ class MyImage{
             ? ClipRRect(
           borderRadius: radius,
           child: FadeInImage.assetNetwork(
-            placeholder: "assets/placeholder.png",
+            placeholder: AppImages.placeholder,
             image: url,
             height: height,
             imageErrorBuilder: (context, object, stackTrace) {
@@ -35,7 +36,7 @@ class MyImage{
                 decoration: BoxDecoration(
                     borderRadius: radius,
                     image:const DecorationImage(
-                        image: AssetImage("assets/placeholder.png"),
+                        image: AssetImage(AppImages.placeholder),
                         fit: BoxFit.cover
                     )
                 ),
@@ -52,7 +53,7 @@ class MyImage{
           decoration: BoxDecoration(
               borderRadius: radius,
               image:const DecorationImage(
-                image: AssetImage("assets/placeholder.png"),
+                image: AssetImage(AppImages.placeholder),
               ),
           ),
         ),

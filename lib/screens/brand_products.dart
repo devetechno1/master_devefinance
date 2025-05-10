@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
@@ -190,7 +191,7 @@ void  reset() {
             itemCount: _productList.length,
             shrinkWrap: true,
             padding:
-            const    EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+            const    EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 10, left: 18, right: 18),
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               // 3

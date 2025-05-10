@@ -224,13 +224,13 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
                           color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                               side:
                                   const BorderSide(color: Colors.black, width: 1.0)),
                           child: Text(
@@ -258,7 +258,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       _showCopied
                           ? Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
+                              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                               child: Text(
                                 AppLocalizations.of(context)!.copied_ucf,
                                 style: TextStyle(
@@ -267,13 +267,13 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             )
                           : Container(),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                               side:
                                   const BorderSide(color: Colors.black, width: 1.0)),
                           child: Text(
@@ -296,14 +296,14 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: 8.0)
+                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
                         color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
@@ -343,13 +343,13 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                           child: Text(AppLocalizations.of(context)!.title_ucf,
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                           child: Container(
                             height: 40,
                             child: TextField(
@@ -366,7 +366,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 0.5),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(8.0),
+                                      Radius.circular(AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   focusedBorder: const OutlineInputBorder(
@@ -374,7 +374,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 1.0),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(8.0),
+                                      Radius.circular(AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   contentPadding:
@@ -383,14 +383,14 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                           child: Text(
                               "${AppLocalizations.of(context)!.message_ucf} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                           child: Container(
                             height: 55,
                             child: TextField(
@@ -409,7 +409,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 0.5),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(8.0),
+                                      Radius.circular(AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   focusedBorder: const OutlineInputBorder(
@@ -417,7 +417,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 1.0),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(8.0),
+                                      Radius.circular(AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   contentPadding: const EdgeInsets.only(
@@ -443,7 +443,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           height: 30,
                           color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
@@ -467,7 +467,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           height: 30,
                           color: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
@@ -593,7 +593,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           bottomNavigationBar: _auctionproductDetails != null
               ? Container(
                   padding:
-                      const EdgeInsets.only(left: 18, right: 18, bottom: 10, top: 10),
+                      const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, bottom: 10, top: 10),
                   color: MyTheme.white.withValues(alpha: 0.9),
                   child: InkWell(
                     onTap: () {
@@ -607,7 +607,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         left: 0,
                       ),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                         color: Theme.of(context).primaryColor,
                         boxShadow:const [
                            BoxShadow(
@@ -678,7 +678,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           opacity: _scrollPosition > 350 ? 1 : 0,
                           duration: const Duration(milliseconds: 200),
                           child: Container(
-                              padding: const EdgeInsets.only(left: 8),
+                              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                               width: DeviceInfo(context).width! / 2,
                               child: Text(
                                 "${_auctionproductDetails != null ? _auctionproductDetails.name : ''}",
@@ -734,7 +734,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 14),
+                          padding: const EdgeInsets.only(top: AppDimensions.paddingNormal),
                           child: _auctionproductDetails != null
                               ? buildSellerRow(context)
                               : ShimmerHelper().buildBasicShimmer(
@@ -779,7 +779,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       children: [
                         Container(
                           color: MyTheme.white,
-                          margin: const EdgeInsets.only(top: 10),
+                          margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -859,7 +859,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                    AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -903,7 +903,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                    AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -947,7 +947,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                   AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -991,7 +991,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   ),
                                   const Spacer(),
                                   Image.asset(
-                                    "assets/arrow.png",
+                                    AppImages.arrow,
                                     height: 11,
                                     width: 20,
                                   ),
@@ -1044,21 +1044,21 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   },
                   child: Padding(
                     padding: app_language_rtl.$!
-                        ? const EdgeInsets.only(left: 8.0)
+                        ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                         : const EdgeInsets.only(right: 8.0),
                     child: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                         border: Border.all(
                             color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
                         //shape: BoxShape.rectangle,
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
                           image: _auctionproductDetails.shopLogo,
                           fit: BoxFit.cover,
                         ),
@@ -1089,7 +1089,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           Visibility(
             visible: AppConfig.businessSettingsData.conversationSystem,
             child: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(AppDimensions.paddingNormal),
                 decoration: BoxDecorations.buildCircularButtonDecoration_1(),
                 child: Row(
                   children: [
@@ -1104,7 +1104,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
                           onTapSellerChat();
                         },
-                        child: Image.asset('assets/chat.png',
+                        child: Image.asset(AppImages.chat,
                             height: 16, width: 16, color: MyTheme.dark_grey)),
                   ],
                 )),
@@ -1276,7 +1276,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           Container(
             child: Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: 8.0)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                   : const EdgeInsets.only(right: 8.0),
               child: Container(
                 width: 75,
@@ -1289,7 +1289,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 5.0),
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
             child: Text(
               _auctionproductDetails.currencySymbol.toString(),
               style: TextStyle(
@@ -1308,7 +1308,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: 8.0)
+              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 95,
@@ -1336,7 +1336,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: 8.0)
+              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 95,
@@ -1361,7 +1361,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: 8.0)
+              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 95,
@@ -1395,14 +1395,14 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(AppDimensions.paddinghalfsmall),
                       child: Text(
                         '${_auctionEndTimeList[index] ?? 00}',
                         style: const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       decoration: BoxDecoration(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(3.0)),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)),
                     );
                   },
                 );
@@ -1425,33 +1425,33 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -1460,33 +1460,33 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -1522,7 +1522,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         child: Container(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.only(top: 22.0),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
               child: Text(
                 _appbarPriceString,
                 style: const TextStyle(fontSize: 16, color: MyTheme.font_grey),
@@ -1560,7 +1560,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: 8.0)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: Container(
                     width: 75,
@@ -1646,10 +1646,10 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       color: MyTheme.medium_grey_50,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(25),
-                          bottomRight: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(AppDimensions.radius),
+                          bottomRight: Radius.circular(AppDimensions.radius),
+                          topRight: Radius.circular(AppDimensions.radius),
+                          topLeft: Radius.circular(AppDimensions.radius),
                         ),
                       ),
                     ),
@@ -1678,22 +1678,22 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
@@ -1702,7 +1702,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 190.0,
               ),
@@ -1723,7 +1723,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!
-                    ? const EdgeInsets.only(left: 8.0)
+                    ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
                     : const EdgeInsets.only(right: 8.0),
                 child: ListView.builder(
                     itemCount: _productImageList.length,
@@ -1743,7 +1743,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           margin: const EdgeInsets.symmetric(
                               vertical: 4.0, horizontal: 2.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                             border: Border.all(
                                 color: _currentImage == itemIndex
                                     ? Theme.of(context).primaryColor
@@ -1752,12 +1752,12 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             //shape: BoxShape.rectangle,
                           ),
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                               child:
                                   /*Image.asset(
                                         singleProduct.product_images[index])*/
                                   FadeInImage.assetNetwork(
-                                placeholder: 'assets/placeholder.png',
+                                placeholder: AppImages.placeholder,
                                 image: _productImageList[index],
                                 fit: BoxFit.contain,
                               )),
@@ -1776,7 +1776,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               width: MediaQuery.of(context).size.width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder_rectangle.png',
+                placeholder: AppImages.placeholderRectangle,
                 image: _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
               )),
@@ -1826,7 +1826,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           height: double.infinity,
                           width: double.infinity,
                           child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder_rectangle.png',
+                            placeholder: AppImages.placeholderRectangle,
                             image: i,
                             fit: BoxFit.fitHeight,
                           )),

@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import '../presenter/home_presenter.dart';
@@ -28,14 +29,14 @@ class PiratedWidget extends StatelessWidget {
                     animation: homeData!.pirated_logo_animation,
                     builder: (context, child) {
                       return Image.asset(
-                        "assets/pirated_square.png",
+                        AppImages.piratedSquare,
                         height: homeData!.pirated_logo_animation.value,
                         color: Colors.white,
                       );
                     })),
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingMaxLarge, left: AppDimensions.paddingMaxLarge, right: AppDimensions.paddingMaxLarge),
                 child: Text(
                   LangText(context).local.pirated_app,
                   style:const TextStyle(color: Colors.white, fontSize: 18),

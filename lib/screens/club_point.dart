@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
@@ -201,7 +202,7 @@ class _ClubpointState extends State<Clubpoint> {
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.all(0.0),
+         // padding: const EdgeInsets.all(0.0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -223,9 +224,9 @@ class _ClubpointState extends State<Clubpoint> {
     return Container(
       height: 91,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(6)),
+          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -58,9 +58,9 @@
 //                       width: double.infinity,
 //                       child: ClipRRect(
 //                           borderRadius: BorderRadius.vertical(
-//                               top: Radius.circular(6), bottom: Radius.zero),
+//                               top: Radius.circular(AppDimensions.radiusaHalfsmall), bottom: Radius.zero),
 //                           child: FadeInImage.assetNetwork(
-//                             placeholder: 'assets/placeholder.png',
+//                             placeholder: 'AppImages.placeholder',
 //                             image: widget.image!,
 //                             fit: BoxFit.cover,
 //                           ))),
@@ -199,6 +199,8 @@
 //   }
 // }
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
@@ -255,9 +257,9 @@ class _MiniProductCardState extends State<MiniProductCard> {
                 child: Container(
                     width: double.infinity,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
+                          placeholder: AppImages.placeholder,
                           image: widget.image!,
                           fit: BoxFit.cover,
                         ))),

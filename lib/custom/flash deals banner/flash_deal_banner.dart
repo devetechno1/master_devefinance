@@ -31,7 +31,7 @@ class FlashDealBanner extends StatelessWidget {
         homeData!.banners.isEmpty) {
       return Padding(
         padding:
-            const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
+            const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 20),
         child: ShimmerHelper().buildBasicShimmer(height: 120),
       );
     }
@@ -96,17 +96,19 @@ class FlashBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+ 
     return DynamicSizeImageBanner(
       urlToOpen: "${AppConfig.RAW_BASE_URL}/flash-deal/$slug",
       photo: bannerLink,
       radius: 10,
     );
+    
     // return Container(
     //   height: size,
     //   width: size,
     //   decoration: BoxDecoration(
     //     color: Colors.white, // background color for container
-    //     borderRadius: BorderRadius.circular(10), // rounded corners
+    //     borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), // rounded corners
     //     boxShadow: [
     //       BoxShadow(
     //         color:

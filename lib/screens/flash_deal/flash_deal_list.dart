@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
@@ -180,7 +182,7 @@ class _FlashDealListState extends State<FlashDealList> {
                     //decoration: BoxDecorations.buildBoxDecoration_1(),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withValues(alpha: 0.16),
@@ -295,7 +297,7 @@ class _FlashDealListState extends State<FlashDealList> {
       width: 136,
       decoration: BoxDecoration(
         color: const Color(0xffF6F7F8),
-        borderRadius: BorderRadius.circular(6.0),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -306,12 +308,12 @@ class _FlashDealListState extends State<FlashDealList> {
           ),
           ClipRRect(
             borderRadius:
-                BorderRadius.circular(4), // Rounding the image corners
+                BorderRadius.circular(AppDimensions.radiusSmallExtra), // Rounding the image corners
             child: Container(
               height: 46,
               width: 44,
               child: FadeInImage(
-                placeholder: const AssetImage("assets/placeholder.png"),
+                placeholder: const AssetImage(AppImages.placeholder),
                 image: NetworkImage(
                   flashDealResponse.flashDeals[flashDealIndex].products
                       .products[productIndex].image,
@@ -322,7 +324,7 @@ class _FlashDealListState extends State<FlashDealList> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
             child: Text(
               convertPrice(flashDealResponse.flashDeals[flashDealIndex].products
                   .products[productIndex].price),
@@ -339,12 +341,12 @@ class _FlashDealListState extends State<FlashDealList> {
 
   Widget buildFlashDealsProductItemShimmer() {
     return Container(
-      margin: const EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: AppDimensions.paddingsupsmall),
       height: 50,
       width: 136,
       decoration: BoxDecoration(
         color: const Color(0xffF6F7F8),
-        borderRadius: BorderRadius.circular(6.0),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -353,21 +355,21 @@ class _FlashDealListState extends State<FlashDealList> {
           Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(6),
-                bottomLeft: Radius.circular(6),
+                topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
               ),
             ),
             child: ShimmerHelper().buildBasicShimmerCustomRadius(
               height: 46,
               width: 44,
               radius: const BorderRadius.only(
-                topLeft: Radius.circular(6),
-                bottomLeft: Radius.circular(6),
+                topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
               ),
             ),
           ),
           Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               child: ShimmerHelper().buildBasicShimmer(height: 15, width: 60))
         ],
       ),
@@ -534,7 +536,7 @@ class _FlashDealListState extends State<FlashDealList> {
           // ShimmerHelper().buildBasicShimmerCustomRadius(
           //     height: 30,
           //     width: 30,
-          //     radius: BorderRadius.circular(6),
+          //     radius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           //     color: MyTheme.shimmer_base),
           ShimmerHelper().buildCircleShimmer(height: 30, width: 30),
           const SizedBox(
@@ -618,9 +620,9 @@ class _FlashDealListState extends State<FlashDealList> {
       constraints: const BoxConstraints(minWidth: 30, minHeight: 24),
       child: child,
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(AppDimensions.paddinghalfsmall),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
         color: Theme.of(context).primaryColor,
       ),
     );

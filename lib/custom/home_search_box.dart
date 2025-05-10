@@ -10,7 +10,7 @@ class HomeSearchBox extends StatelessWidget {
     return Container(
       height: 34,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
         color: const Color(0xffE4E3E8),
         boxShadow: [
           BoxShadow(
@@ -27,7 +27,7 @@ class HomeSearchBox extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/search.png',
+              AppImages.search,
               height: 16,
               color: const Color(0xff7B7980),
             ),

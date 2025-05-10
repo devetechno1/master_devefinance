@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/category_response.dart';
@@ -241,10 +243,10 @@ class _CategoryProductsState extends State<CategoryProducts> {
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(6)),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(6)),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
@@ -271,7 +273,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
               ),
             );
           },
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
           child: SizedBox(
             width: 80,
             child: Column(
@@ -281,9 +283,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: AppImages.placeholder,
                         image: _subCategoryList[index].coverImage ??'',
                         fit: BoxFit.cover,
                       ),
@@ -338,7 +340,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
             itemCount: _productList.length,
             shrinkWrap: true,
             padding:
-                const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+                const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               // 3

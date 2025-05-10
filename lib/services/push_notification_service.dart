@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
@@ -215,7 +216,7 @@ class _dialogImageBody extends StatelessWidget {
         Text(message.notification!.body!),
         const SizedBox(height: 16),
         ClipRRect(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
           child: Image.network(
             message.notification!.apple!.imageUrl!,
             loadingBuilder: (context, child, loadingProgress) {

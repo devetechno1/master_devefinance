@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -48,16 +50,16 @@ class _ListProductCardState extends State<ListProductCard> {
               height: 100,
               child: ClipRRect(
                   borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(6), right: Radius.zero),
+                      left: Radius.circular(AppDimensions.radiusaHalfsmall), right: Radius.zero),
                   child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
+                    placeholder: AppImages.placeholder,
                     image: widget.image!,
                     fit: BoxFit.cover,
                   ))),
           Flexible(
             child: Container(
               padding:
-                  const EdgeInsets.only(top: 10, left: 12, right: 12, bottom: 14),
+                  const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 12, right: 12, bottom: 14),
               //width: 240,
               height: 100,
               //color: Colors.red,

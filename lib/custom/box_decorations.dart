@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 class BoxDecorations {
@@ -33,14 +34,14 @@ class BoxDecorations {
 
   static BoxDecoration buildCartCircularButtonDecoration() {
     return BoxDecoration(
-      borderRadius: BorderRadius.circular(16.0),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
       color: const Color.fromRGBO(229, 241, 248, 1),
     );
   }
 
   static BoxDecoration buildCircularButtonDecoration_1() {
     return BoxDecoration(
-      borderRadius: BorderRadius.circular(36.0),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
       color: Colors.white.withValues(alpha: .80),
       boxShadow: [
         BoxShadow(

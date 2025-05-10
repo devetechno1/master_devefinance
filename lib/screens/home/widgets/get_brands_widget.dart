@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/brand_products.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                       child: Stack(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                             child: Image.network(
                               brand.logo ?? '',
                               height: 60,
@@ -95,7 +96,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
               child: Column(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                     child: Image.network(
                       brand.logo ?? '',
                       height: 60,

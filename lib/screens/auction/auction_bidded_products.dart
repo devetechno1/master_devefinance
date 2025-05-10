@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auction_products_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
 import 'package:flutter/material.dart';
@@ -203,8 +204,8 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
               fit: BoxFit.fitHeight,
               url: imageUrl!,
               radius: const BorderRadius.only(
-                topLeft: Radius.circular(5),
-                bottomLeft: Radius.circular(5),
+                topLeft: Radius.circular(AppDimensions.radiusSmallExtra),
+                bottomLeft: Radius.circular(AppDimensions.radiusSmallExtra),
               ),
             ),
           ),
@@ -213,7 +214,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: AppDimensions.paddingsmall),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,7 +256,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                             child: Text(convertPrice(myBid!),
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -277,7 +278,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                             child: Text(convertPrice(highestBid!),
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -297,7 +298,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                             child: Text(endDate!,
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -317,7 +318,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                             child: TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor: MyTheme.noColor,

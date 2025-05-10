@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 tag: "backgroundImageInSplash",
                 child: Container(
                   child: Image.asset(
-                      "assets/splash_login_registration_background_image.png"),
+                      AppImages.splash_loginRegistrationBackgroundImage),
                 ),
               ),
               radius: 140.0,
@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
@@ -74,16 +74,16 @@ class _SplashScreenState extends State<SplashScreen> {
                             const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                             color: MyTheme.white,
-                            borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
                         child: Image.asset(
-                          "assets/splash_screen_logo.png",
+                          AppImages.splashScreenLogo,
                           filterQuality: FilterQuality.low,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                     child: Text(
                       AppConfig.appNameOnAppLang(context),
                       style: const TextStyle(

@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -21,26 +22,26 @@ class ProductHorizontalListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isProductInitial && productList.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.only(right: 20,left: 20, top: 15),
+        padding: const EdgeInsets.only(right: AppDimensions.paddingLarge,left: 20, top: 15),
         child: Row(
           children: [
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
                       width: (MediaQuery.of(context).size.width - 64) / 3)),
             ),
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
                       width: (MediaQuery.of(context).size.width - 64) / 3)),
             ),
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
                       width: (MediaQuery.of(context).size.width - 160) / 3)),
@@ -60,7 +61,7 @@ class ProductHorizontalListWidget extends StatelessWidget {
             return true;
           },
           child: ListView.separated(
-            padding: const EdgeInsets.only(right: 20,left: 15, top: 10),
+            padding: const EdgeInsets.only(right: AppDimensions.paddingLarge,left: 15, top: 10),
             separatorBuilder: (context, index) => const SizedBox(
               width: 12,
             ),

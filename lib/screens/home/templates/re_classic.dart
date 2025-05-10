@@ -20,6 +20,7 @@ import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
+import '../widgets/whatsapp_floating_widget.dart';
 
 class ReClassicScreen extends StatefulWidget {
   const ReClassicScreen({
@@ -69,6 +70,8 @@ class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderSt
         textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
+         floatingActionButton: whatsappFloatingButtonWidget,
+
             appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
@@ -97,7 +100,7 @@ class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderSt
                           const CategoryList(),
                           SliverList(delegate: SliverChildListDelegate([
                             Padding(
-                              padding: const EdgeInsets.only(left: 20,bottom: 10),
+                              padding: const EdgeInsets.only(left: AppDimensions.paddingLarge,bottom: 10),
                               child: Text(AppLocalizations.of(context)!.todays_deal_ucf, style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                             ),
                               TodaysDealProductsWidget(homePresenter: homeData,),
@@ -191,7 +194,7 @@ class _ReClassicScreenState extends State<ReClassicScreen> with TickerProviderSt
 //     margin: const EdgeInsets.symmetric(horizontal: 5.0),
 //     decoration: BoxDecoration(
 //       color: Colors.white,
-//       borderRadius: BorderRadius.circular(5)
+//       borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)
 //     ),
 //     child: SingleChildScrollView(
 //       scrollDirection: Axis.horizontal,

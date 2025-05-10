@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ProductDetails(
@@ -45,7 +47,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
         height: 90,
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
             boxShadow: [
               BoxShadow(
                   color: Colors.black.withValues(alpha: 0.08),
@@ -59,9 +61,9 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
               height: 90,
               child: ClipRRect(
                   borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(6), right: Radius.zero),
+                      left: Radius.circular(AppDimensions.radiusaHalfsmall), right: Radius.zero),
                   child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
+                    placeholder:AppImages.placeholder,
                     image: widget.image!,
                     fit: BoxFit.cover,
                   ))),

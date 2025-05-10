@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
@@ -163,7 +164,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: _verify_by == "email"
@@ -186,7 +187,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                     child: Text(
                       AppLocalizations.of(context)!.enter_the_code,
                       style: TextStyle(
@@ -195,7 +196,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -212,7 +213,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                     child: Text(
                       AppLocalizations.of(context)!.password_ucf,
                       style: TextStyle(
@@ -221,7 +222,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -248,7 +249,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
                     child: Text(
                       AppLocalizations.of(context)!.retype_password_ucf,
                       style: TextStyle(
@@ -257,7 +258,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Container(
                       height: 36,
                       child: TextField(
@@ -272,20 +273,20 @@ class _PasswordOtpState extends State<PasswordOtp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40.0),
+                    padding: const EdgeInsets.only(top: AppDimensions.paddingveryLarge),
                     child: Container(
                       height: 45,
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: MyTheme.textfield_grey, width: 1),
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(12.0))),
+                              const BorderRadius.all(Radius.circular(AppDimensions.radiusNormal))),
                       child: Btn.basic(
                         minWidth: MediaQuery.of(context).size.width,
                         color: Theme.of(context).primaryColor,
                         shape: const RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
+                                BorderRadius.all(Radius.circular(AppDimensions.radiusNormal))),
                         child: Text(
                           AppLocalizations.of(context)!.confirm_ucf,
                           style: const TextStyle(
@@ -315,7 +316,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 40, bottom: 60),
+              padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge, bottom: 60),
               child: Visibility(
                 visible: !canResend,
                 child: TimerWidget(
@@ -338,7 +339,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: Text(LangText(context).local.congratulations_ucf,
@@ -349,7 +350,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                           fontWeight: FontWeight.bold))),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: Text(
@@ -363,14 +364,14 @@ class _PasswordOtpState extends State<PasswordOtp> {
                       ))),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
               child: Image.asset(
-                'assets/changed_password.png',
+                AppImages.changedPassword,
                 width: DeviceInfo(context).width! / 2,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 40.0),
+              padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 45,
@@ -379,7 +380,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.all(Radius.circular(6.0))),
+                          BorderRadius.all(Radius.circular(AppDimensions.radiusaHalfsmall))),
                   child: Text(
                     AppLocalizations.of(context)!.back_to_Login_ucf,
                     style: const TextStyle(

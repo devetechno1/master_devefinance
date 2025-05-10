@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -59,7 +60,7 @@ class _SelectAddressState extends State<SelectAddress> {
                     SliverList(
                         delegate: SliverChildListDelegate([
                       Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
                           child: buildShippingInfoList(
                               selectAddressProvider, context)),
                       buildAddOrEditAddress(context, selectAddressProvider),
@@ -92,7 +93,7 @@ class _SelectAddressState extends State<SelectAddress> {
             });
           },
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(AppDimensions.paddingsmall),
             child: Text(
               LangText(context)
                   .local
@@ -154,7 +155,7 @@ class _SelectAddressState extends State<SelectAddress> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
               child: buildShippingInfoItemCard(
                   index, selectAddressProvider, context),
             );
@@ -197,11 +198,11 @@ class _SelectAddressState extends State<SelectAddress> {
                   selectAddressProvider.shippingAddressList[index].id
               ? BorderSide(color: Theme.of(context).primaryColor, width: 2.0)
               : BorderSide(color: MyTheme.light_grey, width: 1.0),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
         ),
         elevation: 0.0,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
           child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -245,7 +246,7 @@ class _SelectAddressState extends State<SelectAddress> {
                       padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 9),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.error,
-                        borderRadius: BorderRadius.circular(5)
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)
                       ),
                       child: Text(
                           LangText(context).local.you_have_to_add_location_here,
@@ -291,7 +292,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   // Padding buildShippingInfoItemPhone(index, selectAddressProvider) {
   //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 8.0),
+  //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
   //     child: Row(
   //       crossAxisAlignment: CrossAxisAlignment.start,
   //       children: [
@@ -320,7 +321,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   // Padding buildShippingInfoItemPostalCode(index, selectAddressProvider) {
   //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 8.0),
+  //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
   //     child: Row(
   //       crossAxisAlignment: CrossAxisAlignment.start,
   //       children: [
@@ -349,7 +350,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   // Padding buildShippingInfoItemCountry(index, selectAddressProvider) {
   //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 8.0),
+  //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
   //     child: Row(
   //       crossAxisAlignment: CrossAxisAlignment.start,
   //       children: [
@@ -378,7 +379,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   // Padding buildShippingInfoItemState(index, selectAddressProvider) {
   //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 8.0),
+  //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
   //     child: Row(
   //       crossAxisAlignment: CrossAxisAlignment.start,
   //       children: [
@@ -407,7 +408,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   // Padding buildShippingInfoItemCity(index, selectAddressProvider) {
   //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 8.0),
+  //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
   //     child: Row(
   //       crossAxisAlignment: CrossAxisAlignment.start,
   //       children: [
@@ -436,7 +437,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   // Padding buildShippingInfoItemAddress(index, selectAddressProvider) {
   //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 8.0),
+  //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
   //     child: Row(
   //       crossAxisAlignment: CrossAxisAlignment.start,
   //       children: [
@@ -473,7 +474,7 @@ class _SelectAddressState extends State<SelectAddress> {
             height: 16,
             width: 16,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0), color: Colors.green),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),

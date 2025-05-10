@@ -252,11 +252,13 @@ class BusinessSettingsData extends Equatable {
   final bool cuponSubtitle;
   final double? deliveryPickupLongitude;
   final double? deliveryPickupLatitude;
-
+  final String? whatsappNumber; 
 
   bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
 
-  const BusinessSettingsData({
+  const BusinessSettingsData(
+     {
+    this.whatsappNumber,
     this.allowTwitterLogin = false,
     this.allowGoogleLogin = false,
     this.allowFacebookLogin = false,
@@ -505,6 +507,7 @@ class BusinessSettingsData extends Equatable {
 
   factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
     return BusinessSettingsData(
+      whatsappNumber: data['whatsapp_number'] as String?,
       allowTwitterLogin: (data['twitter_login'] as String?)=="1",
       allowGoogleLogin: (data['google_login'] as String?)=="1",
       allowFacebookLogin: (data['facebook_login'] as String?)=="1",
@@ -1620,6 +1623,7 @@ class BusinessSettingsData extends Equatable {
   @override
   List<Object?> get props {
     return [
+      whatsappNumber,
       homeDefaultCurrency,
       systemDefaultCurrency,
       currencyFormat,

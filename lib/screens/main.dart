@@ -166,9 +166,9 @@ class _MainState extends State<Main> {
             items: [
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Image.asset(
-                      "assets/home.png",
+                      AppImages.home,
                       color: _currentIndex == 0
                           ? Theme.of(context).primaryColor
                           : const Color.fromRGBO(153, 153, 153, 1),
@@ -178,9 +178,9 @@ class _MainState extends State<Main> {
                   label: AppLocalizations.of(context)!.home_ucf),
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: Image.asset(
-                      "assets/categories.png",
+                      AppImages.categories,
                       color: _currentIndex == 1
                           ? Theme.of(context).primaryColor
                           : const Color.fromRGBO(153, 153, 153, 1),
@@ -190,19 +190,19 @@ class _MainState extends State<Main> {
                   label: AppLocalizations.of(context)!.categories_ucf),
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                     child: badges.Badge(
                       badgeStyle: badges.BadgeStyle(
                         shape: badges.BadgeShape.circle,
                         badgeColor: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                         padding:const EdgeInsets.all(5),
                       ),
                       badgeAnimation:const badges.BadgeAnimation.slide(
                         toAnimate: false,
                       ),
                       child: Image.asset(
-                        "assets/cart.png",
+                        AppImages.cart,
                         color: _currentIndex == 2
                             ? Theme.of(context).primaryColor
                             :const Color.fromRGBO(153, 153, 153, 1),
@@ -222,9 +222,9 @@ class _MainState extends State<Main> {
                   label: AppLocalizations.of(context)!.cart_ucf),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Image.asset(
-                    "assets/profile.png",
+                    AppImages.profile,
                     color: _currentIndex == 3
                         ? Theme.of(context).primaryColor
                         : const Color.fromRGBO(153, 153, 153, 1),
