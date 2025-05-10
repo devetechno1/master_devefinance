@@ -34,7 +34,7 @@ class HomeAllProducts extends StatelessWidget {
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
             childAspectRatio: 0.618),
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {

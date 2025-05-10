@@ -483,7 +483,7 @@ class _AddressState extends State<Address> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingDefualt).copyWith(bottom: AppDimensions.paddingsmall),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefault).copyWith(bottom: AppDimensions.paddingsmall),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -963,7 +963,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                   child: Container(
                     height: 40,
                     child: TypeAheadField(
@@ -1020,7 +1020,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                   child: Container(
                     height: 40,
                     child: TypeAheadField(
@@ -1130,7 +1130,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                           fontSize: 12)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                   child: Container(
                     height: 40,
                     child: TextField(
@@ -1443,7 +1443,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 55,
                   child: TextField(
@@ -1464,7 +1464,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1517,7 +1517,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1572,7 +1572,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1635,7 +1635,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                           fontSize: 12)),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom:  AppDimensions.paddingDefualt),
+                  margin: const EdgeInsets.only(bottom:  AppDimensions.paddingDefault),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
@@ -1684,7 +1684,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TextField(

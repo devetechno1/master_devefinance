@@ -250,6 +250,7 @@ class BusinessSettingsData extends Equatable {
   final Color? cuponBackgroundColor;
   final bool cuponTitle;
   final bool cuponSubtitle;
+  final bool isBlogActive;
   final double? deliveryPickupLongitude;
   final double? deliveryPickupLatitude;
   final String? whatsappNumber; 
@@ -259,6 +260,7 @@ class BusinessSettingsData extends Equatable {
   const BusinessSettingsData(
      {
     this.whatsappNumber,
+    this.isBlogActive = false,
     this.allowTwitterLogin = false,
     this.allowGoogleLogin = false,
     this.allowFacebookLogin = false,
@@ -508,6 +510,7 @@ class BusinessSettingsData extends Equatable {
   factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
     return BusinessSettingsData(
       whatsappNumber: data['whatsapp_number'] as String?,
+      isBlogActive: (data['blog_section_activation'] as String?)=="1",
       allowTwitterLogin: (data['twitter_login'] as String?)=="1",
       allowGoogleLogin: (data['google_login'] as String?)=="1",
       allowFacebookLogin: (data['facebook_login'] as String?)=="1",

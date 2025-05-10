@@ -380,7 +380,7 @@ final  ScrollController _mainScrollController = ScrollController();
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 55,
                           child: TextField(
@@ -1090,7 +1090,7 @@ final  ScrollController _mainScrollController = ScrollController();
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1459,7 +1459,7 @@ final  ScrollController _mainScrollController = ScrollController();
   Container buildOrderedProductItemsCard(index) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

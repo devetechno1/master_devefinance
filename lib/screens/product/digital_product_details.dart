@@ -578,7 +578,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 40,
                             child: TextField(
@@ -619,7 +619,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 55,
                             child: TextField(
@@ -988,7 +988,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                            padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -2281,7 +2281,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           ),
           itemCount: _topProducts.length,
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+          padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -2340,7 +2340,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             separatorBuilder: (context, index) => const SizedBox(
               width: 16,
             ),
-            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+            padding: const EdgeInsets.all(AppDimensions.paddingDefault),
             itemCount: _relatedProducts.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {

@@ -1399,7 +1399,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 //////Featured Products///////////
   Widget buildFeaturedProductsSection() {
     return Padding(
-      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
       child: Container(
         height: 296,
         decoration: const BoxDecoration(
@@ -1420,7 +1420,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
             Container(
               height: 240,
-              padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
               width: double.infinity,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -1604,7 +1604,7 @@ class _SellerDetailsState extends State<SellerDetails> {
   Widget buildCarouselSlider(context) {
     if (_shopDetails == null) {
       return Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: ShimmerHelper().buildBasicShimmer(
           height: 100.0,
         ),

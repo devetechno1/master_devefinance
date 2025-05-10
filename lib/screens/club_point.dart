@@ -226,7 +226,7 @@ class _ClubpointState extends State<Clubpoint> {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

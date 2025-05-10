@@ -232,7 +232,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                       width: 50,
                       height: 50,
                       child: Padding(
-                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                           child:
                               /*Image.asset(
                           _list[index].image,

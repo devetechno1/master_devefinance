@@ -182,7 +182,7 @@ class _CategoryListState extends State<CategoryList> {
       ),
       height: widget.is_base_category ? 0 : 80,
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Column(
           children: [
             Padding(

@@ -413,7 +413,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   Padding buildProfileForm(context) {
     return Padding(
       padding:
-          const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: AppDimensions.paddingDefualt, right: AppDimensions.paddingDefualt),
+          const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: AppDimensions.paddingDefault, right: AppDimensions.paddingDefault),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,7 +520,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
           child: Container(
             decoration: BoxDecorations.buildBoxDecoration_with_shadow(),
             height: 36,

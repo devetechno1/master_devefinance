@@ -651,7 +651,7 @@ class _CheckoutState extends State<Checkout> {
                     delegate: SliverChildListDelegate(
                       [
                         Padding(
-                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                           child: buildPaymentMethodList(),
                         ),
                         Container(
@@ -680,7 +680,7 @@ class _CheckoutState extends State<Checkout> {
                           : 292,
                       //color: Colors.white,
                       child: Padding(
-                        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                         child: Column(
                           children: [
                             widget.paymentFor == PaymentFor.Order
@@ -895,7 +895,7 @@ class _CheckoutState extends State<Checkout> {
                       width: 100,
                       height: 63,
                       child: Padding(
-                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                           child:
                               /*Image.asset(
                           _paymentTypeList[index].image,
@@ -1082,7 +1082,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(2).copyWith(top: AppDimensions.paddingDefualt),
+      contentPadding: const EdgeInsets.all(2).copyWith(top: AppDimensions.paddingDefault),
       content: CheckoutDetails(showTotal: true, subTotalString: _subTotalString, taxString: _taxString, shippingCostString: _shippingCostString, discountString: _discountString, totalString: _totalString),
       actions: [
         Btn.basic(

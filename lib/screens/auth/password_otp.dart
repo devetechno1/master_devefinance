@@ -164,7 +164,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: _verify_by == "email"
@@ -339,7 +339,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: Text(LangText(context).local.congratulations_ucf,
@@ -350,7 +350,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                           fontWeight: FontWeight.bold))),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: Text(

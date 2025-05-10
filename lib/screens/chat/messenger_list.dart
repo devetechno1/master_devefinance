@@ -89,7 +89,7 @@ class _MessengerListState extends State<MessengerList> {
                   SliverList(
                     delegate: SliverChildListDelegate([
                       Padding(
-                        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                         child: buildMessengerList(),
                       ),
                     ]),
@@ -246,7 +246,7 @@ class _MessengerListState extends State<MessengerList> {
           ),
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+            padding: const EdgeInsets.all(AppDimensions.paddingDefault),
             child: Icon(
               Icons.arrow_forward_ios_rounded,
               color: MyTheme.medium_grey,

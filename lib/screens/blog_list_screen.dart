@@ -22,6 +22,19 @@ class BlogListScreen extends StatefulWidget {
 class _BlogListScreenState extends State<BlogListScreen> {
   bool _showSearchBar = false;
   final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    Provider.of<BlogProvider>(context, listen: false).fetchBlogs(false);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,11 +81,11 @@ class _BlogListScreenState extends State<BlogListScreen> {
         children: [
           Container(
             width: 20,
+            margin: const EdgeInsetsDirectional.only(
+                end: AppDimensions.paddingDefault),
             child: UsefulElements.backButton(context, color: "black"),
           ),
-          Container(
-            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
-            width: DeviceInfo(context).width! / 2,
+          Expanded(
             child: Text(
               AppLocalizations.of(context)!.all_blogs_ucf,
               maxLines: 1,
@@ -80,7 +93,6 @@ class _BlogListScreenState extends State<BlogListScreen> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
-          const Spacer(),
           SizedBox(
               width: 20,
               child: GestureDetector(
@@ -118,125 +130,129 @@ class _BlogListScreenState extends State<BlogListScreen> {
           ),
           filled: true,
           fillColor: MyTheme.white.withValues(alpha: 0.6),
-          hintText: LangText(context).local.search_in_blogs //widget.category_name!
+          hintText:
+              LangText(context).local.search_in_blogs //widget.category_name!
           ,
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+            borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          ),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+            borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          ),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
     );
   }
 
-  FutureBuilder<void> buildBlogList(context) {
-    return FutureBuilder(
-        future: Provider.of<BlogProvider>(context, listen: false).fetchBlogs(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+  Widget buildBlogList(context) {
+    return RefreshIndicator(
+      onRefresh: Provider.of<BlogProvider>(context, listen: false).fetchBlogs,
+      child: Consumer<BlogProvider>(
+        builder: (context, blogProvider, child) {
+          if (blogProvider.isLoading) {
             return ShimmerHelper()
                 .buildListShimmer(item_count: 10, item_height: 100.0);
-          } else {
-            return Consumer<BlogProvider>(
-                builder: (context, blogProvider, child) {
-              return MasonryGridView.count(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                crossAxisCount: 2,
-                itemCount: blogProvider.blogs.length,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlogDetailsScreen(
-                              blog: blogProvider.blogs[index],
-                            ),
-                          ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
-                        image: DecorationImage(
-                          image: NetworkImage(blogProvider.blogs[index]
-                              .banner), // Replace with your image asset
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusDefualt), // Ensure the gradient follows the border radius
-                        child: Stack(
-                          children: [
-                            // Gradient overlay
-                            Positioned.fill(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.white.withValues(alpha: 0.5),
-                                      Colors.black.withValues(alpha: 0.5)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            // Centering the text content
-                            Container(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 113, 10, 18),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      blogProvider.blogs[index].title,
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      blogProvider.blogs[index].title,
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.white70,
-                                      ),
-                                    ),
-                                    Text(
-                                      blogProvider
-                                          .blogs[index].shortDescription,
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.white,
-                                      ),
-                                      maxLines: 3,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+          }
+          return MasonryGridView.count(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            crossAxisCount: 2,
+            itemCount: blogProvider.blogs.length,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlogDetailsScreen(
+                        blog: blogProvider.blogs[index],
                       ),
                     ),
                   );
                 },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusDefualt),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        blogProvider.blogs[index].banner,
+                      ), // Replace with your image asset
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      AppDimensions.radiusDefualt,
+                    ), // Ensure the gradient follows the border radius
+                    child: Stack(
+                      children: [
+                        // Gradient overlay
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.white.withValues(alpha: 0.5),
+                                  Colors.black.withValues(alpha: 0.5)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Centering the text content
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 113, 10, 18),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  blogProvider.blogs[index].title,
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  blogProvider.blogs[index].title,
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                                Text(
+                                  blogProvider.blogs[index].shortDescription,
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                  maxLines: 3,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               );
-            });
-          }
-        });
+            },
+          );
+        },
+      ),
+    );
   }
 }

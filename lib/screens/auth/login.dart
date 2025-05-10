@@ -639,7 +639,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                           child: Visibility(
                             visible: AppConfig.businessSettingsData.allowFacebookLogin,
                             child: InkWell(

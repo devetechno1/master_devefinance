@@ -208,7 +208,7 @@ class MapLocationState extends State<MapLocation>
             child: Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                 child: TypeAheadField<Results>(
                   // controller: _countryController,
                   debounceDuration: const Duration(milliseconds: 500),

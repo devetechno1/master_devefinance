@@ -347,20 +347,21 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildBottomVerticalCardListItem(AppImages.blog, LangText(context).local.blog_list_ucf,
-                  onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const BlogListScreen()));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          if(AppConfig.businessSettingsData.isBlogActive)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildBottomVerticalCardListItem(AppImages.blog, LangText(context).local.blog_list_ucf,
+                    onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const BlogListScreen()));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
           buildBottomVerticalCardListItem(AppImages.download,
               LangText(context).local.all_digital_products_ucf, onPressed: () {
@@ -400,10 +401,6 @@ class _ProfileState extends State<Profile> {
                 );
               }),
                    ],
-          ),
-           Divider(
-            thickness: 1,
-            color: MyTheme.light_grey,
           ),
           //flash_deals
           buildBottomVerticalCardListItem(

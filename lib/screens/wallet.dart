@@ -230,7 +230,7 @@ class _WalletState extends State<Wallet> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt, left: AppDimensions.paddingDefualt),
+                  const EdgeInsets.only(top: AppDimensions.paddingDefault, bottom: AppDimensions.paddingDefault, left: AppDimensions.paddingDefault),
               child: Text(
                 AppLocalizations.of(context)!.wallet_recharge_history_ucf,
                 style: TextStyle(
@@ -292,7 +292,7 @@ class _WalletState extends State<Wallet> {
       height: 100,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt),
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingNormal),
         child: Row(
@@ -389,7 +389,7 @@ class _WalletState extends State<Wallet> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
                 child: Text(
                   AppLocalizations.of(context)!.wallet_balance_ucf,
                   style: const TextStyle(

@@ -826,7 +826,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               Container(
                 height: 100,
                 child: Padding(
-                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -945,7 +945,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                               child: buildFilterCategoryList(),
                             ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                         child: Text(
                           AppLocalizations.of(context)!.brands_ucf,
                           style: const TextStyle(
@@ -1029,7 +1029,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   ListView buildFilterBrandsList() {
     return ListView(
-      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefault, bottom: AppDimensions.paddingDefault),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
@@ -1060,7 +1060,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   ListView buildFilterCategoryList() {
     return ListView(
-      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.only(top: AppDimensions.paddingDefault, bottom: AppDimensions.paddingDefault),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[

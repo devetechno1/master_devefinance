@@ -452,7 +452,7 @@ class _OrderListState extends State<OrderList> {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

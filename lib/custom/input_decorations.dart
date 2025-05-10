@@ -39,7 +39,7 @@ class InputDecorations {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
                 bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall))),
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt));
+        contentPadding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault));
   }
 
   static InputDecoration buildInputDecoration_with_border(String hintText) {

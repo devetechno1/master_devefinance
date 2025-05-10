@@ -262,7 +262,7 @@ final  ScrollController _mainScrollController = ScrollController();
             SliverList(
               delegate: SliverChildListDelegate([
                 Padding(
-                  padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                  padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                   child: HtmlContentWebView(
                     html: widget.paymentInstruction ?? """<p>Heading</p>""",
                   ),
@@ -432,7 +432,7 @@ final  ScrollController _mainScrollController = ScrollController();
               children: [
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+                  padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
                   child: Container(
                     width: 120,
                     height: 36,

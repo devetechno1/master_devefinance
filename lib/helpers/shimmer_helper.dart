@@ -165,7 +165,7 @@ class ShimmerHelper {
       mainAxisExtent = 100.0,
       controller}) {
     return GridView.builder(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         scrollDirection: Axis.horizontal,
         controller: controller,
         itemCount: item_count,
@@ -192,7 +192,7 @@ class ShimmerHelper {
       int itemCount = 10,
       double itemHeight = 120}) {
     return ListView.separated(
-      padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.all(AppDimensions.paddingDefault),
       separatorBuilder: (context, index) => SizedBox(
         width: separationWidth,
       ),

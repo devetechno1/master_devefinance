@@ -349,7 +349,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 40,
                             child: TextField(
@@ -390,7 +390,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 55,
                             child: TextField(

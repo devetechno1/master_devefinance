@@ -990,7 +990,7 @@ final  List<ClassifiedAdsMiniData> _relatedProducts = [];
           separatorBuilder: (context, index) => const SizedBox(
             width: 16,
           ),
-          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+          padding: const EdgeInsets.all(AppDimensions.paddingDefault),
           itemCount: _relatedProducts.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {

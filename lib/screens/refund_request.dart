@@ -188,7 +188,7 @@ class _RefundRequestState extends State<RefundRequest> {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
