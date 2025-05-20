@@ -194,8 +194,8 @@ class _CategoryListState extends State<CategoryList> {
                   minWidth: MediaQuery.of(context).size.width,
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(AppDimensions.radiusSmall))),
                   child: Text(
                     AppLocalizations.of(context)!.all_products_of_ucf + " ",
                     style: const TextStyle(

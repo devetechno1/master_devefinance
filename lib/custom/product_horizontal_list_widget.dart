@@ -5,24 +5,32 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../helpers/shimmer_helper.dart';
 import '../ui_elements/mini_product_card.dart';
 
-import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart' as productMini;
-
+import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
+    as productMini;
 
 class ProductHorizontalListWidget extends StatelessWidget {
   final bool isProductInitial;
-  final List <productMini.Product> productList;
+  final List<productMini.Product> productList;
   final int numberOfTotalProducts;
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
-  const ProductHorizontalListWidget({Key? key, required this.isProductInitial, required this.productList, required this.numberOfTotalProducts,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle,})
-      : super(key: key);
+  const ProductHorizontalListWidget({
+    Key? key,
+    required this.isProductInitial,
+    required this.productList,
+    required this.numberOfTotalProducts,
+    required this.onArriveTheEndOfList,
+    this.priceTextStyle,
+    this.nameTextStyle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (isProductInitial && productList.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.only(right: AppDimensions.paddingLarge,left: 20, top: 15),
+        padding: const EdgeInsets.only(
+            right: AppDimensions.paddingLarge, left: 20, top: 15),
         child: Row(
           children: [
             Expanded(
@@ -55,22 +63,25 @@ class ProductHorizontalListWidget extends StatelessWidget {
         alignment: Alignment.center,
         child: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
-            if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-              if(numberOfTotalProducts > productList.length) onArriveTheEndOfList();
+            if (scrollInfo.metrics.pixels ==
+                scrollInfo.metrics.maxScrollExtent) {
+              if (numberOfTotalProducts > productList.length)
+                onArriveTheEndOfList();
             }
             return true;
           },
           child: ListView.separated(
-            padding: const EdgeInsets.only(right: AppDimensions.paddingLarge,left: 15, top: 10),
+            padding: const EdgeInsets.only(
+                right: AppDimensions.paddingLarge, left: 15, top: 10),
             separatorBuilder: (context, index) => const SizedBox(
               width: 12,
             ),
-            itemCount:numberOfTotalProducts > productList.length
-              ? productList.length + 1
-              : productList.length,
+            itemCount: numberOfTotalProducts > productList.length
+                ? productList.length + 1
+                : productList.length,
             scrollDirection: Axis.horizontal,
             //itemExtent: 135,
-                
+
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             itemBuilder: (context, index) {
@@ -87,17 +98,12 @@ class ProductHorizontalListWidget extends StatelessWidget {
                   : MiniProductCard(
                       id: productList[index].id,
                       slug: productList[index].slug ?? '',
-                      image:
-                         productList[index].thumbnail_image,
-                      name:productList[index].name,
-                      main_price:
-                        productList[index].main_price,
-                      stroked_price:
-                          productList[index].stroked_price,
-                      has_discount:
-                          productList[index].has_discount,
-                      isWholesale:
-                         productList[index].isWholesale,
+                      image: productList[index].thumbnail_image,
+                      name: productList[index].name,
+                      main_price: productList[index].main_price,
+                      stroked_price: productList[index].stroked_price,
+                      has_discount: productList[index].has_discount,
+                      isWholesale: productList[index].isWholesale,
                       priceTextStyle: priceTextStyle,
                       nameTextStyle: nameTextStyle,
                     );

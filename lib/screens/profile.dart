@@ -257,18 +257,20 @@ class _ProfileState extends State<Profile> {
               Align(
                 alignment: AlignmentDirectional.topEnd,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 18,bottom: 12),
+                  padding:
+                      const EdgeInsetsDirectional.only(end: 18, bottom: 12),
                   child: InkWell(
                     onTap: () => Navigator.pop(context),
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusVeryEtra),
                     child: const SizedBox(
                       height: 30,
                       width: 30,
                       child: Icon(
-                          Icons.close,
-                          color: MyTheme.white,
-                          size: 20,
-                        ),
+                        Icons.close,
+                        color: MyTheme.white,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -290,7 +292,8 @@ class _ProfileState extends State<Profile> {
 
   Widget buildBottomVerticalCardList() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 120, top: AppDimensions.paddingNormal),
+      margin:
+          const EdgeInsets.only(bottom: 120, top: AppDimensions.paddingNormal),
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Column(
@@ -334,8 +337,8 @@ class _ProfileState extends State<Profile> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildBottomVerticalCardListItem(
-                    AppImages.wholeSale, LangText(context).local.wholesale_product, onPressed: () {
+                buildBottomVerticalCardListItem(AppImages.wholeSale,
+                    LangText(context).local.wholesale_product, onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -350,10 +353,13 @@ class _ProfileState extends State<Profile> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildBottomVerticalCardListItem(AppImages.blog, LangText(context).local.blog_list_ucf,
+              buildBottomVerticalCardListItem(
+                  AppImages.blog, LangText(context).local.blog_list_ucf,
                   onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const BlogListScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BlogListScreen()));
               }),
               Divider(
                 thickness: 1,
@@ -372,36 +378,31 @@ class _ProfileState extends State<Profile> {
             thickness: 1,
             color: MyTheme.light_grey,
           ),
-           buildBottomVerticalCardListItem(
+          buildBottomVerticalCardListItem(
               AppImages.coupon, LangText(context).local.coupons_ucf,
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const Coupons();
             }));
           }),
-            Divider(
+          Divider(
             thickness: 1,
             color: MyTheme.light_grey,
           ),
           //flash_deals
-             Column(
+          Column(
             children: [
-             if (homeData.isFlashDealInitial != false)
-              buildBottomVerticalCardListItem(
-              
-                  AppImages.flashDeal, AppLocalizations.of(context)!.flash_deal_ucf,
-                  onPressed: () {
-
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return FlashDealList();
-                 
-                })
-                );
-              }),
-                   ],
+              if (homeData.isFlashDealInitial != false)
+                buildBottomVerticalCardListItem(AppImages.flashDeal,
+                    AppLocalizations.of(context)!.flash_deal_ucf,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return FlashDealList();
+                  }));
+                }),
+            ],
           ),
-           Divider(
+          Divider(
             thickness: 1,
             color: MyTheme.light_grey,
           ),
@@ -438,8 +439,8 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.classifiedProduct)
             Column(
               children: [
-                buildBottomVerticalCardListItem(
-                    AppImages.myClassified, LangText(context).local.my_classified_ads_ucf,
+                buildBottomVerticalCardListItem(AppImages.myClassified,
+                    LangText(context).local.my_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MyClassifiedAds();
@@ -455,8 +456,8 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.classifiedProduct)
             Column(
               children: [
-                buildBottomVerticalCardListItem(
-                    AppImages.classifiedProduct, LangText(context).local.all_classified_ads_ucf,
+                buildBottomVerticalCardListItem(AppImages.classifiedProduct,
+                    LangText(context).local.all_classified_ads_ucf,
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ClassifiedAds();
@@ -469,7 +470,8 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          if (AppConfig.businessSettingsData.lastViewedProductActivation && is_logged_in.$)
+          if (AppConfig.businessSettingsData.lastViewedProductActivation &&
+              is_logged_in.$)
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.lastViewProduct,
@@ -514,7 +516,8 @@ class _ProfileState extends State<Profile> {
                           : 80
                       : 40,
                   alignment: Alignment.topCenter,
-                  padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+                  padding:
+                      const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
                   child: InkWell(
                     onTap: () {
                       _auctionExpand = !_auctionExpand;
@@ -529,7 +532,8 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.only(end: 24.0),
+                                    padding: const EdgeInsetsDirectional.only(
+                                        end: 24.0),
                                     child: Image.asset(
                                       AppImages.auction,
                                       height: 16,
@@ -560,9 +564,12 @@ class _ProfileState extends State<Profile> {
                           child: AnimatedScale(
                             duration: const Duration(milliseconds: 300),
                             scale: _auctionExpand ? 1 : 0,
-                            alignment: app_language_rtl.$ == true? Alignment.centerRight : Alignment.centerLeft,
+                            alignment: app_language_rtl.$ == true
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
                             child: Container(
-                              padding: const EdgeInsetsDirectional.only(start: 40),
+                              padding:
+                                  const EdgeInsetsDirectional.only(start: 40),
                               width: double.infinity,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -687,7 +694,8 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          if (is_logged_in.$ && (AppConfig.businessSettingsData.classifiedProduct))
+          if (is_logged_in.$ &&
+              (AppConfig.businessSettingsData.classifiedProduct))
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.followSeller,
@@ -704,19 +712,19 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-          buildBottomVerticalCardListItem(AppImages.delete,
-                LangText(context).local.privacy_policy_ucf, onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          CommonWebviewScreen(
-                            page_name:
-                                AppLocalizations.of(context)!.privacy_policy_ucf,
-                            url:
-                                "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
-                          )));
-          },icon: Icons.lock_outline_rounded),
+          buildBottomVerticalCardListItem(
+              AppImages.delete, LangText(context).local.privacy_policy_ucf,
+              onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CommonWebviewScreen(
+                          page_name:
+                              AppLocalizations.of(context)!.privacy_policy_ucf,
+                          url:
+                              "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
+                        )));
+          }, icon: Icons.lock_outline_rounded),
           Divider(
             thickness: 1,
             color: MyTheme.light_grey,
@@ -725,14 +733,13 @@ class _ProfileState extends State<Profile> {
           if (is_logged_in.$)
             Column(
               children: [
-                buildBottomVerticalCardListItem(AppImages.delete,
-                    LangText(context).local.delete_my_account, onPressed: () {
+                buildBottomVerticalCardListItem(
+                    AppImages.delete, LangText(context).local.delete_my_account,
+                    onPressed: () {
                   deleteWarningDialog();
                 }),
               ],
             ),
-
-         
         ],
       ),
     );
@@ -753,13 +760,20 @@ class _ProfileState extends State<Profile> {
           children: [
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 24.0),
-              child: icon == null? Image.asset(
-                img,
-                height: 16,
-                width: 16,
-                color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
-              ):
-              Icon(icon,size: 18,color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,),
+              child: icon == null
+                  ? Image.asset(
+                      img,
+                      height: 16,
+                      width: 16,
+                      color:
+                          isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
+                    )
+                  : Icon(
+                      icon,
+                      size: 18,
+                      color:
+                          isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
+                    ),
             ),
             Text(
               label,
@@ -921,10 +935,11 @@ class _ProfileState extends State<Profile> {
       height: 208,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: GridView(
         scrollDirection: Axis.horizontal,
-        padding:  const EdgeInsets.symmetric(vertical: 2, horizontal: 25),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 25),
         physics: const PageScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 50.0,
@@ -937,9 +952,10 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.walletSystem)
             Container(
               child: buildSettingAndAddonsHorizontalMenuItem(
-                  AppImages.wallet,
-                  AppLocalizations.of(context)!.my_wallet_ucf, () {
-                Navigator.push(context, PageAnimation.fadeRoute(const Wallet()));
+                  AppImages.wallet, AppLocalizations.of(context)!.my_wallet_ucf,
+                  () {
+                Navigator.push(
+                    context, PageAnimation.fadeRoute(const Wallet()));
               }),
             ),
           buildSettingAndAddonsHorizontalMenuItem(
@@ -973,7 +989,8 @@ class _ProfileState extends State<Profile> {
           Container(
             child: badges.Badge(
               showBadge: is_logged_in.$,
-              position: badges.BadgePosition.topEnd(top: 2, end: AppDimensions.paddingLarge),
+              position: badges.BadgePosition.topEnd(
+                  top: 2, end: AppDimensions.paddingLarge),
               badgeStyle: badges.BadgeStyle(
                 shape: badges.BadgeShape.circle,
                 badgeColor: Theme.of(context).primaryColor,
@@ -994,8 +1011,10 @@ class _ProfileState extends State<Profile> {
                   AppLocalizations.of(context)!.notification_ucf,
                   is_logged_in.$
                       ? () {
-                          Navigator.push(context,
-                                  PageAnimation.fadeRoute(const NotificationList()))
+                          Navigator.push(
+                                  context,
+                                  PageAnimation.fadeRoute(
+                                      const NotificationList()))
                               .then((value) {
                             onPopped(value);
                           });
@@ -1041,8 +1060,10 @@ class _ProfileState extends State<Profile> {
               AppLocalizations.of(context)!.downloads_ucf,
               is_logged_in.$
                   ? () {
-                      Navigator.push(context,
-                          PageAnimation.fadeRoute(const PurchasedDigitalProducts()));
+                      Navigator.push(
+                          context,
+                          PageAnimation.fadeRoute(
+                              const PurchasedDigitalProducts()));
                     }
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
@@ -1109,28 +1130,31 @@ class _ProfileState extends State<Profile> {
         buildCountersRowItem(
           _cartCounterString,
           AppLocalizations.of(context)!.in_your_cart_all_lower,
-          onTap: () =>  Navigator.push(context, PageAnimation.fadeRoute(const Cart(has_bottomnav: false))),
+          onTap: () => Navigator.push(context,
+              PageAnimation.fadeRoute(const Cart(has_bottomnav: false))),
         ),
         buildCountersRowItem(
           _wishlistCounterString,
           AppLocalizations.of(context)!.in_your_wishlist_all_lower,
-          onTap: () =>  Navigator.push(context, PageAnimation.fadeRoute(Wishlist())),
+          onTap: () =>
+              Navigator.push(context, PageAnimation.fadeRoute(Wishlist())),
         ),
         buildCountersRowItem(
           _orderCounterString,
           AppLocalizations.of(context)!.your_ordered_all_lower,
-          onTap: () => Navigator.push(context, PageAnimation.fadeRoute(const OrderList())),
+          onTap: () => Navigator.push(
+              context, PageAnimation.fadeRoute(const OrderList())),
         ),
-       
       ],
     );
   }
 
-  Widget buildCountersRowItem(String counter, String title, {Future<void> Function()? onTap}) {
+  Widget buildCountersRowItem(String counter, String title,
+      {Future<void> Function()? onTap}) {
     return InkWell(
       onTap: is_logged_in.$ && onTap != null
-      ?  () => onTap.call().then((_) => onPopped(null))
-      : null,
+          ? () => onTap.call().then((_) => onPopped(null))
+          : null,
       borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
       child: Container(
         margin: const EdgeInsets.only(top: AppDimensions.paddingLarge),
@@ -1190,14 +1214,16 @@ class _ProfileState extends State<Profile> {
               height: 48,
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusVeryEtra),
                 border: Border.all(color: MyTheme.white, width: 1),
                 //shape: BoxShape.rectangle,
               ),
               child: is_logged_in.$
                   ? ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radiusVeryEtra)),
+                      borderRadius: const BorderRadius.all(
+                          Radius.circular(AppDimensions.radiusVeryEtra)),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: "${avatar_original.$}",
@@ -1217,7 +1243,8 @@ class _ProfileState extends State<Profile> {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
             // 	rgb(50,205,50)
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 side: const BorderSide(color: MyTheme.white)),
             child: Text(
               is_logged_in.$

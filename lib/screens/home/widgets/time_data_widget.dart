@@ -2,26 +2,31 @@ import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:flutter/material.dart';
 
 class RowTimeDataWidget extends StatelessWidget {
-  const RowTimeDataWidget({super.key, required this.time, this.isFirst = false, required this.timeType});
+  const RowTimeDataWidget(
+      {super.key,
+      required this.time,
+      this.isFirst = false,
+      required this.timeType});
   final String time;
   final String timeType;
   final bool isFirst;
 
   @override
   Widget build(BuildContext context) {
-
     return RichText(
       text: TextSpan(
         style: const TextStyle(
-          color:Colors.white,
+          color: Colors.white,
           fontSize: 14.0,
           fontWeight: FontWeight.w600,
         ),
         children: [
-          if(!isFirst) const TextSpan(text: '  :  '),
+          if (!isFirst) const TextSpan(text: '  :  '),
           TextSpan(text: time.timeText()),
           const WidgetSpan(child: SizedBox(width: 4)),
-          TextSpan(text: timeType, style: const TextStyle(color:Colors.white, fontSize: 9)),
+          TextSpan(
+              text: timeType,
+              style: const TextStyle(color: Colors.white, fontSize: 9)),
         ],
       ),
     );

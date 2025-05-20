@@ -20,7 +20,8 @@ import '../../main.dart';
 class Otp extends StatefulWidget {
   final String? title;
   final bool fromRegistration;
-  const Otp({Key? key, this.title, required this.fromRegistration}) : super(key: key);
+  const Otp({Key? key, this.title, required this.fromRegistration})
+      : super(key: key);
 
   @override
   _OtpState createState() => _OtpState();
@@ -28,14 +29,16 @@ class Otp extends StatefulWidget {
 
 class _OtpState extends State<Otp> {
   //controllers
-  final TextEditingController _verificationCodeController = TextEditingController();
-  CountdownController countdownController = CountdownController(autoStart: true);
+  final TextEditingController _verificationCodeController =
+      TextEditingController();
+  CountdownController countdownController =
+      CountdownController(autoStart: true);
   bool canResend = false;
   @override
   void initState() {
     //on Splash Screen hide statusbar
-    if(!widget.fromRegistration) AuthRepository().getResendCodeResponse();
-    
+    if (!widget.fromRegistration) AuthRepository().getResendCodeResponse();
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
     super.initState();
@@ -89,9 +92,9 @@ class _OtpState extends State<Otp> {
       if (SystemConfig.systemUser != null) {
         SystemConfig.systemUser!.emailVerified = true;
       }
-      if(widget.fromRegistration){
+      if (widget.fromRegistration) {
         context.go("/");
-      }else{
+      } else {
         context.pop();
       }
       ToastComponent.showDialog(confirmCodeResponse.message);
@@ -113,8 +116,7 @@ class _OtpState extends State<Otp> {
               color: MyTheme.soft_accent_color,
               width: _screen_width,
               height: 200,
-              child: Image.asset(
-                 AppImages.splashLoginRegisterationBackground),
+              child: Image.asset(AppImages.splashLoginRegisterationBackground),
             ),
             Container(
               width: double.infinity,
@@ -125,15 +127,15 @@ class _OtpState extends State<Otp> {
                   if (widget.title != null)
                     Text(
                       widget.title!,
-                      style: const TextStyle(fontSize: 25, color: MyTheme.font_grey),
+                      style: const TextStyle(
+                          fontSize: 25, color: MyTheme.font_grey),
                     ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40.0, bottom: 15),
                     child: Container(
                       width: 75,
                       height: 75,
-                      child: Image.asset(
-                          AppImages.loginRegisteration),
+                      child: Image.asset(AppImages.loginRegisteration),
                     ),
                   ),
                   Container(
@@ -142,7 +144,8 @@ class _OtpState extends State<Otp> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -168,13 +171,15 @@ class _OtpState extends State<Otp> {
                                 border: Border.all(
                                     color: MyTheme.textfield_grey, width: 1),
                                 borderRadius: const BorderRadius.all(
-                                    Radius.circular(AppDimensions.radiusNormal))),
+                                    Radius.circular(
+                                        AppDimensions.radiusNormal))),
                             child: Btn.basic(
                               minWidth: MediaQuery.of(context).size.width,
                               color: Theme.of(context).primaryColor,
                               shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
-                                      Radius.circular(AppDimensions.radiusNormal))),
+                                      Radius.circular(
+                                          AppDimensions.radiusNormal))),
                               child: Text(
                                 AppLocalizations.of(context)!.confirm_ucf,
                                 style: const TextStyle(
@@ -192,8 +197,11 @@ class _OtpState extends State<Otp> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
-                    child: Text(AppLocalizations.of(context)!.check_your_WhatsApp_messages_to_retrieve_the_verification_code,
+                    padding:
+                        const EdgeInsets.only(top: AppDimensions.paddingLarge),
+                    child: Text(
+                        AppLocalizations.of(context)!
+                            .check_your_WhatsApp_messages_to_retrieve_the_verification_code,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Theme.of(context).disabledColor,
@@ -206,30 +214,34 @@ class _OtpState extends State<Otp> {
                       child: Text(AppLocalizations.of(context)!.resend_code_ucf,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: canResend? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
+                              color: canResend
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context).disabledColor,
                               decoration: TextDecoration.underline,
                               fontSize: 13)),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge, bottom: 60),
+                    padding: const EdgeInsets.only(
+                        top: AppDimensions.paddingveryLarge, bottom: 60),
                     child: Visibility(
                       visible: !canResend,
                       child: TimerWidget(
-                        duration: const Duration(seconds: 20), 
+                        duration: const Duration(seconds: 20),
                         callback: () {
-                            setState(() {
-                              countdownController.restart();
-                              canResend = true;
-                            });
-                        }, 
+                          setState(() {
+                            countdownController.restart();
+                            canResend = true;
+                          });
+                        },
                         controller: countdownController,
                       ),
                     ),
                   ),
                   // SizedBox(height: 15,),
                   Padding(
-                    padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
+                    padding: const EdgeInsets.only(
+                        top: AppDimensions.paddingveryLarge),
                     child: Center(
                       child: InkWell(
                         onTap: () {
@@ -263,7 +275,6 @@ class _OtpState extends State<Otp> {
   }
 }
 
-
 class TimerWidget extends StatelessWidget {
   const TimerWidget({
     required this.duration,
@@ -287,7 +298,8 @@ class TimerWidget extends StatelessWidget {
         controller: controller,
         seconds: duration.inSeconds,
         onFinished: callback,
-        build: (BuildContext context, double seconds) => Text(seconds.fromSeconds ?? ''),
+        build: (BuildContext context, double seconds) =>
+            Text(seconds.fromSeconds ?? ''),
       ),
     );
   }

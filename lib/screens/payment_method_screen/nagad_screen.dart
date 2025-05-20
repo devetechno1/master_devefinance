@@ -15,12 +15,12 @@ import '../../helpers/shared_value_helper.dart';
 import '../profile.dart';
 
 class NagadScreen extends StatefulWidget {
-final  double? amount;
- final String payment_type;
- final String? payment_method_key;
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
   final package_id;
- final int? orderId;
- const NagadScreen(
+  final int? orderId;
+  const NagadScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -39,7 +39,7 @@ class _NagadScreenState extends State<NagadScreen> {
   String? _initial_url = "";
   bool _initial_url_fetched = false;
 
-final  WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -175,21 +175,22 @@ final  WebViewController _webViewController = WebViewController();
       nagadPaymentProcessResponse.message!,
     );
     if (widget.payment_type == "cart_payment") {
-   await   Navigator.push(context, MaterialPageRoute(builder: (context) {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const OrderList(from_checkout: true);
       }));
     } else if (widget.payment_type == "wallet_payment") {
-   await   Navigator.push(context, MaterialPageRoute(builder: (context) {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const Wallet(from_recharge: true);
       }));
     } else if (widget.payment_type == "customer_package_payment") {
-    await  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      await Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
         return const Profile();
       }));
     }
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {
@@ -233,7 +234,7 @@ final  WebViewController _webViewController = WebViewController();
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_nagad,
-        style:TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

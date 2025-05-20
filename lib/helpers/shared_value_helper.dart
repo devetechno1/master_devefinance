@@ -177,9 +177,12 @@ final SharedValue<bool> auction_addon_installed = SharedValue(
 //   key: "minimum_order_quantity", // disk storage key for shared_preferences
 // );
 
-bool minOrderAmountNotEnough(double amount) => AppConfig.businessSettingsData.minimumOrderAmountCheck && amount < AppConfig.businessSettingsData.minimumOrderAmount;
-bool minOrderQuantityNotEnough(int quantity) => AppConfig.businessSettingsData.minimumOrderQuantityCheck && quantity < AppConfig.businessSettingsData.minimumOrderQuantity;
-
+bool minOrderAmountNotEnough(double amount) =>
+    AppConfig.businessSettingsData.minimumOrderAmountCheck &&
+    amount < AppConfig.businessSettingsData.minimumOrderAmount;
+bool minOrderQuantityNotEnough(int quantity) =>
+    AppConfig.businessSettingsData.minimumOrderQuantityCheck &&
+    quantity < AppConfig.businessSettingsData.minimumOrderQuantity;
 
 final SharedValue<String> guestEmail = SharedValue(
   value: "", // initial value

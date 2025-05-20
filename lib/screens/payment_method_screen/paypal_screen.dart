@@ -16,13 +16,13 @@ import '../../helpers/main_helpers.dart';
 import '../profile.dart';
 
 class PaypalScreen extends StatefulWidget {
- final double? amount;
- final String payment_type;
- final String? payment_method_key;
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
   final package_id;
-final  int? orderId;
+  final int? orderId;
 
- const PaypalScreen(
+  const PaypalScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -112,8 +112,7 @@ class _PaypalScreenState extends State<PaypalScreen> {
               getData();
             } else if (page.contains("/paypal/payment/cancel")) {
               ToastComponent.showDialog(
-                LangText(context).local.payment_cancelled_ucf
-              );
+                  LangText(context).local.payment_cancelled_ucf);
               Navigator.of(context).pop();
               return;
             }
@@ -182,7 +181,7 @@ class _PaypalScreenState extends State<PaypalScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

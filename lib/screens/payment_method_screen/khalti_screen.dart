@@ -168,7 +168,7 @@ class _KhaltiScreenState extends State<KhaltiScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     //print(initial_url);
     if (_order_init == false &&
         _combined_order_id == 0 &&

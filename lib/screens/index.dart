@@ -28,7 +28,7 @@ class _IndexState extends State<Index> {
       AuthHelper().fetch_and_set();
     });
     AddonsHelper().setAddonsData();
-    await Future.wait([ 
+    await Future.wait([
       app_language.load(),
       app_mobile_language.load(),
       app_language_rtl.load(),
@@ -40,10 +40,10 @@ class _IndexState extends State<Index> {
 
     return app_mobile_language.$;
   }
-    
+
   @override
   void initState() {
-   InternetHelper.listenToConnectivityChanges(context);
+    InternetHelper.listenToConnectivityChanges(context);
     // TODO: implement initState
     getSharedValueHelperData().then((value) {
       Future.delayed(const Duration(seconds: 3)).then((value) {

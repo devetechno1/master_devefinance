@@ -6,6 +6,7 @@ import 'package:one_context/one_context.dart';
 import 'package:go_router/go_router.dart';
 import '../helpers/color_helper.dart';
 import '../repositories/pop_up_repositry.dart';
+import '../services/navigation_service.dart';
 
 class PopupBanner extends StatelessWidget {
   final String title;
@@ -131,7 +132,7 @@ void showPopupBanner(BuildContext context) {
           onAction: () {
             final url = bannerData['btn_link'] ?? '';
             if (url.isNotEmpty) {
-              handleBannerNavigation(context, url);
+              NavigationService.handleUrls(url);
               Navigator.pop(context);
             }
           },

@@ -24,8 +24,11 @@ class FeaturedCategoriesWidget extends StatelessWidget {
           controller: homeData.featuredCategoryScrollController);
     } else if (homeData.featuredCategoryList.isNotEmpty) {
       return GridView.builder(
-        padding:
-            const EdgeInsets.only(left: AppDimensions.paddingLarge, right: AppDimensions.paddingLarge, top: 11, bottom: 24),
+        padding: const EdgeInsets.only(
+            left: AppDimensions.paddingLarge,
+            right: AppDimensions.paddingLarge,
+            top: 11,
+            bottom: 24),
         scrollDirection: Axis.horizontal,
         controller: homeData.featuredCategoryScrollController,
         itemCount: homeData.featuredCategoryList.length,
@@ -59,7 +62,8 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xff000000).withValues(alpha: 0.1),
+                                color: const Color(0xff000000)
+                                    .withValues(alpha: 0.1),
                                 spreadRadius: 1,
                                 blurRadius: 15,
                                 offset: const Offset(0, 6),
@@ -67,11 +71,13 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                             ],
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusNormal),
                             child: FadeInImage.assetNetwork(
                               placeholder: AppImages.placeholder,
                               image: homeData
-                                  .featuredCategoryList[index].coverImage ??'',
+                                      .featuredCategoryList[index].coverImage ??
+                                  '',
                               fit: BoxFit.cover,
                             ),
                           ),

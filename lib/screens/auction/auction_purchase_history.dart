@@ -58,7 +58,8 @@ class AuctionPurchaseHistory extends StatefulWidget {
 }
 
 class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
-  final ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
+  final ScrollController _scrollController =
+      ScrollController(initialScrollOffset: 0);
   int _page = 1;
   bool _isDataFetch = false;
   bool _showMoreProductLoadingContainer = false;
@@ -66,7 +67,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   String _defaultPaymentStatusKey = '';
   String _defaultDeliveryStatusKey = '';
 
-  final List<PaymentStatus> _paymentStatusList = PaymentStatus.getPaymentStatusList();
+  final List<PaymentStatus> _paymentStatusList =
+      PaymentStatus.getPaymentStatusList();
   final List<DeliveryStatus> _deliveryStatusList =
       DeliveryStatus.getDeliveryStatusList();
 
@@ -427,7 +429,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
     return Container(
       padding: const EdgeInsets.fromLTRB(12, 14, 21, 12),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -437,7 +440,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(
                   _purchaseList[index].code!,
                   style: TextStyle(
@@ -452,7 +456,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                          ? const EdgeInsets.only(
+                              left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       // child: const Icon(
                       //   Icons.calendar_today_outlined,
@@ -469,12 +474,14 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingsmallExtra),
                 child: Row(
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                          ? const EdgeInsets.only(
+                              left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       // child: const Icon(
                       //   Icons.credit_card,
@@ -517,7 +524,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 children: [
                   Padding(
                     padding: app_language_rtl.$!
-                        ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                        ? const EdgeInsets.only(
+                            left: AppDimensions.paddingsmall)
                         : const EdgeInsets.only(right: 8.0),
                     // child: const Icon(
                     //   Icons.local_shipping_outlined,
@@ -625,7 +633,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 Padding(
                   padding: MediaQuery.of(context).viewPadding.top >
                           30 //MediaQuery.of(context).viewPadding.top is the status bar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                      ? const EdgeInsets.only(top: AppDimensions.paddingveryLarge)
+                      ? const EdgeInsets.only(
+                          top: AppDimensions.paddingveryLarge)
                       : const EdgeInsets.only(top: 14.0),
                   child: buildTopAppBarContainer(),
                 ),
@@ -644,7 +653,9 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)),
+                color: Colors.white,
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusSmallExtra)),
             padding: const EdgeInsets.symmetric(horizontal: 14),
             height: 36,
             width: MediaQuery.of(context).size.width * .35,
@@ -674,7 +685,9 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
           Container(
             // decoration: BoxDecorations.buildBoxDecoration_1(),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)),
+                color: Colors.white,
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusSmallExtra)),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
             width: MediaQuery.of(context).size.width * .35,

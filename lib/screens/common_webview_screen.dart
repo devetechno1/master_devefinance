@@ -38,7 +38,8 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
       ..loadRequest(Uri.parse(widget.url));
   }
 
-  TextDirection get direction => app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr;
+  TextDirection get direction =>
+      app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,8 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
   SizedBox buildBody() {
     return SizedBox.expand(
       child: Container(
-        child: WebViewWidget(controller: _webViewController, layoutDirection: direction),
+        child: WebViewWidget(
+            controller: _webViewController, layoutDirection: direction),
       ),
     );
   }
@@ -66,7 +68,11 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(app_language_rtl.$! ?  CupertinoIcons.arrow_right : CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
+          icon: Icon(
+              app_language_rtl.$!
+                  ? CupertinoIcons.arrow_right
+                  : CupertinoIcons.arrow_left,
+              color: MyTheme.dark_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),

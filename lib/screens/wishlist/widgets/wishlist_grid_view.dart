@@ -22,7 +22,8 @@ class WishListGridView extends StatelessWidget {
         crossAxisSpacing: 14,
         itemCount: _wishlistItems.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
+        padding:
+            const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return ProductCard(

@@ -10,7 +10,8 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 
 class ShopRepository {
   Future<dynamic> getShops({name = "", page = 1}) async {
-    final String url = ("${AppConfig.BASE_URL}/shops" + "?page=$page&name=$name");
+    final String url =
+        ("${AppConfig.BASE_URL}/shops" + "?page=$page&name=$name");
 
     final response = await ApiRequest.get(
       url: url,
@@ -36,7 +37,8 @@ class ShopRepository {
 
   Future<ProductMiniResponse> getTopFromThisSellerProducts(
       {int? id = 0}) async {
-    final String url = ("${AppConfig.BASE_URL}/shops/products/top/" + id.toString());
+    final String url =
+        ("${AppConfig.BASE_URL}/shops/products/top/" + id.toString());
     final response = await ApiRequest.get(
       url: url,
       headers: {
@@ -49,7 +51,8 @@ class ShopRepository {
 
   Future<ProductMiniResponse> getNewFromThisSellerProducts(
       {int? id = 0}) async {
-    final String url = ("${AppConfig.BASE_URL}/shops/products/new/" + id.toString());
+    final String url =
+        ("${AppConfig.BASE_URL}/shops/products/new/" + id.toString());
     final response = await ApiRequest.get(
       url: url,
       headers: {

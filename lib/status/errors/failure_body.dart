@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-
-class FailureBody{
+class FailureBody {
   final String status = 'Failure';
   final int code;
   final String type;
@@ -49,5 +48,4 @@ class FailureBody{
       message: message ?? this.message,
     );
   }
-
 }

@@ -13,18 +13,18 @@ import '../data_model/language_list_response.dart';
 import '../providers/theme_provider.dart';
 import '../repositories/language_repository.dart';
 
-
-
 class BusinessSettingHelper {
   Future<void> setBusinessSettingData(BuildContext context) async {
-    final BusinessSettingListResponse businessLists = await BusinessSettingRepository().getBusinessSettingList();
+    final BusinessSettingListResponse businessLists =
+        await BusinessSettingRepository().getBusinessSettingList();
     final Map<String, dynamic> map = {};
 
-    businessLists.data?.forEach((element) => map[element.type!] = element.value);
+    businessLists.data
+        ?.forEach((element) => map[element.type!] = element.value);
 
     AppConfig.businessSettingsData = BusinessSettingsData.fromMap(map);
 
-    Provider.of<ThemeProvider>(context,listen: false).changeAppColors(
+    Provider.of<ThemeProvider>(context, listen: false).changeAppColors(
       primary: AppConfig.businessSettingsData.primaryColor,
       secondary: AppConfig.businessSettingsData.secondaryColor,
     );

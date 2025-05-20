@@ -71,7 +71,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
             child: UsefulElements.backButton(context, color: "black"),
           ),
           Container(
-            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+            padding:
+                const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
             width: DeviceInfo(context).width! / 2,
             child: Text(
               AppLocalizations.of(context)!.all_blogs_ucf,
@@ -118,15 +119,18 @@ class _BlogListScreenState extends State<BlogListScreen> {
           ),
           filled: true,
           fillColor: MyTheme.white.withValues(alpha: 0.6),
-          hintText: LangText(context).local.search_in_blogs //widget.category_name!
+          hintText:
+              LangText(context).local.search_in_blogs //widget.category_name!
           ,
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
@@ -144,7 +148,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
             return Consumer<BlogProvider>(
                 builder: (context, blogProvider, child) {
               return MasonryGridView.count(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 crossAxisCount: 2,
                 itemCount: blogProvider.blogs.length,
                 crossAxisSpacing: 10,
@@ -162,7 +167,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusDefualt),
                         image: DecorationImage(
                           image: NetworkImage(blogProvider.blogs[index]
                               .banner), // Replace with your image asset
@@ -170,8 +176,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
                         ),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusDefualt), // Ensure the gradient follows the border radius
+                        borderRadius: BorderRadius.circular(AppDimensions
+                            .radiusDefualt), // Ensure the gradient follows the border radius
                         child: Stack(
                           children: [
                             // Gradient overlay

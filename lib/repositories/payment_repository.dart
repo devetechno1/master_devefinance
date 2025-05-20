@@ -51,12 +51,8 @@ class PaymentRepository {
     return orderCreateResponseFromJson(response.body);
   }
 
-  Future<PaypalUrlResponse> getPaypalUrlResponse(
-      String paymentType,
-      int? combinedOrderId,
-      var packageId,
-      double? amount,
-      int? orderId) async {
+  Future<PaypalUrlResponse> getPaypalUrlResponse(String paymentType,
+      int? combinedOrderId, var packageId, double? amount, int? orderId) async {
     final String url =
         ("${AppConfig.BASE_URL}/paypal/payment/url?payment_type=$paymentType&combined_order_id=$combinedOrderId&amount=$amount&user_id=${user_id.$}&package_id=$packageId&order_id=$orderId");
     final response = await ApiRequest.get(url: url, headers: {
@@ -66,12 +62,8 @@ class PaymentRepository {
     return paypalUrlResponseFromJson(response.body);
   }
 
-  Future<FlutterwaveUrlResponse> getFlutterwaveUrlResponse(
-      String paymentType,
-      int? combinedOrderId,
-      var packageId,
-      double? amount,
-      int orderId) async {
+  Future<FlutterwaveUrlResponse> getFlutterwaveUrlResponse(String paymentType,
+      int? combinedOrderId, var packageId, double? amount, int orderId) async {
     final String url =
         ("${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=$paymentType&combined_order_id=$combinedOrderId&amount=$amount&user_id=${user_id.$}&package_id=$packageId&order_id=$orderId");
 
@@ -123,8 +115,7 @@ class PaymentRepository {
     return orderCreateResponseFromJson(response.body);
   }
 
-  Future<dynamic> getOrderCreateResponseFromManualPayment(
-      paymentMethod) async {
+  Future<dynamic> getOrderCreateResponseFromManualPayment(paymentMethod) async {
     final postBody = jsonEncode(
         {"user_id": "${user_id.$}", "payment_type": "$paymentMethod"});
 
@@ -220,12 +211,8 @@ class PaymentRepository {
     return iyzicoPaymentSuccessResponseFromJson(response.body);
   }
 
-  Future<BkashBeginResponse> getBkashBeginResponse(
-      String paymentType,
-      int? combinedOrderId,
-      var packageId,
-      double? amount,
-      int orderId) async {
+  Future<BkashBeginResponse> getBkashBeginResponse(String paymentType,
+      int? combinedOrderId, var packageId, double? amount, int orderId) async {
     final String url =
         ("${AppConfig.BASE_URL}/bkash/begin?payment_type=$paymentType&combined_order_id=$combinedOrderId&amount=$amount&user_id=${user_id.$}&package_id=$packageId&order_id=$orderId}");
     final response = await ApiRequest.get(
@@ -267,12 +254,8 @@ class PaymentRepository {
     return bkashPaymentProcessResponseFromJson(response.body);
   }
 
-  Future<SslcommerzBeginResponse> getSslcommerzBeginResponse(
-      String paymentType,
-      int? combinedOrderId,
-      var packageId,
-      double? amount,
-      int orderId) async {
+  Future<SslcommerzBeginResponse> getSslcommerzBeginResponse(String paymentType,
+      int? combinedOrderId, var packageId, double? amount, int orderId) async {
     final String url =
         ("${AppConfig.BASE_URL}/sslcommerz/begin?payment_type=$paymentType&combined_order_id=$combinedOrderId&amount=$amount&user_id=${user_id.$}&package_id=$packageId&order_id=$orderId");
 
@@ -287,12 +270,8 @@ class PaymentRepository {
     return sslcommerzBeginResponseFromJson(response.body);
   }
 
-  Future<NagadBeginResponse> getNagadBeginResponse(
-      String paymentType,
-      int? combinedOrderId,
-      var packageId,
-      double? amount,
-      int orderId) async {
+  Future<NagadBeginResponse> getNagadBeginResponse(String paymentType,
+      int? combinedOrderId, var packageId, double? amount, int orderId) async {
     final String url =
         ("${AppConfig.BASE_URL}/nagad/begin?payment_type=$paymentType&combined_order_id=$combinedOrderId&amount=$amount&user_id=${user_id.$}&package_id=$packageId&order_id=$orderId");
 

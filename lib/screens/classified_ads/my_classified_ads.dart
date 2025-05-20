@@ -256,16 +256,19 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
               height: 40,
               width: DeviceInfo(context).width,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
-                border: Border.all(color: Theme.of(context).primaryColor, width: 1),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                border:
+                    Border.all(color: Theme.of(context).primaryColor, width: 1),
                 color: const Color(0xffFBEAE6),
               ),
               child: InkWell(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const UpdatePackage())).then((value) {
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UpdatePackage()))
+                      .then((value) {
                     resetAll();
                   });
                   //  MyTransaction(context: context).push(Packages());
@@ -285,8 +288,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         ),
                         Text(
                           LangText(context).local.current_package_ucf,
-                          style:
-                              const TextStyle(fontSize: 10, color: MyTheme.grey_153),
+                          style: const TextStyle(
+                              fontSize: 10, color: MyTheme.grey_153),
                         ),
                         const SizedBox(
                           width: 11,
@@ -336,7 +339,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
           Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.08),
@@ -376,9 +380,10 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
             onTap: () {
               if (int.parse(_remainingProduct) == 0) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const UpdatePackage())).then((value) {
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UpdatePackage()))
+                    .then((value) {
                   resetAll();
                 });
 
@@ -396,7 +401,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
             child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.08),
@@ -406,7 +412,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                       )
                     ],
                     color: const Color(0xffFEF0D7),
-                    border: Border.all(color: const Color(0xffFFA800), width: 1)),
+                    border:
+                        Border.all(color: const Color(0xffFFA800), width: 1)),
                 height: 75,
                 width: mWidht / 2 - 23,
                 child: Container(
@@ -426,7 +433,9 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         height: 5,
                       ),
                       Image.asset(AppImages.add,
-                          color: Theme.of(context).primaryColor, height: 18, width: 18),
+                          color: Theme.of(context).primaryColor,
+                          height: 18,
+                          width: 18),
                     ],
                   ),
                 )),
@@ -519,7 +528,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                     url: imageUrl,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(AppDimensions.radiusSmallExtra),
-                      bottomLeft: Radius.circular(AppDimensions.radiusSmallExtra),
+                      bottomLeft:
+                          Radius.circular(AppDimensions.radiusSmallExtra),
                     ),
                   ),
                   const SizedBox(
@@ -569,15 +579,17 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color: condition == "new"
                             ? MyTheme.golden
                             : Theme.of(context).primaryColor,
                         borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                          bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                          topLeft:
+                              Radius.circular(AppDimensions.radiusaHalfsmall),
+                          bottomRight:
+                              Radius.circular(AppDimensions.radiusaHalfsmall),
                         ),
                         boxShadow: const [
                           BoxShadow(
@@ -595,8 +607,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                           fontWeight: FontWeight.w700,
                           height: 1.8,
                         ),
-                        textHeightBehavior:
-                            const TextHeightBehavior(applyHeightToFirstAscent: false),
+                        textHeightBehavior: const TextHeightBehavior(
+                            applyHeightToFirstAscent: false),
                         softWrap: false,
                       ),
                     ),
@@ -615,7 +627,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         width: DeviceInfo(context).width! * 1.5,
         child: AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
           title: Text(
             LangText(context).local.do_you_want_to_delete_it,
             style: const TextStyle(
@@ -696,7 +709,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
           return AlertDialog(
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
             ),
             content: Container(
               height: 40,

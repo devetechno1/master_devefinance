@@ -179,7 +179,8 @@ class _DigitalProductsState extends State<DigitalProducts> {
           crossAxisSpacing: 14,
           itemCount: _digitalProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
+          padding:
+              const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3
@@ -262,7 +263,8 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       width: double.infinity,
                       child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image ?? AppImages.placeholder,
@@ -276,13 +278,15 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       Positioned(
                         bottom: 0,
                         child: Container(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 4),
                           decoration: const BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              topRight: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -386,10 +390,14 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       Container(
                         height: 20,
                         width: 48,
-                        margin: const EdgeInsets.only(top: AppDimensions.paddingsmall, right: AppDimensions.paddingsmall, bottom: 15),
+                        margin: const EdgeInsets.only(
+                            top: AppDimensions.paddingsmall,
+                            right: AppDimensions.paddingsmall,
+                            bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),

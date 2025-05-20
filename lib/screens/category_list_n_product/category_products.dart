@@ -13,7 +13,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CategoryProducts extends StatefulWidget {
-  const CategoryProducts({Key? key, required this.slug, required this.name}) : super(key: key);
+  const CategoryProducts({Key? key, required this.slug, required this.name})
+      : super(key: key);
   final String slug;
   final String name;
 
@@ -42,7 +43,8 @@ class _CategoryProductsState extends State<CategoryProducts> {
   //   setState(() {});
   // }
   getSubCategory() async {
-    final res = await CategoryRepository().getCategories(parent_id: widget.slug);
+    final res =
+        await CategoryRepository().getCategories(parent_id: widget.slug);
     if (res.categories != null) {
       _subCategoryList.addAll(res.categories!);
     }
@@ -155,7 +157,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
             height: subCatHeight,
             color: MyTheme.mainColor,
             duration: const Duration(milliseconds: 300),
-            child:  buildSubCategory(subCatHeight),
+            child: buildSubCategory(subCatHeight),
           ),
           preferredSize: const Size.fromHeight(-35)),
       title: buildAppBarTitle(context),
@@ -189,7 +191,8 @@ class _CategoryProductsState extends State<CategoryProducts> {
                 categoryInfo?.name ?? widget.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -243,10 +246,12 @@ class _CategoryProductsState extends State<CategoryProducts> {
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
@@ -283,10 +288,11 @@ class _CategoryProductsState extends State<CategoryProducts> {
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
-                        image: _subCategoryList[index].coverImage ??'',
+                        image: _subCategoryList[index].coverImage ?? '',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -339,8 +345,11 @@ class _CategoryProductsState extends State<CategoryProducts> {
             crossAxisSpacing: 14,
             itemCount: _productList.length,
             shrinkWrap: true,
-            padding:
-                const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+            padding: const EdgeInsets.only(
+                top: AppDimensions.paddingsupsmall,
+                bottom: AppDimensions.paddingsupsmall,
+                left: 18,
+                right: 18),
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               // 3

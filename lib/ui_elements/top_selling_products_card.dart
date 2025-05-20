@@ -61,16 +61,17 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
               height: 90,
               child: ClipRRect(
                   borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(AppDimensions.radiusaHalfsmall), right: Radius.zero),
+                      left: Radius.circular(AppDimensions.radiusaHalfsmall),
+                      right: Radius.zero),
                   child: FadeInImage.assetNetwork(
-                    placeholder:AppImages.placeholder,
+                    placeholder: AppImages.placeholder,
                     image: widget.image!,
                     fit: BoxFit.cover,
                   ))),
           Flexible(
             child: Container(
-              padding:
-                  const EdgeInsets.only(top: 14, left: 14, right: 34, bottom: 14),
+              padding: const EdgeInsets.only(
+                  top: 14, left: 14, right: 34, bottom: 14),
               //width: 240,
               height: 90,
               //color: Colors.red,

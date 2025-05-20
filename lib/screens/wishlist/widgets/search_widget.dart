@@ -782,7 +782,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                     builder: (context, controller, focusNode) {
                       return Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusNormal),
                           color: const Color(0xffE4E3E8),
                           boxShadow: [
                             BoxShadow(
@@ -831,7 +832,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Text(
                           AppLocalizations.of(context)!.price_range_ucf,
                           style: const TextStyle(
@@ -842,7 +844,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingsmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -861,7 +864,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           color: MyTheme.textfield_grey,
                                           width: 1.0),
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(AppDimensions.radiusSmallExtra),
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     focusedBorder: const OutlineInputBorder(
@@ -869,7 +873,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           color: MyTheme.textfield_grey,
                                           width: 2.0),
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(AppDimensions.radiusSmallExtra),
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     contentPadding: const EdgeInsets.all(4.0)),
@@ -878,7 +883,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                           ),
                           const Text(" - "),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingsmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -897,7 +903,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           color: MyTheme.textfield_grey,
                                           width: 1.0),
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(AppDimensions.radiusSmallExtra),
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     focusedBorder: const OutlineInputBorder(
@@ -905,7 +912,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           color: MyTheme.textfield_grey,
                                           width: 2.0),
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(AppDimensions.radiusSmallExtra),
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
                                     contentPadding: const EdgeInsets.all(4.0)),
@@ -937,7 +945,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 child: Text(
                                   AppLocalizations.of(context)!
                                       .no_category_is_available,
-                                  style: const TextStyle(color: MyTheme.font_grey),
+                                  style:
+                                      const TextStyle(color: MyTheme.font_grey),
                                 ),
                               ),
                             )
@@ -945,7 +954,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                               child: buildFilterCategoryList(),
                             ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingDefualt),
                         child: Text(
                           AppLocalizations.of(context)!.brands_ucf,
                           style: const TextStyle(
@@ -959,7 +969,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 child: Text(
                                   AppLocalizations.of(context)!
                                       .no_brand_is_available,
-                                  style: const TextStyle(color: MyTheme.font_grey),
+                                  style:
+                                      const TextStyle(color: MyTheme.font_grey),
                                 ),
                               ),
                             )
@@ -1029,7 +1040,9 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   ListView buildFilterBrandsList() {
     return ListView(
-      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.only(
+          top: AppDimensions.paddingDefualt,
+          bottom: AppDimensions.paddingDefualt),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
@@ -1060,7 +1073,9 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   ListView buildFilterCategoryList() {
     return ListView(
-      padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.only(
+          top: AppDimensions.paddingDefualt,
+          bottom: AppDimensions.paddingDefualt),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
@@ -1131,8 +1146,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingsupsmall,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1205,8 +1223,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
                     childAspectRatio: 1),
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1275,8 +1296,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 14,
                     childAspectRatio: 0.7),
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1325,6 +1349,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             Radius.circular(AppDimensions.radiusSmall),
           ),
         ),
-        contentPadding: const EdgeInsets.only(left: AppDimensions.paddingsmall, top: 10.0, bottom: 15.0));
+        contentPadding: const EdgeInsets.only(
+            left: AppDimensions.paddingsmall, top: 10.0, bottom: 15.0));
   }
 }

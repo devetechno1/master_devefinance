@@ -161,7 +161,8 @@ class ProductRepository {
 
   Future<ProductMiniResponse> getFrequentlyBoughProducts(
       {required String slug}) async {
-    final String url = ("${AppConfig.BASE_URL}/products/frequently-bought/$slug");
+    final String url =
+        ("${AppConfig.BASE_URL}/products/frequently-bought/$slug");
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
     });

@@ -36,7 +36,7 @@ class AmarpayScreen extends StatefulWidget {
 
 class _AmarpayScreenState extends State<AmarpayScreen> {
   //controller
- final WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   int? _combined_order_id = 0;
   bool _order_init = false;
@@ -100,7 +100,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
 
   amarpay() {
     // todo:: PUT amar pay initial url here
-   final String _initial_url =
+    final String _initial_url =
         "${AppConfig.BASE_URL}/amarpay?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
 
     _webViewController
@@ -151,7 +151,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
   }
 
   // body
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

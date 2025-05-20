@@ -19,7 +19,8 @@ class ProductData {
 
   factory ProductData.fromJson(Map<String, dynamic> json) {
     final list = json['data'] as List;
-    final List<Product> productList = list.map((i) => Product.fromJson(i)).toList();
+    final List<Product> productList =
+        list.map((i) => Product.fromJson(i)).toList();
 
     return ProductData(
       data: productList,

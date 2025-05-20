@@ -293,8 +293,10 @@ class CartProvider extends ChangeNotifier {
     return count;
   }
 
-  bool get isMinOrderQuantityNotEnough => shopList.isNotEmpty && minOrderQuantityNotEnough(itemsCount);
-  bool get isMinOrderAmountNotEnough => shopList.isNotEmpty && minOrderAmountNotEnough(_cartTotal);
+  bool get isMinOrderQuantityNotEnough =>
+      shopList.isNotEmpty && minOrderQuantityNotEnough(itemsCount);
+  bool get isMinOrderAmountNotEnough =>
+      shopList.isNotEmpty && minOrderAmountNotEnough(_cartTotal);
 
   void initState(BuildContext context) {
     fetchData(context);
@@ -329,7 +331,11 @@ class CartProvider extends ChangeNotifier {
     _cartTotalString = _shopResponse!.grandTotal!.replaceAll(
         SystemConfig.systemCurrency!.code!,
         SystemConfig.systemCurrency!.symbol!);
-    _cartTotal = double.tryParse(_cartTotalString.replaceAll(",",'').replaceAll("${SystemConfig.systemCurrency!.symbol}",'').replaceAll("${SystemConfig.systemCurrency!.code}",'')) ?? 0;
+    _cartTotal = double.tryParse(_cartTotalString
+            .replaceAll(",", '')
+            .replaceAll("${SystemConfig.systemCurrency!.symbol}", '')
+            .replaceAll("${SystemConfig.systemCurrency!.code}", '')) ??
+        0;
 
     notifyListeners();
   }
@@ -368,8 +374,8 @@ class CartProvider extends ChangeNotifier {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: Colors.white,
-        contentPadding:
-            const EdgeInsets.only(top: 30.0, left: 2.0, right: 2.0, bottom: 20.0),
+        contentPadding: const EdgeInsets.only(
+            top: 30.0, left: 2.0, right: 2.0, bottom: 20.0),
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           child: Text(
@@ -465,20 +471,19 @@ class CartProvider extends ChangeNotifier {
       if (mode == "update") {
         fetchData(context);
       } else if (mode == "proceed_to_shipping") {
-        if(isMinOrderQuantityNotEnough){
+        if (isMinOrderQuantityNotEnough) {
           ToastComponent.showDialog(
-            '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity}',
-            color: Theme.of(context).colorScheme.error
-          );
+              '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity}',
+              color: Theme.of(context).colorScheme.error);
           return;
-        }else if(isMinOrderAmountNotEnough){
+        } else if (isMinOrderAmountNotEnough) {
           ToastComponent.showDialog(
-            '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount}',
-            color: Theme.of(context).colorScheme.error
-          );
+              '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount}',
+              color: Theme.of(context).colorScheme.error);
           return;
         }
-        if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
+        if (AppConfig.businessSettingsData.guestCheckoutStatus &&
+            !is_logged_in.$) {
           // Handle guest checkout logic
           // For example, navigate to guest checkout page
           Navigator.push(context, MaterialPageRoute(builder: (context) {

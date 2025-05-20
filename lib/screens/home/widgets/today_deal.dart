@@ -5,12 +5,11 @@ import '../../product/product_details.dart';
 
 class TodaysDealProductsWidget extends StatelessWidget {
   //final List<Product>? products;
-    final HomePresenter homePresenter;
-
+  final HomePresenter homePresenter;
 
   const TodaysDealProductsWidget({
     super.key,
-     required this.homePresenter, 
+    required this.homePresenter,
   });
 
   @override
@@ -45,14 +44,17 @@ class TodaysDealProductsWidget extends StatelessWidget {
                   },
             child: Container(
               width: 160,
-              margin: const EdgeInsetsDirectional.only(end: 8,),
+              margin: const EdgeInsetsDirectional.only(
+                end: 8,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AspectRatio(
                     aspectRatio: 1,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmall),
                       child: Image.network(
                         product.thumbnail_image ?? '',
                         fit: BoxFit.cover,

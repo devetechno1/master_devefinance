@@ -29,7 +29,8 @@ class SingleProduct {
       this.in_user_wishlist,
       this.club_point,
       this.seller,
-      this.is_inhouse_product,this.description});
+      this.is_inhouse_product,
+      this.description});
 }
 
 class Seller {
@@ -39,13 +40,12 @@ class Seller {
   Seller({this.shop_name, this.shop_image});
 }
 
-Seller seller =
-    Seller(shop_name: "UGG Australia", shop_image: AppImages.s8);
+Seller seller = Seller(shop_name: "UGG Australia", shop_image: AppImages.s8);
 
 List<String> my_product_images = [
   AppImages.pi1,
   AppImages.pi2,
-AppImages.pi3,
+  AppImages.pi3,
   AppImages.pi4,
 ];
 
@@ -135,4 +135,5 @@ SingleProduct singleProduct = SingleProduct(
     has_disocunt: true,
     club_point: 120.00,
     seller: seller,
-    is_inhouse_product: true,description: description);
+    is_inhouse_product: true,
+    description: description);

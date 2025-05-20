@@ -187,7 +187,8 @@ class _UpdatePackageState extends State<UpdatePackage> {
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
                 packageName,
-                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                style: const TextStyle(
+                    fontSize: 17, fontWeight: FontWeight.normal),
               ),
             ),
             Padding(
@@ -196,7 +197,8 @@ class _UpdatePackageState extends State<UpdatePackage> {
                 width: DeviceInfo(context).width! / 2,
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: InkWell(
                     onTap: () {
@@ -209,7 +211,9 @@ class _UpdatePackageState extends State<UpdatePackage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Checkout(
-                                        title: LangText(context).local.purchase_package,
+                                        title: LangText(context)
+                                            .local
+                                            .purchase_package,
                                         rechargeAmount:
                                             double.parse(price.toString()),
                                         paymentFor: PaymentFor.PackagePay,

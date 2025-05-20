@@ -29,11 +29,15 @@ class ProfileEdit extends StatefulWidget {
 
 class _ProfileEditState extends State<ProfileEdit> {
   final ScrollController _mainScrollController = ScrollController();
-  final TextEditingController _nameController = TextEditingController(text: "${user_name.$}");
-  final TextEditingController _phoneController = TextEditingController(text: "${user_phone.$}");
-  final TextEditingController _emailController = TextEditingController(text: "${user_email.$}");
+  final TextEditingController _nameController =
+      TextEditingController(text: "${user_name.$}");
+  final TextEditingController _phoneController =
+      TextEditingController(text: "${user_phone.$}");
+  final TextEditingController _emailController =
+      TextEditingController(text: "${user_email.$}");
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordConfirmController = TextEditingController();
+  final TextEditingController _passwordConfirmController =
+      TextEditingController();
 
   bool _showPassword = false;
   bool _showConfirmPassword = false;
@@ -126,33 +130,27 @@ class _ProfileEditState extends State<ProfileEdit> {
     }
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
-        color: Theme.of(context).colorScheme.error
-      );
+          AppLocalizations.of(context)!.enter_phone_number,
+          color: Theme.of(context).colorScheme.error);
       return;
-    }else if(!_isValidPhoneNumber){
+    } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.invalid_phone_number,
-        color: Theme.of(context).colorScheme.error
-      );
+          AppLocalizations.of(context)!.invalid_phone_number,
+          color: Theme.of(context).colorScheme.error);
       return;
     }
 
     final postBody = jsonEncode({"name": "$name", "phone": _phone.trim()});
 
-    final profileUpdateResponse = await ProfileRepository()
-        .getProfileUpdateResponse(post_body: postBody);
+    final profileUpdateResponse =
+        await ProfileRepository().getProfileUpdateResponse(post_body: postBody);
 
     if (profileUpdateResponse.result == false) {
-      ToastComponent.showDialog(
-        profileUpdateResponse.message,
-        color: Theme.of(context).colorScheme.error
-      );
+      ToastComponent.showDialog(profileUpdateResponse.message,
+          color: Theme.of(context).colorScheme.error);
     } else {
-      ToastComponent.showDialog(
-        profileUpdateResponse.message,
-        color: Colors.green
-      );
+      ToastComponent.showDialog(profileUpdateResponse.message,
+          color: Colors.green);
 
       user_name.$ = name;
       user_phone.$ = _phone;
@@ -212,13 +210,13 @@ class _ProfileEditState extends State<ProfileEdit> {
       setState(() {});
     }
   }
-  
+
   Future<void> fetch_country() async {
     final data = await AddressRepository().getCountryList();
     data.countries?.forEach((c) => countries_code.add(c.code));
     setState(() {});
   }
-  
+
   Future<void> getInitVal() async {
     _phone = user_phone.$.trim();
     initialValue = await PhoneNumber.getRegionInfoFromPhoneNumber(_phone);
@@ -226,7 +224,7 @@ class _ProfileEditState extends State<ProfileEdit> {
     _isValidPhoneNumber = _phoneController.text.isNotEmpty;
     setState(() {});
   }
- 
+
   @override
   void initState() {
     super.initState();
@@ -238,11 +236,11 @@ class _ProfileEditState extends State<ProfileEdit> {
   void dispose() {
     _mainScrollController.dispose();
 
-   _nameController.dispose();
-   _phoneController.dispose();
-   _emailController.dispose();
-   _passwordController.dispose();
-   _passwordConfirmController.dispose();
+    _nameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
     super.dispose();
   }
 
@@ -340,13 +338,15 @@ class _ProfileEditState extends State<ProfileEdit> {
                 height: 80,
                 decoration: BoxDecoration(
                   boxShadow: [MyTheme.commonShadow()],
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusVeryEtra),
 
                   //shape: BoxShape.rectangle,
                 ),
                 child: ClipRRect(
                     clipBehavior: Clip.hardEdge,
-                    borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radiusVeryEtra)),
+                    borderRadius: const BorderRadius.all(
+                        Radius.circular(AppDimensions.radiusVeryEtra)),
                     child: FadeInImage.assetNetwork(
                       placeholder: AppImages.placeholder,
                       image: "${avatar_original.$}",
@@ -385,12 +385,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                     height: 24,
                     decoration: BoxDecoration(
                       boxShadow: [MyTheme.commonShadow()],
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusVeryEtra),
 
                       //shape: BoxShape.rectangle,
                     ),
                     child: Btn.basic(
-                     // padding: const EdgeInsets.all(0),
+                      // padding: const EdgeInsets.all(0),
                       child: const Icon(
                         Icons.edit,
                         color: Color(0xff3E4447),
@@ -412,8 +413,11 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   Padding buildProfileForm(context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: AppDimensions.paddingDefualt, right: AppDimensions.paddingDefualt),
+      padding: const EdgeInsets.only(
+          top: AppDimensions.paddingsmall,
+          bottom: AppDimensions.paddingsmall,
+          left: AppDimensions.paddingDefualt,
+          right: AppDimensions.paddingDefualt),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,7 +435,9 @@ class _ProfileEditState extends State<ProfileEdit> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingLarge,
+              bottom: AppDimensions.paddingsupsmall),
           child: Center(
             child: Text(
               LangText(context).local.password_changes_ucf,
@@ -480,7 +486,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                       borderSide: BorderSide.none,
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor),
                     ),
                     suffixIcon: InkWell(
                       onTap: () {
@@ -498,12 +505,14 @@ class _ProfileEditState extends State<ProfileEdit> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingsmallExtra),
+                padding:
+                    const EdgeInsets.only(top: AppDimensions.paddingsmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!
                       .password_must_contain_at_least_6_characters,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor, fontStyle: FontStyle.italic),
+                      color: Theme.of(context).primaryColor,
+                      fontStyle: FontStyle.italic),
                 ),
               )
             ],
@@ -537,7 +546,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                        borderSide:
+                            BorderSide(color: Theme.of(context).primaryColor),
                       ),
                       suffixIcon: InkWell(
                         onTap: () {
@@ -566,7 +576,8 @@ class _ProfileEditState extends State<ProfileEdit> {
               height: 42,
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusSmall)),
               child: Text(
                 textAlign: TextAlign.center,
                 LangText(context).local.save_changes,
@@ -611,16 +622,17 @@ class _ProfileEditState extends State<ProfileEdit> {
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 boxShadow: [MyTheme.commonShadow()]),
             height: 36,
             child: TextField(
               controller: _nameController,
               autofocus: false,
               style: const TextStyle(color: Color(0xff999999), fontSize: 12),
-              decoration:
-                  InputDecorations.buildInputDecoration_1(hint_text: LangText(context).local.name_ucf)
-                      .copyWith(
+              decoration: InputDecorations.buildInputDecoration_1(
+                      hint_text: LangText(context).local.name_ucf)
+                  .copyWith(
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
@@ -656,7 +668,8 @@ class _ProfileEditState extends State<ProfileEdit> {
             initialValue: initialValue,
             onInputChanged: (PhoneNumber number) {
               setState(() {
-                if(number.isoCode != null) AppConfig.default_country = number.isoCode!;
+                if (number.isoCode != null)
+                  AppConfig.default_country = number.isoCode!;
                 _phone = number.phoneNumber ?? '';
                 print(_phone);
               });
@@ -664,11 +677,10 @@ class _ProfileEditState extends State<ProfileEdit> {
             onInputValidated: (bool value) {
               print(value);
               _isValidPhoneNumber = value;
-              setState(() {
-                
-              });
+              setState(() {});
             },
-            selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.DIALOG),
+            selectorConfig: const SelectorConfig(
+                selectorType: PhoneInputSelectorType.DIALOG),
             ignoreBlank: false,
             autoValidateMode: AutovalidateMode.disabled,
             selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
@@ -676,7 +688,8 @@ class _ProfileEditState extends State<ProfileEdit> {
             textFieldController: _phoneController,
             formatInput: true,
             keyboardType: const TextInputType.numberWithOptions(signed: true),
-            inputDecoration: InputDecorations.buildInputDecoration_phone(hint_text: "01XXX XXX XXX"),
+            inputDecoration: InputDecorations.buildInputDecoration_phone(
+                hint_text: "01XXX XXX XXX"),
             onSaved: (PhoneNumber number) {
               print('On Saved: $number');
             },
@@ -686,7 +699,8 @@ class _ProfileEditState extends State<ProfileEdit> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               child: Text(
                 AppLocalizations.of(context)!.email_ucf,
                 style: const TextStyle(
@@ -696,18 +710,21 @@ class _ProfileEditState extends State<ProfileEdit> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
               child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                       boxShadow: [MyTheme.commonShadow()]),
                   height: 36,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     _emailController.text,
-                    style: const TextStyle(fontSize: 12, color: Color(0xff999999)),
+                    style:
+                        const TextStyle(fontSize: 12, color: Color(0xff999999)),
                   )
                   /*TextField(
                         style: TextStyle(color:MyTheme.grey_153,fontSize: 12),
@@ -745,7 +762,8 @@ class _ProfileEditState extends State<ProfileEdit> {
               height: 42,
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusSmall)),
               child: Text(
                 textAlign: TextAlign.center,
                 LangText(context).local.update_profile_ucf,

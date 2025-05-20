@@ -85,7 +85,8 @@ class OrderRepository {
   Future<dynamic> getPurchasedDigitalProducts({
     page = 1,
   }) async {
-    final String url = ("${AppConfig.BASE_URL}/digital/purchased-list?page=$page");
+    final String url =
+        ("${AppConfig.BASE_URL}/digital/purchased-list?page=$page");
     final Map<String, String> header = commonHeader;
 
     header.addAll(authHeader);

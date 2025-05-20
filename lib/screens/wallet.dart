@@ -229,8 +229,10 @@ class _WalletState extends State<Wallet> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.only(top: AppDimensions.paddingDefualt, bottom: AppDimensions.paddingDefualt, left: AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.only(
+                  top: AppDimensions.paddingDefualt,
+                  bottom: AppDimensions.paddingDefualt,
+                  left: AppDimensions.paddingDefualt),
               child: Text(
                 AppLocalizations.of(context)!.wallet_recharge_history_ucf,
                 style: TextStyle(
@@ -247,7 +249,8 @@ class _WalletState extends State<Wallet> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
                   child: buildRechargeListItemCard(index),
                 );
               },
@@ -291,8 +294,10 @@ class _WalletState extends State<Wallet> {
     return Container(
       height: 100,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
+      margin:
+          const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingNormal),
         child: Row(
@@ -389,7 +394,8 @@ class _WalletState extends State<Wallet> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+                padding:
+                    const EdgeInsets.only(top: AppDimensions.paddingDefualt),
                 child: Text(
                   AppLocalizations.of(context)!.wallet_balance_ucf,
                   style: const TextStyle(
@@ -427,7 +433,8 @@ class _WalletState extends State<Wallet> {
           decoration: BoxDecoration(
             color: const Color(0xffFEF0D7), // Background color
             border: Border.all(color: Colors.amber.shade700, width: 1),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), // Set border radius here
+            borderRadius: BorderRadius.circular(
+                AppDimensions.radiusNormal), // Set border radius here
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(
@@ -436,8 +443,8 @@ class _WalletState extends State<Wallet> {
               minWidth: MediaQuery.of(context).size.width,
               color: MyTheme.amber,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                    Radius.circular(5.0)), // Adjust if needed
+                borderRadius:
+                    BorderRadius.all(Radius.circular(5.0)), // Adjust if needed
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -482,8 +489,8 @@ class _WalletState extends State<Wallet> {
             borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
           ),
           insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-          contentPadding:
-              const EdgeInsets.only(top: 36.0, left: 20.0, right: 22.0, bottom: 2.0),
+          contentPadding: const EdgeInsets.only(
+              top: 36.0, left: 20.0, right: 22.0, bottom: 2.0),
           content: Container(
             width: 400,
             child: SingleChildScrollView(
@@ -492,7 +499,8 @@ class _WalletState extends State<Wallet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Text(AppLocalizations.of(context)!.amount_ucf,
                         style: TextStyle(
                             color: MyTheme.dark_font_grey,
@@ -500,14 +508,15 @@ class _WalletState extends State<Wallet> {
                             fontWeight: FontWeight.bold)),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Container(
                       height: 40,
                       child: TextField(
                         controller: _amountController,
                         autofocus: false,
-                        keyboardType:
-                            const TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [_amountValidator],
                         decoration: InputDecoration(
                             fillColor: MyTheme.light_grey,
@@ -549,9 +558,10 @@ class _WalletState extends State<Wallet> {
                   height: 30,
                   color: const Color.fromRGBO(253, 253, 253, 1),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
-                      side:
-                          BorderSide(color: Theme.of(context).primaryColor, width: 1.0)),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                      side: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 1.0)),
                   child: Text(
                     AppLocalizations.of(context)!.close_ucf,
                     style: TextStyle(
@@ -573,7 +583,8 @@ class _WalletState extends State<Wallet> {
                     height: 30,
                     color: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.proceed_ucf,

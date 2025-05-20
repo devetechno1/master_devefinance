@@ -121,7 +121,7 @@ class AuthScreen {
               color: Theme.of(context).primaryColor,
               alignment: Alignment.topRight,
               child: Image.asset(
-               AppImages.backgroundOne,
+                AppImages.backgroundOne,
               ),
             ),
             // CustomScrollView
@@ -144,15 +144,17 @@ class AuthScreen {
                               height: 72,
                               decoration: BoxDecoration(
                                   color: MyTheme.white,
-                                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
-                              child: Image.asset(
-                                  AppImages.loginRegisteration),
+                                  borderRadius: BorderRadius.circular(
+                                      AppDimensions.radiusSmall)),
+                              child: Image.asset(AppImages.loginRegisteration),
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingLarge, top: AppDimensions.paddingsupsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingLarge,
+                            top: AppDimensions.paddingsupsmall),
                         child: Text(
                           headerText,
                           style: const TextStyle(

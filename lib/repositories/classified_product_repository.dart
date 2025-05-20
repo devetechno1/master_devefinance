@@ -42,7 +42,8 @@ class ClassifiedProductRepository {
   Future<ClassifiedAdsResponse> getOwnClassifiedProducts({
     page = 1,
   }) async {
-    final String url = ("${AppConfig.BASE_URL}/classified/own-products?page=$page");
+    final String url =
+        ("${AppConfig.BASE_URL}/classified/own-products?page=$page");
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
       "Content-Type": "application/json",
@@ -55,7 +56,8 @@ class ClassifiedProductRepository {
   Future<ClassifiedAdsResponse> getClassifiedOtherAds({
     required slug,
   }) async {
-    final String url = ("${AppConfig.BASE_URL}/classified/related-products/$slug");
+    final String url =
+        ("${AppConfig.BASE_URL}/classified/related-products/$slug");
 
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
@@ -66,7 +68,8 @@ class ClassifiedProductRepository {
 
   Future<ClassifiedProductDetailsResponse> getClassifiedProductsDetails(
       slug) async {
-    final String url = ("${AppConfig.BASE_URL}/classified/product-details/$slug");
+    final String url =
+        ("${AppConfig.BASE_URL}/classified/product-details/$slug");
 
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
@@ -123,7 +126,8 @@ class ClassifiedProductRepository {
 
   Future<CommonResponse> updateCustomerProductResponse(
       postBody, id, lang) async {
-    final String url = ("${AppConfig.BASE_URL}/classified/update/$id?lang=$lang");
+    final String url =
+        ("${AppConfig.BASE_URL}/classified/update/$id?lang=$lang");
 
     final response = await ApiRequest.post(
       url: url,

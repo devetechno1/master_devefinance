@@ -133,7 +133,8 @@ class _PurchasedDigitalProductsState extends State<PurchasedDigitalProducts> {
           crossAxisSpacing: 14,
           itemCount: _digitalProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 0.0, bottom: 10, left: 20, right: 20),
+          padding:
+              const EdgeInsets.only(top: 0.0, bottom: 10, left: 20, right: 20),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3

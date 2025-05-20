@@ -65,10 +65,11 @@ class _ShippingInfoState extends State<ShippingInfo> {
               false)) {
         shippingId = element.carriers!.data!.first.id;
       }
-      print("AppConfig.businessSettingsData.carrierBaseShipping{AppConfig.businessSettingsData.carrierBaseShipping}");
+      print(
+          "AppConfig.businessSettingsData.carrierBaseShipping{AppConfig.businessSettingsData.carrierBaseShipping}");
 
-      _sellerWiseShippingOption.add(
-          SellerWithShipping(element.ownerId, shippingOption, shippingId));
+      _sellerWiseShippingOption
+          .add(SellerWithShipping(element.ownerId, shippingOption, shippingId));
     });
     getSetShippingCost();
     setState(() {});
@@ -160,7 +161,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
     print(_sellerWiseShippingOptionErrors.length);
     print(jsonEncode(_sellerWiseShippingOption));
 
-    if (_sellerWiseShippingOptionErrors.isNotEmpty && AppConfig.businessSettingsData.carrierBaseShipping) {
+    if (_sellerWiseShippingOptionErrors.isNotEmpty &&
+        AppConfig.businessSettingsData.carrierBaseShipping) {
       ToastComponent.showDialog(
         LangText(context).local.please_choose_valid_info,
       );
@@ -518,13 +520,15 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   width: 75.0,
                   radius: const BorderRadius.only(
                       topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                      bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall)),
+                      bottomLeft:
+                          Radius.circular(AppDimensions.radiusaHalfsmall)),
                   url: _deliveryInfoList[sellerArrayIndex]
                       .carriers!
                       .data![carrierIndex]
                       .logo),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingsupsmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -543,7 +547,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+                      padding: const EdgeInsets.only(
+                          top: AppDimensions.paddingsupsmall),
                       child: Text(
                         _deliveryInfoList[sellerArrayIndex]
                                 .carriers!
@@ -603,7 +608,9 @@ class _ShippingInfoState extends State<ShippingInfo> {
             height: 16,
             width: 16,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),
@@ -681,7 +688,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
           const SizedBox(
             width: 14,
           ),
-          if (AppConfig.businessSettingsData.pickupPoint) buildPickUpPointOption(context, sellerIndex),
+          if (AppConfig.businessSettingsData.pickupPoint)
+            buildPickUpPointOption(context, sellerIndex),
         ],
       ),
     );
@@ -764,19 +772,19 @@ class _ShippingInfoState extends State<ShippingInfo> {
         child: Row(
           children: [
             Radio(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              fillColor: WidgetStateProperty.resolveWith((states) {
-                if (!states.contains(WidgetState.selected)) {
-                  return Theme.of(context).primaryColor;
-                }
-                return MyTheme.white;
-              }),
-              value: ShippingOption.HomeDelivery,
-              groupValue:
-                  _sellerWiseShippingOption[sellerIndex].shippingOption,
-              onChanged: (dynamic newOption) {
-                changeShippingOption(newOption, sellerIndex);
-            }),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                fillColor: WidgetStateProperty.resolveWith((states) {
+                  if (!states.contains(WidgetState.selected)) {
+                    return Theme.of(context).primaryColor;
+                  }
+                  return MyTheme.white;
+                }),
+                value: ShippingOption.HomeDelivery,
+                groupValue:
+                    _sellerWiseShippingOption[sellerIndex].shippingOption,
+                onChanged: (dynamic newOption) {
+                  changeShippingOption(newOption, sellerIndex);
+                }),
             Text(
               AppLocalizations.of(context)!.home_delivery_ucf,
               style: TextStyle(
@@ -925,7 +933,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingMedium),
+                padding:
+                    const EdgeInsets.only(top: AppDimensions.paddingMedium),
                 child: Text(
                   LangText(context).local.choose_delivery_ucf,
                   style: TextStyle(
@@ -976,7 +985,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
             aspectRatio: 1,
             child: ClipRRect(
               borderRadius: const BorderRadius.horizontal(
-                  left: Radius.circular(AppDimensions.radiusaHalfsmall), right: Radius.zero),
+                  left: Radius.circular(AppDimensions.radiusaHalfsmall),
+                  right: Radius.zero),
               child: FadeInImage.assetNetwork(
                 placeholder: AppImages.placeholder,
                 image: _deliveryInfoList[sellerIndex]
@@ -1008,30 +1018,29 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         fontWeight: FontWeight.w400),
                   ),
                 ),
-                
-                Builder(
-                  builder: (context) {
-                    String priceWithCurrency = SystemConfig.systemCurrency != null
-                          ? "${_deliveryInfoList[sellerIndex].cartItems![itemIndex].productPrice}"
-                              .replaceAll(
-                                  SystemConfig.systemCurrency!.code!,
-                                  SystemConfig.systemCurrency!.symbol!)
-                          : "${_deliveryInfoList[sellerIndex].cartItems![itemIndex].productPrice}";
-                    if(SystemConfig.systemCurrency?.symbol != null && !priceWithCurrency.contains("${SystemConfig.systemCurrency?.symbol}")){
-                      priceWithCurrency += " ${SystemConfig.systemCurrency!.symbol!}";
-                    }
-                    return Text(
-                      "$priceWithCurrency × ${_deliveryInfoList[sellerIndex].cartItems![itemIndex].productQuantity}",
-                      textAlign: TextAlign.left,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700),
-                    );
+                Builder(builder: (context) {
+                  String priceWithCurrency = SystemConfig.systemCurrency != null
+                      ? "${_deliveryInfoList[sellerIndex].cartItems![itemIndex].productPrice}"
+                          .replaceAll(SystemConfig.systemCurrency!.code!,
+                              SystemConfig.systemCurrency!.symbol!)
+                      : "${_deliveryInfoList[sellerIndex].cartItems![itemIndex].productPrice}";
+                  if (SystemConfig.systemCurrency?.symbol != null &&
+                      !priceWithCurrency
+                          .contains("${SystemConfig.systemCurrency?.symbol}")) {
+                    priceWithCurrency +=
+                        " ${SystemConfig.systemCurrency!.symbol!}";
                   }
-                ),
+                  return Text(
+                    "$priceWithCurrency × ${_deliveryInfoList[sellerIndex].cartItems![itemIndex].productQuantity}",
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  );
+                }),
               ],
             ),
           ),

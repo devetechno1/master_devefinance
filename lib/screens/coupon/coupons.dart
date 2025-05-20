@@ -44,7 +44,8 @@ class _CouponsState extends State<Coupons> {
   }
 
   fetchData() async {
-    final couponRes = await CouponRepository().getCouponResponseList(page: _page);
+    final couponRes =
+        await CouponRepository().getCouponResponseList(page: _page);
     setState(() {
       _couponsList.addAll(couponRes.data ?? []);
       _totalData = couponRes.meta?.total ?? 0;
@@ -161,13 +162,16 @@ class _CouponsState extends State<Coupons> {
       children: [
         Material(
           elevation: 0,
-          borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.RadiusExtraMedium)),
+          borderRadius: const BorderRadius.all(
+              Radius.circular(AppDimensions.RadiusExtraMedium)),
           child: Container(
             decoration: BoxDecoration(
               gradient: _selectGradient(index),
-              borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radius)),
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(AppDimensions.radius)),
             ),
-            padding: const EdgeInsets.only(left: 37, right: 25, top: 22, bottom: 1),
+            padding:
+                const EdgeInsets.only(left: 37, right: 25, top: 22, bottom: 1),
             height: 182,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,7 +289,8 @@ class _CouponsState extends State<Coupons> {
                 itemCount: products.length.clamp(0, 3),
                 itemBuilder: (context, i) {
                   return Padding(
-                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingsmall),
                       child:
                           // Image.network(
                           //   products[i].thumbnail_image!,
@@ -302,8 +307,9 @@ class _CouponsState extends State<Coupons> {
                                       products[i].thumbnail_image!),
                                   fit: BoxFit.cover,
                                 ),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(AppDimensions.radiusSmallExtra)),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(
+                                        AppDimensions.radiusSmallExtra)),
                               )));
                 },
               ),

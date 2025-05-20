@@ -36,10 +36,13 @@ class PiratedWidget extends StatelessWidget {
                     })),
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingMaxLarge, left: AppDimensions.paddingMaxLarge, right: AppDimensions.paddingMaxLarge),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingMaxLarge,
+                    left: AppDimensions.paddingMaxLarge,
+                    right: AppDimensions.paddingMaxLarge),
                 child: Text(
                   LangText(context).local.pirated_app,
-                  style:const TextStyle(color: Colors.white, fontSize: 18),
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),

@@ -22,7 +22,8 @@ class PasswordForget extends StatefulWidget {
 }
 
 class _PasswordForgetState extends State<PasswordForget> {
-  String _send_code_by = otp_addon_installed.$ ? "phone" : "email"; //phone or email
+  String _send_code_by =
+      otp_addon_installed.$ ? "phone" : "email"; //phone or email
   String? _phone = "";
   var countries_code = <String?>[];
   //controllers
@@ -92,7 +93,9 @@ class _PasswordForgetState extends State<PasswordForget> {
   Widget build(BuildContext context) {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
-        context, LangText(context).local.forget_password, buildBody(_screen_width, context));
+        context,
+        LangText(context).local.forget_password,
+        buildBody(_screen_width, context));
   }
 
   Column buildBody(double _screen_width, BuildContext context) {
@@ -108,18 +111,21 @@ class _PasswordForgetState extends State<PasswordForget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingsmallExtra),
                 child: Text(
                   _send_code_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
                       : AppLocalizations.of(context)!.phone_ucf,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               if (_send_code_by == "email")
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  padding:
+                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -154,7 +160,8 @@ class _PasswordForgetState extends State<PasswordForget> {
                 )
               else
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  padding:
+                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -163,12 +170,15 @@ class _PasswordForgetState extends State<PasswordForget> {
                         child: CustomInternationalPhoneNumberInput(
                           countries: countries_code,
                           hintText: LangText(context).local.phone_number_ucf,
-                          errorMessage: LangText(context).local.invalid_phone_number,
-                          initialValue: PhoneNumber(isoCode: AppConfig.default_country),
+                          errorMessage:
+                              LangText(context).local.invalid_phone_number,
+                          initialValue:
+                              PhoneNumber(isoCode: AppConfig.default_country),
                           onInputChanged: (PhoneNumber number) {
                             //print(number.phoneNumber);
                             setState(() {
-                              if(number.isoCode != null)  AppConfig.default_country = number.isoCode!;
+                              if (number.isoCode != null)
+                                AppConfig.default_country = number.isoCode!;
                               _phone = number.phoneNumber;
                             });
                           },
@@ -213,7 +223,8 @@ class _PasswordForgetState extends State<PasswordForget> {
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(top:  AppDimensions.paddingveryLarge),
+                padding:
+                    const EdgeInsets.only(top: AppDimensions.paddingveryLarge),
                 child: Container(
                   height: 45,
                   child: Btn.basic(

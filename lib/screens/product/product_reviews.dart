@@ -158,7 +158,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                     SliverList(
                       delegate: SliverChildListDelegate([
                         Padding(
-                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.all(
+                              AppDimensions.paddingDefualt),
                           child: buildProductReviewsList(),
                         ),
                         Container(
@@ -187,7 +188,8 @@ class _ProductReviewsState extends State<ProductReviews> {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
-          decoration: BoxDecoration(color: Colors.white54.withValues(alpha: 0.6)),
+          decoration:
+              BoxDecoration(color: Colors.white54.withValues(alpha: 0.6)),
           height: 120,
           //color: Colors.white,
           child: Padding(
@@ -223,7 +225,7 @@ class _ProductReviewsState extends State<ProductReviews> {
     );
   }
 
- Widget? buildProductReviewsList() {
+  Widget? buildProductReviewsList() {
     if (_isInitial && _reviewList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
@@ -267,13 +269,15 @@ class _ProductReviewsState extends State<ProductReviews> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 border: Border.all(
                     color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
                 //shape: BoxShape.rectangle,
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _reviewList[index].avatar,
@@ -286,7 +290,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                 Container(
                   width: 180,
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingDefualt),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -304,7 +309,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                               fontWeight: FontWeight.w600),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmallExtra),
                           child: Text(
                             _reviewList[index].time,
                             style: TextStyle(color: MyTheme.medium_grey),
@@ -318,8 +324,8 @@ class _ProductReviewsState extends State<ProductReviews> {
             ),
             const Spacer(),
             Padding(
-                padding:
-                    const EdgeInsets.only(top: 0.0, bottom: 0.0, left: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.only(
+                    top: 0.0, bottom: 0.0, left: AppDimensions.paddingDefualt),
                 child: Container(
                   child: RatingBar(
                     itemSize: 12.0,
@@ -411,7 +417,9 @@ class _ProductReviewsState extends State<ProductReviews> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsmall,
+              bottom: AppDimensions.paddingsmall),
           child: RatingBar.builder(
             itemSize: 20.0,
             initialRating: _my_rating,
@@ -465,7 +473,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                         Radius.circular(AppDimensions.radiusVeryLarge),
                       ),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0)),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16.0)),
               ),
             ),
             Padding(
@@ -477,12 +486,15 @@ class _ProductReviewsState extends State<ProductReviews> {
                 child: Container(
                   width: 40,
                   height: 40,
-                  margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 4.0, horizontal: 2.0),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusVeryLarge),
                     border: Border.all(
-                        color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
+                        color: const Color.fromRGBO(112, 112, 112, .3),
+                        width: 1),
                     //shape: BoxShape.rectangle,
                   ),
                   child: const Center(

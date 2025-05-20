@@ -19,9 +19,9 @@ class ApiRequest {
     if (headers != null) {
       headerMap.addAll(headers);
     }
-    if(kDebugMode) print("api request url: $url headers: $headerMap");
+    if (kDebugMode) print("api request url: $url headers: $headerMap");
     final response = await http.get(uri, headers: headerMap);
-    if(kDebugMode) log("api response url: $url response: ${response.body}");
+    if (kDebugMode) log("api response url: $url response: ${response.body}");
     return AIZApiResponse.check(response,
         middleware: middleware, groupMiddleWare: groupMiddleWare);
   }
@@ -38,9 +38,11 @@ class ApiRequest {
     if (headers != null) {
       headerMap.addAll(headers);
     }
-    if(kDebugMode) print("post api request url: $url headers: $headerMap body: $body");
+    if (kDebugMode)
+      print("post api request url: $url headers: $headerMap body: $body");
     final response = await http.post(uri, headers: headerMap, body: body);
-    if(kDebugMode) log("post api response url: $url response: ${response.body}");
+    if (kDebugMode)
+      log("post api response url: $url response: ${response.body}");
     return AIZApiResponse.check(response,
         middleware: middleware, groupMiddleWare: groupMiddleWare);
   }

@@ -23,7 +23,8 @@ class ConfirmDialog {
                 width: DeviceInfo(context).width! * 0.6,
                 child: Text(
                   message,
-                  style: const TextStyle(fontSize: 14, color: MyTheme.font_grey),
+                  style:
+                      const TextStyle(fontSize: 14, color: MyTheme.font_grey),
                 ),
               )
             ],

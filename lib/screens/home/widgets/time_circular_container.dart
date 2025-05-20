@@ -6,8 +6,7 @@ class TimeCircularContainer extends StatelessWidget {
     required this.currentValue,
     required this.totalValue,
     required this.timeText,
-     required this.timeType,
-
+    required this.timeType,
   });
 
   final int currentValue;
@@ -25,7 +24,8 @@ class TimeCircularContainer extends StatelessWidget {
             child: CircularProgressIndicator(
               value: currentValue / totalValue,
               backgroundColor: const Color.fromARGB(255, 240, 220, 220),
-              valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
               strokeWidth: 4.0,
               strokeCap: StrokeCap.round,
             ),
@@ -41,16 +41,22 @@ class TimeCircularContainer extends StatelessWidget {
               children: [
                 Text(
                   timeText,
-                  style:  TextStyle(
+                  style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 10.0,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-               // SizedBox(width: 12,),
-                Flexible(child: Padding(
+                // SizedBox(width: 12,),
+                Flexible(
+                    child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                  child: FittedBox(fit: BoxFit.scaleDown, child: Text(timeType, style: TextStyle(color:Theme.of(context).primaryColor, fontSize: 7))),
+                  child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(timeType,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 7))),
                 )),
               ],
             ),

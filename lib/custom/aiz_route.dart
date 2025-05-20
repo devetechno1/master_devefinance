@@ -12,9 +12,9 @@ import '../app_config.dart';
 
 class AIZRoute {
   static Otp otpRoute(BuildContext context) => Otp(
-    title: AppLocalizations.of(context)!.verifyYourAccount,
-    fromRegistration: false,
-  );
+        title: AppLocalizations.of(context)!.verifyYourAccount,
+        fromRegistration: false,
+      );
 
   static Future<T?> push<T extends Object?>(
       BuildContext context, Widget route) {
@@ -47,8 +47,9 @@ class AIZRoute {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final begin =
-            !(app_language_rtl.$!) ? const Offset(-1.0, 0.0) : const Offset(1.0, 0.0);
+        final begin = !(app_language_rtl.$!)
+            ? const Offset(-1.0, 0.0)
+            : const Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
 
@@ -86,8 +87,9 @@ class AIZRoute {
     return CustomTransitionPage(
       child: page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final begin =
-            !(app_language_rtl.$!) ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0);
+        final begin = !(app_language_rtl.$!)
+            ? const Offset(1.0, 0.0)
+            : const Offset(-1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
 
@@ -109,16 +111,17 @@ class AIZRoute {
     if (is_logged_in.$ &&
         mailVerifiedRoute &&
         SystemConfig.systemUser != null) {
-          final bool isMailVerified = SystemConfig.systemUser!.emailVerified ?? false;
+      final bool isMailVerified =
+          SystemConfig.systemUser!.emailVerified ?? false;
 
-          if(isMailVerified){
-            return false;
-          }else{
-            if(SystemConfig.systemUser!.phone != null){
-              if(!AppConfig.businessSettingsData.mustOtp) return false;
-            }
-            return true;
-          }
+      if (isMailVerified) {
+        return false;
+      } else {
+        if (SystemConfig.systemUser!.phone != null) {
+          if (!AppConfig.businessSettingsData.mustOtp) return false;
+        }
+        return true;
+      }
 
       // return !isMailVerified;
     }

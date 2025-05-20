@@ -22,7 +22,8 @@ class AuctionBiddedProducts extends StatefulWidget {
 }
 
 class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
-  final ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
+  final ScrollController _scrollController =
+      ScrollController(initialScrollOffset: 0);
   bool _isDataFetch = false;
   double mHeight = 0.0, mWidht = 0.0;
   int _page = 1;
@@ -214,7 +215,10 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: AppDimensions.paddingsmall),
+              padding: const EdgeInsets.only(
+                  top: AppDimensions.paddingsmall,
+                  bottom: AppDimensions.paddingsmall,
+                  left: AppDimensions.paddingsmall),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,7 +260,8 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingDefualt),
                             child: Text(convertPrice(myBid!),
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -278,7 +283,8 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingDefualt),
                             child: Text(convertPrice(highestBid!),
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -298,7 +304,8 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingDefualt),
                             child: Text(endDate!,
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -318,7 +325,8 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingDefualt),
                             child: TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor: MyTheme.noColor,

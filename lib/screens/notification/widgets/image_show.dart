@@ -50,7 +50,8 @@ class ImageShow extends StatelessWidget {
             width: 38.0,
             height: 40.0,
             fit: BoxFit.cover,
-            borderRadius: BorderRadius.circular(AppDimensions.radiusVeryVeryEtra)),
+            borderRadius:
+                BorderRadius.circular(AppDimensions.radiusVeryVeryEtra)),
       );
     }
 

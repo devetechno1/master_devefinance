@@ -48,7 +48,11 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
       scrolledUnderElevation: 0.0,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(app_language_rtl.$! ?  CupertinoIcons.arrow_right : CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
+          icon: Icon(
+              app_language_rtl.$!
+                  ? CupertinoIcons.arrow_right
+                  : CupertinoIcons.arrow_left,
+              color: MyTheme.dark_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -77,7 +81,8 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
 
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return Center(child: Text(LangText(context).local.error_loading_products));
+            return Center(
+                child: Text(LangText(context).local.error_loading_products));
           }
 
           // Safely check if data and products exist
@@ -96,8 +101,11 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
               crossAxisSpacing: 14,
               itemCount: products.length, // Fix length issue here
               shrinkWrap: true,
-              padding:
-                  const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+              padding: const EdgeInsets.only(
+                  top: AppDimensions.paddingLarge,
+                  bottom: AppDimensions.paddingsupsmall,
+                  left: 18,
+                  right: 18),
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 final product = products[index]; // Fix index issue here
@@ -193,7 +201,8 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       width: double.infinity,
                       child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image ?? AppImages.placeholder,
@@ -205,13 +214,15 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       Positioned(
                         bottom: 0,
                         child: Container(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 4),
                           decoration: const BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              topRight: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -315,10 +326,14 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       Container(
                         height: 20,
                         width: 48,
-                        margin: const EdgeInsets.only(top: AppDimensions.paddingsmall, right: AppDimensions.paddingsmall, bottom: 15),
+                        margin: const EdgeInsets.only(
+                            top: AppDimensions.paddingsmall,
+                            right: AppDimensions.paddingsmall,
+                            bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),

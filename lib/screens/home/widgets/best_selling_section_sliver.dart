@@ -12,12 +12,14 @@ class BestSellingSectionSliver extends StatelessWidget {
       child: ListenableBuilder(
           listenable: homeData,
           builder: (context, child) {
-            if (!homeData.isBestSellingProductInitial && homeData.bestSellingProductList.isEmpty) return const SizedBox();
+            if (!homeData.isBestSellingProductInitial &&
+                homeData.bestSellingProductList.isEmpty)
+              return const SizedBox();
             return CustomHorizontalProductsListSectionWidget(
               title: AppLocalizations.of(context)!.best_selling,
-              isProductInitial: homeData.isBestSellingProductInitial, 
-              productList: homeData.bestSellingProductList, 
-              numberOfTotalProducts: homeData.totalBestSellingProductData, 
+              isProductInitial: homeData.isBestSellingProductInitial,
+              productList: homeData.bestSellingProductList,
+              numberOfTotalProducts: homeData.totalBestSellingProductData,
               onArriveTheEndOfList: homeData.fetchBestSellingProducts,
             );
           }),

@@ -1,10 +1,8 @@
-
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_details.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart' as productMini;
-
-
+import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
+    as productMini;
 
 class CustomAuctionProductsListWidget extends StatelessWidget {
   final List<productMini.Product>? products;
@@ -17,7 +15,7 @@ class CustomAuctionProductsListWidget extends StatelessWidget {
       return const Center(
         child: Text(
           'No auction products available',
-       //   LangText(context).local.no_auction_products_available,
+          //   LangText(context).local.no_auction_products_available,
         ),
       );
     }

@@ -13,12 +13,13 @@ class FeaturedProductsListSliver extends StatelessWidget {
       child: ListenableBuilder(
           listenable: homeData,
           builder: (context, child) {
-            if (!homeData.isFeaturedProductInitial && homeData.featuredProductList.isEmpty) return const SizedBox();
+            if (!homeData.isFeaturedProductInitial &&
+                homeData.featuredProductList.isEmpty) return const SizedBox();
             return CustomHorizontalProductsListSectionWidget(
-              title: LangText(context).local.featured_products_ucf, 
-              isProductInitial: homeData.isFeaturedProductInitial, 
-              productList: homeData.featuredProductList, 
-              numberOfTotalProducts: homeData.totalFeaturedProductData, 
+              title: LangText(context).local.featured_products_ucf,
+              isProductInitial: homeData.isFeaturedProductInitial,
+              productList: homeData.featuredProductList,
+              numberOfTotalProducts: homeData.totalFeaturedProductData,
               onArriveTheEndOfList: homeData.fetchFeaturedProducts,
             );
           }),

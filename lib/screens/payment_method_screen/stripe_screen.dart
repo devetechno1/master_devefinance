@@ -150,7 +150,7 @@ class _StripeScreenState extends State<StripeScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     //print("init url");
     //print(initial_url);
 

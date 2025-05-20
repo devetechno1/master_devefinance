@@ -80,8 +80,11 @@ class _TodaysDealProductsState extends State<TodaysDealProducts> {
                 crossAxisSpacing: 14,
                 itemCount: productResponse!.products!.length,
                 shrinkWrap: true,
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ProductCard(

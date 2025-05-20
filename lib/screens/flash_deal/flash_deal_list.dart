@@ -25,7 +25,8 @@ class _FlashDealListState extends State<FlashDealList> {
   final List<CountdownTimerController> _timerControllerList = [];
 
   DateTime convertTimeStampToDateTime(int timeStamp) {
-    final dateToTimeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+    final dateToTimeStamp =
+        DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
     return dateToTimeStamp;
   }
 
@@ -182,7 +183,8 @@ class _FlashDealListState extends State<FlashDealList> {
                     //decoration: BoxDecorations.buildBoxDecoration_1(),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        borderRadius: BorderRadius.circular(
+                            AppDimensions.radiusaHalfsmall),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withValues(alpha: 0.16),
@@ -206,8 +208,8 @@ class _FlashDealListState extends State<FlashDealList> {
                             scrollDirection: Axis.horizontal,
                             physics: const BouncingScrollPhysics(),
                             child: Container(
-                              padding:
-                                  const EdgeInsetsDirectional.only(top: 0, start: 2, bottom: 17),
+                              padding: const EdgeInsetsDirectional.only(
+                                  top: 0, start: 2, bottom: 17),
                               width: 460,
                               child: Wrap(
                                 runSpacing: 10,
@@ -216,7 +218,6 @@ class _FlashDealListState extends State<FlashDealList> {
                                 runAlignment: WrapAlignment.spaceBetween,
                                 alignment: WrapAlignment.start,
                                 direction: Axis.vertical,
-                          
                                 children: List.generate(
                                   flashDealResponse.flashDeals![index].products!
                                       .products!.length,
@@ -265,7 +266,8 @@ class _FlashDealListState extends State<FlashDealList> {
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
                     child: Container(
-                      padding: const EdgeInsets.only(top: 0, left: 2, bottom: 16),
+                      padding:
+                          const EdgeInsets.only(top: 0, left: 2, bottom: 16),
                       width: 460,
                       child: Wrap(
                         //spacing: 10,
@@ -307,8 +309,8 @@ class _FlashDealListState extends State<FlashDealList> {
             width: 2,
           ),
           ClipRRect(
-            borderRadius:
-                BorderRadius.circular(AppDimensions.radiusSmallExtra), // Rounding the image corners
+            borderRadius: BorderRadius.circular(
+                AppDimensions.radiusSmallExtra), // Rounding the image corners
             child: Container(
               height: 46,
               width: 44,
@@ -324,7 +326,8 @@ class _FlashDealListState extends State<FlashDealList> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+            padding:
+                const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
             child: Text(
               convertPrice(flashDealResponse.flashDeals[flashDealIndex].products
                   .products[productIndex].price),
@@ -369,7 +372,8 @@ class _FlashDealListState extends State<FlashDealList> {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               child: ShimmerHelper().buildBasicShimmer(height: 15, width: 60))
         ],
       ),
@@ -566,7 +570,8 @@ class _FlashDealListState extends State<FlashDealList> {
                 children: [
                   Text(
                     LangText(context).local.shop_more_ucf,
-                    style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3)),
+                    style:
+                        const TextStyle(fontSize: 10, color: Color(0xffA8AFB3)),
                   ),
                   const SizedBox(
                     width: 3,

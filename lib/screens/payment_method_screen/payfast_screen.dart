@@ -16,12 +16,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../helpers/main_helpers.dart';
 
 class PayfastScreen extends StatefulWidget {
- final double? amount;
- final String payment_type;
- final String? payment_method_key;
- final String package_id;
- final int? orderId;
- const PayfastScreen(
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
+  final String package_id;
+  final int? orderId;
+  const PayfastScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -154,7 +154,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

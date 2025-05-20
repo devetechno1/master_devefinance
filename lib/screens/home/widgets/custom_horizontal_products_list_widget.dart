@@ -6,19 +6,18 @@ import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.d
 class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
   const CustomHorizontalProductsListSectionWidget({
     super.key,
-    required this.title, 
-    required this.isProductInitial, 
-    required this.productList, 
-    required this.numberOfTotalProducts, 
-    required this.onArriveTheEndOfList, 
-    this.priceTextStyle, 
+    required this.title,
+    required this.isProductInitial,
+    required this.productList,
+    required this.numberOfTotalProducts,
+    required this.onArriveTheEndOfList,
+    this.priceTextStyle,
     this.nameTextStyle,
   });
 
   final String title;
   final bool isProductInitial;
-  final List <Product> productList;
-  
+  final List<Product> productList;
 
   final int numberOfTotalProducts;
   final void Function() onArriveTheEndOfList;
@@ -26,11 +25,12 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
   final TextStyle? nameTextStyle;
   @override
   Widget build(BuildContext context) {
-    if(!isProductInitial && productList.isEmpty) return const SizedBox();
+    if (!isProductInitial && productList.isEmpty) return const SizedBox();
     return Container(
       height: 305,
       width: double.maxFinite,
-      margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 5),
+      margin:
+          const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 5),
       color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,9 +52,9 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
           ),
           Flexible(
             child: ProductHorizontalListWidget(
-              isProductInitial: isProductInitial, 
-              productList: productList, 
-              numberOfTotalProducts: numberOfTotalProducts ,
+              isProductInitial: isProductInitial,
+              productList: productList,
+              numberOfTotalProducts: numberOfTotalProducts,
               onArriveTheEndOfList: onArriveTheEndOfList,
               nameTextStyle: nameTextStyle,
               priceTextStyle: priceTextStyle,

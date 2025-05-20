@@ -22,6 +22,7 @@ import '../../custom/home_carousel_slider.dart';
 import '../../custom/pirated_widget.dart';
 import '../../other_config.dart';
 import '../../services/push_notification_service.dart';
+
 HomePresenter homeData = HomePresenter();
 
 class Home extends StatefulWidget {
@@ -41,11 +42,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
-      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.updateDeviceToken();
+      if (OtherConfig.USE_PUSH_NOTIFICATION)
+        PushNotificationService.updateDeviceToken();
       change();
     });
 
@@ -67,7 +68,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
@@ -78,7 +78,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: BuildAppBar(statusBarHeight: 34, context: context,),
+            appBar: BuildAppBar(
+              statusBarHeight: 34,
+              context: context,
+            ),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -120,7 +123,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               const SizedBox(height: 16),
 
                               Padding(
-                                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                                padding: const EdgeInsets.only(
+                                    bottom: AppDimensions.paddingDefualt),
                                 child: MenuItemList(),
                               ),
                               // SizedBox(height: 16),
@@ -134,17 +138,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           ),
 
                           //Featured Categories
-                  const CategoryList(),
+                          const CategoryList(),
 
                           if (homeData.isFlashDeal)
                             SliverList(
                                 delegate: SliverChildListDelegate([
                               InkWell(
-                                onTap: () => GoRouter.of(context).go('/flash-deals'),
+                                onTap: () =>
+                                    GoRouter.of(context).go('/flash-deals'),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
                                   child: Text(
-                                    AppLocalizations.of(context)!.flash_deals_ucf,
+                                    AppLocalizations.of(context)!
+                                        .flash_deals_ucf,
                                     style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700),
@@ -180,8 +187,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             delegate: SliverChildListDelegate([
                               SingleChildScrollView(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
@@ -300,7 +306,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //         "backgroundColor": const Color(0xffE9EAEB),
   //       },
   //   ];
-    
 
   //   if(menuItems.isEmpty) return const SizedBox();
 

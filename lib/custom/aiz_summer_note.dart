@@ -128,7 +128,8 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
       height: widget.height ?? MediaQuery.of(context).size.height,
       decoration: widget.decoration ??
           BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(AppDimensions.radiusSmallExtra)),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(AppDimensions.radiusSmallExtra)),
             border: Border.all(color: const Color(0xffececec), width: 1),
           ),
       child: Column(
@@ -139,7 +140,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
           Visibility(
             visible: widget.showBottomToolbar,
             child: Padding(
-              padding:const  EdgeInsets.all(AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
               child: Row(children: _generateBottomToolbar(context)),
             ),
           )
@@ -166,8 +167,9 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
       Expanded(
         child: GestureDetector(
           onTap: () async {
-            final ClipboardData data = await (Clipboard.getData(Clipboard.kTextPlain)
-                as FutureOr<ClipboardData>);
+            final ClipboardData data =
+                await (Clipboard.getData(Clipboard.kTextPlain)
+                    as FutureOr<ClipboardData>);
 
             final String txtIsi = data.text!
                 .replaceAll("'", '\\"')
@@ -200,10 +202,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
               onTap: () => _attach(context),
               child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.attach_file),
-                    Text('Attach')
-                  ]),
+                  children: <Widget>[Icon(Icons.attach_file), Text('Attach')]),
             ),
           ));
     }
@@ -271,7 +270,8 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
             size: 20,
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+            padding:
+                const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
             child: Text(
               title,
               style: const TextStyle(

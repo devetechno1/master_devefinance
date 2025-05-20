@@ -9,17 +9,18 @@ import '../../../data_model/brand_response.dart';
 
 class CustomBrandListWidget extends StatefulWidget {
   final HomePresenter homePresenter;
-    final bool showViewAllButton;
+  final bool showViewAllButton;
 
-
-  const CustomBrandListWidget({super.key, required this.homePresenter, required this.showViewAllButton});
+  const CustomBrandListWidget(
+      {super.key,
+      required this.homePresenter,
+      required this.showViewAllButton});
 
   @override
   State<CustomBrandListWidget> createState() => _CustomBrandListWidgetState();
 }
 
 class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
-
   @override
   Widget build(BuildContext context) {
     final List<Brands> brands = widget.homePresenter.brandsList;
@@ -45,7 +46,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
           itemBuilder: (context, index) {
             final Brands brand = brands[index];
 
-            if(showViewAll && index == 7){
+            if (showViewAll && index == 7) {
               return GestureDetector(
                 onTap: () {
                   context.pushNamed('Brands');
@@ -56,19 +57,24 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                       child: Stack(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusSmall),
                             child: Image.network(
                               brand.logo ?? '',
                               height: 60,
                               width: 60,
                               fit: BoxFit.contain,
-                              errorBuilder: (_, __, ___) => const Icon(Icons.image),
+                              errorBuilder: (_, __, ___) =>
+                                  const Icon(Icons.image),
                             ),
                           ),
                           Positioned.fill(
                             child: ColoredBox(
-                              color: Theme.of(context).primaryColor.withValues(alpha: 0.8),
-                              child: const Icon(Icons.more_horiz_outlined, color: Colors.white),
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withValues(alpha: 0.8),
+                              child: const Icon(Icons.more_horiz_outlined,
+                                  color: Colors.white),
                             ),
                           )
                         ],
@@ -76,9 +82,9 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      
                       AppLocalizations.of(context)!.view_all_ucf,
-                      style: const TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -96,7 +102,8 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
               child: Column(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusSmall),
                     child: Image.network(
                       brand.logo ?? '',
                       height: 60,
@@ -109,7 +116,9 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                   SizedBox(
                     child: Text(
                       brand.name ?? '',
-                      style: const TextStyle(fontSize: 12,),
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

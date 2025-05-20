@@ -218,7 +218,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             duration: const Duration(milliseconds: 400),
             decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall))
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusaHalfsmall))
                 .copyWith(
                     border: Border.all(
                         color: _selected_index == index
@@ -232,7 +233,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                       width: 50,
                       height: 50,
                       child: Padding(
-                          padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+                          padding: const EdgeInsets.all(
+                              AppDimensions.paddingDefualt),
                           child:
                               /*Image.asset(
                           _list[index].image,
@@ -249,7 +251,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmall),
                           child: Text(
                             "${_list[index].name} - ${_list[index].code} - ${_list[index].mobile_app_code}",
                             textAlign: TextAlign.left,
@@ -289,7 +292,9 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             height: 16,
             width: 16,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),

@@ -27,7 +27,8 @@ class InputDecorations {
   static InputDecoration buildInputDecoration_phone({hint_text = ""}) {
     return InputDecoration(
         hintText: hint_text,
-        hintStyle: const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+        hintStyle:
+            const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5),
           borderRadius: BorderRadius.only(
@@ -39,7 +40,8 @@ class InputDecorations {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
                 bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall))),
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt));
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingDefualt));
   }
 
   static InputDecoration buildInputDecoration_with_border(String hintText) {
@@ -49,7 +51,8 @@ class InputDecorations {
     );
     return InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+        hintStyle:
+            const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
         border: outlineInputBorder,
