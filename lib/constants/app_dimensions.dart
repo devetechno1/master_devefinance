@@ -28,4 +28,7 @@ abstract final class AppDimensions {
   static const double radiusVeryEtraLarge = 60;
   static const double radiusVeryEtra = 100;
   static const double radiusVeryVeryEtra = 116;
+  //constrained width
+  static const double constrainedBoxDefaultWidth = 500;
+
 }
