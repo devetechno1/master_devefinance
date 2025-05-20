@@ -26,6 +26,13 @@ class SlidersRepository {
         "App-Language": app_language.$!,
       },
     );
+    const String url1 = ("${AppConfig.BASE_URL}/banners-popup");
+    final response1 = await ApiRequest.get(
+      url: url1,
+      headers: {
+        "App-Language": app_language.$!,
+      },
+    );
     return sliderResponseFromJson(response.body);
   }
 
