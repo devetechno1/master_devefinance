@@ -486,7 +486,7 @@ class _AddressState extends State<Address> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingDefualt)
+              padding: const EdgeInsets.all(AppDimensions.paddingDefault)
                   .copyWith(bottom: AppDimensions.paddingsmall),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -977,7 +977,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1037,7 +1037,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1152,7 +1152,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -1468,7 +1468,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 55,
                   child: TextField(
@@ -1491,7 +1491,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1546,7 +1546,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1602,7 +1602,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -1666,7 +1666,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               ),
               Container(
                 margin:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius:
@@ -1718,7 +1718,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                 child: Container(
                   height: 40,
                   child: TextField(

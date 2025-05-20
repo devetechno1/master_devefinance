@@ -90,7 +90,7 @@ class _MessengerListState extends State<MessengerList> {
                     delegate: SliverChildListDelegate([
                       Padding(
                         padding:
-                            const EdgeInsets.all(AppDimensions.paddingDefualt),
+                            const EdgeInsets.all(AppDimensions.paddingDefault),
                         child: buildMessengerList(),
                       ),
                     ]),

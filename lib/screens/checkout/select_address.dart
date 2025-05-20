@@ -61,7 +61,7 @@ class _SelectAddressState extends State<SelectAddress> {
                         delegate: SliverChildListDelegate([
                       Padding(
                           padding: const EdgeInsets.all(
-                              AppDimensions.paddingDefualt),
+                              AppDimensions.paddingDefault),
                           child: buildShippingInfoList(
                               selectAddressProvider, context)),
                       buildAddOrEditAddress(context, selectAddressProvider),
@@ -209,7 +209,7 @@ class _SelectAddressState extends State<SelectAddress> {
         ),
         elevation: 0.0,
         child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+            padding: const EdgeInsets.all(AppDimensions.paddingDefault),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

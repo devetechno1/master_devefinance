@@ -124,7 +124,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: AppDimensions.paddingDefualt),
+                                    bottom: AppDimensions.paddingDefault),
                                 child: MenuItemList(),
                               ),
                               // SizedBox(height: 16),

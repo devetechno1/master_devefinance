@@ -261,7 +261,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: AppDimensions.paddingDefualt),
+                                bottom: AppDimensions.paddingDefault),
                             child: Text(convertPrice(myBid!),
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -284,7 +284,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: AppDimensions.paddingDefualt),
+                                bottom: AppDimensions.paddingDefault),
                             child: Text(convertPrice(highestBid!),
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -305,7 +305,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: AppDimensions.paddingDefualt),
+                                bottom: AppDimensions.paddingDefault),
                             child: Text(endDate!,
                                 style: const TextStyle(
                                     fontSize: 12, color: MyTheme.grey_153)),
@@ -326,7 +326,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: AppDimensions.paddingDefualt),
+                                bottom: AppDimensions.paddingDefault),
                             child: TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor: MyTheme.noColor,

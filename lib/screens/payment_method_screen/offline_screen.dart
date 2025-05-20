@@ -454,7 +454,7 @@ class _OfflineState extends State<OfflineScreen> {
                 const Spacer(),
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: AppDimensions.paddingDefualt),
+                      const EdgeInsets.only(top: AppDimensions.paddingDefault),
                   child: Container(
                     width: 120,
                     height: 36,

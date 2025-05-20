@@ -955,7 +955,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                             ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Text(
                           AppLocalizations.of(context)!.brands_ucf,
                           style: const TextStyle(
@@ -1041,8 +1041,8 @@ class _SearchWidgetState extends State<SearchWidget> {
   ListView buildFilterBrandsList() {
     return ListView(
       padding: const EdgeInsets.only(
-          top: AppDimensions.paddingDefualt,
-          bottom: AppDimensions.paddingDefualt),
+          top: AppDimensions.paddingDefault,
+          bottom: AppDimensions.paddingDefault),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
@@ -1074,8 +1074,8 @@ class _SearchWidgetState extends State<SearchWidget> {
   ListView buildFilterCategoryList() {
     return ListView(
       padding: const EdgeInsets.only(
-          top: AppDimensions.paddingDefualt,
-          bottom: AppDimensions.paddingDefualt),
+          top: AppDimensions.paddingDefault,
+          bottom: AppDimensions.paddingDefault),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[

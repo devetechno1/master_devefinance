@@ -362,7 +362,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingDefualt),
+                              bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 40,
                             child: TextField(
@@ -407,7 +407,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingDefualt),
+                              bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 55,
                             child: TextField(

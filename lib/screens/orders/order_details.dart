@@ -386,7 +386,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 55,
                           child: TextField(

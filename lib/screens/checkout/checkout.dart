@@ -658,7 +658,7 @@ class _CheckoutState extends State<Checkout> {
                       [
                         Padding(
                           padding: const EdgeInsets.all(
-                              AppDimensions.paddingDefualt),
+                              AppDimensions.paddingDefault),
                           child: buildPaymentMethodList(),
                         ),
                         Container(
@@ -688,7 +688,7 @@ class _CheckoutState extends State<Checkout> {
                       //color: Colors.white,
                       child: Padding(
                         padding:
-                            const EdgeInsets.all(AppDimensions.paddingDefualt),
+                            const EdgeInsets.all(AppDimensions.paddingDefault),
                         child: Column(
                           children: [
                             widget.paymentFor == PaymentFor.Order
@@ -918,7 +918,7 @@ class _CheckoutState extends State<Checkout> {
                       height: 63,
                       child: Padding(
                           padding: const EdgeInsets.all(
-                              AppDimensions.paddingDefualt),
+                              AppDimensions.paddingDefault),
                           child:
                               /*Image.asset(
                           _paymentTypeList[index].image,
@@ -1112,7 +1112,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       contentPadding:
-          const EdgeInsets.all(2).copyWith(top: AppDimensions.paddingDefualt),
+          const EdgeInsets.all(2).copyWith(top: AppDimensions.paddingDefault),
       content: CheckoutDetails(
           showTotal: true,
           subTotalString: _subTotalString,

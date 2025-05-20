@@ -598,7 +598,7 @@ class _ChatState extends State<Chat> {
               )),
           Padding(
             padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
             child: Text(
               " " + _list[index].message.toString(),
               style: TextStyle(
@@ -763,7 +763,7 @@ class _ChatState extends State<Chat> {
                 )),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Text(
                 "    ",
                 style: TextStyle(

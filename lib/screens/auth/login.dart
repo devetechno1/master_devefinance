@@ -660,7 +660,7 @@ class _LoginState extends State<Login> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingDefualt),
+                              bottom: AppDimensions.paddingDefault),
                           child: Visibility(
                             visible: AppConfig
                                 .businessSettingsData.allowFacebookLogin,
@@ -677,7 +677,7 @@ class _LoginState extends State<Login> {
                         ),
                         // if (AppConfig.businessSettingsData.allow_twitter_login.$)
                         //   Padding(
-                        //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                        //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                         //     child: InkWell(
                         //       onTap: () {
                         //         onPressedTwitterLogin();
@@ -690,7 +690,7 @@ class _LoginState extends State<Login> {
                         //   ),
                         /* if (Platform.isIOS)
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
                             // visible: true,
                             child: A(
                               onTap: () async {

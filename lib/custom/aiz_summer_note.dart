@@ -140,7 +140,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
           Visibility(
             visible: widget.showBottomToolbar,
             child: Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingDefualt),
+              padding: const EdgeInsets.all(AppDimensions.paddingDefault),
               child: Row(children: _generateBottomToolbar(context)),
             ),
           )

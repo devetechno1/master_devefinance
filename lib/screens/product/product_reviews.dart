@@ -159,7 +159,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                       delegate: SliverChildListDelegate([
                         Padding(
                           padding: const EdgeInsets.all(
-                              AppDimensions.paddingDefualt),
+                              AppDimensions.paddingDefault),
                           child: buildProductReviewsList(),
                         ),
                         Container(
@@ -291,7 +291,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                   width: 180,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingDefualt),
+                        bottom: AppDimensions.paddingDefault),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -325,7 +325,7 @@ class _ProductReviewsState extends State<ProductReviews> {
             const Spacer(),
             Padding(
                 padding: const EdgeInsets.only(
-                    top: 0.0, bottom: 0.0, left: AppDimensions.paddingDefualt),
+                    top: 0.0, bottom: 0.0, left: AppDimensions.paddingDefault),
                 child: Container(
                   child: RatingBar(
                     itemSize: 12.0,

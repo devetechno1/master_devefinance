@@ -167,7 +167,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: _verify_by == "email"
@@ -353,7 +353,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: Text(LangText(context).local.congratulations_ucf,
@@ -365,7 +365,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                   width: _screen_width * (3 / 4),
                   child: Text(

@@ -598,7 +598,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -665,7 +665,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -732,7 +732,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TextField(
@@ -886,7 +886,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 55,
                           child: TextField(
@@ -911,7 +911,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -957,7 +957,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -1008,7 +1008,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TypeAheadField(
@@ -1063,7 +1063,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefualt),
+                            bottom: AppDimensions.paddingDefault),
                         child: Container(
                           height: 40,
                           child: TextField(

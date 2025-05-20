@@ -614,7 +614,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingDefualt),
+                              bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 40,
                             child: TextField(
@@ -659,7 +659,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingDefualt),
+                              bottom: AppDimensions.paddingDefault),
                           child: Container(
                             height: 55,
                             child: TextField(
@@ -1045,7 +1045,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(
-                                AppDimensions.paddingDefualt),
+                                AppDimensions.paddingDefault),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

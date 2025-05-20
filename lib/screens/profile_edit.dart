@@ -416,8 +416,8 @@ class _ProfileEditState extends State<ProfileEdit> {
       padding: const EdgeInsets.only(
           top: AppDimensions.paddingsmall,
           bottom: AppDimensions.paddingsmall,
-          left: AppDimensions.paddingDefualt,
-          right: AppDimensions.paddingDefualt),
+          left: AppDimensions.paddingDefault,
+          right: AppDimensions.paddingDefault),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

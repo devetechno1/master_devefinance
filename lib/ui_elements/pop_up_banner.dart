@@ -56,9 +56,9 @@ class PopupBannerDialog extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppDimensions.paddingDefualt),
+              const SizedBox(height: AppDimensions.paddingDefault),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault),
                 child: Text(
                   popupBannerModel.title ?? '',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -68,16 +68,16 @@ class PopupBannerDialog extends StatelessWidget {
               ),
               const SizedBox(height: AppDimensions.paddingsmall),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt),
+                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault),
                 child: Text(
                   popupBannerModel.summary ?? '',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
-              const SizedBox(height: AppDimensions.paddingDefualt),
+              const SizedBox(height: AppDimensions.paddingDefault),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefualt, vertical: AppDimensions.paddingsupsmall),
+                      const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault, vertical: AppDimensions.paddingsupsmall),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
