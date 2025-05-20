@@ -14,13 +14,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OnlinePay extends StatefulWidget {
-final  String? title;
-final  double? amount;
- final String payment_type;
- final String? payment_method_key;
+  final String? title;
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
   final package_id;
- final int? orderId;
-const  OnlinePay(
+  final int? orderId;
+  const OnlinePay(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,

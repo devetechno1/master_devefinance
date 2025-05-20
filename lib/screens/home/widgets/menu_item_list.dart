@@ -61,62 +61,62 @@ class MenuItemList extends StatelessWidget {
           backgroundColor: const Color(0xffE9EAEB),
         ),
     ];
-    if(menuItems.isEmpty) return const SizedBox();
+    if (menuItems.isEmpty) return const SizedBox();
 
-return Container(
-  height: 40,
-  child: ListView.builder(
-    scrollDirection: Axis.horizontal,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    itemCount: menuItems.length,
-    itemBuilder: (context, index) {
-      final item = menuItems[index];
+    return Container(
+      height: 40,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        itemCount: menuItems.length,
+        itemBuilder: (context, index) {
+          final item = menuItems[index];
 
-      return GestureDetector(
-        onTap: item.onTap,
-        child: Container(
-          margin: const EdgeInsetsDirectional.only(start: 8),
-          height: 40,
-          width: 106,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
-            color: item.backgroundColor,
-          ),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
-                  child: Container(
-                    height: 16,
-                    width: 16,
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      item.image,
-                      color: item.textColor,
+          return GestureDetector(
+            onTap: item.onTap,
+            child: Container(
+              margin: const EdgeInsetsDirectional.only(start: 8),
+              height: 40,
+              width: 106,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                color: item.backgroundColor,
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+                      child: Container(
+                        height: 16,
+                        width: 16,
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          item.image,
+                          color: item.textColor,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    item.title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: item.textColor,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 10,
+                    Flexible(
+                      child: Text(
+                        item.title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: item.textColor,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      );
-    },
-  ),
-);
-
+          );
+        },
+      ),
+    );
   }
 }

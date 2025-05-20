@@ -124,7 +124,9 @@ class CategoryItemCardWidget extends StatelessWidget {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), color: Colors.white),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusNormal),
+                  color: Colors.white),
               width: itemWidth,
               height: itemWidth,
               child: ClipRRect(

@@ -10,23 +10,23 @@ class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static Future<void> handleUrls(String? url, [BuildContext? context]) async {
-    if(url?.isNotEmpty != true) return;
+    if (url?.isNotEmpty != true) return;
     context ??= OneContext().context!;
     final Uri? uri = Uri.tryParse(url ?? '');
     try {
-      if(uri?.hasAbsolutePath ?? false){
-        if(uri?.host ==  AppConfig.DOMAIN_PATH){
+      if (uri?.hasAbsolutePath ?? false) {
+        if (uri?.host == AppConfig.DOMAIN_PATH) {
           context.push(uri!.path);
-        }else{
+        } else {
           await launchUrl(uri!);
         }
-      }else{
+      } else {
         throw AppLocalizations.of(context)!.invalidURL;
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar( content: Text(e.toString())));      
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
-
   }
 
 /*

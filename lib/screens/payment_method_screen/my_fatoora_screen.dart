@@ -143,7 +143,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     //print("init url");
     //print(initial_url);
 
@@ -184,7 +184,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_my_fatoora,
-        style:TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

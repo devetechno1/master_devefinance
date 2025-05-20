@@ -9,8 +9,8 @@ class Country {
   final String? name;
 
   Country({this.id, this.name});
-  @override String toString() => '$name';
-
+  @override
+  String toString() => '$name';
 }
 
 List<Country> countryList = [

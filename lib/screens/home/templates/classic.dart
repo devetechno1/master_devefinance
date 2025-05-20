@@ -16,7 +16,9 @@ import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
+import '../../../repositories/pop_up_repositry.dart';
 import '../../../services/push_notification_service.dart';
+import '../../../ui_elements/pop_up_banner.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/flash_sale.dart';
@@ -37,14 +39,20 @@ class ClassicScreen extends StatefulWidget {
   _ClassicScreenState createState() => _ClassicScreenState();
 }
 
-class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateMixin {
+class _ClassicScreenState extends State<ClassicScreen>
+    with TickerProviderStateMixin {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
-      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.updateDeviceToken();
+      if (OtherConfig.USE_PUSH_NOTIFICATION)
+        PushNotificationService.updateDeviceToken();
       change();
     });
     super.initState();
+    Future.delayed(const Duration(seconds: 1), () {
+      showPopupBanner(context);
+      fetchBannerpopupData();
+    });
   }
 
   void change() {
@@ -66,10 +74,11 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
         return widget.go_back;
       },
       child: Directionality(
-        textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+        textDirection:
+            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-          floatingActionButton: whatsappFloatingButtonWidget,
+            floatingActionButton: whatsappFloatingButtonWidget,
             appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
@@ -90,34 +99,35 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                         slivers: <Widget>[
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
+                              AppConfig.purchase_code == ""
+                                  ? PiratedWidget(homeData: homeData)
+                                  : const SizedBox(),
                               const SizedBox(height: 10),
 
                               // Header Banner
-                              HomeCarouselSlider(homeData: homeData, context: context),
+                              HomeCarouselSlider(
+                                  homeData: homeData, context: context),
                               const SizedBox(height: 16),
 
-                        const FlashSale(iscircle: true),                          
+                              const FlashSale(iscircle: true),
                             ]),
-                          ),                      
-                            //move banner 
-                          SliverList(
-                            delegate: SliverChildListDelegate(
-                              [
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                //   child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                                // ),
-                                TodaysDealProductsWidget(homePresenter: homeData,),
-                              ]
-                            ),
                           ),
-                              //Featured category-----------------------
-                            const CategoryList(),
-                       
-                            
-                          
-                            //BannerList---------------------                            
+                          //move banner
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              // Padding(
+                              //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              //   child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
+                              // ),
+                              TodaysDealProductsWidget(
+                                homePresenter: homeData,
+                              ),
+                            ]),
+                          ),
+                          //Featured category-----------------------
+                          const CategoryList(),
+
+                          //BannerList---------------------
 
                           SliverToBoxAdapter(
                             child: HomeBannersList(
@@ -125,44 +135,52 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
                               isBannersInitial: homeData.isBannerOneInitial,
                             ),
                           ),
-                            //featuredProducts-----------------------------   
+                          //featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
-                          //BannerList---------------------                            
-                            SliverToBoxAdapter(
-                              child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
-                              ),
+                          //BannerList---------------------
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerTwoImageList,
+                              isBannersInitial: homeData.isBannerTwoInitial,
                             ),
+                          ),
 
                           //Best Selling-------------------
-                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                            const BestSellingSectionSliver(),
-                          //newProducts-----------------------------                            
-                            const NewProductsListSliver(),
-                          //BannerList---------------------                            
-                            SliverToBoxAdapter(
-                              child: HomeBannersList(
-                                bannersImagesList: homeData.bannerThreeImageList,
-                                isBannersInitial: homeData.isBannerThreeInitial,
-                              ),
+                          // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
+                          const BestSellingSectionSliver(),
+                          //newProducts-----------------------------
+                          const NewProductsListSliver(),
+                          //BannerList---------------------
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerThreeImageList,
+                              isBannersInitial: homeData.isBannerThreeInitial,
                             ),
-
+                          ),
 
                           //auction products----------------------------
-                      AuctionProductsSectionSliver(homeData: homeData,),
+                          AuctionProductsSectionSliver(
+                            homeData: homeData,
+                          ),
                           //Brand List ---------------------------
-                          if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                          BrandListSectionSliver(homeData: homeData,),
+                          if (homeData.isBrandsInitial ||
+                              homeData.brandsList.isNotEmpty)
+                            BrandListSectionSliver(
+                              homeData: homeData,
+                            ),
                           //all products --------------------------
-                          AllProducts(homeData: homeData,),
+                          AllProducts(
+                            homeData: homeData,
+                          ),
+
                           ///
                         ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child: ProductLoadingcontainer(context: context, homeData: homeData),
+                      child: ProductLoadingcontainer(
+                          context: context, homeData: homeData),
                     ),
                   ],
                 );
@@ -173,8 +191,6 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
       ),
     );
   }
-
-
 
   // AppBar buildAppBar(double statusBarHeight, BuildContext context) {
   //   return AppBar(
@@ -194,6 +210,4 @@ class _ClassicScreenState extends State<ClassicScreen> with TickerProviderStateM
   //     ),
   //   );
   // }
-
-
-  }
+}

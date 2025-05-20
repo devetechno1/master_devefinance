@@ -15,12 +15,12 @@ import '../../helpers/shared_value_helper.dart';
 import '../profile.dart';
 
 class BkashScreen extends StatefulWidget {
-final  double? amount;
-final  String payment_type;
- final  String? payment_method_key;
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
   final package_id;
-final  int? orderId;
- const BkashScreen(
+  final int? orderId;
+  const BkashScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -265,7 +265,7 @@ class _BkashScreenState extends State<BkashScreen> {
   //   }
   // }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {
@@ -309,7 +309,7 @@ class _BkashScreenState extends State<BkashScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_bkash,
-        style:TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

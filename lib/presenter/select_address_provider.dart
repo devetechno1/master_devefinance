@@ -28,7 +28,7 @@ class SelectAddressProvider with ChangeNotifier {
     super.dispose();
   }
 
-  Future<void> fetchAll(BuildContext context) async{
+  Future<void> fetchAll(BuildContext context) async {
     if (is_logged_in.$ == true) {
       await fetchShippingAddressList(context);
     }

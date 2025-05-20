@@ -89,7 +89,11 @@ class _LastViewProductState extends State<LastViewProduct> {
           crossAxisSpacing: 14,
           itemCount: _lastViewProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsupsmall,
+              bottom: AppDimensions.paddingsupsmall,
+              left: 18,
+              right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3

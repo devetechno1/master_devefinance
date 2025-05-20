@@ -89,7 +89,8 @@ class _MessengerListState extends State<MessengerList> {
                   SliverList(
                     delegate: SliverChildListDelegate([
                       Padding(
-                        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
+                        padding:
+                            const EdgeInsets.all(AppDimensions.paddingDefualt),
                         child: buildMessengerList(),
                       ),
                     ]),
@@ -152,7 +153,7 @@ class _MessengerListState extends State<MessengerList> {
         child: ListView.builder(
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-         // padding: const EdgeInsets.all(0.0),
+          // padding: const EdgeInsets.all(0.0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -191,13 +192,15 @@ class _MessengerListState extends State<MessengerList> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusVeryLarge),
               border: Border.all(
                   color: const Color.fromRGBO(112, 112, 112, .3), width: 1),
               //shape: BoxShape.rectangle,
             ),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusVeryLarge),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _list[index].shop_logo,

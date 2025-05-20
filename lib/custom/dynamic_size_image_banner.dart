@@ -13,7 +13,7 @@ class DynamicSizeImageBanner extends StatefulWidget {
   const DynamicSizeImageBanner({
     Key? key,
     required this.urlToOpen,
-    required this.photo, 
+    required this.photo,
     this.radius = 0,
   }) : super(key: key);
 
@@ -40,9 +40,10 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
       }),
     );
   }
+
   @override
   Widget build(BuildContext context) {
-     if (widget.photo == null || widget.photo!.isEmpty) {
+    if (widget.photo == null || widget.photo!.isEmpty) {
       return const SizedBox();
     }
     return InkWell(
@@ -63,7 +64,11 @@ class LoadingImageBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 20),
+      padding: const EdgeInsets.only(
+          left: AppDimensions.paddingMedium,
+          right: AppDimensions.paddingMedium,
+          top: 10,
+          bottom: 20),
       child: ShimmerHelper().buildBasicShimmer(height: 120),
     );
   }

@@ -102,7 +102,8 @@ class _PurchasedDigitalProductCardState
               margin: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
                 color: const Color(0xffE5411C),
-                borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusSmallExtra),
               ),
               child: Center(
                 child: Text(

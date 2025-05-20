@@ -37,7 +37,11 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
       // centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(app_language_rtl.$! ?  CupertinoIcons.arrow_right : CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
+          icon: Icon(
+              app_language_rtl.$!
+                  ? CupertinoIcons.arrow_right
+                  : CupertinoIcons.arrow_left,
+              color: MyTheme.dark_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -72,8 +76,11 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
                 crossAxisSpacing: 14,
                 itemCount: productResponse!.products!.length,
                 shrinkWrap: true,
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   // 3

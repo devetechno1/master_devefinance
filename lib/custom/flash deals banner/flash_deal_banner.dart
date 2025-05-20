@@ -22,16 +22,19 @@ class FlashDealBanner extends StatelessWidget {
     if (homeData == null) {
       return Container(
         height: 100,
-        child: Center(child: Text(LangText(context).local.no_data_is_available)),
+        child:
+            Center(child: Text(LangText(context).local.no_data_is_available)),
       );
     }
 
     // When data is loading and no images are available
-    if (homeData!.isFlashDealInitial &&
-        homeData!.banners.isEmpty) {
+    if (homeData!.isFlashDealInitial && homeData!.banners.isEmpty) {
       return Padding(
-        padding:
-            const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 20),
+        padding: const EdgeInsets.only(
+            left: AppDimensions.paddingMedium,
+            right: AppDimensions.paddingMedium,
+            top: 10,
+            bottom: 20),
         child: ShimmerHelper().buildBasicShimmer(height: 120),
       );
     }
@@ -55,8 +58,9 @@ class FlashDealBanner extends StatelessWidget {
           return Builder(
             builder: (BuildContext context) {
               return Padding(
-                padding: const EdgeInsetsDirectional.only(start: 12, bottom: 10),
-                child: FlashBannerWidget(bannerLink: i.banner,slug: i.slug),
+                padding:
+                    const EdgeInsetsDirectional.only(start: 12, bottom: 10),
+                child: FlashBannerWidget(bannerLink: i.banner, slug: i.slug),
               );
             },
           );
@@ -65,8 +69,7 @@ class FlashDealBanner extends StatelessWidget {
     }
 
     // When images are not found and loading is complete
-    else if (!homeData!.isFlashDealInitial &&
-        homeData!.banners.isEmpty) {
+    else if (!homeData!.isFlashDealInitial && homeData!.banners.isEmpty) {
       return Container(
         height: 100,
         child: Center(
@@ -87,22 +90,21 @@ class FlashDealBanner extends StatelessWidget {
 
 class FlashBannerWidget extends StatelessWidget {
   const FlashBannerWidget({
-    super.key, 
-    required this.bannerLink, 
-    required this.slug, 
+    super.key,
+    required this.bannerLink,
+    required this.slug,
   });
   final String? bannerLink;
   final String? slug;
 
   @override
   Widget build(BuildContext context) {
- 
     return DynamicSizeImageBanner(
       urlToOpen: "${AppConfig.RAW_BASE_URL}/flash-deal/$slug",
       photo: bannerLink,
       radius: 10,
     );
-    
+
     // return Container(
     //   height: size,
     //   width: size,

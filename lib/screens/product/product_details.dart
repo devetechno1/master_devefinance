@@ -80,7 +80,8 @@ class _ProductDetailsState extends State<ProductDetails>
   double webViewHeight = 50.0;
   late double initHeight = webViewHeight;
 
-  final CarouselSliderController _carouselController = CarouselSliderController();
+  final CarouselSliderController _carouselController =
+      CarouselSliderController();
   late BuildContext loadingcontext;
 
   //init values
@@ -110,19 +111,22 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   void initState() {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          controller.runJavaScriptReturningResult("document.getElementById('scaled-frame').clientHeight").then(
-            (value) {
-              initHeight = double.parse(value.toString());
-              if(webViewHeight < initHeight){
-                webViewHeight = initHeight;
-              }else{
-                initHeight = webViewHeight;
-              }
-              setState(() {});
-            },
-          );
-        });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller
+          .runJavaScriptReturningResult(
+              "document.getElementById('scaled-frame').clientHeight")
+          .then(
+        (value) {
+          initHeight = double.parse(value.toString());
+          if (webViewHeight < initHeight) {
+            webViewHeight = initHeight;
+          } else {
+            initHeight = webViewHeight;
+          }
+          setState(() {});
+        },
+      );
+    });
     quantityText.text = "${_quantity ?? 0}";
     controller;
     _ColorAnimationController =
@@ -391,7 +395,8 @@ class _ProductDetailsState extends State<ProductDetails>
     addToCart(mode: "buy_now", context: context);
   }
 
-  Future<void> addToCart({mode, required BuildContext context, snackbar = null}) async {
+  Future<void> addToCart(
+      {mode, required BuildContext context, snackbar = null}) async {
     // if (is_logged_in.$ == false) {
     //   // ToastComponent.showDialog(AppLocalizations.of(context).common_login_warning, context,
     //   //     gravity: Toast.center, duration: Toast.lengthLong);
@@ -471,15 +476,17 @@ class _ProductDetailsState extends State<ProductDetails>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
                           color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
-                              side:
-                                  const BorderSide(color: Colors.black, width: 1.0)),
+                              borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusSmall),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1.0)),
                           child: Text(
                             AppLocalizations.of(context)!.copy_product_link_ucf,
                             style: TextStyle(
@@ -505,7 +512,8 @@ class _ProductDetailsState extends State<ProductDetails>
                       ),
                       _showCopied
                           ? Padding(
-                              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                              padding: const EdgeInsets.only(
+                                  bottom: AppDimensions.paddingsmall),
                               child: Text(
                                 AppLocalizations.of(context)!.copied_ucf,
                                 style: TextStyle(
@@ -514,22 +522,28 @@ class _ProductDetailsState extends State<ProductDetails>
                             )
                           : Container(),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
-                              side:
-                                  const BorderSide(color: Colors.black, width: 1.0)),
+                              borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusSmall),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1.0)),
                           child: Text(
                             AppLocalizations.of(context)!.share_options_ucf,
                             style: const TextStyle(color: Colors.white),
                           ),
-                          onPressed: () async{
-
-                            Share.share(_productDetails!.link!,sharePositionOrigin: Rect.fromLTWH(0, 0, MediaQuery.sizeOf(context).width, MediaQuery.sizeOf(context).height / 1.92));
+                          onPressed: () async {
+                            Share.share(_productDetails!.link!,
+                                sharePositionOrigin: Rect.fromLTWH(
+                                    0,
+                                    0,
+                                    MediaQuery.sizeOf(context).width,
+                                    MediaQuery.sizeOf(context).height / 1.92));
                           },
                         ),
                       ),
@@ -543,14 +557,16 @@ class _ProductDetailsState extends State<ProductDetails>
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
-                          ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                          ? const EdgeInsets.only(
+                              left: AppDimensions.paddingsmall)
                           : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
                         color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusSmall),
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
@@ -590,13 +606,15 @@ class _ProductDetailsState extends State<ProductDetails>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmall),
                           child: Text(AppLocalizations.of(context)!.title_ucf,
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingDefualt),
                           child: Container(
                             height: 40,
                             child: TextField(
@@ -613,7 +631,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 0.5),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(AppDimensions.radiusSmall),
+                                      Radius.circular(
+                                          AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   focusedBorder: const OutlineInputBorder(
@@ -621,23 +640,26 @@ class _ProductDetailsState extends State<ProductDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 1.0),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(AppDimensions.radiusSmall),
+                                      Radius.circular(
+                                          AppDimensions.radiusSmall),
                                     ),
                                   ),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(horizontal: 8.0)),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0)),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmall),
                           child: Text(
                               "${AppLocalizations.of(context)!.message_ucf} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingDefualt),
                           child: Container(
                             height: 55,
                             child: TextField(
@@ -656,7 +678,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 0.5),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(AppDimensions.radiusSmall),
+                                      Radius.circular(
+                                          AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   focusedBorder: const OutlineInputBorder(
@@ -664,7 +687,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                         color: MyTheme.textfield_grey,
                                         width: 1.0),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(AppDimensions.radiusSmall),
+                                      Radius.circular(
+                                          AppDimensions.radiusSmall),
                                     ),
                                   ),
                                   contentPadding: const EdgeInsets.only(
@@ -690,7 +714,8 @@ class _ProductDetailsState extends State<ProductDetails>
                           height: 30,
                           color: const Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                              borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusSmall),
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
@@ -714,7 +739,8 @@ class _ProductDetailsState extends State<ProductDetails>
                           height: 30,
                           color: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                              borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusSmall),
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
@@ -818,7 +844,8 @@ class _ProductDetailsState extends State<ProductDetails>
       action: SnackBarAction(
         label: AppLocalizations.of(context)!.show_cart_all_capital,
         onPressed: () {
-          Navigator.push(OneContext().context!, MaterialPageRoute(builder: (context) {
+          Navigator.push(OneContext().context!,
+              MaterialPageRoute(builder: (context) {
             return const Cart(has_bottomnav: false);
           })).then((value) {
             onPopped(value);
@@ -856,7 +883,8 @@ class _ProductDetailsState extends State<ProductDetails>
                       opacity: _scrollPosition > 250 ? 1 : 0,
                       duration: const Duration(milliseconds: 200),
                       child: Container(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmall),
                           width: DeviceInfo(context).width! / 2,
                           child: Text(
                             "${_productDetails != null ? _productDetails!.name : ''}",
@@ -892,7 +920,9 @@ class _ProductDetailsState extends State<ProductDetails>
                                     height: 36,
                                     child: Center(
                                       child: Icon(
-                                        app_language_rtl.$! ? CupertinoIcons.arrow_right : CupertinoIcons.arrow_left,
+                                        app_language_rtl.$!
+                                            ? CupertinoIcons.arrow_right
+                                            : CupertinoIcons.arrow_left,
                                         color: MyTheme.dark_font_grey,
                                         size: 20,
                                       ),
@@ -918,7 +948,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                       .buildCircularButtonDecoration_for_productDetails(),
                                   width: 32,
                                   height: 32,
-                                  padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+                                  padding: const EdgeInsets.all(
+                                      AppDimensions.paddingsmallExtra),
                                   child: badges.Badge(
                                     position: badges.BadgePosition.topEnd(
                                       top: -6,
@@ -926,10 +957,13 @@ class _ProductDetailsState extends State<ProductDetails>
                                     ),
                                     badgeStyle: badges.BadgeStyle(
                                       shape: badges.BadgeShape.circle,
-                                      badgeColor: Theme.of(context).primaryColor,
-                                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                                      badgeColor:
+                                          Theme.of(context).primaryColor,
+                                      borderRadius: BorderRadius.circular(
+                                          AppDimensions.radiusNormal),
                                     ),
-                                    badgeAnimation: const badges.BadgeAnimation.slide(
+                                    badgeAnimation:
+                                        const badges.BadgeAnimation.slide(
                                       toAnimate: true,
                                     ),
                                     stackFit: StackFit.loose,
@@ -966,16 +1000,17 @@ class _ProductDetailsState extends State<ProductDetails>
                               const SizedBox(width: 15),
                               InkWell(
                                 onTap: onWishTap,
-                                borderRadius: BorderRadius.circular(AppDimensions.radiusVeryEtra),
-                                child: _isInWishList 
-                                ? const TappableIconWidget(
-                                  icon:  Icons.favorite,
-                                  color: Color.fromRGBO(230, 46, 4, 1),
-                                )
-                                : TappableIconWidget(
-                                  icon:  Icons.favorite_border,
-                                  color: MyTheme.dark_font_grey,
-                                ),
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusVeryEtra),
+                                child: _isInWishList
+                                    ? const TappableIconWidget(
+                                        icon: Icons.favorite,
+                                        color: Color.fromRGBO(230, 46, 4, 1),
+                                      )
+                                    : TappableIconWidget(
+                                        icon: Icons.favorite_border,
+                                        color: MyTheme.dark_font_grey,
+                                      ),
                               ),
                             ],
                           ),
@@ -991,7 +1026,8 @@ class _ProductDetailsState extends State<ProductDetails>
                         horizontal: 16, vertical: 24),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        borderRadius: BorderRadius.circular(
+                            AppDimensions.radiusaHalfsmall),
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
@@ -1008,7 +1044,8 @@ class _ProductDetailsState extends State<ProductDetails>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(AppDimensions.paddingDefault),
+                            padding: const EdgeInsets.all(
+                                AppDimensions.paddingDefualt),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1142,8 +1179,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                 color: Colors.black.withValues(alpha: 0.08),
                                 spreadRadius: 0,
                                 blurRadius: 16,
-                                offset:
-                                    const Offset(0, 0), // changes position of shadow
+                                offset: const Offset(
+                                    0, 0), // changes position of shadow
                               ),
                             ],
                           ),
@@ -1427,20 +1464,23 @@ class _ProductDetailsState extends State<ProductDetails>
                   },
                   child: Padding(
                     padding: app_language_rtl.$!
-                        ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                        ? const EdgeInsets.only(
+                            left: AppDimensions.paddingsmall)
                         : const EdgeInsets.only(right: 8.0),
                     child: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        borderRadius: BorderRadius.circular(
+                            AppDimensions.radiusaHalfsmall),
                         border: Border.all(
                             color: const Color.fromRGBO(112, 112, 112, 0.298),
                             width: 1),
                         //shape: BoxShape.rectangle,
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        borderRadius: BorderRadius.circular(
+                            AppDimensions.radiusaHalfsmall),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: _productDetails!.shop_logo!,
@@ -1476,15 +1516,16 @@ class _ProductDetailsState extends State<ProductDetails>
             child: Container(
                 padding: const EdgeInsets.all(AppDimensions.paddingNormal),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusVeryLarge),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusVeryLarge),
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: .08),
                       blurRadius: 20,
                       spreadRadius: 0.0,
-                      offset:
-                          const Offset(0.0, 10.0), // shadow direction: bottom right
+                      offset: const Offset(
+                          0.0, 10.0), // shadow direction: bottom right
                     )
                   ],
                 ),
@@ -1502,7 +1543,9 @@ class _ProductDetailsState extends State<ProductDetails>
                           onTapSellerChat();
                         },
                         child: Image.asset('assets/chat.png',
-                            height: 16, width: 16, color: const Color(0xff6B7377))),
+                            height: 16,
+                            width: 16,
+                            color: const Color(0xff6B7377))),
                   ],
                 )),
           )
@@ -1527,13 +1570,15 @@ class _ProductDetailsState extends State<ProductDetails>
                 width: 75,
                 child: Text(
                   AppLocalizations.of(context)!.total_price_ucf,
-                  style: const TextStyle(color: Color(0xff6B7377), fontSize: 10),
+                  style:
+                      const TextStyle(color: Color(0xff6B7377), fontSize: 10),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+            padding:
+                const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
             child: Text(
               SystemConfig.systemCurrency != null
                   ? _totalPrice.toString().replaceAll(
@@ -1737,13 +1782,14 @@ class _ProductDetailsState extends State<ProductDetails>
                 children: List.generate(
                     choiceOptions[choiceOptionsIndex].options.length,
                     (index) => Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Container(
                           width: 75,
-                          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                          padding: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingsmall),
                           child: buildChoiceItem(
-                              choiceOptions[choiceOptionsIndex]
-                                  .options[index],
+                              choiceOptions[choiceOptionsIndex].options[index],
                               choiceOptionsIndex,
                               index),
                         ))),
@@ -1778,7 +1824,8 @@ class _ProductDetailsState extends State<ProductDetails>
                 color: Colors.black.withValues(alpha: 0.12),
                 blurRadius: 6,
                 spreadRadius: 1,
-                offset: const Offset(0.0, 3.0), // shadow direction: bottom right
+                offset:
+                    const Offset(0.0, 3.0), // shadow direction: bottom right
               )
             ],
           ),
@@ -1864,15 +1911,16 @@ class _ProductDetailsState extends State<ProductDetails>
           boxShadow: [
             _selectedColorIndex == index
                 ? BoxShadow(
-                    color: Colors.black.withValues(alpha: 
-                        _selectedColorIndex == index ? 0.25 : 0.12),
+                    color: Colors.black.withValues(
+                        alpha: _selectedColorIndex == index ? 0.25 : 0.12),
                     blurRadius: 10,
                     spreadRadius: 2.0,
-                    offset: const Offset(0.0, 6.0), // shadow direction: bottom right
+                    offset: const Offset(
+                        0.0, 6.0), // shadow direction: bottom right
                   )
                 : BoxShadow(
-                    color: Colors.black.withValues(alpha: 
-                        _selectedColorIndex == index ? 0.25 : 0.16),
+                    color: Colors.black.withValues(
+                        alpha: _selectedColorIndex == index ? 0.25 : 0.16),
                     blurRadius: 6,
                     spreadRadius: 0.0,
                     offset: const Offset(0.0, 3.0),
@@ -2130,14 +2178,16 @@ class _ProductDetailsState extends State<ProductDetails>
           onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               color: color,
               boxShadow: [
                 BoxShadow(
                   color: color,
                   blurRadius: 20,
                   spreadRadius: 0.0,
-                  offset: const Offset(0.0, 10.0), // shadow direction: bottom right
+                  offset:
+                      const Offset(0.0, 10.0), // shadow direction: bottom right
                 )
               ],
             ),
@@ -2170,7 +2220,8 @@ class _ProductDetailsState extends State<ProductDetails>
           ratingWidget: RatingWidget(
             full: const Icon(Icons.star, color: Colors.amber),
             half: const Icon(Icons.star_half, color: Colors.amber),
-            empty: const Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
+            empty:
+                const Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
           ),
           itemPadding: const EdgeInsets.only(right: 1.0),
           onRatingUpdate: (rating) {
@@ -2212,7 +2263,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
- Widget buildBrandRow() {
+  Widget buildBrandRow() {
     return _productDetails!.brand!.id! > 0
         ? InkWell(
             onTap: () {
@@ -2475,22 +2526,26 @@ class _ProductDetailsState extends State<ProductDetails>
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingsupsmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
@@ -2499,7 +2554,8 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 190.0,
               ),
@@ -2540,7 +2596,8 @@ class _ProductDetailsState extends State<ProductDetails>
                           margin: const EdgeInsets.symmetric(
                               vertical: 4.0, horizontal: 2.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusNormal),
                             border: Border.all(
                                 color: _currentImage == itemIndex
                                     ? Theme.of(context).primaryColor
@@ -2549,7 +2606,8 @@ class _ProductDetailsState extends State<ProductDetails>
                             //shape: BoxShape.rectangle,
                           ),
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                              borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusNormal),
                               child:
                                   /*Image.asset(
                                         singleProduct.product_images[index])*/

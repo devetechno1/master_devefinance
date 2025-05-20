@@ -10,18 +10,18 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../helpers/shared_value_helper.dart';
 
- class BrandProducts extends StatefulWidget {
- const BrandProducts({Key? key, required this.slug}) : super(key: key);
- final String slug;
+class BrandProducts extends StatefulWidget {
+  const BrandProducts({Key? key, required this.slug}) : super(key: key);
+  final String slug;
 
   @override
   _BrandProductsState createState() => _BrandProductsState();
 }
 
 class _BrandProductsState extends State<BrandProducts> {
- final ScrollController _scrollController = ScrollController();
- final ScrollController _xcrollController = ScrollController();
- final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final ScrollController _xcrollController = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
 
   final List<dynamic> _productList = [];
   bool _isInitial = true;
@@ -57,7 +57,7 @@ class _BrandProductsState extends State<BrandProducts> {
     super.dispose();
   }
 
- Future<void> fetchData() async {
+  Future<void> fetchData() async {
     final productResponse = await ProductRepository()
         .getBrandProducts(slug: widget.slug, page: _page, name: _searchKey);
     _productList.addAll(productResponse.products!);
@@ -67,7 +67,7 @@ class _BrandProductsState extends State<BrandProducts> {
     setState(() {});
   }
 
-void  reset() {
+  void reset() {
     _productList.clear();
     _isInitial = true;
     _totalData = 0;
@@ -116,7 +116,11 @@ void  reset() {
       backgroundColor: Colors.white,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(app_language_rtl.$! ?  CupertinoIcons.arrow_right : CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
+          icon: Icon(
+              app_language_rtl.$!
+                  ? CupertinoIcons.arrow_right
+                  : CupertinoIcons.arrow_left,
+              color: MyTheme.dark_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -139,15 +143,15 @@ void  reset() {
           decoration: InputDecoration(
               hintText:
                   "${AppLocalizations.of(context)!.search_product_here} : ",
-              hintStyle:
-          const        TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
-              enabledBorder:const OutlineInputBorder(
+              hintStyle: const TextStyle(
+                  fontSize: 14.0, color: MyTheme.textfield_grey),
+              enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: MyTheme.white, width: 0.0),
               ),
-              focusedBorder:const OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: MyTheme.white, width: 0.0),
               ),
-              contentPadding:const EdgeInsets.all(0.0)),
+              contentPadding: const EdgeInsets.all(0.0)),
         ),
       ),
       elevation: 0.0,
@@ -190,8 +194,11 @@ void  reset() {
             crossAxisSpacing: 14,
             itemCount: _productList.length,
             shrinkWrap: true,
-            padding:
-            const    EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 10, left: 18, right: 18),
+            padding: const EdgeInsets.only(
+                top: AppDimensions.paddingsupsmall,
+                bottom: 10,
+                left: 18,
+                right: 18),
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               // 3

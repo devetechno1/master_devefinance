@@ -38,7 +38,9 @@ class _MainState extends State<Main> {
     fetchAll();
 
     if (AppConfig.businessSettingsData.guestCheckoutStatus && (i == 2)) {
-    } else if (!AppConfig.businessSettingsData.guestCheckoutStatus && (i == 2) && !is_logged_in.$) {
+    } else if (!AppConfig.businessSettingsData.guestCheckoutStatus &&
+        (i == 2) &&
+        !is_logged_in.$) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
       return;
     }
@@ -59,7 +61,7 @@ class _MainState extends State<Main> {
   @override
   void initState() {
     _children = [
-    //   HomePageType.home.screen,
+      //   HomePageType.home.screen,
       AppConfig.businessSettingsData.selectedHomePage.screen,
       const CategoryList(
         slug: "",
@@ -71,7 +73,7 @@ class _MainState extends State<Main> {
         from_navigation: true,
         counter: counter,
       ),
-     const Profile()
+      const Profile()
     ];
     fetchAll();
     // TODO: implement initState
@@ -81,7 +83,6 @@ class _MainState extends State<Main> {
     super.initState();
   }
 
-  
   bool _dialogShowing = false;
 
   Future<bool> willPop() async {
@@ -155,18 +156,19 @@ class _MainState extends State<Main> {
             backgroundColor: Colors.white.withValues(alpha: 0.95),
             unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
             selectedItemColor: Theme.of(context).primaryColor,
-            selectedLabelStyle:TextStyle(
+            selectedLabelStyle: TextStyle(
                 fontWeight: FontWeight.w700,
                 color: Theme.of(context).primaryColor,
                 fontSize: 12),
-            unselectedLabelStyle:const TextStyle(
+            unselectedLabelStyle: const TextStyle(
                 fontWeight: FontWeight.w400,
                 color: Color.fromRGBO(168, 175, 179, 1),
                 fontSize: 12),
             items: [
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Image.asset(
                       AppImages.home,
                       color: _currentIndex == 0
@@ -178,7 +180,8 @@ class _MainState extends State<Main> {
                   label: AppLocalizations.of(context)!.home_ucf),
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Image.asset(
                       AppImages.categories,
                       color: _currentIndex == 1
@@ -190,30 +193,32 @@ class _MainState extends State<Main> {
                   label: AppLocalizations.of(context)!.categories_ucf),
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: badges.Badge(
                       badgeStyle: badges.BadgeStyle(
                         shape: badges.BadgeShape.circle,
                         badgeColor: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
-                        padding:const EdgeInsets.all(5),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusNormal),
+                        padding: const EdgeInsets.all(5),
                       ),
-                      badgeAnimation:const badges.BadgeAnimation.slide(
+                      badgeAnimation: const badges.BadgeAnimation.slide(
                         toAnimate: false,
                       ),
                       child: Image.asset(
                         AppImages.cart,
                         color: _currentIndex == 2
                             ? Theme.of(context).primaryColor
-                            :const Color.fromRGBO(153, 153, 153, 1),
+                            : const Color.fromRGBO(153, 153, 153, 1),
                         height: 16,
                       ),
                       badgeContent: Consumer<CartCounter>(
                         builder: (context, cart, child) {
                           return Text(
                             "${cart.cartCounter}",
-                            style:
-                             const   TextStyle(fontSize: 10, color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 10, color: Colors.white),
                           );
                         },
                       ),
@@ -222,7 +227,8 @@ class _MainState extends State<Main> {
                   label: AppLocalizations.of(context)!.cart_ucf),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  padding:
+                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                   child: Image.asset(
                     AppImages.profile,
                     color: _currentIndex == 3

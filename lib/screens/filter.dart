@@ -41,7 +41,7 @@ class WhichFilter {
 }
 
 class Filter extends StatefulWidget {
- const Filter({
+  const Filter({
     Key? key,
     this.selected_filter = "product",
   }) : super(key: key);
@@ -56,9 +56,9 @@ class _FilterState extends State<Filter> {
   final _amountValidator = RegExInputFormatter.withRegex(
       '^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
 
- final ScrollController _productScrollController = ScrollController();
- final ScrollController _brandScrollController = ScrollController();
- final  ScrollController _shopScrollController = ScrollController();
+  final ScrollController _productScrollController = ScrollController();
+  final ScrollController _brandScrollController = ScrollController();
+  final ScrollController _shopScrollController = ScrollController();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -67,39 +67,39 @@ class _FilterState extends State<Filter> {
   String? _givenSelectedFilterOptionKey; // may be it can come from another page
   String? _selectedSort = "";
 
- final  List<WhichFilter> _which_filter_list = WhichFilter.getWhichFilterList();
+  final List<WhichFilter> _which_filter_list = WhichFilter.getWhichFilterList();
   List<DropdownMenuItem<WhichFilter>>? _dropdownWhichFilterItems;
- final  List<dynamic> _selectedCategories = [];
- final  List<dynamic> _selectedBrands = [];
+  final List<dynamic> _selectedCategories = [];
+  final List<dynamic> _selectedBrands = [];
 
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _minPriceController = TextEditingController();
   final TextEditingController _maxPriceController = TextEditingController();
 
   //--------------------
-final  List<dynamic> _filterBrandList = [];
+  final List<dynamic> _filterBrandList = [];
   bool _filteredBrandsCalled = false;
- final List<dynamic> _filterCategoryList = [];
+  final List<dynamic> _filterCategoryList = [];
   bool _filteredCategoriesCalled = false;
 
-final  List<dynamic> _searchSuggestionList = [];
+  final List<dynamic> _searchSuggestionList = [];
 
   //----------------------------------------
   String? _searchKey = "";
 
-final  List<dynamic> _productList = [];
+  final List<dynamic> _productList = [];
   bool _isProductInitial = true;
   int _productPage = 1;
   int? _totalProductData = 0;
   bool _showProductLoadingContainer = false;
 
- final List<dynamic> _brandList = [];
+  final List<dynamic> _brandList = [];
   bool _isBrandInitial = true;
   int _brandPage = 1;
   int? _totalBrandData = 0;
   bool _showBrandLoadingContainer = false;
 
- final List<dynamic> _shopList = [];
+  final List<dynamic> _shopList = [];
   bool _isShopInitial = true;
   int _shopPage = 1;
   int? _totalShopData = 0;
@@ -328,7 +328,7 @@ final  List<dynamic> _productList = [];
 
   List<DropdownMenuItem<WhichFilter>> buildDropdownWhichFilterItems(
       List whichFilterList) {
-   final List<DropdownMenuItem<WhichFilter>> items = [];
+    final List<DropdownMenuItem<WhichFilter>> items = [];
     for (WhichFilter which_filter_item
         in whichFilterList as Iterable<WhichFilter>) {
       items.add(
@@ -442,23 +442,25 @@ final  List<dynamic> _productList = [];
                 color: Colors.white,
                 border: Border.symmetric(
                     vertical: BorderSide(color: MyTheme.light_grey, width: .5),
-                    horizontal: BorderSide(color: MyTheme.light_grey, width: 1))),
-            padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    horizontal:
+                        BorderSide(color: MyTheme.light_grey, width: 1))),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
             child: DropdownButton<WhichFilter>(
               dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
-              icon:const Icon(Icons.expand_more_rounded, size: 18),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+              icon: const Icon(Icons.expand_more_rounded, size: 18),
               hint: Text(
                 AppLocalizations.of(context)!.products_ucf,
-                style:const TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                 ),
               ),
-              style:const TextStyle(color: Colors.black, fontSize: 13),
+              style: const TextStyle(color: Colors.black, fontSize: 13),
               iconSize: 13,
-              underline:const SizedBox(),
+              underline: const SizedBox(),
               value: _selectedFilter,
               items: _dropdownWhichFilterItems,
               isExpanded: true,
@@ -466,7 +468,7 @@ final  List<dynamic> _productList = [];
                 setState(() {
                   _selectedFilter = selectedFilter;
                 });
-          
+
                 _onWhichFilterChange();
               },
             ),
@@ -484,11 +486,12 @@ final  List<dynamic> _productList = [];
               ;
             },
             child: Container(
-              padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.symmetric(
-                      vertical: BorderSide(color: MyTheme.light_grey, width: .5),
+                      vertical:
+                          BorderSide(color: MyTheme.light_grey, width: .5),
                       horizontal:
                           BorderSide(color: MyTheme.light_grey, width: 1))),
               height: 36,
@@ -497,12 +500,12 @@ final  List<dynamic> _productList = [];
                 children: [
                   Text(
                     AppLocalizations.of(context)!.filter_ucf,
-                    style:const TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 13,
                     ),
                   ),
-               const   Icon(
+                  const Icon(
                     Icons.filter_alt_outlined,
                     size: 13,
                   ),
@@ -522,8 +525,11 @@ final  List<dynamic> _productList = [];
                                 ? TextDirection.rtl
                                 : TextDirection.ltr,
                             child: AlertDialog(
-                              contentPadding:const EdgeInsets.only(
-                                  top: 16.0, left: 2.0, right: 2.0, bottom: 2.0),
+                              contentPadding: const EdgeInsets.only(
+                                  top: 16.0,
+                                  left: 2.0,
+                                  right: 2.0,
+                                  bottom: 2.0),
                               content: StatefulBuilder(builder:
                                   (BuildContext context, StateSetter setState) {
                                 return Column(
@@ -647,7 +653,8 @@ final  List<dynamic> _productList = [];
                                   child: Text(
                                     AppLocalizations.of(context)!
                                         .close_all_capital,
-                                    style: TextStyle(color: MyTheme.medium_grey),
+                                    style:
+                                        TextStyle(color: MyTheme.medium_grey),
                                   ),
                                   onPressed: () {
                                     Navigator.of(context, rootNavigator: true)
@@ -667,7 +674,8 @@ final  List<dynamic> _productList = [];
               decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.symmetric(
-                      vertical: BorderSide(color: MyTheme.light_grey, width: .5),
+                      vertical:
+                          BorderSide(color: MyTheme.light_grey, width: .5),
                       horizontal:
                           BorderSide(color: MyTheme.light_grey, width: 1))),
               height: 36,
@@ -676,16 +684,15 @@ final  List<dynamic> _productList = [];
                 children: [
                   Text(
                     AppLocalizations.of(context)!.sort_ucf,
-                    style:const TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 13,
                     ),
                   ),
-                 const Icon(
+                  const Icon(
                     Icons.swap_vert,
                     size: 13,
                   ),
-                  
                 ],
               ),
             ),
@@ -705,7 +712,7 @@ final  List<dynamic> _productList = [];
             onPressed: () => Navigator.of(context).pop(),
           ),
           Padding(
-            padding:const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Container(
               width: MediaQuery.of(context).size.width * .85,
               height: 70,
@@ -782,21 +789,21 @@ final  List<dynamic> _productList = [];
                                   color: MyTheme.medium_grey),
                               hintText:
                                   AppLocalizations.of(context)!.search_here_ucf,
-                              hintStyle:const TextStyle(
+                              hintStyle: const TextStyle(
                                   fontSize: 12.0,
                                   color: MyTheme.textfield_grey),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: MyTheme.noColor, width: 0.5),
                                 borderRadius: const BorderRadius.all(
-                                   Radius.circular(AppDimensions.radiusSmall),
+                                  Radius.circular(AppDimensions.radiusSmall),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: MyTheme.noColor, width: 1.0),
                                 borderRadius: const BorderRadius.all(
-                                   Radius.circular(AppDimensions.radiusSmall),
+                                  Radius.circular(AppDimensions.radiusSmall),
                                 ),
                               ),
                               contentPadding: const EdgeInsetsDirectional.only(
@@ -824,7 +831,7 @@ final  List<dynamic> _productList = [];
       child: Drawer(
         backgroundColor: Colors.white,
         child: Container(
-          padding:const EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(top: 50),
           child: Column(
             children: [
               Container(
@@ -835,10 +842,11 @@ final  List<dynamic> _productList = [];
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Text(
                           AppLocalizations.of(context)!.price_range_ucf,
-                          style:const TextStyle(
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -846,7 +854,8 @@ final  List<dynamic> _productList = [];
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingsmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -857,32 +866,35 @@ final  List<dynamic> _productList = [];
                                 decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
                                         .minimum_ucf,
-                                    hintStyle:const TextStyle(
+                                    hintStyle: const TextStyle(
                                         fontSize: 12.0,
                                         color: MyTheme.textfield_grey),
-                                    enabledBorder:const OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: MyTheme.textfield_grey,
                                           width: 1.0),
-                                      borderRadius:  BorderRadius.all(
-                                         Radius.circular(AppDimensions.radiusSmallExtra),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
-                                    focusedBorder:const OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: MyTheme.textfield_grey,
                                           width: 2.0),
-                                      borderRadius:  BorderRadius.all(
-                                         Radius.circular(AppDimensions.radiusSmallExtra),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
-                                    contentPadding:const EdgeInsets.all(4.0)),
+                                    contentPadding: const EdgeInsets.all(4.0)),
                               ),
                             ),
                           ),
-                       const   Text(" - "),
+                          const Text(" - "),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                            padding: const EdgeInsets.only(
+                                bottom: AppDimensions.paddingsmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -893,26 +905,28 @@ final  List<dynamic> _productList = [];
                                 decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
                                         .maximum_ucf,
-                                    hintStyle:const TextStyle(
+                                    hintStyle: const TextStyle(
                                         fontSize: 12.0,
                                         color: MyTheme.textfield_grey),
-                                    enabledBorder:const OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: MyTheme.textfield_grey,
                                           width: 1.0),
-                                      borderRadius:  BorderRadius.all(
-                                         Radius.circular(AppDimensions.radiusSmallExtra),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
-                                    focusedBorder:const OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: MyTheme.textfield_grey,
                                           width: 2.0),
-                                      borderRadius:  BorderRadius.all(
-                                         Radius.circular(AppDimensions.radiusSmallExtra),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            AppDimensions.radiusSmallExtra),
                                       ),
                                     ),
-                                    contentPadding:const EdgeInsets.all(4.0)),
+                                    contentPadding: const EdgeInsets.all(4.0)),
                               ),
                             ),
                           ),
@@ -930,7 +944,7 @@ final  List<dynamic> _productList = [];
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           AppLocalizations.of(context)!.categories_ucf,
-                          style:const TextStyle(
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -941,7 +955,8 @@ final  List<dynamic> _productList = [];
                                 child: Text(
                                   AppLocalizations.of(context)!
                                       .no_category_is_available,
-                                  style:const TextStyle(color: MyTheme.font_grey),
+                                  style:
+                                      const TextStyle(color: MyTheme.font_grey),
                                 ),
                               ),
                             )
@@ -952,7 +967,7 @@ final  List<dynamic> _productList = [];
                         padding: const EdgeInsetsDirectional.only(start: 16.0),
                         child: Text(
                           AppLocalizations.of(context)!.brands_ucf,
-                          style:const TextStyle(
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -963,7 +978,8 @@ final  List<dynamic> _productList = [];
                                 child: Text(
                                   AppLocalizations.of(context)!
                                       .no_brand_is_available,
-                                  style:const TextStyle(color: MyTheme.font_grey),
+                                  style:
+                                      const TextStyle(color: MyTheme.font_grey),
                                 ),
                               ),
                             )
@@ -992,7 +1008,7 @@ final  List<dynamic> _productList = [];
                       },
                       child: Text(
                         AppLocalizations.of(context)!.clear_all_capital,
-                        style:const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                     ElevatedButton(
@@ -1018,7 +1034,7 @@ final  List<dynamic> _productList = [];
                       },
                       child: Text(
                         AppLocalizations.of(context)!.apply_all_capital,
-                        style:const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
@@ -1033,8 +1049,8 @@ final  List<dynamic> _productList = [];
 
   ListView buildFilterBrandsList() {
     return ListView(
-      padding:const EdgeInsets.only(top: 16.0, bottom: 16.0),
-      physics:const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
         ..._filterBrandList
@@ -1064,8 +1080,8 @@ final  List<dynamic> _productList = [];
 
   ListView buildFilterCategoryList() {
     return ListView(
-      padding:const EdgeInsets.only(top: 16.0, bottom: 16.0),
-      physics:const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: <Widget>[
         ..._filterCategoryList
@@ -1135,9 +1151,12 @@ final  List<dynamic> _productList = [];
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                padding:
-                 const   EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
-                physics:const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingsupsmall,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   // 3
@@ -1204,14 +1223,17 @@ final  List<dynamic> _productList = [];
                 //addAutomaticKeepAlives: true,
                 itemCount: _brandList.length,
                 controller: _scrollController,
-                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
                     childAspectRatio: 1),
-                padding:
-                 const   EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
-                physics:const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   // 3
@@ -1279,8 +1301,11 @@ final  List<dynamic> _productList = [];
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
                     childAspectRatio: 0.7),
-                padding:
-                 const   EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {

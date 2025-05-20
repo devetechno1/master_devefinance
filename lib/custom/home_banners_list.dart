@@ -16,8 +16,8 @@ class HomeBannersList extends StatelessWidget {
   const HomeBannersList(
       {Key? key,
       required this.isBannersInitial,
-      required this.bannersImagesList, 
-      this.aspectRatio = 2, 
+      required this.bannersImagesList,
+      this.aspectRatio = 2,
       this.viewportFraction = 0.49})
       : super(key: key);
 
@@ -30,7 +30,7 @@ class HomeBannersList extends StatelessWidget {
 
     // When banner images are available
     else if (bannersImagesList.isNotEmpty) {
-      if(bannersImagesList.length == 1){
+      if (bannersImagesList.length == 1) {
         return DynamicSizeImageBanner(
           urlToOpen: bannersImagesList.first.url,
           photo: bannersImagesList.first.photo,
@@ -43,7 +43,7 @@ class HomeBannersList extends StatelessWidget {
           options: CarouselOptions(
             aspectRatio: aspectRatio,
             viewportFraction: viewportFraction,
-            initialPage: 0,  
+            initialPage: 0,
             padEnds: false,
             enlargeCenterPage: false,
             enableInfiniteScroll: canScroll,
@@ -51,7 +51,8 @@ class HomeBannersList extends StatelessWidget {
           ),
           items: bannersImagesList.map((i) {
             return Container(
-              margin: const EdgeInsetsDirectional.only(start: 10, bottom: 10,top: 10),
+              margin: const EdgeInsetsDirectional.only(
+                  start: 10, bottom: 10, top: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),

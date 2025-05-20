@@ -99,12 +99,14 @@ class _CouponProductsState extends State<CouponProducts> {
         future: CouponRepository().getCouponProductList(id: widget.id),
         builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text(LangText(context).local.an_error_occurred));
+            return Center(
+                child: Text(LangText(context).local.an_error_occurred));
           } else if (snapshot.hasData) {
             final productResponse = snapshot.data;
             if (productResponse?.products == null ||
                 productResponse!.products!.isEmpty) {
-              return Center(child: Text(LangText(context).local.no_products_found));
+              return Center(
+                  child: Text(LangText(context).local.no_products_found));
             }
             return SingleChildScrollView(
               child: MasonryGridView.count(
@@ -113,8 +115,11 @@ class _CouponProductsState extends State<CouponProducts> {
                 crossAxisSpacing: 14,
                 itemCount: productResponse.products!.length,
                 shrinkWrap: true,
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
+                    bottom: AppDimensions.paddingsupsmall,
+                    left: 18,
+                    right: 18),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final product = productResponse.products![index];

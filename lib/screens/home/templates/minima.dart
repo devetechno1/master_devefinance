@@ -20,6 +20,7 @@ import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
+import '../../../ui_elements/pop_up_banner.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/new_products_list_sliver.dart';
@@ -41,14 +42,19 @@ class MinimaScreen extends StatefulWidget {
   _MinimaScreenState createState() => _MinimaScreenState();
 }
 
-class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMixin {
+class _MinimaScreenState extends State<MinimaScreen>
+    with TickerProviderStateMixin {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
-      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.updateDeviceToken();
+      if (OtherConfig.USE_PUSH_NOTIFICATION)
+        PushNotificationService.updateDeviceToken();
       change();
     });
     super.initState();
+    Future.delayed(const Duration(seconds: 1), () {
+      showPopupBanner(context);
+    });
   }
 
   void change() {
@@ -70,12 +76,15 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
         return widget.go_back;
       },
       child: Directionality(
-        textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+        textDirection:
+            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-         floatingActionButton: whatsappFloatingButtonWidget,
-
-            appBar: BuildAppBar( statusBarHeight: 34, context: context,),
+            floatingActionButton: whatsappFloatingButtonWidget,
+            appBar: BuildAppBar(
+              statusBarHeight: 34,
+              context: context,
+            ),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,
@@ -95,107 +104,130 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
                         slivers: <Widget>[
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
+                              AppConfig.purchase_code == ""
+                                  ? PiratedWidget(homeData: homeData)
+                                  : const SizedBox(),
                               const SizedBox(height: 10),
 
                               // Header Banner
-                              HomeCarouselSlider(homeData: homeData, context: context),
+                              HomeCarouselSlider(
+                                  homeData: homeData, context: context),
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                              if(homeData.flashDeal != null)
-                              ...[
-
-                              GestureDetector(
-                                onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return FlashDealList();
-                                }));},
-                                child: ColoredBox(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(22, 10, 10, 10),
-                                        child: Text(AppLocalizations.of(context)!.flash_deal_ucf, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                      ),
-                                       Image.asset(AppImages.flashDeal, height: 20, color: MyTheme.golden),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withValues(alpha: 0.5),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: const Offset(0, 3), // changes position of shadow
-                                  )],
-                                    color:  const Color.fromARGB(255, 249, 248, 248),
-                                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
-
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
-                                    child: Column(
+                              if (homeData.flashDeal != null) ...[
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return FlashDealList();
+                                    }));
+                                  },
+                                  child: ColoredBox(
+                                    color: Colors.transparent,
+                                    child: Row(
                                       children: [
-                                      //  buildTimerRow(homeData.flashDealRemainingTime),
-                                        //FlashBanner SpecialOffer
-                                        FlashBannerWidget(
-                                          bannerLink: homeData.flashDeal?.banner, 
-                                          slug: homeData.flashDeal!.slug,
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(22, 10, 10, 10),
+                                          child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .flash_deal_ucf,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18)),
                                         ),
+                                        Image.asset(AppImages.flashDeal,
+                                            height: 20, color: MyTheme.golden),
                                       ],
                                     ),
-                                  )),
-                              ),
-
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 25),
+                                  child: Container(
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey
+                                                .withValues(alpha: 0.5),
+                                            spreadRadius: 5,
+                                            blurRadius: 7,
+                                            offset: const Offset(0,
+                                                3), // changes position of shadow
+                                          )
+                                        ],
+                                        color: const Color.fromARGB(
+                                            255, 249, 248, 248),
+                                        borderRadius: BorderRadius.circular(
+                                            AppDimensions.radiusSmall),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            AppDimensions.paddingsmallExtra),
+                                        child: Column(
+                                          children: [
+                                            //  buildTimerRow(homeData.flashDealRemainingTime),
+                                            //FlashBanner SpecialOffer
+                                            FlashBannerWidget(
+                                              bannerLink:
+                                                  homeData.flashDeal?.banner,
+                                              slug: homeData.flashDeal!.slug,
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                ),
                               ],
                             ]),
                           ),
                           //feature_categories//
 
-                      const    CategoryList(),    
-                       SliverToBoxAdapter(
-                              child: HomeBannersList(
-                                bannersImagesList: homeData.bannerOneImageList,
-                                isBannersInitial: homeData.isBannerOneInitial,
-                              ),
+                          const CategoryList(),
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerOneImageList,
+                              isBannersInitial: homeData.isBannerOneInitial,
                             ),
-                      const  FeaturedProductsListSliver(),
-                      SliverToBoxAdapter(
-                              child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
-                              ),
+                          ),
+                          const FeaturedProductsListSliver(),
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerTwoImageList,
+                              isBannersInitial: homeData.isBannerTwoInitial,
                             ),
+                          ),
 
-                            //Best Selling
-                      const BestSellingSectionSliver(),
-                     const NewProductsListSliver(),
-                      SliverToBoxAdapter(
-                              child: HomeBannersList(
-                                bannersImagesList: homeData.bannerThreeImageList,
-                                isBannersInitial: homeData.isBannerThreeInitial,
-                              ),
+                          //Best Selling
+                          const BestSellingSectionSliver(),
+                          const NewProductsListSliver(),
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerThreeImageList,
+                              isBannersInitial: homeData.isBannerThreeInitial,
                             ),
-                                       
+                          ),
+
 //auction products
-                       AuctionProductsSectionSliver(homeData: homeData,),
-                          if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                         BrandListSectionSliver(homeData: homeData,),
+                          AuctionProductsSectionSliver(
+                            homeData: homeData,
+                          ),
+                          if (homeData.isBrandsInitial ||
+                              homeData.brandsList.isNotEmpty)
+                            BrandListSectionSliver(
+                              homeData: homeData,
+                            ),
 //all products ------------
-                        AllProducts(homeData: homeData)
+                          AllProducts(homeData: homeData)
                         ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child: ProductLoadingcontainer(context: context, homeData: homeData),
+                      child: ProductLoadingcontainer(
+                          context: context, homeData: homeData),
                     ),
                   ],
                 );
@@ -207,10 +239,8 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
     );
   }
 
-  
-
-  
-  Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
+  Widget timerCircularContainer(
+      int currentValue, int totalValue, String timeText) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -237,7 +267,6 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
       ],
     );
   }
-  
 
   Widget buildTimerRow(CurrentRemainingTime time) {
     return Padding(
@@ -245,50 +274,60 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
       child: Row(
         children: [
           const Spacer(),
-
           Column(
             children: [
-              timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 3)),
+              timerCircularContainer(time.days, 365,
+                  timeText((time.days).toString(), default_length: 3)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.days, style: const TextStyle(color: Colors.grey, fontSize: 10))
+              Text(LangText(context).local.days,
+                  style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
           const SizedBox(width: 12),
           Column(
             children: [
-              timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
+              timerCircularContainer(time.hours, 24,
+                  timeText((time.hours).toString(), default_length: 2)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.hours, style: const TextStyle(color: Colors.grey, fontSize: 10))
+              Text(LangText(context).local.hours,
+                  style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
           const SizedBox(width: 10),
           Column(
             children: [
-              timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
+              timerCircularContainer(time.min, 60,
+                  timeText((time.min).toString(), default_length: 2)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.grey, fontSize: 10))
+              Text(LangText(context).local.minutes,
+                  style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
           const SizedBox(width: 5),
           Column(
             children: [
-              timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
+              timerCircularContainer(time.sec, 60,
+                  timeText((time.sec).toString(), default_length: 2)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.grey, fontSize: 10))
+              Text(LangText(context).local.seconds,
+                  style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
           const SizedBox(width: 10),
           const Column(
             children: [
-            ///  Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
+              ///  Image.asset("assets/flash_deal.png", height: 20, color: MyTheme.golden),
               SizedBox(height: 12),
             ],
           ),
           Row(
             children: [
-              Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
+              Text(LangText(context).local.shop_more_ucf,
+                  style:
+                      const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
               const SizedBox(width: 3),
-              const Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
+              const Icon(Icons.arrow_forward_outlined,
+                  size: 10, color: MyTheme.grey_153),
               const SizedBox(width: 10),
             ],
           )
@@ -301,4 +340,3 @@ class _MinimaScreenState extends State<MinimaScreen> with TickerProviderStateMix
     return val.padLeft(default_length, '0');
   }
 }
-

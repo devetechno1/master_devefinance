@@ -66,8 +66,10 @@ void main() async {
   await Future.wait([
     Firebase.initializeApp(),
     FlutterDownloader.initialize(
-      debug: kDebugMode, // Optional: set to false to disable printing logs to console
-      ignoreSsl:true, // Optional: set to false to disable working with HTTP links
+      debug:
+          kDebugMode, // Optional: set to false to disable printing logs to console
+      ignoreSsl:
+          true, // Optional: set to false to disable working with HTTP links
     ),
   ]);
 
@@ -82,13 +84,12 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: AppConfig.turnDevicePreviewOn,
-      builder: (context) {
-        return SharedValue.wrapApp(
-          MyApp(),
-        );
-      }
-    ),
+        enabled: AppConfig.turnDevicePreviewOn,
+        builder: (context) {
+          return SharedValue.wrapApp(
+            MyApp(),
+          );
+        }),
   );
 }
 
@@ -133,7 +134,8 @@ var routes = GoRouter(
               path: "auction_product_bids",
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   MaterialPage(
-                      child: AuthMiddleware(const AuctionBiddedProducts()).next())),
+                      child: AuthMiddleware(const AuctionBiddedProducts())
+                          .next())),
           GoRoute(
               path: "users/login",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -162,7 +164,8 @@ var routes = GoRouter(
               path: "auction/purchase_history",
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   MaterialPage(
-                      child: AuthMiddleware(const AuctionPurchaseHistory()).next())),
+                      child: AuthMiddleware(const AuctionPurchaseHistory())
+                          .next())),
           GoRoute(
               path: "brand/:slug",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -187,7 +190,7 @@ var routes = GoRouter(
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   MaterialPage(
                       child: (CategoryList(
-                        name: getParameter(state, "name"),
+                    name: getParameter(state, "name"),
                     slug: getParameter(state, "slug"),
                   )))),
           GoRoute(
@@ -195,7 +198,7 @@ var routes = GoRouter(
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   MaterialPage(
                       child: (CategoryProducts(
-                        name: getParameter(state, "name"),
+                    name: getParameter(state, "name"),
                     slug: getParameter(state, "slug"),
                   )))),
           GoRoute(
@@ -262,7 +265,8 @@ class _MyAppState extends State<MyApp> {
     BusinessSettingHelper.setInitLang();
     Future.microtask(() async {
       await Firebase.initializeApp();
-      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.initialize();
+      if (OtherConfig.USE_PUSH_NOTIFICATION)
+        PushNotificationService.initialize();
     });
     _handleDeepLink();
   }
@@ -275,7 +279,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => CartCounter()),
         ChangeNotifierProvider(create: (context) => SelectAddressProvider()),
-        ChangeNotifierProvider(create: (context) => UnReadNotificationCounter()),
+        ChangeNotifierProvider(
+            create: (context) => UnReadNotificationCounter()),
         ChangeNotifierProvider(create: (context) => CurrencyPresenter()),
 
         ///
@@ -287,13 +292,15 @@ class _MyAppState extends State<MyApp> {
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, provider, snapshot) {
-          final ThemeProvider theme = Provider.of<ThemeProvider>(context,listen: true);
+          final ThemeProvider theme =
+              Provider.of<ThemeProvider>(context, listen: true);
           return MaterialApp.router(
             routerConfig: routes,
             title: AppConfig.appNameOnDeviceLang,
             debugShowCheckedModeBanner: false,
             builder: (context, child) {
-              if(AppConfig.turnDevicePreviewOn) child = DevicePreview.appBuilder(context, child);
+              if (AppConfig.turnDevicePreviewOn)
+                child = DevicePreview.appBuilder(context, child);
               return OneContext().builder(context, child);
             },
             theme: ThemeData(
@@ -332,21 +339,20 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Future<void> _handleDeepLink() async{
+Future<void> _handleDeepLink() async {
   final appLinks = AppLinks(); // AppLinks is singleton
   final Uri? uri = await appLinks.getInitialLink();
   WidgetsBinding.instance.addPostFrameCallback(
     (_) {
-      if(uri != null) OneContext().key.currentContext!.go(uri.path);
+      if (uri != null) OneContext().key.currentContext!.go(uri.path);
     },
   );
-  appLinks.uriLinkStream.listen(
-    (Uri? uriStream) {
-      WidgetsBinding.instance.addPostFrameCallback(
-        (_) {
-          if(uriStream != null) OneContext().key.currentContext!.go(uriStream.path);
-        },
-      );
-    }
-  );
+  appLinks.uriLinkStream.listen((Uri? uriStream) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        if (uriStream != null)
+          OneContext().key.currentContext!.go(uriStream.path);
+      },
+    );
+  });
 }

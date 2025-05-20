@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const double maxPhoneWidth = 600; 
-const double maxTabletWidth = 900; 
+const double maxPhoneWidth = 600;
+const double maxTabletWidth = 900;
 
 extension ContextHelperEx on BuildContext {
   double get height => MediaQuery.sizeOf(this).height;

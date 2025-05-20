@@ -1409,7 +1409,9 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: AppDimensions.paddingLarge, top: AppDimensions.paddingLarge),
+              padding: const EdgeInsets.only(
+                  left: AppDimensions.paddingLarge,
+                  top: AppDimensions.paddingLarge),
               child: Text(
                 LangText(context).local.featured_products_ucf,
                 style: const TextStyle(
@@ -1424,7 +1426,8 @@ class _SellerDetailsState extends State<SellerDetails> {
               width: double.infinity,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: AppDimensions.paddingLarge),
+                  padding:
+                      const EdgeInsets.only(left: AppDimensions.paddingLarge),
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
@@ -1467,7 +1470,8 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, top: 20),
+            padding: const EdgeInsets.only(
+                left: AppDimensions.paddingMedium, top: 20),
             child: Column(
               children: [
                 ShimmerHelper()
@@ -1477,7 +1481,8 @@ class _SellerDetailsState extends State<SellerDetails> {
           ),
           Container(
             height: 239,
-            padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 20),
+            padding: const EdgeInsets.only(
+                top: AppDimensions.paddingsupsmall, bottom: 20),
             width: double.infinity,
             child: ListView.separated(
               itemCount: 10,
@@ -1577,7 +1582,9 @@ class _SellerDetailsState extends State<SellerDetails> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Btn.basic(
         padding: EdgeInsets.zero,
-        color: tabOptionIndex == index ? Theme.of(context).primaryColor : MyTheme.white,
+        color: tabOptionIndex == index
+            ? Theme.of(context).primaryColor
+            : MyTheme.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
         ),
@@ -1720,7 +1727,11 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _topProducts.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+        padding: const EdgeInsets.only(
+            top: AppDimensions.paddingsupsmall,
+            bottom: AppDimensions.paddingsupsmall,
+            left: 18,
+            right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1749,7 +1760,11 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisSpacing: 14,
           itemCount: _newArrivalProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsupsmall,
+              bottom: AppDimensions.paddingsupsmall,
+              left: 18,
+              right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return FeaturedProductCard(
@@ -1779,7 +1794,11 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _allProductList.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+        padding: const EdgeInsets.only(
+            top: AppDimensions.paddingsupsmall,
+            bottom: AppDimensions.paddingsupsmall,
+            left: 18,
+            right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1828,19 +1847,22 @@ class _SellerDetailsState extends State<SellerDetails> {
               //  decoration: BoxDecorations.buildBoxDecoration_1(),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: .08),
                     blurRadius: 20,
                     spreadRadius: 0.0,
-                    offset: const Offset(0.0, 10.0), // shadow direction: bottom right
+                    offset: const Offset(
+                        0.0, 10.0), // shadow direction: bottom right
                   )
                 ],
               ),
               padding: const EdgeInsets.all(AppDimensions.paddingsmall),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _shopDetails?.logo ?? "",
@@ -1852,7 +1874,8 @@ class _SellerDetailsState extends State<SellerDetails> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               width: DeviceInfo(context).width! / 2.5,
               height: 60,
               child: Column(
@@ -1892,18 +1915,20 @@ class _SellerDetailsState extends State<SellerDetails> {
                       color: Colors.black.withValues(alpha: .08),
                       blurRadius: 20,
                       spreadRadius: 0.0,
-                      offset:
-                          const Offset(0.0, 10.0), // shadow direction: bottom right
+                      offset: const Offset(
+                          0.0, 10.0), // shadow direction: bottom right
                     )
                   ],
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusSmallExtra)),
               child: Btn.basic(
                 padding: EdgeInsets.zero,
                 color: _isThisSellerFollowed != null && _isThisSellerFollowed!
                     ? MyTheme.green_light
                     : MyTheme.amber,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                     side: BorderSide(
                         color: _isThisSellerFollowed != null &&
                                 _isThisSellerFollowed!
@@ -1954,14 +1979,16 @@ class _SellerDetailsState extends State<SellerDetails> {
             height: 60,
             decoration: BoxDecorations.buildBoxDecoration_1(),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               child: ShimmerHelper().buildBasicShimmer(height: 60, width: 60),
             ),
           ),
           Flexible(
             child: Container(
               //color: Colors.amber,
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
               width: DeviceInfo(context).width! / 2,
               height: 60,
               child: Column(
@@ -2017,7 +2044,8 @@ class _SellerDetailsState extends State<SellerDetails> {
           ratingWidget: RatingWidget(
             full: const Icon(Icons.star, color: Colors.amber),
             half: const Icon(Icons.star_half, color: Colors.amber),
-            empty: const Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
+            empty:
+                const Icon(Icons.star, color: Color.fromRGBO(224, 224, 225, 1)),
           ),
           //  itemPadding: EdgeInsets.only(right: 4.0),
           onRatingUpdate: (rating) {
@@ -2089,7 +2117,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                     width: double.infinity,
                     child: ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: widget.image ?? AppImages.placeholder,
@@ -2181,7 +2210,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),
@@ -2207,13 +2237,15 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                       ),
                     if (whole_sale_addon_installed.$ && widget.isWholesale!)
                       Container(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 4),
                         decoration: const BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                            bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                            topRight:
+                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                            bottomLeft:
+                                Radius.circular(AppDimensions.radiusaHalfsmall),
                           ),
                           boxShadow: [
                             BoxShadow(

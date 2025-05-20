@@ -181,7 +181,6 @@ class FlashDealResponseDatum {
     this.banner,
     this.products,
     this.isFeatured = false,
-   
   });
 
   int? id;
@@ -191,7 +190,6 @@ class FlashDealResponseDatum {
   String? banner;
   Products? products;
   bool isFeatured;
-
 
   factory FlashDealResponseDatum.fromJson(Map<String, dynamic> json) =>
       FlashDealResponseDatum(
@@ -204,7 +202,6 @@ class FlashDealResponseDatum {
         products: json["products"] != null
             ? Products.fromJson(json["products"])
             : null,
-            
       );
 
   Map<String, dynamic> toJson() => {
@@ -215,7 +212,6 @@ class FlashDealResponseDatum {
         "banner": banner,
         "featured": isFeatured ? 1 : 0,
         "products": products != null ? products!.toJson() : null,
-        
       };
 }
 

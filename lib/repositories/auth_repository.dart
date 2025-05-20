@@ -187,8 +187,8 @@ class AuthRepository {
 
   Future<ResendCodeResponse> getPasswordResendCodeResponse(
       String? emailOrCode, String verifyBy) async {
-    final postBody = jsonEncode(
-        {"email_or_code": "$emailOrCode", "verify_by": "$verifyBy"});
+    final postBody =
+        jsonEncode({"email_or_code": "$emailOrCode", "verify_by": "$verifyBy"});
 
     const String url = ("${AppConfig.BASE_URL}/auth/password/resend_code");
     final response = await ApiRequest.post(

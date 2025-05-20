@@ -16,6 +16,7 @@ import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
+import '../../../ui_elements/pop_up_banner.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
@@ -36,14 +37,19 @@ class MetroScreen extends StatefulWidget {
   _MetroScreenState createState() => _MetroScreenState();
 }
 
-class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin {
+class _MetroScreenState extends State<MetroScreen>
+    with TickerProviderStateMixin {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
-      if (OtherConfig.USE_PUSH_NOTIFICATION) PushNotificationService.updateDeviceToken();
+      if (OtherConfig.USE_PUSH_NOTIFICATION)
+        PushNotificationService.updateDeviceToken();
       change();
     });
     super.initState();
+    Future.delayed(const Duration(seconds: 1), () {
+      showPopupBanner(context);
+    });
   }
 
   void change() {
@@ -65,11 +71,11 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
         return widget.go_back;
       },
       child: Directionality(
-        textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+        textDirection:
+            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-                        floatingActionButton: whatsappFloatingButtonWidget,
-
+            floatingActionButton: whatsappFloatingButtonWidget,
             appBar: BuildAppBar(statusBarHeight: 34, context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
@@ -90,34 +96,36 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                         slivers: <Widget>[
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == "" ? PiratedWidget(homeData: homeData) : const SizedBox(),
+                              AppConfig.purchase_code == ""
+                                  ? PiratedWidget(homeData: homeData)
+                                  : const SizedBox(),
                               const SizedBox(height: 10),
 
                               // Header Banner
-                              HomeCarouselSlider(homeData: homeData, context: context),
+                              HomeCarouselSlider(
+                                  homeData: homeData, context: context),
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                              const  FlashSale(iscircle: true)
+                              const FlashSale(iscircle: true)
                             ]),
-                          ),                      
-                            //move banner 
+                          ),
+                          //move banner
                           SliverList(
-                            delegate: SliverChildListDelegate(
-                              [
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                //   child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                                // ),
-                                TodaysDealProductsWidget(homePresenter: homeData,),
-                              ]
-                            ),
+                            delegate: SliverChildListDelegate([
+                              // Padding(
+                              //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              //   child: Image.network("https://devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
+                              // ),
+                              TodaysDealProductsWidget(
+                                homePresenter: homeData,
+                              ),
+                            ]),
                           ),
 //Featured category-----------------------
-                            const CategoryList(),
-                  
-                  
-//BannerList---------------------                            
+                          const CategoryList(),
+
+//BannerList---------------------
 
                           SliverToBoxAdapter(
                             child: HomeBannersList(
@@ -125,36 +133,45 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
                               isBannersInitial: homeData.isBannerOneInitial,
                             ),
                           ),
-//featuredProducts-----------------------------   
+//featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
-//BannerList---------------------                            
-                            SliverToBoxAdapter(
-                              child: HomeBannersList(
-                                bannersImagesList: homeData.bannerTwoImageList,
-                                isBannersInitial: homeData.isBannerTwoInitial,
-                              ),
+//BannerList---------------------
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerTwoImageList,
+                              isBannersInitial: homeData.isBannerTwoInitial,
                             ),
+                          ),
 
 //Best Selling-------------------
-                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                            const BestSellingSectionSliver(),
-//featuredProducts-----------------------------                            
-                            const FeaturedProductsListSliver(),
+                          // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
+                          const BestSellingSectionSliver(),
+//featuredProducts-----------------------------
+                          const FeaturedProductsListSliver(),
 
 //auction products----------------------------
-                      AuctionProductsSectionSliver(homeData: homeData,),
+                          AuctionProductsSectionSliver(
+                            homeData: homeData,
+                          ),
 //Brand List ---------------------------
-                          if(homeData.isBrandsInitial || homeData.brandsList.isNotEmpty)
-                          BrandListSectionSliver(homeData: homeData,),
+                          if (homeData.isBrandsInitial ||
+                              homeData.brandsList.isNotEmpty)
+                            BrandListSectionSliver(
+                              homeData: homeData,
+                            ),
 //all products --------------------------
-                          AllProducts(homeData: homeData,),
+                          AllProducts(
+                            homeData: homeData,
+                          ),
+
                           ///
                         ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child:ProductLoadingcontainer(context: context, homeData: homeData),
+                      child: ProductLoadingcontainer(
+                          context: context, homeData: homeData),
                     ),
                   ],
                 );
@@ -165,11 +182,6 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
       ),
     );
   }
-
-
-
-
-
 
   // Widget timerCircularContainer(int currentValue, int totalValue, String timeText) {
   //   return Stack(
@@ -198,7 +210,6 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
   //     ],
   //   );
   // }
-  
 
   // Widget buildTimerRow(CurrentRemainingTime time) {
   //   return Padding(
@@ -261,7 +272,4 @@ class _MetroScreenState extends State<MetroScreen> with TickerProviderStateMixin
 //   String timeText(String val, {int default_length = 2}) {
 //     return val.padLeft(default_length, '0');
 //   }
- }
-
-
-
+}

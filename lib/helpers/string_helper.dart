@@ -1,6 +1,5 @@
-class StringHelper{
-
-  bool? stringContains(String? string,String part){
+class StringHelper {
+  bool? stringContains(String? string, String part) {
     return string?.toLowerCase().contains(part.toLowerCase());
   }
 }

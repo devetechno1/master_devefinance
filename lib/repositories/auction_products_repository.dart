@@ -54,7 +54,8 @@ class AuctionProductsRepository {
   Future<AuctionBiddedProducts> getAuctionBiddedProducts({
     page = 1,
   }) async {
-    final String url = ("${AppConfig.BASE_URL}/auction/bided-products?page=$page");
+    final String url =
+        ("${AppConfig.BASE_URL}/auction/bided-products?page=$page");
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
       "Authorization": "Bearer ${access_token.$}",

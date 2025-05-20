@@ -1,4 +1,3 @@
-
 import 'status.dart';
 
 Future<Status<T>> executeAndHandleErrors<T>(

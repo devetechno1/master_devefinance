@@ -174,7 +174,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {

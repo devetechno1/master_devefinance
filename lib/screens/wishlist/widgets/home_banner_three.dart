@@ -18,11 +18,13 @@ class HomeBannerThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (homeData!.isBannerOneInitial &&
-        homeData!.bannerOneImageList.isEmpty) {
+    if (homeData!.isBannerOneInitial && homeData!.bannerOneImageList.isEmpty) {
       return Padding(
-          padding:
-              const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 20),
+          padding: const EdgeInsets.only(
+              left: AppDimensions.paddingMedium,
+              right: AppDimensions.paddingMedium,
+              top: 10,
+              bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
     } else if (homeData!.bannerOneImageList.isNotEmpty) {
       return Container(
@@ -60,7 +62,8 @@ class HomeBannerThree extends StatelessWidget {
                   height: 156,
                   child: InkWell(
                     onTap: () {
-                      final url = i.url?.split(AppConfig.DOMAIN_PATH).last ?? "";
+                      final url =
+                          i.url?.split(AppConfig.DOMAIN_PATH).last ?? "";
                       print(url);
                       GoRouter.of(context).go(url);
                     },

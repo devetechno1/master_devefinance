@@ -249,12 +249,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             children: [
               // name
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(AppLocalizations.of(context)!.name_ucf,
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -268,12 +271,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
 
               // email
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(AppLocalizations.of(context)!.email_ucf,
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -286,14 +292,16 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               ),
               // address
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text("${AppLocalizations.of(context)!.address_ucf} *",
                     style:
                         TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
               ),
 
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 55,
                   child: TextField(
@@ -309,12 +317,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
 
               // country
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text("${AppLocalizations.of(context)!.country_ucf} *",
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -359,12 +370,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               ),
               // state
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text("${AppLocalizations.of(context)!.state_ucf} *",
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -416,12 +430,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               ),
               // city
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text("${AppLocalizations.of(context)!.city_ucf} *",
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TypeAheadField(
@@ -473,12 +490,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               ),
               // postal code
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(AppLocalizations.of(context)!.postal_code,
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefualt),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -491,12 +511,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               ),
               // phone
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Text(AppLocalizations.of(context)!.phone_ucf,
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -518,7 +541,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                 textAlign: TextAlign.start,
                 text: TextSpan(
                   text: LangText(context).local.existing_email_address,
-                  style: const TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                  style:
+                      const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                   children: <TextSpan>[
                     TextSpan(
                       recognizer: TapGestureRecognizer()
@@ -562,7 +586,8 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
           Radius.circular(AppDimensions.radiusSmall),
         ),
       ),
-      contentPadding: const EdgeInsets.only(left: AppDimensions.paddingsmall, top: 5.0, bottom: 5.0));
+      contentPadding: const EdgeInsets.only(
+          left: AppDimensions.paddingsmall, top: 5.0, bottom: 5.0));
 }
 
 AppBar buildAppBar(BuildContext context) {

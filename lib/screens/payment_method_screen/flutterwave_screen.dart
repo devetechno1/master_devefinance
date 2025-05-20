@@ -15,12 +15,12 @@ import '../../helpers/main_helpers.dart';
 import '../profile.dart';
 
 class FlutterwaveScreen extends StatefulWidget {
- final double? amount;
- final String payment_type;
- final String? payment_method_key;
+  final double? amount;
+  final String payment_type;
+  final String? payment_method_key;
   final package_id;
- final int? orderId;
- const FlutterwaveScreen(
+  final int? orderId;
+  const FlutterwaveScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
@@ -39,7 +39,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
   String? _initial_url = "";
   bool _initial_url_fetched = false;
 
- final WebViewController _webViewController = WebViewController();
+  final WebViewController _webViewController = WebViewController();
 
   @override
   void initState() {
@@ -169,7 +169,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
     });
   }
 
- Widget? buildBody() {
+  Widget? buildBody() {
     if (_order_init == false &&
         _combined_order_id == 0 &&
         widget.payment_type == "cart_payment") {
@@ -180,7 +180,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
       );
     } else if (_initial_url_fetched == false) {
       return Container(
-        child:const Center(
+        child: const Center(
           child: Text("Fetching Flutterwave url ..."),
         ),
       );
@@ -213,7 +213,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
       ),
       title: Text(
         LangText(context).local.pay_with_flutterwave,
-        style:TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

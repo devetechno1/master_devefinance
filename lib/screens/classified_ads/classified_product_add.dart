@@ -89,7 +89,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
   }
 
   List<CommonDropDownItemWithChild> setChildCategory(List<CatData> child) {
-  final  List<CommonDropDownItemWithChild> list = [];
+    final List<CommonDropDownItemWithChild> list = [];
     for (var element in child) {
       final children = element.child ?? [];
       final model = CommonDropDownItemWithChild(
@@ -219,7 +219,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     }
     Loading.show(context);
     await setProductValues();
-  final  Map<String, dynamic> postValue = {
+    final Map<String, dynamic> postValue = {
       "name": productName,
       "added_by": "customer",
       "category_id": categoryId,
@@ -249,7 +249,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
       ToastComponent.showDialog(response.message);
       Navigator.pop(context);
     } else {
-    final  dynamic errorMessages = response.message;
+      final dynamic errorMessages = response.message;
       if (errorMessages.runtimeType == String) {
         ToastComponent.showDialog(errorMessages);
       } else {
@@ -323,7 +323,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               BoxShadow(color: MyTheme.white),
             ],
           ),
-          padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -401,7 +402,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 18, vertical: 10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusaHalfsmall),
                             color: MyTheme.white,
                             border: Border.all(
                                 color: _hasFocus
@@ -411,7 +413,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                                 width: _hasFocus ? 0.5 : 0.2),
                             boxShadow: [
                               BoxShadow(
-                                color: MyTheme.blue_grey.withValues(alpha: 0.15),
+                                color:
+                                    MyTheme.blue_grey.withValues(alpha: 0.15),
                                 blurRadius: 20,
                                 spreadRadius: 0.0,
                                 offset: const Offset(0.0,
@@ -495,7 +498,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               ),
             ],
           ),
-          padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _mediaExpanded ? 200 : 40,
           child: Column(
@@ -585,12 +589,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           children: [
             Text(
               title,
-              style:const TextStyle(
+              style: const TextStyle(
                   fontSize: 12,
                   color: MyTheme.font_grey,
                   fontWeight: FontWeight.bold),
             ),
-          const  SizedBox(
+            const SizedBox(
               height: 10,
             ),
             fileField(AppLocalizations.of(context)!.document, onChosenFile,
@@ -609,7 +613,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         TextButton(
           onPressed: () async {
             // XFile chooseFile = await pickSingleImage();
-        final    List<FileInfo> chooseFile = await (Navigator.push(
+            final List<FileInfo> chooseFile = await (Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => UploadFile(
@@ -632,10 +636,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
                   child: Text(
                     AppLocalizations.of(context)!.choose_file,
-                    style:const TextStyle(fontSize: 12, color: MyTheme.grey_153),
+                    style:
+                        const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
                 ),
                 Container(
@@ -645,32 +651,33 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   color: MyTheme.light_grey,
                   child: Text(
                     AppLocalizations.of(context)!.browse,
-                    style:const TextStyle(fontSize: 12, color: MyTheme.grey_153),
+                    style:
+                        const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
                 ),
               ],
             ),
           ),
         ),
-    const    SizedBox(
+        const SizedBox(
           height: 10,
         ),
         if (selectedFile != null)
           Stack(
             children: [
               Container(
-                padding:const EdgeInsets.all(3),
+                padding: const EdgeInsets.all(3),
                 height: 40,
                 alignment: Alignment.center,
                 width: 40,
-                decoration:const BoxDecoration(
+                decoration: const BoxDecoration(
                   color: MyTheme.grey_153,
                 ),
                 child: Text(
                   selectedFile.fileOriginalName! +
                       "." +
                       selectedFile.extension!,
-                  style:const TextStyle(fontSize: 9, color: MyTheme.white),
+                  style: const TextStyle(fontSize: 9, color: MyTheme.white),
                 ),
               ),
               Positioned(
@@ -680,14 +687,15 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   height: 15,
                   width: 15,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppDimensions.RadiusExtraMedium),
+                      borderRadius: BorderRadius.circular(
+                          AppDimensions.RadiusExtraMedium),
                       color: MyTheme.white),
                   // remove the selected file button
                   child: InkWell(
                     onTap: () {
                       onChosenFile(null);
                     },
-                    child:const Icon(
+                    child: const Icon(
                       Icons.close,
                       size: 12,
                       color: MyTheme.brick_red,
@@ -711,12 +719,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           children: [
             Text(
               title,
-              style:const TextStyle(
+              style: const TextStyle(
                   fontSize: 12,
                   color: MyTheme.font_grey,
                   fontWeight: FontWeight.bold),
             ),
-         const   SizedBox(
+            const SizedBox(
               height: 10,
             ),
             imageField(onChosenImage, selectedFile)
@@ -733,7 +741,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         TextButton(
           onPressed: () async {
             // XFile chooseFile = await pickSingleImage();
-         final   List<FileInfo> chooseFile = await (Navigator.push(
+            final List<FileInfo> chooseFile = await (Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const UploadFile(
@@ -756,10 +764,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
                   child: Text(
                     AppLocalizations.of(context)!.choose_file,
-                    style:const TextStyle(fontSize: 12, color: MyTheme.grey_153),
+                    style:
+                        const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
                 ),
                 Container(
@@ -769,7 +779,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   color: MyTheme.light_grey,
                   child: Text(
                     AppLocalizations.of(context)!.browse,
-                    style:const TextStyle(fontSize: 12, color: MyTheme.grey_153),
+                    style:
+                        const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
                 ),
               ],
@@ -782,7 +793,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
             clipBehavior: Clip.antiAlias,
             alignment: Alignment.bottomCenter,
             children: [
-           const   SizedBox(
+              const SizedBox(
                 height: 60,
                 width: 70,
               ),
@@ -799,13 +810,14 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   height: 15,
                   width: 15,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppDimensions.RadiusExtraMedium),
+                      borderRadius: BorderRadius.circular(
+                          AppDimensions.RadiusExtraMedium),
                       color: MyTheme.light_grey),
                   child: InkWell(
                     onTap: () {
                       onChosenImage(null);
                     },
-                    child:const Icon(
+                    child: const Icon(
                       Icons.close,
                       size: 12,
                       color: MyTheme.cinnabar,
@@ -839,7 +851,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               ),
             ],
           ),
-          padding:const EdgeInsets.only(top: AppDimensions.paddingsupsmall, left: 5, right: 5),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsupsmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _priceExpanded ? 200 : 40,
           child: Column(
@@ -896,11 +909,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                       buildGroupItems(
                         AppLocalizations.of(context)!.meta_description_ucf,
                         Container(
-                          padding:const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           height: 150,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusaHalfsmall),
                             border: Border.all(
                                 color: Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
@@ -921,7 +935,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                             minLines: 1,
                             maxLines: 50,
                             enabled: true,
-                            style:const TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                             decoration: InputDecoration.collapsed(
                                 hintText: LangText(context)
                                     .local
@@ -943,20 +957,21 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                         alignment: Alignment.bottomRight,
                         child: TextButton(
                             style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Theme.of(context).primaryColor),
+                              backgroundColor: WidgetStateProperty.all(
+                                  Theme.of(context).primaryColor),
                               shape: WidgetStateProperty.all<
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
-                                  side:const BorderSide(color: Colors.red),
+                                  borderRadius: BorderRadius.circular(
+                                      AppDimensions.radiusaHalfsmall),
+                                  side: const BorderSide(color: Colors.red),
                                 ),
                               ),
                             ),
                             onPressed: submit,
                             child: Text(
                               AppLocalizations.of(context)!.save_product_ucf,
-                              style:const TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             )),
                       )
                     ],
@@ -989,23 +1004,23 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 hintText: hint,
                 filled: true,
                 fillColor: MyTheme.white,
-                hintStyle:
-                const    TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
-                enabledBorder:OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Theme.of(context).primaryColor, width: 0.2),
+                hintStyle: const TextStyle(
+                    fontSize: 12.0, color: MyTheme.textfield_grey),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor, width: 0.2),
                   borderRadius: const BorderRadius.all(
-                     Radius.circular(AppDimensions.radiusaHalfsmall),
+                    Radius.circular(AppDimensions.radiusaHalfsmall),
                   ),
                 ),
-                focusedBorder:const OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(color: MyTheme.textfield_grey, width: 0.5),
-                  borderRadius:  BorderRadius.all(
-                     Radius.circular(AppDimensions.radiusaHalfsmall),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(AppDimensions.radiusaHalfsmall),
                   ),
                 ),
-                contentPadding:const EdgeInsets.symmetric(horizontal: 16.0)),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0)),
           ),
         ),
         isMandatory: isMandatory,
@@ -1020,7 +1035,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           children: [
             buildFieldTitle(title),
             if (isMandatory)
-       const       Text(
+              const Text(
                 " *",
                 style: TextStyle(
                     fontSize: 12,
@@ -1097,7 +1112,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
               color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
               width: 0.2),
-          boxShadow:const [],
+          boxShadow: const [],
         ),
         child: DropdownButton<CommonDropDownItem>(
           borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
@@ -1174,7 +1189,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   value: value,
                   child: Text(
                     value.value!,
-                    style: const TextStyle(color: MyTheme.font_grey, fontSize: 12.0),
+                    style: const TextStyle(
+                        color: MyTheme.font_grey, fontSize: 12.0),
                   ),
                 ),
               )
@@ -1184,7 +1200,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
- void setChange() {
+  void setChange() {
     setState(() {});
   }
 
@@ -1194,7 +1210,11 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     return buildCommonSingleField(
       title,
       Container(
-        padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 8, left: AppDimensions.paddingsupsmall, right: AppDimensions.paddingsupsmall),
+        padding: const EdgeInsets.only(
+            top: AppDimensions.paddingsupsmall,
+            bottom: 8,
+            left: AppDimensions.paddingsupsmall,
+            right: AppDimensions.paddingsupsmall),
         alignment: Alignment.centerLeft,
         constraints: BoxConstraints(minWidth: DeviceInfo(context).width!),
         decoration: BoxDecoration(
@@ -1237,20 +1257,21 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 controller: textEditingController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
-                style:const TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
                 decoration: InputDecoration.collapsed(
                   hintText:
                       AppLocalizations.of(context)!.type_and_hit_submit_ucf,
-                  hintStyle:const TextStyle(fontSize: 12),
+                  hintStyle: const TextStyle(fontSize: 12),
                 ).copyWith(
-                  constraints:const BoxConstraints(maxWidth: 150),
+                  constraints: const BoxConstraints(maxWidth: 150),
                 ),
               );
             }
             return Container(
                 decoration: BoxDecoration(
                     color: MyTheme.white,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusSmallExtra),
                     border: Border.all(width: 2, color: MyTheme.grey_153)),
                 constraints: BoxConstraints(
                     maxWidth: (DeviceInfo(context).width! - 50) / 4),
@@ -1289,7 +1310,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
- void addTag(String string) {
+  void addTag(String string) {
     if (string.trim().isNotEmpty) {
       tags.add(string.trim());
     }
@@ -1351,9 +1372,9 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     );
   }
 
- Future<void> pickGalleryImages() async {
+  Future<void> pickGalleryImages() async {
     final tmp = productGalleryImages;
-   final List<FileInfo>? images = await Navigator.push(
+    final List<FileInfo>? images = await Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => UploadFile(
@@ -1376,12 +1397,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           children: [
             Text(
               AppLocalizations.of(context)!.gallery_images,
-              style:const TextStyle(
+              style: const TextStyle(
                   fontSize: 12,
                   color: MyTheme.font_grey,
                   fontWeight: FontWeight.bold),
             ),
-       const     SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextButton(
@@ -1401,11 +1422,12 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingNormal),
                         child: Text(
                           AppLocalizations.of(context)!.choose_file,
-                          style:
-                     const TextStyle(fontSize: 12, color: MyTheme.grey_153),
+                          style: const TextStyle(
+                              fontSize: 12, color: MyTheme.grey_153),
                         ),
                       ),
                       Container(
@@ -1415,8 +1437,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                         color: MyTheme.light_grey,
                         child: Text(
                           AppLocalizations.of(context)!.browse,
-                          style:
-                    const   TextStyle(fontSize: 12, color: MyTheme.grey_153),
+                          style: const TextStyle(
+                              fontSize: 12, color: MyTheme.grey_153),
                         ),
                       ),
                     ],
@@ -1424,7 +1446,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
             ),
           ],
         ),
-    const SizedBox(
+        const SizedBox(
           height: 10,
         ),
         if (productGalleryImages.isNotEmpty)
@@ -1444,7 +1466,8 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                       height: 15,
                       width: 15,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppDimensions.RadiusExtraMedium),
+                          borderRadius: BorderRadius.circular(
+                              AppDimensions.RadiusExtraMedium),
                           color: MyTheme.white),
                       child: InkWell(
                         onTap: () {
@@ -1452,7 +1475,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                           productGalleryImages.removeAt(index);
                           setState(() {});
                         },
-                        child:const Icon(
+                        child: const Icon(
                           Icons.close,
                           size: 12,
                           color: MyTheme.cinnabar,
@@ -1487,7 +1510,7 @@ class CommonDropDownItemWithChild {
       this.children = const [],
       this.level});
 
- void setLevelText() {
+  void setLevelText() {
     String tmpTxt = "";
     for (int i = 0; i < level!; i++) {
       tmpTxt += "–";

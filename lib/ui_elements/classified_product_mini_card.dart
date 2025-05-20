@@ -51,7 +51,9 @@ class _MiniProductCardState extends State<ClassifiedMiniProductCard> {
                     child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
                         borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(AppDimensions.radiusaHalfsmall), bottom: Radius.zero),
+                            top:
+                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                            bottom: Radius.zero),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image!,
@@ -106,13 +108,16 @@ class _MiniProductCardState extends State<ClassifiedMiniProductCard> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color:
                           widget.condition == "new" ? Colors.green : Colors.red,
                       borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                        bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                        topRight:
+                            Radius.circular(AppDimensions.radiusaHalfsmall),
+                        bottomLeft:
+                            Radius.circular(AppDimensions.radiusaHalfsmall),
                       ),
                       boxShadow: const [
                         BoxShadow(
@@ -130,8 +135,8 @@ class _MiniProductCardState extends State<ClassifiedMiniProductCard> {
                         fontWeight: FontWeight.w700,
                         height: 1.8,
                       ),
-                      textHeightBehavior:
-                          const TextHeightBehavior(applyHeightToFirstAscent: false),
+                      textHeightBehavior: const TextHeightBehavior(
+                          applyHeightToFirstAscent: false),
                       softWrap: false,
                     ),
                   ),

@@ -30,8 +30,9 @@ class InfoDialog {
         content: content ?? const Text(""),
         actions: [
           Btn.basic(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
             color: MyTheme.grey_153,
             onPressed: () => Navigator.pop(context),
             child: Text(LangText(context).local.ok,

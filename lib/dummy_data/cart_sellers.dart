@@ -17,9 +17,14 @@ class CartSellerItem {
   int? quantity;
   String currency_symbol;
 
-
   CartSellerItem(
-      {this.id, this.cart_item_id, this.name, this.image, this.price,this.quantity,this.currency_symbol="\$"});
+      {this.id,
+      this.cart_item_id,
+      this.name,
+      this.image,
+      this.price,
+      this.quantity,
+      this.currency_symbol = "\$"});
 }
 
 List<CartSellerItem> cartSellerItemsList_1 = [
@@ -28,7 +33,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     cart_item_id: "101",
     name: "HP Spectre x360 13-AE517TU 8th Gen Intel Core i7 8550U",
     price: 548.00,
-    quantity:2,
+    quantity: 2,
     image: AppImages.p1,
   ),
   CartSellerItem(
@@ -36,7 +41,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     cart_item_id: "102",
     name: "Makeup Cosmetic Puff Smooth Beauty Foundation",
     price: 15.00,
-    quantity:1,
+    quantity: 1,
     image: AppImages.p2,
   ),
   CartSellerItem(
@@ -45,7 +50,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     name:
         "Apple Macbook Air (2017) Dual Core Intel Core i5 (1.8-2.9GHz, 8GB 1600MHz LPDDR3, 256GB PCIe Onboard SSD)",
     price: 1200.00,
-    quantity:4,
+    quantity: 4,
     image: AppImages.p3,
   ),
   CartSellerItem(
@@ -53,7 +58,7 @@ List<CartSellerItem> cartSellerItemsList_1 = [
     cart_item_id: "104",
     name: "Chelsea Crew Black Label Ollie Tan Leather High Heel",
     price: 7.00,
-    quantity:10,
+    quantity: 10,
     image: AppImages.p4,
   ),
 ];
@@ -65,7 +70,7 @@ List<CartSellerItem> cartSellerItemsList_2 = [
     name:
         "Women Lady Leather Handbag Shoulder Satchel Ladies Bag Evening Tote Purse Hot",
     price: 200.00,
-    quantity:1,
+    quantity: 1,
     image: AppImages.p5,
   ),
   CartSellerItem(
@@ -73,7 +78,7 @@ List<CartSellerItem> cartSellerItemsList_2 = [
     cart_item_id: "106",
     name: "New football shoes for Football Boots Nike Phantom ",
     price: 340.00,
-    quantity:3,
+    quantity: 3,
     image: AppImages.p6,
   ),
 ];

@@ -83,7 +83,8 @@ class _NotificationListCardState extends State<NotificationListCard> {
                 ),
               ),
               ImageShow(
-                notificationShowType: AppConfig.businessSettingsData.notificationShowType ?? '',
+                notificationShowType:
+                    AppConfig.businessSettingsData.notificationShowType ?? '',
                 image: widget.image ?? "",
               ),
               const SizedBox(width: 5),
@@ -113,7 +114,8 @@ class _NotificationListCardState extends State<NotificationListCard> {
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${widget.orderCode}",
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor),
                               ),
                               TextSpan(
                                 text:

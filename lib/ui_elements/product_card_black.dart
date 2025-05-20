@@ -68,7 +68,8 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                     width: double.infinity,
                     child: ClipRRect(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusNormal),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: widget.image ?? AppImages.placeholder,
@@ -160,7 +161,8 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                             top: 8, right: 8, bottom: 15), // Adjusted margin
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusNormal),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),
@@ -184,15 +186,18 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                           ),
                         ),
                       ),
-                    if (whole_sale_addon_installed.$ && (widget.isWholesale ?? false))
+                    if (whole_sale_addon_installed.$ &&
+                        (widget.isWholesale ?? false))
                       Container(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 4),
                         decoration: const BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                            bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                            topRight:
+                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                            bottomLeft:
+                                Radius.circular(AppDimensions.radiusaHalfsmall),
                           ),
                           boxShadow: [
                             BoxShadow(

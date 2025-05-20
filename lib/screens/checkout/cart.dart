@@ -88,41 +88,55 @@ class _CartState extends State<_Cart> {
                       [
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
-                          height: cartProvider.isMinOrderQuantityNotEnough ? 25:0,
+                          height:
+                              cartProvider.isMinOrderQuantityNotEnough ? 25 : 0,
                           width: double.maxFinite,
-                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 3),
                           color: Theme.of(context).primaryColor,
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: RichText(
                               text: TextSpan(
-                                style: const TextStyle(color: Colors.white),
-                                children: [
-                                  TextSpan(text: '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
-                                  TextSpan(text: LangText(context).local.remaining),
-                                  TextSpan(text: ' ${AppConfig.businessSettingsData.minimumOrderQuantity - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
-                                ]
-                              ),
+                                  style: const TextStyle(color: Colors.white),
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
+                                    TextSpan(
+                                        text:
+                                            LangText(context).local.remaining),
+                                    TextSpan(
+                                        text:
+                                            ' ${AppConfig.businessSettingsData.minimumOrderQuantity - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
+                                  ]),
                             ),
                           ),
                         ),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
-                          height: cartProvider.isMinOrderAmountNotEnough?25:0,
+                          height:
+                              cartProvider.isMinOrderAmountNotEnough ? 25 : 0,
                           width: double.maxFinite,
-                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 3),
                           color: Theme.of(context).primaryColor,
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: RichText(
                               text: TextSpan(
-                                style: const TextStyle(color: Colors.white),
-                                children: [
-                                  TextSpan(text: '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
-                                  TextSpan(text: LangText(context).local.remaining),
-                                  TextSpan(text: ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
-                                ]
-                              ),
+                                  style: const TextStyle(color: Colors.white),
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
+                                    TextSpan(
+                                        text:
+                                            LangText(context).local.remaining),
+                                    TextSpan(
+                                        text:
+                                            ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
+                                  ]),
                             ),
                           ),
                         ),
@@ -163,7 +177,8 @@ class _CartState extends State<_Cart> {
               height: 40,
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusaHalfsmall),
                   color: MyTheme.soft_accent_color),
               child: Row(
                 children: [
@@ -192,26 +207,36 @@ class _CartState extends State<_Cart> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+                  padding:
+                      const EdgeInsets.only(top: AppDimensions.paddingsmall),
                   child: Container(
                     height: 58,
                     width: (MediaQuery.of(context).size.width - 48),
                     // width: (MediaQuery.of(context).size.width - 48) * (2 / 3),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Theme.of(context).primaryColor, width: 1),
+                      border: Border.all(
+                          color: Theme.of(context).primaryColor, width: 1),
                       borderRadius: app_language_rtl.$!
                           ? const BorderRadius.only(
-                              topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              topLeft: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              topRight: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              bottomRight: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
                             )
                           : const BorderRadius.only(
-                              topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                              bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                              topLeft: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              bottomLeft: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              topRight: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
+                              bottomRight: Radius.circular(
+                                  AppDimensions.radiusaHalfsmall),
                             ),
                     ),
                     child: Btn.basic(
@@ -220,8 +245,10 @@ class _CartState extends State<_Cart> {
                       shape: app_language_rtl.$!
                           ? const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                                bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                                topLeft: Radius.circular(
+                                    AppDimensions.radiusaHalfsmall),
+                                bottomLeft: Radius.circular(
+                                    AppDimensions.radiusaHalfsmall),
                                 topRight: Radius.circular(0.0),
                                 bottomRight: Radius.circular(0.0),
                               ),
@@ -230,8 +257,10 @@ class _CartState extends State<_Cart> {
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0.0),
                                 bottomLeft: Radius.circular(0.0),
-                                topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                                bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall),
+                                topRight: Radius.circular(
+                                    AppDimensions.radiusaHalfsmall),
+                                bottomRight: Radius.circular(
+                                    AppDimensions.radiusaHalfsmall),
                               ),
                             ),
                       child: Text(
@@ -274,7 +303,7 @@ class _CartState extends State<_Cart> {
     );
   }
 
- Widget? buildCartSellerList(cartProvider, context) {
+  Widget? buildCartSellerList(cartProvider, context) {
     if (cartProvider.isInitial && cartProvider.shopList.length == 0) {
       return SingleChildScrollView(
           child: ShimmerHelper()
@@ -294,7 +323,8 @@ class _CartState extends State<_Cart> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
                   child: Row(
                     children: [
                       Text(

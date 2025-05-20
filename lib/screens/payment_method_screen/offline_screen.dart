@@ -22,16 +22,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OfflineScreen extends StatefulWidget {
- final int? order_id;
- final String? paymentInstruction;
- final String? paymentMethod;
+  final int? order_id;
+  final String? paymentInstruction;
+  final String? paymentMethod;
 
- final PaymentFor? offLinePaymentFor;
- final int? offline_payment_id;
+  final PaymentFor? offLinePaymentFor;
+  final int? offline_payment_id;
   final double? rechargeAmount;
   final packageId;
 
- const OfflineScreen(
+  const OfflineScreen(
       {Key? key,
       this.order_id,
       this.paymentInstruction,
@@ -47,11 +47,11 @@ class OfflineScreen extends StatefulWidget {
 }
 
 class _OfflineState extends State<OfflineScreen> {
-final  ScrollController _mainScrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
 
- final TextEditingController _amountController = TextEditingController();
- final TextEditingController _nameController = TextEditingController();
- final TextEditingController _trxIdController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _trxIdController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
   XFile? _photo_file;
@@ -131,7 +131,7 @@ final  ScrollController _mainScrollController = ScrollController();
           submitResponse.message,
         );
 
-    await    Navigator.push(context, MaterialPageRoute(builder: (context) {
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
           return OrderDetails(id: widget.order_id, go_back: false);
         }));
       }
@@ -170,7 +170,8 @@ final  ScrollController _mainScrollController = ScrollController();
     }
 
     //return;
-    final String base64Image = FileHelper.getBase64FormateFile(_photo_file!.path);
+    final String base64Image =
+        FileHelper.getBase64FormateFile(_photo_file!.path);
     final String fileName = _photo_file!.path.split("/").last;
 
     final imageUpdateResponse =
@@ -284,14 +285,18 @@ final  ScrollController _mainScrollController = ScrollController();
 
   Widget buildProfileForm(context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: AppDimensions.paddingsmall, bottom: AppDimensions.paddingsmall, left: 16.0, right: 16.0),
+      padding: const EdgeInsets.only(
+          top: AppDimensions.paddingsmall,
+          bottom: AppDimensions.paddingsmall,
+          left: 16.0,
+          right: 16.0),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 AppLocalizations.of(context)!.all_marked_fields_are_mandatory,
                 style: const TextStyle(
@@ -301,7 +306,8 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 AppLocalizations.of(context)!
                     .correctly_fill_up_the_necessary_information,
@@ -309,35 +315,42 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.amount_ucf}*",
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 36,
                 child: TextField(
                   controller: _amountController,
                   autofocus: false,
                   decoration: InputDecorations.buildInputDecoration_1(
-                      hint_text: AppLocalizations.of(context)!.twelve_thousand_only ),
+                      hint_text:
+                          AppLocalizations.of(context)!.twelve_thousand_only),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.name_ucf}*",
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -349,15 +362,18 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.transaction_id_ucf}*",
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -369,11 +385,13 @@ final  ScrollController _mainScrollController = ScrollController();
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.photo_proof_ucf}* (${AppLocalizations.of(context)!.only_image_file_allowed})",
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             Row(
@@ -386,14 +404,14 @@ final  ScrollController _mainScrollController = ScrollController();
                     decoration: BoxDecoration(
                         border:
                             Border.all(color: MyTheme.textfield_grey, width: 1),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(AppDimensions.radiusSmall))),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: MyTheme.medium_grey,
                       shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(AppDimensions.radiusSmall))),
                       child: Text(
                         AppLocalizations.of(context)!.photo_proof_ucf,
                         style: const TextStyle(
@@ -409,18 +427,21 @@ final  ScrollController _mainScrollController = ScrollController();
                 ),
                 _photo_path != ""
                     ? Padding(
-                        padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+                        padding:
+                            const EdgeInsets.all(AppDimensions.paddingsmall),
                         child: Text(AppLocalizations.of(context)!.selected_ucf),
                       )
                     : Container()
               ],
             ),
-            if(_photo_file != null) 
+            if (_photo_file != null)
               Center(
                 child: Container(
                   margin: const EdgeInsets.all(8),
                   clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
+                  decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmall)),
                   constraints: BoxConstraints(
                     maxHeight: MediaQuery.sizeOf(context).shortestSide * .5,
                     maxWidth: MediaQuery.sizeOf(context).shortestSide * .5,
@@ -432,21 +453,22 @@ final  ScrollController _mainScrollController = ScrollController();
               children: [
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
+                  padding:
+                      const EdgeInsets.only(top: AppDimensions.paddingDefualt),
                   child: Container(
                     width: 120,
                     height: 36,
                     decoration: BoxDecoration(
                         border:
                             Border.all(color: MyTheme.textfield_grey, width: 1),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(AppDimensions.radiusSmall))),
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
                       color: Theme.of(context).primaryColor,
                       shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(AppDimensions.radiusSmall))),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(AppDimensions.radiusSmall))),
                       child: Text(
                         AppLocalizations.of(context)!.submit_ucf + "",
                         style: const TextStyle(

@@ -6,23 +6,29 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../helpers/shimmer_helper.dart';
 import '../ui_elements/mini_product_card.dart';
 
-
-
 class BrandHorizontalListWidget extends StatelessWidget {
   final bool isBrandsInitial;
-  final List <Brands> brandsList;
+  final List<Brands> brandsList;
   final int numberOfTotalBrands;
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
-  const BrandHorizontalListWidget({Key? key, required this.isBrandsInitial, required this.brandsList, required this.numberOfTotalBrands,required this.onArriveTheEndOfList, this.priceTextStyle, this.nameTextStyle,})
-      : super(key: key);
+  const BrandHorizontalListWidget({
+    Key? key,
+    required this.isBrandsInitial,
+    required this.brandsList,
+    required this.numberOfTotalBrands,
+    required this.onArriveTheEndOfList,
+    this.priceTextStyle,
+    this.nameTextStyle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (isBrandsInitial && brandsList.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.only(right: AppDimensions.paddingLarge,left: 20, top: 15),
+        padding: const EdgeInsets.only(
+            right: AppDimensions.paddingLarge, left: 20, top: 15),
         child: Row(
           children: [
             Expanded(
@@ -55,22 +61,25 @@ class BrandHorizontalListWidget extends StatelessWidget {
         alignment: Alignment.center,
         child: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
-            if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-              if(numberOfTotalBrands > brandsList.length) onArriveTheEndOfList();
+            if (scrollInfo.metrics.pixels ==
+                scrollInfo.metrics.maxScrollExtent) {
+              if (numberOfTotalBrands > brandsList.length)
+                onArriveTheEndOfList();
             }
             return true;
           },
           child: ListView.separated(
-            padding: const EdgeInsets.only(right: AppDimensions.paddingLarge,left: 20, top: 15),
+            padding: const EdgeInsets.only(
+                right: AppDimensions.paddingLarge, left: 20, top: 15),
             separatorBuilder: (context, index) => const SizedBox(
               width: 12,
             ),
-            itemCount:numberOfTotalBrands > brandsList.length
-              ? brandsList.length + 1
-              : brandsList.length,
+            itemCount: numberOfTotalBrands > brandsList.length
+                ? brandsList.length + 1
+                : brandsList.length,
             scrollDirection: Axis.horizontal,
             //itemExtent: 135,
-                
+
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             itemBuilder: (context, index) {
@@ -87,12 +96,9 @@ class BrandHorizontalListWidget extends StatelessWidget {
                   : MiniProductCard(
                       id: brandsList[index].id,
                       slug: brandsList[index].slug ?? '',
-                      image:
-                         brandsList[index].logo,
-                      name:brandsList[index].name,
-                      main_price:
-                        brandsList[index].name,
-                   
+                      image: brandsList[index].logo,
+                      name: brandsList[index].name,
+                      main_price: brandsList[index].name,
                       priceTextStyle: priceTextStyle,
                       nameTextStyle: nameTextStyle,
                     );

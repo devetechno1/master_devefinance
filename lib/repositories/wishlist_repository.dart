@@ -50,7 +50,8 @@ class WishListRepository {
   }
 
   Future<dynamic> add({product_slug = ''}) async {
-    final String url = ("${AppConfig.BASE_URL}/wishlists-add-product/$product_slug");
+    final String url =
+        ("${AppConfig.BASE_URL}/wishlists-add-product/$product_slug");
     final response = await ApiRequest.get(
         url: url,
         headers: {

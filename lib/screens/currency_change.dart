@@ -58,7 +58,8 @@ class _CurrencyChangeState extends State<CurrencyChange> {
                     SliverList(
                       delegate: SliverChildListDelegate([
                         Padding(
-                          padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+                          padding:
+                              const EdgeInsets.all(AppDimensions.paddingMedium),
                           child: buildLanguageMethodList(),
                         ),
                       ]),
@@ -160,7 +161,9 @@ class _CurrencyChangeState extends State<CurrencyChange> {
             height: 16,
             width: 16,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt), color: Colors.green),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),
               child: Icon(Icons.check, color: Colors.white, size: 10),

@@ -15,7 +15,8 @@ class RefundRequestRepository {
     header.addAll(authHeader);
     header.addAll(currencyHeader);
 
-    final String url = ("${AppConfig.BASE_URL}/refund-request/get-list?page=$page");
+    final String url =
+        ("${AppConfig.BASE_URL}/refund-request/get-list?page=$page");
     final response = await ApiRequest.get(
       url: url,
       headers: header,

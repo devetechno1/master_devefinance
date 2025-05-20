@@ -37,7 +37,7 @@ class OrderDetails extends StatefulWidget {
   final bool from_notification;
   final bool go_back;
 
- const OrderDetails(
+  const OrderDetails(
       {Key? key, this.id, this.from_notification = false, this.go_back = true})
       : super(key: key);
 
@@ -46,7 +46,7 @@ class OrderDetails extends StatefulWidget {
 }
 
 class _OrderDetailsState extends State<OrderDetails> {
-final  ScrollController _mainScrollController = ScrollController();
+  final ScrollController _mainScrollController = ScrollController();
   final _steps = [
     'pending',
     'confirmed',
@@ -56,7 +56,7 @@ final  ScrollController _mainScrollController = ScrollController();
     'delivered'
   ];
 
- final TextEditingController _refundReasonController = TextEditingController();
+  final TextEditingController _refundReasonController = TextEditingController();
   bool _showReasonWarning = false;
 
   @pragma('vm:entry-point')
@@ -68,13 +68,12 @@ final  ScrollController _mainScrollController = ScrollController();
 
   //init
   int _stepIndex = 0;
- final ReceivePort _port = ReceivePort();
+  final ReceivePort _port = ReceivePort();
   DetailedOrder? _orderDetails;
- final List<dynamic> _orderedItemList = [];
+  final List<dynamic> _orderedItemList = [];
   bool _orderItemsInit = false;
 
   @override
-
   void initState() {
     fetchAll();
 
@@ -108,7 +107,7 @@ final  ScrollController _mainScrollController = ScrollController();
   Future<void> _downloadInvoice(id) async {
     final folder = await createFolder();
     try {
-     final String? _taskid = await FlutterDownloader.enqueue(
+      final String? _taskid = await FlutterDownloader.enqueue(
           url: AppConfig.BASE_URL + "/invoice/download/$id",
           // saveInPublicStorage: true,
           savedDir: folder,
@@ -131,7 +130,7 @@ final  ScrollController _mainScrollController = ScrollController();
   Future<String> createFolder() async {
     var mPath = "storage/emulated/0/Download/";
     if (Platform.isIOS) {
-      final  iosPath = await getApplicationDocumentsDirectory();
+      final iosPath = await getApplicationDocumentsDirectory();
       mPath = iosPath.path;
     }
     // print("path = $mPath");
@@ -207,7 +206,7 @@ final  ScrollController _mainScrollController = ScrollController();
     Loading.show(context);
     final response = await OrderRepository().reOrder(id: id);
     Loading.close();
-    Widget success =const SizedBox.shrink(), failed =const SizedBox.shrink();
+    Widget success = const SizedBox.shrink(), failed = const SizedBox.shrink();
     print(response.successMsgs.toString());
     print(response.failedMsgs.toString());
     if (response.successMsgs!.isNotEmpty) {
@@ -219,7 +218,7 @@ final  ScrollController _mainScrollController = ScrollController();
     if (response.failedMsgs!.isNotEmpty) {
       failed = Text(
         response.failedMsgs?.join("\n") ?? "",
-        style:const TextStyle(fontSize: 14, color: Colors.red),
+        style: const TextStyle(fontSize: 14, color: Colors.red),
       );
     }
 
@@ -231,7 +230,7 @@ final  ScrollController _mainScrollController = ScrollController();
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               success,
-           const   SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               failed
@@ -255,11 +254,12 @@ final  ScrollController _mainScrollController = ScrollController();
 
   Future _make_re_payment(String amount) {
     const String currencyPattern = r"^[A-Z]{3}(?:[,.]?)";
-   final String amountWithoutCountryCode = amount.replaceAll(RegExp(r'[^\d.,]+'), '');;
-
+    final String amountWithoutCountryCode =
+        amount.replaceAll(RegExp(r'[^\d.,]+'), '');
+    ;
 
     double convertToDouble(String amountStr) {
-     final String amountWithoutCurrency =
+      final String amountWithoutCurrency =
           amountStr.replaceAll(RegExp(currencyPattern), "");
 
       try {
@@ -271,7 +271,7 @@ final  ScrollController _mainScrollController = ScrollController();
       }
     }
 
-   final double convertedAmount = convertToDouble(amountWithoutCountryCode);
+    final double convertedAmount = convertToDouble(amountWithoutCountryCode);
     return Navigator.push(
       context,
       MaterialPageRoute(
@@ -308,8 +308,8 @@ final  ScrollController _mainScrollController = ScrollController();
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (context, StateSetter setState) {
             return AlertDialog(
-              insetPadding:const EdgeInsets.symmetric(horizontal: 10),
-              contentPadding:const EdgeInsets.only(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+              contentPadding: const EdgeInsets.only(
                   top: 36.0, left: 36.0, right: 36.0, bottom: 2.0),
               content: Container(
                 width: 400,
@@ -319,20 +319,22 @@ final  ScrollController _mainScrollController = ScrollController();
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Row(
                           children: [
                             Text(AppLocalizations.of(context)!.product_name_ucf,
-                                style:const TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
                             Container(
                               width: 225,
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                                padding: const EdgeInsets.only(
+                                    bottom: AppDimensions.paddingsmall),
                                 child: Text(itemName,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.font_grey,
                                         fontSize: 13)),
                               ),
@@ -341,28 +343,31 @@ final  ScrollController _mainScrollController = ScrollController();
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Row(
                           children: [
                             Text(AppLocalizations.of(context)!.order_code_ucf,
-                                style:const TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                              padding: const EdgeInsets.only(
+                                  bottom: AppDimensions.paddingsmall),
                               child: Text(orderCode,
-                                  style:const TextStyle(
+                                  style: const TextStyle(
                                       color: MyTheme.font_grey, fontSize: 13)),
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingsmall),
                         child: Row(
                           children: [
                             Text(
                                 "${AppLocalizations.of(context)!.reason_ucf} *",
-                                style:const TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
                             _showReasonWarning
                                 ? Padding(
@@ -372,7 +377,7 @@ final  ScrollController _mainScrollController = ScrollController();
                                     child: Text(
                                         AppLocalizations.of(context)!
                                             .reason_cannot_be_empty,
-                                        style:const TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.red, fontSize: 12)),
                                   )
                                 : Container(),
@@ -380,7 +385,8 @@ final  ScrollController _mainScrollController = ScrollController();
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingDefualt),
                         child: Container(
                           height: 55,
                           child: TextField(
@@ -391,26 +397,26 @@ final  ScrollController _mainScrollController = ScrollController();
                             decoration: InputDecoration(
                                 hintText: AppLocalizations.of(context)!
                                     .enter_reason_ucf,
-                                hintStyle:const TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 12.0,
                                     color: MyTheme.textfield_grey),
-                                enabledBorder:const OutlineInputBorder(
+                                enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: MyTheme.textfield_grey,
                                       width: 0.5),
-                                  borderRadius:  BorderRadius.all(
-                                     Radius.circular(AppDimensions.radiusSmall),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(AppDimensions.radiusSmall),
                                   ),
                                 ),
-                                focusedBorder:const OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: MyTheme.textfield_grey,
                                       width: 1.0),
-                                  borderRadius:  BorderRadius.all(
-                                     Radius.circular(AppDimensions.radiusSmall),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(AppDimensions.radiusSmall),
                                   ),
                                 ),
-                                contentPadding:const EdgeInsets.only(
+                                contentPadding: const EdgeInsets.only(
                                     left: 8.0, top: 16.0, bottom: 16.0)),
                           ),
                         ),
@@ -424,18 +430,20 @@ final  ScrollController _mainScrollController = ScrollController();
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingsmall),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
-                        color:const Color.fromRGBO(253, 253, 253, 1),
+                        color: const Color.fromRGBO(253, 253, 253, 1),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusSmall),
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
                           AppLocalizations.of(context)!.close_all_capital,
-                          style:const TextStyle(
+                          style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
                         ),
@@ -445,22 +453,24 @@ final  ScrollController _mainScrollController = ScrollController();
                         },
                       ),
                     ),
-                 const   SizedBox(
+                    const SizedBox(
                       width: 1,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingextraLarge),
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingextraLarge),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
                         color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusSmall),
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
                           AppLocalizations.of(context)!.submit_ucf,
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
@@ -482,7 +492,7 @@ final  ScrollController _mainScrollController = ScrollController();
     setState(() {
       _showReasonWarning = true;
     });
-  final  Timer timer = Timer(const Duration(seconds: 2), () {
+    final Timer timer = Timer(const Duration(seconds: 2), () {
       setState(() {
         _showReasonWarning = false;
       });
@@ -513,7 +523,7 @@ final  ScrollController _mainScrollController = ScrollController();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         refundRequestSendResponse.message,
-        style:const TextStyle(color: MyTheme.font_grey),
+        style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
@@ -592,7 +602,7 @@ final  ScrollController _mainScrollController = ScrollController();
                   Center(
                     child: Text(
                       AppLocalizations.of(context)!.ordered_product_ucf,
-                      style:const TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
@@ -610,7 +620,8 @@ final  ScrollController _mainScrollController = ScrollController();
                                   child: Text(
                                     AppLocalizations.of(context)!
                                         .ordered_product_ucf,
-                                    style:const TextStyle(color: MyTheme.font_grey),
+                                    style: const TextStyle(
+                                        color: MyTheme.font_grey),
                                   ),
                                 )))
                 ])),
@@ -647,7 +658,8 @@ final  ScrollController _mainScrollController = ScrollController();
           ? Column(
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Row(
                       children: [
                         Container(
@@ -655,16 +667,16 @@ final  ScrollController _mainScrollController = ScrollController();
                           child: Text(
                             AppLocalizations.of(context)!.sub_total_all_capital,
                             textAlign: TextAlign.end,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.font_grey,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                      const  Spacer(),
+                        const Spacer(),
                         Text(
                           convertPrice(_orderDetails!.subtotal!),
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
@@ -672,7 +684,8 @@ final  ScrollController _mainScrollController = ScrollController();
                       ],
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Row(
                       children: [
                         Container(
@@ -680,16 +693,16 @@ final  ScrollController _mainScrollController = ScrollController();
                           child: Text(
                             AppLocalizations.of(context)!.tax_all_capital,
                             textAlign: TextAlign.end,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.font_grey,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                      const  Spacer(),
+                        const Spacer(),
                         Text(
                           convertPrice(_orderDetails!.tax!),
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
@@ -697,7 +710,8 @@ final  ScrollController _mainScrollController = ScrollController();
                       ],
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Row(
                       children: [
                         Container(
@@ -706,16 +720,16 @@ final  ScrollController _mainScrollController = ScrollController();
                             AppLocalizations.of(context)!
                                 .shipping_cost_all_capital,
                             textAlign: TextAlign.end,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.font_grey,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                     const   Spacer(),
+                        const Spacer(),
                         Text(
                           convertPrice(_orderDetails!.shipping_cost!),
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
@@ -723,7 +737,8 @@ final  ScrollController _mainScrollController = ScrollController();
                       ],
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Row(
                       children: [
                         Container(
@@ -731,25 +746,26 @@ final  ScrollController _mainScrollController = ScrollController();
                           child: Text(
                             AppLocalizations.of(context)!.discount_all_capital,
                             textAlign: TextAlign.end,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.font_grey,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                      const  Spacer(),
+                        const Spacer(),
                         Text(
                           convertPrice(_orderDetails!.coupon_discount!),
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
                         ),
                       ],
                     )),
-              const  Divider(),
+                const Divider(),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingsmall),
                     child: Row(
                       children: [
                         Container(
@@ -764,7 +780,7 @@ final  ScrollController _mainScrollController = ScrollController();
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                      const  Spacer(),
+                        const Spacer(),
                         Text(
                           convertPrice(_orderDetails!.grand_total!),
                           style: TextStyle(
@@ -787,25 +803,25 @@ final  ScrollController _mainScrollController = ScrollController();
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding:const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: ShimmerHelper().buildBasicShimmer(height: 40, width: 40.0),
             ),
             Padding(
-              padding:const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: ShimmerHelper().buildBasicShimmer(height: 40, width: 40.0),
             ),
             Padding(
-              padding:const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: ShimmerHelper().buildBasicShimmer(height: 40, width: 40.0),
             ),
             Padding(
-              padding:const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: ShimmerHelper().buildBasicShimmer(height: 40, width: 40.0),
             )
           ],
         ),
         Padding(
-          padding:const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: ShimmerHelper().buildBasicShimmer(height: 20, width: 250.0),
         )
       ],
@@ -835,36 +851,38 @@ final  ScrollController _mainScrollController = ScrollController();
                     height:
                         _orderDetails!.delivery_status == "pending" ? 36 : 30,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmallExtra),
                       border: Border.all(color: Colors.redAccent, width: 2),
 
                       //shape: BoxShape.rectangle,
                     ),
-                    child:const Icon(
+                    child: const Icon(
                       Icons.list_alt,
                       color: Colors.redAccent,
                       size: 18,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
                         width: MediaQuery.of(context).size.width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
-                const  Spacer(),
+                  const Spacer(),
                   Text(
                     AppLocalizations.of(context)!.order_placed,
                     textAlign: TextAlign.center,
-                    style:const TextStyle(color: MyTheme.font_grey),
+                    style: const TextStyle(color: MyTheme.font_grey),
                   )
                 ],
               ),
             ),
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 0 ? Colors.green : MyTheme.medium_grey,
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               iconStyle: _stepIndex >= 0
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
@@ -895,43 +913,45 @@ final  ScrollController _mainScrollController = ScrollController();
                     height:
                         _orderDetails!.delivery_status == "confirmed" ? 36 : 30,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmallExtra),
                       border: Border.all(color: Colors.blue, width: 2),
 
                       //shape: BoxShape.rectangle,
                     ),
-                    child:const Icon(
+                    child: const Icon(
                       Icons.thumb_up_sharp,
                       color: Colors.blue,
                       size: 18,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
                         width: MediaQuery.of(context).size.width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
-                 const Spacer(),
+                  const Spacer(),
                   Text(
                     AppLocalizations.of(context)!.confirmed_ucf,
                     textAlign: TextAlign.center,
-                    style:const TextStyle(color: MyTheme.font_grey),
+                    style: const TextStyle(color: MyTheme.font_grey),
                   )
                 ],
               ),
             ),
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 1 ? Colors.green : MyTheme.medium_grey,
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               iconStyle: _stepIndex >= 1
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
                   : null,
             ),
             beforeLineStyle: _stepIndex >= 1
-                ?const LineStyle(
+                ? const LineStyle(
                     color: Colors.green,
                     thickness: 5,
                   )
@@ -966,43 +986,45 @@ final  ScrollController _mainScrollController = ScrollController();
                         ? 36
                         : 30,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmallExtra),
                       border: Border.all(color: Colors.amber, width: 2),
 
                       //shape: BoxShape.rectangle,
                     ),
-                    child:const Icon(
+                    child: const Icon(
                       Icons.local_shipping_outlined,
                       color: Colors.amber,
                       size: 18,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
                         width: MediaQuery.of(context).size.width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
-                const  Spacer(),
+                  const Spacer(),
                   Text(
                     AppLocalizations.of(context)!.on_the_way_ucf,
                     textAlign: TextAlign.center,
-                    style:const TextStyle(color: MyTheme.font_grey),
+                    style: const TextStyle(color: MyTheme.font_grey),
                   )
                 ],
               ),
             ),
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 2 ? Colors.green : MyTheme.medium_grey,
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               iconStyle: _stepIndex >= 2
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
                   : null,
             ),
             beforeLineStyle: _stepIndex >= 2
-                ?const LineStyle(
+                ? const LineStyle(
                     color: Colors.green,
                     thickness: 5,
                   )
@@ -1011,7 +1033,7 @@ final  ScrollController _mainScrollController = ScrollController();
                     thickness: 4,
                   ),
             afterLineStyle: _stepIndex >= 5
-                ?const LineStyle(
+                ? const LineStyle(
                     color: Colors.green,
                     thickness: 5,
                   )
@@ -1036,43 +1058,45 @@ final  ScrollController _mainScrollController = ScrollController();
                     height:
                         _orderDetails!.delivery_status == "delivered" ? 36 : 30,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmallExtra),
                       border: Border.all(color: Colors.purple, width: 2),
 
                       //shape: BoxShape.rectangle,
                     ),
-                    child:const Icon(
+                    child: const Icon(
                       Icons.done_all,
                       color: Colors.purple,
                       size: 18,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
                         width: MediaQuery.of(context).size.width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
-                const  Spacer(),
+                  const Spacer(),
                   Text(
                     AppLocalizations.of(context)!.delivered_ucf,
                     textAlign: TextAlign.center,
-                    style:const TextStyle(color: MyTheme.font_grey),
+                    style: const TextStyle(color: MyTheme.font_grey),
                   )
                 ],
               ),
             ),
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 5 ? Colors.green : MyTheme.medium_grey,
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               iconStyle: _stepIndex >= 5
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
                   : null,
             ),
             beforeLineStyle: _stepIndex >= 5
-                ?const LineStyle(
+                ? const LineStyle(
                     color: Colors.green,
                     thickness: 5,
                   )
@@ -1098,15 +1122,15 @@ final  ScrollController _mainScrollController = ScrollController();
               children: [
                 Text(
                   AppLocalizations.of(context)!.order_code_ucf,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 ),
-               const Spacer(),
+                const Spacer(),
                 Text(
                   AppLocalizations.of(context)!.shipping_method_ucf,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
@@ -1114,7 +1138,8 @@ final  ScrollController _mainScrollController = ScrollController();
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Text(
@@ -1124,10 +1149,10 @@ final  ScrollController _mainScrollController = ScrollController();
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),
-               const   Spacer(),
+                  const Spacer(),
                   Text(
                     _orderDetails!.shipping_type_string!,
-                    style:const TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.grey_153,
                     ),
                   ),
@@ -1136,17 +1161,17 @@ final  ScrollController _mainScrollController = ScrollController();
             ),
             Row(
               children: [
-                Text( 
+                Text(
                   AppLocalizations.of(context)!.order_date_ucf,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 ),
-              const  Spacer(),
+                const Spacer(),
                 Text(
                   AppLocalizations.of(context)!.payment_method_ucf,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
@@ -1154,19 +1179,20 @@ final  ScrollController _mainScrollController = ScrollController();
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Text(
                     _orderDetails!.date!,
-                    style:const  TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.grey_153,
                     ),
                   ),
-                 const  Spacer(),
+                  const Spacer(),
                   Text(
                     _orderDetails!.payment_type!,
-                    style:const  TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.grey_153,
                     ),
                   ),
@@ -1177,15 +1203,15 @@ final  ScrollController _mainScrollController = ScrollController();
               children: [
                 Text(
                   AppLocalizations.of(context)!.payment_status_ucf,
-                  style:const  TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 ),
-              const   Spacer(),
+                const Spacer(),
                 Text(
                   AppLocalizations.of(context)!.delivery_status_ucf,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
@@ -1200,17 +1226,17 @@ final  ScrollController _mainScrollController = ScrollController();
                     padding: const EdgeInsetsDirectional.only(end: 8.0),
                     child: Text(
                       _orderDetails!.payment_status_string!,
-                      style:const  TextStyle(
+                      style: const TextStyle(
                         color: MyTheme.grey_153,
                       ),
                     ),
                   ),
                   buildPaymentStatusCheckContainer(
                       _orderDetails!.payment_status),
-                const   Spacer(),
+                  const Spacer(),
                   Text(
                     _orderDetails!.delivery_status_string!,
-                    style:const  TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.grey_153,
                     ),
                   ),
@@ -1228,10 +1254,10 @@ final  ScrollController _mainScrollController = ScrollController();
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 ),
-               const  Spacer(),
+                const Spacer(),
                 Text(
                   AppLocalizations.of(context)!.total_amount_ucf,
-                  style:const  TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
@@ -1239,7 +1265,8 @@ final  ScrollController _mainScrollController = ScrollController();
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   _orderDetails!.shipping_address != null
@@ -1250,7 +1277,7 @@ final  ScrollController _mainScrollController = ScrollController();
                                 ? Text(
                                     "${AppLocalizations.of(context)!.name_ucf}: ${_orderDetails!.shipping_address!.name}",
                                     maxLines: 3,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                       color: MyTheme.grey_153,
                                     ),
                                   )
@@ -1259,7 +1286,7 @@ final  ScrollController _mainScrollController = ScrollController();
                                 ? Text(
                                     "${AppLocalizations.of(context)!.email_ucf}: ${_orderDetails!.shipping_address!.email}",
                                     maxLines: 3,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                       color: MyTheme.grey_153,
                                     ),
                                   )
@@ -1267,42 +1294,42 @@ final  ScrollController _mainScrollController = ScrollController();
                             Text(
                               "${AppLocalizations.of(context)!.address_ucf}: ${_orderDetails!.shipping_address!.address}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.city_ucf}: ${_orderDetails!.shipping_address!.city}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.country_ucf}: ${_orderDetails!.shipping_address!.country}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.state_ucf}: ${_orderDetails!.shipping_address!.state}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.phone_ucf}: ${_orderDetails!.shipping_address!.phone ?? ''}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.postal_code}: ${_orderDetails!.shipping_address!.postal_code ?? ''}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
@@ -1315,7 +1342,7 @@ final  ScrollController _mainScrollController = ScrollController();
                                 ? Text(
                                     "${AppLocalizations.of(context)!.name_ucf}: ${_orderDetails!.pickupPoint!.name}",
                                     maxLines: 3,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                       color: MyTheme.grey_153,
                                     ),
                                   )
@@ -1323,20 +1350,20 @@ final  ScrollController _mainScrollController = ScrollController();
                             Text(
                               "${AppLocalizations.of(context)!.address_ucf}: ${_orderDetails!.pickupPoint?.address}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.phone_ucf}: ${_orderDetails!.pickupPoint!.phone}",
                               maxLines: 3,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                           ],
                         ),
-                const  Spacer(),
+                  const Spacer(),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -1348,7 +1375,7 @@ final  ScrollController _mainScrollController = ScrollController();
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                  const    SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Btn.basic(
@@ -1360,26 +1387,27 @@ final  ScrollController _mainScrollController = ScrollController();
                             _onPressReorder(_orderDetails!.id);
                           },
                           child: Container(
-                            padding:const EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusSmall),
                                 border: Border.all(color: MyTheme.light_grey)),
                             child: Row(
                               children: [
-                             const   Icon(
+                                const Icon(
                                   Icons.refresh,
                                   color: MyTheme.grey_153,
                                   size: 16,
                                 ),
                                 Text(
                                   LangText(context).local.re_order_ucf,
-                                  style:const TextStyle(
+                                  style: const TextStyle(
                                       color: MyTheme.grey_153, fontSize: 14),
                                 ),
                               ],
                             ),
                           )),
-                    const  SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       /*
@@ -1423,8 +1451,9 @@ final  ScrollController _mainScrollController = ScrollController();
                 _orderDetails!.payment_status == "unpaid")
               Btn.basic(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
-                  padding:const EdgeInsets.symmetric(vertical: 10),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmall)),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   minWidth: DeviceInfo(context).width,
                   color: MyTheme.font_grey,
                   onPressed: () {
@@ -1432,14 +1461,15 @@ final  ScrollController _mainScrollController = ScrollController();
                   },
                   child: Text(
                     LangText(context).local.cancel_order_ucf,
-                    style:const TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   )),
             if (_orderDetails!.delivery_status == "pending" &&
                 _orderDetails!.payment_status == "unpaid")
               Btn.basic(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
-                  padding:const EdgeInsets.symmetric(vertical: 10),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmall)),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   minWidth: DeviceInfo(context).width,
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
@@ -1448,7 +1478,7 @@ final  ScrollController _mainScrollController = ScrollController();
                   },
                   child: Text(
                     LangText(context).local.make_payment_ucf,
-                    style:const TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   )),
           ],
         ),
@@ -1464,22 +1494,24 @@ final  ScrollController _mainScrollController = ScrollController();
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 _orderedItemList[index].product_name,
                 maxLines: 2,
-                style:const TextStyle(
+                style: const TextStyle(
                   color: MyTheme.font_grey,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Row(
                 children: [
                   Text(
                     _orderedItemList[index].quantity.toString() + " x ",
-                    style:const TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
@@ -1488,19 +1520,19 @@ final  ScrollController _mainScrollController = ScrollController();
                           _orderedItemList[index].variation != null
                       ? Text(
                           _orderedItemList[index].variation,
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 13,
                               fontWeight: FontWeight.w600),
                         )
                       : Text(
                           LangText(context).local.item_all_lower,
-                          style:const TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 13,
                               fontWeight: FontWeight.w600),
                         ),
-                const  Spacer(),
+                  const Spacer(),
                   Text(
                     convertPrice(_orderedItemList[index].price),
                     style: TextStyle(
@@ -1521,7 +1553,8 @@ final  ScrollController _mainScrollController = ScrollController();
                           _orderDetails!.code);
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingsmall),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -1532,8 +1565,8 @@ final  ScrollController _mainScrollController = ScrollController();
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline),
                           ),
-                         Padding(
-                            padding:  const EdgeInsets.only(left: 2.0),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 2.0),
                             child: Icon(
                               Icons.rotate_left,
                               color: Theme.of(context).primaryColor,
@@ -1555,7 +1588,7 @@ final  ScrollController _mainScrollController = ScrollController();
                         children: [
                           Text(
                             AppLocalizations.of(context)!.refund_status_ucf,
-                            style:const TextStyle(color: MyTheme.font_grey),
+                            style: const TextStyle(color: MyTheme.font_grey),
                           ),
                           Text(
                             _orderedItemList[index].refund_label,
@@ -1596,7 +1629,7 @@ final  ScrollController _mainScrollController = ScrollController();
               Divider(color: MyTheme.medium_grey),
           itemCount: _orderedItemList.length,
           scrollDirection: Axis.vertical,
-          physics:const NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildOrderedProductItemsCard(index);
@@ -1620,7 +1653,7 @@ final  ScrollController _mainScrollController = ScrollController();
             onPressed: () {
               if (widget.from_notification || widget.go_back == false) {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return  const Main();
+                  return const Main();
                 }));
               } else {
                 return Navigator.of(context).pop();
@@ -1650,7 +1683,7 @@ final  ScrollController _mainScrollController = ScrollController();
                   color: MyTheme.soft_accent_color,
                   child: Text(
                     AppLocalizations.of(context)!.make_offline_payment_ucf,
-                    style:const TextStyle(color: MyTheme.font_grey),
+                    style: const TextStyle(color: MyTheme.font_grey),
                   ),
                   onPressed: () {
                     onPressOfflinePaymentButton();

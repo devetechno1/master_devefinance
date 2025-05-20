@@ -61,7 +61,8 @@ class _OrderListState extends State<OrderList> {
   final ScrollController _scrollController = ScrollController();
   final ScrollController _xcrollController = ScrollController();
 
-  final List<PaymentStatus> _paymentStatusList = PaymentStatus.getPaymentStatusList();
+  final List<PaymentStatus> _paymentStatusList =
+      PaymentStatus.getPaymentStatusList();
   final List<DeliveryStatus> _deliveryStatusList =
       DeliveryStatus.getDeliveryStatusList();
 
@@ -259,7 +260,8 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: DropdownButton<PaymentStatus>(
               dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -289,7 +291,8 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: DropdownButton<DeliveryStatus>(
               dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -338,7 +341,8 @@ class _OrderListState extends State<OrderList> {
                 Padding(
                   padding: MediaQuery.of(context).viewPadding.top >
                           30 //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                      ? const EdgeInsets.only(top: AppDimensions.paddingveryLarge)
+                      ? const EdgeInsets.only(
+                          top: AppDimensions.paddingveryLarge)
                       : const EdgeInsets.only(top: 14.0),
                   child: buildTopAppBarContainer(),
                 ),
@@ -419,8 +423,11 @@ class _OrderListState extends State<OrderList> {
             separatorBuilder: (context, index) => const SizedBox(
               height: 14,
             ),
-            padding:
-                const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium, top: 10, bottom: 0),
+            padding: const EdgeInsets.only(
+                left: AppDimensions.paddingMedium,
+                right: AppDimensions.paddingMedium,
+                top: 10,
+                bottom: 0),
             itemCount: _orderList.length,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
@@ -457,7 +464,8 @@ class _OrderListState extends State<OrderList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Text(
                 _orderList[index].code,
                 style: TextStyle(
@@ -467,7 +475,8 @@ class _OrderListState extends State<OrderList> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               child: Row(
                 children: [
                   Text(_orderList[index].date,
@@ -485,7 +494,8 @@ class _OrderListState extends State<OrderList> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+              padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingsmallExtra),
               child: Row(
                 children: [
                   Text(

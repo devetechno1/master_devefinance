@@ -3,9 +3,8 @@ import 'package:active_ecommerce_cms_demo_app/custom/home_search_box.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:flutter/material.dart';
 
-class BuildAppBar extends StatelessWidget implements PreferredSizeWidget
-{
-  const BuildAppBar(  {
+class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const BuildAppBar({
     super.key,
     required this.statusBarHeight,
     required this.context,
@@ -15,25 +14,30 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget
   final BuildContext context;
 
   AppBar get appBar => AppBar(
-    automaticallyImplyLeading: false,
-    backgroundColor: Colors.white,
-    scrolledUnderElevation: 0.0,
-    centerTitle: false,
-    elevation: 0,
-    flexibleSpace: Padding(
-      padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
-      child: GestureDetector(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter())),
-        child: HomeSearchBox(context: context),
-      ),
-    ),
-  );
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
+        centerTitle: false,
+        elevation: 0,
+        flexibleSpace: Padding(
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingsupsmall,
+              bottom: AppDimensions.paddingsupsmall,
+              left: 18,
+              right: 18),
+          child: GestureDetector(
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => const Filter())),
+            child: HomeSearchBox(context: context),
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     return appBar;
   }
-  
+
   @override
   Size get preferredSize => appBar.preferredSize;
 }

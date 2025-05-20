@@ -171,7 +171,8 @@ class _AuctionProductsState extends State<AuctionProducts> {
           crossAxisSpacing: 14,
           itemCount: _auctionProductItems.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
+          padding:
+              const EdgeInsets.only(top: 0.0, bottom: 10, left: 18, right: 18),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3

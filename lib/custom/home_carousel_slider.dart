@@ -12,7 +12,7 @@ class HomeCarouselSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeBannersList(
-      isBannersInitial: homeData!.isCarouselInitial, 
+      isBannersInitial: homeData!.isCarouselInitial,
       bannersImagesList: homeData!.carouselImageList,
       aspectRatio: 338 / 140,
       viewportFraction: 1,

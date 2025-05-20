@@ -92,7 +92,7 @@ class _WishlistState extends State<Wishlist> {
     );
   }
 
- Widget buildWishlist() {
+  Widget buildWishlist() {
     if (is_logged_in.$ == false) {
       return Container(
         height: 100,
@@ -108,7 +108,8 @@ class _WishlistState extends State<Wishlist> {
         child: ShimmerHelper().buildListShimmer(item_count: 10),
       );
     } else if (_wishlistItems.isNotEmpty) {
-      return WishListGridView(onPopFromProduct: _onPageRefresh, wishlistItems: _wishlistItems);
+      return WishListGridView(
+          onPopFromProduct: _onPageRefresh, wishlistItems: _wishlistItems);
     } else {
       return Container(
         height: 100,

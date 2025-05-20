@@ -51,7 +51,8 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
                 width: 170,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusNormal)),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusNormal)),
                 padding: const EdgeInsets.all(AppDimensions.paddingveryLarge),
                 child: _buildImage()),
             Column(
@@ -86,7 +87,8 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       height: 100,
       child: Center(
         child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(AppDimensions.radiusDefualt)),
+          borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppDimensions.radiusDefualt)),
           child: FadeInImage.assetNetwork(
             placeholder: AppImages.placeholder,
             image: widget.image ?? AppImages.placeholder,

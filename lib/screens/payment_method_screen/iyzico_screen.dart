@@ -139,20 +139,21 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       iyzicoPaymentSuccessResponse.message!,
     );
     if (widget.payment_type == "cart_payment") {
-    await  Navigator.push(context, MaterialPageRoute(builder: (context) {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const OrderList(from_checkout: true);
       }));
     } else if (widget.payment_type == "order_re_payment") {
-    await  Navigator.push(context, MaterialPageRoute(builder: (context) {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const OrderList(from_checkout: true);
       }));
     } else if (widget.payment_type == "wallet_payment") {
-    await  Navigator.push(context, MaterialPageRoute(builder: (context) {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const Wallet(from_recharge: true);
       }));
     } else if (widget.payment_type == "customer_package_payment") {
-      await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return  const Profile();
+      await Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+        return const Profile();
       }));
     }
   }
@@ -196,7 +197,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       ),
       title: Text(
         AppLocalizations.of(context)!.pay_with_iyzico,
-        style:TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
       titleSpacing: 0,

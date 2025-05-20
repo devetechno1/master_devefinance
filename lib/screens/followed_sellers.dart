@@ -116,7 +116,11 @@ class _FollowedSellersState extends State<FollowedSellers> {
               crossAxisSpacing: 14,
               mainAxisSpacing: 14,
               childAspectRatio: 0.7),
-          padding: const EdgeInsets.only(top: AppDimensions.paddingLarge, bottom: AppDimensions.paddingsupsmall, left: 18, right: 18),
+          padding: const EdgeInsets.only(
+              top: AppDimensions.paddingLarge,
+              bottom: AppDimensions.paddingsupsmall,
+              left: 18,
+              right: 18),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -157,7 +161,8 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   height: 100,
                   child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(AppDimensions.radiusDefualt), bottom: Radius.zero),
+                          top: Radius.circular(AppDimensions.radiusDefualt),
+                          bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: sellerInfo.shopLogo!,
@@ -185,7 +190,8 @@ class _FollowedSellersState extends State<FollowedSellers> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
               child: Container(
                 height: 15,
                 child: RatingBar(
@@ -244,7 +250,8 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.amber),
                       color: MyTheme.amber,
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                      borderRadius: BorderRadius.circular(
+                          AppDimensions.radiusaHalfsmall)),
                   child: Text(
                     LangText(context).local.visit_store_ucf,
                     style: TextStyle(
@@ -266,7 +273,9 @@ class _FollowedSellersState extends State<FollowedSellers> {
         crossAxisCount: 3,
       ),
       itemCount: 18,
-      padding: const EdgeInsets.only(left: AppDimensions.paddingMedium, right: AppDimensions.paddingMedium),
+      padding: const EdgeInsets.only(
+          left: AppDimensions.paddingMedium,
+          right: AppDimensions.paddingMedium),
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,

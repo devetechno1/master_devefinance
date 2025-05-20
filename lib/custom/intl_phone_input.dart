@@ -89,48 +89,47 @@ class CustomInternationalPhoneNumberInput extends StatefulWidget {
 
   final double? height;
 
-  const CustomInternationalPhoneNumberInput(
-      {Key? key,
-      this.selectorConfig = const SelectorConfig(),
-      required this.onInputChanged,
-      this.onInputValidated,
-      this.onSubmit,
-      this.onFieldSubmitted,
-      this.validator,
-      this.onSaved,
-      this.textFieldController,
-      this.keyboardAction,
-      this.keyboardType = TextInputType.phone,
-      this.initialValue,
-      this.hintText = 'Phone number',
-      this.errorMessage = 'Invalid phone number',
-      this.selectorButtonOnErrorPadding = 24,
-      this.spaceBetweenSelectorAndTextField = 12,
-      this.maxLength = 15,
-      this.isEnabled = true,
-      this.formatInput = true,
-      this.autoFocus = false,
-      this.autoFocusSearch = false,
-      this.autoValidateMode = AutovalidateMode.disabled,
-      this.ignoreBlank = false,
-      this.countrySelectorScrollControlled = true,
-      this.locale,
-      this.textStyle,
-      this.selectorTextStyle,
-      this.inputBorder,
-      this.inputDecoration,
-      this.searchBoxDecoration,
-      this.textAlign = TextAlign.start,
-      this.textAlignVertical = TextAlignVertical.center,
-      this.scrollPadding = const EdgeInsets.all(20.0),
-      this.focusNode,
-      this.cursorColor,
-      this.autofillHints,
-      this.countries, 
-      this.backgroundColor, 
-      this.height,
-    })
-      : super(key: key);
+  const CustomInternationalPhoneNumberInput({
+    Key? key,
+    this.selectorConfig = const SelectorConfig(),
+    required this.onInputChanged,
+    this.onInputValidated,
+    this.onSubmit,
+    this.onFieldSubmitted,
+    this.validator,
+    this.onSaved,
+    this.textFieldController,
+    this.keyboardAction,
+    this.keyboardType = TextInputType.phone,
+    this.initialValue,
+    this.hintText = 'Phone number',
+    this.errorMessage = 'Invalid phone number',
+    this.selectorButtonOnErrorPadding = 24,
+    this.spaceBetweenSelectorAndTextField = 12,
+    this.maxLength = 15,
+    this.isEnabled = true,
+    this.formatInput = true,
+    this.autoFocus = false,
+    this.autoFocusSearch = false,
+    this.autoValidateMode = AutovalidateMode.disabled,
+    this.ignoreBlank = false,
+    this.countrySelectorScrollControlled = true,
+    this.locale,
+    this.textStyle,
+    this.selectorTextStyle,
+    this.inputBorder,
+    this.inputDecoration,
+    this.searchBoxDecoration,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical = TextAlignVertical.center,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.focusNode,
+    this.cursorColor,
+    this.autofillHints,
+    this.countries,
+    this.backgroundColor,
+    this.height,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _InputWidgetState();
@@ -318,8 +317,7 @@ class _InputWidgetState extends State<CustomInternationalPhoneNumberInput> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (isValid) {
         setState(() {
-          selectorButtonBottomPadding =
-              widget.selectorButtonOnErrorPadding;
+          selectorButtonBottomPadding = widget.selectorButtonOnErrorPadding;
         });
       } else {
         setState(() {
@@ -344,8 +342,7 @@ class _InputWidgetState extends State<CustomInternationalPhoneNumberInput> {
       final String parsedPhoneNumberString =
           controller!.text.replaceAll(RegExp(r'[^\d+]'), '');
 
-      getParsedPhoneNumber(parsedPhoneNumberString, country?.alpha2Code)
-          .then(
+      getParsedPhoneNumber(parsedPhoneNumberString, country?.alpha2Code).then(
         (phoneNumber) => widget.onSaved?.call(
           PhoneNumber(
               phoneNumber: phoneNumber,
@@ -483,8 +480,8 @@ class CustomSelectorButton extends StatelessWidget {
     required this.locale,
     required this.onCountryChanged,
     required this.isEnabled,
-    required this.isScrollControlled, 
-    required this.backgroundColor, 
+    required this.isScrollControlled,
+    required this.backgroundColor,
     required this.height,
   }) : super(key: key);
 
@@ -519,7 +516,8 @@ class CustomSelectorButton extends StatelessWidget {
                 border: Border.all(color: MyTheme.textfield_grey, width: .5),
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                    bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall))),
+                    bottomLeft:
+                        Radius.circular(AppDimensions.radiusaHalfsmall))),
             child: TextButton(
               key: const Key(TestHelper.DropdownButtonKeyValue),
               style: TextButton.styleFrom(
@@ -616,7 +614,8 @@ class CustomSelectorButton extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(AppDimensions.radiusNormal), topRight: Radius.circular(AppDimensions.radiusNormal))),
+              topLeft: Radius.circular(AppDimensions.radiusNormal),
+              topRight: Radius.circular(AppDimensions.radiusNormal))),
       builder: (BuildContext context) {
         return AnimatedPadding(
           padding:

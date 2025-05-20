@@ -42,10 +42,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PhotoProvider with ChangeNotifier {
-
-
-
-
   Future<List<SingleBanner>> fetchPhotos(String slug) async {
     final url = "${AppConfig.BASE_URL}/$slug";
 
@@ -68,7 +64,6 @@ class PhotoProvider with ChangeNotifier {
         } else {
           return [];
         }
-
       } else {
         throw Exception(
             "Failed to load photos. Status code: ${response.statusCode}");

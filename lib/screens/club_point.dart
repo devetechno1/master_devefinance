@@ -202,7 +202,7 @@ class _ClubpointState extends State<Clubpoint> {
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
-         // padding: const EdgeInsets.all(0.0),
+          // padding: const EdgeInsets.all(0.0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -224,7 +224,8 @@ class _ClubpointState extends State<Clubpoint> {
     return Container(
       height: 91,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Row(

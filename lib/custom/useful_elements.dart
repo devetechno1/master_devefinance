@@ -29,9 +29,10 @@ class UsefulElements {
   }
 
   static Widget backToMain(context, {color = 'black', go_back = true}) {
-    if(!go_back) return const SizedBox();
+    if (!go_back) return const SizedBox();
     return IconButton(
-      icon: Icon(app_language_rtl.$!
+      icon: Icon(
+          app_language_rtl.$!
               ? CupertinoIcons.arrow_right
               : CupertinoIcons.arrow_left,
           color: color == 'white' ? Colors.white : MyTheme.dark_font_grey),

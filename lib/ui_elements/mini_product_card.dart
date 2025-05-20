@@ -226,8 +226,8 @@ class MiniProductCard extends StatefulWidget {
     this.main_price,
     this.stroked_price,
     this.has_discount,
-    this.isWholesale = false, 
-    this.priceTextStyle, 
+    this.isWholesale = false,
+    this.priceTextStyle,
     this.nameTextStyle,
   }) : super(key: key);
 
@@ -257,7 +257,8 @@ class _MiniProductCardState extends State<MiniProductCard> {
                 child: Container(
                     width: double.infinity,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusNormal),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image!,
@@ -270,11 +271,12 @@ class _MiniProductCardState extends State<MiniProductCard> {
                   widget.name!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: widget.nameTextStyle ?? const TextStyle(
-                      color: MyTheme.font_grey_Light,
-                      fontSize: 12,
-                      height: 1.2,
-                      fontWeight: FontWeight.w400),
+                  style: widget.nameTextStyle ??
+                      const TextStyle(
+                          color: MyTheme.font_grey_Light,
+                          fontSize: 12,
+                          height: 1.2,
+                          fontWeight: FontWeight.w400),
                 ),
               ),
               Flexible(
@@ -287,10 +289,11 @@ class _MiniProductCardState extends State<MiniProductCard> {
                             SystemConfig.systemCurrency!.symbol!)
                         : widget.main_price!,
                     maxLines: 1,
-                    style: widget.priceTextStyle ?? TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
+                    style: widget.priceTextStyle ??
+                        TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

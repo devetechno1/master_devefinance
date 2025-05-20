@@ -15,17 +15,16 @@ class GetBrandsListSliver extends StatelessWidget {
       child: ListenableBuilder(
           listenable: homeData,
           builder: (context, child) {
-           // if (!homeData.isFeaturedProductInitial && homeData.featuredProductList.isEmpty) return const SizedBox();
+            // if (!homeData.isFeaturedProductInitial && homeData.featuredProductList.isEmpty) return const SizedBox();
             return CustomHorizontalBrandsListSectionWidget(
               title: LangText(context).local.top_brands_ucf,
-               isBrandsInitial: homeData.isBrandsInitial,
-                brandsList: homeData.brandsList,
-                 numberOfTotalBrands: homeData.totalAllBrandsData,
-                  onArriveTheEndOfList: homeData.fetchBrandsProducts, 
-     
-             
-            //  nameTextStyle: ,
-            //pricesTextStyle:
+              isBrandsInitial: homeData.isBrandsInitial,
+              brandsList: homeData.brandsList,
+              numberOfTotalBrands: homeData.totalAllBrandsData,
+              onArriveTheEndOfList: homeData.fetchBrandsProducts,
+
+              //  nameTextStyle: ,
+              //pricesTextStyle:
             );
           }),
     );

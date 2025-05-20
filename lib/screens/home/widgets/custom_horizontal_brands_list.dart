@@ -6,19 +6,18 @@ import 'package:flutter/material.dart';
 class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
   const CustomHorizontalBrandsListSectionWidget({
     super.key,
-    required this.title, 
-    required this.isBrandsInitial, 
-    required this.brandsList, 
-    required this.numberOfTotalBrands, 
-    required this.onArriveTheEndOfList, 
-    this.priceTextStyle, 
+    required this.title,
+    required this.isBrandsInitial,
+    required this.brandsList,
+    required this.numberOfTotalBrands,
+    required this.onArriveTheEndOfList,
+    this.priceTextStyle,
     this.nameTextStyle,
   });
 
   final String title;
   final bool isBrandsInitial;
-  final List <Brands> brandsList;
-  
+  final List<Brands> brandsList;
 
   final int numberOfTotalBrands;
   final void Function() onArriveTheEndOfList;
@@ -28,7 +27,8 @@ class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 305,
-      margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 5),
+      margin:
+          const EdgeInsets.only(top: AppDimensions.paddingsupsmall, bottom: 5),
       color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,11 +49,11 @@ class CustomHorizontalBrandsListSectionWidget extends StatelessWidget {
             ),
           ),
           Flexible(
-            child: BrandHorizontalListWidget(isBrandsInitial: isBrandsInitial,
-             brandsList:brandsList,
-             numberOfTotalBrands:numberOfTotalBrands ,
+            child: BrandHorizontalListWidget(
+              isBrandsInitial: isBrandsInitial,
+              brandsList: brandsList,
+              numberOfTotalBrands: numberOfTotalBrands,
               onArriveTheEndOfList: onArriveTheEndOfList,
-
             ),
           ),
         ],

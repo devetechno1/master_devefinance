@@ -10,20 +10,21 @@ class CategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 220, 
+        height: 220,
         child: ListenableBuilder(
           listenable: homeData,
           builder: (context, child) {
-            if (!homeData.isFeaturedProductInitial && homeData.featuredProductList.isEmpty) {
+            if (!homeData.isFeaturedProductInitial &&
+                homeData.featuredProductList.isEmpty) {
               return const SizedBox();
             }
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-             
                 Padding(
-                  padding: const EdgeInsetsDirectional.only( top: 10,start: 20, bottom: 1),
+                  padding: const EdgeInsetsDirectional.only(
+                      top: 10, start: 20, bottom: 1),
                   child: Text(
                     AppLocalizations.of(context)!.featured_categories_ucf,
                     style: const TextStyle(
@@ -33,8 +34,6 @@ class CategoryList extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                
                 Expanded(
                   child: FeaturedCategoriesWidget(homeData: homeData),
                 ),

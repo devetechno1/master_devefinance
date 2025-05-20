@@ -14,7 +14,7 @@ abstract final class AppDimensions {
   static const double paddingMaxLarge = 24;
   static const double paddingextraLarge = 28;
   static const double paddingveryLarge = 36;
- //Radius
+  //Radius
   static const double radiusSmallExtra = 4;
   static const double radiusaHalfsmall = 6;
   static const double radiusSmall = 8;
@@ -28,4 +28,7 @@ abstract final class AppDimensions {
   static const double radiusVeryEtraLarge = 60;
   static const double radiusVeryEtra = 100;
   static const double radiusVeryVeryEtra = 116;
+  //constrained width
+  static const double constrainedBoxDefaultWidth = 500;
+
 }
