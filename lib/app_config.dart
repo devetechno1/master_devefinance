@@ -6,12 +6,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'data_model/business_settings/business_settings.dart';
+import 'data_model/business_settings/update_model.dart';
 export 'constants/app_dimensions.dart';
 export 'constants/app_images.dart';
 
 // final String this_year = DateTime.now().year.toString();
 
 class AppConfig {
+
+  /// To know the device operating system (ios, huawei or any android device)
+  static StoreType storeType = StoreType.unknown;
+
+
+  /// To make force update to app
+  static String version = '1.0.0';
+
   //configure this
   // static String copyright_text =
   //     "@ Deve Finance " + this_year; //this shows in the splash screen

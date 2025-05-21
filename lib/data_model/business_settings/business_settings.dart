@@ -4,7 +4,9 @@ import 'package:active_ecommerce_cms_demo_app/helpers/color_helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../app_config.dart';
 import '../../screens/home/home_page_type_enum.dart';
+import 'update_model.dart';
 import 'verification_form.dart';
 
 class BusinessSettingsData extends Equatable {
@@ -254,11 +256,13 @@ class BusinessSettingsData extends Equatable {
   final double? deliveryPickupLongitude;
   final double? deliveryPickupLatitude;
   final String? whatsappNumber;
+  final UpdateDataModel? updateData;
 
   bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
 
   const BusinessSettingsData({
     this.whatsappNumber,
+    this.updateData,
     this.isBlogActive = false,
     this.allowTwitterLogin = false,
     this.allowGoogleLogin = false,
@@ -507,7 +511,34 @@ class BusinessSettingsData extends Equatable {
   });
 
   factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
+
+    UpdateDataModel? updateData;
+
+    switch (AppConfig.storeType) {
+
+      case StoreType.appGallery:
+        updateData = UpdateDataModel(
+          mustUpdate: '${data['must_appgallery_update']}' == '1', 
+          version: '${data['appgallery_version']}', 
+          storeLink: '${data['appgallery_link']}',
+        );
+      case StoreType.playStore:
+        updateData = UpdateDataModel(
+          mustUpdate: '${data['must_googleplay_update']}' == '1', 
+          version: '${data['googleplay_version']}', 
+          storeLink: '${data['googleplay_link']}',
+        );
+      case StoreType.appleStore:
+        updateData = UpdateDataModel(
+          mustUpdate: '${data['must_appstore_update']}' == '1', 
+          version: '${data['appstore_version']}', 
+          storeLink: '${data['appstore_link']}',
+        );
+      case StoreType.unknown:
+        updateData = null;
+    }
     return BusinessSettingsData(
+        updateData: updateData,
         whatsappNumber: data['whatsapp_number'] as String?,
         allowTwitterLogin: (data['twitter_login'] as String?) == "1",
         allowGoogleLogin: (data['google_login'] as String?) == "1",

@@ -20,6 +20,7 @@ import 'package:device_preview/device_preview.dart';
 import 'app_config.dart';
 import 'custom/aiz_route.dart';
 
+import 'data_model/business_settings/update_model.dart';
 import 'helpers/business_setting_helper.dart';
 import 'helpers/main_helpers.dart';
 import 'lang_config.dart';
@@ -72,6 +73,8 @@ void main() async {
           true, // Optional: set to false to disable working with HTTP links
     ),
   ]);
+
+  AppConfig.storeType = await StoreType.thisDeviceType();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
