@@ -303,6 +303,7 @@ class HomePresenter extends ChangeNotifier {
       if (banners.isNotEmpty) {
         final BuildContext? context = OneContext().context;
         if (context != null) {
+          await lastIndexPopupBanner.load();
           int index = lastIndexPopupBanner.$ + 1;
           if (index >= banners.length) index = 0;
 

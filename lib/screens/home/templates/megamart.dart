@@ -48,6 +48,7 @@ class _MegamartScreenState extends State<MegamartScreen>
       change();
     });
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => homeData.showPopupBanner());
   }
 
   void change() {

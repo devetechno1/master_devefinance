@@ -47,6 +47,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     });
 
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => homeData.showPopupBanner());
   }
 
   void change() {
