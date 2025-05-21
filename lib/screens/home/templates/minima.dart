@@ -20,7 +20,6 @@ import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
-import '../../../ui_elements/pop_up_banner.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/new_products_list_sliver.dart';
@@ -52,9 +51,6 @@ class _MinimaScreenState extends State<MinimaScreen>
       change();
     });
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      showPopupBanner(context);
-    });
   }
 
   void change() {

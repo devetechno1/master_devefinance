@@ -86,6 +86,10 @@ final SharedValue<bool> auction_addon_installed = SharedValue(
   value: false, // initial value
   key: "auction_addon_installed", // disk storage key for shared_preferences
 );
+final SharedValue<int> lastIndexPopupBanner = SharedValue(
+  value: -1, // initial value
+  key: "lastIndexPopupBanner", // disk storage key for shared_preferences
+);
 // addon end
 
 // social login start

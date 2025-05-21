@@ -1,9 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import '../constants/app_dimensions.dart';
 import '../data_model/popup_banner_model.dart';
-import '../repositories/pop_up_repositry.dart';
 import '../services/navigation_service.dart';
+
 class PopupBannerDialog extends StatelessWidget {
   final PopupBannerModel popupBannerModel;
   const PopupBannerDialog({super.key, required this.popupBannerModel});
@@ -11,9 +10,9 @@ class PopupBannerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: ConstrainedBox(
-        constraints:const BoxConstraints(maxWidth: AppDimensions.constrainedBoxDefaultWidth),
+        constraints: const BoxConstraints(
+            maxWidth: AppDimensions.constrainedBoxDefaultWidth),
         child: Dialog(
-          
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(),
           child: Column(
@@ -34,7 +33,7 @@ class PopupBannerDialog extends StatelessWidget {
                     top: AppDimensions.paddingSmall,
                     right: AppDimensions.paddingSmall,
                     child: Container(
-                      width: 28 ,
+                      width: 28,
                       height: 28,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -58,7 +57,8 @@ class PopupBannerDialog extends StatelessWidget {
               ),
               const SizedBox(height: AppDimensions.paddingDefault),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.paddingDefault),
                 child: Text(
                   popupBannerModel.title ?? '',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -68,53 +68,39 @@ class PopupBannerDialog extends StatelessWidget {
               ),
               const SizedBox(height: AppDimensions.paddingSmall),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.paddingDefault),
                 child: Text(
                   popupBannerModel.summary ?? '',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
               const SizedBox(height: AppDimensions.paddingDefault),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault, vertical: AppDimensions.paddingSupSmall),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      NavigationService.handleUrls(popupBannerModel.btnLink);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, AppDimensions.paddingVeryLarge),
-                      backgroundColor:popupBannerModel.btnBackgroundColor,
-                      shape: const RoundedRectangleBorder(),
-                    ),
-                    child: Text(
-                      popupBannerModel.btnText??'',
-                      style: const TextStyle(color: Colors.white),
-                    ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.paddingDefault,
+                    vertical: AppDimensions.paddingSupSmall),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    NavigationService.handleUrls(popupBannerModel.btnLink);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(
+                        double.infinity, AppDimensions.paddingVeryLarge),
+                    backgroundColor: popupBannerModel.btnBackgroundColor,
+                    shape: const RoundedRectangleBorder(),
+                  ),
+                  child: Text(
+                    popupBannerModel.btnText ?? '',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
-}
-
-void showPopupBanner(BuildContext context) {
-  fetchBannerPopupData().then((banners) {
-    if (banners.isNotEmpty) {
-      final random = Random();
-      final randomIndex = random.nextInt(banners.length);
-      final bannerData = banners[randomIndex];
-      showDialog(        
-        barrierDismissible: true,
-        context: context,
-        builder: (context) => PopupBannerDialog(
-          popupBannerModel: bannerData
-        ),
-      );
-    }
-  });
 }

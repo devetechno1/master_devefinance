@@ -4,14 +4,10 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/menu_item_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

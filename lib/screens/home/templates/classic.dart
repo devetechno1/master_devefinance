@@ -16,9 +16,7 @@ import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
-import '../../../repositories/pop_up_repositry.dart';
 import '../../../services/push_notification_service.dart';
-import '../../../ui_elements/pop_up_banner.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/flash_sale.dart';
@@ -49,10 +47,6 @@ class _ClassicScreenState extends State<ClassicScreen>
       change();
     });
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      showPopupBanner(context);
-      fetchBannerPopupData();
-    });
   }
 
   void change() {

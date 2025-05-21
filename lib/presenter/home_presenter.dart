@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
@@ -12,8 +13,13 @@ import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.da
 import 'package:active_ecommerce_cms_demo_app/repositories/sliders_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
 import 'package:flutter/material.dart';
+import 'package:one_context/one_context.dart';
 import '../data_model/category_response.dart';
+import '../data_model/popup_banner_model.dart';
+import '../helpers/shared_value_helper.dart';
 import '../status/execute_and_handle_remote_errors.dart';
+import '../status/status.dart';
+import '../ui_elements/pop_up_banner.dart';
 
 class HomePresenter extends ChangeNotifier {
   CurrentRemainingTime flashDealRemainingTime =
@@ -147,7 +153,7 @@ class HomePresenter extends ChangeNotifier {
     }
   }
 
-  fetchFlashDealData() async {
+  Future<void> fetchFlashDealData() async {
     FlashDealResponse? deal;
     await executeAndHandleErrors(
         () async => deal = await FlashDealRepository().getFlashDeals());
@@ -287,6 +293,29 @@ class HomePresenter extends ChangeNotifier {
     TodayDealList.addAll(deals?.products ?? []);
     isTodayDealInitial = false;
     notifyListeners();
+  }
+
+  Future<void> showPopupBanner() async {
+    final Status<List<PopupBannerModel>> bannersStatus = await executeAndHandleErrors(() => SlidersRepository().fetchBannerPopupData());
+
+    if (bannersStatus is Success<List<PopupBannerModel>>){
+      final List<PopupBannerModel> banners = List.unmodifiable(bannersStatus.data);
+      if (banners.isNotEmpty) {
+        final BuildContext? context = OneContext().context;
+        if (context != null) {
+          int index = lastIndexPopupBanner.$ + 1;
+          if (index >= banners.length) index = 0;
+
+          lastIndexPopupBanner.$ = index;
+          lastIndexPopupBanner.save();
+          
+          showDialog(
+            context: context,
+            builder: (context) => PopupBannerDialog(popupBannerModel: banners[index]),
+          );
+        }
+      }
+    }
   }
 
   Future<void> fetchBannerOneImages() async {

@@ -6,6 +6,8 @@ import 'package:active_ecommerce_cms_demo_app/data_model/slider_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
 
+import '../data_model/popup_banner_model.dart';
+
 class SlidersRepository {
   Future<SliderResponse> getSliders() async {
     const String url = ("${AppConfig.BASE_URL}/sliders");
@@ -22,13 +24,6 @@ class SlidersRepository {
     const String url = ("${AppConfig.BASE_URL}/banners-one");
     final response = await ApiRequest.get(
       url: url,
-      headers: {
-        "App-Language": app_language.$!,
-      },
-    );
-    const String url1 = ("${AppConfig.BASE_URL}/banners-popup");
-    final response1 = await ApiRequest.get(
-      url: url1,
       headers: {
         "App-Language": app_language.$!,
       },
@@ -92,6 +87,24 @@ class SlidersRepository {
       }
     } else {
       throw Exception('Failed to load banners: Status code not 200');
+    }
+  }
+
+  Future<List<PopupBannerModel>> fetchBannerPopupData() async {
+    const String url = '${AppConfig.BASE_URL}/banners-popup';
+
+    try {
+      final response = await ApiRequest.get(url: url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return (data['data'] as List<dynamic>?)
+            ?.map((e) => PopupBannerModel.fromMap(e as Map<String, dynamic>))
+            .toList() ?? [];
+      } else {
+        throw Exception('Failed to load popup banner, status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

@@ -11,6 +11,8 @@ import 'package:active_ecommerce_cms_demo_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'home/home.dart';
+
 class Index extends StatefulWidget {
   const Index({super.key, this.goBack = true});
   final bool goBack;
@@ -24,6 +26,11 @@ class _IndexState extends State<Index> {
     await BusinessSettingHelper.setInitLang();
     await BusinessSettingHelper().setBusinessSettingData(context);
     Provider.of<CurrencyPresenter>(context, listen: false).fetchListData();
+    lastIndexPopupBanner.load().then(
+      (_) async{
+        WidgetsBinding.instance.addPostFrameCallback((_) => homeData.showPopupBanner());
+      },
+    );
     access_token.load().whenComplete(() {
       AuthHelper().fetch_and_set();
     });
