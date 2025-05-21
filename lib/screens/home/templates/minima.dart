@@ -166,7 +166,7 @@ class _MinimaScreenState extends State<MinimaScreen>
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(
-                                            AppDimensions.paddingsmallExtra),
+                                            AppDimensions.paddingSmallExtra),
                                         child: Column(
                                           children: [
                                             //  buildTimerRow(homeData.flashDealRemainingTime),

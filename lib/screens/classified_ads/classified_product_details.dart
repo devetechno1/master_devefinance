@@ -151,7 +151,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75.0,
                           height: 26.0,
@@ -178,7 +178,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                       _showCopied
                           ? Padding(
                               padding: const EdgeInsets.only(
-                                  bottom: AppDimensions.paddingsmall),
+                                  bottom: AppDimensions.paddingSmall),
                               child: Text(
                                 AppLocalizations.of(context)!.copied_ucf,
                                 style: TextStyle(
@@ -188,7 +188,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                           : Container(),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75.0,
                           height: 26.0,
@@ -219,7 +219,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                     Padding(
                       padding: app_language_rtl.$!
                           ? const EdgeInsets.only(
-                              left: AppDimensions.paddingsmall)
+                              left: AppDimensions.paddingSmall)
                           : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
@@ -444,7 +444,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                         Container(
                           color: MyTheme.white,
                           margin: const EdgeInsets.only(
-                              top: AppDimensions.paddingsupsmall),
+                              top: AppDimensions.paddingSupSmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -772,7 +772,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
           Container(
             child: Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                   : const EdgeInsets.only(right: 8.0),
               child: Container(
                 width: 75,
@@ -786,7 +786,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
           ),
           Padding(
             padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+                const EdgeInsets.only(bottom: AppDimensions.paddingSmallExtra),
             child: Text(
               _productDetails!.unitPrice!,
               style: TextStyle(
@@ -811,33 +811,33 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -846,33 +846,33 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -897,7 +897,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: Container(
                     width: 75,
@@ -975,14 +975,14 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
         children: [
           Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
                   width: (MediaQuery.of(context).size.width - 32) / 3)),
           Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
@@ -1079,25 +1079,25 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
@@ -1107,7 +1107,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
           Flexible(
             child: Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 190.0,
               ),
@@ -1129,7 +1129,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!
-                    ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                    ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                     : const EdgeInsets.only(right: 8.0),
                 child: ListView.builder(
                     itemCount: _productImageList.length,

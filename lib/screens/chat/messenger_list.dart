@@ -185,7 +185,7 @@ class _MessengerListState extends State<MessengerList> {
         }));
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Container(

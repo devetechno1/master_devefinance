@@ -31,8 +31,8 @@ class PopupBannerDialog extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: AppDimensions.paddingsmall,
-                    right: AppDimensions.paddingsmall,
+                    top: AppDimensions.paddingSmall,
+                    right: AppDimensions.paddingSmall,
                     child: Container(
                       width: 28 ,
                       height: 28,
@@ -66,7 +66,7 @@ class PopupBannerDialog extends StatelessWidget {
                       ),
                 ),
               ),
-              const SizedBox(height: AppDimensions.paddingsmall),
+              const SizedBox(height: AppDimensions.paddingSmall),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault),
                 child: Text(
@@ -77,14 +77,14 @@ class PopupBannerDialog extends StatelessWidget {
               const SizedBox(height: AppDimensions.paddingDefault),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault, vertical: AppDimensions.paddingsupsmall),
+                      const EdgeInsets.symmetric(horizontal: AppDimensions.paddingDefault, vertical: AppDimensions.paddingSupSmall),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                       NavigationService.handleUrls(popupBannerModel.btnLink);
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, AppDimensions.paddingveryLarge),
+                      minimumSize: const Size(double.infinity, AppDimensions.paddingVeryLarge),
                       backgroundColor:popupBannerModel.btnBackgroundColor,
                       shape: const RoundedRectangleBorder(),
                     ),
@@ -103,7 +103,7 @@ class PopupBannerDialog extends StatelessWidget {
 }
 
 void showPopupBanner(BuildContext context) {
-  fetchBannerpopupData().then((banners) {
+  fetchBannerPopupData().then((banners) {
     if (banners.isNotEmpty) {
       final random = Random();
       final randomIndex = random.nextInt(banners.length);
@@ -112,39 +112,9 @@ void showPopupBanner(BuildContext context) {
         barrierDismissible: true,
         context: context,
         builder: (context) => PopupBannerDialog(
-          popupBannerModel: bannerData,
-        //   btnBackgroundColor:
-        //       ColorHelper.stringToColor(bannerData['btn_background_color']) ??
-        //           Colors.black,
-        //   title: bannerData['title'] ?? '',
-        //   message: bannerData['summary'] ?? '',
-        //   imageUrl: bannerData['image'] ?? '',
-        //   actionText: bannerData['btn_text'] ?? '',
-        //   onAction: () {
-        //     final url = bannerData['btn_link'] ?? '';
-        //     if (url.isNotEmpty) {
-        //       NavigationService.handleUrls(url);
-        //       Navigator.pop(context);
-        //     }
-        //   },
-        //   onClose: () => Navigator.pop(context),
+          popupBannerModel: bannerData
         ),
       );
     }
   });
 }
-
-// void handleBannerNavigation(BuildContext context, String url) {
-//   try {
-//     final uri = Uri.parse(url);
-//     final path = uri.path;
-//     if (path.isNotEmpty) {
-//       final router = GoRouter.of(OneContext().key.currentContext!);
-//       router.go(path);
-//     } else {
-//       print("Invalid path in URL: $url");
-//     }
-//   } catch (e) {
-//     print("Error parsing URL: $e");
-//   }
-// }

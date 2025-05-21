@@ -225,7 +225,7 @@ class _ClubpointState extends State<Clubpoint> {
       height: 91,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall)),
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingDefault),
         child: Row(

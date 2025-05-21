@@ -103,7 +103,7 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
               shrinkWrap: true,
               padding: const EdgeInsets.only(
                   top: AppDimensions.paddingLarge,
-                  bottom: AppDimensions.paddingsupsmall,
+                  bottom: AppDimensions.paddingSupSmall,
                   left: 18,
                   right: 18),
               physics: const NeverScrollableScrollPhysics(),
@@ -220,9 +220,9 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               bottomLeft: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -327,8 +327,8 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                         height: 20,
                         width: 48,
                         margin: const EdgeInsets.only(
-                            top: AppDimensions.paddingsmall,
-                            right: AppDimensions.paddingsmall,
+                            top: AppDimensions.paddingSmall,
+                            right: AppDimensions.paddingSmall,
                             bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,

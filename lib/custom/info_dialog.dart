@@ -32,7 +32,7 @@ class InfoDialog {
           Btn.basic(
             shape: RoundedRectangleBorder(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall)),
             color: MyTheme.grey_153,
             onPressed: () => Navigator.pop(context),
             child: Text(LangText(context).local.ok,

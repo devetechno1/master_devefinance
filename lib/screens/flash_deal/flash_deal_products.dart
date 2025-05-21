@@ -264,7 +264,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius:
-                          BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                          BorderRadius.circular(AppDimensions.radiusHalfSmall),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.black.withValues(alpha: 0.16),
@@ -511,7 +511,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
       alignment: Alignment.center,
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
         color: Theme.of(context).primaryColor,
       ),
     );

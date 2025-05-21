@@ -391,7 +391,7 @@ class _LoginState extends State<Login> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   _login_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
@@ -404,7 +404,7 @@ class _LoginState extends State<Login> {
               if (_login_by == "email")
                 Padding(
                   padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -440,7 +440,7 @@ class _LoginState extends State<Login> {
               else
                 Padding(
                   padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -504,7 +504,7 @@ class _LoginState extends State<Login> {
                 ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
                   style: TextStyle(
@@ -514,7 +514,7 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -551,7 +551,7 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingextraLarge),
+                    const EdgeInsets.only(top: AppDimensions.paddingExtraLarge),
                 child: Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -565,7 +565,7 @@ class _LoginState extends State<Login> {
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
-                            Radius.circular(AppDimensions.radiusaHalfsmall))),
+                            Radius.circular(AppDimensions.radiusHalfSmall))),
                     child: Text(
                       AppLocalizations.of(context)!.login_screen_log_in,
                       style: const TextStyle(
@@ -597,7 +597,7 @@ class _LoginState extends State<Login> {
                   color: MyTheme.amber,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
-                          Radius.circular(AppDimensions.radiusaHalfsmall))),
+                          Radius.circular(AppDimensions.radiusHalfSmall))),
                   child: Text(
                     AppLocalizations.of(context)!.login_screen_sign_up,
                     style: TextStyle(

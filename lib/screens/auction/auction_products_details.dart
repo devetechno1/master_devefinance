@@ -229,7 +229,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
@@ -265,7 +265,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       _showCopied
                           ? Padding(
                               padding: const EdgeInsets.only(
-                                  bottom: AppDimensions.paddingsmall),
+                                  bottom: AppDimensions.paddingSmall),
                               child: Text(
                                 AppLocalizations.of(context)!.copied_ucf,
                                 style: TextStyle(
@@ -275,7 +275,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           : Container(),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Btn.minWidthFixHeight(
                           minWidth: 75,
                           height: 26,
@@ -306,7 +306,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     Padding(
                       padding: app_language_rtl.$!
                           ? const EdgeInsets.only(
-                              left: AppDimensions.paddingsmall)
+                              left: AppDimensions.paddingSmall)
                           : const EdgeInsets.only(right: 8.0),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
@@ -355,7 +355,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingsmall),
+                              bottom: AppDimensions.paddingSmall),
                           child: Text(AppLocalizations.of(context)!.title_ucf,
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
@@ -399,7 +399,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingsmall),
+                              bottom: AppDimensions.paddingSmall),
                           child: Text(
                               "${AppLocalizations.of(context)!.message_ucf} *",
                               style: const TextStyle(
@@ -632,7 +632,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusaHalfsmall),
+                            AppDimensions.radiusHalfSmall),
                         color: Theme.of(context).primaryColor,
                         boxShadow: const [
                           BoxShadow(
@@ -704,7 +704,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           duration: const Duration(milliseconds: 200),
                           child: Container(
                               padding: const EdgeInsets.only(
-                                  bottom: AppDimensions.paddingsmall),
+                                  bottom: AppDimensions.paddingSmall),
                               width: DeviceInfo(context).width! / 2,
                               child: Text(
                                 "${_auctionproductDetails != null ? _auctionproductDetails.name : ''}",
@@ -807,7 +807,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         Container(
                           color: MyTheme.white,
                           margin: const EdgeInsets.only(
-                              top: AppDimensions.paddingsupsmall),
+                              top: AppDimensions.paddingSupSmall),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -1073,14 +1073,14 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   child: Padding(
                     padding: app_language_rtl.$!
                         ? const EdgeInsets.only(
-                            left: AppDimensions.paddingsmall)
+                            left: AppDimensions.paddingSmall)
                         : const EdgeInsets.only(right: 8.0),
                     child: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusaHalfsmall),
+                            AppDimensions.radiusHalfSmall),
                         border: Border.all(
                             color: const Color.fromRGBO(112, 112, 112, .3),
                             width: 1),
@@ -1088,7 +1088,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusaHalfsmall),
+                            AppDimensions.radiusHalfSmall),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: _auctionproductDetails.shopLogo,
@@ -1307,7 +1307,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           Container(
             child: Padding(
               padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                  ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                   : const EdgeInsets.only(right: 8.0),
               child: Container(
                 width: 75,
@@ -1321,7 +1321,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           ),
           Padding(
             padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+                const EdgeInsets.only(bottom: AppDimensions.paddingSmallExtra),
             child: Text(
               _auctionproductDetails.currencySymbol.toString(),
               style: TextStyle(
@@ -1340,7 +1340,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+              ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 95,
@@ -1368,7 +1368,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+              ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 95,
@@ -1393,7 +1393,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       children: [
         Padding(
           padding: app_language_rtl.$!
-              ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+              ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
               : const EdgeInsets.only(right: 8.0),
           child: Container(
             width: 95,
@@ -1428,7 +1428,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       padding:
-                          const EdgeInsets.all(AppDimensions.paddinghalfsmall),
+                          const EdgeInsets.all(AppDimensions.paddingHalfSmall),
                       child: Text(
                         '${_auctionEndTimeList[index] ?? 00}',
                         style:
@@ -1460,33 +1460,33 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -1495,33 +1495,33 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
             child: Row(
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
                 ),
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 30.0, width: 60),
@@ -1599,7 +1599,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               children: [
                 Padding(
                   padding: app_language_rtl.$!
-                      ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                      ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                       : const EdgeInsets.only(right: 8.0),
                   child: Container(
                     width: 75,
@@ -1719,25 +1719,25 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingsupsmall),
+                      bottom: AppDimensions.paddingSupSmall),
                   child: ShimmerHelper()
                       .buildBasicShimmer(height: 40.0, width: 40.0),
                 ),
@@ -1747,7 +1747,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           Flexible(
             child: Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: ShimmerHelper().buildBasicShimmer(
                 height: 190.0,
               ),
@@ -1768,7 +1768,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!
-                    ? const EdgeInsets.only(left: AppDimensions.paddingsmall)
+                    ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                     : const EdgeInsets.only(right: 8.0),
                 child: ListView.builder(
                     itemCount: _productImageList.length,

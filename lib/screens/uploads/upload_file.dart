@@ -369,8 +369,8 @@ class _UploadFileState extends State<UploadFile> {
           if (_selectedImages!
               .any((element) => element.id == _images[index].id))
             Positioned(
-                top: AppDimensions.paddingsupsmall,
-                right: AppDimensions.paddingsupsmall,
+                top: AppDimensions.paddingSupSmall,
+                right: AppDimensions.paddingSupSmall,
                 child: buildCheckContainer()),
           if (!widget.canMultiSelect && !widget.canSelect)
             Positioned(
@@ -426,7 +426,7 @@ class _UploadFileState extends State<UploadFile> {
         buildUploadFileContainer(context),
         Container(
           height: 40,
-          margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+          margin: const EdgeInsets.only(top: AppDimensions.paddingSupSmall),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -438,7 +438,7 @@ class _UploadFileState extends State<UploadFile> {
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(255, 255, 255, 0),
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     border: Border.all(
                         color: const Color.fromRGBO(255, 255, 255, 0),
                         width: 0.0),
@@ -476,7 +476,7 @@ class _UploadFileState extends State<UploadFile> {
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(255, 255, 255, 0),
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     border: Border.all(
                         color: const Color.fromRGBO(255, 255, 255, 0),
                         width: 0.0),
@@ -532,7 +532,7 @@ class _UploadFileState extends State<UploadFile> {
         height: 16,
         width: 16,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
             color: Colors.green),
         child: const Padding(
           padding: EdgeInsets.all(3),

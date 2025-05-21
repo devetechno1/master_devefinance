@@ -15,7 +15,7 @@ Widget? get whatsappFloatingButtonWidget {
     },
     backgroundColor: const Color(0xff289811),
     child: Padding(
-      padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+      padding: const EdgeInsets.all(AppDimensions.paddingSmall),
       child: Image.asset(AppImages.whatsapp),
     ),
   );

@@ -25,7 +25,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
       height: 120,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall)),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -34,7 +34,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 height: 120,
                 child: ClipRRect(
                     borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(AppDimensions.radiusaHalfsmall),
+                        left: Radius.circular(AppDimensions.radiusHalfSmall),
                         right: Radius.zero),
                     child: FadeInImage.assetNetwork(
                       placeholder: AppImages.placeholder,
@@ -152,8 +152,8 @@ class CartSellerItemCardWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: AppDimensions.paddingsmall,
-                        bottom: AppDimensions.paddingsmall),
+                        top: AppDimensions.paddingSmall,
+                        bottom: AppDimensions.paddingSmall),
                     child: Text(
                       cartProvider
                           .shopList[sellerIndex].cartItems[itemIndex].quantity

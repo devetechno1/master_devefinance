@@ -1482,7 +1482,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           Container(
             height: 239,
             padding: const EdgeInsets.only(
-                top: AppDimensions.paddingsupsmall, bottom: 20),
+                top: AppDimensions.paddingSupSmall, bottom: 20),
             width: double.infinity,
             child: ListView.separated(
               itemCount: 10,
@@ -1586,7 +1586,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ? Theme.of(context).primaryColor
             : MyTheme.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
         ),
         onPressed: () {
           tabOptionIndex = index;
@@ -1728,8 +1728,8 @@ class _SellerDetailsState extends State<SellerDetails> {
         itemCount: _topProducts.length,
         shrinkWrap: true,
         padding: const EdgeInsets.only(
-            top: AppDimensions.paddingsupsmall,
-            bottom: AppDimensions.paddingsupsmall,
+            top: AppDimensions.paddingSupSmall,
+            bottom: AppDimensions.paddingSupSmall,
             left: 18,
             right: 18),
         physics: const NeverScrollableScrollPhysics(),
@@ -1761,8 +1761,8 @@ class _SellerDetailsState extends State<SellerDetails> {
           itemCount: _newArrivalProducts.length,
           shrinkWrap: true,
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall,
-              bottom: AppDimensions.paddingsupsmall,
+              top: AppDimensions.paddingSupSmall,
+              bottom: AppDimensions.paddingSupSmall,
               left: 18,
               right: 18),
           physics: const NeverScrollableScrollPhysics(),
@@ -1795,8 +1795,8 @@ class _SellerDetailsState extends State<SellerDetails> {
         itemCount: _allProductList.length,
         shrinkWrap: true,
         padding: const EdgeInsets.only(
-            top: AppDimensions.paddingsupsmall,
-            bottom: AppDimensions.paddingsupsmall,
+            top: AppDimensions.paddingSupSmall,
+            bottom: AppDimensions.paddingSupSmall,
             left: 18,
             right: 18),
         physics: const NeverScrollableScrollPhysics(),
@@ -1848,7 +1848,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: .08),
@@ -1859,10 +1859,10 @@ class _SellerDetailsState extends State<SellerDetails> {
                   )
                 ],
               ),
-              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+              padding: const EdgeInsets.all(AppDimensions.paddingSmall),
               child: ClipRRect(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppImages.placeholder,
                   image: _shopDetails?.logo ?? "",
@@ -1875,7 +1875,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
             Container(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
               width: DeviceInfo(context).width! / 2.5,
               height: 60,
               child: Column(
@@ -1928,7 +1928,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                     : MyTheme.amber,
                 shape: RoundedRectangleBorder(
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     side: BorderSide(
                         color: _isThisSellerFollowed != null &&
                                 _isThisSellerFollowed!
@@ -1980,7 +1980,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             child: ClipRRect(
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall),
               child: ShimmerHelper().buildBasicShimmer(height: 60, width: 60),
             ),
           ),
@@ -1988,7 +1988,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             child: Container(
               //color: Colors.amber,
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
               width: DeviceInfo(context).width! / 2,
               height: 60,
               child: Column(
@@ -2243,9 +2243,9 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
                             topRight:
-                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                                Radius.circular(AppDimensions.radiusHalfSmall),
                             bottomLeft:
-                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                                Radius.circular(AppDimensions.radiusHalfSmall),
                           ),
                           boxShadow: [
                             BoxShadow(

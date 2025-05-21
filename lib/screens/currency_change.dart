@@ -162,7 +162,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                    BorderRadius.circular(AppDimensions.radiusDefault),
                 color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),

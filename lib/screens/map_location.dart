@@ -151,7 +151,7 @@ class MapLocationState extends State<MapLocation>
                 //     ))
                 //   :
                 Container(
-              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+              padding: const EdgeInsets.all(AppDimensions.paddingSmall),
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: const BorderRadius.only(
@@ -227,7 +227,7 @@ class MapLocationState extends State<MapLocation>
                       borderSide: const BorderSide(
                           color: MyTheme.textfield_grey, width: 0.5),
                       borderRadius:
-                          BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                          BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     );
                     return TextField(
                       controller: controller,

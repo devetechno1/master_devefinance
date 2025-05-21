@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsupsmall),
+                        bottom: AppDimensions.paddingSupSmall),
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmallExtra),
+                        bottom: AppDimensions.paddingSmallExtra),
                     child: Text(
                       AppConfig.appNameOnAppLang(context),
                       style: const TextStyle(

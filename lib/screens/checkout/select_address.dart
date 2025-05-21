@@ -95,7 +95,7 @@ class _SelectAddressState extends State<SelectAddress> {
             });
           },
           child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+            padding: const EdgeInsets.all(AppDimensions.paddingSmall),
             child: Text(
               LangText(context)
                   .local
@@ -159,7 +159,7 @@ class _SelectAddressState extends State<SelectAddress> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: buildShippingInfoItemCard(
                   index, selectAddressProvider, context),
             );
@@ -495,7 +495,7 @@ class _SelectAddressState extends State<SelectAddress> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                    BorderRadius.circular(AppDimensions.radiusDefault),
                 color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),

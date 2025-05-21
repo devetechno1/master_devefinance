@@ -215,7 +215,7 @@ class _ChatState extends State<Chat> {
                     width: 220,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -291,7 +291,7 @@ class _ChatState extends State<Chat> {
                           height: 35.0,
                           fit: BoxFit.cover,
                           borderRadius: BorderRadius.circular(
-                              AppDimensions.radiusDefualt)),
+                              AppDimensions.radiusDefault)),
                     ],
                   ),
                 ),
@@ -321,7 +321,7 @@ class _ChatState extends State<Chat> {
       ),
       backgroundColor: MyTheme.mainColor,
       leading: Container(
-        margin: const EdgeInsets.only(left: AppDimensions.paddingsupsmall),
+        margin: const EdgeInsets.only(left: AppDimensions.paddingSupSmall),
         child: UsefulElements.backButton(context),
       ),
     );
@@ -345,7 +345,7 @@ class _ChatState extends State<Chat> {
           itemBuilder: (context, index) {
             return Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: buildChatItem(index),
             );
           },
@@ -406,7 +406,7 @@ class _ChatState extends State<Chat> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+          padding: const EdgeInsets.all(AppDimensions.paddingSmall),
           child: GestureDetector(
             onTap: () {
               onTapSendMessage();
@@ -443,7 +443,7 @@ class _ChatState extends State<Chat> {
       elevation: 0.0,
       clipper: clipper,
       alignment: Alignment.topRight,
-      margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+      margin: const EdgeInsets.only(top: AppDimensions.paddingSupSmall),
       backGroundColor: MyTheme.soft_accent_color,
       child: Container(
         constraints: BoxConstraints(
@@ -470,7 +470,7 @@ class _ChatState extends State<Chat> {
         elevation: 0.0,
         clipper: clipper,
         backGroundColor: const Color.fromRGBO(239, 239, 239, 1),
-        margin: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+        margin: const EdgeInsets.only(top: AppDimensions.paddingSupSmall),
         child: Container(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.6,
@@ -505,8 +505,8 @@ class _ChatState extends State<Chat> {
           itemCount: _list.length,
           shrinkWrap: true,
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall,
-              bottom: AppDimensions.paddingsupsmall),
+              top: AppDimensions.paddingSupSmall,
+              bottom: AppDimensions.paddingSupSmall),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Container(
@@ -553,21 +553,21 @@ class _ChatState extends State<Chat> {
         maxWidth: DeviceInfo(context).width! / 1.6,
       ),
       padding: const EdgeInsets.only(
-          top: AppDimensions.paddingsmall, bottom: 3, right: 10, left: 10),
+          top: AppDimensions.paddingSmall, bottom: 3, right: 10, left: 10),
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
           color: MyTheme.noColor,
         ),
         borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(AppDimensions.radiusDefualt),
-          topRight: const Radius.circular(AppDimensions.radiusDefualt),
+          topLeft: const Radius.circular(AppDimensions.radiusDefault),
+          topRight: const Radius.circular(AppDimensions.radiusDefault),
           bottomLeft: _list[index].sendType == "customer"
-              ? const Radius.circular(AppDimensions.radiusDefualt)
+              ? const Radius.circular(AppDimensions.radiusDefault)
               : const Radius.circular(0),
           bottomRight: _list[index].sendType == "customer"
               ? const Radius.circular(0)
-              : const Radius.circular(AppDimensions.radiusDefualt),
+              : const Radius.circular(AppDimensions.radiusDefault),
         ),
         color: (_list[index].sendType == "customer"
             ? Theme.of(context).primaryColor
@@ -696,8 +696,8 @@ class _ChatState extends State<Chat> {
           itemCount: 10,
           shrinkWrap: true,
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall,
-              bottom: AppDimensions.paddingsupsmall),
+              top: AppDimensions.paddingSupSmall,
+              bottom: AppDimensions.paddingSupSmall),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             //print(_messages[index+1].year.toString());
@@ -726,7 +726,7 @@ class _ChatState extends State<Chat> {
           maxWidth: DeviceInfo(context).width! / 1.6,
         ),
         padding: const EdgeInsets.only(
-            top: AppDimensions.paddingsmall, bottom: 3, right: 10, left: 10),
+            top: AppDimensions.paddingSmall, bottom: 3, right: 10, left: 10),
         decoration: BoxDecoration(
           border: Border.all(
               width: 1,
@@ -734,14 +734,14 @@ class _ChatState extends State<Chat> {
                   ? Theme.of(context).primaryColor
                   : MyTheme.grey_153),
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(AppDimensions.radiusDefualt),
-            topRight: const Radius.circular(AppDimensions.radiusDefualt),
+            topLeft: const Radius.circular(AppDimensions.radiusDefault),
+            topRight: const Radius.circular(AppDimensions.radiusDefault),
             bottomLeft: index.isOdd
-                ? const Radius.circular(AppDimensions.radiusDefualt)
+                ? const Radius.circular(AppDimensions.radiusDefault)
                 : const Radius.circular(0),
             bottomRight: index.isOdd
                 ? const Radius.circular(0)
-                : const Radius.circular(AppDimensions.radiusDefualt),
+                : const Radius.circular(AppDimensions.radiusDefault),
           ),
           color: (index.isOdd
               ? Theme.of(context).primaryColor

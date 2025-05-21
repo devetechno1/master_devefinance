@@ -200,7 +200,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child: Text(
                         _list[index].product_name,
                         textAlign: TextAlign.start,
@@ -212,7 +212,7 @@ class _RefundRequestState extends State<RefundRequest> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child: Text(
                         _list[index].order_code,
                         style: TextStyle(
@@ -240,7 +240,7 @@ class _RefundRequestState extends State<RefundRequest> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child: Text(
                         convertPrice(_list[index].product_price),
                         style: TextStyle(

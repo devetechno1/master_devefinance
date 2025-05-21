@@ -178,7 +178,7 @@ class _CartState extends State<_Cart> {
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius:
-                      BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                      BorderRadius.circular(AppDimensions.radiusHalfSmall),
                   color: MyTheme.soft_accent_color),
               child: Row(
                 children: [
@@ -208,7 +208,7 @@ class _CartState extends State<_Cart> {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: AppDimensions.paddingsmall),
+                      const EdgeInsets.only(top: AppDimensions.paddingSmall),
                   child: Container(
                     height: 58,
                     width: (MediaQuery.of(context).size.width - 48),
@@ -220,23 +220,23 @@ class _CartState extends State<_Cart> {
                       borderRadius: app_language_rtl.$!
                           ? const BorderRadius.only(
                               topLeft: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               bottomLeft: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               topRight: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               bottomRight: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                             )
                           : const BorderRadius.only(
                               topLeft: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               bottomLeft: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               topRight: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               bottomRight: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                             ),
                     ),
                     child: Btn.basic(
@@ -246,9 +246,9 @@ class _CartState extends State<_Cart> {
                           ? const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(
-                                    AppDimensions.radiusaHalfsmall),
+                                    AppDimensions.radiusHalfSmall),
                                 bottomLeft: Radius.circular(
-                                    AppDimensions.radiusaHalfsmall),
+                                    AppDimensions.radiusHalfSmall),
                                 topRight: Radius.circular(0.0),
                                 bottomRight: Radius.circular(0.0),
                               ),
@@ -258,9 +258,9 @@ class _CartState extends State<_Cart> {
                                 topLeft: Radius.circular(0.0),
                                 bottomLeft: Radius.circular(0.0),
                                 topRight: Radius.circular(
-                                    AppDimensions.radiusaHalfsmall),
+                                    AppDimensions.radiusHalfSmall),
                                 bottomRight: Radius.circular(
-                                    AppDimensions.radiusaHalfsmall),
+                                    AppDimensions.radiusHalfSmall),
                               ),
                             ),
                       child: Text(

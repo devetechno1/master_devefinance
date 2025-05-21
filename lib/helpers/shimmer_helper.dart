@@ -138,12 +138,12 @@ class ShimmerHelper {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           childAspectRatio: 1),
-      padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+      padding: const EdgeInsets.all(AppDimensions.paddingSmall),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+          padding: const EdgeInsets.all(AppDimensions.paddingSmall),
           child: Shimmer.fromColors(
             baseColor: MyTheme.shimmer_base,
             highlightColor: MyTheme.shimmer_highlighted,

@@ -216,9 +216,9 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: AppDimensions.paddingsmall,
-                  bottom: AppDimensions.paddingsmall,
-                  left: AppDimensions.paddingsmall),
+                  top: AppDimensions.paddingSmall,
+                  bottom: AppDimensions.paddingSmall,
+                  left: AppDimensions.paddingSmall),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,

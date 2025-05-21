@@ -161,7 +161,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
             shrinkWrap: true,
             padding: const EdgeInsets.only(
                 top: AppDimensions.paddingLarge,
-                bottom: AppDimensions.paddingsupsmall,
+                bottom: AppDimensions.paddingSupSmall,
                 left: 18,
                 right: 18),
             physics: const NeverScrollableScrollPhysics(),

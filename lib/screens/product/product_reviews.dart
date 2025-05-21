@@ -260,7 +260,7 @@ class _ProductReviewsState extends State<ProductReviews> {
 
   Padding buildProductReviewsItem(index) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+      padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -310,7 +310,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingsmallExtra),
+                              bottom: AppDimensions.paddingSmallExtra),
                           child: Text(
                             _reviewList[index].time,
                             style: TextStyle(color: MyTheme.medium_grey),
@@ -418,8 +418,8 @@ class _ProductReviewsState extends State<ProductReviews> {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsmall,
-              bottom: AppDimensions.paddingsmall),
+              top: AppDimensions.paddingSmall,
+              bottom: AppDimensions.paddingSmall),
           child: RatingBar.builder(
             itemSize: 20.0,
             initialRating: _my_rating,
@@ -478,7 +478,7 @@ class _ProductReviewsState extends State<ProductReviews> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+              padding: const EdgeInsets.all(AppDimensions.paddingSmall),
               child: GestureDetector(
                 onTap: () {
                   onTapReviewSubmit(context);

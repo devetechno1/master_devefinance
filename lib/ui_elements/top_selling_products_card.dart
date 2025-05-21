@@ -61,7 +61,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
               height: 90,
               child: ClipRRect(
                   borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(AppDimensions.radiusaHalfsmall),
+                      left: Radius.circular(AppDimensions.radiusHalfSmall),
                       right: Radius.zero),
                   child: FadeInImage.assetNetwork(
                     placeholder: AppImages.placeholder,

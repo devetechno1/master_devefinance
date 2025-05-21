@@ -290,7 +290,7 @@ class _CouponsState extends State<Coupons> {
                 itemBuilder: (context, i) {
                   return Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child:
                           // Image.network(
                           //   products[i].thumbnail_image!,

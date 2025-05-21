@@ -122,8 +122,8 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
           itemCount: _classifiedProducts.length,
           shrinkWrap: true,
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall,
-              bottom: AppDimensions.paddingsupsmall,
+              top: AppDimensions.paddingSupSmall,
+              bottom: AppDimensions.paddingSupSmall,
               left: 18,
               right: 18),
           physics: const NeverScrollableScrollPhysics(),

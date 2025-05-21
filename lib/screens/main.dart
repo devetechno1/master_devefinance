@@ -168,7 +168,7 @@ class _MainState extends State<Main> {
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Image.asset(
                       AppImages.home,
                       color: _currentIndex == 0
@@ -181,7 +181,7 @@ class _MainState extends State<Main> {
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Image.asset(
                       AppImages.categories,
                       color: _currentIndex == 1
@@ -194,7 +194,7 @@ class _MainState extends State<Main> {
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: badges.Badge(
                       badgeStyle: badges.BadgeStyle(
                         shape: badges.BadgeShape.circle,
@@ -228,7 +228,7 @@ class _MainState extends State<Main> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Image.asset(
                     AppImages.profile,
                     color: _currentIndex == 3

@@ -286,8 +286,8 @@ class _OfflineState extends State<OfflineScreen> {
   Widget buildProfileForm(context) {
     return Padding(
       padding: const EdgeInsets.only(
-          top: AppDimensions.paddingsmall,
-          bottom: AppDimensions.paddingsmall,
+          top: AppDimensions.paddingSmall,
+          bottom: AppDimensions.paddingSmall,
           left: 16.0,
           right: 16.0),
       child: Container(
@@ -296,7 +296,7 @@ class _OfflineState extends State<OfflineScreen> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
                 AppLocalizations.of(context)!.all_marked_fields_are_mandatory,
                 style: const TextStyle(
@@ -307,7 +307,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
                 AppLocalizations.of(context)!
                     .correctly_fill_up_the_necessary_information,
@@ -316,7 +316,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.amount_ucf}*",
                 style: TextStyle(
@@ -326,7 +326,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -340,7 +340,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.name_ucf}*",
                 style: TextStyle(
@@ -350,7 +350,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -363,7 +363,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.transaction_id_ucf}*",
                 style: TextStyle(
@@ -373,7 +373,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Container(
                 height: 36,
                 child: TextField(
@@ -386,7 +386,7 @@ class _OfflineState extends State<OfflineScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: Text(
                 "${AppLocalizations.of(context)!.photo_proof_ucf}* (${AppLocalizations.of(context)!.only_image_file_allowed})",
                 style: TextStyle(
@@ -428,7 +428,7 @@ class _OfflineState extends State<OfflineScreen> {
                 _photo_path != ""
                     ? Padding(
                         padding:
-                            const EdgeInsets.all(AppDimensions.paddingsmall),
+                            const EdgeInsets.all(AppDimensions.paddingSmall),
                         child: Text(AppLocalizations.of(context)!.selected_ucf),
                       )
                     : Container()

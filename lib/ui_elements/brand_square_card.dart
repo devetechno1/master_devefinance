@@ -40,7 +40,7 @@ class _BrandSquareCardState extends State<BrandSquareCard> {
                   //width: double.infinity,
                   child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(AppDimensions.radiusDefualt),
+                          top: Radius.circular(AppDimensions.radiusDefault),
                           bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,

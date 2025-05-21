@@ -355,7 +355,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -392,7 +392,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -519,16 +519,16 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   height: 75.0,
                   width: 75.0,
                   radius: const BorderRadius.only(
-                      topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                      topLeft: Radius.circular(AppDimensions.radiusHalfSmall),
                       bottomLeft:
-                          Radius.circular(AppDimensions.radiusaHalfsmall)),
+                          Radius.circular(AppDimensions.radiusHalfSmall)),
                   url: _deliveryInfoList[sellerArrayIndex]
                       .carriers!
                       .data![carrierIndex]
                       .logo),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsupsmall),
+                    bottom: AppDimensions.paddingSupSmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -548,7 +548,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                     ),
                     Container(
                       padding: const EdgeInsets.only(
-                          top: AppDimensions.paddingsupsmall),
+                          top: AppDimensions.paddingSupSmall),
                       child: Text(
                         _deliveryInfoList[sellerArrayIndex]
                                 .carriers!
@@ -609,7 +609,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                    BorderRadius.circular(AppDimensions.radiusDefault),
                 color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),
@@ -702,7 +702,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ? Theme.of(context).primaryColor
           : Theme.of(context).primaryColor.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           side: BorderSide(color: Theme.of(context).primaryColor)),
       padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
       onPressed: () {
@@ -759,7 +759,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ? Theme.of(context).primaryColor
           : Theme.of(context).primaryColor.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           side: BorderSide(color: Theme.of(context).primaryColor)),
       padding: const EdgeInsetsDirectional.only(end: 14),
       onPressed: () {
@@ -813,7 +813,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ? Theme.of(context).primaryColor
           : Theme.of(context).primaryColor.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           side: BorderSide(color: Theme.of(context).primaryColor)),
       padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
       onPressed: () {
@@ -985,7 +985,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             aspectRatio: 1,
             child: ClipRRect(
               borderRadius: const BorderRadius.horizontal(
-                  left: Radius.circular(AppDimensions.radiusaHalfsmall),
+                  left: Radius.circular(AppDimensions.radiusHalfSmall),
                   right: Radius.zero),
               child: FadeInImage.assetNetwork(
                 placeholder: AppImages.placeholder,

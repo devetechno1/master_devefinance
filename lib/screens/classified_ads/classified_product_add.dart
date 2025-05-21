@@ -316,7 +316,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(255, 255, 255, 0),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
             border: Border.all(
                 color: const Color.fromRGBO(255, 255, 255, 0), width: 0.0),
             boxShadow: const [
@@ -324,7 +324,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
             ],
           ),
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall, left: 5, right: 5),
+              top: AppDimensions.paddingSupSmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -403,7 +403,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                               horizontal: 18, vertical: 10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                                AppDimensions.radiusaHalfsmall),
+                                AppDimensions.radiusHalfSmall),
                             color: MyTheme.white,
                             border: Border.all(
                                 color: _hasFocus
@@ -489,7 +489,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(255, 255, 255, 0),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
             border: Border.all(
                 color: const Color.fromRGBO(255, 255, 255, 0), width: 0.0),
             boxShadow: const [
@@ -499,7 +499,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
             ],
           ),
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall, left: 5, right: 5),
+              top: AppDimensions.paddingSupSmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _mediaExpanded ? 200 : 40,
           child: Column(
@@ -842,7 +842,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(255, 255, 255, 0),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
             border: Border.all(
                 color: const Color.fromRGBO(255, 255, 255, 0), width: 0.0),
             boxShadow: const [
@@ -852,7 +852,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
             ],
           ),
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall, left: 5, right: 5),
+              top: AppDimensions.paddingSupSmall, left: 5, right: 5),
           alignment: Alignment.topCenter,
           // height: _priceExpanded ? 200 : 40,
           child: Column(
@@ -914,7 +914,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                                AppDimensions.radiusaHalfsmall),
+                                AppDimensions.radiusHalfSmall),
                             border: Border.all(
                                 color: Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
@@ -963,7 +963,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      AppDimensions.radiusaHalfsmall),
+                                      AppDimensions.radiusHalfSmall),
                                   side: const BorderSide(color: Colors.red),
                                 ),
                               ),
@@ -1010,14 +1010,14 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   borderSide: BorderSide(
                       color: Theme.of(context).primaryColor, width: 0.2),
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(AppDimensions.radiusaHalfsmall),
+                    Radius.circular(AppDimensions.radiusHalfSmall),
                   ),
                 ),
                 focusedBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(color: MyTheme.textfield_grey, width: 0.5),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(AppDimensions.radiusaHalfsmall),
+                    Radius.circular(AppDimensions.radiusHalfSmall),
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16.0)),
@@ -1107,7 +1107,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           border: Border.all(
               color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
@@ -1159,7 +1159,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         height: 36,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           border: Border.all(
               color: Theme.of(context).primaryColor,
               style: BorderStyle.solid,
@@ -1211,14 +1211,14 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
       title,
       Container(
         padding: const EdgeInsets.only(
-            top: AppDimensions.paddingsupsmall,
+            top: AppDimensions.paddingSupSmall,
             bottom: 8,
-            left: AppDimensions.paddingsupsmall,
-            right: AppDimensions.paddingsupsmall),
+            left: AppDimensions.paddingSupSmall,
+            right: AppDimensions.paddingSupSmall),
         alignment: Alignment.centerLeft,
         constraints: BoxConstraints(minWidth: DeviceInfo(context).width!),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           // color: MyTheme.light_grey,
           border: Border.all(
               color: Theme.of(context).primaryColor,

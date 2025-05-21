@@ -262,7 +262,7 @@ class _ProfileState extends State<Profile> {
                   child: InkWell(
                     onTap: () => Navigator.pop(context),
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusVeryEtra),
+                        BorderRadius.circular(AppDimensions.radiusVeryExtra),
                     child: const SizedBox(
                       height: 30,
                       width: 30,
@@ -517,7 +517,7 @@ class _ProfileState extends State<Profile> {
                       : 40,
                   alignment: Alignment.topCenter,
                   padding:
-                      const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+                      const EdgeInsets.only(top: AppDimensions.paddingSupSmall),
                   child: InkWell(
                     onTap: () {
                       _auctionExpand = !_auctionExpand;
@@ -936,7 +936,7 @@ class _ProfileState extends State<Profile> {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall)),
       child: GridView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 25),
@@ -995,7 +995,7 @@ class _ProfileState extends State<Profile> {
                 shape: badges.BadgeShape.circle,
                 badgeColor: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
-                padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+                padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
               ),
               ignorePointer: true,
               badgeContent: Consumer<UnReadNotificationCounter>(
@@ -1155,13 +1155,13 @@ class _ProfileState extends State<Profile> {
       onTap: is_logged_in.$ && onTap != null
           ? () => onTap.call().then((_) => onPopped(null))
           : null,
-      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
       child: Container(
         margin: const EdgeInsets.only(top: AppDimensions.paddingLarge),
         padding: const EdgeInsets.symmetric(vertical: 14),
         width: DeviceInfo(context).width! / 3.5,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
           color: MyTheme.white,
         ),
         child: Column(
@@ -1215,7 +1215,7 @@ class _ProfileState extends State<Profile> {
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusVeryEtra),
+                    BorderRadius.circular(AppDimensions.radiusVeryExtra),
                 border: Border.all(color: MyTheme.white, width: 1),
                 //shape: BoxShape.rectangle,
               ),
@@ -1223,7 +1223,7 @@ class _ProfileState extends State<Profile> {
                   ? ClipRRect(
                       clipBehavior: Clip.hardEdge,
                       borderRadius: const BorderRadius.all(
-                          Radius.circular(AppDimensions.radiusVeryEtra)),
+                          Radius.circular(AppDimensions.radiusVeryExtra)),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: "${avatar_original.$}",
@@ -1244,7 +1244,7 @@ class _ProfileState extends State<Profile> {
             // 	rgb(50,205,50)
             shape: RoundedRectangleBorder(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 side: const BorderSide(color: MyTheme.white)),
             child: Text(
               is_logged_in.$

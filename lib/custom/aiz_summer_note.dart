@@ -271,7 +271,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
           ),
           Padding(
             padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingsmallExtra),
+                const EdgeInsets.only(bottom: AppDimensions.paddingSmallExtra),
             child: Text(
               title,
               style: const TextStyle(

@@ -833,7 +833,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Text(
                           AppLocalizations.of(context)!.price_range_ucf,
                           style: const TextStyle(
@@ -845,7 +845,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: AppDimensions.paddingsmall),
+                                bottom: AppDimensions.paddingSmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -884,7 +884,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                           const Text(" - "),
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: AppDimensions.paddingsmall),
+                                bottom: AppDimensions.paddingSmall),
                             child: Container(
                               height: 30,
                               width: 100,
@@ -1147,8 +1147,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
                 padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingsupsmall,
-                    bottom: AppDimensions.paddingsupsmall,
+                    top: AppDimensions.paddingSupSmall,
+                    bottom: AppDimensions.paddingSupSmall,
                     left: 18,
                     right: 18),
                 physics: const NeverScrollableScrollPhysics(),
@@ -1225,7 +1225,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     childAspectRatio: 1),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingLarge,
-                    bottom: AppDimensions.paddingsupsmall,
+                    bottom: AppDimensions.paddingSupSmall,
                     left: 18,
                     right: 18),
                 physics: const NeverScrollableScrollPhysics(),
@@ -1298,7 +1298,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     childAspectRatio: 0.7),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingLarge,
-                    bottom: AppDimensions.paddingsupsmall,
+                    bottom: AppDimensions.paddingSupSmall,
                     left: 18,
                     right: 18),
                 physics: const NeverScrollableScrollPhysics(),
@@ -1350,6 +1350,6 @@ class _SearchWidgetState extends State<SearchWidget> {
           ),
         ),
         contentPadding: const EdgeInsets.only(
-            left: AppDimensions.paddingsmall, top: 10.0, bottom: 15.0));
+            left: AppDimensions.paddingSmall, top: 10.0, bottom: 15.0));
   }
 }

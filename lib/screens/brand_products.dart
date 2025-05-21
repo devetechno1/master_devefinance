@@ -195,7 +195,7 @@ class _BrandProductsState extends State<BrandProducts> {
             itemCount: _productList.length,
             shrinkWrap: true,
             padding: const EdgeInsets.only(
-                top: AppDimensions.paddingsupsmall,
+                top: AppDimensions.paddingSupSmall,
                 bottom: 10,
                 left: 18,
                 right: 18),

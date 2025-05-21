@@ -250,7 +250,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // name
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text(AppLocalizations.of(context)!.name_ucf,
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
@@ -272,7 +272,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // email
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text(AppLocalizations.of(context)!.email_ucf,
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
@@ -293,7 +293,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // address
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text("${AppLocalizations.of(context)!.address_ucf} *",
                     style:
                         TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
@@ -318,7 +318,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // country
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text("${AppLocalizations.of(context)!.country_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
@@ -371,7 +371,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // state
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text("${AppLocalizations.of(context)!.state_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
@@ -431,7 +431,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // city
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text("${AppLocalizations.of(context)!.city_ucf} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
@@ -491,7 +491,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // postal code
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text(AppLocalizations.of(context)!.postal_code,
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
@@ -512,14 +512,14 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
               // phone
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text(AppLocalizations.of(context)!.phone_ucf,
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Container(
                   height: 40,
                   child: TextField(
@@ -587,7 +587,7 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
         ),
       ),
       contentPadding: const EdgeInsets.only(
-          left: AppDimensions.paddingsmall, top: 5.0, bottom: 5.0));
+          left: AppDimensions.paddingSmall, top: 5.0, bottom: 5.0));
 }
 
 AppBar buildAppBar(BuildContext context) {

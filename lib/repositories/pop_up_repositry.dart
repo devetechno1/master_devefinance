@@ -4,7 +4,7 @@ import '../app_config.dart';
 import '../data_model/popup_banner_model.dart';
 import 'api-request.dart';
 
-Future<List<PopupBannerModel>> fetchBannerpopupData() async {
+Future<List<PopupBannerModel>> fetchBannerPopupData() async {
   const String url = '${AppConfig.BASE_URL}/banners-popup';
 
   try {

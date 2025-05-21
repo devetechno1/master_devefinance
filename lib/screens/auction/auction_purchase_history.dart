@@ -430,7 +430,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
       padding: const EdgeInsets.fromLTRB(12, 14, 21, 12),
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -441,7 +441,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text(
                   _purchaseList[index].code!,
                   style: TextStyle(
@@ -457,7 +457,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                     Padding(
                       padding: app_language_rtl.$!
                           ? const EdgeInsets.only(
-                              left: AppDimensions.paddingsmall)
+                              left: AppDimensions.paddingSmall)
                           : const EdgeInsets.only(right: 8.0),
                       // child: const Icon(
                       //   Icons.calendar_today_outlined,
@@ -475,13 +475,13 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Row(
                   children: [
                     Padding(
                       padding: app_language_rtl.$!
                           ? const EdgeInsets.only(
-                              left: AppDimensions.paddingsmall)
+                              left: AppDimensions.paddingSmall)
                           : const EdgeInsets.only(right: 8.0),
                       // child: const Icon(
                       //   Icons.credit_card,
@@ -525,7 +525,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   Padding(
                     padding: app_language_rtl.$!
                         ? const EdgeInsets.only(
-                            left: AppDimensions.paddingsmall)
+                            left: AppDimensions.paddingSmall)
                         : const EdgeInsets.only(right: 8.0),
                     // child: const Icon(
                     //   Icons.local_shipping_outlined,
@@ -634,7 +634,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   padding: MediaQuery.of(context).viewPadding.top >
                           30 //MediaQuery.of(context).viewPadding.top is the status bar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                       ? const EdgeInsets.only(
-                          top: AppDimensions.paddingveryLarge)
+                          top: AppDimensions.paddingVeryLarge)
                       : const EdgeInsets.only(top: 14.0),
                   child: buildTopAppBarContainer(),
                 ),

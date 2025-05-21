@@ -899,7 +899,7 @@ class _CheckoutState extends State<Checkout> {
             decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall))
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall))
                 .copyWith(
                     border: Border.all(
                         color: _selected_payment_method_key ==
@@ -939,7 +939,7 @@ class _CheckoutState extends State<Checkout> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingsmall),
+                              bottom: AppDimensions.paddingSmall),
                           child: Text(
                             _paymentTypeList[index].title,
                             textAlign: TextAlign.left,
@@ -977,7 +977,7 @@ class _CheckoutState extends State<Checkout> {
         height: 16,
         width: 16,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
             color: Colors.green),
         child: const Icon(Icons.check, color: Colors.white, size: 10),
       ),
@@ -1025,7 +1025,7 @@ class _CheckoutState extends State<Checkout> {
         color: MyTheme.soft_accent_color,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+        padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
         child: Row(
           children: [
             Padding(
@@ -1166,7 +1166,7 @@ class CheckoutDetails extends StatelessWidget {
         children: [
           Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Container(
@@ -1196,7 +1196,7 @@ class CheckoutDetails extends StatelessWidget {
               )),
           Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Container(
@@ -1226,7 +1226,7 @@ class CheckoutDetails extends StatelessWidget {
               )),
           Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Container(
@@ -1256,7 +1256,7 @@ class CheckoutDetails extends StatelessWidget {
               )),
           Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Container(
@@ -1290,7 +1290,7 @@ class CheckoutDetails extends StatelessWidget {
           if (showTotal)
             Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Row(
                   children: [
                     Container(

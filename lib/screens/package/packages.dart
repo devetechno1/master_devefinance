@@ -133,7 +133,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
   ListView buildList() {
     return _isFetchAllData
         ? ListView.separated(
-            padding: const EdgeInsets.only(top: AppDimensions.paddingsupsmall),
+            padding: const EdgeInsets.only(top: AppDimensions.paddingSupSmall),
             separatorBuilder: (context, index) {
               return const SizedBox(
                 height: 10,
@@ -192,13 +192,13 @@ class _UpdatePackageState extends State<UpdatePackage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: InkWell(
                     onTap: () {
@@ -237,7 +237,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.paddingsmall),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
               child: Container(
                 width: DeviceInfo(context).width! / 2,
                 child: Row(

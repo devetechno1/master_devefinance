@@ -195,9 +195,9 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.only(
                             topRight:
-                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                                Radius.circular(AppDimensions.radiusHalfSmall),
                             bottomLeft:
-                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                                Radius.circular(AppDimensions.radiusHalfSmall),
                           ),
                           boxShadow: [
                             BoxShadow(

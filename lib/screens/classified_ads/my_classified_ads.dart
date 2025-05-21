@@ -257,7 +257,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
               width: DeviceInfo(context).width,
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 border:
                     Border.all(color: Theme.of(context).primaryColor, width: 1),
                 color: const Color(0xffFBEAE6),
@@ -340,7 +340,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.08),
@@ -402,7 +402,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.08),
@@ -507,7 +507,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
       child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.08),
@@ -587,9 +587,9 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                             : Theme.of(context).primaryColor,
                         borderRadius: const BorderRadius.only(
                           topLeft:
-                              Radius.circular(AppDimensions.radiusaHalfsmall),
+                              Radius.circular(AppDimensions.radiusHalfSmall),
                           bottomRight:
-                              Radius.circular(AppDimensions.radiusaHalfsmall),
+                              Radius.circular(AppDimensions.radiusHalfSmall),
                         ),
                         boxShadow: const [
                           BoxShadow(
@@ -710,7 +710,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall),
             ),
             content: Container(
               height: 40,

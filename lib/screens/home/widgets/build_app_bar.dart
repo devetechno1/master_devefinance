@@ -21,8 +21,8 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         flexibleSpace: Padding(
           padding: const EdgeInsets.only(
-              top: AppDimensions.paddingsupsmall,
-              bottom: AppDimensions.paddingsupsmall,
+              top: AppDimensions.paddingSupSmall,
+              bottom: AppDimensions.paddingSupSmall,
               left: 18,
               right: 18),
           child: GestureDetector(

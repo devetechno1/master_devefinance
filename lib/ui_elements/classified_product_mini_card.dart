@@ -52,7 +52,7 @@ class _MiniProductCardState extends State<ClassifiedMiniProductCard> {
                         clipBehavior: Clip.hardEdge,
                         borderRadius: const BorderRadius.vertical(
                             top:
-                                Radius.circular(AppDimensions.radiusaHalfsmall),
+                                Radius.circular(AppDimensions.radiusHalfSmall),
                             bottom: Radius.zero),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
@@ -115,9 +115,9 @@ class _MiniProductCardState extends State<ClassifiedMiniProductCard> {
                           widget.condition == "new" ? Colors.green : Colors.red,
                       borderRadius: const BorderRadius.only(
                         topRight:
-                            Radius.circular(AppDimensions.radiusaHalfsmall),
+                            Radius.circular(AppDimensions.radiusHalfSmall),
                         bottomLeft:
-                            Radius.circular(AppDimensions.radiusaHalfsmall),
+                            Radius.circular(AppDimensions.radiusHalfSmall),
                       ),
                       boxShadow: const [
                         BoxShadow(

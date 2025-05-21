@@ -20,7 +20,7 @@ class BrandListSectionSliver extends StatelessWidget {
           padding: const EdgeInsetsDirectional.only(
               top: AppDimensions.paddingLarge,
               start: AppDimensions.paddingLarge,
-              bottom: AppDimensions.paddingsupsmall),
+              bottom: AppDimensions.paddingSupSmall),
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {

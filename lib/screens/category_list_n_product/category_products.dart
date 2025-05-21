@@ -247,11 +247,11 @@ class _CategoryProductsState extends State<CategoryProducts> {
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall)),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
@@ -346,8 +346,8 @@ class _CategoryProductsState extends State<CategoryProducts> {
             itemCount: _productList.length,
             shrinkWrap: true,
             padding: const EdgeInsets.only(
-                top: AppDimensions.paddingsupsmall,
-                bottom: AppDimensions.paddingsupsmall,
+                top: AppDimensions.paddingSupSmall,
+                bottom: AppDimensions.paddingSupSmall,
                 left: 18,
                 right: 18),
             physics: const NeverScrollableScrollPhysics(),

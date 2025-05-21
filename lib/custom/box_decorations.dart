@@ -34,7 +34,7 @@ class BoxDecorations {
 
   static BoxDecoration buildCartCircularButtonDecoration() {
     return BoxDecoration(
-      borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
       color: const Color.fromRGBO(229, 241, 248, 1),
     );
   }

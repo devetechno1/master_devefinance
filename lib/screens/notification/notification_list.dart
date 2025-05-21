@@ -113,7 +113,7 @@ class _NotificationListState extends State<NotificationList> {
 
   Container buildShowNotificationSection() {
     return Container(
-        padding: const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+        padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,

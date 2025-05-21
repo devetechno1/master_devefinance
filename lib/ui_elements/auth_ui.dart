@@ -154,7 +154,7 @@ class AuthScreen {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingLarge,
-                            top: AppDimensions.paddingsupsmall),
+                            top: AppDimensions.paddingSupSmall),
                         child: Text(
                           headerText,
                           style: const TextStyle(
@@ -187,7 +187,7 @@ class AuthScreen {
                   Navigator.of(context).pop();
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(AppDimensions.paddingsmall),
+                  padding: const EdgeInsets.all(AppDimensions.paddingSmall),
                   decoration: BoxDecoration(
                     color: Colors.red
                         .withValues(alpha: 0.7), // Optional background color

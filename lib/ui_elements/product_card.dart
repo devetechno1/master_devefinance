@@ -92,9 +92,9 @@ class _ProductCardState extends State<ProductCard> {
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                               bottomLeft: Radius.circular(
-                                  AppDimensions.radiusaHalfsmall),
+                                  AppDimensions.radiusHalfSmall),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -199,8 +199,8 @@ class _ProductCardState extends State<ProductCard> {
                         height: 20,
                         width: 48,
                         margin: const EdgeInsets.only(
-                            top: AppDimensions.paddingsmall,
-                            right: AppDimensions.paddingsmall,
+                            top: AppDimensions.paddingSmall,
+                            right: AppDimensions.paddingSmall,
                             bottom: 15),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,

@@ -219,7 +219,7 @@ class _RegistrationState extends State<Registration> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!.name_ucf,
                   style: TextStyle(
@@ -229,7 +229,7 @@ class _RegistrationState extends State<Registration> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Container(
                   height: 36,
                   child: TextField(
@@ -242,7 +242,7 @@ class _RegistrationState extends State<Registration> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   _register_by == "email"
                       ? AppLocalizations.of(context)!.email_ucf
@@ -255,7 +255,7 @@ class _RegistrationState extends State<Registration> {
               if (_register_by == "email")
                 Padding(
                   padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -291,7 +291,7 @@ class _RegistrationState extends State<Registration> {
               else
                 Padding(
                   padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -355,7 +355,7 @@ class _RegistrationState extends State<Registration> {
                 ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
                   style: TextStyle(
@@ -365,7 +365,7 @@ class _RegistrationState extends State<Registration> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -393,7 +393,7 @@ class _RegistrationState extends State<Registration> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingsmallExtra),
+                    bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   AppLocalizations.of(context)!.retype_password_ucf,
                   style: TextStyle(
@@ -403,7 +403,7 @@ class _RegistrationState extends State<Registration> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Container(
                   height: 36,
                   child: TextField(
@@ -446,7 +446,7 @@ class _RegistrationState extends State<Registration> {
                       child: Checkbox(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  AppDimensions.radiusaHalfsmall)),
+                                  AppDimensions.radiusHalfSmall)),
                           value: _isAgree,
                           onChanged: (newValue) {
                             _isAgree = newValue;
@@ -518,7 +518,7 @@ class _RegistrationState extends State<Registration> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingextraLarge),
+                    const EdgeInsets.only(top: AppDimensions.paddingExtraLarge),
                 child: Container(
                   height: 45,
                   child: Btn.minWidthFixHeight(
@@ -527,7 +527,7 @@ class _RegistrationState extends State<Registration> {
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
-                            Radius.circular(AppDimensions.radiusaHalfsmall))),
+                            Radius.circular(AppDimensions.radiusHalfSmall))),
                     child: Text(
                       AppLocalizations.of(context)!.sign_up_ucf,
                       style: const TextStyle(

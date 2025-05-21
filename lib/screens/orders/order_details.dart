@@ -320,7 +320,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Row(
                           children: [
                             Text(AppLocalizations.of(context)!.product_name_ucf,
@@ -330,7 +330,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               width: 225,
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: AppDimensions.paddingsmall),
+                                    bottom: AppDimensions.paddingSmall),
                                 child: Text(itemName,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
@@ -344,7 +344,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Row(
                           children: [
                             Text(AppLocalizations.of(context)!.order_code_ucf,
@@ -352,7 +352,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     color: MyTheme.font_grey, fontSize: 12)),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  bottom: AppDimensions.paddingsmall),
+                                  bottom: AppDimensions.paddingSmall),
                               child: Text(orderCode,
                                   style: const TextStyle(
                                       color: MyTheme.font_grey, fontSize: 13)),
@@ -362,7 +362,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingsmall),
+                            bottom: AppDimensions.paddingSmall),
                         child: Row(
                           children: [
                             Text(
@@ -431,7 +431,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
@@ -458,7 +458,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingextraLarge),
+                          bottom: AppDimensions.paddingExtraLarge),
                       child: Btn.minWidthFixHeight(
                         minWidth: 75,
                         height: 30,
@@ -659,7 +659,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               children: [
                 Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Row(
                       children: [
                         Container(
@@ -685,7 +685,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     )),
                 Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Row(
                       children: [
                         Container(
@@ -711,7 +711,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     )),
                 Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Row(
                       children: [
                         Container(
@@ -738,7 +738,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     )),
                 Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Row(
                       children: [
                         Container(
@@ -765,7 +765,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 const Divider(),
                 Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingsmall),
+                        bottom: AppDimensions.paddingSmall),
                     child: Row(
                       children: [
                         Container(
@@ -882,7 +882,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 0 ? Colors.green : MyTheme.medium_grey,
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               iconStyle: _stepIndex >= 0
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
@@ -944,7 +944,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 1 ? Colors.green : MyTheme.medium_grey,
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               iconStyle: _stepIndex >= 1
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
@@ -1017,7 +1017,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 2 ? Colors.green : MyTheme.medium_grey,
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               iconStyle: _stepIndex >= 2
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
@@ -1089,7 +1089,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             indicatorStyle: IndicatorStyle(
               color: _stepIndex >= 5 ? Colors.green : MyTheme.medium_grey,
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               iconStyle: _stepIndex >= 5
                   ? IconStyle(
                       color: Colors.white, iconData: Icons.check, fontSize: 16)
@@ -1139,7 +1139,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Text(
@@ -1180,7 +1180,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Text(
@@ -1266,7 +1266,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   _orderDetails!.shipping_address != null
@@ -1495,7 +1495,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
                 _orderedItemList[index].product_name,
                 maxLines: 2,
@@ -1506,7 +1506,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Row(
                 children: [
                   Text(
@@ -1554,7 +1554,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingsmall),
+                          bottom: AppDimensions.paddingSmall),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -1700,10 +1700,10 @@ class _OrderDetailsState extends State<OrderDetails> {
       height: 16,
       width: 16,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
           color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+        padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
         child: Icon(paymentStatus == "paid" ? Icons.check : Icons.check,
             color: Colors.white, size: 10),
       ),

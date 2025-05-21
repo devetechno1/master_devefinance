@@ -118,7 +118,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
               childAspectRatio: 0.7),
           padding: const EdgeInsets.only(
               top: AppDimensions.paddingLarge,
-              bottom: AppDimensions.paddingsupsmall,
+              bottom: AppDimensions.paddingSupSmall,
               left: 18,
               right: 18),
           physics: const NeverScrollableScrollPhysics(),
@@ -161,7 +161,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   height: 100,
                   child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(AppDimensions.radiusDefualt),
+                          top: Radius.circular(AppDimensions.radiusDefault),
                           bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
@@ -191,7 +191,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Container(
                 height: 15,
                 child: RatingBar(
@@ -251,7 +251,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                       border: Border.all(color: Colors.amber),
                       color: MyTheme.amber,
                       borderRadius: BorderRadius.circular(
-                          AppDimensions.radiusaHalfsmall)),
+                          AppDimensions.radiusHalfSmall)),
                   child: Text(
                     LangText(context).local.visit_store_ucf,
                     style: TextStyle(

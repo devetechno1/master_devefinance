@@ -87,7 +87,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
           ),
           Container(
             padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingsupsmall),
+                const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
             width: DeviceInfo(context).width! / 2,
             child: Text(
               AppLocalizations.of(context)!.all_blogs_ucf,
@@ -140,11 +140,11 @@ class _BlogListScreenState extends State<BlogListScreen> {
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall)),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall)),
           contentPadding: const EdgeInsets.all(8.0),
         ),
       ),
@@ -183,7 +183,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusDefualt),
+                            BorderRadius.circular(AppDimensions.radiusDefault),
                         image: DecorationImage(
                           image: NetworkImage(blogProvider.blogs[index]
                               .banner), // Replace with your image asset
@@ -192,7 +192,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppDimensions
-                            .radiusDefualt), // Ensure the gradient follows the border radius
+                            .radiusDefault), // Ensure the gradient follows the border radius
                         child: Stack(
                           children: [
                             // Gradient overlay

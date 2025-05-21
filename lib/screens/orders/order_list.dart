@@ -261,7 +261,7 @@ class _OrderListState extends State<OrderList> {
             child: DropdownButton<PaymentStatus>(
               dropdownColor: Colors.white,
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall),
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -292,7 +292,7 @@ class _OrderListState extends State<OrderList> {
             child: DropdownButton<DeliveryStatus>(
               dropdownColor: Colors.white,
               borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall),
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -342,7 +342,7 @@ class _OrderListState extends State<OrderList> {
                   padding: MediaQuery.of(context).viewPadding.top >
                           30 //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                       ? const EdgeInsets.only(
-                          top: AppDimensions.paddingveryLarge)
+                          top: AppDimensions.paddingVeryLarge)
                       : const EdgeInsets.only(top: 14.0),
                   child: buildTopAppBarContainer(),
                 ),
@@ -465,7 +465,7 @@ class _OrderListState extends State<OrderList> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingsmall),
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
                 _orderList[index].code,
                 style: TextStyle(
@@ -476,7 +476,7 @@ class _OrderListState extends State<OrderList> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: Row(
                 children: [
                   Text(_orderList[index].date,
@@ -495,7 +495,7 @@ class _OrderListState extends State<OrderList> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingsmallExtra),
+                  bottom: AppDimensions.paddingSmallExtra),
               child: Row(
                 children: [
                   Text(
@@ -541,10 +541,10 @@ class _OrderListState extends State<OrderList> {
       height: 16,
       width: 16,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusDefualt),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
           color: paymentStatus == "paid" ? Colors.green : Colors.red),
       child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+        padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
         child: Icon(paymentStatus == "paid" ? Icons.check : Icons.check,
             color: Colors.white, size: 10),
       ),

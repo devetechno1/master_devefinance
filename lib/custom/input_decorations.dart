@@ -12,13 +12,13 @@ class InputDecorations {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.2),
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.radiusaHalfsmall),
+            Radius.circular(AppDimensions.radiusHalfSmall),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.primaryColor, width: 0.5),
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.radiusaHalfsmall),
+            Radius.circular(AppDimensions.radiusHalfSmall),
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 14.0));
@@ -32,14 +32,14 @@ class InputDecorations {
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5),
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-              bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall)),
+              topRight: Radius.circular(AppDimensions.radiusHalfSmall),
+              bottomRight: Radius.circular(AppDimensions.radiusHalfSmall)),
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: MyTheme.primaryColor, width: 0.5),
             borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(AppDimensions.radiusaHalfsmall),
-                bottomRight: Radius.circular(AppDimensions.radiusaHalfsmall))),
+                topRight: Radius.circular(AppDimensions.radiusHalfSmall),
+                bottomRight: Radius.circular(AppDimensions.radiusHalfSmall))),
         contentPadding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.paddingDefault));
   }
@@ -47,7 +47,7 @@ class InputDecorations {
   static InputDecoration buildInputDecoration_with_border(String hintText) {
     final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
       borderSide: const BorderSide(color: MyTheme.textfield_grey, width: 0.5),
-      borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
     );
     return InputDecoration(
         hintText: hintText,

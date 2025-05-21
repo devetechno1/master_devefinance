@@ -515,9 +515,9 @@ class CustomSelectorButton extends StatelessWidget {
                 color: backgroundColor ?? Colors.white,
                 border: Border.all(color: MyTheme.textfield_grey, width: .5),
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                    topLeft: Radius.circular(AppDimensions.radiusHalfSmall),
                     bottomLeft:
-                        Radius.circular(AppDimensions.radiusaHalfsmall))),
+                        Radius.circular(AppDimensions.radiusHalfSmall))),
             child: TextButton(
               key: const Key(TestHelper.DropdownButtonKeyValue),
               style: TextButton.styleFrom(
@@ -526,8 +526,8 @@ class CustomSelectorButton extends StatelessWidget {
                 backgroundColor: backgroundColor ?? Colors.white,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
-                  bottomLeft: Radius.circular(AppDimensions.radiusaHalfsmall),
+                  topLeft: Radius.circular(AppDimensions.radiusHalfSmall),
+                  bottomLeft: Radius.circular(AppDimensions.radiusHalfSmall),
                 )),
               ),
               onPressed: countries.isNotEmpty &&

@@ -53,7 +53,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.circular(AppDimensions.radiusNormal)),
-                padding: const EdgeInsets.all(AppDimensions.paddingveryLarge),
+                padding: const EdgeInsets.all(AppDimensions.paddingVeryLarge),
                 child: _buildImage()),
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -88,7 +88,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       child: Center(
         child: ClipRRect(
           borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(AppDimensions.radiusDefualt)),
+              top: Radius.circular(AppDimensions.radiusDefault)),
           child: FadeInImage.assetNetwork(
             placeholder: AppImages.placeholder,
             image: widget.image ?? AppImages.placeholder,
@@ -143,7 +143,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.amber),
         color: MyTheme.amber,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusaHalfsmall),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
       ),
       child: Text(
         LangText(context).local.visit_store_ucf,

@@ -88,7 +88,7 @@ class MenuItemList extends StatelessWidget {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.all(AppDimensions.paddingsmallExtra),
+                          const EdgeInsets.all(AppDimensions.paddingSmallExtra),
                       child: Container(
                         height: 16,
                         width: 16,

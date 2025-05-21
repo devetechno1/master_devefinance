@@ -51,7 +51,7 @@ class _ClassicScreenState extends State<ClassicScreen>
     super.initState();
     Future.delayed(const Duration(seconds: 1), () {
       showPopupBanner(context);
-      fetchBannerpopupData();
+      fetchBannerPopupData();
     });
   }
 

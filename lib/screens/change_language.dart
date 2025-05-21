@@ -219,7 +219,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusaHalfsmall))
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall))
                 .copyWith(
                     border: Border.all(
                         color: _selected_index == index
@@ -252,7 +252,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingsmall),
+                              bottom: AppDimensions.paddingSmall),
                           child: Text(
                             "${_list[index].name} - ${_list[index].code} - ${_list[index].mobile_app_code}",
                             textAlign: TextAlign.left,
@@ -293,7 +293,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             width: 16,
             decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusDefualt),
+                    BorderRadius.circular(AppDimensions.radiusDefault),
                 color: Colors.green),
             child: const Padding(
               padding: EdgeInsets.all(3),

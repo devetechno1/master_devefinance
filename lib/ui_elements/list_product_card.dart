@@ -50,7 +50,7 @@ class _ListProductCardState extends State<ListProductCard> {
               height: 100,
               child: ClipRRect(
                   borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(AppDimensions.radiusaHalfsmall),
+                      left: Radius.circular(AppDimensions.radiusHalfSmall),
                       right: Radius.zero),
                   child: FadeInImage.assetNetwork(
                     placeholder: AppImages.placeholder,
@@ -60,7 +60,7 @@ class _ListProductCardState extends State<ListProductCard> {
           Flexible(
             child: Container(
               padding: const EdgeInsets.only(
-                  top: AppDimensions.paddingsupsmall,
+                  top: AppDimensions.paddingSupSmall,
                   left: 12,
                   right: 12,
                   bottom: 14),
