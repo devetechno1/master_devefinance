@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../constants/app_dimensions.dart';
 import '../data_model/popup_banner_model.dart';
@@ -23,10 +24,12 @@ class PopupBannerDialog extends StatelessWidget {
                 children: [
                   AspectRatio(
                     aspectRatio: 1,
-                    child: Image.network(
-                      popupBannerModel.image ?? '',
+                    child: CachedNetworkImage(
+                     // popupBannerModel.image ?? '',
                       width: double.infinity,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.cover, 
+                    
+                      imageUrl:popupBannerModel.image ?? '',
                     ),
                   ),
                   Positioned(

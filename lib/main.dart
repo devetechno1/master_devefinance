@@ -99,7 +99,7 @@ void main() async {
   );
 }
 
-bool onOpen = false;
+bool skipUpdate = false;
 
 var routes = GoRouter(
   overridePlatformDefaultLocation: false,
@@ -110,11 +110,16 @@ var routes = GoRouter(
         path: '/',
         name: "Home",
         redirect: (context, state) {
+          final extra = state.extra;
+          if (extra is Map<String, dynamic>) {
+            if (extra["skipUpdate"] == true) {
+              skipUpdate = true;
+            }
+          }
           if (AppConfig.version !=
                   AppConfig.businessSettingsData.updateData?.version &&
-              !onOpen &&
+              !skipUpdate &&
               state.uri.path != "/update") {
-                onOpen = true;
             return '/update?url=${state.uri.path}';
           }
           return null;
@@ -334,8 +339,10 @@ class _MyAppState extends State<MyApp> {
               textTheme: MyTheme.textTheme1,
               fontFamilyFallback: const ['NotoSans'],
               colorScheme: ColorScheme.light(
-                primary: AppConfig.businessSettingsData.primaryColor ?? theme.primary,
-                secondary: AppConfig.businessSettingsData.secondaryColor ??theme.secondary,
+                primary: AppConfig.businessSettingsData.primaryColor ??
+                    theme.primary,
+                secondary: AppConfig.businessSettingsData.secondaryColor ??
+                    theme.secondary,
               ),
               scrollbarTheme: ScrollbarThemeData(
                 thumbVisibility: WidgetStateProperty.all<bool>(false),
