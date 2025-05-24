@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:active_ecommerce_cms_demo_app/middlewares/auth_middleware.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/update_screen.dart';
 import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -64,7 +65,11 @@ import 'single_banner/photo_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  AppConfig.storeType = await StoreType.thisDeviceType();
+
   await Future.wait([
+    BusinessSettingHelper().setBusinessSettingData(),
     Firebase.initializeApp(),
     FlutterDownloader.initialize(
       debug:
@@ -73,8 +78,6 @@ void main() async {
           true, // Optional: set to false to disable working with HTTP links
     ),
   ]);
-
-  AppConfig.storeType = await StoreType.thisDeviceType();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -104,8 +107,18 @@ var routes = GoRouter(
     GoRoute(
         path: '/',
         name: "Home",
-        pageBuilder: (BuildContext context, GoRouterState state) =>
-            const MaterialPage(child: Index()),
+        redirect: (context, state) {
+          if (AppConfig.version !=
+                  AppConfig.businessSettingsData.updateData?.version &&
+              !(state.extra as bool? ?? false) &&
+              state.uri.path != "/update") {
+            return '/update?url=${state.uri.path}';
+          }
+          return null;
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return const MaterialPage(child: Index());
+        },
         routes: [
           GoRoute(
               path: "customer_products",
@@ -252,6 +265,10 @@ var routes = GoRouter(
               path: "coupons",
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   const MaterialPage(child: (Coupons()))),
+          GoRoute(
+              path: "update",
+              pageBuilder: (BuildContext context, GoRouterState state) =>
+                  const MaterialPage(child: (UpdateScreen()))),
         ])
   ],
 );
@@ -314,8 +331,8 @@ class _MyAppState extends State<MyApp> {
               textTheme: MyTheme.textTheme1,
               fontFamilyFallback: const ['NotoSans'],
               colorScheme: ColorScheme.light(
-                primary: theme.primary,
-                secondary: theme.secondary,
+                primary: AppConfig.businessSettingsData.primaryColor ?? theme.primary,
+                secondary: AppConfig.businessSettingsData.secondaryColor ??theme.secondary,
               ),
               scrollbarTheme: ScrollbarThemeData(
                 thumbVisibility: WidgetStateProperty.all<bool>(false),

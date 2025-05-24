@@ -38,10 +38,7 @@ class UsefulElements {
           color: color == 'white' ? Colors.white : MyTheme.dark_font_grey),
       onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => Main(
-                    go_back: go_back,
-                  ))),
+          MaterialPageRoute(builder: (context) => const Main())),
     );
   }
 

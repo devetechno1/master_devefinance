@@ -11,9 +11,11 @@ import 'package:active_ecommerce_cms_demo_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../app_config.dart';
+import '../providers/theme_provider.dart';
+
 class Index extends StatefulWidget {
-  const Index({super.key, this.goBack = true});
-  final bool goBack;
+  const Index({super.key});
 
   @override
   State<Index> createState() => _IndexState();
@@ -22,7 +24,10 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   Future<String?> getSharedValueHelperData() async {
     await BusinessSettingHelper.setInitLang();
-    await BusinessSettingHelper().setBusinessSettingData(context);
+    Provider.of<ThemeProvider>(context, listen: false).changeAppColors(
+      primary: AppConfig.businessSettingsData.primaryColor,
+      secondary: AppConfig.businessSettingsData.secondaryColor,
+    );
     Provider.of<CurrencyPresenter>(context, listen: false).fetchListData();
     access_token.load().whenComplete(() {
       AuthHelper().fetch_and_set();
@@ -44,7 +49,6 @@ class _IndexState extends State<Index> {
   @override
   void initState() {
     InternetHelper.listenToConnectivityChanges(context);
-    // TODO: implement initState
     getSharedValueHelperData().then((value) {
       Future.delayed(const Duration(seconds: 3)).then((value) {
         SystemConfig.isShownSplashScreed = true;
@@ -61,9 +65,7 @@ class _IndexState extends State<Index> {
     SystemConfig.context ??= context;
     return Scaffold(
       body: SystemConfig.isShownSplashScreed
-          ? Main(
-              go_back: widget.goBack,
-            )
+          ? const Main()
           : const SplashScreen(),
     );
   }

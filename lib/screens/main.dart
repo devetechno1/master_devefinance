@@ -17,8 +17,7 @@ import '../app_config.dart';
 // import 'home/home_page_type_enum.dart';
 
 class Main extends StatefulWidget {
-  const Main({Key? key, this.go_back = true}) : super(key: key);
-  final bool go_back;
+  const Main({Key? key}) : super(key: key);
 
   @override
   _MainState createState() => _MainState();

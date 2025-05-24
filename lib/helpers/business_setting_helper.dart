@@ -1,20 +1,14 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:active_ecommerce_cms_demo_app/data_model/business_setting_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/business_setting_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../app_config.dart';
 import '../data_model/business_settings/business_settings.dart';
 import '../data_model/language_list_response.dart';
-import '../providers/theme_provider.dart';
 import '../repositories/language_repository.dart';
 
 class BusinessSettingHelper {
-  Future<void> setBusinessSettingData(BuildContext context) async {
+  Future<void> setBusinessSettingData() async {
     final BusinessSettingListResponse businessLists =
         await BusinessSettingRepository().getBusinessSettingList();
     final Map<String, dynamic> map = {};
@@ -23,13 +17,6 @@ class BusinessSettingHelper {
         ?.forEach((element) => map[element.type!] = element.value);
 
     AppConfig.businessSettingsData = BusinessSettingsData.fromMap(map);
-
-    Provider.of<ThemeProvider>(context, listen: false).changeAppColors(
-      primary: AppConfig.businessSettingsData.primaryColor,
-      secondary: AppConfig.businessSettingsData.secondaryColor,
-    );
-
-    log("business setting : ${jsonEncode(map)}");
   }
 
   static Future<void> setInitLang() async {
