@@ -99,6 +99,8 @@ void main() async {
   );
 }
 
+bool onOpen = false;
+
 var routes = GoRouter(
   overridePlatformDefaultLocation: false,
   navigatorKey: OneContext().key,
@@ -110,8 +112,9 @@ var routes = GoRouter(
         redirect: (context, state) {
           if (AppConfig.version !=
                   AppConfig.businessSettingsData.updateData?.version &&
-              !(state.extra as bool? ?? false) &&
+              !onOpen &&
               state.uri.path != "/update") {
+                onOpen = true;
             return '/update?url=${state.uri.path}';
           }
           return null;
