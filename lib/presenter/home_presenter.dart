@@ -13,10 +13,12 @@ import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.da
 import 'package:active_ecommerce_cms_demo_app/repositories/sliders_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 import '../data_model/category_response.dart';
 import '../data_model/popup_banner_model.dart';
 import '../helpers/shared_value_helper.dart';
+import '../helpers/system_config.dart';
 import '../status/execute_and_handle_remote_errors.dart';
 import '../status/status.dart';
 import '../ui_elements/pop_up_banner.dart';
@@ -295,26 +297,25 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> showPopupBanner() async {
+  Future<void> showPopupBanner([BuildContext? cntx]) async {
+    final BuildContext? context = cntx ?? OneContext().context;
+    if(context == null || GoRouter.of(context).state?.path != "/" || !SystemConfig.isShownSplashScreed) return;
     final Status<List<PopupBannerModel>> bannersStatus = await executeAndHandleErrors(() => SlidersRepository().fetchBannerPopupData());
 
     if (bannersStatus is Success<List<PopupBannerModel>>){
       final List<PopupBannerModel> banners = List.unmodifiable(bannersStatus.data);
       if (banners.isNotEmpty) {
-        final BuildContext? context = OneContext().context;
-        if (context != null) {
-          await lastIndexPopupBanner.load();
-          int index = lastIndexPopupBanner.$ + 1;
-          if (index >= banners.length) index = 0;
+        await lastIndexPopupBanner.load();
+        int index = lastIndexPopupBanner.$ + 1;
+        if (index >= banners.length) index = 0;
 
-          lastIndexPopupBanner.$ = index;
-          lastIndexPopupBanner.save();
-          
-          showDialog(
-            context: context,
-            builder: (context) => PopupBannerDialog(popupBannerModel: banners[index]),
-          );
-        }
+        lastIndexPopupBanner.$ = index;
+        lastIndexPopupBanner.save();
+        
+        showDialog(
+          context: context,
+          builder: (context) => PopupBannerDialog(popupBannerModel: banners[index]),
+        );
       }
     }
   }

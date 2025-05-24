@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data_model/business_settings/update_model.dart';
 import '../services/navigation_service.dart';
+import 'home/home.dart';
 
 class UpdateScreen extends StatelessWidget {
   const UpdateScreen({super.key});

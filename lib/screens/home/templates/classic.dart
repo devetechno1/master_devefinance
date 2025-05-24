@@ -47,7 +47,6 @@ class _ClassicScreenState extends State<ClassicScreen>
       change();
     });
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => homeData.showPopupBanner());
   }
 
   void change() {

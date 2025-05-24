@@ -46,7 +46,6 @@ class _MetroScreenState extends State<MetroScreen>
       change();
     });
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => homeData.showPopupBanner());
   }
 
   void change() {

@@ -51,7 +51,6 @@ class _MinimaScreenState extends State<MinimaScreen>
       change();
     });
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => homeData.showPopupBanner());
   }
 
   void change() {
