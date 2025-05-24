@@ -63,6 +63,15 @@ abstract final class AppImages {
       "$_assetDir/splash_login_registration_background_image.png";
   static const String facebook = "$_assetDir/facebook_logo.png";
   static const String google = "$_assetDir/google_logo.png";
+  static const String huawei = "$_assetDir/huawei.png";
+  static const String googleplay = "$_assetDir/googleplay.png";
+  static const String applestore = "$_assetDir/applestore.png";
+  static const String applogo = "$_assetDir/app_logo.png";
+  
+
+
+
+
 //dummy assets
   static const String _dummyAssetDir = "dummy_assets";
   static const String sSeven = "$_dummyAssetDir/s7.jpg";
