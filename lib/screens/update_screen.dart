@@ -45,7 +45,7 @@ class UpdateScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 14),
                 ),
-                const SizedBox(height: AppDimensions.paddingVeryLarge),
+                const SizedBox(height: AppDimensions.paddingVeryExtraLarge),
                 ElevatedButton.icon(
                   icon: const Icon(
                     Icons.system_update_alt,
