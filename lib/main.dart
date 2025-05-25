@@ -100,6 +100,7 @@ void main() async {
   );
 }
 
+bool _isUpdateScreenOpened = false;
 bool skipUpdate = false;
 
 var routes = GoRouter(
@@ -113,14 +114,12 @@ var routes = GoRouter(
         redirect: (context, state) {
           final extra = state.extra;
           if (extra is Map<String, dynamic>) {
-            if (extra["skipUpdate"] == true) {
-              skipUpdate = true;
-            }
+            if (extra["skipUpdate"] == true) skipUpdate = true;
           }
-          if (AppConfig.version !=
-                  AppConfig.businessSettingsData.updateData?.version &&
-              !skipUpdate &&
-              state.uri.path != "/update") {
+          if (AppConfig.version != AppConfig.businessSettingsData.updateData?.version 
+          && (!_isUpdateScreenOpened || !skipUpdate || AppConfig.businessSettingsData.updateData?.mustUpdate == true)
+          && state.uri.path != "/update") {
+            _isUpdateScreenOpened = true;
             return '/update?url=${state.uri.path}';
           }
           return null;
