@@ -9,7 +9,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/orders/order_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -212,7 +211,9 @@ class _OrderListState extends State<OrderList> {
     return WillPopScope(
         onWillPop: () {
           if (widget.from_checkout) {
-            context.go("/");
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const Main();
+            }));
             return Future<bool>.value(false);
           } else {
             return Future<bool>.value(true);

@@ -247,7 +247,16 @@ class _CheckoutState extends State<Checkout> {
     fetchAll();
   }
 
-  onPopped(value) {
+  onPopped(value) async {
+    if (value == true) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.payment_cancelled_ucf,
+      );
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return const OrderList(from_checkout: true);
+      }));
+      return;
+    }
     reset();
     fetchAll();
   }
@@ -331,7 +340,7 @@ class _CheckoutState extends State<Checkout> {
     }
 
     if (_selected_payment_method == "stripe") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return StripeScreen(
           amount: _grandTotalValue,
           payment_type: payment_type,
