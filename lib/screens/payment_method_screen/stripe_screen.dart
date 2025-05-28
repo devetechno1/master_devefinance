@@ -41,6 +41,8 @@ class _StripeScreenState extends State<StripeScreen> {
 
   final WebViewController _webViewController = WebViewController();
 
+  bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -62,16 +64,16 @@ class _StripeScreenState extends State<StripeScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onWebResourceError: (error) {
-            Navigator.of(context).pop(_order_init);
+            Navigator.of(context).pop(goToOrdersScreen);
           },
           onHttpError: (error) {
-            Navigator.of(context).pop(_order_init);
+            Navigator.of(context).pop(goToOrdersScreen);
           },
           onPageFinished: (page) {
             if (page.contains("/stripe/success")) {
               getData();
             } else if (page.contains("/stripe/cancel")) {
-              Navigator.of(context).pop(_order_init);
+              Navigator.of(context).pop(goToOrdersScreen);
               return;
             }
           },
@@ -88,7 +90,7 @@ class _StripeScreenState extends State<StripeScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(_order_init);
+      Navigator.of(context).pop(goToOrdersScreen);
       return;
     }
 
@@ -104,7 +106,7 @@ class _StripeScreenState extends State<StripeScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(_order_init);
+          Navigator.of(context).pop(goToOrdersScreen);
         }
       },
       child: Scaffold(
@@ -192,7 +194,7 @@ class _StripeScreenState extends State<StripeScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(_order_init),
+          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
         ),
       ),
       title: Text(
