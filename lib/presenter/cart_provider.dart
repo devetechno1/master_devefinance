@@ -282,6 +282,10 @@ class CartProvider extends ChangeNotifier {
   List<Datum> get shopList => _shopList;
   CartResponse? get shopResponse => _shopResponse;
   bool get isInitial => _isInitial;
+  bool get isFreeShipping => 
+  // false;
+      _cartTotal > AppConfig.businessSettingsData.freeShippingMinimumOrderAmount &&
+      AppConfig.businessSettingsData.freeShippingMinimumCheck;
   double get cartTotal => _cartTotal;
   String get cartTotalString => _cartTotalString;
 
@@ -344,7 +348,8 @@ class CartProvider extends ChangeNotifier {
       BuildContext context, int sellerIndex, int itemIndex) {
     if (_shopList[sellerIndex].cartItems![itemIndex].quantity! <
         _shopList[sellerIndex].cartItems![itemIndex].upperLimit!) {
-      _shopList[sellerIndex].cartItems![itemIndex].quantity = _shopList[sellerIndex].cartItems![itemIndex].quantity! + 1;
+      _shopList[sellerIndex].cartItems![itemIndex].quantity =
+          _shopList[sellerIndex].cartItems![itemIndex].quantity! + 1;
       notifyListeners();
       process(context, mode: "update");
     } else {
@@ -359,7 +364,8 @@ class CartProvider extends ChangeNotifier {
       BuildContext context, int sellerIndex, int itemIndex) {
     if (_shopList[sellerIndex].cartItems![itemIndex].quantity! >
         _shopList[sellerIndex].cartItems![itemIndex].lowerLimit!) {
-      _shopList[sellerIndex].cartItems![itemIndex].quantity = _shopList[sellerIndex].cartItems![itemIndex].quantity! - 1;
+      _shopList[sellerIndex].cartItems![itemIndex].quantity =
+          _shopList[sellerIndex].cartItems![itemIndex].quantity! - 1;
       notifyListeners();
       process(context, mode: "update");
     } else {

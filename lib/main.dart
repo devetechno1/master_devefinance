@@ -28,6 +28,7 @@ import 'lang_config.dart';
 import 'my_theme.dart';
 import 'other_config.dart';
 import 'presenter/cart_counter.dart';
+import 'presenter/cart_provider.dart';
 import 'presenter/currency_presenter.dart';
 import 'presenter/home_presenter.dart';
 import 'presenter/select_address_provider.dart';
@@ -316,10 +317,11 @@ class _MyAppState extends State<MyApp> {
 
         ///
         //ChangeNotifierProvider(create: (_) => BannerProvider()),
-        ChangeNotifierProvider(create: (_) => HomePresenter()),
+        // ChangeNotifierProvider(create: (_) => HomePresenter()),
         ChangeNotifierProvider(create: (_) => BlogProvider()),
         ChangeNotifierProvider(create: (_) => PhotoProvider()),
         ChangeNotifierProvider(create: (_) => MyClassifiedProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, provider, snapshot) {

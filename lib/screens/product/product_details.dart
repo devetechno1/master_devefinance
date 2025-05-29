@@ -1639,9 +1639,21 @@ class _ProductDetailsState extends State<ProductDetails>
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text(
-            "$_stock_txt",
-            style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
+          child: Row(
+            children: [
+              Text(
+                "$_stock_txt",
+                style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              if (_stock_txt == 0)
+                Text(
+                  "no items found",
+                  style: const TextStyle(color: Colors.red, fontSize: 14),
+                ),
+            ],
           ),
         ),
       ],
@@ -1906,6 +1918,12 @@ class _ProductDetailsState extends State<ProductDetails>
         width: _selectedColorIndex == index ? 28 : 20,
         height: _selectedColorIndex == index ? 28 : 20,
         decoration: BoxDecoration(
+          border: Border.all(
+            color: _selectedColorIndex == index
+                ? Theme.of(context).primaryColor
+                : Colors.grey, // لون التحديد
+            width: 1, // السماكة
+          ),
           borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
           color: ColorHelper.getColorFromColorCode(_colorList[index]),
           boxShadow: [
@@ -2180,16 +2198,18 @@ class _ProductDetailsState extends State<ProductDetails>
             decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(AppDimensions.radiusHalfSmall),
-              color: color,
-              boxShadow: [
-                BoxShadow(
-                  color: color,
-                  blurRadius: 20,
-                  spreadRadius: 0.0,
-                  offset:
-                      const Offset(0.0, 10.0), // shadow direction: bottom right
-                )
-              ],
+              color: _stock_txt == 0 ? Colors.grey : color,
+              boxShadow: _stock_txt == 0
+                  ? []
+                  : [
+                      BoxShadow(
+                        color: color,
+                        blurRadius: 20,
+                        spreadRadius: 0.0,
+                        offset: const Offset(
+                            0.0, 10.0), // shadow direction: bottom right
+                      )
+                    ],
             ),
             height: 50,
             child: Center(
