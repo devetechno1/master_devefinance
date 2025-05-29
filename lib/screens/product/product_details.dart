@@ -1650,7 +1650,7 @@ class _ProductDetailsState extends State<ProductDetails>
               ),
               if (_stock_txt == 0)
                 Text(
-                  "no items found",
+                  LangText(context).local.out_of_stock,
                   style: const TextStyle(color: Colors.red, fontSize: 14),
                 ),
             ],
@@ -1913,17 +1913,16 @@ class _ProductDetailsState extends State<ProductDetails>
       onTap: () {
         _onColorChange(index);
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 400),
-        width: _selectedColorIndex == index ? 28 : 20,
-        height: _selectedColorIndex == index ? 28 : 20,
+      child: Container(
+        width: _selectedColorIndex == index ? 21 : 18,
+        height: _selectedColorIndex == index ? 21 : 18,
         decoration: BoxDecoration(
-          border: Border.all(
-            color: _selectedColorIndex == index
-                ? Theme.of(context).primaryColor
-                : Colors.grey, // لون التحديد
-            width: 1, // السماكة
-          ),
+          border: _selectedColorIndex == index
+              ? Border.all(
+                  color: Theme.of(context).primaryColor,
+                  width: 3,
+                )
+              : Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
           color: ColorHelper.getColorFromColorCode(_colorList[index]),
           boxShadow: [
@@ -1945,24 +1944,8 @@ class _ProductDetailsState extends State<ProductDetails>
                   )
           ],
         ),
-        child: _selectedColorIndex == index
-            ? buildColorCheckerContainer()
-            : Container(
-                height: 25,
-              ),
       ),
     );
-  }
-
-  Padding buildColorCheckerContainer() {
-    return Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingHalfSmall),
-        child: /*Icon(Icons.check, color: Colors.white, size: 16),*/
-            Image.asset(
-          "assets/white_tick.png",
-          width: 16,
-          height: 16,
-        ));
   }
 
   Widget buildWholeSaleQuantityPrice() {
