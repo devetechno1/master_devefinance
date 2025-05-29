@@ -39,7 +39,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     child: FadeInImage.assetNetwork(
                       placeholder: AppImages.placeholder,
                       image: cartProvider.shopList[sellerIndex]
-                          .cartItems[itemIndex].productThumbnailImage,
+                          .cartItems![itemIndex].productThumbnailImage!,
                       fit: BoxFit.contain,
                     ))),
             Container(
@@ -52,8 +52,8 @@ class CartSellerItemCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      cartProvider.shopList[sellerIndex].cartItems[itemIndex]
-                          .productName,
+                      cartProvider.shopList[sellerIndex].cartItems![itemIndex]
+                          .productName!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: const TextStyle(
@@ -69,12 +69,12 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           Text(
                             SystemConfig.systemCurrency != null
                                 ? cartProvider.shopList[sellerIndex]
-                                    .cartItems[itemIndex].price
+                                    .cartItems![itemIndex].price!
                                     .replaceAll(
-                                        SystemConfig.systemCurrency!.code,
-                                        SystemConfig.systemCurrency!.symbol)
+                                        SystemConfig.systemCurrency!.code!,
+                                        SystemConfig.systemCurrency!.symbol!)
                                 : cartProvider.shopList[sellerIndex]
-                                    .cart_items[itemIndex].price,
+                                    .cartItems![itemIndex].price!,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
@@ -102,7 +102,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                       cartProvider.onPressDelete(
                         context,
                         cartProvider
-                            .shopList[sellerIndex].cartItems[itemIndex].id
+                            .shopList[sellerIndex].cartItems![itemIndex].id
                             .toString(),
                       );
                     },
@@ -127,7 +127,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       if (cartProvider.shopList[sellerIndex]
-                              .cartItems[itemIndex].auctionProduct ==
+                              .cartItems![itemIndex].auctionProduct ==
                           0) {
                         cartProvider.onQuantityIncrease(
                             context, sellerIndex, itemIndex);
@@ -142,7 +142,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                       child: Icon(
                         Icons.add,
                         color: cartProvider.shopList[sellerIndex]
-                                    .cartItems[itemIndex].auctionProduct ==
+                                    .cartItems![itemIndex].auctionProduct ==
                                 0
                             ? Theme.of(context).primaryColor
                             : MyTheme.grey_153,
@@ -156,7 +156,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         bottom: AppDimensions.paddingSmall),
                     child: Text(
                       cartProvider
-                          .shopList[sellerIndex].cartItems[itemIndex].quantity
+                          .shopList[sellerIndex].cartItems![itemIndex].quantity
                           .toString(),
                       style: TextStyle(
                           color: Theme.of(context).primaryColor, fontSize: 16),
@@ -165,7 +165,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       if (cartProvider.shopList[sellerIndex]
-                              .cartItems[itemIndex].auctionProduct ==
+                              .cartItems![itemIndex].auctionProduct ==
                           0) {
                         cartProvider.onQuantityDecrease(
                             context, sellerIndex, itemIndex);
@@ -180,7 +180,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                       child: Icon(
                         Icons.remove,
                         color: cartProvider.shopList[sellerIndex]
-                                    .cartItems[itemIndex].auctionProduct ==
+                                    .cartItems![itemIndex].auctionProduct ==
                                 0
                             ? Theme.of(context).primaryColor
                             : MyTheme.grey_153,

@@ -1,4 +1,9 @@
 {
+  "you_should_complete":"You should complete",
+  "to_take_free_shipping":"to take free shipping",
+  "free_shipping_eligible": "Congratulations! You are eligible for free shipping! 🚚",
+
+   "free_shipping_ucf": "Free",
   "skip_ucf": "No,i want to continue",
   "please_update_to_continue":"Please update the app to continue using it",
       "avaliable_update":"New update is available",
@@ -25,7 +30,7 @@
   "you_have_to_add_location_first": "You have to add location first",
   "check_your_WhatsApp_messages_to_retrieve_the_verification_code": "Check your WhatsApp messages to retrieve the verification code",
   "minimum_order_amount_is": "Minimum order amount is",
-  "minimum_order_qty_is": "The minimum order quantity for different products is",
+  "minimum_order_qty_is": "Minimum order quantity for different products is",
   "remaining": "remaining",
   "seconds": "Seconds",
   "minutes": "Minutes",

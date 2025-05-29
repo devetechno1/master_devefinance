@@ -28,13 +28,10 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CartProvider(),
-      child: _Cart(
-        counter: counter,
-        from_navigation: from_navigation,
-        has_bottomnav: has_bottomnav,
-      ),
+    return _Cart(
+      counter: counter,
+      from_navigation: from_navigation,
+      has_bottomnav: has_bottomnav,
     );
   }
 }
@@ -67,6 +64,15 @@ class _CartState extends State<_Cart> {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(builder: (context, cartProvider, _) {
+      final double progress = (cartProvider.cartTotal /
+              AppConfig.businessSettingsData.minimumOrderAmount)
+          .clamp(0.0, 1.0);
+      final int currentQuantity =
+          cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0;
+      final int minQuantity =
+          AppConfig.businessSettingsData.minimumOrderQuantity;
+      final double quantityProgress =
+          (currentQuantity / minQuantity).clamp(0.0, 1.0);
       return Scaffold(
         key: cartProvider.scaffoldKey,
         backgroundColor: MyTheme.mainColor,
@@ -86,19 +92,139 @@ class _CartState extends State<_Cart> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          height:
-                              cartProvider.isMinOrderQuantityNotEnough ? 25 : 0,
-                          width: double.maxFinite,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 3),
-                          color: Theme.of(context).primaryColor,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: RichText(
-                              text: TextSpan(
-                                  style: const TextStyle(color: Colors.white),
+                        // AnimatedContainer(
+                        //   duration: const Duration(milliseconds: 300),
+                        //   height:
+                        //       cartProvider.isMinOrderQuantityNotEnough ? 25 : 0,
+                        //   width: double.maxFinite,
+                        //   padding: const EdgeInsets.symmetric(
+                        //       horizontal: 20, vertical: 3),
+                        //   color: Theme.of(context).primaryColor,
+                        //   child: FittedBox(
+                        //     fit: BoxFit.scaleDown,
+                        //     child: RichText(
+                        //       text: TextSpan(
+                        //           style: const TextStyle(color: Colors.white),
+                        //           children: [
+                        //             TextSpan(
+                        //                 text:
+                        //                     '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
+                        //             TextSpan(
+                        //                 text:
+                        //                     LangText(context).local.remaining),
+                        //             TextSpan(
+                        //                 text:
+                        //                     ' ${AppConfig.businessSettingsData.minimumOrderQuantity - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
+                        //           ]),
+                        //     ),
+                        //   ),
+                        // ),
+                        // AnimatedContainer(
+                        //   duration: const Duration(milliseconds: 300),
+                        //   height:
+                        //       cartProvider.isMinOrderAmountNotEnough ? 25 : 0,
+                        //   width: double.maxFinite,
+                        //   padding: const EdgeInsets.symmetric(
+                        //       horizontal: 20, vertical: 3),
+                        //   color: Theme.of(context).primaryColor,
+                        //   child: FittedBox(
+                        //     fit: BoxFit.scaleDown,
+                        //     child: RichText(
+                        //       text: TextSpan(
+                        //           style: const TextStyle(color: Colors.white),
+                        //           children: [
+                        //             TextSpan(
+                        //                 text:
+                        //                     '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
+                        //             TextSpan(
+                        //                 text:
+                        //                     LangText(context).local.remaining),
+                        //             TextSpan(
+                        //                 text:
+                        //                     ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
+                        //           ]),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 30),
+                        Visibility(
+                          visible: !cartProvider.isInitial && progress < 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: AppDimensions.paddingLarge),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    LinearProgressIndicator(
+                                        value: (cartProvider.cartTotal /
+                                                AppConfig.businessSettingsData
+                                                    .minimumOrderAmount)
+                                            .clamp(0.0, 1.0),
+                                        minHeight: 20,
+                                        backgroundColor: Colors.grey[300],
+                                        color: Theme.of(context).primaryColor),
+                                    Text(
+                                      '${((cartProvider.cartTotal / AppConfig.businessSettingsData.minimumOrderAmount) * 100).clamp(0, 100).toStringAsFixed(0)}%',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
+                                        TextSpan(
+                                            text: LangText(context)
+                                                .local
+                                                .remaining),
+                                        TextSpan(
+                                            text:
+                                                ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
+                                      ]),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        if (!cartProvider.isInitial && quantityProgress < 1.0) ...[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                LinearProgressIndicator(
+                                  value: quantityProgress,
+                                  minHeight: 20,
+                                  backgroundColor: Colors.grey[300],
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                Text(
+                                  '${(quantityProgress * 100).toStringAsFixed(0)}%',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: AppDimensions.paddingVeryExtraLarge,
+                                vertical: AppDimensions.paddingSmall),
+                            child: FittedBox(
+                              child: RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(color: Colors.black),
                                   children: [
                                     TextSpan(
                                         text:
@@ -108,38 +234,13 @@ class _CartState extends State<_Cart> {
                                             LangText(context).local.remaining),
                                     TextSpan(
                                         text:
-                                            ' ${AppConfig.businessSettingsData.minimumOrderQuantity - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
-                                  ]),
+                                            ' ${AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity} '),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          height:
-                              cartProvider.isMinOrderAmountNotEnough ? 25 : 0,
-                          width: double.maxFinite,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 3),
-                          color: Theme.of(context).primaryColor,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: RichText(
-                              text: TextSpan(
-                                  style: const TextStyle(color: Colors.white),
-                                  children: [
-                                    TextSpan(
-                                        text:
-                                            '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
-                                    TextSpan(
-                                        text:
-                                            LangText(context).local.remaining),
-                                    TextSpan(
-                                        text:
-                                            ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
-                                  ]),
-                            ),
-                          ),
-                        ),
+                        ],
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                           child: buildCartSellerList(cartProvider, context),

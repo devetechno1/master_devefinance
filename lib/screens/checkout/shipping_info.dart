@@ -13,12 +13,14 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/cart_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/shipping_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_config.dart';
 
@@ -655,16 +657,46 @@ class _ShippingInfoState extends State<ShippingInfo> {
   }
 
   Container buildAppbarTitle(BuildContext context) {
+    final CartProvider cartProvider =
+        Provider.of<CartProvider>(context, listen: false);
+
     return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      child: Text(
-        "${AppLocalizations.of(context)!.shipping_cost_ucf} ${SystemConfig.systemCurrency != null ? _shipping_cost_string!.replaceAll(SystemConfig.systemCurrency!.code!, SystemConfig.systemCurrency!.symbol!) : _shipping_cost_string}",
-        style: TextStyle(
-            fontSize: 16,
-            color: MyTheme.dark_font_grey,
-            fontWeight: FontWeight.bold),
-      ),
-    );
+        width: MediaQuery.of(context).size.width - 40,
+        child: Row(
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.shipping_cost_ucf} ",
+              style: TextStyle(
+                fontSize: 16,
+                color: MyTheme.dark_font_grey,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            Text(
+              "${SystemConfig.systemCurrency != null ? _shipping_cost_string!.replaceAll(SystemConfig.systemCurrency!.code!, SystemConfig.systemCurrency!.symbol!) : _shipping_cost_string}",
+              style: TextStyle(
+                fontSize: 16,
+                color: MyTheme.dark_font_grey,
+                fontWeight: FontWeight.bold,
+                decoration: cartProvider.isFreeShipping
+                    ? TextDecoration.lineThrough
+                    : null,
+              ),
+            ),
+            if (cartProvider.isFreeShipping) ...[
+              SizedBox(width: 10),
+              Text(
+                "${AppLocalizations.of(context)!.free_shipping_ucf}",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ],
+        ));
   }
 
   Container buildAppbarBackArrow() {
@@ -911,50 +943,92 @@ class _ShippingInfoState extends State<ShippingInfo> {
       ),
     );
   }
-
   Column buildCartSellerListItem(int index, BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 12.0),
-          child: Text(
-            _deliveryInfoList[index].name!,
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.w700,
-                fontSize: 16),
-          ),
+    final CartProvider cartProvider =
+        Provider.of<CartProvider>(context, listen: false);
+  double difference = AppConfig.businessSettingsData.freeShippingMinimumOrderAmount - cartProvider.cartTotal;
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+     
+        Center(
+          child: Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              
+              child:cartProvider.isFreeShipping? Text(
+                LangText(context).local.free_shipping_eligible,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12),
+              ): (difference > 0
+              
+             ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                   Text(
+                    LangText(context).local.you_should_complete,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12),
+                  ),
+                  Text(
+                   "$difference",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12),
+                  ),
+                  
+                  Text(
+                  LangText(context).local.to_take_free_shipping,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12),
+                  ),
+                ],
+              ):Container()
+              ),
+        ),),
+      
+      Padding(
+        padding: const EdgeInsets.only(bottom: 12.0),
+        child: Text(
+          _deliveryInfoList[index].name!,
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.w700,
+              fontSize: 16),
         ),
-        buildCartSellerItemList(index),
-        if (!(_deliveryInfoList[index]
-            .cartItems!
-            .every((element) => (element.isDigital ?? false))))
-          Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingMedium),
-                child: Text(
-                  LangText(context).local.choose_delivery_ucf,
-                  style: TextStyle(
-                      color: MyTheme.dark_font_grey,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 12),
-                ),
+      ),
+      buildCartSellerItemList(index),
+      if (!((_deliveryInfoList[index]
+          .cartItems!
+          .every((element) => (element.isDigital ?? false)))))
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: AppDimensions.paddingMedium),
+              child: Text(
+                LangText(context).local.choose_delivery_ucf,
+                style: TextStyle(
+                    color: MyTheme.dark_font_grey,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12),
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              buildChooseShippingOptions(context, index),
-              const SizedBox(
-                height: 10,
-              ),
-              buildShippingListBody(index),
-            ],
-          ),
-      ],
-    );
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            buildChooseShippingOptions(context, index),
+            const SizedBox(
+              height: 10,
+            ),
+            buildShippingListBody(index),
+          ],
+        ),
+    ]);
   }
 
   SingleChildScrollView buildCartSellerItemList(sellerIndex) {
