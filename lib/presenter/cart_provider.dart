@@ -271,7 +271,7 @@ import '../screens/guest_checkout_pages/guest_checkout_address.dart';
 class CartProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController _mainScrollController = ScrollController();
-  List _shopList = [];
+  List<Datum> _shopList = [];
   CartResponse? _shopResponse;
   bool _isInitial = true;
   double _cartTotal = 0.00;
@@ -279,7 +279,7 @@ class CartProvider extends ChangeNotifier {
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
   ScrollController get mainScrollController => _mainScrollController;
-  List get shopList => _shopList;
+  List<Datum> get shopList => _shopList;
   CartResponse? get shopResponse => _shopResponse;
   bool get isInitial => _isInitial;
   double get cartTotal => _cartTotal;
@@ -288,7 +288,7 @@ class CartProvider extends ChangeNotifier {
   int get itemsCount {
     int count = 0;
     for (var e in _shopList) {
-      count += ((e?.cartItems?.length as int?) ?? 0);
+      count += (e.cartItems?.length ?? 0);
     }
     return count;
   }
@@ -342,14 +342,14 @@ class CartProvider extends ChangeNotifier {
 
   void onQuantityIncrease(
       BuildContext context, int sellerIndex, int itemIndex) {
-    if (_shopList[sellerIndex].cartItems[itemIndex].quantity <
-        _shopList[sellerIndex].cartItems[itemIndex].upperLimit) {
-      _shopList[sellerIndex].cartItems[itemIndex].quantity++;
+    if (_shopList[sellerIndex].cartItems![itemIndex].quantity! <
+        _shopList[sellerIndex].cartItems![itemIndex].upperLimit!) {
+      _shopList[sellerIndex].cartItems![itemIndex].quantity = _shopList[sellerIndex].cartItems![itemIndex].quantity! + 1;
       notifyListeners();
       process(context, mode: "update");
     } else {
       ToastComponent.showDialog(
-          "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems[itemIndex].upperLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
+          "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].upperLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
           gravity: ToastGravity.CENTER,
           toastLength: Toast.LENGTH_LONG);
     }
@@ -357,14 +357,14 @@ class CartProvider extends ChangeNotifier {
 
   void onQuantityDecrease(
       BuildContext context, int sellerIndex, int itemIndex) {
-    if (_shopList[sellerIndex].cartItems[itemIndex].quantity >
-        _shopList[sellerIndex].cartItems[itemIndex].lowerLimit) {
-      _shopList[sellerIndex].cartItems[itemIndex].quantity--;
+    if (_shopList[sellerIndex].cartItems![itemIndex].quantity! >
+        _shopList[sellerIndex].cartItems![itemIndex].lowerLimit!) {
+      _shopList[sellerIndex].cartItems![itemIndex].quantity = _shopList[sellerIndex].cartItems![itemIndex].quantity! - 1;
       notifyListeners();
       process(context, mode: "update");
     } else {
       ToastComponent.showDialog(
-        "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems[itemIndex].lowerLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
+        "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].lowerLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
       );
     }
   }
@@ -441,8 +441,8 @@ class CartProvider extends ChangeNotifier {
     final cartQuantities = [];
     if (_shopList.isNotEmpty) {
       _shopList.forEach((shop) {
-        if (shop.cartItems.length > 0) {
-          shop.cartItems.forEach((cartItem) {
+        if (shop.cartItems!.isNotEmpty) {
+          shop.cartItems!.forEach((cartItem) {
             cartIds.add(cartItem.id);
             cartQuantities.add(cartItem.quantity);
           });
