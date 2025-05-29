@@ -64,12 +64,12 @@ class _PhonepayScreenState extends State<PhonepayScreen> {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onWebResourceError: (error) {
-             Navigator.of(context).pop(goToOrdersScreen);
-          },
-          onHttpError: (error) {
-            Navigator.of(context).pop(goToOrdersScreen);
-          },
+          // onWebResourceError: (error) {
+          //    Navigator.of(context).pop(goToOrdersScreen);
+          // },
+          // onHttpError: (error) {
+          //   Navigator.of(context).pop(goToOrdersScreen);
+          // },
           onPageFinished: (page) {
             if (page.contains("/phonepe/redirecturl")) {
               getData();

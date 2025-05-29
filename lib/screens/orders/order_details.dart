@@ -277,8 +277,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         builder: (context) => Checkout(
           title: LangText(context).local.order_repayment,
           rechargeAmount: convertedAmount,
-          paymentFor: PaymentFor.ManualPayment,
-          packageId: 0,
+          paymentFor: PaymentFor.OrderRePayment,
           order_id: _orderDetails!.id,
         ),
       ),

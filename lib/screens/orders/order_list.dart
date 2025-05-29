@@ -12,6 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../data_model/order_mini_response.dart';
+
 class PaymentStatus {
   String option_key;
   String name;
@@ -72,7 +74,7 @@ class _OrderListState extends State<OrderList> {
   List<DropdownMenuItem<DeliveryStatus>>? _dropdownDeliveryStatusItems;
 
   //------------------------------------
-  final List<dynamic> _orderList = [];
+  final List<Order> _orderList = [];
   bool _isInitial = true;
   int _page = 1;
   int? _totalData = 0;
@@ -170,9 +172,9 @@ class _OrderListState extends State<OrderList> {
         payment_status: _selectedPaymentStatus!.option_key,
         delivery_status: _selectedDeliveryStatus!.option_key);
     //print("or:"+orderResponse.toJson().toString());
-    _orderList.addAll(orderResponse.orders);
+    _orderList.addAll(orderResponse.orders!);
     _isInitial = false;
-    _totalData = orderResponse.meta.total;
+    _totalData = orderResponse.meta!.total;
     _showLoadingContainer = false;
     setState(() {});
   }
@@ -468,7 +470,7 @@ class _OrderListState extends State<OrderList> {
               padding:
                   const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
-                _orderList[index].code,
+                _orderList[index].code!,
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 13,
@@ -480,12 +482,12 @@ class _OrderListState extends State<OrderList> {
                   bottom: AppDimensions.paddingSmallExtra),
               child: Row(
                 children: [
-                  Text(_orderList[index].date,
+                  Text(_orderList[index].date!,
                       style: TextStyle(
                           color: MyTheme.dark_font_grey, fontSize: 12)),
                   const Spacer(),
                   Text(
-                    convertPrice(_orderList[index].grand_total),
+                    convertPrice(_orderList[index].grand_total!),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 16,
@@ -505,9 +507,9 @@ class _OrderListState extends State<OrderList> {
                         TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                   ),
                   Text(
-                    _orderList[index].payment_status_string,
+                    _orderList[index].payment_status_string!,
                     style: TextStyle(
-                        color: _orderList[index].payment_status == "paid"
+                        color: _orderList[index].payment_status == "Paid"
                             ? Colors.green
                             : Colors.red,
                         fontSize: 12,
@@ -523,7 +525,7 @@ class _OrderListState extends State<OrderList> {
                   style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                 ),
                 Text(
-                  _orderList[index].delivery_status_string,
+                  _orderList[index].delivery_status_string!,
                   style: TextStyle(
                       color: MyTheme.dark_font_grey,
                       fontSize: 12,
