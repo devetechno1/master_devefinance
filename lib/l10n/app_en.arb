@@ -1,4 +1,28 @@
 {
+  "minimum_order_amount_with_remaining": "Minimum order amount is {minAmount}, remaining {remaining}",
+  "@minimum_order_amount_with_remaining": {
+    "description": "Message for showing minimum order amount and remaining amount",
+    "placeholders": {
+      "minAmount": {
+        "type": "String"
+      },
+      "remaining": {
+        "type": "String"
+      }
+    }
+  },
+  "minimum_order_quantity_with_remaining": "Minimum order quantity is {minquantity}, remaining {remaining}",
+  "@minimum_order_quantity_with_remaining": {
+    "description": "Message for showing minimum quantity order amount and remaining amount",
+    "placeholders": {
+      "minquantity": {
+        "type": "String"
+      },
+      "remaining": {
+        "type": "String"
+      }
+    }
+  },
   "out_of_stock": "Out of stock",
   "you_should_complete": "You should complete",
   "to_take_free_shipping": "to take free shipping",
