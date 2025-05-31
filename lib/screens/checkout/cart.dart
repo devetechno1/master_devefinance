@@ -262,7 +262,7 @@ class _CartState extends State<_Cart> {
     });
   }
 
-  Container buildBottomContainer(cartProvider) {
+  Container buildBottomContainer(CartProvider cartProvider) {
     return Container(
       decoration: const BoxDecoration(
         color: MyTheme.mainColor,
@@ -390,8 +390,8 @@ class _CartState extends State<_Cart> {
       backgroundColor: MyTheme.mainColor,
       leading: Builder(
         builder: (context) => widget.from_navigation
-            ? UsefulElements.backToMain(context, go_back: false)
-            : UsefulElements.backButton(context),
+            ? UsefulElements.backToMain(go_back: false)
+            : UsefulElements.backButton(),
       ),
       centerTitle: widget.from_navigation,
       title: Text(

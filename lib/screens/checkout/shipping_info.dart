@@ -652,7 +652,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       backgroundColor: MyTheme.white,
       automaticallyImplyLeading: false,
       title: buildAppbarTitle(context),
-      leading: UsefulElements.backButton(context),
+      leading: UsefulElements.backButton(),
     );
   }
 
@@ -702,7 +702,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
   Container buildAppbarBackArrow() {
     return Container(
       width: 40,
-      child: UsefulElements.backButton(context),
+      child: UsefulElements.backButton(),
     );
   }
 
@@ -946,7 +946,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
   Column buildCartSellerListItem(int index, BuildContext context) {
     final CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: false);
-  double difference = AppConfig.businessSettingsData.freeShippingMinimumOrderAmount - cartProvider.cartTotal;
+  final double difference = AppConfig.businessSettingsData.freeShippingMinimumOrderAmount - cartProvider.cartTotal;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
      

@@ -498,9 +498,14 @@ class CartProvider extends ChangeNotifier {
         } else {
           // Navigate to select address page
           // Example:
-          AIZRoute.push(context, const SelectAddress()).then((value) {
-            onPopped(context, value);
-          });
+          Future.delayed(
+            Duration.zero,
+            () {
+              AIZRoute.push(context, const SelectAddress()).then((value) {
+                onPopped(context, value);
+              });
+            },
+          );
         }
       }
     }
