@@ -65,45 +65,20 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: AppDimensions.paddingLarge),
-                      child: Row(
-                        children: [
-                          Text(
+                    AnimatedNumberText<double>(
+                      double.tryParse(
                             cartProvider.shopList[sellerIndex]
-                                .cartItems![itemIndex].price!,
-                            // cartProvider.shopList[sellerIndex]
-                            //     .cartItems![itemIndex].price!,
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          AnimatedNumberText<double>(
-                            double.tryParse(
-                                  cartProvider.shopList[sellerIndex]
-                                      .cartItems![itemIndex].price!
-                                      .replaceAll(RegExp('[^0-9.]'), ''),
-                                ) ??
-                                0.0,
-                            duration: const Duration(milliseconds: 500),
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            formatter: (value) => '${value.toStringAsFixed(2)}',
-                          ),
-                        ],
+                                .cartItems![itemIndex].price!
+                                .replaceAll(RegExp('[^0-9.]'), ''),
+                          ) ??
+                          0.0,
+                      duration: const Duration(milliseconds: 500),
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
+                      formatter: (value) => '${value.toStringAsFixed(2)}',
                     ),
                   ],
                 ),
@@ -111,7 +86,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
             ),
             Column(
               children: [
-                 Visibility(
+                Visibility(
                   visible: cartProvider
                       .shopList[sellerIndex].cartItems![index].isLoading,
                   child: const Padding(
@@ -119,13 +94,11 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     child: SizedBox(
                       width: 24,
                       height: 24,
-                      child: CircularProgressIndicator(
-                        
-                      ),
+                      child: CircularProgressIndicator(),
                     ),
                   ),
                 ),
-            
+
                 const Spacer(),
                 ////////////////////////////////////////////////
                 GestureDetector(

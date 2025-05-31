@@ -1277,8 +1277,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ],
                           ),
-                        if (_productDetails?.video_link != null &&
-                            _productDetails!.video_link!.isNotEmpty) ...[
+                        if (_productDetails?.video_link?.isNotEmpty == true) ...[
                           const SizedBox(
                             height: 16,
                           ),
@@ -1403,7 +1402,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         ),
                       ]),
                 ),
-                if (_relatedProducts.isNotEmpty)
+                if (_relatedProducts.isNotEmpty || _relatedProductInit==false)
                   SliverList(
                     delegate: SliverChildListDelegate([
                       Padding(
