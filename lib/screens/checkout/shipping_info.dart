@@ -43,6 +43,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
   String? _shipping_cost_string = ". . .";
   // Boolean variables
   bool _isFetchDeliveryInfo = false;
+  bool _isFetchShippingCost = false;
   //double variables
   double mWidth = 0;
   double mHeight = 0;
@@ -87,6 +88,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     } else {
       _shipping_cost_string = "0.0";
     }
+    _isFetchShippingCost = true;
     setState(() {});
   }
 
@@ -101,6 +103,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     _shipping_cost_string = ". . .";
     _shipping_cost_string = ". . .";
     _isFetchDeliveryInfo = false;
+    _isFetchShippingCost = false;
     setState(() {});
   }
 
@@ -679,12 +682,12 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 fontSize: 16,
                 color: MyTheme.dark_font_grey,
                 fontWeight: FontWeight.bold,
-                decoration: cartProvider.isFreeShipping
+                decoration: cartProvider.isFreeShipping && _isFetchShippingCost
                     ? TextDecoration.lineThrough
                     : null,
               ),
             ),
-            if (cartProvider.isFreeShipping) ...[
+            if (cartProvider.isFreeShipping && _isFetchShippingCost) ...[
               SizedBox(width: 10),
               Text(
                 "${AppLocalizations.of(context)!.free_shipping_ucf}",
@@ -954,7 +957,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           child: Container(
               margin: const EdgeInsets.only(bottom: 10),
               
-              child:cartProvider.isFreeShipping? Text(
+              child:cartProvider.isFreeShipping && _isFetchShippingCost? Text(
                 LangText(context).local.free_shipping_eligible,
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
