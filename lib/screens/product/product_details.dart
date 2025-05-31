@@ -878,7 +878,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   backgroundColor: MyTheme.mainColor,
                   pinned: true,
                   automaticallyImplyLeading: _scrollPosition > 250,
-                  expandedHeight: 355.0,
+                  expandedHeight: 375.0,
                   title: AnimatedOpacity(
                       opacity: _scrollPosition > 250 ? 1 : 0,
                       duration: const Duration(milliseconds: 200),
@@ -897,15 +897,20 @@ class _ProductDetailsState extends State<ProductDetails>
                     background: Stack(
                       children: [
                         Positioned.fill(
-                          child: ProductSliderImageWidget(
-                            productImageList: _productImageList,
-                            currentImage: _currentImage,
-                            carouselController: _carouselController,
+                          child: SafeArea(
+                            child: ProductSliderImageWidget(
+                              productImageList: _productImageList,
+                              currentImage: _currentImage,
+                              carouselController: _carouselController,
+                            ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 48, left: 33, right: 33),
+                            top: 48,
+                            left: 33,
+                            right: 33,
+                          ),
                           child: Row(
                             children: [
                               Builder(
@@ -1272,71 +1277,76 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ],
                           ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (_productDetails!.video_link == "") {
-                              ToastComponent.showDialog(
-                                AppLocalizations.of(context)!
-                                    .video_not_available,
-                              );
-                              return;
-                            }
+                        if (_productDetails?.video_link != null &&
+                            _productDetails!.video_link!.isNotEmpty) ...[
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          // if (_productDetails?.video_link != null &&
+                          //     _productDetails!.video_link!.isNotEmpty)
+                          InkWell(
+                            onTap: () {
+                              if (_productDetails!.video_link == "") {
+                                ToastComponent.showDialog(
+                                  AppLocalizations.of(context)!
+                                      .video_not_available,
+                                );
+                                return;
+                              }
 
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return VideoDescription(
-                                url: _productDetails!.video_link,
-                              );
-                            })).then((value) {
-                              onPopped(value);
-                            });
-                          },
-                          child: Container(
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.08),
-                                  spreadRadius: 0,
-                                  blurRadius: 16,
-                                  offset: const Offset(
-                                      0, 0), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                18.0,
-                                14.0,
-                                18.0,
-                                14.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    AppLocalizations.of(context)!.video_ucf,
-                                    style: const TextStyle(
-                                        color: Color(0xff3E4447),
-                                        fontSize: 13,
-                                        fontFamily: 'Public Sans',
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const Spacer(),
-                                  Image.asset(
-                                    "assets/arrow.png",
-                                    color: const Color(0xff6B7377),
-                                    height: 11,
-                                    width: 20,
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return VideoDescription(
+                                  url: _productDetails!.video_link,
+                                );
+                              })).then((value) {
+                                onPopped(value);
+                              });
+                            },
+                            child: Container(
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.08),
+                                    spreadRadius: 0,
+                                    blurRadius: 16,
+                                    offset: const Offset(
+                                        0, 0), // changes position of shadow
                                   ),
                                 ],
                               ),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  18.0,
+                                  14.0,
+                                  18.0,
+                                  14.0,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!.video_ucf,
+                                      style: const TextStyle(
+                                          color: Color(0xff3E4447),
+                                          fontSize: 13,
+                                          fontFamily: 'Public Sans',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const Spacer(),
+                                    Image.asset(
+                                      "assets/arrow.png",
+                                      color: const Color(0xff6B7377),
+                                      height: 11,
+                                      width: 20,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                         const SizedBox(
                           height: 16,
                         ),
@@ -1393,30 +1403,29 @@ class _ProductDetailsState extends State<ProductDetails>
                         ),
                       ]),
                 ),
-                if (_relatedProductInit == true && _relatedProducts.isNotEmpty)
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        18.0,
-                        22.0,
-                        18.0,
-                        0.0,
+                if (_relatedProducts.isNotEmpty)
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          18.0,
+                          22.0,
+                          18.0,
+                          0.0,
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .products_you_may_also_like,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Roboto',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      
-                      child: Text(
-                        AppLocalizations.of(context)!
-                            .products_you_may_also_like,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Roboto',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    buildProductsMayLikeList()
-                  ]),
-                ),
+                      buildProductsMayLikeList()
+                    ]),
+                  ),
 
                 //Top selling product
                 SliverList(
