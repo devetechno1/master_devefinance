@@ -1393,6 +1393,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         ),
                       ]),
                 ),
+                if (_relatedProductInit == true && _relatedProducts.isNotEmpty)
                 SliverList(
                   delegate: SliverChildListDelegate([
                     Padding(
@@ -1402,6 +1403,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         18.0,
                         0.0,
                       ),
+                      
                       child: Text(
                         AppLocalizations.of(context)!
                             .products_you_may_also_like,
