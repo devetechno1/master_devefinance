@@ -1924,7 +1924,8 @@ class _ProductDetailsState extends State<ProductDetails>
       onTap: () {
         _onColorChange(index);
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds:AppDimensions.animationDefaultInMillis),
         width: _selectedColorIndex == index ? 21 : 18,
         height: _selectedColorIndex == index ? 21 : 18,
         decoration: BoxDecoration(

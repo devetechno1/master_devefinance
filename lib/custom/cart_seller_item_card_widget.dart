@@ -1,22 +1,28 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
+import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/system_config.dart';
 import '../my_theme.dart';
 import '../presenter/cart_provider.dart';
+import '../screens/home/home.dart';
+import '../ui_elements/product_card.dart';
 import 'box_decorations.dart';
 import 'device_info.dart';
+import 'home_all_products.dart';
 
 class CartSellerItemCardWidget extends StatelessWidget {
   final int sellerIndex;
   final int itemIndex;
   final CartProvider cartProvider;
+  final int index;
 
   const CartSellerItemCardWidget(
       {Key? key,
       required this.cartProvider,
       required this.sellerIndex,
-      required this.itemIndex})
+      required this.itemIndex,
+      required this.index})
       : super(key: key);
 
   @override
@@ -42,9 +48,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                           .cartItems![itemIndex].productThumbnailImage!,
                       fit: BoxFit.contain,
                     ))),
-            Container(
-              //color: Colors.red,
-              width: DeviceInfo(context).width! / 3,
+            Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
@@ -67,21 +71,36 @@ class CartSellerItemCardWidget extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            SystemConfig.systemCurrency != null
-                                ? cartProvider.shopList[sellerIndex]
-                                    .cartItems![itemIndex].price!
-                                    .replaceAll(
-                                        SystemConfig.systemCurrency!.code!,
-                                        SystemConfig.systemCurrency!.symbol!)
-                                : cartProvider.shopList[sellerIndex]
-                                    .cartItems![itemIndex].price!,
+                            cartProvider.shopList[sellerIndex]
+                                .cartItems![itemIndex].price!,
+                            // cartProvider.shopList[sellerIndex]
+                            //     .cartItems![itemIndex].price!,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          AnimatedNumberText<double>(
+                            double.tryParse(
+                                  cartProvider.shopList[sellerIndex]
+                                      .cartItems![itemIndex].price!
+                                      .replaceAll(RegExp('[^0-9.]'), ''),
+                                ) ??
+                                0.0,
+                            duration: const Duration(milliseconds: 500),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            formatter: (value) => '${value.toStringAsFixed(2)}',
                           ),
                         ],
                       ),
@@ -90,34 +109,46 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
-            Container(
-              width: 32,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ////////////////////////////////////////////////
-                  GestureDetector(
-                    onTap: () async {
-                      cartProvider.onPressDelete(
+            Column(
+              children: [
+                 Visibility(
+                  visible: cartProvider
+                      .shopList[sellerIndex].cartItems![index].isLoading,
+                  child: const Padding(
+                    padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        
+                      ),
+                    ),
+                  ),
+                ),
+            
+                const Spacer(),
+                ////////////////////////////////////////////////
+                GestureDetector(
+                  onTap: () async {
+                    cartProvider.onPressDelete(
                         context,
                         cartProvider
                             .shopList[sellerIndex].cartItems![itemIndex].id
                             .toString(),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingNormal),
-                      child: Image.asset(
-                        AppImages.trash,
-                        height: 16,
-                        color: Colors.red,
-                      ),
+                        sellerIndex,
+                        itemIndex);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingNormal),
+                    child: Image.asset(
+                      AppImages.trash,
+                      height: 16,
+                      color: Colors.red,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(AppDimensions.paddingDefault),

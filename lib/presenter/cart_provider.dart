@@ -282,9 +282,10 @@ class CartProvider extends ChangeNotifier {
   List<Datum> get shopList => _shopList;
   CartResponse? get shopResponse => _shopResponse;
   bool get isInitial => _isInitial;
-  bool get isFreeShipping => 
-  // false;
-      _cartTotal > AppConfig.businessSettingsData.freeShippingMinimumOrderAmount &&
+  bool get isFreeShipping =>
+      // false;
+      _cartTotal >
+          AppConfig.businessSettingsData.freeShippingMinimumOrderAmount &&
       AppConfig.businessSettingsData.freeShippingMinimumCheck;
   double get cartTotal => _cartTotal;
   String get cartTotalString => _cartTotalString;
@@ -345,13 +346,16 @@ class CartProvider extends ChangeNotifier {
   }
 
   void onQuantityIncrease(
-      BuildContext context, int sellerIndex, int itemIndex) {
+      BuildContext context, int sellerIndex, int itemIndex) async {
     if (_shopList[sellerIndex].cartItems![itemIndex].quantity! <
         _shopList[sellerIndex].cartItems![itemIndex].upperLimit!) {
       _shopList[sellerIndex].cartItems![itemIndex].quantity =
           _shopList[sellerIndex].cartItems![itemIndex].quantity! + 1;
+      _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
       notifyListeners();
-      process(context, mode: "update");
+      await process(context, mode: "update");
+      _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+      notifyListeners();
     } else {
       ToastComponent.showDialog(
           "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].upperLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
@@ -361,13 +365,15 @@ class CartProvider extends ChangeNotifier {
   }
 
   void onQuantityDecrease(
-      BuildContext context, int sellerIndex, int itemIndex) {
+      BuildContext context, int sellerIndex, int itemIndex) async {
     if (_shopList[sellerIndex].cartItems![itemIndex].quantity! >
         _shopList[sellerIndex].cartItems![itemIndex].lowerLimit!) {
       _shopList[sellerIndex].cartItems![itemIndex].quantity =
           _shopList[sellerIndex].cartItems![itemIndex].quantity! - 1;
+      _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
       notifyListeners();
-      process(context, mode: "update");
+      await process(context, mode: "update");
+      _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
     } else {
       ToastComponent.showDialog(
         "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].lowerLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
@@ -375,7 +381,9 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  void onPressDelete(BuildContext context, String cartId) {
+  void onPressDelete(
+      BuildContext context, String cartId, int sellerIndex, int itemIndex) {
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -398,6 +406,7 @@ class CartProvider extends ChangeNotifier {
             ),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
+              notifyListeners();
             },
           ),
           Btn.basic(
@@ -408,7 +417,7 @@ class CartProvider extends ChangeNotifier {
             ),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
-              confirmDelete(context, cartId);
+              confirmDelete(context, cartId, sellerIndex, itemIndex);
             },
           ),
         ],
@@ -416,9 +425,12 @@ class CartProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> confirmDelete(BuildContext context, String cartId) async {
+  Future<void> confirmDelete(BuildContext context, String cartId,int sellerIndex, int itemIndex) async {
+      _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
+    notifyListeners();
     final cartDeleteResponse =
         await CartRepository().getCartDeleteResponse(int.parse(cartId));
+          
 
     if (cartDeleteResponse.result == true) {
       ToastComponent.showDialog(
@@ -432,6 +444,8 @@ class CartProvider extends ChangeNotifier {
         cartDeleteResponse.message,
       );
     }
+ _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+    notifyListeners();
   }
 
   void onPressUpdate(BuildContext context) {

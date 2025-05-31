@@ -145,38 +145,44 @@ class _CartState extends State<_Cart> {
                         //   ),
                         // ),
                         // const SizedBox(height: 30),
+                        SizedBox(height: 20,),
                         if (cartProvider.shopList.length != 0) ...[
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 100),
-                            child: LinearOrderProgress(
-                              value: AppConfig
-                                  .businessSettingsData.minimumOrderAmount,
-                              total: cartProvider.cartTotal,
-                              isLoading: cartProvider.isInitial,
-                              title: LangText(context)
-                                  .local
-                                  .minimum_order_amount_with_remaining(
-                                    "${AppConfig.businessSettingsData.minimumOrderAmount}",
-                                    "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
-                                  ),
-                            ),
-                          ),
-                          if (!cartProvider.isInitial &&
-                              quantityProgress < 1.0) ...[
-                            ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 100),
+                          Align(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 900),
                               child: LinearOrderProgress(
                                 value: AppConfig
-                                    .businessSettingsData.minimumOrderQuantity
-                                    .toDouble(),
-                                total: currentQuantity.toDouble(),
+                                    .businessSettingsData.minimumOrderAmount,
+                                total: cartProvider.cartTotal,
                                 isLoading: cartProvider.isInitial,
                                 title: LangText(context)
                                     .local
-                                    .minimum_order_quantity_with_remaining(
-                                      "${AppConfig.businessSettingsData.minimumOrderQuantity}",
-                                      "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
+                                    .minimum_order_amount_with_remaining(
+                                      "${AppConfig.businessSettingsData.minimumOrderAmount}",
+                                      "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
                                     ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+                          if (!cartProvider.isInitial &&
+                              quantityProgress < 1.0) ...[
+                            Align(
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 900),
+                                child: LinearOrderProgress(
+                                  value: AppConfig
+                                      .businessSettingsData.minimumOrderQuantity
+                                      .toDouble(),
+                                  total: currentQuantity.toDouble(),
+                                  isLoading: cartProvider.isInitial,
+                                  title: LangText(context)
+                                      .local
+                                      .minimum_order_quantity_with_remaining(
+                                        "${AppConfig.businessSettingsData.minimumOrderQuantity}",
+                                        "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
+                                      ),
+                                ),
                               ),
                             ),
                           ]

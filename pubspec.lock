@@ -30,6 +30,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.11.0"
+  animated_text_kit:
+    dependency: "direct overridden"
+    description:
+      name: animated_text_kit
+      sha256: adba517adb7e6adeb1eb5e1c8a147dd7bc664dfdf2f5e92226b572a91393a93d
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.3"
+  animated_text_lerp:
+    dependency: "direct main"
+    description:
+      name: animated_text_lerp
+      sha256: "63cc134786c177e81b38b2a9139997ac993866099b1b1a3e9db3920c9dd96e1f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   app_links:
     dependency: "direct main"
     description:
@@ -1466,6 +1482,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  pretty_animated_text:
+    dependency: "direct overridden"
+    description:
+      name: pretty_animated_text
+      sha256: "80c8054807bc1580df4672eb55794a60781179398b2cbe4987bc75b144ae8346"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   provider:
     dependency: "direct main"
     description:
