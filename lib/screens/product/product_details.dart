@@ -343,7 +343,7 @@ class _ProductDetailsState extends State<ProductDetails>
     setState(() {});
   }
 
-  reset() {
+  void reset() {
     restProductDetailValues();
     _currentImage = 0;
     _productImageList.clear();
@@ -361,7 +361,7 @@ class _ProductDetailsState extends State<ProductDetails>
     setState(() {});
   }
 
-  restProductDetailValues() {
+  void restProductDetailValues() {
     _appbarPriceString = " . . .";
     _productDetails = null;
     _productImageList.clear();
@@ -374,24 +374,24 @@ class _ProductDetailsState extends State<ProductDetails>
     fetchAll();
   }
 
-  _onVariantChange(_choice_options_index, value) {
+  void _onVariantChange(_choice_options_index, value) {
     _selectedChoices[_choice_options_index] = value;
     setChoiceString();
     setState(() {});
     fetchAndSetVariantWiseInfo();
   }
 
-  _onColorChange(index) {
+  void _onColorChange(index) {
     _selectedColorIndex = index;
     setState(() {});
     fetchAndSetVariantWiseInfo();
   }
 
-  onPressAddToCart(context, snackbar) {
+  void onPressAddToCart(context, snackbar) {
     addToCart(mode: "add_to_cart", context: context, snackbar: snackbar);
   }
 
-  onPressBuyNow(context) {
+  void onPressBuyNow(context) {
     addToCart(mode: "buy_now", context: context);
   }
 
@@ -1645,10 +1645,8 @@ class _ProductDetailsState extends State<ProductDetails>
                 "$_stock_txt",
                 style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
               ),
-              SizedBox(
-                width: 20,
-              ),
-              if (_stock_txt == 0)
+              const SizedBox(width: 20),
+              if (_stock == 0)
                 Text(
                   LangText(context).local.out_of_stock,
                   style: const TextStyle(color: Colors.red, fontSize: 14),
@@ -2143,37 +2141,45 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   Widget buildBottomAppBar(_addedToCartSnackbar) {
-    return BottomNavigationBar(
-      backgroundColor: MyTheme.white.withValues(alpha: 0.9),
-      items: [
-        bottomTap(context,
+    return Container(
+      padding:
+          const EdgeInsets.symmetric(vertical: AppDimensions.paddingDefault),
+      color: MyTheme.white.withValues(alpha: 0.9),
+      child: Row(
+        children: [
+          bottomTap(
+            context,
             text: AppLocalizations.of(context)!.add_to_cart_ucf,
             color: Theme.of(context).primaryColor,
             shadowColor: MyTheme.accent_color_shadow,
-            onTap: () => onPressAddToCart(context, _addedToCartSnackbar)),
-        bottomTap(context,
+            onTap: () => onPressAddToCart(
+              context,
+              _addedToCartSnackbar,
+            ),
+          ),
+          bottomTap(
+            context,
             text: AppLocalizations.of(context)!.buy_now_ucf,
             color: MyTheme.golden,
             shadowColor: MyTheme.golden_shadow,
-            onTap: () => onPressBuyNow(context)),
-      ],
+            onTap: () => onPressBuyNow(context),
+          ),
+        ],
+      ),
     );
   }
 
-  BottomNavigationBarItem bottomTap(
+  Widget bottomTap(
     BuildContext context, {
     required String text,
     required Color color,
     required Color shadowColor,
     required void Function() onTap,
   }) {
-    return BottomNavigationBarItem(
-      backgroundColor: Colors.transparent,
-      label: '',
-      icon: Padding(
-        padding: const EdgeInsets.only(
-          left: 23,
-          right: 14,
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.paddingSmall,
         ),
         child: InkWell(
           onTap: onTap,
@@ -2181,16 +2187,15 @@ class _ProductDetailsState extends State<ProductDetails>
             decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(AppDimensions.radiusHalfSmall),
-              color: _stock_txt == 0 ? Colors.grey : color,
-              boxShadow: _stock_txt == 0
-                  ? []
+              color: _stock == 0 ? Colors.grey : color,
+              boxShadow: _stock == 0
+                  ? null
                   : [
                       BoxShadow(
                         color: color,
                         blurRadius: 20,
                         spreadRadius: 0.0,
-                        offset: const Offset(
-                            0.0, 10.0), // shadow direction: bottom right
+                        offset: const Offset(0.0, 5.0),
                       )
                     ],
             ),
@@ -2199,9 +2204,10 @@ class _ProductDetailsState extends State<ProductDetails>
               child: Text(
                 text,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
