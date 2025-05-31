@@ -297,7 +297,6 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _isOpenedBefore = false;
   Future<void> showPopupBanner([BuildContext? cntx]) async {
     final BuildContext? context = cntx ?? OneContext().context;
     if(context == null || GoRouter.of(context).state?.path != "/" || !SystemConfig.isShownSplashScreed || _isOpenedBefore) return;
@@ -552,3 +551,4 @@ class CurrentRemainingTime {
     required this.sec,
   });
 }
+  bool _isOpenedBefore = false;

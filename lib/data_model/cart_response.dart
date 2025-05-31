@@ -82,6 +82,7 @@ class CartItem {
   int? quantity;
   int? lowerLimit;
   int? upperLimit;
+  bool isLoading;
 
   CartItem({
     this.id,
@@ -99,6 +100,7 @@ class CartItem {
     this.quantity,
     this.lowerLimit,
     this.upperLimit,
+    this.isLoading = false,
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(

@@ -1,4 +1,28 @@
 {
+    "minimum_order_amount_with_remaining": "الحد الأدنى للطلب هو {minAmount}، المتبقي {remaining}",
+    "@minimum_order_amount_with_remaining": {
+        "description": "Message for showing minimum order and remaining amount",
+        "placeholders": {
+            "minAmount": {
+                "type": "String"
+            },
+            "remaining": {
+                "type": "String"
+            }
+        }
+    },
+    "minimum_order_quantity_with_remaining": "الحد الأدنى للكميه هو {minquantity}، المتبقي {remaining}",
+    "@minimum_order_quantity_with_remaining": {
+        "description": "Message for showing minimumquantity order and remaining amount",
+        "placeholders": {
+            "minquantity": {
+                "type": "String"
+            },
+            "remaining": {
+                "type": "String"
+            }
+        }
+    },
     "out_of_stock": "غير متوفر حالياً",
     "you_should_complete": "يجب عليك إكمال",
     "free_shipping_eligible": "مبروك! أنت مؤهل للشحن المجاني! 🚚",
