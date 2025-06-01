@@ -335,7 +335,7 @@ class _ProductDetailsState extends State<ProductDetails>
       if (photo.variant == _variant &&
           variantResponse.variantData!.image != "") {
         _currentImage = pindex;
-        _carouselController.jumpToPage(pindex);
+        _carouselController.animateToPage(pindex);
       }
       pindex++;
     });
@@ -1634,7 +1634,8 @@ class _ProductDetailsState extends State<ProductDetails>
               const SizedBox(
                 width: 1,
               ),
-              Container(
+              AnimatedContainer(
+                  duration: const Duration(milliseconds: 700),
                   width: 30,
                   child: Center(
                       child: QuantityInputField.show(quantityText,
