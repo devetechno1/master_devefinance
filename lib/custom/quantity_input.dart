@@ -2,8 +2,12 @@ import 'package:active_ecommerce_cms_demo_app/custom/only_number_formatter.dart'
 import 'package:flutter/material.dart';
 
 class QuantityInputField {
-  static TextField show(TextEditingController controller,
-      {required VoidCallback onSubmitted, bool isDisable = false}) {
+  static TextField show(
+    TextEditingController controller, {
+    required VoidCallback onSubmitted,
+    void Function(String)? onChanged,
+    bool isDisable = false,
+  }) {
     return TextField(
       controller: controller,
       textAlign: TextAlign.center,
@@ -13,7 +17,13 @@ class QuantityInputField {
       onSubmitted: (str) {
         onSubmitted();
       },
-      decoration: const InputDecoration.collapsed(hintText: "0"),
+      onChanged: onChanged,
+      decoration: const InputDecoration.collapsed(
+          hintText: "0",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            borderSide: BorderSide(),
+          )),
     );
   }
 }
