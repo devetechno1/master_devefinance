@@ -451,6 +451,8 @@ class CartProvider extends ChangeNotifier {
 
     if (cartDeleteResponse.result == true) {
       ToastComponent.showDialog(
+        color: Colors.green,
+        // Theme.of(context).colorScheme.error,
         cartDeleteResponse.message,
       );
 

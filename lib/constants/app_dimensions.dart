@@ -33,6 +33,7 @@ abstract final class AppDimensions {
 
 
   //animation
+  static const int animationShortInMillis = 100;
   static const int animationDefaultInMillis = 300;
 
 }
