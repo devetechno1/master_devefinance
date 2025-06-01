@@ -2,14 +2,10 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:flutter/material.dart';
 
-import '../helpers/system_config.dart';
 import '../my_theme.dart';
 import '../presenter/cart_provider.dart';
-import '../screens/home/home.dart';
-import '../ui_elements/product_card.dart';
 import 'box_decorations.dart';
 import 'device_info.dart';
-import 'home_all_products.dart';
 
 class CartSellerItemCardWidget extends StatelessWidget {
   final int sellerIndex;
@@ -155,17 +151,22 @@ class CartSellerItemCardWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: AppDimensions.paddingSmall,
-                        bottom: AppDimensions.paddingSmall),
-                    child: Text(
-                      cartProvider
-                          .shopList[sellerIndex].cartItems![itemIndex].quantity
-                          .toString(),
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 16),
-                    ),
-                  ),
+                        bottom: AppDimensions.paddingSmall,
+                      ),
+                      child: Text(
+                        "${int.tryParse(
+                              cartProvider.shopList[sellerIndex]
+                                      .cartItems?[itemIndex].quantity
+                                      ?.toString() ??
+                                  '0',
+                            ) ?? 0}",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16,
+                        ),
+                      )),
                   GestureDetector(
                     onTap: () {
                       if (cartProvider.shopList[sellerIndex]

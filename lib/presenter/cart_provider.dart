@@ -263,6 +263,7 @@ import '../app_config.dart';
 import '../custom/aiz_route.dart';
 import '../custom/btn.dart';
 import '../custom/lang_text.dart';
+import '../helpers/debouncer.dart';
 import '../helpers/shared_value_helper.dart';
 import '../my_theme.dart';
 import '../screens/checkout/select_address.dart';
@@ -290,6 +291,8 @@ class CartProvider extends ChangeNotifier {
   double get cartTotal => _cartTotal;
   String get cartTotalString => _cartTotalString;
 
+  Debouncer debouncer = Debouncer(milliseconds: 600);
+
   int get itemsCount {
     int count = 0;
     for (var e in _shopList) {
@@ -310,6 +313,7 @@ class CartProvider extends ChangeNotifier {
   @override
   void dispose() {
     _mainScrollController.dispose();
+    debouncer.cancel();
     super.dispose();
   }
 
@@ -353,9 +357,14 @@ class CartProvider extends ChangeNotifier {
           _shopList[sellerIndex].cartItems![itemIndex].quantity! + 1;
       _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
       notifyListeners();
-      await process(context, mode: "update");
-      _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
-      notifyListeners();
+      debouncer(
+        () async {
+          await process(context, mode: "update");
+          _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+          notifyListeners();
+          debouncer.cancel();
+        },
+      );
     } else {
       ToastComponent.showDialog(
           "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].upperLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
@@ -372,8 +381,14 @@ class CartProvider extends ChangeNotifier {
           _shopList[sellerIndex].cartItems![itemIndex].quantity! - 1;
       _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
       notifyListeners();
-      await process(context, mode: "update");
-      _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+      debouncer(
+        () async {
+          await process(context, mode: "update");
+          _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+          notifyListeners();
+          debouncer.cancel();
+        },
+      );
     } else {
       ToastComponent.showDialog(
         "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].lowerLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
@@ -383,7 +398,6 @@ class CartProvider extends ChangeNotifier {
 
   void onPressDelete(
       BuildContext context, String cartId, int sellerIndex, int itemIndex) {
-
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -425,12 +439,12 @@ class CartProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> confirmDelete(BuildContext context, String cartId,int sellerIndex, int itemIndex) async {
-      _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
+  Future<void> confirmDelete(BuildContext context, String cartId,
+      int sellerIndex, int itemIndex) async {
+    _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
     notifyListeners();
     final cartDeleteResponse =
         await CartRepository().getCartDeleteResponse(int.parse(cartId));
-          
 
     if (cartDeleteResponse.result == true) {
       ToastComponent.showDialog(
@@ -444,7 +458,7 @@ class CartProvider extends ChangeNotifier {
         cartDeleteResponse.message,
       );
     }
- _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+    _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
     notifyListeners();
   }
 
