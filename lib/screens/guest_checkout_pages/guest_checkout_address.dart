@@ -266,46 +266,55 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     if (_nameController.text.trim().toString().isEmpty) {
       ToastComponent.showDialog(
         LangText(context).local.name_required,
+       color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_emailController.text.trim().toString().isEmpty) {
       ToastComponent.showDialog(
         LangText(context).local.email_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (!emailValid!) {
       ToastComponent.showDialog(
         LangText(context).local.enter_correct_email,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_addressController.text.trim().toString().isEmpty) {
       ToastComponent.showDialog(
         LangText(context).local.shipping_address_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_selected_country == null) {
       ToastComponent.showDialog(
         LangText(context).local.country_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_selected_state == null) {
       ToastComponent.showDialog(
         LangText(context).local.state_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_selected_city == null) {
       ToastComponent.showDialog(
         LangText(context).local.city_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_postalCodeController.text.trim().toString().isEmpty) {
       ToastComponent.showDialog(
         LangText(context).local.postal_code_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     } else if (_phoneController.text.trim().toString().isEmpty) {
       ToastComponent.showDialog(
         LangText(context).local.phone_number_required,
+        color: Theme.of(context).colorScheme.error
       );
       return false;
     }
