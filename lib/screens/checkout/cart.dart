@@ -65,12 +65,9 @@ class _CartState extends State<_Cart> {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(builder: (context, cartProvider, _) {
-      final int currentQuantity =
+      final int currentQuantity = cartQuantityProduct.value =
           cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0;
-      final int minQuantity =
-          AppConfig.businessSettingsData.minimumOrderQuantity;
-      final double quantityProgress =
-          (currentQuantity / minQuantity).clamp(0.0, 1.0);
+
       return Scaffold(
         key: cartProvider.scaffoldKey,
         backgroundColor: MyTheme.mainColor,
@@ -145,48 +142,49 @@ class _CartState extends State<_Cart> {
                         //   ),
                         // ),
                         // const SizedBox(height: 30),
-                        SizedBox(height: 20,),
-                        if (cartProvider.shopList.length != 0) ...[
-                          Align(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 900),
-                              child: LinearOrderProgress(
-                                value: AppConfig
-                                    .businessSettingsData.minimumOrderAmount,
-                                total: cartProvider.cartTotal,
-                                isLoading: cartProvider.isInitial,
-                                title: LangText(context)
-                                    .local
-                                    .minimum_order_amount_with_remaining(
-                                      "${AppConfig.businessSettingsData.minimumOrderAmount}",
-                                      "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
-                                    ),
-                              ),
+                        Align(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 900),
+                            child: LinearOrderProgress(
+                              value: AppConfig
+                                  .businessSettingsData.minimumOrderAmount,
+                              total: cartProvider.cartTotal,
+                              isLoading: cartProvider.isInitial,
+                              showProgress:
+                                  cartProvider.isMinOrderAmountNotEnough,
+                              title: LangText(context)
+                                  .local
+                                  .minimum_order_amount_with_remaining(
+                                    "${AppConfig.businessSettingsData.minimumOrderAmount}",
+                                    "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
+                                  ),
                             ),
                           ),
-                          SizedBox(height: 20,),
-                          if (!cartProvider.isInitial &&
-                              quantityProgress < 1.0) ...[
-                            Align(
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(maxWidth: 900),
-                                child: LinearOrderProgress(
-                                  value: AppConfig
-                                      .businessSettingsData.minimumOrderQuantity
-                                      .toDouble(),
-                                  total: currentQuantity.toDouble(),
-                                  isLoading: cartProvider.isInitial,
-                                  title: LangText(context)
-                                      .local
-                                      .minimum_order_quantity_with_remaining(
-                                        "${AppConfig.businessSettingsData.minimumOrderQuantity}",
-                                        "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
-                                      ),
-                                ),
-                              ),
+                        ),
+                        if (cartProvider.isMinOrderAmountNotEnough &&
+                            cartProvider.isMinOrderQuantityNotEnough)
+                          const SizedBox(height: AppDimensions.paddingNormal),
+                        Align(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 900),
+                            child: LinearOrderProgress(
+                              value: AppConfig
+                                  .businessSettingsData.minimumOrderQuantity
+                                  .toDouble(),
+                              total: currentQuantity.toDouble(),
+                              isLoading: cartProvider.isInitial,
+                              showProgress:
+                                  cartProvider.isMinOrderQuantityNotEnough,
+                              title: LangText(context)
+                                  .local
+                                  .minimum_order_quantity_with_remaining(
+                                    "${AppConfig.businessSettingsData.minimumOrderQuantity}",
+                                    "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
+                                  ),
                             ),
-                          ]
-                        ],
+                          ),
+                        ),
+
                         // if (!cartProvider.isInitial &&
                         //     quantityProgress < 1.0) ...[
                         // Padding(
@@ -319,7 +317,10 @@ class _CartState extends State<_Cart> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(
-                          color: Theme.of(context).primaryColor, width: 1),
+                        color: cartProvider.shopList.isNotEmpty
+                            ? Theme.of(context).primaryColor
+                            : Colors.grey,
+                      ),
                       borderRadius: app_language_rtl.$!
                           ? const BorderRadius.only(
                               topLeft: Radius.circular(
@@ -499,12 +500,14 @@ class LinearOrderProgress extends StatefulWidget {
     required this.total,
     required this.isLoading,
     required this.title,
+    required this.showProgress,
   });
 
   final double value;
   final double total;
   final bool isLoading;
   final String title;
+  final bool showProgress;
 
   @override
   State<LinearOrderProgress> createState() => _LinearOrderProgressState();
@@ -527,7 +530,7 @@ class _LinearOrderProgressState extends State<LinearOrderProgress> {
   @override
   Widget build(BuildContext context) {
     final double progress = (widget.total / widget.value).clamp(0.0, 1.0);
-    if (progress >= 1.0 && showProgress) {
+    if (progress >= 1.0 && showProgress && !widget.showProgress) {
       Future.delayed(
         const Duration(milliseconds: AppDimensions.animationDefaultInMillis),
         () {
@@ -536,14 +539,21 @@ class _LinearOrderProgressState extends State<LinearOrderProgress> {
           });
         },
       );
-    } else if (progress < 1 && !showProgress) {
+    } else if (progress < 1 && !showProgress && widget.showProgress) {
       setState(() {
         showProgress = true;
       });
+    } else if (showProgress && !widget.showProgress) {
+      setState(() {
+        showProgress = false;
+      });
     }
-    return Visibility(
-      visible: showProgress,
-      child: Padding(
+    return AnimatedCrossFade(
+      crossFadeState:
+          showProgress ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+      duration: const Duration(milliseconds: 100),
+      secondChild: const SizedBox(),
+      firstChild: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: AppDimensions.paddingLarge),
         child: Column(
@@ -576,7 +586,7 @@ class _LinearOrderProgressState extends State<LinearOrderProgress> {
                 // ),
                 AnimatedNumberText<double>(
                   progress * 100,
-                  duration: Duration(
+                  duration: const Duration(
                     milliseconds: AppDimensions.animationDefaultInMillis,
                   ),
                   style: const TextStyle(
@@ -589,8 +599,9 @@ class _LinearOrderProgressState extends State<LinearOrderProgress> {
             ),
             AnimatedStringText(
               widget.title,
-              duration: Duration(
-                  milliseconds: AppDimensions.animationDefaultInMillis),
+              duration: const Duration(
+                milliseconds: AppDimensions.animationDefaultInMillis,
+              ),
             ),
           ],
         ),

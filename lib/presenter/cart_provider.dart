@@ -269,6 +269,9 @@ import '../my_theme.dart';
 import '../screens/checkout/select_address.dart';
 import '../screens/guest_checkout_pages/guest_checkout_address.dart';
 
+ValueNotifier<double> cartTotalAmount = ValueNotifier<double>(0.0);
+ValueNotifier<int> cartQuantityProduct = ValueNotifier<int>(0);
+
 class CartProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController _mainScrollController = ScrollController();
@@ -361,7 +364,7 @@ class CartProvider extends ChangeNotifier {
         () async {
           await process(context, mode: "update");
           _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
-          notifyListeners();
+          cartTotalAmount.value = cartTotal;
           debouncer.cancel();
         },
       );
@@ -373,7 +376,7 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  void onQuantityDecrease(
+  Future<void> onQuantityDecrease(
       BuildContext context, int sellerIndex, int itemIndex) async {
     if (_shopList[sellerIndex].cartItems![itemIndex].quantity! >
         _shopList[sellerIndex].cartItems![itemIndex].lowerLimit!) {
@@ -385,7 +388,7 @@ class CartProvider extends ChangeNotifier {
         () async {
           await process(context, mode: "update");
           _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
-          notifyListeners();
+          cartTotalAmount.value = cartTotal;
           debouncer.cancel();
         },
       );
