@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -108,7 +109,6 @@ class _ProductDetailsState extends State<ProductDetails>
   bool _relatedProductInit = false;
   final List<dynamic> _topProducts = [];
   bool _topProductInit = false;
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -292,6 +292,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (is_logged_in.$ == false) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.you_need_to_log_in,
+        color: Theme.of(context).colorScheme.error,
       );
       return;
     }
@@ -311,7 +312,8 @@ class _ProductDetailsState extends State<ProductDetails>
     quantityText.text = "${quantity ?? 0}";
   }
 
-  fetchAndSetVariantWiseInfo({bool change_appbar_string = true}) async {
+  Future<void> fetchAndSetVariantWiseInfo(
+      {bool change_appbar_string = true}) async {
     final colorString = _colorList.isNotEmpty
         ? _colorList[_selectedColorIndex].toString().replaceAll("#", "")
         : "";
@@ -412,6 +414,7 @@ class _ProductDetailsState extends State<ProductDetails>
         return;
       }
     }
+    await fetchAndSetVariantWiseInfo();
 
     final cartAddResponse = await CartRepository().getCartAddResponse(
         _productDetails?.id, _variant, user_id.$, _quantity);
@@ -422,6 +425,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(
         cartAddResponse.message,
+        color: Theme.of(context).colorScheme.error,
       );
       return;
     } else {
@@ -784,6 +788,7 @@ class _ProductDetailsState extends State<ProductDetails>
   dynamic showLoginWarning() {
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
+      color: Theme.of(context).colorScheme.error,
     );
   }
 
@@ -799,6 +804,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (title == "" || message == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.title_or_message_empty_warning,
+        color: Theme.of(context).colorScheme.error,
       );
       return;
     }
@@ -812,6 +818,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (conversationCreateResponse.result == false) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.could_not_create_conversation,
+        color: Theme.of(context).colorScheme.error,
       );
       return;
     }
@@ -1277,7 +1284,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ],
                           ),
-                        if (_productDetails?.video_link?.isNotEmpty == true) ...[
+                        if (_productDetails?.video_link?.isNotEmpty ==
+                            true) ...[
                           const SizedBox(
                             height: 16,
                           ),
@@ -1402,7 +1410,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         ),
                       ]),
                 ),
-                if (_relatedProducts.isNotEmpty || _relatedProductInit==false)
+                if (_relatedProducts.isNotEmpty || _relatedProductInit == false)
                   SliverList(
                     delegate: SliverChildListDelegate([
                       Padding(
@@ -1546,6 +1554,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           if (is_logged_in == false) {
                             ToastComponent.showDialog(
                               LangText(context).local.you_need_to_log_in,
+                              color: Theme.of(context).colorScheme.error,
                             );
                             return;
                           }
@@ -1589,17 +1598,20 @@ class _ProductDetailsState extends State<ProductDetails>
           Padding(
             padding:
                 const EdgeInsets.only(bottom: AppDimensions.paddingSmallExtra),
-            child: Text(
-              SystemConfig.systemCurrency != null
-                  ? _totalPrice.toString().replaceAll(
-                      SystemConfig.systemCurrency!.code!,
-                      SystemConfig.systemCurrency!.symbol!)
-                  : SystemConfig.systemCurrency!.symbol! +
-                      _totalPrice.toString(),
+            child: AnimatedNumberText<double>(
+              double.tryParse(
+                    _totalPrice.toString().replaceAll(RegExp(r'[^0-9.]'), ''),
+                  ) ??
+                  0.0,
+              duration: const Duration(milliseconds: 500),
               style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600),
+                color: Theme.of(context).primaryColor,
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+              ),
+              formatter: (value) {
+                return '${value.toStringAsFixed(2)}';
+              },
             ),
           )
         ],
@@ -1631,38 +1643,53 @@ class _ProductDetailsState extends State<ProductDetails>
             mainAxisSize: MainAxisSize.max,
             children: [
               buildQuantityDownButton(),
-              const SizedBox(
-                width: 1,
+              const SizedBox(width: 1),
+              SizedBox(
+                width: 30,
+                child: Center(
+                  child: QuantityInputField.show(
+                    quantityText,
+                    isDisable: _quantity == 0,
+                    onChanged: (val) {
+                      _quantity = int.parse(quantityText.text);
+                    },
+                    onSubmitted: () {
+                      _quantity = int.parse(quantityText.text);
+                      fetchAndSetVariantWiseInfo();
+                    },
+                  ),
+                ),
               ),
-              AnimatedContainer(
-                  duration: const Duration(milliseconds: 700),
-                  width: 30,
-                  child: Center(
-                      child: QuantityInputField.show(quantityText,
-                          isDisable: _quantity == 0, onSubmitted: () {
-                    _quantity = int.parse(quantityText.text);
-                    print(_quantity);
-                    fetchAndSetVariantWiseInfo();
-                  }))),
               buildQuantityUpButton()
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Row(
-            children: [
-              Text(
-                "$_stock_txt",
-                style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
-              ),
-              const SizedBox(width: 20),
-              if (_stock == 0)
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+              children: [
                 Text(
-                  LangText(context).local.out_of_stock,
-                  style: const TextStyle(color: Colors.red, fontSize: 14),
+                  "$_stock_txt",
+                  style:
+                      const TextStyle(color: Color(0xff6B7377), fontSize: 14),
                 ),
-            ],
+                const SizedBox(width: 20),
+                Expanded(
+                  child: AnimatedDefaultTextStyle(
+                    duration: const Duration(
+                      milliseconds: AppDimensions.animationShortInMillis,
+                    ),
+                    child: Text(LangText(context).local.out_of_stock),
+                    textAlign: TextAlign.center,
+                    style: _stock == 0
+                        ? const TextStyle(color: Colors.red, fontSize: 15)
+                        : const TextStyle(
+                            color: Colors.transparent, fontSize: 0),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -1923,7 +1950,8 @@ class _ProductDetailsState extends State<ProductDetails>
         _onColorChange(index);
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds:AppDimensions.animationDefaultInMillis),
+        duration: const Duration(
+            milliseconds: AppDimensions.animationDefaultInMillis),
         width: _selectedColorIndex == index ? 21 : 18,
         height: _selectedColorIndex == index ? 21 : 18,
         decoration: BoxDecoration(
