@@ -481,13 +481,17 @@ class _CartState extends State<_Cart> {
         ),
       );
     } else if (!cartProvider.isInitial && cartProvider.shopList.length == 0) {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
+      return SizedBox(
+        height: MediaQuery.sizeOf(context).height * 0.65,
+        child: Center(
+          child: Text(
             AppLocalizations.of(context)!.cart_is_empty,
-            style: const TextStyle(color: MyTheme.font_grey),
-          )));
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: MyTheme.font_grey,
+                ),
+          ),
+        ),
+      );
     }
     return null;
   }
