@@ -14,16 +14,17 @@ class QuantityInputField {
       readOnly: isDisable,
       keyboardType: TextInputType.number,
       inputFormatters: [OnlyNumberFormatter()],
-      onSubmitted: (str) {
-        onSubmitted();
-      },
+      onSubmitted: (str) => onSubmitted(),
       onChanged: onChanged,
-      decoration: const InputDecoration.collapsed(
-          hintText: "0",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            borderSide: BorderSide(),
-          )),
+      
+      decoration: const InputDecoration(
+        hintText: "0",
+        contentPadding: EdgeInsets.zero,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          borderSide: BorderSide(),
+        ),
+      ),
     );
   }
 }

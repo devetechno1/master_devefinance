@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'dart:async';
+import 'dart:math';
 
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:badges/badges.dart' as badges;
@@ -99,9 +100,21 @@ class _ProductDetailsState extends State<ProductDetails>
   String? _totalPrice = "...";
   var _singlePrice;
   var _singlePriceString;
-  int? _quantity = 1;
-  int? _stock = 0;
+  int _stock = 0;
+  int _quantity = 1;
+  int _inCart = 0;
   var _stock_txt;
+
+  int get maxQuantity => min(_stock, _productDetails?.maxQty ?? _stock);
+  int get minQuantity => _productDetails?.minQty ?? 1;
+
+  T whenItemInCart<T>(T inCart, T notInCart) {
+    if (_inCart > 0) {
+      return inCart;
+    } else {
+      return notInCart;
+    }
+  }
 
   double opacity = 0;
 
@@ -127,8 +140,7 @@ class _ProductDetailsState extends State<ProductDetails>
         },
       );
     });
-    quantityText.text = "${_quantity ?? 0}";
-    controller;
+    quantityText.text = "$_quantity";
     _ColorAnimationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 0));
 
@@ -162,15 +174,16 @@ class _ProductDetailsState extends State<ProductDetails>
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _mainScrollController.dispose();
-  //   _variantScrollController.dispose();
-  //   _imageScrollController.dispose();
-  //   _colorScrollController.dispose();
-  //   _ColorAnimationController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    quantityText.dispose();
+    _mainScrollController.dispose();
+    _variantScrollController.dispose();
+    _imageScrollController.dispose();
+    _colorScrollController.dispose();
+    _ColorAnimationController.dispose();
+    super.dispose();
+  }
 
   fetchAll() {
     fetchProductDetails();
@@ -219,7 +232,7 @@ class _ProductDetailsState extends State<ProductDetails>
       _singlePrice = _productDetails!.calculable_price;
       _singlePriceString = _productDetails!.main_price;
       // fetchVariantPrice();
-      _stock = _productDetails!.current_stock;
+      _stock = _productDetails!.current_stock ?? _stock;
       _productDetails!.photos!.forEach((photo) {
         _productImageList.add(photo.path);
       });
@@ -231,7 +244,7 @@ class _ProductDetailsState extends State<ProductDetails>
         _colorList.add(color);
       });
       setChoiceString();
-      fetchAndSetVariantWiseInfo(change_appbar_string: true);
+      fetchAndSetVariantWiseInfo(change_appbar_string: true, inInit: true);
       _productDetailsFetched = true;
 
       setState(() {});
@@ -292,7 +305,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (is_logged_in.$ == false) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.you_need_to_log_in,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -308,25 +321,31 @@ class _ProductDetailsState extends State<ProductDetails>
     }
   }
 
-  setQuantity(quantity) {
-    quantityText.text = "${quantity ?? 0}";
-  }
-
-  Future<void> fetchAndSetVariantWiseInfo(
-      {bool change_appbar_string = true}) async {
+  Future<void> fetchAndSetVariantWiseInfo({
+    bool change_appbar_string = true,
+    bool inInit = false,
+  }) async {
     final colorString = _colorList.isNotEmpty
         ? _colorList[_selectedColorIndex].toString().replaceAll("#", "")
         : "";
 
     final variantResponse = await ProductRepository().getVariantWiseInfo(
-        slug: widget.slug,
-        color: colorString,
-        variants: _choiceString,
-        qty: _quantity);
-    _stock = variantResponse.variantData!.stock;
+      slug: widget.slug,
+      color: colorString,
+      variants: _choiceString,
+      qty: _quantity,
+      userId: user_id.$,
+    );
+    _stock = variantResponse.variantData!.stock ?? _stock;
     _stock_txt = variantResponse.variantData!.stockTxt;
-    if (_quantity! > _stock!) {
-      _quantity = _stock;
+    _inCart = variantResponse.variantData!.inCart ?? 0;
+
+    if (inInit) _quantity = _inCart;
+
+    if (_quantity > maxQuantity) {
+      _quantity = maxQuantity;
+    } else if (_quantity < minQuantity) {
+      _quantity = minQuantity;
     }
 
     _variant = variantResponse.variantData!.variant;
@@ -341,7 +360,7 @@ class _ProductDetailsState extends State<ProductDetails>
       }
       pindex++;
     });
-    setQuantity(_quantity);
+    quantityText.text = "$_quantity";
     setState(() {});
   }
 
@@ -356,7 +375,7 @@ class _ProductDetailsState extends State<ProductDetails>
     _choiceString = "";
     _variant = "";
     _selectedColorIndex = 0;
-    _quantity = 1;
+    _quantity = _inCart == 0 ? minQuantity : _inCart;
     _productDetailsFetched = false;
     _isInWishList = false;
     sellerChatTitleController.clear();
@@ -380,13 +399,13 @@ class _ProductDetailsState extends State<ProductDetails>
     _selectedChoices[_choice_options_index] = value;
     setChoiceString();
     setState(() {});
-    fetchAndSetVariantWiseInfo();
+    fetchAndSetVariantWiseInfo(inInit: true);
   }
 
   void _onColorChange(index) {
     _selectedColorIndex = index;
     setState(() {});
-    fetchAndSetVariantWiseInfo();
+    fetchAndSetVariantWiseInfo(inInit: true);
   }
 
   void onPressAddToCart(context, snackbar) {
@@ -397,8 +416,11 @@ class _ProductDetailsState extends State<ProductDetails>
     addToCart(mode: "buy_now", context: context);
   }
 
-  Future<void> addToCart(
-      {mode, required BuildContext context, snackbar = null}) async {
+  Future<void> addToCart({
+    mode,
+    required BuildContext context,
+    snackbar = null,
+  }) async {
     // if (is_logged_in.$ == false) {
     //   // ToastComponent.showDialog(AppLocalizations.of(context).common_login_warning, context,
     //   //     gravity: Toast.center, duration: Toast.lengthLong);
@@ -417,7 +439,11 @@ class _ProductDetailsState extends State<ProductDetails>
     await fetchAndSetVariantWiseInfo();
 
     final cartAddResponse = await CartRepository().getCartAddResponse(
-        _productDetails?.id, _variant, user_id.$, _quantity);
+      _productDetails?.id,
+      _variant,
+      user_id.$,
+      _quantity,
+    );
 
     temp_user_id.$ = cartAddResponse.tempUserId;
     temp_user_id.save();
@@ -425,7 +451,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(
         cartAddResponse.message,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     } else {
@@ -788,7 +814,7 @@ class _ProductDetailsState extends State<ProductDetails>
   dynamic showLoginWarning() {
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
-      color: Theme.of(context).colorScheme.error,
+      isError: true,
     );
   }
 
@@ -804,7 +830,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (title == "" || message == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.title_or_message_empty_warning,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -818,7 +844,7 @@ class _ProductDetailsState extends State<ProductDetails>
     if (conversationCreateResponse.result == false) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.could_not_create_conversation,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -843,7 +869,10 @@ class _ProductDetailsState extends State<ProductDetails>
   Widget build(BuildContext context) {
     final SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
-        AppLocalizations.of(context)!.added_to_cart,
+        whenItemInCart<String>(
+          AppLocalizations.of(context)!.update_cart_ucf,
+          AppLocalizations.of(context)!.added_to_cart,
+        ),
         style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
@@ -1297,6 +1326,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 ToastComponent.showDialog(
                                   AppLocalizations.of(context)!
                                       .video_not_available,
+                                  isError: true,
                                 );
                                 return;
                               }
@@ -1551,10 +1581,10 @@ class _ProductDetailsState extends State<ProductDetails>
                   children: [
                     InkWell(
                         onTap: () {
-                          if (is_logged_in == false) {
+                          if (is_logged_in.$ == false) {
                             ToastComponent.showDialog(
                               LangText(context).local.you_need_to_log_in,
-                              color: Theme.of(context).colorScheme.error,
+                              isError: true,
                             );
                             return;
                           }
@@ -1642,16 +1672,32 @@ class _ProductDetailsState extends State<ProductDetails>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
-              buildQuantityDownButton(),
-              const SizedBox(width: 1),
+              QuantityButtonWidget(
+                icon: Icons.remove,
+                doWhen: _quantity > minQuantity,
+                textWhenDont: AppLocalizations.of(context)!
+                    .minimumOrderQuantity(minQuantity),
+                onPressed: () {
+                  _quantity = _quantity - 1;
+                  setState(() {});
+                  fetchAndSetVariantWiseInfo();
+                },
+              ),
               SizedBox(
-                width: 30,
+                width: 36,
+                height: 36,
                 child: Center(
                   child: QuantityInputField.show(
                     quantityText,
-                    isDisable: _quantity == 0,
+                    isDisable: _stock == 0,
                     onChanged: (val) {
                       _quantity = int.parse(quantityText.text);
+                      if(_quantity > maxQuantity){
+                        _quantity = maxQuantity;
+                      }else if(_quantity < minQuantity){
+                        _quantity = minQuantity;
+                      }
+                      quantityText.text = _quantity.toString();
                     },
                     onSubmitted: () {
                       _quantity = int.parse(quantityText.text);
@@ -1660,7 +1706,17 @@ class _ProductDetailsState extends State<ProductDetails>
                   ),
                 ),
               ),
-              buildQuantityUpButton()
+              QuantityButtonWidget(
+                icon: Icons.add,
+                doWhen: _quantity < maxQuantity,
+                textWhenDont: AppLocalizations.of(context)!
+                    .maxOrderQuantityLimit(maxQuantity),
+                onPressed: () {
+                  _quantity = _quantity + 1;
+                  setState(() {});
+                  fetchAndSetVariantWiseInfo();
+                },
+              ),
             ],
           ),
         ),
@@ -2185,26 +2241,49 @@ class _ProductDetailsState extends State<ProductDetails>
       padding:
           const EdgeInsets.symmetric(vertical: AppDimensions.paddingDefault),
       color: MyTheme.white.withValues(alpha: 0.9),
-      child: Row(
-        children: [
+      child: AnimatedSwitcher(
+        duration: const Duration(
+          milliseconds: AppDimensions.animationDefaultInMillis,
+        ),
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        transitionBuilder: (child, animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        child: whenItemInCart(
           bottomTap(
             context,
-            text: AppLocalizations.of(context)!.add_to_cart_ucf,
+            text: AppLocalizations.of(context)!.update_cart_ucf,
             color: Theme.of(context).primaryColor,
             shadowColor: MyTheme.accent_color_shadow,
-            onTap: () => onPressAddToCart(
-              context,
-              _addedToCartSnackbar,
-            ),
+            onTap: () => onPressAddToCart(context, _addedToCartSnackbar),
           ),
-          bottomTap(
-            context,
-            text: AppLocalizations.of(context)!.buy_now_ucf,
-            color: MyTheme.golden,
-            shadowColor: MyTheme.golden_shadow,
-            onTap: () => onPressBuyNow(context),
+          Row(
+            children: [
+              Expanded(
+                child: bottomTap(
+                  context,
+                  text: AppLocalizations.of(context)!.add_to_cart_ucf,
+                  color: Theme.of(context).primaryColor,
+                  shadowColor: MyTheme.accent_color_shadow,
+                  onTap: () => onPressAddToCart(context, _addedToCartSnackbar),
+                ),
+              ),
+              Expanded(
+                child: bottomTap(
+                  context,
+                  text: AppLocalizations.of(context)!.buy_now_ucf,
+                  color: MyTheme.golden,
+                  shadowColor: MyTheme.golden_shadow,
+                  onTap: () => onPressBuyNow(context),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -2216,38 +2295,39 @@ class _ProductDetailsState extends State<ProductDetails>
     required Color shadowColor,
     required void Function() onTap,
   }) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.paddingSmall,
-        ),
-        child: InkWell(
-          onTap: onTap,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.circular(AppDimensions.radiusHalfSmall),
-              color: _stock == 0 ? Colors.grey : color,
-              boxShadow: _stock == 0
-                  ? null
-                  : [
-                      BoxShadow(
-                        color: color,
-                        blurRadius: 20,
-                        spreadRadius: 0.0,
-                        offset: const Offset(0.0, 5.0),
-                      )
-                    ],
-            ),
-            height: 50,
-            child: Center(
-              child: Text(
-                text,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimensions.paddingSmall,
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
+        child: AnimatedContainer(
+          duration: const Duration(
+            milliseconds: AppDimensions.animationDefaultInMillis,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
+            color: _stock == 0 ? Colors.grey : color,
+            boxShadow: _stock == 0
+                ? null
+                : [
+                    BoxShadow(
+                      color: color,
+                      blurRadius: 20,
+                      spreadRadius: 0.0,
+                      offset: const Offset(0.0, 5.0),
+                    )
+                  ],
+          ),
+          height: 50,
+          child: Center(
+            child: Text(
+              text,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -2511,61 +2591,6 @@ class _ProductDetailsState extends State<ProductDetails>
     }
   }
 
-  Container buildQuantityUpButton() => Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle, // This makes the container a perfect circle
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: .16),
-              blurRadius: 6,
-              spreadRadius: 0.0,
-              offset: const Offset(0.0, 3.0), // shadow direction: bottom right
-            ),
-          ],
-        ),
-        width: 36,
-        child: IconButton(
-            icon: Icon(Icons.add, size: 16, color: MyTheme.dark_grey),
-            onPressed: () {
-              if (_quantity! < _stock!) {
-                _quantity = (_quantity!) + 1;
-                setState(() {});
-                //fetchVariantPrice();
-
-                fetchAndSetVariantWiseInfo();
-                // calculateTotalPrice();
-              }
-            }),
-      );
-
-  Container buildQuantityDownButton() => Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle, // This makes the container a perfect circle
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: .16),
-            blurRadius: 6,
-            spreadRadius: 0.0,
-            offset: const Offset(0.0, 3.0), // shadow direction: bottom right
-          ),
-        ],
-      ),
-      width: 30,
-      child: IconButton(
-          icon: const Center(
-              child: Icon(Icons.remove, size: 16, color: Color(0xff707070))),
-          onPressed: () {
-            if (_quantity! > 1) {
-              _quantity = _quantity! - 1;
-              setState(() {});
-              // calculateTotalPrice();
-              // fetchVariantPrice();
-              fetchAndSetVariantWiseInfo();
-            }
-          }));
-
   Row buildProductImageSection() {
     if (_productImageList.isEmpty) {
       return Row(
@@ -2762,5 +2787,51 @@ $string
 
 </html>
 """;
+  }
+}
+
+class QuantityButtonWidget extends StatelessWidget {
+  const QuantityButtonWidget({
+    super.key,
+    required this.icon,
+    required this.doWhen,
+    required this.textWhenDont,
+    required this.onPressed,
+  });
+  final IconData icon;
+  final bool doWhen;
+  final String textWhenDont;
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (doWhen) {
+          onPressed();
+        } else {
+          ToastComponent.showDialog(textWhenDont, isError: true);
+        }
+      },
+      borderRadius: BorderRadius.circular(100),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: .16),
+              blurRadius: 6,
+              spreadRadius: 0.0,
+              offset: const Offset(0.0, 3.0),
+            ),
+          ],
+        ),
+        width: 36,
+        height: 36,
+        alignment: Alignment.center,
+        child: Icon(icon, size: 16, color: MyTheme.dark_grey),
+      ),
+    );
   }
 }
