@@ -1,4 +1,28 @@
 {
+  "maxOrderExceeded": "You can't order more than {maxQuantity}. Please reduce the quantity.",
+  "@maxOrderExceeded": {
+    "placeholders": {
+      "maxQuantity": {
+        "type": "int"
+      }
+    }
+  },
+  "maxOrderQuantityLimit": "The maximum quantity you can order is {maxQuantity}. You cannot order more than that.",
+  "@maxOrderQuantityLimit": {
+    "placeholders": {
+      "maxQuantity": {
+        "type": "int"
+      }
+    }
+  },
+  "minimumOrderQuantity": "The minimum order quantity is {minQuantity}",
+  "@minimumOrderQuantity": {
+    "placeholders": {
+      "minQuantity": {
+        "type": "int"
+      }
+    }
+  },
   "minimum_order_amount_with_remaining": "Minimum order amount is {minAmount}, remaining {remaining}",
   "@minimum_order_amount_with_remaining": {
     "description": "Message for showing minimum order amount and remaining amount",

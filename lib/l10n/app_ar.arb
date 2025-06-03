@@ -1,4 +1,28 @@
 {
+    "maxOrderExceeded": "لا يمكنك طلب أكثر من {maxQuantity}. يرجى تقليل الكمية.",
+    "@maxOrderExceeded": {
+        "placeholders": {
+            "maxQuantity": {
+                "type": "int"
+            }
+        }
+    },
+    "maxOrderQuantityLimit": "الحد الأقصى المسموح بطلبه هو {maxQuantity}. لا يمكنك طلب أكثر من ذلك.",
+    "@maxOrderQuantityLimit": {
+        "placeholders": {
+            "maxQuantity": {
+                "type": "int"
+            }
+        }
+    },
+    "minimumOrderQuantity": "الحد الأدنى للطلب هو {minQuantity}",
+    "@minimumOrderQuantity": {
+        "placeholders": {
+            "minQuantity": {
+                "type": "int"
+            }
+        }
+    },
     "minimum_order_amount_with_remaining": "الحد الأدنى للطلب هو {minAmount}، المتبقي {remaining}",
     "@minimum_order_amount_with_remaining": {
         "description": "Message for showing minimum order and remaining amount",
