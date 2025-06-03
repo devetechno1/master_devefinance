@@ -33,6 +33,7 @@ class VariantResponse {
 
 class VariantData {
   String? price;
+  double basePrice;
   int? stock;
   int? inCart;
   var stockTxt;
@@ -45,6 +46,7 @@ class VariantData {
 
   VariantData({
     this.price,
+    this.basePrice = 0.0,
     this.stock,
     this.inCart,
     this.stockTxt,
@@ -58,6 +60,7 @@ class VariantData {
 
   factory VariantData.fromJson(Map<String, dynamic> json) => VariantData(
         price: json["price"],
+        basePrice: double.tryParse(json["base_price"].toString()) ?? 0,
         stock: int.parse(json["stock"].toString()),
         inCart: int.tryParse(json["in_cart"].toString()),
         stockTxt: json["stock_txt"],
@@ -71,6 +74,7 @@ class VariantData {
 
   Map<String, dynamic> toJson() => {
         "price": price,
+        "base_price": basePrice,
         "stock": stock,
         "in_cart": inCart,
         "digital": digital,

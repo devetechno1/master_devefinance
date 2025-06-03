@@ -98,6 +98,7 @@ class _ProductDetailsState extends State<ProductDetails>
   var _choiceString = "";
   String? _variant = "";
   String? _totalPrice = "...";
+  double _basePrice = 0;
   var _singlePrice;
   var _singlePriceString;
   int _stock = 0;
@@ -107,6 +108,8 @@ class _ProductDetailsState extends State<ProductDetails>
 
   int get maxQuantity => min(_stock, _productDetails?.maxQty ?? _stock);
   int get minQuantity => _productDetails?.minQty ?? 1;
+
+  double get totalBasePrice => _basePrice * _quantity;
 
   T whenItemInCart<T>(T inCart, T notInCart) {
     if (_inCart > 0) {
@@ -329,6 +332,8 @@ class _ProductDetailsState extends State<ProductDetails>
         ? _colorList[_selectedColorIndex].toString().replaceAll("#", "")
         : "";
 
+    if (inInit) _quantity = minQuantity;
+
     final variantResponse = await ProductRepository().getVariantWiseInfo(
       slug: widget.slug,
       color: colorString,
@@ -350,6 +355,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
     _variant = variantResponse.variantData!.variant;
     _totalPrice = variantResponse.variantData!.price;
+    _basePrice = variantResponse.variantData!.basePrice;
 
     int pindex = 0;
     _productDetails!.photos?.forEach((photo) {
@@ -1629,10 +1635,7 @@ class _ProductDetailsState extends State<ProductDetails>
             padding:
                 const EdgeInsets.only(bottom: AppDimensions.paddingSmallExtra),
             child: AnimatedNumberText<double>(
-              double.tryParse(
-                    _totalPrice.toString().replaceAll(RegExp(r'[^0-9.]'), ''),
-                  ) ??
-                  0.0,
+              totalBasePrice,
               duration: const Duration(milliseconds: 500),
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
@@ -1692,9 +1695,9 @@ class _ProductDetailsState extends State<ProductDetails>
                     isDisable: _stock == 0,
                     onChanged: (val) {
                       _quantity = int.parse(quantityText.text);
-                      if(_quantity > maxQuantity){
+                      if (_quantity > maxQuantity) {
                         _quantity = maxQuantity;
-                      }else if(_quantity < minQuantity){
+                      } else if (_quantity < minQuantity) {
                         _quantity = minQuantity;
                       }
                       quantityText.text = _quantity.toString();
