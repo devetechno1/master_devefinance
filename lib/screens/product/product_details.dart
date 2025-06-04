@@ -1632,18 +1632,21 @@ class _ProductDetailsState extends State<ProductDetails>
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingSmallExtra),
+            padding: const EdgeInsets.only(
+              bottom: AppDimensions.paddingSmallExtra,
+            ),
             child: AnimatedNumberText<double>(
               totalBasePrice,
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(
+                  milliseconds: AppDimensions.animationDefaultInMillis),
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 16.0,
                 fontWeight: FontWeight.w600,
               ),
               formatter: (value) {
-                return '${value.toStringAsFixed(2)}';
+                return '${value.toStringAsFixed(2)} ${SystemConfig.systemCurrency?.symbol ?? ''}'
+                    .trim();
               },
             ),
           )
@@ -2141,17 +2144,20 @@ class _ProductDetailsState extends State<ProductDetails>
   Row buildMainPriceRow() {
     return Row(
       children: [
-        Text(
-          SystemConfig.systemCurrency != null
-              ? _singlePriceString.replaceAll(SystemConfig.systemCurrency!.code,
-                  SystemConfig.systemCurrency!.symbol)
-              : _singlePriceString,
-          // _singlePriceString,
+        AnimatedNumberText<double>(
+          _basePrice,
+          duration: const Duration(
+              milliseconds: AppDimensions.animationDefaultInMillis),
           style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontFamily: 'Public Sans',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold),
+            color: Theme.of(context).primaryColor,
+            fontFamily: 'Public Sans',
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+          formatter: (value) {
+            return '${value.toStringAsFixed(2)} ${SystemConfig.systemCurrency?.symbol ?? ''}'
+                .trim();
+          },
         ),
         Visibility(
           visible: _productDetails!.has_discount!,
