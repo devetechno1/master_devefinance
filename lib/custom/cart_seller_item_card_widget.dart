@@ -2,10 +2,12 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:flutter/material.dart';
 
+import '../data_model/cart_response.dart';
 import '../my_theme.dart';
 import '../presenter/cart_provider.dart';
 import 'box_decorations.dart';
 import 'device_info.dart';
+import 'lang_text.dart';
 
 class CartSellerItemCardWidget extends StatelessWidget {
   final int sellerIndex;
@@ -31,19 +33,49 @@ class CartSellerItemCardWidget extends StatelessWidget {
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-                width: DeviceInfo(context).width! / 4,
-                height: 120,
-                child: ClipRRect(
-                    borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(AppDimensions.radiusHalfSmall),
-                        right: Radius.zero),
+            SizedBox(
+              width: DeviceInfo(context).width! / 4,
+              height: 120,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadiusDirectional.horizontal(
+                      start: Radius.circular(AppDimensions.radiusHalfSmall),
+                      end: Radius.zero,
+                    ),
                     child: FadeInImage.assetNetwork(
                       placeholder: AppImages.placeholder,
                       image: cartProvider.shopList[sellerIndex]
                           .cartItems![itemIndex].productThumbnailImage!,
                       fit: BoxFit.contain,
-                    ))),
+                    ),
+                  ),
+                  if (cartProvider.shopList[sellerIndex].cartItems![itemIndex]
+                      .isNotAvailable)
+                    Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        borderRadius: const BorderRadiusDirectional.horizontal(
+                          start: Radius.circular(
+                            AppDimensions.radiusHalfSmall,
+                          ),
+                          end: Radius.zero,
+                        ),
+                      ),
+                      child: Text(
+                        LangText(context).local.notAvailable,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -76,6 +108,35 @@ class CartSellerItemCardWidget extends StatelessWidget {
                       ),
                       formatter: (value) => '${value.toStringAsFixed(2)}',
                     ),
+                    Builder(
+                      builder: (context) {
+                        String? text;
+                        final CartItem item = cartProvider
+                            .shopList[sellerIndex].cartItems![itemIndex];
+                        if (item.quantity < item.minQuantity) {
+                          text = LangText(context)
+                              .local
+                              .minimumOrderQuantity(item.minQuantity);
+                        } else if (item.quantity > item.maxQuantity) {
+                          text = LangText(context)
+                              .local
+                              .maxOrderQuantityLimit(item.maxQuantity);
+                        }
+                        if (text == null) return const SizedBox();
+                        return Center(
+                          child: Text(
+                            text,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.error,
+                              fontSize: 12,
+                            ),
+                          ),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),
@@ -159,7 +220,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         "${int.tryParse(
                               cartProvider.shopList[sellerIndex]
                                       .cartItems?[itemIndex].quantity
-                                      ?.toString() ??
+                                      .toString() ??
                                   '0',
                             ) ?? 0}",
                         style: TextStyle(

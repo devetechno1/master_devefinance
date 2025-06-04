@@ -256,7 +256,6 @@ import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/cart_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
@@ -294,7 +293,7 @@ class CartProvider extends ChangeNotifier {
   double get cartTotal => _cartTotal;
   String get cartTotalString => _cartTotalString;
 
-  Debouncer debouncer = Debouncer(milliseconds: 600);
+  Debouncer debouncer = Debouncer(milliseconds: 900);
 
   int get itemsCount {
     int count = 0;
@@ -352,41 +351,51 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onQuantityIncrease(
+  Future<void> onQuantityIncrease(
       BuildContext context, int sellerIndex, int itemIndex) async {
-    if (_shopList[sellerIndex].cartItems![itemIndex].quantity! <
-        _shopList[sellerIndex].cartItems![itemIndex].upperLimit!) {
+    if (_shopList[sellerIndex].cartItems![itemIndex].quantity <
+        _shopList[sellerIndex].cartItems![itemIndex].maxQuantity) {
       _shopList[sellerIndex].cartItems![itemIndex].quantity =
-          _shopList[sellerIndex].cartItems![itemIndex].quantity! + 1;
+          _shopList[sellerIndex].cartItems![itemIndex].quantity + 1;
       _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
       notifyListeners();
       debouncer(
         () async {
-          await process(context, mode: "update");
+          final bool hasError = await process(context, mode: "update");
           _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
+          if (hasError) {
+            _shopList[sellerIndex].cartItems![itemIndex].quantity =
+                _shopList[sellerIndex].cartItems![itemIndex].quantity - 1;
+            notifyListeners();
+          }
           cartTotalAmount.value = cartTotal;
           debouncer.cancel();
         },
       );
     } else {
       ToastComponent.showDialog(
-          "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].upperLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
-          gravity: ToastGravity.CENTER,
-          toastLength: Toast.LENGTH_LONG);
+        "${AppLocalizations.of(context)!.maxOrderQuantityLimit(_shopList[sellerIndex].cartItems![itemIndex].maxQuantity)}",
+        isError: true,
+      );
     }
   }
 
   Future<void> onQuantityDecrease(
       BuildContext context, int sellerIndex, int itemIndex) async {
-    if (_shopList[sellerIndex].cartItems![itemIndex].quantity! >
+    if (_shopList[sellerIndex].cartItems![itemIndex].quantity >
         _shopList[sellerIndex].cartItems![itemIndex].lowerLimit!) {
       _shopList[sellerIndex].cartItems![itemIndex].quantity =
-          _shopList[sellerIndex].cartItems![itemIndex].quantity! - 1;
+          _shopList[sellerIndex].cartItems![itemIndex].quantity - 1;
       _shopList[sellerIndex].cartItems![itemIndex].isLoading = true;
       notifyListeners();
       debouncer(
         () async {
-          await process(context, mode: "update");
+          final bool hasError = await process(context, mode: "update");
+          if (hasError) {
+            _shopList[sellerIndex].cartItems![itemIndex].quantity =
+                _shopList[sellerIndex].cartItems![itemIndex].quantity + 1;
+            notifyListeners();
+          }
           _shopList[sellerIndex].cartItems![itemIndex].isLoading = false;
           cartTotalAmount.value = cartTotal;
           debouncer.cancel();
@@ -394,7 +403,8 @@ class CartProvider extends ChangeNotifier {
       );
     } else {
       ToastComponent.showDialog(
-        "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems![itemIndex].lowerLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
+        "${AppLocalizations.of(context)!.minimumOrderQuantity(_shopList[sellerIndex].cartItems![itemIndex].minQuantity)}",
+        isError: true,
       );
     }
   }
@@ -472,10 +482,27 @@ class CartProvider extends ChangeNotifier {
   }
 
   void onPressProceedToShipping(BuildContext context) {
+    for (Datum shop in _shopList) {
+      for (CartItem cartItem in shop.cartItems ?? []) {
+        if (cartItem.quantity < cartItem.minQuantity) {
+          ToastComponent.showDialog(
+            AppLocalizations.of(context)!.productBelowMinQuantity,
+            isError: true,
+          );
+          return;
+        } else if (cartItem.quantity > cartItem.maxQuantity) {
+          ToastComponent.showDialog(
+            AppLocalizations.of(context)!.productExceedsMaxQuantity,
+            isError: true,
+          );
+          return;
+        }
+      }
+    }
     process(context, mode: "proceed_to_shipping");
   }
 
-  Future<void> process(BuildContext context, {required String mode}) async {
+  Future<bool> process(BuildContext context, {required String mode}) async {
     final cartIds = [];
     final cartQuantities = [];
     if (_shopList.isNotEmpty) {
@@ -483,17 +510,22 @@ class CartProvider extends ChangeNotifier {
         if (shop.cartItems!.isNotEmpty) {
           shop.cartItems!.forEach((cartItem) {
             cartIds.add(cartItem.id);
-            cartQuantities.add(cartItem.quantity);
+            int _quantity = cartItem.quantity;
+
+            if (_quantity > cartItem.maxQuantity) {
+              _quantity = cartItem.maxQuantity;
+            } else if (_quantity < cartItem.minQuantity) {
+              _quantity = cartItem.minQuantity;
+            }
+            cartQuantities.add(_quantity);
           });
         }
       });
     }
 
     if (cartIds.isEmpty) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.cart_is_empty,
-      );
-      return;
+      ToastComponent.showDialog(AppLocalizations.of(context)!.cart_is_empty);
+      return true;
     }
 
     final cartIdsString = cartIds.join(',').toString();
@@ -503,9 +535,8 @@ class CartProvider extends ChangeNotifier {
         .getCartProcessResponse(cartIdsString, cartQuantitiesString);
 
     if (cartProcessResponse.result == false) {
-      ToastComponent.showDialog(
-        cartProcessResponse.message,
-      );
+      ToastComponent.showDialog(cartProcessResponse.message,isError: true);
+      return true;
     } else {
       if (mode == "update") {
         fetchData(context);
@@ -514,12 +545,12 @@ class CartProvider extends ChangeNotifier {
           ToastComponent.showDialog(
               '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity}',
               color: Theme.of(context).colorScheme.error);
-          return;
+          return true;
         } else if (isMinOrderAmountNotEnough) {
           ToastComponent.showDialog(
               '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount}',
               color: Theme.of(context).colorScheme.error);
-          return;
+          return true;
         }
         if (AppConfig.businessSettingsData.guestCheckoutStatus &&
             !is_logged_in.$) {
@@ -541,6 +572,7 @@ class CartProvider extends ChangeNotifier {
           );
         }
       }
+      return false;
     }
   }
 

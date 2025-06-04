@@ -1,12 +1,7 @@
 {
-    "maxOrderExceeded": "لا يمكنك طلب أكثر من {maxQuantity}. يرجى تقليل الكمية.",
-    "@maxOrderExceeded": {
-        "placeholders": {
-            "maxQuantity": {
-                "type": "int"
-            }
-        }
-    },
+    "notAvailable": "غير متوفر",
+    "productExceedsMaxQuantity": "أحد المنتجات يحتوي على كمية تتجاوز الحد الأقصى المسموح.",
+    "productBelowMinQuantity": "أحد المنتجات يحتوي على كمية أقل من الحد الأدنى المسموح للطلب.",
     "maxOrderQuantityLimit": "الحد الأقصى المسموح بطلبه هو {maxQuantity}. لا يمكنك طلب أكثر من ذلك.",
     "@maxOrderQuantityLimit": {
         "placeholders": {
@@ -15,7 +10,7 @@
             }
         }
     },
-    "minimumOrderQuantity": "الحد الأدنى للطلب هو {minQuantity}",
+    "minimumOrderQuantity": "الحد الأدنى لطلب هذا المنتج هو {minQuantity}.",
     "@minimumOrderQuantity": {
         "placeholders": {
             "minQuantity": {

@@ -1,12 +1,7 @@
 {
-  "maxOrderExceeded": "You can't order more than {maxQuantity}. Please reduce the quantity.",
-  "@maxOrderExceeded": {
-    "placeholders": {
-      "maxQuantity": {
-        "type": "int"
-      }
-    }
-  },
+  "notAvailable": "Not available",
+  "productExceedsMaxQuantity": "One of the products exceeds the maximum allowed quantity.",
+  "productBelowMinQuantity": "One of the products is below the minimum order quantity.",
   "maxOrderQuantityLimit": "The maximum quantity you can order is {maxQuantity}. You cannot order more than that.",
   "@maxOrderQuantityLimit": {
     "placeholders": {
@@ -15,7 +10,7 @@
       }
     }
   },
-  "minimumOrderQuantity": "The minimum order quantity is {minQuantity}",
+  "minimumOrderQuantity": "The minimum quantity required to order this product is {minQuantity}",
   "@minimumOrderQuantity": {
     "placeholders": {
       "minQuantity": {
