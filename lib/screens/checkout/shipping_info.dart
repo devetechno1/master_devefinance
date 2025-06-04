@@ -654,12 +654,12 @@ class _ShippingInfoState extends State<ShippingInfo> {
       elevation: 0,
       backgroundColor: MyTheme.white,
       automaticallyImplyLeading: false,
-      title: buildAppbarTitle(context),
+      title: buildAppBarTitle(context),
       leading: UsefulElements.backButton(),
     );
   }
 
-  Container buildAppbarTitle(BuildContext context) {
+  Container buildAppBarTitle(BuildContext context) {
     final CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: false);
 
