@@ -42,9 +42,16 @@
             }
         }
     },
+    "freeShippingUnlocked": "لقد حصلت على شحن مجاني لأن قيمة طلبك تجاوزت {minOrderForFreeShipping}.",
+    "@freeShippingUnlocked": {
+        "placeholders": {
+            "minOrderForFreeShipping": {
+                "type": "double"
+            }
+        }
+    },
     "out_of_stock": "غير متوفر حالياً",
     "you_should_complete": "يجب عليك إكمال",
-    "free_shipping_eligible": "مبروك! أنت مؤهل للشحن المجاني! 🚚",
     "to_take_free_shipping": "للحصول على شحن مجاني",
     "free_shipping_ucf": "مجاني",
     "skip_ucf": "لا، اريد المتابعة",

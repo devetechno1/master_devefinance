@@ -676,19 +676,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 decoration: TextDecoration.none,
               ),
             ),
-            Text(
-              "${SystemConfig.systemCurrency != null ? _shipping_cost_string!.replaceAll(SystemConfig.systemCurrency!.code!, SystemConfig.systemCurrency!.symbol!) : _shipping_cost_string}",
-              style: TextStyle(
-                fontSize: 16,
-                color: MyTheme.dark_font_grey,
-                fontWeight: FontWeight.bold,
-                decoration: cartProvider.isFreeShipping && _isFetchShippingCost
-                    ? TextDecoration.lineThrough
-                    : null,
-              ),
-            ),
-            if (cartProvider.isFreeShipping && _isFetchShippingCost) ...[
-              SizedBox(width: 10),
+            if (cartProvider.isFreeShipping && _isFetchShippingCost)
               Text(
                 "${AppLocalizations.of(context)!.free_shipping_ucf}",
                 style: TextStyle(
@@ -696,8 +684,16 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-            ],
+              )
+            else
+              Text(
+                "${SystemConfig.systemCurrency != null ? _shipping_cost_string!.replaceAll(SystemConfig.systemCurrency!.code!, SystemConfig.systemCurrency!.symbol!) : _shipping_cost_string}",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: MyTheme.dark_font_grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
           ],
         ));
   }
@@ -946,55 +942,56 @@ class _ShippingInfoState extends State<ShippingInfo> {
       ),
     );
   }
+
   Column buildCartSellerListItem(int index, BuildContext context) {
     final CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: false);
-  final double difference = AppConfig.businessSettingsData.freeShippingMinimumOrderAmount - cartProvider.cartTotal;
+    final double difference =
+        AppConfig.businessSettingsData.freeShippingMinimumOrderAmount -
+            cartProvider.cartTotal;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-     
-        Center(
-          child: Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              
-              child:cartProvider.isFreeShipping && _isFetchShippingCost? Text(
-                LangText(context).local.free_shipping_eligible,
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 12),
-              ): (difference > 0
-              
-             ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                   Text(
-                    LangText(context).local.you_should_complete,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12),
-                  ),
-                  Text(
-                   "$difference",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12),
-                  ),
-                  
-                  Text(
-                  LangText(context).local.to_take_free_shipping,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12),
-                  ),
-                ],
-              ):Container()
-              ),
-        ),),
-      
+      Center(
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          child: cartProvider.isFreeShipping && _isFetchShippingCost
+              ? Text(
+                  LangText(context).local.freeShippingUnlocked(AppConfig.businessSettingsData.freeShippingMinimumOrderAmount),
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12),
+                )
+              : (difference > 0
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          LangText(context).local.you_should_complete,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12),
+                        ),
+                        Text(
+                          "$difference",
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12),
+                        ),
+                        Text(
+                          LangText(context).local.to_take_free_shipping,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12),
+                        ),
+                      ],
+                    )
+                  : Container()),
+        ),
+      ),
       Padding(
         padding: const EdgeInsets.only(bottom: 12.0),
         child: Text(

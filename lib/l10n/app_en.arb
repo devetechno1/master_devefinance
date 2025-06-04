@@ -42,10 +42,17 @@
       }
     }
   },
+  "freeShippingUnlocked": "You’ve unlocked free shipping because your order exceeded {minOrderForFreeShipping}.",
+  "@freeShippingUnlocked": {
+    "placeholders": {
+      "minOrderForFreeShipping": {
+        "type": "double"
+      }
+    }
+  },
   "out_of_stock": "Out of stock",
   "you_should_complete": "You should complete",
   "to_take_free_shipping": "to take free shipping",
-  "free_shipping_eligible": "Congratulations! You are eligible for free shipping! 🚚",
   "free_shipping_ucf": "Free",
   "skip_ucf": "No,i want to continue",
   "please_update_to_continue": "Please update the app to continue using it",
