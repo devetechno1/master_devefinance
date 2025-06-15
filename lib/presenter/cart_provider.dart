@@ -272,7 +272,6 @@ ValueNotifier<double> cartTotalAmount = ValueNotifier<double>(0.0);
 ValueNotifier<int> cartQuantityProduct = ValueNotifier<int>(0);
 
 class CartProvider extends ChangeNotifier {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController _mainScrollController = ScrollController();
   List<Datum> _shopList = [];
   CartResponse? _shopResponse;
@@ -280,7 +279,6 @@ class CartProvider extends ChangeNotifier {
   double _cartTotal = 0.00;
   String _cartTotalString = ". . .";
 
-  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
   ScrollController get mainScrollController => _mainScrollController;
   List<Datum> get shopList => _shopList;
   CartResponse? get shopResponse => _shopResponse;

@@ -69,7 +69,7 @@ class _CartState extends State<_Cart> {
           cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0;
 
       return Scaffold(
-        key: cartProvider.scaffoldKey,
+        
         backgroundColor: MyTheme.mainColor,
         appBar: buildAppBar(context),
         body: Stack(
