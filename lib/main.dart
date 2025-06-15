@@ -116,11 +116,17 @@ var routes = GoRouter(
           if (extra is Map<String, dynamic>) {
             if (extra["skipUpdate"] == true) skipUpdate = true;
           }
-        final UpdateDataModel? updateData = AppConfig.businessSettingsData.updateData;
+          final UpdateDataModel? updateData =
+              AppConfig.businessSettingsData.updateData;
 
-          if ((updateData?.version != null && AppConfig.version != AppConfig.businessSettingsData.updateData?.version )
-          && (!_isUpdateScreenOpened || !skipUpdate || AppConfig.businessSettingsData.updateData?.mustUpdate == true)
-          && state.uri.path != "/update") {
+          if ((updateData?.version != null &&
+                  AppConfig.version !=
+                      AppConfig.businessSettingsData.updateData?.version) &&
+              (!_isUpdateScreenOpened ||
+                  !skipUpdate ||
+                  AppConfig.businessSettingsData.updateData?.mustUpdate ==
+                      true) &&
+              state.uri.path != "/update") {
             _isUpdateScreenOpened = true;
             return '/update?url=${state.uri.path}';
           }
@@ -320,7 +326,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => BlogProvider()),
         ChangeNotifierProvider(create: (_) => PhotoProvider()),
         ChangeNotifierProvider(create: (_) => MyClassifiedProvider()),
-        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(lazy: false, create: (_) => CartProvider()),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, provider, snapshot) {

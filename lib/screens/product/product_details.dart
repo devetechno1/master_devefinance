@@ -437,7 +437,6 @@ class _ProductDetailsState extends State<ProductDetails>
 
     if (!AppConfig.businessSettingsData.guestCheckoutStatus) {
       if (is_logged_in.$ == false) {
-        print("object $context");
         context.push("/users/login");
         return;
       }
