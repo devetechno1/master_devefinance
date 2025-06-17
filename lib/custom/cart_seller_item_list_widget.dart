@@ -1,7 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/app_dimensions.dart';
 import 'cart_seller_item_card_widget.dart';
 
 class CartSellerItemListWidget extends StatelessWidget {

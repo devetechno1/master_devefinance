@@ -498,7 +498,7 @@
   "enter_your_name": "Enter your name",
   "confirm_your_password": "Confirm your password",
   "password_must_contain_at_least_6_characters": "Password must contain at least 6 characters",
-  "passwords_do_not_match": "Passwords do not match",
+  "passwords_do_not_match": "Password does not match",
   "join_ucf": "Join",
   "retype_password_ucf": "Retype Password",
   "or_register_with_a_phone": "or, Register with a phone number",

@@ -340,6 +340,7 @@ class _ProductDetailsState extends State<ProductDetails>
       variants: _choiceString,
       qty: _quantity,
       userId: user_id.$,
+      tempUserId: temp_user_id.$,
     );
     _stock = variantResponse.variantData!.stock ?? _stock;
     _stock_txt = variantResponse.variantData!.stockTxt;
@@ -451,7 +452,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
 
     temp_user_id.$ = cartAddResponse.tempUserId;
-    temp_user_id.save();
+    await temp_user_id.save();
 
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(
