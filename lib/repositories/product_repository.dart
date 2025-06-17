@@ -185,8 +185,6 @@ class ProductRepository {
     String color = '',
     String variants = '',
     int? qty = 1,
-    required int? userId,
-    required String? tempUserId,
   }) async {
     const String url = ("${AppConfig.BASE_URL}/products/variant/price");
 
@@ -195,8 +193,10 @@ class ProductRepository {
       "color": color,
       "variants": variants,
       "quantity": qty,
-      if(tempUserId != null) "temp_user_id": tempUserId,
-      if(userId != null) "user_id": userId,
+      if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$)
+        "temp_user_id": temp_user_id.$
+      else
+        "user_id": user_id.$,
     });
 
     final response = await ApiRequest.post(

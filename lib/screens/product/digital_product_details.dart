@@ -302,8 +302,6 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
       color: colorString,
       variants: _choiceString,
       qty: _quantity,
-      userId: user_id.$,
-      tempUserId: temp_user_id.$,
     );
     _stock = variantResponse.variantData!.stock;
     _stock_txt = variantResponse.variantData!.stockTxt;

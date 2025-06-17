@@ -388,7 +388,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         if (postalCode != null) "postal_code": postalCode!,
         if (longitude != null) "longitude": longitude!.toString(),
         if (latitude != null) "latitude": latitude!.toString(),
-        "temp_user_id": temp_user_id.$!
+        "temp_user_id": temp_user_id.$,
       });
 
       postBody = jsonEncode(postValue);
