@@ -14,8 +14,8 @@ class CategoryList extends StatelessWidget {
         child: ListenableBuilder(
           listenable: homeData,
           builder: (context, child) {
-            if (!homeData.isFeaturedProductInitial &&
-                homeData.featuredProductList.isEmpty) {
+            if (!homeData.isCategoryInitial &&
+                homeData.featuredCategoryList.isEmpty) {
               return const SizedBox();
             }
 
