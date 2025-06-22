@@ -52,7 +52,6 @@ import 'screens/coupon/coupons.dart';
 import 'screens/flash_deal/flash_deal_list.dart';
 import 'screens/flash_deal/flash_deal_products.dart';
 import 'screens/followed_sellers.dart';
-import 'screens/home/home.dart';
 import 'screens/index.dart';
 import 'screens/orders/order_details.dart';
 import 'screens/orders/order_list.dart';
