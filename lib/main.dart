@@ -133,7 +133,6 @@ var routes = GoRouter(
           return null;
         },
         pageBuilder: (BuildContext context, GoRouterState state) {
-          homeData.showPopupBanner(context);
           return const MaterialPage(child: Index());
         },
         routes: [
