@@ -25,7 +25,7 @@ class AppConfig {
   // static String copyright_text =
   //     "@ Deve Finance " + this_year; //this shows in the splash screen
   static const String app_name_ar = "متجر ديفي";
-  static const String app_name_en = "Devefinance Store";
+  static const String app_name_en = "Healthy Spread";
 
   /// This get the name of the application in deviceLocale
   static String appNameOnDeviceLang =
@@ -62,7 +62,7 @@ class AppConfig {
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
   static const DOMAIN_PATH =
-      "devefinance.com"; //use only domain name without http:// or https://
+      "healthyspread.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
