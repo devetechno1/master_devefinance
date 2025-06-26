@@ -92,7 +92,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>User can choose date from calender</string>
 	<key>NSCameraUsageDescription</key>
-	<string>User can upload and change her profile picture from Camera</string>
+	<string>User can upload and change his profile picture from Camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Allow Contact Access For Details</string>
 	<key>NSDocumentDirectory</key>
@@ -100,7 +100,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>User can set address using phone location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>location when in use</string>
+	<string>This app requires access to your location to help you add accurate delivery addresses</string>
 	<key>NSMotionUsageDescription</key>
 	<string>This app will use your motion data for your active tasks</string>
 	<key>NSPhotoLibraryUsageDescription</key>
