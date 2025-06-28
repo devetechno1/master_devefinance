@@ -66,6 +66,7 @@ class _NotificationListState extends State<NotificationList> {
                   fontWeight: FontWeight.bold,
                   color: MyTheme.dark_font_grey),
             ),
+            if (notificationIds.isNotEmpty)
             PopupMenuButton<int>(
               itemBuilder: (context) => [
                 PopupMenuItem(
