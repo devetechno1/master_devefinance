@@ -35,6 +35,7 @@ import 'package:one_context/one_context.dart';
 import '../../app_config.dart';
 import '../../custom/loading.dart';
 import '../../data_model/order_detail_response.dart';
+import '../../data_model/payment_type_response.dart';
 import '../../helpers/auth_helper.dart';
 import '../../repositories/guest_checkout_repository.dart';
 import '../../repositories/order_repository.dart';
@@ -72,10 +73,11 @@ class _CheckoutState extends State<Checkout> {
   var _selected_payment_method_index = 0;
   String? _selected_payment_method = "";
   String? _selected_payment_method_key = "";
+  String subPaymentOption = '';
 
   final ScrollController _mainScrollController = ScrollController();
   final TextEditingController _couponController = TextEditingController();
-  final _paymentTypeList = [];
+  final List<PaymentTypeResponse> _paymentTypeList = [];
   bool _isInitial = true;
   String? _totalString = ". . .";
   double? _grandTotalValue = 0.00;
@@ -108,8 +110,8 @@ class _CheckoutState extends State<Checkout> {
     String? balance;
 
     // Setting balance based on paymentFor conditions
-    if (widget.paymentFor == PaymentFor.ManualPayment || 
-    widget.paymentFor == PaymentFor.OrderRePayment) {
+    if (widget.paymentFor == PaymentFor.ManualPayment ||
+        widget.paymentFor == PaymentFor.OrderRePayment) {
       balance = widget.rechargeAmount.toString();
     }
     if (SystemConfig.systemCurrency != null) {
@@ -328,12 +330,25 @@ class _CheckoutState extends State<Checkout> {
     if (_selected_payment_method == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.please_choose_one_option_to_pay,
+        isError: true,
       );
       return;
     }
     if (_grandTotalValue == 0.00) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.nothing_to_pay,
+        isError: true,
+      );
+      return;
+    }
+
+    if (subPaymentOption.trim().isEmpty &&
+        _paymentTypeList[_selected_payment_method_index]
+            .integrations
+            .isNotEmpty) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.please_choose_one_option_to_pay,
+        isError: true,
       );
       return;
     }
@@ -535,6 +550,7 @@ class _CheckoutState extends State<Checkout> {
     } else if (_selected_payment_method == "paymob") {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return PaymobScreen(
+          subPaymentOption: subPaymentOption,
           amount: _grandTotalValue,
           payment_type: payment_type,
           payment_method_key: _selected_payment_method_key,
@@ -921,58 +937,135 @@ class _CheckoutState extends State<Checkout> {
                     borderRadius:
                         BorderRadius.circular(AppDimensions.radiusHalfSmall))
                 .copyWith(
-                    border: Border.all(
-                        color: _selected_payment_method_key ==
-                                _paymentTypeList[index].payment_type_key
-                            ? Theme.of(context).primaryColor
-                            : MyTheme.light_grey,
-                        width: _selected_payment_method_key ==
-                                _paymentTypeList[index].payment_type_key
-                            ? 2.0
-                            : 0.0)),
+              border: Border.all(
+                color: _selected_payment_method_key ==
+                        _paymentTypeList[index].payment_type_key
+                    ? Theme.of(context).primaryColor
+                    : MyTheme.light_grey,
+                width: _selected_payment_method_key ==
+                        _paymentTypeList[index].payment_type_key
+                    ? 2.0
+                    : 0.0,
+              ),
+            ),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                      width: 100,
-                      height: 63,
-                      child: Padding(
-                          padding: const EdgeInsets.all(
-                              AppDimensions.paddingDefault),
-                          child:
-                              /*Image.asset(
-                          _paymentTypeList[index].image,
-                          fit: BoxFit.fitWidth,
-                        ),*/
-                              FadeInImage.assetNetwork(
-                            placeholder: AppImages.placeholder,
-                            image: _paymentTypeList[index].payment_type ==
-                                    "manual_payment"
-                                ? _paymentTypeList[index].image
-                                : _paymentTypeList[index].image,
-                            fit: BoxFit.fitWidth,
-                          ))),
-                  Container(
-                    width: 150,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingSmall),
-                          child: Text(
-                            _paymentTypeList[index].title,
-                            textAlign: TextAlign.left,
+                    width: 100,
+                    padding: const EdgeInsets.all(AppDimensions.paddingDefault),
+                    constraints: const BoxConstraints(maxHeight: 100),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: AppImages.placeholder,
+                      image: _paymentTypeList[index].image ?? '',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: AppDimensions.paddingSmall),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: AppDimensions.paddingSmall,
+                        children: [
+                          Text(
+                            _paymentTypeList[index].title ?? '',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: const TextStyle(
-                                color: MyTheme.font_grey,
-                                fontSize: 14,
-                                height: 1.6,
-                                fontWeight: FontWeight.w400),
+                              color: MyTheme.font_grey,
+                              fontSize: 14,
+                              height: 1.6,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                      ],
+                          Builder(
+                            builder: (context) {
+                              subPaymentOption = '';
+                              final bool hasSubOptions =
+                                  _selected_payment_method_index == index &&
+                                      _paymentTypeList[index]
+                                          .integrations
+                                          .isNotEmpty;
+
+                              return AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                height: hasSubOptions ? 50 : 0,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusSmall,
+                                  ),
+                                ),
+                                child: StatefulBuilder(
+                                  builder: (context, setState2) {
+                                    return ListView.builder(
+                                      itemCount: _paymentTypeList[index]
+                                          .integrations
+                                          .length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, i) {
+                                        final SubPayment integration =
+                                            _paymentTypeList[index]
+                                                .integrations[i];
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.only(
+                                            end: AppDimensions.paddingSmall,
+                                          ),
+                                          child: ChoiceChip(
+                                            avatar: integration.image == null
+                                                ? null
+                                                : FadeInImage.assetNetwork(
+                                                    placeholder:
+                                                        AppImages.placeholder,
+                                                    imageErrorBuilder:
+                                                        (___, __, _) =>
+                                                            const SizedBox(),
+                                                    image: integration.image!,
+                                                    fit: BoxFit.fitWidth,
+                                                  ),
+                                            checkmarkColor: Colors.white,
+                                            onSelected: (value) {
+                                              setState2(() {
+                                                subPaymentOption =
+                                                    integration.value ?? '';
+                                              });
+                                            },
+                                            selected: subPaymentOption ==
+                                                    integration.value &&
+                                                subPaymentOption
+                                                    .trim()
+                                                    .isNotEmpty,
+                                            label: Text(integration.name ?? ''),
+                                            labelStyle: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  color: subPaymentOption ==
+                                                              integration
+                                                                  .value &&
+                                                          subPaymentOption
+                                                              .trim()
+                                                              .isNotEmpty
+                                                      ? Colors.white
+                                                      : Theme.of(context)
+                                                          .primaryColor,
+                                                ),
+                                            selectedColor:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ]),

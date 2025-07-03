@@ -21,12 +21,14 @@ class PaymobScreen extends StatefulWidget {
   final String? payment_method_key;
   final String package_id;
   final int? orderId;
+  final String subPaymentOption;
   const PaymobScreen(
       {Key? key,
       this.amount = 0.00,
       this.orderId = 0,
       this.payment_type = "",
       this.payment_method_key = "",
+      required this.subPaymentOption,
       this.package_id = "0"})
       : super(key: key);
 
@@ -55,7 +57,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
 
   paymob() {
     final String _initial_url =
-        "${AppConfig.BASE_URL}/paymob/initiate?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}";
+        "${AppConfig.BASE_URL}/paymob/initiate?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}&sub_payment_option=${widget.subPaymentOption}";
     print(_initial_url);
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
