@@ -5,9 +5,7 @@ import 'home_banners_list.dart';
 
 class HomeCarouselSlider extends StatelessWidget {
   final HomePresenter? homeData;
-  final BuildContext? context;
-  const HomeCarouselSlider({Key? key, this.homeData, this.context})
-      : super(key: key);
+  const HomeCarouselSlider({super.key, this.homeData});
 
   @override
   Widget build(BuildContext context) {

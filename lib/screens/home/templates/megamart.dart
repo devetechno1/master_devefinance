@@ -101,8 +101,7 @@ class _MegamartScreenState extends State<MegamartScreen>
                                   : const SizedBox(),
                               const SizedBox(height: 10),
                               // Header Banner
-                              HomeCarouselSlider(
-                                  homeData: homeData, context: context),
+                              HomeCarouselSlider(homeData: homeData),
                               const SizedBox(height: 10),
 
                               // Flash Sale Section

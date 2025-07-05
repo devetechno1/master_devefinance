@@ -94,8 +94,7 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                         slivers: <Widget>[
                           SliverList(
                               delegate: SliverChildListDelegate([
-                            HomeCarouselSlider(
-                                homeData: homeData, context: context),
+                            HomeCarouselSlider(homeData: homeData),
                           ])),
                           const CategoryList(),
                           SliverList(

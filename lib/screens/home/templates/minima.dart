@@ -106,8 +106,7 @@ class _MinimaScreenState extends State<MinimaScreen>
                               const SizedBox(height: 10),
 
                               // Header Banner
-                              HomeCarouselSlider(
-                                  homeData: homeData, context: context),
+                              HomeCarouselSlider(homeData: homeData),
                               const SizedBox(height: 16),
 
                               // Flash Sale Section

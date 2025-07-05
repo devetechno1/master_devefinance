@@ -112,10 +112,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               // ),
                               // SizedBox(height: 8),
                               //Header Banner
-                              HomeCarouselSlider(
-                                homeData: homeData,
-                                context: context,
-                              ),
+                              HomeCarouselSlider(homeData: homeData),
                               const SizedBox(height: 16),
 
                               Padding(

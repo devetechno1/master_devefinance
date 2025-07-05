@@ -13,13 +13,13 @@ class HomeBannersList extends StatelessWidget {
   final double aspectRatio;
   final double viewportFraction;
 
-  const HomeBannersList(
-      {Key? key,
-      required this.isBannersInitial,
-      required this.bannersImagesList,
-      this.aspectRatio = 2,
-      this.viewportFraction = 0.49})
-      : super(key: key);
+  const HomeBannersList({
+    Key? key,
+    required this.isBannersInitial,
+    required this.bannersImagesList,
+    this.aspectRatio = 2,
+    this.viewportFraction = 0.49,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,7 @@ class HomeBannersList extends StatelessWidget {
           ),
           items: bannersImagesList.map((i) {
             return Container(
-              margin: const EdgeInsetsDirectional.only(
-                  start: 10, bottom: 10, top: 10),
+              margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
