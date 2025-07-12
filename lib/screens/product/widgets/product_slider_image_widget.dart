@@ -2,7 +2,6 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 
 import '../../../helpers/shimmer_helper.dart';
 import '../../../my_theme.dart';
