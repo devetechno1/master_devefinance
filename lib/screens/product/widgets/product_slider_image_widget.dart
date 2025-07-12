@@ -83,7 +83,8 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFB7B2B2).withValues(alpha: 0.5),
@@ -119,42 +120,42 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
 
   Future openPhotoDialog(BuildContext context, path) => showDialog(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext context) {
           return Dialog(
-            child: Container(
-                child: Stack(
+            child: Stack(
               children: [
-                PhotoView(
-                  enableRotation: true,
-                  heroAttributes: const PhotoViewHeroAttributes(tag: "someTag"),
-                  imageProvider: NetworkImage(path),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
+                Hero(
+                  tag: "someTag",
                   child: Container(
-                    decoration: ShapeDecoration(
+                    padding: const EdgeInsets.all(AppDimensions.paddingDefault),
+                    decoration: BoxDecoration(
+                      color: MyTheme.white,
+                      borderRadius: BorderRadius.circular(AppDimensions.radius),
+                    ),
+                    child: Image.network(path),
+                  ),
+                ),
+                Positioned(
+                  top: AppDimensions.paddingHalfSmall,
+                  right: AppDimensions.paddingHalfSmall,
+                  child: Container(
+                    decoration: BoxDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(AppDimensions.radius),
-                          bottomRight: Radius.circular(AppDimensions.radius),
-                          topRight: Radius.circular(AppDimensions.radius),
-                          topLeft: Radius.circular(AppDimensions.radius),
-                        ),
-                      ),
+                      shape: BoxShape.circle,
                     ),
                     width: 40,
                     height: 40,
                     child: IconButton(
                       icon: const Icon(Icons.clear, color: MyTheme.white),
                       onPressed: () {
-                        Navigator.of(context, rootNavigator: true).pop();
+                        Navigator.of(context).pop();
                       },
                     ),
                   ),
                 ),
               ],
-            )),
+            ),
           );
         },
       );
