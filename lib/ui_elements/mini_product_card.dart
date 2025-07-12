@@ -201,6 +201,7 @@
 
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
@@ -265,18 +266,22 @@ class _MiniProductCardState extends State<MiniProductCard> {
                           fit: BoxFit.cover,
                         ))),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 12, 8, 6),
-                child: Text(
-                  widget.name!,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: widget.nameTextStyle ??
-                      const TextStyle(
-                          color: MyTheme.font_grey_Light,
-                          fontSize: 12,
-                          height: 1.2,
-                          fontWeight: FontWeight.w400),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(8, 12, 8, 6),
+                  width: double.maxFinite,
+                  child: Text(
+                    widget.name!,
+                    overflow: TextOverflow.ellipsis,
+                    textDirection: widget.name!.direction,
+                    maxLines: 2,
+                    style: widget.nameTextStyle ??
+                        const TextStyle(
+                            color: MyTheme.font_grey_Light,
+                            fontSize: 12,
+                            height: 1.2,
+                            fontWeight: FontWeight.w400),
+                  ),
                 ),
               ),
               Flexible(

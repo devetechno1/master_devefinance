@@ -15,4 +15,6 @@ extension StringHelperEx on String {
   bool get isRTL => intl.Bidi.detectRtlDirectionality(this);
 
   TextDirection get direction => isRTL ? TextDirection.rtl : TextDirection.ltr;
+
+  TextAlign get textAlign => isRTL ? TextAlign.right : TextAlign.left;
 }
