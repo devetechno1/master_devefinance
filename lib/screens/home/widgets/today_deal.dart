@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/app_dimensions.dart';
@@ -39,10 +40,10 @@ class TodaysDealProductsWidget extends StatelessWidget {
             child: Container(
               width: 160,
               margin: const EdgeInsetsDirectional.only(
-                end: 8,
+                end: AppDimensions.paddingDefault,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   AspectRatio(
                     aspectRatio: 1,
@@ -59,6 +60,7 @@ class TodaysDealProductsWidget extends StatelessWidget {
                   Text(
                     product.name ?? '',
                     maxLines: 2,
+                    textDirection: (product.name ?? '').direction,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
