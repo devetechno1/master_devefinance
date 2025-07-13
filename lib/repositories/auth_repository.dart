@@ -17,6 +17,7 @@ class AuthRepository {
     final postBody = jsonEncode({
       "email": "$email",
       "password": "$password",
+      if(AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
       "identity_matrix": AppConfig.purchase_code,
       "login_by": loginBy,
       "temp_user_id": temp_user_id.$
@@ -49,6 +50,7 @@ class AuthRepository {
       "name": name,
       "email": email,
       "provider": "$provider",
+      if(AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
       "social_provider": "$socialProvider",
       "access_token": "$access_token",
       "secret_token": "$secret_token"
@@ -104,6 +106,7 @@ class AuthRepository {
       if (email != null) "email": "$email",
       "phone": "$phone",
       "password": "$password",
+      if(AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
       "password_confirmation": "$passowrdConfirmation",
       "g-recaptcha-response": "$capchaKey",
     });
