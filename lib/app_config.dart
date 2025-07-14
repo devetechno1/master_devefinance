@@ -61,6 +61,7 @@ class AppConfig {
 
   //Default country config
   static String default_country = "EG";
+  
 
   //configure this
   static const bool HTTPS =
@@ -79,4 +80,6 @@ class AppConfig {
   // static HomePageType selectedHomePageType = HomePageType.home;
   static BusinessSettingsData businessSettingsData =
       const BusinessSettingsData();
+
+  static Map<String, dynamic> deviceInfo = {};
 }

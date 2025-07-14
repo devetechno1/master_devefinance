@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 
+import '../../app_config.dart';
+
 enum StoreType {
   appGallery,
   playStore,
@@ -11,11 +13,16 @@ enum StoreType {
   const StoreType();
 
   static Future<StoreType> thisDeviceType() async {
-    if (Platform.isIOS) return appleStore;
+    if (Platform.isIOS) {
+      final IosDeviceInfo iosInfo = await DeviceInfoPlugin().iosInfo;
+      AppConfig.deviceInfo = {"device_type": "ios", "info": iosInfo.data};
+      return appleStore;
+    }
 
-    final AndroidDeviceInfo deviceInfo = await DeviceInfoPlugin().androidInfo;
+    final AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
+    AppConfig.deviceInfo = {"device_type": "android", "info": androidInfo.data};
 
-    if (deviceInfo.manufacturer.toLowerCase() == 'huawei') return appGallery;
+    if (androidInfo.manufacturer.toLowerCase() == 'huawei') return appGallery;
     return playStore;
   }
 }

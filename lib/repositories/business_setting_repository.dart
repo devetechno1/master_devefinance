@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/business_setting_response.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
@@ -24,6 +27,7 @@ class BusinessSettingRepository {
     // ];
     // String params = businessSettings.join(',');
     // var body = {"keys": params};
+    log("Device info in config ${jsonEncode(AppConfig.deviceInfo)}");
     final response = await ApiRequest.get(
       url: url,
     );
