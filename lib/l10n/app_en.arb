@@ -1,4 +1,6 @@
 {
+  "add_default_address": "You have to add a default address",
+  "change_default_before_delete": "You have to change default address before deleting this address",
   "notAvailable": "Not available",
   "productExceedsMaxQuantity": "One of the products exceeds the maximum allowed quantity.",
   "productBelowMinQuantity": "One of the products is below the minimum order quantity.",

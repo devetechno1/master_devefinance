@@ -1,4 +1,6 @@
 {
+    "add_default_address": "يرجى تحديد عنوان كافتراضي للمتابعة",
+    "change_default_before_delete": "يجب تغيير العنوان الافتراضي قبل حذف هذا العنوان",
     "notAvailable": "غير متوفر",
     "productExceedsMaxQuantity": "أحد المنتجات يحتوي على كمية تتجاوز الحد الأقصى المسموح.",
     "productBelowMinQuantity": "أحد المنتجات يحتوي على كمية أقل من الحد الأدنى المسموح للطلب.",
