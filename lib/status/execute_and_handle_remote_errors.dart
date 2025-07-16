@@ -1,3 +1,4 @@
+import '../custom/toast_component.dart';
 import 'status.dart';
 
 Future<Status<T>> executeAndHandleErrors<T>(
@@ -19,4 +20,23 @@ Future<Status<T>> executeAndHandleErrors<T>(
 
     return Failure<T>(FailureBody(message: e.toString()), data);
   }
+}
+
+Future<T?> handleErrorsWithMessage<T>(
+  Future<T> Function() function, [
+  Future<T?> Function()? functionWhenError,
+]) async {
+  final Status temp = await executeAndHandleErrors<T>(
+    function,
+    functionWhenError,
+  );
+  if (temp is Success<T>) return temp.data;
+
+  if (temp is Failure<T>) {
+    ToastComponent.showDialog(temp.failure.message ?? temp.failure.type);
+
+    return temp.data;
+  }
+
+  return null;
 }

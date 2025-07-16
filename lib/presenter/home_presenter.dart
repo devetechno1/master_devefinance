@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
@@ -15,9 +16,14 @@ import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
+import '../custom/lang_text.dart';
+import '../custom/toast_component.dart';
+import '../data_model/address_response.dart';
 import '../data_model/category_response.dart';
 import '../data_model/popup_banner_model.dart';
 import '../helpers/shared_value_helper.dart';
+import '../repositories/address_repository.dart';
+import '../screens/address.dart' as screen;
 import '../status/execute_and_handle_remote_errors.dart';
 import '../status/status.dart';
 import '../ui_elements/pop_up_banner.dart';
@@ -29,6 +35,8 @@ class HomePresenter extends ChangeNotifier {
 
   Timer? _flashDealTimer;
   DateTime? _flashDealEndTime;
+
+  Address? defaultAddress;
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int current_slider = 0;
@@ -101,6 +109,7 @@ class HomePresenter extends ChangeNotifier {
   int cartCount = 0;
 
   fetchAll() {
+    fetchAddressLists();
     fetchCarouselImages();
     fetchBannerOneImages();
     fetchBannerTwoImages();
@@ -227,6 +236,54 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> fetchAddressLists() async {
+    if (!AppConfig.businessSettingsData.sellerWiseShipping || !is_logged_in.$) {
+      return;
+    }
+
+    final AddressResponse? addressResponse =
+        await handleErrorsWithMessage(AddressRepository().getAddressList);
+    if (addressResponse != null) {
+      if (addressResponse.addresses?.isNotEmpty != true) {
+        handleAddressNavigationWithToast();
+        return;
+      }
+      for (Address a in addressResponse.addresses!) {
+        if (a.set_default == 1) {
+          defaultAddress = a;
+          break;
+        }
+      }
+      if (defaultAddress == null) {
+        final Address temp = addressResponse.addresses!.first;
+        final addressMakeDefaultResponse =
+            await AddressRepository().getAddressMakeDefaultResponse(-1);
+
+        if (addressMakeDefaultResponse.result == false) {
+          handleAddressNavigationWithToast();
+          return;
+        }
+        defaultAddress = temp;
+      }
+      notifyListeners();
+    }
+  }
+
+  void handleAddressNavigationWithToast() {
+    ToastComponent.showDialog(
+      LangText(OneContext().context!).local.add_default_address,
+      isError: true,
+    );
+    handleAddressNavigation();
+  }
+
+  void handleAddressNavigation() {
+    Navigator.push(
+      OneContext().context!,
+      MaterialPageRoute(builder: (_) => const screen.Address()),
+    ).then((value) => fetchAddressLists());
+  }
+
   fetchCarouselImages() async {
     SliderResponse? carouselResponse;
     await executeAndHandleErrors(
@@ -298,13 +355,18 @@ class HomePresenter extends ChangeNotifier {
 
   Future<void> showPopupBanner([BuildContext? cntx]) async {
     final BuildContext? context = cntx ?? OneContext().context;
-    if(context == null || GoRouter.of(context).state?.path != "/" || _isOpenedBefore) return;
+    if (context == null ||
+        GoRouter.of(context).state.path != "/" ||
+        _isOpenedBefore) return;
     _isOpenedBefore = true;
-    
-    final Status<List<PopupBannerModel>> bannersStatus = await executeAndHandleErrors(() => SlidersRepository().fetchBannerPopupData());
 
-    if (bannersStatus is Success<List<PopupBannerModel>>){
-      final List<PopupBannerModel> banners = List.unmodifiable(bannersStatus.data);
+    final Status<List<PopupBannerModel>> bannersStatus =
+        await executeAndHandleErrors(
+            () => SlidersRepository().fetchBannerPopupData());
+
+    if (bannersStatus is Success<List<PopupBannerModel>>) {
+      final List<PopupBannerModel> banners =
+          List.unmodifiable(bannersStatus.data);
       if (banners.isNotEmpty) {
         await lastIndexPopupBanner.load();
         int index = lastIndexPopupBanner.$ + 1;
@@ -313,10 +375,10 @@ class HomePresenter extends ChangeNotifier {
         lastIndexPopupBanner.$ = index;
         lastIndexPopupBanner.save();
 
-        
         showDialog(
           context: context,
-          builder: (context) => PopupBannerDialog(popupBannerModel: banners[index]),
+          builder: (context) =>
+              PopupBannerDialog(popupBannerModel: banners[index]),
         );
       }
     }
@@ -550,4 +612,5 @@ class CurrentRemainingTime {
     required this.sec,
   });
 }
-  bool _isOpenedBefore = false;
+
+bool _isOpenedBefore = false;

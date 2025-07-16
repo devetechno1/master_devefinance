@@ -64,14 +64,16 @@ class _AddressState extends State<Address> {
     setState(() {});
   }
 
-  Future fetchShippingAddressList() async {
+  Future fetchShippingAddressList([bool isRefresh = true]) async {
     // print("enter fetchShippingAddressList");
     final res.AddressResponse addressResponse =
         await AddressRepository().getAddressList();
+    _shippingAddressList.clear();
     _shippingAddressList.addAll(addressResponse.addresses ?? []);
-    setState(() {
-      _isInitial = false;
-    });
+    if (isRefresh)
+      setState(() {
+        _isInitial = false;
+      });
     if (_shippingAddressList.isNotEmpty) {
       // var count = 0;
       _shippingAddressList.forEach((address) {
@@ -131,7 +133,7 @@ class _AddressState extends State<Address> {
 
   onPopped(value) async {
     reset();
-    fetchAll();
+    await fetchAll();
   }
 
   Future afterAddingAnAddress() async {
@@ -167,9 +169,11 @@ class _AddressState extends State<Address> {
     setState(() {
       _default_shipping_address = index;
     });
+
+    fetchShippingAddressList(false);
   }
 
-  onPressDelete(id) {
+  onPressDelete(res.Address address) {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -179,8 +183,10 @@ class _AddressState extends State<Address> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Text(
-                  AppLocalizations.of(context)!
-                      .are_you_sure_to_remove_this_address,
+                  address.set_default == 1
+                      ? LangText(context).local.change_default_before_delete
+                      : AppLocalizations.of(context)!
+                          .are_you_sure_to_remove_this_address,
                   maxLines: 3,
                   style:
                       const TextStyle(color: MyTheme.font_grey, fontSize: 14),
@@ -196,17 +202,18 @@ class _AddressState extends State<Address> {
                     Navigator.of(context, rootNavigator: true).pop();
                   },
                 ),
-                Btn.basic(
-                  color: MyTheme.soft_accent_color,
-                  child: Text(
-                    AppLocalizations.of(context)!.confirm_ucf,
-                    style: TextStyle(color: MyTheme.dark_grey),
+                if (address.set_default != 1)
+                  Btn.basic(
+                    color: MyTheme.soft_accent_color,
+                    child: Text(
+                      AppLocalizations.of(context)!.confirm_ucf,
+                      style: TextStyle(color: MyTheme.dark_grey),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                      confirmDelete(address.id);
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.of(context, rootNavigator: true).pop();
-                    confirmDelete(id);
-                  },
-                ),
               ],
             ));
   }
@@ -235,7 +242,7 @@ class _AddressState extends State<Address> {
         buildShowUpdateFormDialog(context, listIndex);
         break;
       case 1:
-        onPressDelete(_shippingAddressList[listIndex].id);
+        onPressDelete(_shippingAddressList[listIndex]);
         break;
       case 2:
         _choosePlace(_shippingAddressList[listIndex]);
@@ -249,8 +256,18 @@ class _AddressState extends State<Address> {
   void _choosePlace(res.Address address) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MapLocation(address: address);
-    })).then((value) {
-      onPopped(value);
+    })).then((value) async {
+      await onPopped(value);
+      if (value != null) {
+        bool hasDefault = false;
+        for (res.Address e in _shippingAddressList) {
+          if (e.set_default == 1) {
+            hasDefault = true;
+            break;
+          }
+        }
+        if (!hasDefault) onAddressSwitch(address.id);
+      }
     });
   }
 
@@ -618,10 +635,11 @@ class _AddressState extends State<Address> {
           value: MenuOptions.Edit,
           child: Text(AppLocalizations.of(context)!.edit_ucf),
         ),
-        PopupMenuItem<MenuOptions>(
-          value: MenuOptions.Delete,
-          child: Text(AppLocalizations.of(context)!.delete_ucf),
-        ),
+        if (_shippingAddressList.length > 1)
+          PopupMenuItem<MenuOptions>(
+            value: MenuOptions.Delete,
+            child: Text(AppLocalizations.of(context)!.delete_ucf),
+          ),
         PopupMenuItem<MenuOptions>(
           value: MenuOptions.AddLocation,
           child: Text(AppLocalizations.of(context)!.edit_location),
@@ -644,13 +662,16 @@ class LineData extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppDimensions.paddingSmall,
         children: [
           Container(
             width: 75,
             child: Text(
               name,
               style: const TextStyle(
-                  color: Color(0xff6B7377), fontWeight: FontWeight.normal),
+                color: Color(0xff6B7377),
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
           Flexible(
@@ -658,7 +679,9 @@ class LineData extends StatelessWidget {
               body!,
               maxLines: 2,
               style: TextStyle(
-                  color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
+                color: MyTheme.dark_grey,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -734,7 +757,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     if (address.trim() == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.enter_address_ucf,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -742,7 +765,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     if (_selected_country == null) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.select_a_country,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -750,7 +773,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     if (_selected_state == null) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.select_a_state,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -758,20 +781,22 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     if (_selected_city == null) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.select_a_city,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
 
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.enter_phone_number,
-          color: Theme.of(context).colorScheme.error);
+        AppLocalizations.of(context)!.enter_phone_number,
+        isError: true,
+      );
       return;
     } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.invalid_phone_number,
-          color: Theme.of(context).colorScheme.error);
+        AppLocalizations.of(context)!.invalid_phone_number,
+        isError: true,
+      );
       return;
     }
 
@@ -786,7 +811,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     if (addressAddResponse.result == false) {
       ToastComponent.showDialog(
         addressAddResponse.message,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -1195,7 +1220,8 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
             ),
             const SizedBox(width: 1),
             Padding(
-              padding: const EdgeInsetsDirectional.only(start: AppDimensions.paddingDefault),
+              padding: const EdgeInsetsDirectional.only(
+                  start: AppDimensions.paddingDefault),
               child: Btn.minWidthFixHeight(
                 minWidth: 75,
                 height: 40,
@@ -1318,14 +1344,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
     if (_selected_country == null) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.select_a_country,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
     if (_selected_state == null) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.select_a_state,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
@@ -1333,19 +1359,21 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
     if (_selected_city == null) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.select_a_city,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.enter_phone_number,
-          color: Theme.of(context).colorScheme.error);
+        AppLocalizations.of(context)!.enter_phone_number,
+        isError: true,
+      );
       return;
     } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.invalid_phone_number,
-          color: Theme.of(context).colorScheme.error);
+        AppLocalizations.of(context)!.invalid_phone_number,
+        isError: true,
+      );
       return;
     }
 
@@ -1362,7 +1390,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
     if (addressUpdateResponse.result == false) {
       ToastComponent.showDialog(
         addressUpdateResponse.message,
-        color: Theme.of(context).colorScheme.error,
+        isError: true,
       );
       return;
     }

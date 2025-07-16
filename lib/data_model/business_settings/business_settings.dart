@@ -262,6 +262,7 @@ class BusinessSettingsData extends Equatable {
   final UpdateDataModel? updateData;
 
   bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
+  bool get sellerWiseShipping => shippingType == "seller_wise_shipping";
 
   const BusinessSettingsData({
     this.whatsappNumber,

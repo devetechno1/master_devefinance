@@ -72,7 +72,7 @@ class _MetroScreenState extends State<MetroScreen>
         child: SafeArea(
           child: Scaffold(
             floatingActionButton: whatsappFloatingButtonWidget,
-            appBar: BuildAppBar(statusBarHeight: 34, context: context),
+            appBar: BuildAppBar(context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,

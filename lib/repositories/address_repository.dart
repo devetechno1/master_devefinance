@@ -17,7 +17,7 @@ import 'package:active_ecommerce_cms_demo_app/middlewares/banned_user.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
 
 class AddressRepository {
-  Future<dynamic> getAddressList() async {
+  Future<AddressResponse> getAddressList() async {
     const String url = ("${AppConfig.BASE_URL}/user/shipping/address");
     final response = await ApiRequest.get(
       url: url,
@@ -43,7 +43,7 @@ class AddressRepository {
     return addressResponseFromJson(response.body);
   }
 
-  Future<dynamic> getAddressAddResponse(
+  Future<AddressAddResponse> getAddressAddResponse(
       {required String address,
       required int? country_id,
       required int? state_id,
@@ -131,7 +131,7 @@ class AddressRepository {
     return addressUpdateLocationResponseFromJson(response.body);
   }
 
-  Future<dynamic> getAddressMakeDefaultResponse(
+  Future<AddressMakeDefaultResponse> getAddressMakeDefaultResponse(
     int? id,
   ) async {
     final postBody = jsonEncode({

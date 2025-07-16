@@ -74,10 +74,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: BuildAppBar(
-              statusBarHeight: 34,
-              context: context,
-            ),
+            appBar: BuildAppBar(context: context),
             backgroundColor: Colors.white,
             body: ListenableBuilder(
               listenable: homeData,

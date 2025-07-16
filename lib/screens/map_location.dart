@@ -66,13 +66,17 @@ class MapLocationState extends State<MapLocation>
   }
 
   Future<void> onTapPickHere() async {
-    final addressUpdateLocationResponse = await AddressRepository()
-        .getAddressUpdateLocationResponse(
-            widget.address.id, selectedPlace.latitude, selectedPlace.longitude);
+    final addressUpdateLocationResponse =
+        await AddressRepository().getAddressUpdateLocationResponse(
+      widget.address.id,
+      selectedPlace.latitude,
+      selectedPlace.longitude,
+    );
 
     if (addressUpdateLocationResponse.result == false) {
       ToastComponent.showDialog(
         addressUpdateLocationResponse.message,
+        isError: true,
       );
       return;
     }
