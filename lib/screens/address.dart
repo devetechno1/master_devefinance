@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/guest_checkout_pages/old_guest.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/map_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ import '../app_config.dart';
 import '../custom/input_decorations.dart';
 import '../custom/intl_phone_input.dart';
 import '../data_model/address_response.dart' as res;
+import 'guest_checkout_pages/map_location.dart';
 
 class Address extends StatefulWidget {
   const Address({Key? key, this.from_shipping_info = false}) : super(key: key);
@@ -111,6 +113,7 @@ class _AddressState extends State<Address> {
     _shippingAddressList.clear();
     _isInitial = true;
 
+ 
     //update-ables
     _addressControllerListForUpdate.clear();
     _postalCodeControllerListForUpdate.clear();
@@ -323,7 +326,15 @@ class _AddressState extends State<Address> {
                       ],
                     ),
                     onPressed: () {
-                      buildShowAddFormDialog(context);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AddAddressDialog(
+                          shippingAddressList: _shippingAddressList,
+                          afterAddingAnAddress: afterAddingAnAddress,
+                          choosePlace: (index) =>
+                              _choosePlace(_shippingAddressList[index]),
+                        ),
+                      ));
+                      //buildShowAddFormDialog(context);
                     },
                   ),
                 ),
@@ -341,17 +352,17 @@ class _AddressState extends State<Address> {
   }
 
 // Alart Dialog
-  Future buildShowAddFormDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AddAddressDialog(
-            shippingAddressList: _shippingAddressList,
-            afterAddingAnAddress: afterAddingAnAddress,
-            choosePlace: (index) => _choosePlace(_shippingAddressList[index]),
-          );
-        });
-  }
+  // Future buildShowAddFormDialog(BuildContext context) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AddAddressDialog(
+  //           shippingAddressList: _shippingAddressList,
+  //           afterAddingAnAddress: afterAddingAnAddress,
+  //           choosePlace: (index) => _choosePlace(_shippingAddressList[index]),
+  //         );
+  //       });
+  // }
 
   InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
     return InputDecoration(
@@ -706,9 +717,13 @@ class AddAddressDialog extends StatefulWidget {
 
   @override
   State<AddAddressDialog> createState() => _AddAddressDialogState();
+  
 }
 
 class _AddAddressDialogState extends State<AddAddressDialog> {
+  double? longitude;
+  double? latitude;
+
   City? _selected_city;
   Country? _selected_country;
   MyState? _selected_state;
@@ -821,7 +836,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       color: Colors.green,
     );
 
-    Navigator.of(context, rootNavigator: true).pop();
+    Navigator.of(context).pop();
     await widget.afterAddingAnAddress();
     final int i = widget.shippingAddressList.length - 1;
     widget.choosePlace(i);
@@ -895,23 +910,32 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return Scaffold(
+      appBar: buildAppBar(context),
       backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusDefault)),
-      insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-      contentPadding: const EdgeInsets.only(
-          top: AppDimensions.paddingLarge,
-          left: AppDimensions.paddingLarge,
-          right: AppDimensions.paddingLarge,
-          bottom: 2.0),
-      content: Container(
+      // shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(AppDimensions.radiusDefault)),
+      // insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+      // contentPadding: const EdgeInsets.only(
+      //     top: AppDimensions.paddingLarge,
+      //     left: AppDimensions.paddingLarge,
+      //     right: AppDimensions.paddingLarge,
+      //     bottom: 2.0),
+      body: Container(
         width: 400,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              MapLocationWidget(
+                latitude: latitude,
+                longitude: longitude,
+                onPlacePicked: (latLong) {
+                  latitude = latLong?.latitude;
+                  longitude = latLong?.longitude;
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
                 child: Text("${AppLocalizations.of(context)!.address_ucf} *",
@@ -1190,36 +1214,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Btn.minWidthFixHeight(
-              minWidth: 75,
-              height: 40,
-              color: const Color.fromRGBO(253, 253, 253, 1),
-              shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.radiusHalfSmall),
-                  side: BorderSide(color: MyTheme.light_grey, width: 1)),
-              child: Text(
-                LangText(context).local.close_ucf,
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true).pop();
-              },
-            ),
-            const SizedBox(width: 1),
-            Padding(
+              Padding(
               padding: const EdgeInsetsDirectional.only(
                   start: AppDimensions.paddingDefault),
               child: Btn.minWidthFixHeight(
@@ -1241,9 +1236,60 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                 onPressed: _onAddressAdd,
               ),
             )
-          ],
-        )
-      ],
+            ],
+          ),
+        ),
+      ),
+     // actions: [
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     // Btn.minWidthFixHeight(
+        //     //   minWidth: 75,
+        //     //   height: 40,
+        //     //   color: const Color.fromRGBO(253, 253, 253, 1),
+        //     //   shape: RoundedRectangleBorder(
+        //     //       borderRadius:
+        //     //           BorderRadius.circular(AppDimensions.radiusHalfSmall),
+        //     //       side: BorderSide(color: MyTheme.light_grey, width: 1)),
+        //     //   child: Text(
+        //     //     LangText(context).local.close_ucf,
+        //     //     style: TextStyle(
+        //     //       color: Theme.of(context).primaryColor,
+        //     //       fontSize: 16,
+        //     //       fontWeight: FontWeight.w600,
+        //     //     ),
+        //     //   ),
+        //     //   onPressed: () {
+        //     //     Navigator.of(context, rootNavigator: true).pop();
+        //     //   },
+        //     // ),
+        //     const SizedBox(width: 1),
+        //     Padding(
+        //       padding: const EdgeInsetsDirectional.only(
+        //           start: AppDimensions.paddingDefault),
+        //       child: Btn.minWidthFixHeight(
+        //         minWidth: 75,
+        //         height: 40,
+        //         color: Theme.of(context).primaryColor,
+        //         shape: RoundedRectangleBorder(
+        //           borderRadius:
+        //               BorderRadius.circular(AppDimensions.radiusHalfSmall),
+        //         ),
+        //         child: Text(
+        //           LangText(context).local.continue_ucf,
+        //           style: const TextStyle(
+        //             color: Colors.white,
+        //             fontSize: 16,
+        //             fontWeight: FontWeight.w600,
+        //           ),
+        //         ),
+        //         onPressed: _onAddressAdd,
+        //       ),
+        //     )
+        //   ],
+        // )
+    //  ],
     );
   }
 }

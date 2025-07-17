@@ -17,10 +17,8 @@ class AppConfig {
 
   /// To know the device operating system (ios, huawei or any android device)
   static StoreType storeType = StoreType.unknown;
-
+///Specifies the splash screen type to use a custom animated widget instead of a static image or traditional screen.
   static SplashScreenType get splashType => SplashScreenType.splashAnimatedImageWidget;
-
-
   /// To make force update to app
   static String version = '1.0.0';
 
