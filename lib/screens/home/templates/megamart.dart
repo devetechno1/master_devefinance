@@ -73,7 +73,7 @@ class _MegamartScreenState extends State<MegamartScreen>
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            appBar: BuildAppBar(statusBarHeight: 34, context: context),
+            appBar: BuildAppBar(context: context),
             floatingActionButton: whatsappFloatingButtonWidget,
             backgroundColor: Colors.white,
             body: ListenableBuilder(

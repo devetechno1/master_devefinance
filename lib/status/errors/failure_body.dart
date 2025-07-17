@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class FailureBody {
-  final String status = 'Failure';
   final int code;
   final String type;
   final String? message;
@@ -11,6 +10,8 @@ class FailureBody {
     this.type = 'unKnown',
     this.message = 'unKnownMessage',
   });
+  
+  String get status => 'Failure';
 
   factory FailureBody.fromMap(Map<String, dynamic> data) => FailureBody(
         code: data['code'] as int,

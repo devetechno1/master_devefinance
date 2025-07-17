@@ -13,16 +13,16 @@ String addressMakeDefaultResponseToJson(AddressMakeDefaultResponse data) =>
 class AddressMakeDefaultResponse {
   AddressMakeDefaultResponse({
     this.result,
-    this.message,
+    this.message ='',
   });
 
   bool? result;
-  String? message;
+  String message;
 
   factory AddressMakeDefaultResponse.fromJson(Map<String, dynamic> json) =>
       AddressMakeDefaultResponse(
         result: json["result"],
-        message: json["message"],
+        message: json["message"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {

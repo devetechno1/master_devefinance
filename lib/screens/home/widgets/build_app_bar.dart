@@ -1,16 +1,18 @@
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_search_box.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:flutter/material.dart';
 
+import '../../../helpers/shared_value_helper.dart';
+import '../home.dart';
+
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BuildAppBar({
     super.key,
-    required this.statusBarHeight,
     required this.context,
   });
 
-  final double statusBarHeight;
   final BuildContext context;
 
   AppBar get appBar => AppBar(
@@ -19,12 +21,18 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
         scrolledUnderElevation: 0.0,
         centerTitle: false,
         elevation: 0,
+        bottom:
+            is_logged_in.$ && AppConfig.businessSettingsData.sellerWiseShipping
+                ? const PreferredSize(
+                    preferredSize: Size.fromHeight(30),
+                    child: AddressAppBarWidget(),
+                  )
+                : null,
         flexibleSpace: Padding(
-          padding: const EdgeInsets.only(
-              top: AppDimensions.paddingSupSmall,
-              bottom: AppDimensions.paddingSupSmall,
-              left: 18,
-              right: 18),
+          padding: const EdgeInsets.symmetric(
+            vertical: AppDimensions.paddingSupSmall,
+            horizontal: AppDimensions.paddingMedium,
+          ),
           child: GestureDetector(
             onTap: () => Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => const Filter())),
@@ -40,4 +48,43 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => appBar.preferredSize;
+}
+
+class AddressAppBarWidget extends StatelessWidget {
+  const AddressAppBarWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: homeData.handleAddressNavigation,
+      child: Container(
+        height: 40,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.paddingDefault,
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey.withValues(alpha: 0.1),
+            ),
+          ),
+        ),
+        child: Row(
+          spacing: AppDimensions.paddingSmall,
+          children: [
+            Icon(Icons.location_on_outlined,
+                color: Theme.of(context).primaryColor),
+            Expanded(
+              child: ListenableBuilder(
+                listenable: homeData,
+                builder: (context, child) {
+                  return Text("${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}");
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
