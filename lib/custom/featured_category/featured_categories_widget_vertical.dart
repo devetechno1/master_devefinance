@@ -1,22 +1,24 @@
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
-import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_products.dart';
 import 'package:flutter/material.dart';
-import '../my_theme.dart';
-import 'lang_text.dart';
 
-class FeaturedCategoriesWidget extends StatelessWidget {
+import '../../constants/app_dimensions.dart';
+import '../../constants/app_images.dart';
+import '../../helpers/shimmer_helper.dart';
+import '../../my_theme.dart';
+import '../../presenter/home_presenter.dart';
+import '../../screens/category_list_n_product/category_products.dart';
+import '../lang_text.dart';
+
+class FeatureCategoriesWidgetVertical extends StatelessWidget {
   final HomePresenter homeData;
-  const FeaturedCategoriesWidget({Key? key, required this.homeData})
-      : super(key: key);
+  final int crossAxisCount;
+  const FeatureCategoriesWidgetVertical(
+      {super.key, required this.homeData, required this.crossAxisCount});
 
   @override
   Widget build(BuildContext context) {
     if (homeData.isCategoryInitial && homeData.featuredCategoryList.isEmpty) {
       // Handle shimmer loading here (if no categories loaded yet)
-      return ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
+      return ShimmerHelper().buildGridShimmerWithAxisCount(
           crossAxisSpacing: 12.0,
           mainAxisSpacing: 12.0,
           item_count: 10,
@@ -24,20 +26,22 @@ class FeaturedCategoriesWidget extends StatelessWidget {
           controller: homeData.featuredCategoryScrollController);
     } else if (homeData.featuredCategoryList.isNotEmpty) {
       return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.only(
             left: AppDimensions.paddingLarge,
             right: AppDimensions.paddingLarge,
             top: 11,
             bottom: 24),
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         controller: homeData.featuredCategoryScrollController,
         itemCount: homeData.featuredCategoryList.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
             childAspectRatio: 1, // Ensures square boxes
             crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            mainAxisExtent: 170.0),
+            mainAxisSpacing: 3,
+            mainAxisExtent: 150.0),
         itemBuilder: (context, index) {
           return GestureDetector(
               onTap: () {
@@ -54,7 +58,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                 );
               },
               child: Container(
-                child: Row(
+                child: Column(
                   children: [
                     AspectRatio(
                         aspectRatio: 1,
@@ -81,9 +85,6 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          //  decoration: BoxDecoration(
-                          //      image: DecorationImage(
-                          //          image: AssetImage('assets/p1.PNG'),
                         )),
                     const SizedBox(width: 10),
                     Flexible(
@@ -122,4 +123,3 @@ class FeaturedCategoriesWidget extends StatelessWidget {
     }
   }
 }
-
