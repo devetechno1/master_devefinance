@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'data_model/business_settings/business_settings.dart';
 import 'data_model/business_settings/update_model.dart';
+import 'screens/splash_screen/splash_screen_config.dart';
 export 'constants/app_dimensions.dart';
 export 'constants/app_images.dart';
 
@@ -16,6 +17,8 @@ class AppConfig {
 
   /// To know the device operating system (ios, huawei or any android device)
   static StoreType storeType = StoreType.unknown;
+
+  static SplashScreenType get splashType => SplashScreenType.splashAnimatedImageWidget;
 
 
   /// To make force update to app
@@ -49,7 +52,7 @@ class AppConfig {
 
   static String search_bar_text(BuildContext context) =>
       AppLocalizations.of(context)!
-          .search_in_active_ecommerce_cms; //this will show in app Search bar.
+          .search_in_active_ecommerce_cms(AppConfig.appNameOnAppLang(context)); //this will show in app Search bar.
   static String purchase_code =
       "a"; //enter your purchase code for the app from codecanyon
   static String system_key =

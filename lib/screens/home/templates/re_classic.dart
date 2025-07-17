@@ -6,7 +6,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_produ
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_category/feautured_category_horizontal.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
@@ -19,7 +19,7 @@ import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
-import '../widgets/featured_category_vertical.dart';
+import '../widgets/featured_category/featured_category_vertical.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 

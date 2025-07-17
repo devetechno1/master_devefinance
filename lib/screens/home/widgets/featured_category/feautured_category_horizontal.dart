@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_cms_demo_app/custom/feature_categories_widget.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/featured_category/feature_categories_widget_horizontal.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

@@ -7,8 +7,9 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/currency_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/providers/locale_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/splash_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';

@@ -6,7 +6,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products_list_sliver.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/feautured_category.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_category/feautured_category_horizontal.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/menu_item_list.dart';
 
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../custom/featured_categories_widget_vertical.dart';
+import '../../../../custom/featured_category/featured_categories_widget_vertical.dart';
 
 class CategoryListVertical extends StatelessWidget {
   final int crossAxisCount;

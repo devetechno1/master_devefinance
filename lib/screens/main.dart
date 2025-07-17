@@ -16,6 +16,8 @@ import '../app_config.dart';
 import '../presenter/cart_provider.dart';
 import '../ui_elements/close_app_dialog_widget.dart';
 import 'home/home.dart';
+import 'splash_screen/custom_statusbar.dart';
+
 // import 'home/home_page_type_enum.dart';
 
 class Main extends StatefulWidget {
@@ -125,7 +127,9 @@ class _MainState extends State<Main> {
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: Scaffold(
+          appBar: customStatusBar(SystemUiOverlayStyle.dark),
           extendBody: true,
+          extendBodyBehindAppBar: true,
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
