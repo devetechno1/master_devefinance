@@ -132,6 +132,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                           //Featured Categories
                           const CategoryList(),
+                        // const  CategoryListVertical(crossAxisCount: 5,),
 
                           if (homeData.isFlashDeal)
                             SliverList(

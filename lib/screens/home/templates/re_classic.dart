@@ -19,6 +19,7 @@ import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
+import '../widgets/featured_category_vertical.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -97,6 +98,7 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                             HomeCarouselSlider(homeData: homeData),
                           ])),
                           const CategoryList(),
+                      
                           SliverList(
                               delegate: SliverChildListDelegate([
                             Padding(

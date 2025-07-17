@@ -17,6 +17,7 @@ import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
+import '../widgets/featured_category_vertical.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -67,8 +68,9 @@ class _MetroScreenState extends State<MetroScreen>
         return widget.go_back;
       },
       child: Directionality(
-        textDirection:
-            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: (app_language_rtl.$ ?? false)
+            ? TextDirection.rtl
+            : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
             floatingActionButton: whatsappFloatingButtonWidget,
@@ -119,6 +121,7 @@ class _MetroScreenState extends State<MetroScreen>
                           ),
 //Featured category-----------------------
                           const CategoryList(),
+                          // const CategoryListVertical(crossAxisCount: 3,),
 
 //BannerList---------------------
 

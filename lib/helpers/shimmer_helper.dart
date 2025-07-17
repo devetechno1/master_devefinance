@@ -187,7 +187,37 @@ class ShimmerHelper {
           );
         });
   }
-
+ GridView buildGridShimmerWithAxisCount(
+      {item_count = 10,
+      int crossAxisCount = 2,
+      crossAxisSpacing = 10.0,
+      mainAxisSpacing = 10.0,
+      mainAxisExtent = 100.0,
+      Axis scrollDirection = Axis.vertical,
+      controller}) {
+    return GridView.builder(
+        padding: const EdgeInsets.all(AppDimensions.paddingDefault),
+        scrollDirection: scrollDirection,
+        controller: controller,
+        itemCount: item_count,
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: crossAxisSpacing,
+            mainAxisSpacing: mainAxisSpacing,
+            mainAxisExtent: mainAxisExtent),
+        itemBuilder: (context, index) {
+          return Shimmer.fromColors(
+            baseColor: MyTheme.shimmer_base,
+            highlightColor: MyTheme.shimmer_highlighted,
+            child: Container(
+              height: 120,
+              width: double.infinity,
+              decoration: BoxDecorations.buildBoxDecoration_1(),
+            ),
+          );
+        });
+  }
   ListView buildSeparatedHorizontalListShimmer(
       {double separationWidth = 16.0,
       int itemCount = 10,

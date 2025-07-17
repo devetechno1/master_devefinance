@@ -24,6 +24,7 @@ class AppConfig {
   /// Internal development version shown on the splash screen.
   /// Used to verify the app build matches the master app.
   static const String deveVersion = '9.8.1';
+  static const String VersionMobile = '9.8.2';
 
   //configure this
   // static String copyright_text =
