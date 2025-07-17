@@ -50,8 +50,6 @@ abstract final class AppImages {
   static const String profilePlaceholder = "$_assetDir/profile_placeholder.png";
   static const String products = "$_assetDir/products.png";
   static const String deliveryMapIcon = "$_assetDir/delivery_map_icon.png";
-  static const String splash_loginRegistrationBackgroundImage =
-      "$_assetDir/splash_login_registration_background_image.png";
   static const String splashScreenLogo = "$_assetDir/splash_screen_logo.png";
   static const String add = "$_assetDir/add.png";
   static const String arrow = "$_assetDir/arrow.png";
@@ -59,8 +57,6 @@ abstract final class AppImages {
   static const String nextArrow = "$_assetDir/next_arrow.png";
   static const String package = "$_assetDir/package.png";
   static const String changedPassword = "$_assetDir/changed_password.png";
-  static const String splashLoginRegisterationBackground =
-      "$_assetDir/splash_login_registration_background_image.png";
   static const String facebook = "$_assetDir/facebook_logo.png";
   static const String google = "$_assetDir/google_logo.png";
   static const String huawei = "$_assetDir/huawei.png";
