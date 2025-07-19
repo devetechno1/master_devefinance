@@ -58,6 +58,7 @@ class _AddressState extends State<Address> {
   final List<MyState?> _selected_state_list_for_update = [];
   final List<Country> _selected_country_list_for_update = [];
 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -729,7 +730,7 @@ class AddAddressDialog extends StatefulWidget {
 class _AddAddressDialogState extends State<AddAddressDialog> {
   double? longitude;
   double? latitude;
-
+ bool passNotMatch = true;
   City? _selected_city;
   Country? _selected_country;
   MyState? _selected_state;
@@ -743,6 +744,8 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+
 
   String _phone = "";
   bool _isValidPhoneNumber = false;
@@ -772,6 +775,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     _countryController.clear();
     _stateController.clear();
     _cityController.clear();
+     passNotMatch = true;
   }
 
   Future<void> _onAddressAdd() async {
@@ -830,14 +834,45 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       );
       return;
       
-    } else if (!_isValidPhoneNumber) {
+    }
+    if (_passwordController.text.isEmpty) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.enter_phone_number,
+        isError: true,
+      );
+      return;
+      
+    }
+      if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.invalid_phone_number,
         isError: true,
       );
       return;
     }
-
+    if (_passwordController.text.isEmpty && !is_logged_in.$) {
+      ToastComponent.showDialog(LangText(context).local.enter_password,
+        isError: true,
+      );
+      return;
+      
+    }
+    if (_passwordController.text.length < 6 && !is_logged_in.$) {
+      ToastComponent.showDialog(
+          LangText(context).local.password_must_contain_at_least_6_characters,
+        isError: true,
+      );
+      return;
+      
+    }
+   else if (passNotMatch && !is_logged_in.$ ) {
+      ToastComponent.showDialog(
+          LangText(context).local.passwords_do_not_match,
+        isError: true,
+      );
+      return;
+      
+    }
     final addressAddResponse = await AddressRepository().getAddressAddResponse(
 
         address: address,
@@ -931,6 +966,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     _countryController.dispose();
     _stateController.dispose();
     _cityController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -1297,6 +1333,74 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               // Padding(
               //   padding: const EdgeInsetsDirectional.only(
               //       start: AppDimensions.paddingDefault),
+
+//if statement
+if(!is_logged_in.$)...[
+              Padding(
+                        padding: const EdgeInsets.all(
+                            AppDimensions.paddingSmallExtra),
+                        child: Text(
+                            "${AppLocalizations.of(context)!.password_ucf} *",
+                            style: const TextStyle(
+                                color: Color(0xff3E4447),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingNormal),
+                        child: Container(
+                          height: 40,
+                          child: TextField(
+                            textInputAction: TextInputAction.next,
+                            controller: _passwordController,
+                            autofocus: false,
+                            obscureText: true,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecorations
+                                .buildInputDecoration_with_border(
+                                    "• • • • • • • •"),
+                          ),
+                        ),
+                      ),
+                       Padding(
+                        padding: const EdgeInsets.all(
+                            AppDimensions.paddingSmallExtra),
+                        child: Text(
+                            "${AppLocalizations.of(context)!.confirm_your_password} *",
+                            style: const TextStyle(
+                                color: Color(0xff3E4447),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingNormal),
+                        child: Container(
+                          height: 40,
+                          child: TextField(
+                            textInputAction: TextInputAction.done,
+                            autofocus: false,
+                            obscureText: true,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            keyboardType: TextInputType.visiblePassword,
+                            onChanged: (val) {
+                              passNotMatch = val != _passwordController.text;
+                            },
+                            decoration: InputDecorations
+                                .buildInputDecoration_with_border(
+                                    "• • • • • • • •"),
+                          ),
+                        ),
+                      ),
+
+],
+
+
+
               Center(
                 child: Btn.minWidthFixHeight(
                   minWidth: 300,
