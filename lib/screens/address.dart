@@ -23,6 +23,14 @@ import '../custom/intl_phone_input.dart';
 import '../data_model/address_response.dart' as res;
 import 'guest_checkout_pages/map_location.dart';
 
+// class Address extends StatelessWidget {
+//   const Address({super.key, required this.onPressContinue});
+// final void Function(String email, double latitude, double longitude) onPressContinue;
+//   @override
+//   Widget build(BuildContext context) {
+//     return AddressWidgets(onPressContinue: onPressContinue);
+//   }
+// }
 class Address extends StatefulWidget {
   const Address({Key? key, this.from_shipping_info = false}) : super(key: key);
   final bool from_shipping_info;
@@ -113,7 +121,6 @@ class _AddressState extends State<Address> {
     _shippingAddressList.clear();
     _isInitial = true;
 
- 
     //update-ables
     _addressControllerListForUpdate.clear();
     _postalCodeControllerListForUpdate.clear();
@@ -717,7 +724,6 @@ class AddAddressDialog extends StatefulWidget {
 
   @override
   State<AddAddressDialog> createState() => _AddAddressDialogState();
-  
 }
 
 class _AddAddressDialogState extends State<AddAddressDialog> {
@@ -729,6 +735,8 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   MyState? _selected_state;
 
   //controllers for add purpose
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _postalCodeController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -756,6 +764,8 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   }
 
   void reset() {
+    _nameController.clear();
+     _emailController.clear();
     _addressController.clear();
     _postalCodeController.clear();
     _phoneController.clear();
@@ -768,7 +778,18 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     final String address = _addressController.text.toString();
     final String postalCode = _postalCodeController.text.toString();
     // var phone = _phoneController.text.toString();
-
+ if (_nameController.text.trim().toString().isEmpty && !is_logged_in.$) {
+       ToastComponent.showDialog(LangText(context).local.name_required,
+        isError: true,
+      );
+      return;
+    }
+    if (_emailController.text.trim().toString().isEmpty && !is_logged_in.$) {
+       ToastComponent.showDialog(LangText(context).local.email_required,
+        isError: true,
+      );
+      return;
+    }
     if (address.trim() == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.enter_address_ucf,
@@ -801,12 +822,14 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       return;
     }
 
+
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.enter_phone_number,
         isError: true,
       );
       return;
+      
     } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.invalid_phone_number,
@@ -816,6 +839,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     }
 
     final addressAddResponse = await AddressRepository().getAddressAddResponse(
+
         address: address,
         country_id: _selected_country!.id,
         state_id: _selected_state!.id,
@@ -899,6 +923,8 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
   @override
   void dispose() {
+    _nameController.dispose();
+     _emailController.dispose();
     _addressController.dispose();
     _postalCodeController.dispose();
     _phoneController.dispose();
@@ -913,21 +939,75 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     return Scaffold(
       appBar: buildAppBar(context),
       backgroundColor: Colors.white,
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(AppDimensions.radiusDefault)),
-      // insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-      // contentPadding: const EdgeInsets.only(
-      //     top: AppDimensions.paddingLarge,
-      //     left: AppDimensions.paddingLarge,
-      //     right: AppDimensions.paddingLarge,
-      //     bottom: 2.0),
       body: Container(
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingLarge),
         width: 400,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: AppDimensions.paddingSmall),
+              //name
+          if(!is_logged_in.$)...[
+              Padding(
+                padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                child: Text(
+                  "${AppLocalizations.of(context)!.name_ucf} *",
+                  style: const TextStyle(
+                    color: Color(0xff3E4447),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingNormal,
+                ),
+                child: Container(
+                  height: 40,
+                  child: TextField(
+                    controller: _nameController,
+                    autofocus: false,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    decoration:
+                        InputDecorations.buildInputDecoration_with_border(
+                      AppLocalizations.of(context)!.enter_your_name,
+                    ),
+                  ),
+                ),
+              ),
+               Padding(
+                        padding: const EdgeInsets.all(
+                            AppDimensions.paddingSmallExtra),
+                        child: Text(
+                            "${AppLocalizations.of(context)!.email_ucf} *",
+                            style: const TextStyle(
+                                color: Color(0xff3E4447),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingNormal),
+                        child: Container(
+                          height: 40,
+                          child: TextField(
+                            controller: _emailController,
+                            textInputAction: TextInputAction.next,
+                            autofocus: false,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecorations
+                                .buildInputDecoration_with_border(
+                                    AppLocalizations.of(context)!.enter_email),
+                          ),
+                        ),
+                      ),
+          ],
+              //
               MapLocationWidget(
                 latitude: latitude,
                 longitude: longitude,
@@ -1214,82 +1294,87 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
               ),
-              Padding(
-              padding: const EdgeInsetsDirectional.only(
-                  start: AppDimensions.paddingDefault),
-              child: Btn.minWidthFixHeight(
-                minWidth: 75,
-                height: 40,
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.radiusHalfSmall),
-                ),
-                child: Text(
-                  LangText(context).local.continue_ucf,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+              // Padding(
+              //   padding: const EdgeInsetsDirectional.only(
+              //       start: AppDimensions.paddingDefault),
+              Center(
+                child: Btn.minWidthFixHeight(
+                  minWidth: 300,
+                  height: 50,
+                  color: Theme.of(context).primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
                   ),
+                  child: Text(
+                    LangText(context).local.continue_ucf,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onPressed: _onAddressAdd,
                 ),
-                onPressed: _onAddressAdd,
               ),
-            )
+              const SizedBox(
+                height: 20,
+              )
+              // )
             ],
           ),
         ),
       ),
-     // actions: [
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     // Btn.minWidthFixHeight(
-        //     //   minWidth: 75,
-        //     //   height: 40,
-        //     //   color: const Color.fromRGBO(253, 253, 253, 1),
-        //     //   shape: RoundedRectangleBorder(
-        //     //       borderRadius:
-        //     //           BorderRadius.circular(AppDimensions.radiusHalfSmall),
-        //     //       side: BorderSide(color: MyTheme.light_grey, width: 1)),
-        //     //   child: Text(
-        //     //     LangText(context).local.close_ucf,
-        //     //     style: TextStyle(
-        //     //       color: Theme.of(context).primaryColor,
-        //     //       fontSize: 16,
-        //     //       fontWeight: FontWeight.w600,
-        //     //     ),
-        //     //   ),
-        //     //   onPressed: () {
-        //     //     Navigator.of(context, rootNavigator: true).pop();
-        //     //   },
-        //     // ),
-        //     const SizedBox(width: 1),
-        //     Padding(
-        //       padding: const EdgeInsetsDirectional.only(
-        //           start: AppDimensions.paddingDefault),
-        //       child: Btn.minWidthFixHeight(
-        //         minWidth: 75,
-        //         height: 40,
-        //         color: Theme.of(context).primaryColor,
-        //         shape: RoundedRectangleBorder(
-        //           borderRadius:
-        //               BorderRadius.circular(AppDimensions.radiusHalfSmall),
-        //         ),
-        //         child: Text(
-        //           LangText(context).local.continue_ucf,
-        //           style: const TextStyle(
-        //             color: Colors.white,
-        //             fontSize: 16,
-        //             fontWeight: FontWeight.w600,
-        //           ),
-        //         ),
-        //         onPressed: _onAddressAdd,
-        //       ),
-        //     )
-        //   ],
-        // )
-    //  ],
+      // actions: [
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     // Btn.minWidthFixHeight(
+      //     //   minWidth: 75,
+      //     //   height: 40,
+      //     //   color: const Color.fromRGBO(253, 253, 253, 1),
+      //     //   shape: RoundedRectangleBorder(
+      //     //       borderRadius:
+      //     //           BorderRadius.circular(AppDimensions.radiusHalfSmall),
+      //     //       side: BorderSide(color: MyTheme.light_grey, width: 1)),
+      //     //   child: Text(
+      //     //     LangText(context).local.close_ucf,
+      //     //     style: TextStyle(
+      //     //       color: Theme.of(context).primaryColor,
+      //     //       fontSize: 16,
+      //     //       fontWeight: FontWeight.w600,
+      //     //     ),
+      //     //   ),
+      //     //   onPressed: () {
+      //     //     Navigator.of(context, rootNavigator: true).pop();
+      //     //   },
+      //     // ),
+      //     const SizedBox(width: 1),
+      //     Padding(
+      //       padding: const EdgeInsetsDirectional.only(
+      //           start: AppDimensions.paddingDefault),
+      //       child: Btn.minWidthFixHeight(
+      //         minWidth: 75,
+      //         height: 40,
+      //         color: Theme.of(context).primaryColor,
+      //         shape: RoundedRectangleBorder(
+      //           borderRadius:
+      //               BorderRadius.circular(AppDimensions.radiusHalfSmall),
+      //         ),
+      //         child: Text(
+      //           LangText(context).local.continue_ucf,
+      //           style: const TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 16,
+      //             fontWeight: FontWeight.w600,
+      //           ),
+      //         ),
+      //         onPressed: _onAddressAdd,
+      //       ),
+      //     )
+      //   ],
+      // )
+      //  ],
     );
   }
 }
@@ -1357,6 +1442,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
   }
 
   Future<void> getInitVal() async {
+    
     _addressController =
         TextEditingController(text: widget.addressControllerText);
     _postalCodeController =
