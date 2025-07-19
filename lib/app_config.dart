@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'custom/lang_text.dart';
 import 'data_model/business_settings/business_settings.dart';
 import 'data_model/business_settings/update_model.dart';
 import 'screens/splash_screen/splash_screen_config.dart';
@@ -14,7 +15,6 @@ export 'constants/app_images.dart';
 // final String this_year = DateTime.now().year.toString();
 
 class AppConfig {
-
   /// To know the device operating system (ios, huawei or any android device)
   static StoreType storeType = StoreType.unknown;
 ///Specifies the splash screen type to use a custom animated widget instead of a static image or traditional screen.
@@ -42,15 +42,12 @@ class AppConfig {
   static bool isDebugMode = kDebugMode;
   static bool turnDevicePreviewOn = isDebugMode;
 
-  /// This get the name of the application in appLocal
-  static String appNameOnAppLang(BuildContext context) =>
-      Localizations.localeOf(context).languageCode == 'ar'
-          ? app_name_ar
-          : app_name_en;
 
-  static String search_bar_text(BuildContext context) =>
-      AppLocalizations.of(context)!
-          .search_in_active_ecommerce_cms(AppConfig.appNameOnAppLang(context)); //this will show in app Search bar.
+  static String search_bar_text(BuildContext context) {
+    final AppLocalizations x = LangText(context).local;
+    return x.search_in_app_name(x.app_name);
+  }
+
   static String purchase_code =
       "a"; //enter your purchase code for the app from codecanyon
   static String system_key =
@@ -63,7 +60,6 @@ class AppConfig {
 
   //Default country config
   static String default_country = "EG";
-  
 
   //configure this
   static const bool HTTPS =

@@ -223,7 +223,7 @@ class _RegistrationState extends State<Registration> {
     return AuthScreen.buildScreen(
         context,
         "${AppLocalizations.of(context)!.join_ucf} " +
-            AppConfig.appNameOnAppLang(context),
+            LangText(context).local.app_name,
         buildBody(context, _screen_width));
   }
 

@@ -269,9 +269,15 @@
   "featured_categories_ucf": "Featured Categories",
   "featured_products_ucf": "Featured Products",
   "all_products_ucf": "All Products",
-  "search_in_active_ecommerce_cms": "Search In {app_name}...",
-  "@search_in_active_ecommerce_cms":{
-    "app_name": "Devefinance Store"
+  "search_in_app_name": "Search In {app_name}...",
+  "@search_in_app_name": {
+    "description": "Search bar placeholder with the app name",
+    "placeholders": {
+      "app_name": {
+        "type": "String",
+        "example": "App Name to show it"
+      }
+    }
   },
   "app_name": "Devefinance Store",
   "no_carousel_image_found": "No carousel image found",

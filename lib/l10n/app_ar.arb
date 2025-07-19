@@ -168,11 +168,17 @@
     "featured_categories_ucf": "الفئات المميزة",
     "featured_products_ucf": "المنتجات المميزة",
     "all_products_ucf": "جميع المنتجات",
-    "search_in_active_ecommerce_cms": "ابحث في {app_name} ...",
-    "@search_in_active_ecommerce_cms":{
-        "app_name": "متجر ديفي"
+    "search_in_app_name": "ابحث في {app_name} ...",
+    "@search_in_app_name": {
+        "description": "Search bar placeholder with the app name",
+        "placeholders": {
+            "app_name": {
+                "type": "String",
+                "example": "App Name to show it"
+            }
+        }
     },
-     "app_name": "متجر ديفي",
+    "app_name": "متجر ديفي",
     "no_carousel_image_found": "لم يتم العثور على صورة دوّارة",
     "no_category_found": "لم يتم العثور على فئة",
     "categories_ucf": "الفئات",

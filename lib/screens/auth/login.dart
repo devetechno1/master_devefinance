@@ -381,7 +381,7 @@ class _LoginState extends State<Login> {
     return AuthScreen.buildScreen(
         context,
         "${AppLocalizations.of(context)!.login_to} " +
-            AppConfig.appNameOnAppLang(context),
+            LangText(context).local.app_name,
         buildBody(context, _screen_width));
   }
 
