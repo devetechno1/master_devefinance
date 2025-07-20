@@ -102,7 +102,7 @@ class _ClassicScreenState extends State<ClassicScreen>
                               HomeCarouselSlider(homeData: homeData),
                               const SizedBox(height: 16),
 
-                              const FlashSale(iscircle: true),
+                              const FlashSale(isCircle: true),
                             ]),
                           ),
                           //move banner

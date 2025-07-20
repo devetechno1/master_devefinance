@@ -134,7 +134,7 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                              const FlashSale(iscircle: false)
+                              const FlashSale(isCircle: false)
                             ]),
                           ),
                           //featuredProducts-----------------------------

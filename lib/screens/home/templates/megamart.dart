@@ -105,7 +105,7 @@ class _MegamartScreenState extends State<MegamartScreen>
                               const SizedBox(height: 10),
 
                               // Flash Sale Section
-                              const FlashSale(iscircle: false),
+                              const FlashSale(isCircle: false),
                             ]),
                           ),
                           //move banner

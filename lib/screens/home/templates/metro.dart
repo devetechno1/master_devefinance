@@ -103,7 +103,7 @@ class _MetroScreenState extends State<MetroScreen>
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                              const FlashSale(iscircle: true)
+                              const FlashSale(isCircle: true)
                             ]),
                           ),
                           //move banner
