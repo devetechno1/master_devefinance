@@ -69,6 +69,7 @@ class BrandHorizontalListWidget extends StatelessWidget {
             return true;
           },
           child: ListView.separated(
+          
             padding: const EdgeInsets.only(
                 right: AppDimensions.paddingLarge, left: 20, top: 15),
             separatorBuilder: (context, index) => const SizedBox(

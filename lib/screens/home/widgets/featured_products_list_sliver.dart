@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../custom/lang_text.dart';
 import '../home.dart';
-import 'custom_horizontal_products_list_widget.dart';
+import 'featured_products/custom_horizontal_products_list_widget.dart';
 
 class FeaturedProductsListSliver extends StatelessWidget {
   const FeaturedProductsListSliver({super.key});

@@ -17,7 +17,7 @@ import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
-import '../widgets/featured_category/featured_category_vertical.dart';
+import '../widgets/featured_products/vertical_products_sliver.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -122,7 +122,7 @@ class _MetroScreenState extends State<MetroScreen>
 //Featured category-----------------------
                           const CategoryList(),
                           // const CategoryListVertical(crossAxisCount: 3,),
-
+                   
 //BannerList---------------------
 
                           SliverToBoxAdapter(
@@ -144,6 +144,7 @@ class _MetroScreenState extends State<MetroScreen>
 //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                           const BestSellingSectionSliver(),
+                          const VerticalProductsSectionSliver(),
 //auction products----------------------------
                           AuctionProductsSectionSliver(
                             homeData: homeData,
