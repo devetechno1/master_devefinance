@@ -825,9 +825,9 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       );
       return;
     }
-if (_passwordController.text.isEmpty) {
+if (_passwordController.text.isEmpty&& !is_logged_in.$) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
+        AppLocalizations.of(context)!.enter_password,
         isError: true,
       );
       return;
