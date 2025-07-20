@@ -959,7 +959,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   'freeShippingUnlocked'.tr(
                     context: context,
                     args: {
-                      "{minOrderForFreeShipping}":
+                      "minOrderForFreeShipping":
                           "${AppConfig.businessSettingsData.freeShippingMinimumOrderAmount}"
                     },
                   ),

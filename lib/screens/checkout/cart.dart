@@ -153,9 +153,9 @@ class _CartState extends State<_Cart> {
                               title: 'minimum_order_amount_with_remaining'.tr(
                                 context: context,
                                 args: {
-                                  "{minAmount}":
+                                  "minAmount":
                                       "${AppConfig.businessSettingsData.minimumOrderAmount}",
-                                  "{remaining}":
+                                  "remaining":
                                       "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
                                 },
                               ),
@@ -179,9 +179,9 @@ class _CartState extends State<_Cart> {
                               title: 'minimum_order_quantity_with_remaining'.tr(
                                 context: context,
                                 args: {
-                                  "{minquantity}":
+                                  "minquantity":
                                       "${AppConfig.businessSettingsData.minimumOrderQuantity}",
-                                  "{remaining}":
+                                  "remaining":
                                       "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
                                 },
                               ),

@@ -43,6 +43,12 @@ final SharedValue<String> user_phone = SharedValue(
   value: "", // initial value
   key: "user_phone", // disk storage key for shared_preferences
 );
+
+final SharedValue<String> lastUpdateTranslation = SharedValue(
+  value: "2001-02-03 01:00:00", // initial value
+  key: "last_update_translation", // disk storage key for shared_preferences
+);
+
 final SharedValue<String?> app_language = SharedValue(
   value: null, // initial value
   key: "app_language", // disk storage key for shared_preferences

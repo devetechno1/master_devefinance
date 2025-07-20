@@ -1683,7 +1683,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 doWhen: _quantity > minQuantity,
                 textWhenDont: 'minimumOrderQuantity'.tr(
                   context: context,
-                  args: {"{minQuantity}": "$minQuantity"},
+                  args: {"minQuantity": "$minQuantity"},
                 ),
                 onPressed: () {
                   _quantity = _quantity - 1;
@@ -1719,7 +1719,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 doWhen: _quantity < maxQuantity,
                 textWhenDont: 'maxOrderQuantityLimit'.tr(
                   context: context,
-                  args: {"{maxQuantity}": "$maxQuantity"},
+                  args: {"maxQuantity": "$maxQuantity"},
                 ),
                 onPressed: () {
                   _quantity = _quantity + 1;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 
 import '../app_config.dart';
+import '../helpers/business_setting_helper.dart';
 
 class LocaleProvider with ChangeNotifier {
   Locale? _locale;
@@ -15,6 +16,7 @@ class LocaleProvider with ChangeNotifier {
   }
 
   void setLocale(String code) {
+    BusinessSettingHelper.handleTranslations();
     _locale = Locale(code, '');
     notifyListeners();
   }

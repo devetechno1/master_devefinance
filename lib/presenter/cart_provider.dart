@@ -374,7 +374,7 @@ class CartProvider extends ChangeNotifier {
         "${'maxOrderQuantityLimit'.tr(
           context: context,
           args: {
-            "{maxQuantity}":
+            "maxQuantity":
                 "${_shopList[sellerIndex].cartItems![itemIndex].maxQuantity}"
           },
         )}",
@@ -409,7 +409,7 @@ class CartProvider extends ChangeNotifier {
         "${'minimumOrderQuantity'.tr(
           context: context,
           args: {
-            "{minQuantity}":
+            "minQuantity":
                 "${_shopList[sellerIndex].cartItems![itemIndex].minQuantity}"
           },
         )}",

@@ -47,7 +47,7 @@ class AppConfig {
   static String search_bar_text(BuildContext context) {
     return 'search_in_app_name'.tr(
       context: context,
-      args: {'{app_name}': 'app_name'.tr(context: context)},
+      args: {'app_name': 'app_name'.tr(context: context)},
     );
   }
 
@@ -57,9 +57,9 @@ class AppConfig {
       r"a"; //enter your purchase code for the app from codecanyon
 
   //Default language config
-  static String default_language = "en";
-  static String mobile_app_code = "en";
-  static bool app_language_rtl = false;
+  static String default_language = CustomLocalization.supportedLocales.first.languageCode;
+  static String mobile_app_code = CustomLocalization.supportedLocales.first.languageCode;
+  static bool app_language_rtl = mobile_app_code == "ar";
 
   //Default country config
   static String default_country = "EG";

@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
@@ -62,21 +63,26 @@ import 'screens/seller_details.dart';
 import 'services/push_notification_service.dart';
 import 'single_banner/photo_provider.dart';
 
+late final Box<Map> localeTranslation;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final Widget app = SharedValue.wrapApp(MyApp());
 
   AppConfig.storeType = await StoreType.thisDeviceType();
 
   await Future.wait([
     BusinessSettingHelper().setBusinessSettingData(),
+    BusinessSettingHelper.setInitLang(),
     Firebase.initializeApp(),
-    FlutterDownloader.initialize(
-      debug:
-          kDebugMode, // Optional: set to false to disable printing logs to console
-      ignoreSsl:
-          true, // Optional: set to false to disable working with HTTP links
-    ),
+    FlutterDownloader.initialize(debug: kDebugMode, ignoreSsl: true),
+    Hive.initFlutter(),
   ]);
+
+  localeTranslation = await Hive.openBox<Map>('langs');
+
+  await BusinessSettingHelper.handleTranslations();
+
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -89,12 +95,9 @@ void main() async {
 
   runApp(
     DevicePreview(
-        enabled: AppConfig.turnDevicePreviewOn,
-        builder: (context) {
-          return SharedValue.wrapApp(
-            MyApp(),
-          );
-        }),
+      enabled: AppConfig.turnDevicePreviewOn,
+      builder: (context) => app,
+    ),
   );
 }
 
@@ -296,7 +299,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    BusinessSettingHelper.setInitLang();
+    // BusinessSettingHelper.setInitLang();
     Future.microtask(() async {
       await Firebase.initializeApp();
       if (OtherConfig.USE_PUSH_NOTIFICATION)
