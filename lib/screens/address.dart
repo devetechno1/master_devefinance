@@ -825,9 +825,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       );
       return;
     }
-
-
-    if (_phone.trim().isEmpty) {
+if (_passwordController.text.isEmpty) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.enter_phone_number,
         isError: true,
@@ -835,21 +833,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       return;
       
     }
-    if (_passwordController.text.isEmpty) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
-        isError: true,
-      );
-      return;
-      
-    }
-      if (!_isValidPhoneNumber) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.invalid_phone_number,
-        isError: true,
-      );
-      return;
-    }
+
     if (_passwordController.text.isEmpty && !is_logged_in.$) {
       ToastComponent.showDialog(LangText(context).local.enter_password,
         isError: true,
@@ -865,13 +849,29 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       return;
       
     }
-   else if (passNotMatch && !is_logged_in.$ ) {
+    if (passNotMatch && !is_logged_in.$ ) {
       ToastComponent.showDialog(
           LangText(context).local.passwords_do_not_match,
         isError: true,
       );
       return;
       
+    }
+
+    if (_phone.trim().isEmpty) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.enter_phone_number,
+        isError: true,
+      );
+      return;
+      
+    }
+     else if (!_isValidPhoneNumber) {
+      ToastComponent.showDialog(
+        AppLocalizations.of(context)!.invalid_phone_number,
+        isError: true,
+      );
+      return;
     }
     final addressAddResponse = await AddressRepository().getAddressAddResponse(
 
