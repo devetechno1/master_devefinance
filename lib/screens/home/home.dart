@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../custom/home_all_products_2.dart';
-import '../../custom/home_banners_list.dart';
+import '../../custom/home_banners/home_banners_list.dart';
 import '../../custom/home_carousel_slider.dart';
 import '../../custom/pirated_widget.dart';
 import '../../other_config.dart';
