@@ -12,14 +12,13 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../../../custom/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
-import '../widgets/featured_category/featured_category_vertical.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -105,7 +104,7 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                               padding: const EdgeInsets.only(
                                   left: AppDimensions.paddingLarge, bottom: 10),
                               child: Text(
-                                  AppLocalizations.of(context)!.todays_deal_ucf,
+                                  'todays_deal_ucf'.tr(context: context),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18)),
@@ -217,20 +216,20 @@ class _ReClassicScreenState extends State<ReClassicScreen>
 //             Container(
 //               width: 50,
 //               color: Theme.of(context).primaryColor,
-//               child: RowTimeDataWidget(time: "${time.days}", timeType: LangText(context).local.days, isFirst: true)),
+//               child: RowTimeDataWidget(time: "${time.days}", timeType: 'days'.tr(context: context), isFirst: true)),
 //             const  SizedBox(width: 20,),
 //             Container(
 //               width: 50,
 //               color: Theme.of(context).primaryColor,
-//               child: RowTimeDataWidget(time: "${time.hours}", timeType: LangText(context).local.hours, isFirst: true)),
+//               child: RowTimeDataWidget(time: "${time.hours}", timeType: 'hours'.tr(context: context), isFirst: true)),
 //            const   SizedBox(width: 20,),
 //             Container(
 //               width: 60,
-//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.min}", timeType: LangText(context).local.minutes, isFirst: true)),
+//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.min}", timeType: 'minutes'.tr(context: context), isFirst: true)),
 //          const   SizedBox(width: 20,),
 //             Container(
 //               width: 60,
-//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.sec}", timeType: LangText(context).local.seconds, isFirst: true)),
+//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.sec}", timeType: 'seconds'.tr(context: context), isFirst: true)),
 
 //           ],
 //         ),

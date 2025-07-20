@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/helpers/context_ex.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
@@ -9,7 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_circular_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/time_data_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FlashSale extends StatelessWidget {
   const FlashSale({super.key, required this.iscircle});
@@ -36,7 +36,7 @@ class FlashSale extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             10, 10, 10, 10),
-                        child: Text(AppLocalizations.of(context)!.flash_sale,
+                        child: Text('flash_sale'.tr(context: context),
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18)),
                       ),
@@ -112,7 +112,7 @@ class FlashSale extends StatelessWidget {
                     totalValue: 365,
                     timeText:
                         timeText((time.days).toString(), default_length: 3),
-                    timeType: LangText(context).local.days,
+                    timeType: 'days'.tr(context: context),
                   ),
                   const SizedBox(width: 10),
                   TimeCircularContainer(
@@ -120,7 +120,7 @@ class FlashSale extends StatelessWidget {
                     totalValue: 24,
                     timeText:
                         timeText((time.hours).toString(), default_length: 3),
-                    timeType: LangText(context).local.hours,
+                    timeType: 'hours'.tr(context: context),
                   ),
                   const SizedBox(
                     width: 10,
@@ -130,7 +130,7 @@ class FlashSale extends StatelessWidget {
                     totalValue: 60,
                     timeText:
                         timeText((time.min).toString(), default_length: 2),
-                    timeType: LangText(context).local.minutes,
+                    timeType: 'minutes'.tr(context: context),
                   ),
                   const SizedBox(
                     width: 15,
@@ -140,7 +140,7 @@ class FlashSale extends StatelessWidget {
                     totalValue: 60,
                     timeText:
                         timeText((time.sec).toString(), default_length: 2),
-                    timeType: LangText(context).local.seconds,
+                    timeType: 'seconds'.tr(context: context),
                   ),
                 ],
               ),
@@ -172,9 +172,7 @@ class FlashSale extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                                 children: [
                                   TextSpan(
-                                      text: LangText(context)
-                                          .local
-                                          .shop_more_ucf),
+                                      text: 'shop_more_ucf'.tr(context: context)),
                                   WidgetSpan(
                                     alignment: PlaceholderAlignment.middle,
                                     child: Padding(
@@ -204,7 +202,7 @@ class FlashSale extends StatelessWidget {
               //       Flexible(
               //         flex: 2,
               //         child: Text(
-              //           LangText(context).local.shop_more_ucf,
+              //           'shop_more_ucf'.tr(context: context),
               //           //overflow: TextOverflow.clip, // عشان لو كبر الكلام
               //           style: const TextStyle(
               //             fontSize: 10,
@@ -240,17 +238,17 @@ class FlashSale extends StatelessWidget {
             children: [
               RowTimeDataWidget(
                   time: "${time.days}",
-                  timeType: LangText(context).local.days,
+                  timeType: 'days'.tr(context: context),
                   isFirst: true),
               RowTimeDataWidget(
                   time: "${time.hours}",
-                  timeType: LangText(context).local.hours),
+                  timeType: 'hours'.tr(context: context)),
               RowTimeDataWidget(
                   time: "${time.min}",
-                  timeType: LangText(context).local.minutes),
+                  timeType: 'minutes'.tr(context: context)),
               RowTimeDataWidget(
                   time: "${time.sec}",
-                  timeType: LangText(context).local.seconds),
+                  timeType: 'seconds'.tr(context: context)),
             ],
           ),
         ),

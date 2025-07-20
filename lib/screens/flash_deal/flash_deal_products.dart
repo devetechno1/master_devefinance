@@ -15,10 +15,9 @@ import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.da
 import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card_black.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/index.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../custom/lang_text.dart';
 
 class FlashDealProducts extends StatefulWidget {
   const FlashDealProducts({
@@ -176,7 +175,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
             )
-          : Text(LangText(context).local.loading_ucf),
+          : Text('loading_ucf'.tr(context: context)),
       elevation: 0.0,
       titleSpacing: 0,
       scrolledUnderElevation: 0.0,
@@ -277,7 +276,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                         child: Center(
                             child: time == null
                                 ? Text(
-                                    AppLocalizations.of(context)!.ended_ucf,
+                                    'ended_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 16.0,
@@ -359,7 +358,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.days_ucf,
+                'days_ucf'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -378,7 +377,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.hours,
+                'hours'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -397,7 +396,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.minutes,
+                'minutes'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -416,7 +415,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.seconds,
+                'seconds'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],

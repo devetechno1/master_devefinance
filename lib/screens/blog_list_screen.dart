@@ -2,15 +2,14 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/providers/blog_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/blog_detail_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
-import '../custom/lang_text.dart';
 
 class BlogListScreen extends StatefulWidget {
   const BlogListScreen({super.key});
@@ -90,7 +89,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
                 const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
             width: DeviceInfo(context).width! / 2,
             child: Text(
-              AppLocalizations.of(context)!.all_blogs_ucf,
+              'all_blogs_ucf'.tr(context: context),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -134,7 +133,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
           filled: true,
           fillColor: MyTheme.white.withValues(alpha: 0.6),
           hintText:
-              LangText(context).local.search_in_blogs //widget.category_name!
+              'search_in_blogs'.tr(context: context) //widget.category_name!
           ,
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(

@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/data_model/classified_ads_details_
 import 'package:active_ecommerce_cms_demo_app/data_model/classified_ads_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/brand_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/common_webview_screen.dart';
@@ -18,13 +19,11 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../custom/lang_text.dart';
 import '../../repositories/classified_product_repository.dart';
 
 class ClassifiedAdsDetails extends StatefulWidget {
@@ -162,7 +161,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.copy_product_link_ucf,
+                            'copy_product_link_ucf'.tr(context: context),
                             style: TextStyle(
                               color: MyTheme.medium_grey,
                             ),
@@ -180,7 +179,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               padding: const EdgeInsets.only(
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
-                                AppLocalizations.of(context)!.copied_ucf,
+                                'copied_ucf'.tr(context: context),
                                 style: TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
@@ -199,7 +198,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.share_options_ucf,
+                            'share_options_ucf'.tr(context: context),
                             style: const TextStyle(color: Colors.white),
                           ),
                           onPressed: () {
@@ -231,7 +230,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
-                          LangText(context).local.close_all_capital,
+                          'close_all_capital'.tr(context: context),
                           style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
@@ -456,7 +455,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                   0.0,
                                 ),
                                 child: Text(
-                                  AppLocalizations.of(context)!.description_ucf,
+                                  'description_ucf'.tr(context: context),
                                   style: TextStyle(
                                       color: MyTheme.dark_font_grey,
                                       fontSize: 13,
@@ -491,8 +490,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/seller-policy",
-                                page_name: AppLocalizations.of(context)!
-                                    .seller_policy_ucf,
+                                page_name: 'seller_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -509,8 +507,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .seller_policy_ucf,
+                                    'seller_policy_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -535,8 +532,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/return-policy",
-                                page_name: AppLocalizations.of(context)!
-                                    .return_policy_ucf,
+                                page_name: 'return_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -553,8 +549,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .return_policy_ucf,
+                                    'return_policy_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -579,8 +574,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/support-policy",
-                                page_name: AppLocalizations.of(context)!
-                                    .support_policy_ucf,
+                                page_name: 'support_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -597,8 +591,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .support_policy_ucf,
+                                    'support_policy_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -628,7 +621,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                         0.0,
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.other_ads_of_ucf +
+                        'other_ads_of_ucf'.tr(context: context) +
                             " " +
                             (_productDetails != null
                                 ? _productDetails!.category!
@@ -743,7 +736,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.seller_ucf,
+                Text('seller_ucf'.tr(context: context),
                     style: const TextStyle(
                       color: Color.fromRGBO(153, 153, 153, 1),
                     )),
@@ -777,7 +770,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
               child: Container(
                 width: 75,
                 child: Text(
-                  AppLocalizations.of(context)!.total_price_ucf,
+                  'total_price_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Color.fromRGBO(153, 153, 153, 1), fontSize: 10),
                 ),
@@ -902,7 +895,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                   child: Container(
                     width: 75,
                     child: Text(
-                      AppLocalizations.of(context)!.brand_ucf,
+                      'brand_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Color.fromRGBO(
                             153,
@@ -951,8 +944,8 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
-                          ? AppLocalizations.of(context)!.view_more
-                          : AppLocalizations.of(context)!.show_less_ucf,
+                          ? 'view_more'.tr(context: context)
+                          : 'show_less_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: MyTheme.font_grey, fontSize: 11),
                     ),
@@ -1021,7 +1014,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_related_product,
+            'no_related_product'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }

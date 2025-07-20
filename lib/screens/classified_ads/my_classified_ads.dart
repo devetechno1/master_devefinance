@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/custom/common_functions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/classified_ads_response.dart';
@@ -12,6 +12,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.da
 import 'package:active_ecommerce_cms_demo_app/screens/classified_ads/classified_product_details.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/package/packages.dart';
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../app_config.dart';
 import '../../repositories/classified_product_repository.dart';
@@ -58,7 +59,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         .getOwnClassifiedProducts(page: _page);
     if (productResponse.data!.isEmpty) {
       ToastComponent.showDialog(
-        LangText(context).local.no_more_products_ucf,
+        'no_more_products_ucf'.tr(context: context),
       );
     }
     _productList.addAll(productResponse.data!);
@@ -195,7 +196,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
           scrolledUnderElevation: 0.0,
           elevation: 0,
           title: Text(
-            LangText(context).local.my_products_ucf,
+            'my_products_ucf'.tr(context: context),
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -287,7 +288,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                           width: 5,
                         ),
                         Text(
-                          LangText(context).local.current_package_ucf,
+                          'current_package_ucf'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 10, color: MyTheme.grey_153),
                         ),
@@ -307,7 +308,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                     Row(
                       children: [
                         Text(
-                          LangText(context).local.upgrade_package_ucf,
+                          'upgrade_package_ucf'.tr(context: context),
                           style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).primaryColor,
@@ -359,7 +360,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      LangText(context).local.remaining_uploads,
+                      'remaining_uploads'.tr(context: context),
                       style: CommonFunctions.dashboardBoxText(context),
                     ),
                     const SizedBox(
@@ -388,7 +389,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                 });
 
                 ToastComponent.showDialog(
-                  LangText(context).local.classified_product_limit_expired,
+                  'classified_product_limit_expired'.tr(context: context),
                 );
               } else {
                 Navigator.push(
@@ -422,7 +423,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        LangText(context).local.add_new_products_ucf,
+                        'add_new_products_ucf'.tr(context: context),
                         style: CommonFunctions.dashboardBoxText(context)
                             .copyWith(
                                 color: Theme.of(context).primaryColor,
@@ -452,7 +453,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            LangText(context).local.all_products_ucf,
+            'all_products_ucf'.tr(context: context),
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -630,7 +631,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppDimensions.radiusSmall)),
           title: Text(
-            LangText(context).local.do_you_want_to_delete_it,
+            'do_you_want_to_delete_it'.tr(context: context),
             style: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 18, color: Colors.red),
           ),
@@ -640,7 +641,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
           ),
           actions: [
             TextButton(
-              child: Text(LangText(context).local.cancel_ucf),
+              child: Text('cancel_ucf'.tr(context: context)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -650,7 +651,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                   Navigator.pop(context);
                   deleteProduct(id);
                 },
-                child: Text(LangText(context).local.yes_ucf))
+                child: Text('yes_ucf'.tr(context: context)))
           ],
         ),
       ),
@@ -685,15 +686,15 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuOptions>>[
           PopupMenuItem<MenuOptions>(
             value: MenuOptions.Edit,
-            child: Text(LangText(context).local.edit_ucf),
+            child: Text('edit_ucf'.tr(context: context)),
           ),
           PopupMenuItem<MenuOptions>(
             value: MenuOptions.Status,
-            child: Text(LangText(context).local.status_ucf),
+            child: Text('status_ucf'.tr(context: context)),
           ),
           PopupMenuItem<MenuOptions>(
             value: MenuOptions.Delete,
-            child: Text(LangText(context).local.delete_ucf),
+            child: Text('delete_ucf'.tr(context: context)),
           ),
         ],
       ),
@@ -723,8 +724,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                   children: [
                     Text(
                       _productList[index!].status!
-                          ? LangText(context).local.published_ucf
-                          : LangText(context).local.unpublished_ucf,
+                          ? 'published_ucf'.tr(context: context)
+                          : 'unpublished_ucf'.tr(context: context),
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -771,8 +772,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                   children: [
                     Text(
                       _productList[index].published!
-                          ? LangText(context).local.published_ucf
-                          : LangText(context).local.unpublished_ucf,
+                          ? 'published_ucf'.tr(context: context)
+                          : 'unpublished_ucf'.tr(context: context),
                       style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
@@ -810,7 +811,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
               const SizedBox(
                 width: 10,
               ),
-              Text(LangText(context).local.loading_ucf),
+              Text('loading_ucf'.tr(context: context)),
             ],
           ));
         });

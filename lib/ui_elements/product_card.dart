@@ -4,7 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../helpers/shared_value_helper.dart';
 import '../screens/auction/auction_products_details.dart';
 import '../screens/product/product_details.dart';
@@ -105,7 +105,7 @@ class _ProductCardState extends State<ProductCard> {
                             ],
                           ),
                           child: Text(
-                            LangText(context).local.wholesale,
+                            'wholesale'.tr(context: context),
                             style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -129,7 +129,7 @@ class _ProductCardState extends State<ProductCard> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
-                          widget.name ?? LangText(context).local.no_name,
+                          widget.name ?? 'no_name'.tr(context: context),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(

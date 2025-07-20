@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:one_context/one_context.dart';
@@ -35,7 +35,7 @@ class InfoDialog {
                     BorderRadius.circular(AppDimensions.radiusHalfSmall)),
             color: MyTheme.grey_153,
             onPressed: () => Navigator.pop(context),
-            child: Text(LangText(context).local.ok,
+            child: Text('ok'.tr(context: context),
                 style: const TextStyle(fontSize: 14, color: MyTheme.white)),
           ),
         ],

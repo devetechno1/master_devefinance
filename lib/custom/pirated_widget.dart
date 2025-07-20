@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:flutter/material.dart';
 
 import '../presenter/home_presenter.dart';
-import 'lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class PiratedWidget extends StatelessWidget {
   final HomePresenter? homeData;
@@ -41,7 +41,7 @@ class PiratedWidget extends StatelessWidget {
                     left: AppDimensions.paddingMaxLarge,
                     right: AppDimensions.paddingMaxLarge),
                 child: Text(
-                  LangText(context).local.pirated_app,
+                  'pirated_app'.tr(context: context),
                   style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),

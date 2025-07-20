@@ -1,7 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/custom/AIZTypeDef.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class ConfirmDialog {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(LangText(context).local.pleaseEnsureUs),
+          title: Text('pleaseEnsureUs'.tr(context: context)),
           content: Row(
             children: [
               SizedBox(
@@ -47,7 +47,7 @@ class ConfirmDialog {
                 pressYes();
               },
               child: Text(
-                LangText(context).local.yes_ucf,
+                'yes_ucf'.tr(context: context),
                 style: const TextStyle(fontSize: 14, color: MyTheme.white),
               ),
             ),

@@ -7,7 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_d
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
 
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class ProductCardBlack extends StatefulWidget {
   final dynamic identifier;
@@ -87,7 +87,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
-                          widget.name ?? LangText(context).local.no_name,
+                          widget.name ?? 'no_name'.tr(context: context),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(
@@ -208,7 +208,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                           ],
                         ),
                         child: Text(
-                          LangText(context).local.wholesale,
+                          'wholesale'.tr(context: context),
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white,

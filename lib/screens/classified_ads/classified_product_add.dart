@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/category.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
 import '../../custom/aiz_summer_note.dart';
 import '../../custom/device_info.dart';
-import '../../custom/lang_text.dart';
 import '../../custom/loading.dart';
 import '../../custom/my_widget.dart';
 import '../../custom/toast_component.dart';
@@ -16,7 +16,6 @@ import '../../repositories/brand_repository.dart';
 import '../../repositories/classified_product_repository.dart';
 import '../../repositories/product_repository.dart';
 import '../uploads/upload_file.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClassifiedProductAdd extends StatefulWidget {
   const ClassifiedProductAdd({Key? key}) : super(key: key);
@@ -80,10 +79,10 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
 
   void setConstDropdownValues() {
     videoType.addAll([
-      CommonDropDownItem("youtube", AppLocalizations.of(context)!.youtube_ucf),
+      CommonDropDownItem("youtube", 'youtube_ucf'.tr(context: context)),
       CommonDropDownItem(
-          "dailymotion", AppLocalizations.of(context)!.dailymotion_ucf),
-      CommonDropDownItem("vimeo", AppLocalizations.of(context)!.vimeo_ucf),
+          "dailymotion", 'dailymotion_ucf'.tr(context: context)),
+      CommonDropDownItem("vimeo", 'vimeo_ucf'.tr(context: context)),
     ]);
     selectedVideoType = videoType.first;
   }
@@ -130,23 +129,23 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
   bool requiredFieldVerification() {
     if (productNameEditTextController.text.trim().isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.product_name_required);
+          'product_name_required'.tr(context: context));
       return false;
     } else if (unitEditTextController.text.trim().isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.product_unit_required);
+          'product_unit_required'.tr(context: context));
       return false;
     } else if (locationTextController.text.trim().isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.location_required);
+          'location_required'.tr(context: context));
       return false;
     } else if (tags.isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.product_tag_required);
+          'product_tag_required'.tr(context: context));
       return false;
     } else if (description == "") {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.product_description_required);
+          'product_description_required'.tr(context: context));
       return false;
     }
     return true;
@@ -333,7 +332,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.general_ucf,
+                    'general_ucf'.tr(context: context),
                     style: TextStyle(
                       fontSize: 13,
                       color: MyTheme.dark_font_grey,
@@ -356,14 +355,14 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildEditTextField(
-                      AppLocalizations.of(context)!.product_name_ucf,
-                      AppLocalizations.of(context)!.product_name_ucf,
+                      'product_name_ucf'.tr(context: context),
+                      'product_name_ucf'.tr(context: context),
                       productNameEditTextController,
                       isMandatory: true,
                     ),
                     itemSpacer(),
                     _buildDropDownField(
-                      AppLocalizations.of(context)!.brand_ucf,
+                      'brand_ucf'.tr(context: context),
                       (value) {
                         selectedBrand = value;
                         setState(() {});
@@ -373,7 +372,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                     ),
                     itemSpacer(),
                     _buildDropDownFieldWithChildren(
-                      AppLocalizations.of(context)!.categories_ucf,
+                      'categories_ucf'.tr(context: context),
                       (value) {
                         selectedCategory = value;
                         setState(() {});
@@ -383,14 +382,14 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                     ),
                     itemSpacer(),
                     buildEditTextField(
-                      AppLocalizations.of(context)!.product_unit_ucf,
-                      AppLocalizations.of(context)!.product_unit_ucf,
+                      'product_unit_ucf'.tr(context: context),
+                      'product_unit_ucf'.tr(context: context),
                       unitEditTextController,
                       isMandatory: true,
                     ),
                     itemSpacer(),
                     buildGroupItems(
-                      AppLocalizations.of(context)!.condition_ucf,
+                      'condition_ucf'.tr(context: context),
                       Focus(
                         onFocusChange: (hasFocus) {
                           setState(() {
@@ -453,19 +452,19 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                     ),
                     itemSpacer(),
                     buildEditTextField(
-                        AppLocalizations.of(context)!.location_ucf,
-                        AppLocalizations.of(context)!.location_ucf,
+                        'location_ucf'.tr(context: context),
+                        'location_ucf'.tr(context: context),
                         locationTextController,
                         isMandatory: true),
                     itemSpacer(),
-                    buildTagsEditTextField(LangText(context).local.tags_ucf,
-                        LangText(context).local.tags_ucf, tagEditTextController,
+                    buildTagsEditTextField('tags_ucf'.tr(context: context),
+                        'tags_ucf'.tr(context: context), tagEditTextController,
                         isMandatory: true),
                     itemSpacer(),
                     buildGroupItems(
-                      AppLocalizations.of(context)!.descriptions_ucf,
+                      'descriptions_ucf'.tr(context: context),
                       summerNote(
-                          AppLocalizations.of(context)!.descriptions_ucf),
+                          'descriptions_ucf'.tr(context: context)),
                     ),
                     itemSpacer(),
                   ],
@@ -509,7 +508,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.media_ucf,
+                    'media_ucf'.tr(context: context),
                     style: TextStyle(
                         fontSize: 13,
                         color: MyTheme.dark_font_grey,
@@ -537,23 +536,23 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                       chooseGalleryImageField(),
                       itemSpacer(),
                       chooseSingleImageField(
-                          AppLocalizations.of(context)!.thumbnail_image_ucf,
+                          'thumbnail_image_ucf'.tr(context: context),
                           (onChosenImage) {
                         thumbnailImage = onChosenImage;
                         setChange();
                       }, thumbnailImage),
                       buildGroupItems(
-                          AppLocalizations.of(context)!.video_form_ucf,
+                          'video_form_ucf'.tr(context: context),
                           _buildDropDownField(
-                              AppLocalizations.of(context)!.video_url_ucf,
+                              'video_url_ucf'.tr(context: context),
                               (newValue) {
                             selectedVideoType = newValue;
                             setChange();
                           }, selectedVideoType, videoType)),
                       itemSpacer(),
                       buildEditTextField(
-                        AppLocalizations.of(context)!.video_url_ucf,
-                        AppLocalizations.of(context)!.video_link_ucf,
+                        'video_url_ucf'.tr(context: context),
+                        'video_link_ucf'.tr(context: context),
                         videoLinkController,
                       ),
                       itemSpacer(),
@@ -563,7 +562,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                         setChange();
                       }, pdfSpecification),
                       chooseSingleFileField(
-                          AppLocalizations.of(context)!.pdf_specification_ucf,
+                          'pdf_specification_ucf'.tr(context: context),
                           "", (onChosenFile) {
                         pdfSpecification = onChosenFile;
                         setChange();
@@ -597,7 +596,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
             const SizedBox(
               height: 10,
             ),
-            fileField(AppLocalizations.of(context)!.document, onChosenFile,
+            fileField('document'.tr(context: context), onChosenFile,
                 selectedFile)
           ],
         ),
@@ -639,7 +638,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   padding: const EdgeInsets.only(
                       bottom: AppDimensions.paddingNormal),
                   child: Text(
-                    AppLocalizations.of(context)!.choose_file,
+                    'choose_file'.tr(context: context),
                     style:
                         const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
@@ -650,7 +649,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   width: 80,
                   color: MyTheme.light_grey,
                   child: Text(
-                    AppLocalizations.of(context)!.browse,
+                    'browse'.tr(context: context),
                     style:
                         const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
@@ -767,7 +766,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   padding: const EdgeInsets.only(
                       bottom: AppDimensions.paddingNormal),
                   child: Text(
-                    AppLocalizations.of(context)!.choose_file,
+                    'choose_file'.tr(context: context),
                     style:
                         const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
@@ -778,7 +777,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                   width: 80,
                   color: MyTheme.light_grey,
                   child: Text(
-                    AppLocalizations.of(context)!.browse,
+                    'browse'.tr(context: context),
                     style:
                         const TextStyle(fontSize: 12, color: MyTheme.grey_153),
                   ),
@@ -862,7 +861,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.auction_price_ucf,
+                    'auction_price_ucf'.tr(context: context),
                     style: TextStyle(
                         fontSize: 13,
                         color: MyTheme.dark_font_grey,
@@ -888,26 +887,24 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildEditTextField(
-                        AppLocalizations.of(context)!.auction_price_ucf,
-                        LangText(context)
-                            .local
-                            .custom_unit_price_and_base_price,
+                        'auction_price_ucf'.tr(context: context),
+                        'custom_unit_price_and_base_price'.tr(context: context),
                         unitPriceEditTextController,
                         isMandatory: true,
                       ),
                       itemSpacer(),
                       buildGroupItems(
-                        AppLocalizations.of(context)!.meta_tags_ucf,
+                        'meta_tags_ucf'.tr(context: context),
                         buildEditTextField(
-                          AppLocalizations.of(context)!.meta_title_ucf,
-                          AppLocalizations.of(context)!.meta_title_ucf,
+                          'meta_title_ucf'.tr(context: context),
+                          'meta_title_ucf'.tr(context: context),
                           metaTitleTextController,
                           isMandatory: false,
                         ),
                       ),
                       itemSpacer(),
                       buildGroupItems(
-                        AppLocalizations.of(context)!.meta_description_ucf,
+                        'meta_description_ucf'.tr(context: context),
                         Container(
                           padding: const EdgeInsets.all(8),
                           height: 150,
@@ -937,15 +934,13 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                             enabled: true,
                             style: const TextStyle(fontSize: 12),
                             decoration: InputDecoration.collapsed(
-                                hintText: LangText(context)
-                                    .local
-                                    .meta_description_ucf),
+                                hintText: 'meta_description_ucf'.tr(context: context)),
                           ),
                         ),
                       ),
                       itemSpacer(),
                       chooseSingleImageField(
-                          AppLocalizations.of(context)!.meta_image_ucf,
+                          'meta_image_ucf'.tr(context: context),
                           (onChosenImage) {
                         metaImage = onChosenImage;
                         setChange();
@@ -970,7 +965,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                             ),
                             onPressed: submit,
                             child: Text(
-                              AppLocalizations.of(context)!.save_product_ucf,
+                              'save_product_ucf'.tr(context: context),
                               style: const TextStyle(color: Colors.white),
                             )),
                       )
@@ -1260,7 +1255,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                 style: const TextStyle(fontSize: 16),
                 decoration: InputDecoration.collapsed(
                   hintText:
-                      AppLocalizations.of(context)!.type_and_hit_submit_ucf,
+                      'type_and_hit_submit_ucf'.tr(context: context),
                   hintStyle: const TextStyle(fontSize: 12),
                 ).copyWith(
                   constraints: const BoxConstraints(maxWidth: 150),
@@ -1396,7 +1391,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.gallery_images,
+              'gallery_images'.tr(context: context),
               style: const TextStyle(
                   fontSize: 12,
                   color: MyTheme.font_grey,
@@ -1425,7 +1420,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingNormal),
                         child: Text(
-                          AppLocalizations.of(context)!.choose_file,
+                          'choose_file'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 12, color: MyTheme.grey_153),
                         ),
@@ -1436,7 +1431,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                         width: 80,
                         color: MyTheme.light_grey,
                         child: Text(
-                          AppLocalizations.of(context)!.browse,
+                          'browse'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 12, color: MyTheme.grey_153),
                         ),

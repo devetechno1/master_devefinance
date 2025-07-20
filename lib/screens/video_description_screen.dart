@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class VideoDescription extends StatefulWidget {
-  String? url;
+  final String? url;
 
-  VideoDescription({Key? key, this.url}) : super(key: key);
+  const VideoDescription({Key? key, this.url}) : super(key: key);
 
   @override
   _VideoDescriptionState createState() => _VideoDescriptionState();
@@ -22,8 +22,10 @@ class _VideoDescriptionState extends State<VideoDescription> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
 
     webView();
   }
@@ -46,8 +48,10 @@ class _VideoDescriptionState extends State<VideoDescription> {
     return WillPopScope(
       onWillPop: () {
         if (MediaQuery.of(context).orientation == Orientation.landscape) {
-          SystemChrome.setPreferredOrientations(
-              [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown,
+          ]);
         }
         return Future.value(true);
       },

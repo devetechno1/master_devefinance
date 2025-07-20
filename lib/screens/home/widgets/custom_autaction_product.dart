@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_details.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
@@ -12,10 +13,9 @@ class CustomAuctionProductsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (products == null || products!.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          'No auction products available',
-          //   LangText(context).local.no_auction_products_available,
+          'no_auction_products_available'.tr(context: context),
         ),
       );
     }

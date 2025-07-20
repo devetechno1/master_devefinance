@@ -1,10 +1,9 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../custom/lang_text.dart';
 import '../helpers/shared_value_helper.dart';
 import '../helpers/shimmer_helper.dart';
 import '../my_theme.dart';
@@ -106,8 +105,8 @@ class _InhouseProductsState extends State<InhouseProducts> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _inhouseProductList.length
-            ? AppLocalizations.of(context)!.no_more_products_ucf
-            : AppLocalizations.of(context)!.loading_more_products_ucf),
+            ? 'no_more_products_ucf'.tr(context: context)
+            : 'loading_more_products_ucf'.tr(context: context)),
       ),
     );
   }
@@ -127,7 +126,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
         ),
       ),
       title: Text(
-        LangText(context).local.in_house_products_ucf,
+        'in_house_products_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -183,7 +182,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
       );
     } else if (_totalData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_data_is_available));
+          child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

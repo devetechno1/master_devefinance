@@ -9,7 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/category_repository.d
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CategoryProducts extends StatefulWidget {
@@ -139,8 +139,8 @@ class _CategoryProductsState extends State<CategoryProducts> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _productList.length
-            ? AppLocalizations.of(context)!.no_more_products_ucf
-            : AppLocalizations.of(context)!.loading_more_products_ucf),
+            ? 'no_more_products_ucf'.tr(context: context)
+            : 'loading_more_products_ucf'.tr(context: context)),
       ),
     );
   }
@@ -240,7 +240,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
           ),
           filled: true,
           fillColor: MyTheme.white.withValues(alpha: 0.6),
-          hintText: "${AppLocalizations.of(context)!.search_products_from} : " +
+          hintText: "${'search_products_from'.tr(context: context)} : " +
               "" //widget.category_name!
           ,
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
@@ -369,7 +369,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
       );
     } else if (_totalData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_data_is_available));
+          child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container();
     }

@@ -10,7 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
@@ -24,7 +23,7 @@ import 'custom/aiz_route.dart';
 import 'data_model/business_settings/update_model.dart';
 import 'helpers/business_setting_helper.dart';
 import 'helpers/main_helpers.dart';
-import 'lang_config.dart';
+import 'locale/custom_localization.dart';
 import 'my_theme.dart';
 import 'other_config.dart';
 import 'presenter/cart_counter.dart';
@@ -326,57 +325,69 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => MyClassifiedProvider()),
         ChangeNotifierProvider(lazy: false, create: (_) => CartProvider()),
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (context, provider, snapshot) {
-          final ThemeProvider theme =
-              Provider.of<ThemeProvider>(context, listen: true);
-
-          return MaterialApp.router(
-            routerConfig: routes,
-            title: AppConfig.appNameOnDeviceLang,
-            debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              if (AppConfig.turnDevicePreviewOn)
-                child = DevicePreview.appBuilder(context, child);
-              return OneContext().builder(context, child);
-            },
-            theme: ThemeData(
-              primaryColor: theme.primary,
-              scaffoldBackgroundColor: MyTheme.white,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-              fontFamily: "PublicSansSerif",
-              textTheme: MyTheme.textTheme1,
-              fontFamilyFallback: const ['NotoSans'],
-              colorScheme: ColorScheme.light(
-                primary: AppConfig.businessSettingsData.primaryColor ??
-                    theme.primary,
-                secondary: AppConfig.businessSettingsData.secondaryColor ??
-                    theme.secondary,
-              ),
-              scrollbarTheme: ScrollbarThemeData(
-                thumbVisibility: WidgetStateProperty.all<bool>(false),
-              ),
-            ),
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              AppLocalizations.delegate,
-            ],
-            locale: provider.locale,
-            key: ValueKey(provider.locale.languageCode),
-            supportedLocales: LangConfig().supportedLocales(),
-            localeResolutionCallback: (deviceLocale, supportedLocales) {
-              if (AppLocalizations.delegate.isSupported(deviceLocale!)) {
-                return deviceLocale;
-              }
-              return const Locale('en');
-            },
-          );
-        },
-      ),
+      child: const MyMaterialApp(),
     );
   }
+}
+
+class MyMaterialApp extends StatelessWidget {
+  const MyMaterialApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<LocaleProvider>(
+      builder: (context, provider, snapshot) {
+        final ThemeProvider theme =
+            Provider.of<ThemeProvider>(context, listen: true);
+
+        return MaterialApp.router(
+          routerConfig: routes,
+          title: AppConfig.appNameOnDeviceLang,
+          debugShowCheckedModeBanner: false,
+          builder: (context, child) {
+            if (AppConfig.turnDevicePreviewOn)
+              child = DevicePreview.appBuilder(context, child);
+            return OneContext().builder(context, child);
+          },
+          theme: appTheme(theme),
+          localizationsDelegates: const [
+            CustomLocalizationDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: provider.locale,
+          key: ValueKey("${provider.locale.languageCode}"),
+          supportedLocales: CustomLocalization.supportedLocales,
+          localeResolutionCallback: (deviceLocale, supportedLocales) {
+            if (CustomLocalization.isSupported(deviceLocale!))
+              return deviceLocale;
+
+            return const Locale('en');
+          },
+        );
+      },
+    );
+  }
+}
+
+ThemeData appTheme(ThemeProvider theme) {
+  return ThemeData(
+    primaryColor: theme.primary,
+    scaffoldBackgroundColor: MyTheme.white,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    fontFamily: "PublicSansSerif",
+    textTheme: MyTheme.textTheme1,
+    fontFamilyFallback: const ['NotoSans'],
+    colorScheme: ColorScheme.light(
+      primary: AppConfig.businessSettingsData.primaryColor ?? theme.primary,
+      secondary:
+          AppConfig.businessSettingsData.secondaryColor ?? theme.secondary,
+    ),
+    scrollbarTheme: ScrollbarThemeData(
+      thumbVisibility: WidgetStateProperty.all<bool>(false),
+    ),
+  );
 }
 
 Future<void> _handleDeepLink() async {

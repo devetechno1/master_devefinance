@@ -4,7 +4,7 @@
 // import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 // import 'package:active_ecommerce_cms_demo_app/repositories/cart_repository.dart';
 // import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:provider/provider.dart';
 
@@ -92,7 +92,7 @@
 //       process(context, mode: "update");
 //     } else {
 //       ToastComponent.showDialog(
-//           "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems[itemIndex].upperLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
+//           "${'cannot_order_more_than'.tr(context: context)} ${_shopList[sellerIndex].cartItems[itemIndex].upperLimit} ${'items_of_this_all_lower'.tr(context: context)}",
 //           gravity: ToastGravity.CENTER,
 //           duration: Toast.LENGTH_LONG);
 //     }
@@ -107,7 +107,7 @@
 //       process(context, mode: "update");
 //     } else {
 //       ToastComponent.showDialog(
-//         "${AppLocalizations.of(context)!.cannot_order_more_than} ${_shopList[sellerIndex].cartItems[itemIndex].lowerLimit} ${AppLocalizations.of(context)!.items_of_this_all_lower}",
+//         "${'cannot_order_more_than'.tr(context: context)} ${_shopList[sellerIndex].cartItems[itemIndex].lowerLimit} ${'items_of_this_all_lower'.tr(context: context)}",
 //       );
 //     }
 //   }
@@ -194,7 +194,7 @@
 
 //     if (cartIds.length == 0) {
 //       ToastComponent.showDialog(
-//         AppLocalizations.of(context)!.cart_is_empty,
+//         'cart_is_empty'.tr(context: context),
 //       );
 //       return;
 //     }
@@ -255,13 +255,12 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/cart_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
 import '../custom/aiz_route.dart';
 import '../custom/btn.dart';
-import '../custom/lang_text.dart';
 import '../helpers/debouncer.dart';
 import '../helpers/shared_value_helper.dart';
 import '../my_theme.dart';
@@ -372,7 +371,13 @@ class CartProvider extends ChangeNotifier {
       );
     } else {
       ToastComponent.showDialog(
-        "${AppLocalizations.of(context)!.maxOrderQuantityLimit(_shopList[sellerIndex].cartItems![itemIndex].maxQuantity)}",
+        "${'maxOrderQuantityLimit'.tr(
+          context: context,
+          args: {
+            "{maxQuantity}":
+                "${_shopList[sellerIndex].cartItems![itemIndex].maxQuantity}"
+          },
+        )}",
         isError: true,
       );
     }
@@ -401,7 +406,13 @@ class CartProvider extends ChangeNotifier {
       );
     } else {
       ToastComponent.showDialog(
-        "${AppLocalizations.of(context)!.minimumOrderQuantity(_shopList[sellerIndex].cartItems![itemIndex].minQuantity)}",
+        "${'minimumOrderQuantity'.tr(
+          context: context,
+          args: {
+            "{minQuantity}":
+                "${_shopList[sellerIndex].cartItems![itemIndex].minQuantity}"
+          },
+        )}",
         isError: true,
       );
     }
@@ -418,7 +429,7 @@ class CartProvider extends ChangeNotifier {
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           child: Text(
-            AppLocalizations.of(context)!.are_you_sure_to_remove_this_item,
+            'are_you_sure_to_remove_this_item'.tr(context: context),
             maxLines: 3,
             style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
           ),
@@ -426,7 +437,7 @@ class CartProvider extends ChangeNotifier {
         actions: [
           Btn.basic(
             child: Text(
-              AppLocalizations.of(context)!.cancel_ucf,
+              'cancel_ucf'.tr(context: context),
               style: TextStyle(color: MyTheme.medium_grey),
             ),
             onPressed: () {
@@ -437,7 +448,7 @@ class CartProvider extends ChangeNotifier {
           Btn.basic(
             color: MyTheme.soft_accent_color,
             child: Text(
-              AppLocalizations.of(context)!.confirm_ucf,
+              'confirm_ucf'.tr(context: context),
               style: TextStyle(color: MyTheme.dark_grey),
             ),
             onPressed: () {
@@ -484,13 +495,13 @@ class CartProvider extends ChangeNotifier {
       for (CartItem cartItem in shop.cartItems ?? []) {
         if (cartItem.quantity < cartItem.minQuantity) {
           ToastComponent.showDialog(
-            AppLocalizations.of(context)!.productBelowMinQuantity,
+            'productBelowMinQuantity'.tr(context: context),
             isError: true,
           );
           return;
         } else if (cartItem.quantity > cartItem.maxQuantity) {
           ToastComponent.showDialog(
-            AppLocalizations.of(context)!.productExceedsMaxQuantity,
+            'productExceedsMaxQuantity'.tr(context: context),
             isError: true,
           );
           return;
@@ -522,7 +533,7 @@ class CartProvider extends ChangeNotifier {
     }
 
     if (cartIds.isEmpty) {
-      ToastComponent.showDialog(AppLocalizations.of(context)!.cart_is_empty);
+      ToastComponent.showDialog('cart_is_empty'.tr(context: context));
       return true;
     }
 
@@ -541,12 +552,12 @@ class CartProvider extends ChangeNotifier {
       } else if (mode == "proceed_to_shipping") {
         if (isMinOrderQuantityNotEnough) {
           ToastComponent.showDialog(
-              '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity}',
+              '${'minimum_order_qty_is'.tr(context: context)} ${AppConfig.businessSettingsData.minimumOrderQuantity}',
               color: Theme.of(context).colorScheme.error);
           return true;
         } else if (isMinOrderAmountNotEnough) {
           ToastComponent.showDialog(
-              '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount}',
+              '${'minimum_order_amount_is'.tr(context: context)} ${AppConfig.businessSettingsData.minimumOrderAmount}',
               color: Theme.of(context).colorScheme.error);
           return true;
         }

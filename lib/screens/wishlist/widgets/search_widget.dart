@@ -1,11 +1,10 @@
 // ignore_for_file: unused_field
 
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:one_context/one_context.dart';
 
 import '../../../custom/btn.dart';
 import '../../../custom/toast_component.dart';
@@ -32,11 +31,11 @@ class WhichFilter {
   static List<WhichFilter> getWhichFilterList() {
     return <WhichFilter>[
       WhichFilter(
-          'product', AppLocalizations.of(OneContext().context!)!.product_ucf),
+          'product', 'product_ucf'.tr()),
       WhichFilter(
-          'sellers', AppLocalizations.of(OneContext().context!)!.sellers_ucf),
+          'sellers', 'sellers_ucf'.tr()),
       WhichFilter(
-          'brands', AppLocalizations.of(OneContext().context!)!.brands_ucf),
+          'brands', 'brands_ucf'.tr()),
     ];
   }
 }
@@ -349,8 +348,8 @@ class _SearchWidgetState extends State<SearchWidget> {
       color: Colors.white,
       child: Center(
         child: Text(_totalProductData == _productList.length
-            ? AppLocalizations.of(context)!.no_more_products_ucf
-            : AppLocalizations.of(context)!.loading_more_products_ucf),
+            ? 'no_more_products_ucf'.tr(context: context)
+            : 'loading_more_products_ucf'.tr(context: context)),
       ),
     );
   }
@@ -362,8 +361,8 @@ class _SearchWidgetState extends State<SearchWidget> {
       color: Colors.white,
       child: Center(
         child: Text(_totalBrandData == _brandList.length
-            ? AppLocalizations.of(context)!.no_more_brands_ucf
-            : AppLocalizations.of(context)!.loading_more_brands_ucf),
+            ? 'no_more_brands_ucf'.tr(context: context)
+            : 'loading_more_brands_ucf'.tr(context: context)),
       ),
     );
   }
@@ -375,8 +374,8 @@ class _SearchWidgetState extends State<SearchWidget> {
       color: Colors.white,
       child: Center(
         child: Text(_totalShopData == _shopList.length
-            ? AppLocalizations.of(context)!.no_more_shops_ucf
-            : AppLocalizations.of(context)!.loading_more_shops_ucf),
+            ? 'no_more_shops_ucf'.tr(context: context)
+            : 'loading_more_shops_ucf'.tr(context: context)),
       ),
     );
   }
@@ -457,7 +456,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               child: const Icon(Icons.expand_more, color: Colors.black54),
             ),
             hint: Text(
-              AppLocalizations.of(context)!.products_ucf,
+              'products_ucf'.tr(context: context),
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 13,
@@ -482,8 +481,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             _selectedFilter!.option_key == "product"
                 ? _scaffoldKey.currentState!.openEndDrawer()
                 : ToastComponent.showDialog(
-                    AppLocalizations.of(context)!
-                        .you_can_use_sorting_while_searching_for_products,
+                    'you_can_use_sorting_while_searching_for_products'.tr(context: context),
                   );
             ;
           },
@@ -508,7 +506,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                   const SizedBox(width: 2),
                   Text(
-                    AppLocalizations.of(context)!.filter_ucf,
+                    'filter_ucf'.tr(context: context),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 13,
@@ -542,8 +540,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 24.0),
                                       child: Text(
-                                        AppLocalizations.of(context)!
-                                            .sort_products_by_ucf,
+                                        'sort_products_by_ucf'.tr(context: context),
                                       )),
                                   RadioListTile(
                                     dense: true,
@@ -552,8 +549,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     activeColor: MyTheme.font_grey,
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
-                                    title: Text(AppLocalizations.of(context)!
-                                        .default_ucf),
+                                    title: Text('default_ucf'.tr(context: context)),
                                     onChanged: (dynamic value) {
                                       setState(() {
                                         _selectedSort = value;
@@ -569,8 +565,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     activeColor: MyTheme.font_grey,
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
-                                    title: Text(AppLocalizations.of(context)!
-                                        .price_high_to_low),
+                                    title: Text('price_high_to_low'.tr(context: context)),
                                     onChanged: (dynamic value) {
                                       setState(() {
                                         _selectedSort = value;
@@ -586,8 +581,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     activeColor: MyTheme.font_grey,
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
-                                    title: Text(AppLocalizations.of(context)!
-                                        .price_low_to_high),
+                                    title: Text('price_low_to_high'.tr(context: context)),
                                     onChanged: (dynamic value) {
                                       setState(() {
                                         _selectedSort = value;
@@ -603,8 +597,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     activeColor: MyTheme.font_grey,
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
-                                    title: Text(AppLocalizations.of(context)!
-                                        .new_arrival_ucf),
+                                    title: Text('new_arrival_ucf'.tr(context: context)),
                                     onChanged: (dynamic value) {
                                       setState(() {
                                         _selectedSort = value;
@@ -620,8 +613,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     activeColor: MyTheme.font_grey,
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
-                                    title: Text(AppLocalizations.of(context)!
-                                        .popularity_ucf),
+                                    title: Text('popularity_ucf'.tr(context: context)),
                                     onChanged: (dynamic value) {
                                       setState(() {
                                         _selectedSort = value;
@@ -637,8 +629,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     activeColor: MyTheme.font_grey,
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
-                                    title: Text(AppLocalizations.of(context)!
-                                        .top_rated_ucf),
+                                    title: Text('top_rated_ucf'.tr(context: context)),
                                     onChanged: (dynamic value) {
                                       setState(() {
                                         _selectedSort = value;
@@ -653,8 +644,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                             actions: [
                               Btn.basic(
                                 child: Text(
-                                  AppLocalizations.of(context)!
-                                      .close_all_capital,
+                                  'close_all_capital'.tr(context: context),
                                   style: TextStyle(color: MyTheme.medium_grey),
                                 ),
                                 onPressed: () {
@@ -666,8 +656,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                           ),
                         ))
                 : ToastComponent.showDialog(
-                    AppLocalizations.of(context)!
-                        .you_can_use_filters_while_searching_for_products,
+                    'you_can_use_filters_while_searching_for_products'.tr(context: context),
                   );
           },
           child: Container(
@@ -691,7 +680,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                   const SizedBox(width: 2),
                   Text(
-                    AppLocalizations.of(context)!.sort_ucf,
+                    'sort_ucf'.tr(context: context),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 13,
@@ -743,18 +732,17 @@ class _SearchWidgetState extends State<SearchWidget> {
                         color: Colors.white,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_suggestions,
+                                'loading_suggestions'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic suggestion) {
                       //print(suggestion.toString());
                       var subtitle =
-                          "${AppLocalizations.of(context)!.searched_for_all_lower} ${suggestion.count} ${AppLocalizations.of(context)!.times_all_lower}";
+                          "${'searched_for_all_lower'.tr(context: context)} ${suggestion.count} ${'times_all_lower'.tr(context: context)}";
                       if (suggestion.type != "search") {
                         subtitle =
-                            "${suggestion.type_string} ${AppLocalizations.of(context)!.found_all_lower}";
+                            "${suggestion.type_string} ${'found_all_lower'.tr(context: context)}";
                       }
                       return ListTile(
                         tileColor: Colors.white,
@@ -801,10 +789,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                           obscureText: false,
                           decoration: searchContainer(
                               context,
-                              AppLocalizations.of(context)!.search_here_ucf,
+                              'search_here_ucf'.tr(context: context),
                               _onSearchSubmit),
                           //  buildAddressInputDecoration(context,
-                          //     AppLocalizations.of(context)!.search_here_ucf),
+                          //     'search_here_ucf'.tr(context: context)),
                         ),
                       );
                     },
@@ -835,7 +823,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
                         child: Text(
-                          AppLocalizations.of(context)!.price_range_ucf,
+                          'price_range_ucf'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
@@ -854,8 +842,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [_amountValidator],
                                 decoration: InputDecoration(
-                                    hintText: AppLocalizations.of(context)!
-                                        .minimum_ucf,
+                                    hintText: 'minimum_ucf'.tr(context: context),
                                     hintStyle: const TextStyle(
                                         fontSize: 12.0,
                                         color: MyTheme.textfield_grey),
@@ -893,8 +880,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [_amountValidator],
                                 decoration: InputDecoration(
-                                    hintText: AppLocalizations.of(context)!
-                                        .maximum_ucf,
+                                    hintText: 'maximum_ucf'.tr(context: context),
                                     hintStyle: const TextStyle(
                                         fontSize: 12.0,
                                         color: MyTheme.textfield_grey),
@@ -933,7 +919,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          AppLocalizations.of(context)!.categories_ucf,
+                          'categories_ucf'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
@@ -943,8 +929,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                               height: 100,
                               child: Center(
                                 child: Text(
-                                  AppLocalizations.of(context)!
-                                      .no_category_is_available,
+                                  'no_category_is_available'.tr(context: context),
                                   style:
                                       const TextStyle(color: MyTheme.font_grey),
                                 ),
@@ -957,7 +942,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingDefault),
                         child: Text(
-                          AppLocalizations.of(context)!.brands_ucf,
+                          'brands_ucf'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
@@ -967,8 +952,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                               height: 100,
                               child: Center(
                                 child: Text(
-                                  AppLocalizations.of(context)!
-                                      .no_brand_is_available,
+                                  'no_brand_is_available'.tr(context: context),
                                   style:
                                       const TextStyle(color: MyTheme.font_grey),
                                 ),
@@ -1010,8 +994,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         if (min != "" && max != "") {
                           if (max.compareTo(min) < 0) {
                             ToastComponent.showDialog(
-                              AppLocalizations.of(context)!
-                                  .filter_screen_min_max_warning,
+                              'filter_screen_min_max_warning'.tr(context: context),
                             );
                             apply = false;
                           }
@@ -1174,7 +1157,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       );
     } else if (_totalProductData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_product_is_available));
+          child: Text('no_product_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -1246,7 +1229,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       );
     } else if (_totalBrandData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_brand_is_available));
+          child: Text('no_brand_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -1320,7 +1303,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       );
     } else if (_totalShopData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_shop_is_available));
+          child: Text('no_shop_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

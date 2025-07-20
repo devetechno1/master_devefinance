@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,7 @@ class _UploadFileState extends State<UploadFile> {
     final FilePickerResult? file = await pickSingleFile();
     if (file == null) {
       ToastComponent.showDialog(
-        LangText(context).local.no_file_chosen_ucf,
+        'no_file_chosen_ucf'.tr(context: context),
       );
       return;
     }
@@ -218,7 +219,7 @@ class _UploadFileState extends State<UploadFile> {
           backgroundColor: MyTheme.white,
           iconTheme: IconThemeData(color: MyTheme.dark_grey),
           title: Text(
-            LangText(context).local.upload_file_ucf,
+            'upload_file_ucf'.tr(context: context),
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -231,7 +232,7 @@ class _UploadFileState extends State<UploadFile> {
                   Navigator.pop(context, _selectedImages);
                 },
                 child: Text(
-                  LangText(context).local.select_ucf,
+                  'select_ucf'.tr(context: context),
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -251,7 +252,7 @@ class _UploadFileState extends State<UploadFile> {
                     ? _images.isEmpty
                         ? Center(
                             child: Text(
-                                LangText(context).local.no_data_is_available),
+                                'no_data_is_available'.tr(context: context)),
                           )
                         : buildImageListView()
                     : buildShimmerList(context),
@@ -400,7 +401,7 @@ class _UploadFileState extends State<UploadFile> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              LangText(context).local.upload_file_ucf,
+              'upload_file_ucf'.tr(context: context),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
@@ -519,7 +520,7 @@ class _UploadFileState extends State<UploadFile> {
       child: TextField(
         controller: searchEditingController,
         decoration: InputDecoration.collapsed(
-            hintText: LangText(context).local.search_here_ucf),
+            hintText: 'search_here_ucf'.tr(context: context)),
       ),
     );
   }
@@ -566,7 +567,7 @@ class _UploadFileState extends State<UploadFile> {
         itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuOptions>>[
           PopupMenuItem<MenuOptions>(
             value: MenuOptions.Delete,
-            child: Text(LangText(context).local.delete_ucf),
+            child: Text('delete_ucf'.tr(context: context)),
           ),
         ],
       ),

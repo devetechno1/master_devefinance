@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../app_config.dart';
 import '../../constants/app_dimensions.dart';
 import '../../constants/app_images.dart';
-import '../../custom/lang_text.dart';
 import '../../my_theme.dart';
 
 class AnimatedScaleIconWidget extends StatefulWidget {
@@ -84,7 +84,7 @@ class _AnimatedScaleIconWidgetState extends State<AnimatedScaleIconWidget>
                   padding: const EdgeInsets.only(
                       bottom: AppDimensions.paddingSmallExtra),
                   child: Text(
-                    LangText(context).local.app_name,
+                    'app_name'.tr(context: context),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14.0,

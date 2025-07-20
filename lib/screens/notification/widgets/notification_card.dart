@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app_config.dart';
 import '../../../custom/box_decorations.dart';
 import '../../../custom/device_info.dart';
-import '../../../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../../orders/order_details.dart';
 import 'image_show.dart';
 
@@ -109,7 +109,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                         // Use Flexible instead of Expanded
                         child: RichText(
                           text: TextSpan(
-                            text: LangText(context).local.your_order,
+                            text: 'your_order'.tr(context: context),
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
@@ -119,7 +119,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                               ),
                               TextSpan(
                                 text:
-                                    '${LangText(context).local.has_been}${widget.status}',
+                                    '${'has_been'.tr(context: context)}${widget.status}',
                               ),
                             ],
                           ),

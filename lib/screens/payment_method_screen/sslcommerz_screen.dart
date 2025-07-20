@@ -8,7 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/orders/order_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../helpers/main_helpers.dart';
@@ -94,7 +94,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
             } else if (page.contains("/sslcommerz/cancel") ||
                 page.contains("/sslcommerz/fail")) {
              ToastComponent.showDialog(
-                AppLocalizations.of(context)!.payment_cancelled_ucf,
+                'payment_cancelled_ucf'.tr(context: context),
               );
               Navigator.of(context).pop(goToOrdersScreen);
               return;
@@ -193,13 +193,13 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
         widget.payment_type == "cart_payment") {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context)!.creating_order),
+          child: Text('creating_order'.tr(context: context)),
         ),
       );
     } else if (_initial_url_fetched == false) {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context)!.fetching_sslcommerz_url),
+          child: Text('fetching_sslcommerz_url'.tr(context: context)),
         ),
       );
     } else {
@@ -230,7 +230,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.pay_with_sslcommerz,
+        'pay_with_sslcommerz'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,

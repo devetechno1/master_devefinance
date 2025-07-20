@@ -1,19 +1,19 @@
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/city_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/country_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/state_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/guest_checkout_pages/old_guest.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/map_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
@@ -187,9 +187,8 @@ class _AddressState extends State<Address> {
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Text(
                   address.set_default == 1
-                      ? LangText(context).local.change_default_before_delete
-                      : AppLocalizations.of(context)!
-                          .are_you_sure_to_remove_this_address,
+                      ? 'change_default_before_delete'.tr(context: context)
+                      : 'are_you_sure_to_remove_this_address'.tr(context: context),
                   maxLines: 3,
                   style:
                       const TextStyle(color: MyTheme.font_grey, fontSize: 14),
@@ -198,7 +197,7 @@ class _AddressState extends State<Address> {
               actions: [
                 Btn.basic(
                   child: Text(
-                    AppLocalizations.of(context)!.cancel_ucf,
+                    'cancel_ucf'.tr(context: context),
                     style: TextStyle(color: MyTheme.medium_grey),
                   ),
                   onPressed: () {
@@ -209,7 +208,7 @@ class _AddressState extends State<Address> {
                   Btn.basic(
                     color: MyTheme.soft_accent_color,
                     child: Text(
-                      AppLocalizations.of(context)!.confirm_ucf,
+                      'confirm_ucf'.tr(context: context),
                       style: TextStyle(color: MyTheme.dark_grey),
                     ),
                     onPressed: () {
@@ -312,7 +311,7 @@ class _AddressState extends State<Address> {
                     child: Column(
                       children: [
                         Text(
-                          "${AppLocalizations.of(context)!.add_new_address}",
+                          "${'add_new_address'.tr(context: context)}",
                           style: TextStyle(
                               fontSize: 13,
                               color: MyTheme.dark_font_grey,
@@ -426,14 +425,14 @@ class _AddressState extends State<Address> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context)!.addresses_of_user,
+            'addresses_of_user'.tr(context: context),
             style: const TextStyle(
                 fontSize: 16,
                 color: Color(0xff3E4447),
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            "* ${AppLocalizations.of(context)!.tap_on_an_address_to_make_it_default}",
+            "* ${'tap_on_an_address_to_make_it_default'.tr(context: context)}",
             style: const TextStyle(fontSize: 12, color: Color(0xff6B7377)),
           ),
         ],
@@ -450,7 +449,7 @@ class _AddressState extends State<Address> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.you_need_to_log_in,
+            'you_need_to_log_in'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     } else if (_isInitial && _shippingAddressList.isEmpty) {
@@ -479,7 +478,7 @@ class _AddressState extends State<Address> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_address_is_added,
+            'no_address_is_added'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
@@ -492,7 +491,7 @@ class _AddressState extends State<Address> {
       onTap: () {
         if (_shippingAddressList[index].location_available != true) {
           _choosePlace(_shippingAddressList[index]);
-          // ToastComponent.showDialog(AppLocalizations.of(context)!.you_have_to_add_location_first,isError: true,gravity: ToastGravity.BOTTOM);
+          // ToastComponent.showDialog('you_have_to_add_location_first'.tr(context: context),isError: true,gravity: ToastGravity.BOTTOM);
           return;
         }
         if (_default_shipping_address != _shippingAddressList[index].id) {
@@ -520,27 +519,27 @@ class _AddressState extends State<Address> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LineData(
-                    name: AppLocalizations.of(context)!.address_ucf,
+                    name: 'address_ucf'.tr(context: context),
                     body: "${_shippingAddressList[index].address}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.city_ucf,
+                    name: 'city_ucf'.tr(context: context),
                     body: "${_shippingAddressList[index].city_name}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.state_ucf,
+                    name: 'state_ucf'.tr(context: context),
                     body: "${_shippingAddressList[index].state_name}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.country_ucf,
+                    name: 'country_ucf'.tr(context: context),
                     body: "${_shippingAddressList[index].country_name}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.postal_code,
+                    name: 'postal_code'.tr(context: context),
                     body: "${_shippingAddressList[index].postal_code}",
                   ),
                   LineData(
-                    name: AppLocalizations.of(context)!.phone_ucf,
+                    name: 'phone_ucf'.tr(context: context),
                     body: "${_shippingAddressList[index].phone}",
                   ),
                   _shippingAddressList[index].location_available != true
@@ -555,8 +554,7 @@ class _AddressState extends State<Address> {
                                 borderRadius: BorderRadius.circular(
                                     AppDimensions.radiusHalfSmall)),
                             child: Text(
-                              AppLocalizations.of(context)!
-                                  .you_have_to_add_location_here,
+                              'you_have_to_add_location_here'.tr(context: context),
                               maxLines: 2,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
@@ -569,11 +567,11 @@ class _AddressState extends State<Address> {
                       : Column(
                           children: [
                             LineData(
-                              name: AppLocalizations.of(context)!.latitude,
+                              name: 'latitude'.tr(context: context),
                               body: "${_shippingAddressList[index].lat}",
                             ),
                             LineData(
-                              name: AppLocalizations.of(context)!.longitude,
+                              name: 'longitude'.tr(context: context),
                               body: "${_shippingAddressList[index].lang}",
                             ),
                           ],
@@ -609,7 +607,7 @@ class _AddressState extends State<Address> {
               borderRadius: BorderRadius.circular(0.0),
             ),
             child: Text(
-              AppLocalizations.of(context)!.back_to_shipping_info,
+              'back_to_shipping_info'.tr(context: context),
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -644,16 +642,16 @@ class _AddressState extends State<Address> {
       itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuOptions>>[
         PopupMenuItem<MenuOptions>(
           value: MenuOptions.Edit,
-          child: Text(AppLocalizations.of(context)!.edit_ucf),
+          child: Text('edit_ucf'.tr(context: context)),
         ),
         if (_shippingAddressList.length > 1)
           PopupMenuItem<MenuOptions>(
             value: MenuOptions.Delete,
-            child: Text(AppLocalizations.of(context)!.delete_ucf),
+            child: Text('delete_ucf'.tr(context: context)),
           ),
         PopupMenuItem<MenuOptions>(
           value: MenuOptions.AddLocation,
-          child: Text(AppLocalizations.of(context)!.edit_location),
+          child: Text('edit_location'.tr(context: context)),
         ),
       ],
     );
@@ -771,7 +769,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
     if (address.trim() == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_address_ucf,
+        'enter_address_ucf'.tr(context: context),
         isError: true,
       );
       return;
@@ -779,7 +777,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
     if (_selected_country == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_country,
+        'select_a_country'.tr(context: context),
         isError: true,
       );
       return;
@@ -787,7 +785,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
     if (_selected_state == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_state,
+        'select_a_state'.tr(context: context),
         isError: true,
       );
       return;
@@ -795,7 +793,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
     if (_selected_city == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_city,
+        'select_a_city'.tr(context: context),
         isError: true,
       );
       return;
@@ -803,13 +801,13 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
+        'enter_phone_number'.tr(context: context),
         isError: true,
       );
       return;
     } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.invalid_phone_number,
+        'invalid_phone_number'.tr(context: context),
         isError: true,
       );
       return;
@@ -938,7 +936,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               ),
               Padding(
                 padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-                child: Text("${AppLocalizations.of(context)!.address_ucf} *",
+                child: Text("${'address_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -956,14 +954,14 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                     keyboardType: TextInputType.multiline,
                     decoration:
                         InputDecorations.buildInputDecoration_with_border(
-                            AppLocalizations.of(context)!.enter_address_ucf),
+                            'enter_address_ucf'.tr(context: context)),
                   ),
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.country_ucf} *",
+                child: Text("${'country_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -983,8 +981,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         obscureText: false,
                         decoration:
                             InputDecorations.buildInputDecoration_with_border(
-                                AppLocalizations.of(context)!
-                                    .enter_country_ucf),
+                                'enter_country_ucf'.tr(context: context)),
                       );
                     },
                     suggestionsCallback: (name) async {
@@ -997,8 +994,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         height: 50,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_countries_ucf,
+                                'loading_countries_ucf'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
@@ -1018,7 +1014,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.state_ucf} *",
+                child: Text("${'state_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -1037,7 +1033,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         obscureText: false,
                         decoration:
                             InputDecorations.buildInputDecoration_with_border(
-                                AppLocalizations.of(context)!.enter_state_ucf),
+                                'enter_state_ucf'.tr(context: context)),
                       );
                     },
                     controller: _stateController,
@@ -1057,8 +1053,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         height: 50,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_states_ucf,
+                                'loading_states_ucf'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
@@ -1078,7 +1073,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.city_ucf} *",
+                child: Text("${'city_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -1108,8 +1103,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         height: 50,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_cities_ucf,
+                                'loading_cities_ucf'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
@@ -1131,7 +1125,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                         obscureText: false,
                         decoration:
                             InputDecorations.buildInputDecoration_with_border(
-                                AppLocalizations.of(context)!.enter_city_ucf),
+                                'enter_city_ucf'.tr(context: context)),
                       );
                     },
                   ),
@@ -1140,7 +1134,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
+                child: Text("${'phone_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -1159,8 +1153,8 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   countries: countries_code,
                   height: 40,
                   backgroundColor: Colors.transparent,
-                  hintText: LangText(context).local.phone_number_ucf,
-                  errorMessage: LangText(context).local.invalid_phone_number,
+                  hintText: 'phone_number_ucf'.tr(context: context),
+                  errorMessage: 'invalid_phone_number'.tr(context: context),
                   initialValue: initialValue,
                   onInputChanged: (PhoneNumber number) {
                     setState(() {
@@ -1193,7 +1187,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text(AppLocalizations.of(context)!.postal_code,
+                child: Text('postal_code'.tr(context: context),
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -1209,8 +1203,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                     autofocus: false,
                     decoration:
                         InputDecorations.buildInputDecoration_with_border(
-                            AppLocalizations.of(context)!
-                                .enter_postal_code_ucf),
+                            'enter_postal_code_ucf'.tr(context: context)),
                   ),
                 ),
               ),
@@ -1226,7 +1219,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                       BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 ),
                 child: Text(
-                  LangText(context).local.continue_ucf,
+                  'continue_ucf'.tr(context: context),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -1253,7 +1246,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
         //     //           BorderRadius.circular(AppDimensions.radiusHalfSmall),
         //     //       side: BorderSide(color: MyTheme.light_grey, width: 1)),
         //     //   child: Text(
-        //     //     LangText(context).local.close_ucf,
+        //     //     'close_ucf'.tr(context: context),
         //     //     style: TextStyle(
         //     //       color: Theme.of(context).primaryColor,
         //     //       fontSize: 16,
@@ -1277,7 +1270,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
         //               BorderRadius.circular(AppDimensions.radiusHalfSmall),
         //         ),
         //         child: Text(
-        //           LangText(context).local.continue_ucf,
+        //           'continue_ucf'.tr(context: context),
         //           style: const TextStyle(
         //             color: Colors.white,
         //             fontSize: 16,
@@ -1382,21 +1375,21 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
 
     if (address == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_address_ucf,
+        'enter_address_ucf'.tr(context: context),
       );
       return;
     }
 
     if (_selected_country == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_country,
+        'select_a_country'.tr(context: context),
         isError: true,
       );
       return;
     }
     if (_selected_state == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_state,
+        'select_a_state'.tr(context: context),
         isError: true,
       );
       return;
@@ -1404,20 +1397,20 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
 
     if (_selected_city == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.select_a_city,
+        'select_a_city'.tr(context: context),
         isError: true,
       );
       return;
     }
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
+        'enter_phone_number'.tr(context: context),
         isError: true,
       );
       return;
     } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.invalid_phone_number,
+        'invalid_phone_number'.tr(context: context),
         isError: true,
       );
       return;
@@ -1532,7 +1525,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.address_ucf} *",
+                child: Text("${'address_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
@@ -1548,14 +1541,14 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                     keyboardType: TextInputType.multiline,
                     decoration:
                         InputDecorations.buildInputDecoration_with_border(
-                            AppLocalizations.of(context)!.enter_address_ucf),
+                            'enter_address_ucf'.tr(context: context)),
                   ),
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.country_ucf} *",
+                child: Text("${'country_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
@@ -1578,7 +1571,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         obscureText: false,
                         decoration:
                             InputDecorations.buildInputDecoration_with_border(
-                                AppLocalizations.of(context)!.enter_city_ucf),
+                                'enter_city_ucf'.tr(context: context)),
                       );
                     },
                     loadingBuilder: (context) {
@@ -1586,8 +1579,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         height: 50,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_countries_ucf,
+                                'loading_countries_ucf'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
@@ -1610,7 +1602,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.state_ucf} *",
+                child: Text("${'state_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
@@ -1634,7 +1626,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         obscureText: false,
                         decoration:
                             InputDecorations.buildInputDecoration_with_border(
-                                AppLocalizations.of(context)!.enter_city_ucf),
+                                'enter_city_ucf'.tr(context: context)),
                       );
                     },
                     loadingBuilder: (context) {
@@ -1642,8 +1634,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         height: 50,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_states_ucf,
+                                'loading_states_ucf'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
@@ -1666,7 +1657,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.city_ucf} *",
+                child: Text("${'city_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
@@ -1696,7 +1687,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         obscureText: false,
                         decoration:
                             InputDecorations.buildInputDecoration_with_border(
-                                AppLocalizations.of(context)!.enter_city_ucf),
+                                'enter_city_ucf'.tr(context: context)),
                       );
                     },
                     loadingBuilder: (context) {
@@ -1704,8 +1695,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         height: 50,
                         child: Center(
                             child: Text(
-                                AppLocalizations.of(context)!
-                                    .loading_cities_ucf,
+                                'loading_cities_ucf'.tr(context: context),
                                 style: TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
@@ -1728,7 +1718,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${AppLocalizations.of(context)!.phone_ucf} *",
+                child: Text("${'phone_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
@@ -1748,8 +1738,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   countries: countries_code,
                   height: 40,
                   backgroundColor: Colors.transparent,
-                  hintText: LangText(context).local.phone_number_ucf,
-                  errorMessage: LangText(context).local.invalid_phone_number,
+                  hintText: 'phone_number_ucf'.tr(context: context),
+                  errorMessage: 'invalid_phone_number'.tr(context: context),
                   initialValue: initialValue,
                   onInputChanged: (PhoneNumber number) {
                     setState(() {
@@ -1782,7 +1772,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
               Padding(
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text(AppLocalizations.of(context)!.postal_code,
+                child: Text('postal_code'.tr(context: context),
                     style: const TextStyle(
                         color: MyTheme.font_grey, fontSize: 12)),
               ),
@@ -1796,8 +1786,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                     autofocus: false,
                     decoration:
                         InputDecorations.buildInputDecoration_with_border(
-                            AppLocalizations.of(context)!
-                                .enter_postal_code_ucf),
+                            'enter_postal_code_ucf'.tr(context: context)),
                   ),
                 ),
               ),
@@ -1821,7 +1810,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     side: BorderSide(color: MyTheme.light_grey, width: 1.0)),
                 child: Text(
-                  AppLocalizations.of(context)!.close_all_capital,
+                  'close_all_capital'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor, fontSize: 13),
                 ),
@@ -1842,7 +1831,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                       BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.update_all_capital,
+                  'update_all_capital'.tr(context: context),
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 13,

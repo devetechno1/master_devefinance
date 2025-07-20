@@ -14,7 +14,7 @@ import 'package:one_context/one_context.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../helpers/shimmer_helper.dart';
 import 'navigation_service.dart';
 
@@ -168,11 +168,11 @@ class PushNotificationService {
         ),
         actions: <Widget>[
           Btn.basic(
-            child: Text(LangText(context).local.close_ucf),
+            child: Text('close_ucf'.tr(context: context)),
             onPressed: () => Navigator.of(context).pop(),
           ),
           Btn.basic(
-            child: Text(LangText(context).local.go),
+            child: Text('go'.tr(context: context)),
             onPressed: () {
               Navigator.of(context).pop();
               _serialiseAndNavigate(message.toMap());
@@ -188,15 +188,15 @@ class PushNotificationService {
       OneContext().showDialog(
           // barrierDismissible: false,
           builder: (context) => AlertDialog(
-                title: Text(LangText(context).local.you_are_not_logged_in),
-                content: Text(LangText(context).local.please_log_in),
+                title: Text('you_are_not_logged_in'.tr(context: context)),
+                content: Text('please_log_in'.tr(context: context)),
                 actions: <Widget>[
                   Btn.basic(
-                    child: Text(LangText(context).local.close_ucf),
+                    child: Text('close_ucf'.tr(context: context)),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   Btn.basic(
-                      child: Text(LangText(context).local.log_in),
+                      child: Text('log_in'.tr(context: context)),
                       onPressed: () {
                         Navigator.of(context).pop();
                         OneContext().push(MaterialPageRoute(builder: (_) {

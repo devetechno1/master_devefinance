@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:http/http.dart' as http;
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../app_config.dart';
 import '../../custom/btn.dart';
@@ -179,7 +180,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
           padding: const EdgeInsets.all(AppDimensions.paddingSmall),
           child: Text(
             formattedAddress == null
-                ? LangText(context).local.your_delivery_location
+                ? 'your_delivery_location'.tr(context: context)
                 : formattedAddress!,
             maxLines: 2,
             style: TextStyle(color: MyTheme.medium_grey),
@@ -311,7 +312,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                   // state == SearchingState.Searching
                   //   ? Center(
                   //       child: Text(
-                  //       LangText(context).local.calculating,
+                  //       'calculating'.tr(context: context),
                   //       style: TextStyle(color: MyTheme.font_grey),
                   //     ))
                   //   :
@@ -363,7 +364,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                               Radius.circular(AppDimensions.radiusSmallExtra),
                         )),
                         child: Text(
-                          LangText(context).local.pick_here,
+                          'pick_here'.tr(context: context),
                           style: const TextStyle(color: Colors.white),
                         ),
                         onPressed: onTapPickHere,
@@ -403,7 +404,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                             FocusScope.of(context).unfocus(),
                         decoration: InputDecoration(
                             hintText:
-                                LangText(context).local.your_delivery_location,
+                                'your_delivery_location'.tr(context: context),
                             hintStyle: const TextStyle(
                                 fontSize: 12.0, color: MyTheme.textfield_grey),
                             enabledBorder: outlineInputBorder,
@@ -428,7 +429,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                         height: 50,
                         child: Center(
                           child: Text(
-                            LangText(context).local.loading_countries_ucf,
+                            'loading_countries_ucf'.tr(context: context),
                             style: TextStyle(color: MyTheme.medium_grey),
                           ),
                         ),

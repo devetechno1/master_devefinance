@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auction_products_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../custom/my_widget.dart';
 import '../../custom/toast_component.dart';
@@ -48,7 +48,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
         await AuctionProductsRepository().getAuctionBiddedProducts(page: _page);
     if (biddedResponse.data!.isEmpty) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.no_more_products_ucf,
+        'no_more_products_ucf'.tr(context: context),
       );
     }
     _biddedList.addAll(biddedResponse.data!);
@@ -251,7 +251,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.auction_my_bid_ucf,
+                        'auction_my_bid_ucf'.tr(context: context),
                         style: const TextStyle(
                             fontSize: 12,
                             color: MyTheme.font_grey,
@@ -274,7 +274,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.auction_highest_bid_ucf,
+                        'auction_highest_bid_ucf'.tr(context: context),
                         style: const TextStyle(
                             fontSize: 12,
                             color: MyTheme.font_grey,
@@ -296,7 +296,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(AppLocalizations.of(context)!.auction_end_date_ucf,
+                      Text('auction_end_date_ucf'.tr(context: context),
                           style: const TextStyle(
                               fontSize: 12,
                               color: MyTheme.font_grey,
@@ -392,7 +392,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
       centerTitle: false,
       leading: UsefulElements.backButton(),
       title: Text(
-        AppLocalizations.of(context)!.all_bidded_products,
+        'all_bidded_products'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

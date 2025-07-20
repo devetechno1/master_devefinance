@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/aiz_image.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app_config.dart';
@@ -81,7 +81,7 @@ class HomeBannerThree extends StatelessWidget {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_carousel_image_found,
+            'no_carousel_image_found'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     } else {

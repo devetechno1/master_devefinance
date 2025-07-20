@@ -2,10 +2,9 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../custom/lang_text.dart';
 import '../../custom/useful_elements.dart';
 import '../../helpers/shared_value_helper.dart';
 import '../../helpers/shimmer_helper.dart';
@@ -76,7 +75,7 @@ class _LastViewProductState extends State<LastViewProduct> {
 
     if (_lastViewProducts.length == 0) {
       return Center(
-        child: Text(LangText(context).local.no_data_is_available),
+        child: Text('no_data_is_available'.tr(context: context)),
       );
     }
     return RefreshIndicator(
@@ -120,7 +119,7 @@ class _LastViewProductState extends State<LastViewProduct> {
       centerTitle: false,
       leading: UsefulElements.backButton(),
       title: Text(
-        AppLocalizations.of(context)!.last_view_product_ucf,
+        'last_view_product_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

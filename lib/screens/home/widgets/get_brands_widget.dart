@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/brand_products.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data_model/brand_response.dart';
@@ -82,7 +82,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      AppLocalizations.of(context)!.view_all_ucf,
+                      'view_all_ucf'.tr(context: context),
                       style: const TextStyle(
                           fontSize: 12, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,

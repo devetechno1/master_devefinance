@@ -4,16 +4,16 @@ import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/providers/locale_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/coupon_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/language_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../data_model/language_list_response.dart';
+import '../providers/locale_provider.dart';
 import 'home/home.dart';
 
 class ChangeLanguage extends StatefulWidget {
@@ -109,10 +109,10 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
         app_language_rtl.save(),
       ]);
 
-      // var local_provider = new LocaleProvider();
-      // local_provider.setLocale(_list[_selected_index].code);
-      Provider.of<LocaleProvider>(context, listen: false)
-          .setLocale(_list[_selected_index].mobile_app_code ?? 'en');
+      Provider.of<LocaleProvider>(context, listen: false).setLocale(
+        app_mobile_language.$ ??
+            CustomLocalization.supportedLocales.first.languageCode,
+      );
 
       homeData.onRefresh();
 
@@ -169,7 +169,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
         ),
       ),
       title: Text(
-        "${AppLocalizations.of(context)!.change_language_ucf} (${app_language.$}) - (${app_mobile_language.$})",
+        "${'change_language_ucf'.tr(context: context)} (${app_language.$}) - (${app_mobile_language.$})",
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -207,7 +207,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_language_is_added,
+            'no_language_is_added'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }

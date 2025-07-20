@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class ProductLoadingcontainer extends StatelessWidget {
   const ProductLoadingcontainer({
@@ -21,8 +21,8 @@ class ProductLoadingcontainer extends StatelessWidget {
       child: Center(
         child: Text(
           homeData.totalAllProductData == homeData.allProductList.length
-              ? AppLocalizations.of(context)!.no_more_products_ucf
-              : AppLocalizations.of(context)!.loading_more_products_ucf,
+              ? 'no_more_products_ucf'.tr(context: context)
+              : 'loading_more_products_ucf'.tr(context: context),
         ),
       ),
     );

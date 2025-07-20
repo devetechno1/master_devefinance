@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/style.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
@@ -14,7 +14,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/checkout/checkout.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../helpers/shared_value_helper.dart';
 import '../auth/login.dart';
@@ -101,7 +101,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
           elevation: 0,
           backgroundColor: MyTheme.white,
           title: Text(
-            AppLocalizations.of(context)!.packages_ucf,
+            'packages_ucf'.tr(context: context),
             style: MyStyle.appBarStyle,
           ),
           //leadingWidth: 20,
@@ -211,9 +211,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Checkout(
-                                        title: LangText(context)
-                                            .local
-                                            .purchase_package,
+                                        title: 'purchase_package'.tr(context: context),
                                         rechargeAmount:
                                             double.parse(price.toString()),
                                         paymentFor: PaymentFor.PackagePay,
@@ -251,7 +249,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
                     Text(
                       packageProduct +
                           " " +
-                          LangText(context).local.upload_limit_ucf,
+                          'upload_limit_ucf'.tr(context: context),
                       style: const TextStyle(
                           fontSize: 12, fontWeight: FontWeight.normal),
                     ),

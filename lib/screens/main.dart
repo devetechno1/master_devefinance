@@ -9,7 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
@@ -159,7 +159,7 @@ class _MainState extends State<Main> {
                       height: 16,
                     ),
                   ),
-                  label: AppLocalizations.of(context)!.home_ucf),
+                  label: 'home_ucf'.tr(context: context)),
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
@@ -172,7 +172,7 @@ class _MainState extends State<Main> {
                       height: 16,
                     ),
                   ),
-                  label: AppLocalizations.of(context)!.categories_ucf),
+                  label: 'categories_ucf'.tr(context: context)),
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
@@ -206,7 +206,7 @@ class _MainState extends State<Main> {
                       ),
                     ),
                   ),
-                  label: AppLocalizations.of(context)!.cart_ucf),
+                  label: 'cart_ucf'.tr(context: context)),
               BottomNavigationBarItem(
                 icon: Padding(
                   padding:
@@ -219,7 +219,7 @@ class _MainState extends State<Main> {
                     height: 16,
                   ),
                 ),
-                label: AppLocalizations.of(context)!.profile_ucf,
+                label: 'profile_ucf'.tr(context: context),
               ),
             ],
           ),

@@ -6,11 +6,11 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/payment_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/orders/order_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../custom/lang_text.dart';
 import '../../helpers/main_helpers.dart';
 import '../profile.dart';
 
@@ -188,7 +188,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
         widget.payment_type == "cart_payment") {
       return Container(
         child: Center(
-          child: Text(LangText(context).local.creating_order),
+          child: Text('creating_order'.tr(context: context)),
         ),
       );
     } else if (_initial_url_fetched == false) {
@@ -225,7 +225,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
         ),
       ),
       title: Text(
-        LangText(context).local.pay_with_flutterwave,
+        'pay_with_flutterwave'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,

@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -7,7 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/order_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/purchased_digital_product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PurchasedDigitalProducts extends StatefulWidget {
@@ -100,7 +100,7 @@ class _PurchasedDigitalProductsState extends State<PurchasedDigitalProducts> {
       //   )
       // ],
       title: Text(
-        AppLocalizations.of(context)!.digital_product_ucf,
+        'digital_product_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             fontFamily: 'Public Sans',
@@ -120,7 +120,7 @@ class _PurchasedDigitalProductsState extends State<PurchasedDigitalProducts> {
 
     if (_digitalProducts.isEmpty) {
       return Center(
-        child: Text(LangText(context).local.no_data_is_available),
+        child: Text('no_data_is_available'.tr(context: context)),
       );
     }
     return RefreshIndicator(

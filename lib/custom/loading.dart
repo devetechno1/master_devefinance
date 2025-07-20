@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
 
 class Loading {
@@ -16,7 +16,7 @@ class Loading {
             const SizedBox(
               width: 10,
             ),
-            Text(LangText(context).local.please_wait_ucf),
+            Text('please_wait_ucf'.tr(context: context)),
           ],
         ));
       },

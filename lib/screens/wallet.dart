@@ -7,12 +7,12 @@ import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/reg_ex_inpur_formatter.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/wallet_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/checkout.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/main_helpers.dart';
 
@@ -109,7 +109,7 @@ class _WalletState extends State<Wallet> {
 
     if (amountString == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.amount_cannot_be_empty,
+        'amount_cannot_be_empty'.tr(context: context),
       );
       return;
     }
@@ -121,7 +121,7 @@ class _WalletState extends State<Wallet> {
       return Checkout(
         paymentFor: PaymentFor.WalletRecharge,
         rechargeAmount: amount,
-        title: AppLocalizations.of(context)!.recharge_wallet_ucf,
+        title: 'recharge_wallet_ucf'.tr(context: context),
       );
     }));
   }
@@ -182,8 +182,8 @@ class _WalletState extends State<Wallet> {
       color: Colors.white,
       child: Center(
         child: Text(_totalRechargeData == _rechargeList.length
-            ? AppLocalizations.of(context)!.no_more_histories_ucf
-            : AppLocalizations.of(context)!.loading_more_histories_ucf),
+            ? 'no_more_histories_ucf'.tr(context: context)
+            : 'loading_more_histories_ucf'.tr(context: context)),
       ),
     );
   }
@@ -209,7 +209,7 @@ class _WalletState extends State<Wallet> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.my_wallet_ucf,
+        'my_wallet_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -234,7 +234,7 @@ class _WalletState extends State<Wallet> {
                   bottom: AppDimensions.paddingDefault,
                   left: AppDimensions.paddingDefault),
               child: Text(
-                AppLocalizations.of(context)!.wallet_recharge_history_ucf,
+                'wallet_recharge_history_ucf'.tr(context: context),
                 style: TextStyle(
                     color: MyTheme.dark_font_grey,
                     fontSize: 14,
@@ -260,7 +260,7 @@ class _WalletState extends State<Wallet> {
       );
     } else if (_totalRechargeData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_recharges_yet));
+          child: Text('no_recharges_yet'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -329,7 +329,7 @@ class _WalletState extends State<Wallet> {
                     //   height: 10,
                     // ),
                     Text(
-                      AppLocalizations.of(context)!.payment_method_ucf,
+                      'payment_method_ucf'.tr(context: context),
                       style: TextStyle(
                           color: MyTheme.dark_font_grey, fontSize: 12),
                     ),
@@ -397,7 +397,7 @@ class _WalletState extends State<Wallet> {
                 padding:
                     const EdgeInsets.only(top: AppDimensions.paddingDefault),
                 child: Text(
-                  AppLocalizations.of(context)!.wallet_balance_ucf,
+                  'wallet_balance_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -416,7 +416,7 @@ class _WalletState extends State<Wallet> {
               ),
               const Spacer(),
               Text(
-                "${AppLocalizations.of(context)!.last_recharged} : ${_balanceDetails.last_recharged}",
+                "${'last_recharged'.tr(context: context)} : ${_balanceDetails.last_recharged}",
                 style: TextStyle(
                   color: MyTheme.light_grey,
                   fontSize: 10,
@@ -450,7 +450,7 @@ class _WalletState extends State<Wallet> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${AppLocalizations.of(context)!.recharge_wallet_ucf}",
+                    "${'recharge_wallet_ucf'.tr(context: context)}",
                     style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 12,
@@ -501,7 +501,7 @@ class _WalletState extends State<Wallet> {
                   Padding(
                     padding: const EdgeInsets.only(
                         bottom: AppDimensions.paddingSmall),
-                    child: Text(AppLocalizations.of(context)!.amount_ucf,
+                    child: Text('amount_ucf'.tr(context: context),
                         style: TextStyle(
                             color: MyTheme.dark_font_grey,
                             fontSize: 13,
@@ -522,7 +522,7 @@ class _WalletState extends State<Wallet> {
                             fillColor: MyTheme.light_grey,
                             filled: true,
                             hintText:
-                                AppLocalizations.of(context)!.enter_amount_ucf,
+                                'enter_amount_ucf'.tr(context: context),
                             hintStyle: const TextStyle(
                                 fontSize: 12.0, color: MyTheme.textfield_grey),
                             enabledBorder: OutlineInputBorder(
@@ -563,7 +563,7 @@ class _WalletState extends State<Wallet> {
                       side: BorderSide(
                           color: Theme.of(context).primaryColor, width: 1.0)),
                   child: Text(
-                    AppLocalizations.of(context)!.close_ucf,
+                    'close_ucf'.tr(context: context),
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context).primaryColor,
@@ -587,7 +587,7 @@ class _WalletState extends State<Wallet> {
                           BorderRadius.circular(AppDimensions.radiusHalfSmall),
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.proceed_ucf,
+                      'proceed_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,

@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/notification_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +61,7 @@ class _NotificationListState extends State<NotificationList> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              LangText(context).local.notification_ucf,
+              'notification_ucf'.tr(context: context),
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -71,7 +72,7 @@ class _NotificationListState extends State<NotificationList> {
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     value: 1,
-                    child: Text(LangText(context).local.delete_selection),
+                    child: Text('delete_selection'.tr(context: context)),
                   ),
                 ],
                 onSelected: (value) async {
@@ -79,7 +80,7 @@ class _NotificationListState extends State<NotificationList> {
                   // if empty list then return
                   if (notificationIds.isEmpty) {
                     ToastComponent.showDialog(
-                      LangText(context).local.nothing_selected,
+                      'nothing_selected'.tr(context: context),
                     );
                     return;
                   }
@@ -124,7 +125,7 @@ class _NotificationListState extends State<NotificationList> {
                     height: 50,
                     width: DeviceInfo(context).width,
                     child: CheckboxListTile(
-                      title: Text(LangText(context).local.select_all),
+                      title: Text('select_all'.tr(context: context)),
                       value: isAllSelected,
                       onChanged: (bool? value) {
                         setState(() {
@@ -190,7 +191,7 @@ class _NotificationListState extends State<NotificationList> {
                   )
                 : Center(
                     child: Text(
-                    LangText(context).local.no_notification_ucf,
+                    'no_notification_ucf'.tr(context: context),
                   )),
           ],
         ));

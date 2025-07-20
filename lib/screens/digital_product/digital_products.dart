@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -12,7 +12,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_d
 import 'package:active_ecommerce_cms_demo_app/screens/product/digital_product_details.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class DigitalProducts extends StatefulWidget {
@@ -111,8 +111,8 @@ class _DigitalProductsState extends State<DigitalProducts> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _digitalProducts.length
-            ? AppLocalizations.of(context)!.no_more_products_ucf
-            : AppLocalizations.of(context)!.loading_more_products_ucf),
+            ? 'no_more_products_ucf'.tr(context: context)
+            : 'loading_more_products_ucf'.tr(context: context)),
       ),
     );
   }
@@ -136,7 +136,7 @@ class _DigitalProductsState extends State<DigitalProducts> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              AppLocalizations.of(context)!.digital_product_ucf,
+              'digital_product_ucf'.tr(context: context),
               style: TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
@@ -165,7 +165,7 @@ class _DigitalProductsState extends State<DigitalProducts> {
 
     if (_digitalProducts.isEmpty) {
       return Center(
-        child: Text(LangText(context).local.no_data_is_available),
+        child: Text('no_data_is_available'.tr(context: context)),
       );
     }
     return RefreshIndicator(
@@ -297,7 +297,7 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                             ],
                           ),
                           child: Text(
-                            LangText(context).local.wholesale,
+                            'wholesale'.tr(context: context),
                             style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -321,7 +321,7 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
-                          widget.name ?? LangText(context).local.no_name,
+                          widget.name ?? 'no_name'.tr(context: context),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(

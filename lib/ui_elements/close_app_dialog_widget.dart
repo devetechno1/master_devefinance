@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/app_dimensions.dart';
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class CloseAppDialogWidget extends StatelessWidget {
   const CloseAppDialogWidget({super.key});
@@ -23,17 +23,17 @@ class CloseAppDialogWidget extends StatelessWidget {
       ),
       icon: Icon(Icons.logout, color: Theme.of(context).primaryColor, size: 50),
       content: Text(
-        LangText(context).local.do_you_want_close_the_app,
+        'do_you_want_close_the_app'.tr(context: context),
         style: Theme.of(context).textTheme.bodyLarge,
       ),
       actions: [
         TextButton(
           onPressed: Platform.isAndroid ? SystemNavigator.pop : () => exit(0),
-          child: Text(LangText(context).local.yes_ucf),
+          child: Text('yes_ucf'.tr(context: context)),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: Text(LangText(context).local.no_ucf),
+          child: Text('no_ucf'.tr(context: context)),
         ),
       ],
     );

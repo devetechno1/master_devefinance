@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/text_styles.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/chat_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
@@ -25,13 +26,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/index.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../app_config.dart';
-import '../../custom/lang_text.dart';
 import '../../helpers/main_helpers.dart';
 import '../../repositories/auction_products_repository.dart';
 
@@ -240,7 +239,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.copy_product_link_ucf,
+                            'copy_product_link_ucf'.tr(context: context),
                             style: TextStyle(
                               color: MyTheme.medium_grey,
                             ),
@@ -267,7 +266,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               padding: const EdgeInsets.only(
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
-                                AppLocalizations.of(context)!.copied_ucf,
+                                'copied_ucf'.tr(context: context),
                                 style: TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
@@ -286,7 +285,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.share_options_ucf,
+                            'share_options_ucf'.tr(context: context),
                             style: const TextStyle(color: Colors.white),
                           ),
                           onPressed: () {
@@ -318,7 +317,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
-                          LangText(context).local.close_all_capital,
+                          'close_all_capital'.tr(context: context),
                           style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
@@ -356,7 +355,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
-                          child: Text(AppLocalizations.of(context)!.title_ucf,
+                          child: Text('title_ucf'.tr(context: context),
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -369,8 +368,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               controller: sellerChatTitleController,
                               autofocus: false,
                               decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .enter_title_ucf,
+                                  hintText: 'enter_title_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -401,7 +399,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
                           child: Text(
-                              "${AppLocalizations.of(context)!.message_ucf} *",
+                              "${'message_ucf'.tr(context: context)} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -416,8 +414,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
                               decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .enter_message_ucf,
+                                  hintText: 'enter_message_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -467,7 +464,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.close_all_capital,
+                            'close_all_capital'.tr(context: context),
                             style: const TextStyle(
                               color: MyTheme.font_grey,
                             ),
@@ -492,7 +489,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.send_all_capital,
+                            'send_all_capital'.tr(context: context),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -523,7 +520,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               const SizedBox(
                 width: 10,
               ),
-              Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
+              Text("${'please_wait_ucf'.tr(context: context)}"),
             ],
           ));
         });
@@ -531,7 +528,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
   Future<void> showLoginWarning() {
     return ToastComponent.showDialog(
-      AppLocalizations.of(context)!.you_need_to_log_in,
+      'you_need_to_log_in'.tr(context: context),
     );
   }
 
@@ -546,7 +543,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
     if (title == "" || message == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.title_or_message_empty_warning,
+        'title_or_message_empty_warning'.tr(context: context),
       );
       return;
     }
@@ -561,7 +558,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
     if (conversationCreateResponse.result == false) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.could_not_create_conversation,
+        'could_not_create_conversation'.tr(context: context),
       );
       return;
     }
@@ -586,13 +583,13 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   Widget build(BuildContext context) {
     SnackBar(
       content: Text(
-        AppLocalizations.of(context)!.added_to_cart,
+        'added_to_cart'.tr(context: context),
         style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
-        label: AppLocalizations.of(context)!.show_cart_all_capital,
+        label: 'show_cart_all_capital'.tr(context: context),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const Cart(has_bottomnav: false);
@@ -649,8 +646,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         child: Text(
                           (_auctionproductDetails.highestBid == '' ||
                                   _auctionproductDetails.highestBid == null)
-                              ? AppLocalizations.of(context)!.place_bid_ucf
-                              : AppLocalizations.of(context)!.change_bid_ucf,
+                              ? 'place_bid_ucf'.tr(context: context)
+                              : 'change_bid_ucf'.tr(context: context),
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -819,7 +816,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   0.0,
                                 ),
                                 child: Text(
-                                  AppLocalizations.of(context)!.description_ucf,
+                                  'description_ucf'.tr(context: context),
                                   style: TextStyle(
                                       color: MyTheme.dark_font_grey,
                                       fontSize: 13,
@@ -851,8 +848,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           onTap: () {
                             if (_auctionproductDetails.videoLink == "") {
                               ToastComponent.showDialog(
-                                AppLocalizations.of(context)!
-                                    .video_not_available,
+                                'video_not_available'.tr(context: context),
                               );
                               return;
                             }
@@ -879,7 +875,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.video_ucf,
+                                    'video_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -904,8 +900,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/seller-policy",
-                                page_name: AppLocalizations.of(context)!
-                                    .seller_policy_ucf,
+                                page_name: 'seller_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -922,8 +917,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .seller_policy_ucf,
+                                    'seller_policy_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -948,8 +942,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/return-policy",
-                                page_name: AppLocalizations.of(context)!
-                                    .return_policy_ucf,
+                                page_name: 'return_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -966,8 +959,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .return_policy_ucf,
+                                    'return_policy_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -992,8 +984,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/support-policy",
-                                page_name: AppLocalizations.of(context)!
-                                    .support_policy_ucf,
+                                page_name: 'support_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -1010,8 +1001,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .support_policy_ucf,
+                                    'support_policy_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
@@ -1103,7 +1093,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.seller_ucf,
+                Text('seller_ucf'.tr(context: context),
                     style: const TextStyle(
                       color: Color.fromRGBO(153, 153, 153, 1),
                     )),
@@ -1129,7 +1119,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         onTap: () {
                           if (is_logged_in == false) {
                             ToastComponent.showDialog(
-                              LangText(context).local.you_need_to_log_in,
+                              'you_need_to_log_in'.tr(context: context),
                             );
                             return;
                           }
@@ -1153,7 +1143,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         backgroundColor: Theme.of(context).primaryColor,
       ),
       child: Text(
-        AppLocalizations.of(context)!.submit_ucf,
+        'submit_ucf'.tr(context: context),
         style: const TextStyle(color: MyTheme.white),
       ),
       onPressed: () {
@@ -1176,12 +1166,12 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.bid_for_product_ucf,
+                        'bid_for_product_ucf'.tr(context: context),
                         style: TextStyle(
                             fontSize: 13, color: MyTheme.dark_font_grey),
                       ),
                       Text(
-                        "(${AppLocalizations.of(context)!.min_bid_amount_ucf}: ${_auctionproductDetails.minBidPrice})",
+                        "(${'min_bid_amount_ucf'.tr(context: context)}: ${_auctionproductDetails.minBidPrice})",
                         style: const TextStyle(fontSize: 10),
                       ),
                     ],
@@ -1212,7 +1202,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               Row(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.place_bid_price_ucf,
+                    'place_bid_price_ucf'.tr(context: context),
                     style: const TextStyle(fontSize: 12),
                   ),
                   const Text(
@@ -1230,7 +1220,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       controller: _bidPriceController,
                       decoration: InputDecoration(
                         hintText:
-                            AppLocalizations.of(context)!.enter_amount_ucf,
+                            'enter_amount_ucf'.tr(context: context),
                         isDense: true,
                         border: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
@@ -1238,22 +1228,19 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return AppLocalizations.of(context)!
-                              .please_fill_out_this_form;
+                          return 'please_fill_out_this_form'.tr(context: context);
                         }
 
                         if (_auctionproductDetails.highestBid != '') {
                           if (double.parse(value) <
                               _auctionproductDetails.minBidPrice.toDouble()) {
-                            return AppLocalizations.of(context)!
-                                .value_must_be_greater;
+                            return 'value_must_be_greater'.tr(context: context);
                           }
                         }
                         if (_auctionproductDetails.highestBid == '') {
                           if (double.parse(value) <
                               _auctionproductDetails.minBidPrice.toDouble()) {
-                            return AppLocalizations.of(context)!
-                                .value_must_be_greater_or_equal;
+                            return 'value_must_be_greater_or_equal'.tr(context: context);
                           }
                         }
 
@@ -1268,7 +1255,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             backgroundColor: Theme.of(context).primaryColor,
                           ),
                           child: Text(
-                            AppLocalizations.of(context)!.submit_ucf,
+                            'submit_ucf'.tr(context: context),
                             style: const TextStyle(color: MyTheme.white),
                           ),
                           onPressed: () {
@@ -1312,7 +1299,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               child: Container(
                 width: 75,
                 child: Text(
-                  AppLocalizations.of(context)!.total_price_ucf,
+                  'total_price_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Color.fromRGBO(153, 153, 153, 1), fontSize: 10),
                 ),
@@ -1345,7 +1332,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           child: Container(
             width: 95,
             child: Text(
-              AppLocalizations.of(context)!.starting_bid_ucf,
+              'starting_bid_ucf'.tr(context: context),
               style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
             ),
           ),
@@ -1373,7 +1360,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           child: Container(
             width: 95,
             child: Text(
-              AppLocalizations.of(context)!.highest_bid_ucf,
+              'highest_bid_ucf'.tr(context: context),
               style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
             ),
           ),
@@ -1398,7 +1385,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           child: Container(
             width: 95,
             child: Text(
-              AppLocalizations.of(context)!.auction_will_end,
+              'auction_will_end'.tr(context: context),
               style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
             ),
           ),
@@ -1604,7 +1591,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   child: Container(
                     width: 75,
                     child: Text(
-                      AppLocalizations.of(context)!.brand_ucf,
+                      'brand_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Color.fromRGBO(153, 153, 153, 1),
                           fontSize: 10),
@@ -1649,8 +1636,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
-                          ? AppLocalizations.of(context)!.view_more
-                          : AppLocalizations.of(context)!.show_less_ucf,
+                          ? 'view_more'.tr(context: context)
+                          : 'show_less_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: MyTheme.font_grey, fontSize: 11),
                     ),

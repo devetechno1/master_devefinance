@@ -2,13 +2,13 @@
 
 import 'dart:async';
 
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photo_view/photo_view.dart';
@@ -21,7 +21,6 @@ import '../../app_config.dart';
 import '../../custom/box_decorations.dart';
 import '../../custom/btn.dart';
 import '../../custom/device_info.dart';
-import '../../custom/lang_text.dart';
 import '../../custom/toast_component.dart';
 import '../../data_model/product_details_response.dart';
 import '../../helpers/color_helper.dart';
@@ -272,7 +271,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   void onWishTap() {
     if (is_logged_in.$ == false) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.you_need_to_log_in,
+        'you_need_to_log_in'.tr(context: context),
       );
       return;
     }
@@ -379,7 +378,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
   Future<void> addToCart({mode, BuildContext? context, snackbar = null}) async {
     // if (is_logged_in.$ == false) {
-    //   // ToastComponent.showDialog(AppLocalizations.of(context).common_login_warning, context,
+    //   // ToastComponent.showDialog('common_login_warning'.tr(context: context), context,
     //   //     gravity: Toast.center, duration: Toast.lengthLong);
     //   //Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     //   context?.go("/users/login");
@@ -468,7 +467,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.copy_product_link_ucf,
+                            'copy_product_link_ucf'.tr(context: context),
                             style: TextStyle(
                               color: MyTheme.medium_grey,
                             ),
@@ -495,7 +494,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               padding: const EdgeInsets.only(
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
-                                AppLocalizations.of(context)!.copied_ucf,
+                                'copied_ucf'.tr(context: context),
                                 style: TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
@@ -514,7 +513,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.share_options_ucf,
+                            'share_options_ucf'.tr(context: context),
                             style: const TextStyle(color: Colors.white),
                           ),
                           onPressed: () {
@@ -545,7 +544,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
-                          LangText(context).local.close_all_capital,
+                          'close_all_capital'.tr(context: context),
                           style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
@@ -583,7 +582,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
-                          child: Text(AppLocalizations.of(context)!.title_ucf,
+                          child: Text('title_ucf'.tr(context: context),
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -596,8 +595,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               controller: sellerChatTitleController,
                               autofocus: false,
                               decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .enter_title_ucf,
+                                  hintText: 'enter_title_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -628,7 +626,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
                           child: Text(
-                              "${AppLocalizations.of(context)!.message_ucf} *",
+                              "${'message_ucf'.tr(context: context)} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -643,8 +641,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
                               decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .enter_message_ucf,
+                                  hintText: 'enter_message_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -694,7 +691,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.close_all_capital,
+                            'close_all_capital'.tr(context: context),
                             style: const TextStyle(
                               color: MyTheme.font_grey,
                             ),
@@ -719,7 +716,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.send_all_capital,
+                            'send_all_capital'.tr(context: context),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -750,7 +747,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               const SizedBox(
                 width: 10,
               ),
-              Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
+              Text("${'please_wait_ucf'.tr(context: context)}"),
             ],
           ));
         });
@@ -758,7 +755,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
   dynamic showLoginWarning() {
     return ToastComponent.showDialog(
-      AppLocalizations.of(context)!.you_need_to_log_in,
+      'you_need_to_log_in'.tr(context: context),
     );
   }
 
@@ -773,7 +770,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
     if (title == "" || message == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.title_or_message_empty_warning,
+        'title_or_message_empty_warning'.tr(context: context),
       );
       return;
     }
@@ -786,7 +783,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
     if (conversationCreateResponse.result == false) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.could_not_create_conversation,
+        'could_not_create_conversation'.tr(context: context),
       );
       return;
     }
@@ -811,13 +808,13 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   Widget build(BuildContext context) {
     final SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
-        AppLocalizations.of(context)!.added_to_cart,
+        'added_to_cart'.tr(context: context),
         style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
-        label: AppLocalizations.of(context)!.show_cart_all_capital,
+        label: 'show_cart_all_capital'.tr(context: context),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const Cart(has_bottomnav: false);
@@ -1165,7 +1162,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                   0.0,
                                 ),
                                 child: Text(
-                                  AppLocalizations.of(context)!.description_ucf,
+                                  'description_ucf'.tr(context: context),
                                   style: const TextStyle(
                                       color: Color(0xff3E4447),
                                       fontFamily: 'Public Sans',
@@ -1221,8 +1218,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                     child: Row(
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context)!
-                                              .downloads_ucf,
+                                          'downloads_ucf'.tr(context: context),
                                           style: TextStyle(
                                               color: MyTheme.dark_font_grey,
                                               fontSize: 13,
@@ -1248,8 +1244,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           onTap: () {
                             if (_productDetails!.video_link == "") {
                               ToastComponent.showDialog(
-                                AppLocalizations.of(context)!
-                                    .video_not_available,
+                                'video_not_available'.tr(context: context),
                               );
                               return;
                             }
@@ -1287,7 +1282,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.video_ucf,
+                                    'video_ucf'.tr(context: context),
                                     style: const TextStyle(
                                         color: Color(0xff3E4447),
                                         fontSize: 13,
@@ -1342,7 +1337,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.reviews_ucf,
+                                    'reviews_ucf'.tr(context: context),
                                     style: const TextStyle(
                                         color: Color(0xff3E4447),
                                         fontFamily: 'Public Sans',
@@ -1372,8 +1367,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         0.0,
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!
-                            .products_you_may_also_like,
+                        'products_you_may_also_like'.tr(context: context),
                         style: const TextStyle(
                             color: Colors.black,
                             fontFamily: 'Roboto',
@@ -1396,7 +1390,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         0.0,
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.top_selling_products_ucf,
+                        'top_selling_products_ucf'.tr(context: context),
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -1474,7 +1468,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.seller_ucf,
+                Text('seller_ucf'.tr(context: context),
                     style: const TextStyle(
                         color: Color(0xff6B7377),
                         fontFamily: 'Public Sans',
@@ -1514,7 +1508,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         onTap: () {
                           if (is_logged_in == false) {
                             ToastComponent.showDialog(
-                              LangText(context).local.you_need_to_log_in,
+                              'you_need_to_log_in'.tr(context: context),
                             );
                             return;
                           }
@@ -1548,7 +1542,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               child: Container(
                 width: 75,
                 child: Text(
-                  AppLocalizations.of(context)!.total_price_ucf,
+                  'total_price_ucf'.tr(context: context),
                   style:
                       const TextStyle(color: Color(0xff6B7377), fontSize: 10),
                 ),
@@ -1787,7 +1781,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           child: Container(
             width: 75,
             child: Text(
-              AppLocalizations.of(context)!.color_ucf,
+              'color_ucf'.tr(context: context),
               style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
             ),
           ),
@@ -1882,13 +1876,13 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
       columns: [
         DataColumn(
-            label: Text(LangText(context).local.min_qty_ucf,
+            label: Text('min_qty_ucf'.tr(context: context),
                 style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
-            label: Text(LangText(context).local.max_qty_ucf,
+            label: Text('max_qty_ucf'.tr(context: context),
                 style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
-            label: Text(LangText(context).local.unit_price_ucf,
+            label: Text('unit_price_ucf'.tr(context: context),
                 style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
@@ -1949,7 +1943,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   width: 4,
                 ),
                 Text(
-                  AppLocalizations.of(context)!.club_point_ucf,
+                  'club_point_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Color(0xff6B7377),
                       fontSize: 10,
@@ -2101,7 +2095,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               height: 50,
               child: Center(
                 child: Text(
-                  AppLocalizations.of(context)!.add_to_cart_ucf,
+                  'add_to_cart_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -2136,7 +2130,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               ),
               child: Center(
                 child: Text(
-                  AppLocalizations.of(context)!.buy_now_ucf,
+                  'buy_now_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -2189,7 +2183,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
-            LangText(context).local.estimate_shipping_time_ucf,
+            'estimate_shipping_time_ucf'.tr(context: context),
             style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
@@ -2197,7 +2191,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
-            "${_productDetails!.estShippingTime}  ${LangText(context).local.days_ucf}",
+            "${_productDetails!.estShippingTime}  ${'days_ucf'.tr(context: context)}",
             style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
@@ -2225,7 +2219,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   child: Container(
                     width: 75,
                     child: Text(
-                      AppLocalizations.of(context)!.brand_ucf,
+                      'brand_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Color(0xff6B7377),
                           fontSize: 10,
@@ -2284,8 +2278,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               },
               child: Text(
                 webViewHeight == 50
-                    ? LangText(context).local.view_more
-                    : LangText(context).local.less,
+                    ? 'view_more'.tr(context: context)
+                    : 'less'.tr(context: context),
                 style: const TextStyle(color: Color(0xff0077B6)),
               ))
         ],
@@ -2342,8 +2336,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           height: 100,
           child: Center(
               child: Text(
-                  AppLocalizations.of(context)!
-                      .no_top_selling_products_from_this_seller,
+                  'no_top_selling_products_from_this_seller'.tr(context: context),
                   style: const TextStyle(color: MyTheme.font_grey))));
     }
   }
@@ -2403,7 +2396,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_related_product,
+            'no_related_product'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }

@@ -8,8 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/order_repository.dart
 import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/orders/order_details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:one_context/one_context.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../data_model/order_mini_response.dart';
@@ -22,11 +21,9 @@ class PaymentStatus {
 
   static List<PaymentStatus> getPaymentStatusList() {
     return <PaymentStatus>[
-      PaymentStatus('', AppLocalizations.of(OneContext().context!)!.all_ucf),
-      PaymentStatus(
-          'paid', AppLocalizations.of(OneContext().context!)!.paid_ucf),
-      PaymentStatus(
-          'unpaid', AppLocalizations.of(OneContext().context!)!.unpaid_ucf),
+      PaymentStatus('', 'all_ucf'.tr()),
+      PaymentStatus('paid', 'paid_ucf'.tr()),
+      PaymentStatus('unpaid', 'unpaid_ucf'.tr()),
     ];
   }
 }
@@ -39,13 +36,10 @@ class DeliveryStatus {
 
   static List<DeliveryStatus> getDeliveryStatusList() {
     return <DeliveryStatus>[
-      DeliveryStatus('', AppLocalizations.of(OneContext().context!)!.all_ucf),
-      DeliveryStatus('confirmed',
-          AppLocalizations.of(OneContext().context!)!.confirmed_ucf),
-      DeliveryStatus('on_the_way',
-          AppLocalizations.of(OneContext().context!)!.on_the_way_ucf),
-      DeliveryStatus('delivered',
-          AppLocalizations.of(OneContext().context!)!.delivered_ucf),
+      DeliveryStatus('', 'all_ucf'.tr()),
+      DeliveryStatus('confirmed', 'confirmed_ucf'.tr()),
+      DeliveryStatus('on_the_way', 'on_the_way_ucf'.tr()),
+      DeliveryStatus('delivered', 'delivered_ucf'.tr()),
     ];
   }
 }
@@ -240,8 +234,8 @@ class _OrderListState extends State<OrderList> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _orderList.length
-            ? AppLocalizations.of(context)!.no_more_orders_ucf
-            : AppLocalizations.of(context)!.loading_more_orders_ucf),
+            ? 'no_more_orders_ucf'.tr(context: context)
+            : 'loading_more_orders_ucf'.tr(context: context)),
       ),
     );
   }
@@ -264,7 +258,7 @@ class _OrderListState extends State<OrderList> {
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
               hint: Text(
-                AppLocalizations.of(context)!.all_payments_ucf,
+                'all_payments_ucf'.tr(context: context),
                 style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
@@ -295,7 +289,7 @@ class _OrderListState extends State<OrderList> {
               isExpanded: true,
               padding: const EdgeInsets.symmetric(horizontal: 14),
               hint: Text(
-                AppLocalizations.of(context)!.all_deliveries_ucf,
+                'all_deliveries_ucf'.tr(context: context),
                 style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
@@ -373,7 +367,7 @@ class _OrderListState extends State<OrderList> {
             ),
           ),
           Text(
-            AppLocalizations.of(context)!.purchase_history_ucf,
+            'purchase_history_ucf'.tr(context: context),
             style: TextStyle(
                 fontSize: 16,
                 color: MyTheme.dark_font_grey,
@@ -448,8 +442,7 @@ class _OrderListState extends State<OrderList> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(
-          child: Text(AppLocalizations.of(context)!.no_data_is_available));
+      return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -499,7 +492,7 @@ class _OrderListState extends State<OrderList> {
               child: Row(
                 children: [
                   Text(
-                    "${AppLocalizations.of(context)!.payment_status_ucf} - ",
+                    "${'payment_status_ucf'.tr(context: context)} - ",
                     style:
                         TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                   ),
@@ -518,7 +511,7 @@ class _OrderListState extends State<OrderList> {
             Row(
               children: [
                 Text(
-                  "${AppLocalizations.of(context)!.delivery_status_ucf} -",
+                  "${'delivery_status_ucf'.tr(context: context)} -",
                   style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                 ),
                 Text(

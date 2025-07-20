@@ -6,12 +6,12 @@ import '../app_config.dart';
 class LocaleProvider with ChangeNotifier {
   Locale? _locale;
   Locale get locale {
-    //print("app_mobile_language.isEmpty${app_mobile_language.$.isEmpty}");
-    return _locale = Locale(
-        app_mobile_language.$ == ''
-            ? AppConfig.mobile_app_code
-            : app_mobile_language.$!,
-        '');
+    return _locale ??
+        Locale(
+            app_mobile_language.$ == ''
+                ? AppConfig.mobile_app_code
+                : app_mobile_language.$!,
+            '');
   }
 
   void setLocale(String code) {

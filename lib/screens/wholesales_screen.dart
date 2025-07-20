@@ -13,9 +13,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.da
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class WholesalesScreen extends StatefulWidget {
   const WholesalesScreen({super.key});
@@ -57,7 +55,7 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.wholesale_products_ucf,
+        'wholesale_products_ucf'.tr(context: context),
         style: TextStyle(
           fontSize: 16,
           color: MyTheme.dark_font_grey,
@@ -82,14 +80,14 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return Center(
-                child: Text(LangText(context).local.error_loading_products));
+                child: Text('error_loading_products'.tr(context: context)));
           }
 
           // Safely check if data and products exist
           final productResponse = snapshot.data;
           if (productResponse == null || productResponse.products.isEmpty) {
             return Center(
-              child: Text(AppLocalizations.of(context)!.no_data_is_available),
+              child: Text('no_data_is_available'.tr(context: context)),
             );
           }
 
@@ -233,7 +231,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                             ],
                           ),
                           child: Text(
-                            LangText(context).local.wholesale,
+                            'wholesale'.tr(context: context),
                             style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -257,7 +255,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
-                          widget.name ?? LangText(context).local.no_name,
+                          widget.name ?? 'no_name'.tr(context: context),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(

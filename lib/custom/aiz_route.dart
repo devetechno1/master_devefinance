@@ -1,18 +1,18 @@
 import 'package:active_ecommerce_cms_demo_app/data_model/address_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/select_address.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../app_config.dart';
 
 class AIZRoute {
   static Otp otpRoute(BuildContext context) => Otp(
-        title: AppLocalizations.of(context)!.verifyYourAccount,
+        title: 'verifyYourAccount'.tr(context: context),
         fromRegistration: false,
       );
 

@@ -5,7 +5,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/seller_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class ShopSquareCard extends StatefulWidget {
   final int? id;
@@ -101,7 +101,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
 
   Widget _buildName() {
     return Text(
-      widget.name ?? LangText(context).local.no_name,
+      widget.name ?? 'no_name'.tr(context: context),
       textAlign: TextAlign.left,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
@@ -146,7 +146,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
         borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
       ),
       child: Text(
-        LangText(context).local.visit_store_ucf,
+        'visit_store_ucf'.tr(context: context),
         style: TextStyle(
           fontSize: 10,
           color: Colors.amber.shade700,

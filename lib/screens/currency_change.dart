@@ -4,10 +4,10 @@ import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/currency_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/currency_presenter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -84,7 +84,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
         ),
       ),
       title: Text(
-        "${AppLocalizations.of(context)!.currency_change_ucf}",
+        "${'currency_change_ucf'.tr(context: context)}",
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

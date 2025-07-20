@@ -16,7 +16,6 @@ import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
-import '../custom/lang_text.dart';
 import '../custom/toast_component.dart';
 import '../data_model/address_response.dart';
 import '../data_model/category_response.dart';
@@ -27,6 +26,7 @@ import '../screens/address.dart' as screen;
 import '../status/execute_and_handle_remote_errors.dart';
 import '../status/status.dart';
 import '../ui_elements/pop_up_banner.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class HomePresenter extends ChangeNotifier {
   CurrentRemainingTime flashDealRemainingTime =
@@ -271,7 +271,7 @@ class HomePresenter extends ChangeNotifier {
 
   void handleAddressNavigationWithToast() {
     ToastComponent.showDialog(
-      LangText(OneContext().context!).local.add_default_address,
+      'add_default_address'.tr(),
       isError: true,
     );
     handleAddressNavigation();
@@ -560,7 +560,7 @@ class HomePresenter extends ChangeNotifier {
               mainScrollController.positions.first.maxScrollExtent &&
           (totalAllProductData ?? 10000) > allProductList.length) {
         allProductPage++;
-        // ToastComponent.showDialog(LangText(context).local.loading_more_products_ucf);
+        // ToastComponent.showDialog('loading_more_products_ucf'.tr(context: context));
         showAllLoadingContainer = true;
         fetchAllProducts();
       }

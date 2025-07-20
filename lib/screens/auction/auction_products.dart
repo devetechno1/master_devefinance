@@ -1,13 +1,12 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../repositories/auction_products_repository.dart';
@@ -109,8 +108,8 @@ class _AuctionProductsState extends State<AuctionProducts> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _auctionProductItems.length
-            ? AppLocalizations.of(context)!.no_more_products_ucf
-            : AppLocalizations.of(context)!.loading_more_products_ucf),
+            ? 'no_more_products_ucf'.tr(context: context)
+            : 'loading_more_products_ucf'.tr(context: context)),
       ),
     );
   }
@@ -127,7 +126,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              AppLocalizations.of(context)!.auction_product_screen_title,
+              'auction_product_screen_title'.tr(context: context),
               style: TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
@@ -156,7 +155,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
 
     if (_auctionProductItems.isEmpty) {
       return Center(
-        child: Text(LangText(context).local.no_data_is_available),
+        child: Text('no_data_is_available'.tr(context: context)),
       );
     }
     return RefreshIndicator(

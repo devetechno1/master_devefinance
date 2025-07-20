@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/confirm_dialog.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/info_dialog.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/loading.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/order_detail_response.dart';
@@ -26,7 +26,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/refund_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -222,7 +222,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     }
 
     InfoDialog.show(
-        title: LangText(context).local.info_ucf,
+        title: 'info_ucf'.tr(context: context),
         content: SizedBox(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -241,10 +241,10 @@ class _OrderDetailsState extends State<OrderDetails> {
   dynamic _showCancelDialog(id) {
     return ConfirmDialog.show(
       context,
-      title: LangText(context).local.pleaseEnsureUs,
-      message: LangText(context).local.do_you_want_to_cancel_this_order,
-      yesText: LangText(context).local.yes_ucf,
-      noText: LangText(context).local.no_ucf,
+      title: 'pleaseEnsureUs'.tr(context: context),
+      message: 'do_you_want_to_cancel_this_order'.tr(context: context),
+      yesText: 'yes_ucf'.tr(context: context),
+      noText: 'no_ucf'.tr(context: context),
       pressYes: () {
         _onPressCancelOrder(id);
       },
@@ -275,7 +275,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       context,
       MaterialPageRoute(
         builder: (context) => Checkout(
-          title: LangText(context).local.order_repayment,
+          title: 'order_repayment'.tr(context: context),
           rechargeAmount: convertedAmount,
           paymentFor: PaymentFor.OrderRePayment,
           order_id: _orderDetails!.id,
@@ -288,7 +288,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return Checkout(
         order_id: widget.id,
-        title: AppLocalizations.of(context)!.checkout_ucf,
+        title: 'checkout_ucf'.tr(context: context),
         list: "offline",
         paymentFor: PaymentFor.ManualPayment,
         //offLinePaymentFor: OffLinePaymentFor.Order,
@@ -321,7 +321,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             bottom: AppDimensions.paddingSmall),
                         child: Row(
                           children: [
-                            Text(AppLocalizations.of(context)!.product_name_ucf,
+                            Text('product_name_ucf'.tr(context: context),
                                 style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
                             Container(
@@ -345,7 +345,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             bottom: AppDimensions.paddingSmall),
                         child: Row(
                           children: [
-                            Text(AppLocalizations.of(context)!.order_code_ucf,
+                            Text('order_code_ucf'.tr(context: context),
                                 style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
                             Padding(
@@ -364,7 +364,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         child: Row(
                           children: [
                             Text(
-                                "${AppLocalizations.of(context)!.reason_ucf} *",
+                                "${'reason_ucf'.tr(context: context)} *",
                                 style: const TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
                             _showReasonWarning
@@ -373,8 +373,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                       left: 8.0,
                                     ),
                                     child: Text(
-                                        AppLocalizations.of(context)!
-                                            .reason_cannot_be_empty,
+                                        'reason_cannot_be_empty'.tr(context: context),
                                         style: const TextStyle(
                                             color: Colors.red, fontSize: 12)),
                                   )
@@ -393,8 +392,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
                             decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!
-                                    .enter_reason_ucf,
+                                hintText: 'enter_reason_ucf'.tr(context: context),
                                 hintStyle: const TextStyle(
                                     fontSize: 12.0,
                                     color: MyTheme.textfield_grey),
@@ -440,7 +438,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
-                          AppLocalizations.of(context)!.close_all_capital,
+                          'close_all_capital'.tr(context: context),
                           style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
@@ -467,7 +465,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
-                          AppLocalizations.of(context)!.submit_ucf,
+                          'submit_ucf'.tr(context: context),
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -526,7 +524,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
-        label: AppLocalizations.of(context)!.show_request_list_ucf,
+        label: 'show_request_list_ucf'.tr(context: context),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return RefundRequest();
@@ -599,7 +597,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     delegate: SliverChildListDelegate([
                   Center(
                     child: Text(
-                      AppLocalizations.of(context)!.ordered_product_ucf,
+                      'ordered_product_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 14,
@@ -616,8 +614,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               : Container(
                                   height: 100,
                                   child: Text(
-                                    AppLocalizations.of(context)!
-                                        .ordered_product_ucf,
+                                    'ordered_product_ucf'.tr(context: context),
                                     style: const TextStyle(
                                         color: MyTheme.font_grey),
                                   ),
@@ -663,7 +660,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Container(
                           width: 120,
                           child: Text(
-                            AppLocalizations.of(context)!.sub_total_all_capital,
+                            'sub_total_all_capital'.tr(context: context),
                             textAlign: TextAlign.end,
                             style: const TextStyle(
                                 color: MyTheme.font_grey,
@@ -689,7 +686,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Container(
                           width: 120,
                           child: Text(
-                            AppLocalizations.of(context)!.tax_all_capital,
+                            'tax_all_capital'.tr(context: context),
                             textAlign: TextAlign.end,
                             style: const TextStyle(
                                 color: MyTheme.font_grey,
@@ -715,8 +712,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Container(
                           width: 120,
                           child: Text(
-                            AppLocalizations.of(context)!
-                                .shipping_cost_all_capital,
+                            'shipping_cost_all_capital'.tr(context: context),
                             textAlign: TextAlign.end,
                             style: const TextStyle(
                                 color: MyTheme.font_grey,
@@ -742,7 +738,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Container(
                           width: 120,
                           child: Text(
-                            AppLocalizations.of(context)!.discount_all_capital,
+                            'discount_all_capital'.tr(context: context),
                             textAlign: TextAlign.end,
                             style: const TextStyle(
                                 color: MyTheme.font_grey,
@@ -769,8 +765,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Container(
                           width: 120,
                           child: Text(
-                            AppLocalizations.of(context)!
-                                .grand_total_all_capital,
+                            'grand_total_all_capital'.tr(context: context),
                             textAlign: TextAlign.end,
                             style: const TextStyle(
                                 color: MyTheme.font_grey,
@@ -870,7 +865,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Text(
-                    AppLocalizations.of(context)!.order_placed,
+                    'order_placed'.tr(context: context),
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: MyTheme.font_grey),
                   )
@@ -932,7 +927,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Text(
-                    AppLocalizations.of(context)!.confirmed_ucf,
+                    'confirmed_ucf'.tr(context: context),
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: MyTheme.font_grey),
                   )
@@ -1005,7 +1000,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Text(
-                    AppLocalizations.of(context)!.on_the_way_ucf,
+                    'on_the_way_ucf'.tr(context: context),
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: MyTheme.font_grey),
                   )
@@ -1077,7 +1072,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Text(
-                    AppLocalizations.of(context)!.delivered_ucf,
+                    'delivered_ucf'.tr(context: context),
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: MyTheme.font_grey),
                   )
@@ -1119,7 +1114,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             Row(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.order_code_ucf,
+                  'order_code_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1127,7 +1122,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 const Spacer(),
                 Text(
-                  AppLocalizations.of(context)!.shipping_method_ucf,
+                  'shipping_method_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1160,7 +1155,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             Row(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.order_date_ucf,
+                  'order_date_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1168,7 +1163,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 const Spacer(),
                 Text(
-                  AppLocalizations.of(context)!.payment_method_ucf,
+                  'payment_method_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1200,7 +1195,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             Row(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.payment_status_ucf,
+                  'payment_status_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1208,7 +1203,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 const Spacer(),
                 Text(
-                  AppLocalizations.of(context)!.delivery_status_ucf,
+                  'delivery_status_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1245,8 +1240,8 @@ class _OrderDetailsState extends State<OrderDetails> {
               children: [
                 Text(
                   _orderDetails!.shipping_address != null
-                      ? AppLocalizations.of(context)!.shipping_address_ucf
-                      : AppLocalizations.of(context)!.pickup_point_ucf,
+                      ? 'shipping_address_ucf'.tr(context: context)
+                      : 'pickup_point_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1254,7 +1249,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 const Spacer(),
                 Text(
-                  AppLocalizations.of(context)!.total_amount_ucf,
+                  'total_amount_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 13,
@@ -1273,7 +1268,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           children: [
                             _orderDetails!.shipping_address!.name != null
                                 ? Text(
-                                    "${AppLocalizations.of(context)!.name_ucf}: ${_orderDetails!.shipping_address!.name}",
+                                    "${'name_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.name}",
                                     maxLines: 3,
                                     style: const TextStyle(
                                       color: MyTheme.grey_153,
@@ -1282,7 +1277,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 : Container(),
                             _orderDetails!.shipping_address!.email != null
                                 ? Text(
-                                    "${AppLocalizations.of(context)!.email_ucf}: ${_orderDetails!.shipping_address!.email}",
+                                    "${'email_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.email}",
                                     maxLines: 3,
                                     style: const TextStyle(
                                       color: MyTheme.grey_153,
@@ -1290,42 +1285,42 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   )
                                 : Container(),
                             Text(
-                              "${AppLocalizations.of(context)!.address_ucf}: ${_orderDetails!.shipping_address!.address}",
+                              "${'address_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.address}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.city_ucf}: ${_orderDetails!.shipping_address!.city}",
+                              "${'city_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.city}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.country_ucf}: ${_orderDetails!.shipping_address!.country}",
+                              "${'country_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.country}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.state_ucf}: ${_orderDetails!.shipping_address!.state}",
+                              "${'state_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.state}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.phone_ucf}: ${_orderDetails!.shipping_address!.phone ?? ''}",
+                              "${'phone_ucf'.tr(context: context)}: ${_orderDetails!.shipping_address!.phone ?? ''}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.postal_code}: ${_orderDetails!.shipping_address!.postal_code ?? ''}",
+                              "${'postal_code'.tr(context: context)}: ${_orderDetails!.shipping_address!.postal_code ?? ''}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
@@ -1338,7 +1333,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           children: [
                             _orderDetails!.pickupPoint?.name != null
                                 ? Text(
-                                    "${AppLocalizations.of(context)!.name_ucf}: ${_orderDetails!.pickupPoint!.name}",
+                                    "${'name_ucf'.tr(context: context)}: ${_orderDetails!.pickupPoint!.name}",
                                     maxLines: 3,
                                     style: const TextStyle(
                                       color: MyTheme.grey_153,
@@ -1346,14 +1341,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   )
                                 : Container(),
                             Text(
-                              "${AppLocalizations.of(context)!.address_ucf}: ${_orderDetails!.pickupPoint?.address}",
+                              "${'address_ucf'.tr(context: context)}: ${_orderDetails!.pickupPoint?.address}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.phone_ucf}: ${_orderDetails!.pickupPoint!.phone}",
+                              "${'phone_ucf'.tr(context: context)}: ${_orderDetails!.pickupPoint!.phone}",
                               maxLines: 3,
                               style: const TextStyle(
                                 color: MyTheme.grey_153,
@@ -1398,7 +1393,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   size: 16,
                                 ),
                                 Text(
-                                  LangText(context).local.re_order_ucf,
+                                  're_order_ucf'.tr(context: context),
                                   style: const TextStyle(
                                       color: MyTheme.grey_153, fontSize: 14),
                                 ),
@@ -1431,7 +1426,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 size: 16,
                               ),
                               Text(
-                                LangText(context).local.invoice_ucf,
+                                'invoice_ucf'.tr(context: context),
                                 style: TextStyle(
                                     color: MyTheme.grey_153, fontSize: 14),
                               ),
@@ -1458,7 +1453,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     _showCancelDialog(_orderDetails!.id);
                   },
                   child: Text(
-                    LangText(context).local.cancel_order_ucf,
+                    'cancel_order_ucf'.tr(context: context),
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                   )),
             if (_orderDetails!.delivery_status == "pending" &&
@@ -1475,7 +1470,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     _make_re_payment(_orderDetails!.grand_total ?? '');
                   },
                   child: Text(
-                    LangText(context).local.order_repayment,
+                    'order_repayment'.tr(context: context),
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                   )),
           ],
@@ -1524,7 +1519,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               fontWeight: FontWeight.w600),
                         )
                       : Text(
-                          LangText(context).local.item_all_lower,
+                          'item_all_lower'.tr(context: context),
                           style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 13,
@@ -1557,7 +1552,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.ask_for_refund_ucf,
+                            'ask_for_refund_ucf'.tr(context: context),
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.w600,
@@ -1585,7 +1580,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.refund_status_ucf,
+                            'refund_status_ucf'.tr(context: context),
                             style: const TextStyle(color: MyTheme.font_grey),
                           ),
                           Text(
@@ -1659,7 +1654,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             }),
       ),
       title: Text(
-        AppLocalizations.of(context)!.order_details_ucf,
+        'order_details_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -1680,7 +1675,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               ? Btn.basic(
                   color: MyTheme.soft_accent_color,
                   child: Text(
-                    AppLocalizations.of(context)!.make_offline_payment_ucf,
+                    'make_offline_payment_ucf'.tr(context: context),
                     style: const TextStyle(color: MyTheme.font_grey),
                   ),
                   onPressed: () {

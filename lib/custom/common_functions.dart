@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CommonFunctions {
   BuildContext context;
 
   CommonFunctions(this.context);
 
-  appExitDialog() {
+  void appExitDialog() {
     showDialog(
         context: context,
         builder: (context) => Directionality(
@@ -19,18 +19,18 @@ class CommonFunctions {
                   app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
               child: AlertDialog(
                 content: Text(
-                    AppLocalizations.of(context)!.do_you_want_close_the_app),
+                    'do_you_want_close_the_app'.tr(context: context)),
                 actions: [
                   TextButton(
                       onPressed: () {
                         Platform.isAndroid ? SystemNavigator.pop() : exit(0);
                       },
-                      child: Text(AppLocalizations.of(context)!.yes_ucf)),
+                      child: Text('yes_ucf'.tr(context: context))),
                   TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text(AppLocalizations.of(context)!.no_ucf)),
+                      child: Text('no_ucf'.tr(context: context))),
                 ],
               ),
             ));

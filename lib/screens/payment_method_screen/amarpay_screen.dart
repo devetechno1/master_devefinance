@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../app_config.dart';
@@ -120,7 +120,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
               getData();
             } else if (page.contains("/amarpay/cancel")) {
               ToastComponent.showDialog(
-                AppLocalizations.of(context)!.payment_cancelled_ucf,
+                'payment_cancelled_ucf'.tr(context: context),
               );
               Navigator.of(context).pop(goToOrdersScreen);
               return;
@@ -169,7 +169,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
         widget.payment_type == "cart_payment") {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context)!.creating_order),
+          child: Text('creating_order'.tr(context: context)),
         ),
       );
     } else {
@@ -201,7 +201,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.pay_with_amarpay,
+        'pay_with_amarpay'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,

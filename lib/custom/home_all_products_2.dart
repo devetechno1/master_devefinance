@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../helpers/shimmer_helper.dart';
@@ -57,7 +57,7 @@ class HomeAllProducts2 extends StatelessWidget {
           });
     } else if (homeData!.totalAllProductData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_product_is_available));
+          child: Text('no_product_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

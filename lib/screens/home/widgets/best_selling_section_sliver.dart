@@ -1,7 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/custom_horizontal_products_list_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class BestSellingSectionSliver extends StatelessWidget {
   const BestSellingSectionSliver({super.key});
@@ -16,7 +16,7 @@ class BestSellingSectionSliver extends StatelessWidget {
                 homeData.bestSellingProductList.isEmpty)
               return const SizedBox();
             return CustomHorizontalProductsListSectionWidget(
-              title: AppLocalizations.of(context)!.best_selling,
+              title: 'best_selling'.tr(context: context),
               isProductInitial: homeData.isBestSellingProductInitial,
               productList: homeData.bestSellingProductList,
               numberOfTotalProducts: homeData.totalBestSellingProductData,

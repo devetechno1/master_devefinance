@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../home.dart';
 import 'custom_horizontal_products_list_widget.dart';
 
@@ -18,7 +18,7 @@ class NewProductsListSliver extends StatelessWidget {
             if (!homeData.isFeaturedProductInitial &&
                 homeData.featuredProductList.isEmpty) return const SizedBox();
             return CustomHorizontalProductsListSectionWidget(
-              title: LangText(context).local.new_products,
+              title: 'new_products'.tr(context: context),
               isProductInitial: homeData.isFeaturedProductInitial,
               productList: homeData.featuredProductList,
               numberOfTotalProducts: homeData.totalFeaturedProductData,

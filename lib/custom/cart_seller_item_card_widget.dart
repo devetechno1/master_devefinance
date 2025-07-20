@@ -7,7 +7,7 @@ import '../my_theme.dart';
 import '../presenter/cart_provider.dart';
 import 'box_decorations.dart';
 import 'device_info.dart';
-import 'lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class CartSellerItemCardWidget extends StatelessWidget {
   final int sellerIndex;
@@ -65,7 +65,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        LangText(context).local.notAvailable,
+                        'notAvailable'.tr(context: context),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -114,13 +114,9 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         final CartItem item = cartProvider
                             .shopList[sellerIndex].cartItems![itemIndex];
                         if (item.quantity < item.minQuantity) {
-                          text = LangText(context)
-                              .local
-                              .minimumOrderQuantity(item.minQuantity);
+                          text = 'minimumOrderQuantity'.tr(context: context, args: {"minQuantity" : "${item.minQuantity}"});
                         } else if (item.quantity > item.maxQuantity) {
-                          text = LangText(context)
-                              .local
-                              .maxOrderQuantityLimit(item.maxQuantity);
+                          text = 'maxOrderQuantityLimit'.tr(context: context, args: {"maxQuantity" : "${item.maxQuantity}"});
                         }
                         if (text == null) return const SizedBox();
                         return Center(

@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 
 import '../app_config.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -31,7 +31,7 @@ class NavigationService {
           await launchUrl(uri!);
         }
       } else {
-        throw AppLocalizations.of(context)!.invalidURL;
+        throw 'invalidURL'.tr(context: context);
       }
     } catch (e) {
       await callBackError?.call();

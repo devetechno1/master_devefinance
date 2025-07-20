@@ -18,7 +18,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/html_content_webview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OfflineScreen extends StatefulWidget {
@@ -79,15 +79,14 @@ class _OfflineState extends State<OfflineScreen> {
 
     if (amount == "" || name == "" || trxId == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!
-            .amount_name_and_transaction_id_are_necessary,
+        'amount_name_and_transaction_id_are_necessary'.tr(context: context),
       );
       return;
     }
 
     if (_photo_path == "" || _photo_upload_id == 0) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.photo_proof_is_necessary,
+        'photo_proof_is_necessary'.tr(context: context),
       );
       return;
     }
@@ -164,7 +163,7 @@ class _OfflineState extends State<OfflineScreen> {
 
     if (_photo_file == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.no_file_is_chosen,
+        'no_file_is_chosen'.tr(context: context),
       );
       return;
     }
@@ -232,7 +231,7 @@ class _OfflineState extends State<OfflineScreen> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.make_offline_payment_ucf,
+        'make_offline_payment_ucf'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
@@ -246,7 +245,7 @@ class _OfflineState extends State<OfflineScreen> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.you_need_to_log_in,
+            'you_need_to_log_in'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     } else {
@@ -298,7 +297,7 @@ class _OfflineState extends State<OfflineScreen> {
               padding:
                   const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
-                AppLocalizations.of(context)!.all_marked_fields_are_mandatory,
+                'all_marked_fields_are_mandatory'.tr(context: context),
                 style: const TextStyle(
                     color: MyTheme.grey_153,
                     fontWeight: FontWeight.w600,
@@ -309,8 +308,7 @@ class _OfflineState extends State<OfflineScreen> {
               padding:
                   const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
-                AppLocalizations.of(context)!
-                    .correctly_fill_up_the_necessary_information,
+                'correctly_fill_up_the_necessary_information'.tr(context: context),
                 style: const TextStyle(color: MyTheme.grey_153, fontSize: 14.0),
               ),
             ),
@@ -318,7 +316,7 @@ class _OfflineState extends State<OfflineScreen> {
               padding: const EdgeInsets.only(
                   bottom: AppDimensions.paddingSmallExtra),
               child: Text(
-                "${AppLocalizations.of(context)!.amount_ucf}*",
+                "${'amount_ucf'.tr(context: context)}*",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600),
@@ -334,7 +332,7 @@ class _OfflineState extends State<OfflineScreen> {
                   autofocus: false,
                   decoration: InputDecorations.buildInputDecoration_1(
                       hint_text:
-                          AppLocalizations.of(context)!.twelve_thousand_only),
+                          'twelve_thousand_only'.tr(context: context)),
                 ),
               ),
             ),
@@ -342,7 +340,7 @@ class _OfflineState extends State<OfflineScreen> {
               padding: const EdgeInsets.only(
                   bottom: AppDimensions.paddingSmallExtra),
               child: Text(
-                "${AppLocalizations.of(context)!.name_ucf}*",
+                "${'name_ucf'.tr(context: context)}*",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600),
@@ -357,7 +355,7 @@ class _OfflineState extends State<OfflineScreen> {
                   controller: _nameController,
                   autofocus: false,
                   decoration: InputDecorations.buildInputDecoration_1(
-                      hint_text: AppLocalizations.of(context)!.name_ucf),
+                      hint_text: 'name_ucf'.tr(context: context)),
                 ),
               ),
             ),
@@ -365,7 +363,7 @@ class _OfflineState extends State<OfflineScreen> {
               padding: const EdgeInsets.only(
                   bottom: AppDimensions.paddingSmallExtra),
               child: Text(
-                "${AppLocalizations.of(context)!.transaction_id_ucf}*",
+                "${'transaction_id_ucf'.tr(context: context)}*",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600),
@@ -388,7 +386,7 @@ class _OfflineState extends State<OfflineScreen> {
               padding: const EdgeInsets.only(
                   bottom: AppDimensions.paddingSmallExtra),
               child: Text(
-                "${AppLocalizations.of(context)!.photo_proof_ucf}* (${AppLocalizations.of(context)!.only_image_file_allowed})",
+                "${'photo_proof_ucf'.tr(context: context)}* (${'only_image_file_allowed'.tr(context: context)})",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600),
@@ -413,7 +411,7 @@ class _OfflineState extends State<OfflineScreen> {
                           borderRadius: BorderRadius.all(
                               Radius.circular(AppDimensions.radiusSmall))),
                       child: Text(
-                        AppLocalizations.of(context)!.photo_proof_ucf,
+                        'photo_proof_ucf'.tr(context: context),
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -429,7 +427,7 @@ class _OfflineState extends State<OfflineScreen> {
                     ? Padding(
                         padding:
                             const EdgeInsets.all(AppDimensions.paddingSmall),
-                        child: Text(AppLocalizations.of(context)!.selected_ucf),
+                        child: Text('selected_ucf'.tr(context: context)),
                       )
                     : Container()
               ],
@@ -470,7 +468,7 @@ class _OfflineState extends State<OfflineScreen> {
                           borderRadius: BorderRadius.all(
                               Radius.circular(AppDimensions.radiusSmall))),
                       child: Text(
-                        AppLocalizations.of(context)!.submit_ucf + "",
+                        'submit_ucf'.tr(context: context) + "",
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -502,7 +500,7 @@ class _OfflineState extends State<OfflineScreen> {
               const SizedBox(
                 width: 10,
               ),
-              Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
+              Text("${'please_wait_ucf'.tr(context: context)}"),
             ],
           ));
         });

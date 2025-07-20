@@ -1,11 +1,9 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:one_context/one_context.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../custom/device_info.dart';
-import '../../custom/lang_text.dart';
 import '../../custom/toast_component.dart';
 import '../../custom/useful_elements.dart';
 import '../../helpers/main_helpers.dart';
@@ -22,11 +20,9 @@ class PaymentStatus {
 
   static List<PaymentStatus> getPaymentStatusList() {
     return <PaymentStatus>[
-      PaymentStatus('', AppLocalizations.of(OneContext().context!)!.all_ucf),
-      PaymentStatus(
-          'paid', AppLocalizations.of(OneContext().context!)!.paid_ucf),
-      PaymentStatus(
-          'unpaid', AppLocalizations.of(OneContext().context!)!.unpaid_ucf),
+      PaymentStatus('', 'all_ucf'.tr()),
+      PaymentStatus('paid', 'paid_ucf'.tr()),
+      PaymentStatus('unpaid', 'unpaid_ucf'.tr()),
     ];
   }
 }
@@ -39,13 +35,10 @@ class DeliveryStatus {
 
   static List<DeliveryStatus> getDeliveryStatusList() {
     return <DeliveryStatus>[
-      DeliveryStatus('', AppLocalizations.of(OneContext().context!)!.all_ucf),
-      DeliveryStatus('confirmed',
-          AppLocalizations.of(OneContext().context!)!.confirmed_ucf),
-      DeliveryStatus('on_the_way',
-          AppLocalizations.of(OneContext().context!)!.on_the_way_ucf),
-      DeliveryStatus('delivered',
-          AppLocalizations.of(OneContext().context!)!.delivered_ucf),
+      DeliveryStatus('', 'all_ucf'.tr()),
+      DeliveryStatus('confirmed', 'confirmed_ucf'.tr()),
+      DeliveryStatus('on_the_way', 'on_the_way_ucf'.tr()),
+      DeliveryStatus('delivered', 'delivered_ucf'.tr()),
     ];
   }
 }
@@ -173,7 +166,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
             delivery_status: _selectedDeliveryStatus!.option_key);
     if (purchaseListResponse.data!.isEmpty) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.no_data_is_available,
+        'no_data_is_available'.tr(context: context),
       );
     }
     _purchaseList.addAll(purchaseListResponse.data!);
@@ -279,7 +272,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                               (AppBar().preferredSize.height + 75),
                           child: Center(
                             child: Text(
-                                LangText(context).local.no_data_is_available),
+                                'no_data_is_available'.tr(context: context)),
                           ),
                         ),
                 ),
@@ -355,7 +348,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   //                       // ),
   //                     ),
   //                     Text(
-  //                         "${AppLocalizations.of(context)!.payment_status_ucf} - ",
+  //                         "${'payment_status_ucf'.tr(context: context)} - ",
   //                         style: const TextStyle(
   //                             color: MyTheme.font_grey,
   //                             fontSize: 12,
@@ -398,7 +391,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
   //                     // ),
   //                   ),
   //                   Text(
-  //                       "${AppLocalizations.of(context)!.delivery_status_ucf} -",
+  //                       "${'delivery_status_ucf'.tr(context: context)} -",
   //                       style: const TextStyle(
   //                           color: MyTheme.font_grey,
   //                           fontSize: 12,
@@ -489,8 +482,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                       //   color: MyTheme.font_grey,
                       // ),
                     ),
-                    Text(
-                        "${AppLocalizations.of(context)!.payment_status_ucf} - ",
+                    Text("${'payment_status_ucf'.tr(context: context)} - ",
                         style: const TextStyle(
                             color: MyTheme.font_grey,
                             fontSize: 12,
@@ -533,7 +525,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                     //   color: MyTheme.font_grey,
                     // ),
                   ),
-                  Text("${AppLocalizations.of(context)!.delivery_status_ucf} -",
+                  Text("${'delivery_status_ucf'.tr(context: context)} -",
                       style: const TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 12,
@@ -663,7 +655,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
               isExpanded: true,
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               hint: Text(
-                AppLocalizations.of(context)!.all_payments_ucf,
+                'all_payments_ucf'.tr(context: context),
                 style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
@@ -695,7 +687,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
               hint: Text(
-                AppLocalizations.of(context)!.all_deliveries_ucf,
+                'all_deliveries_ucf'.tr(context: context),
                 style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 12,
@@ -733,7 +725,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
             ),
           ),
           Text(
-            AppLocalizations.of(context)!.auction_purchase_history_ucf,
+            'auction_purchase_history_ucf'.tr(context: context),
             style: TextStyle(
                 fontSize: 16,
                 color: MyTheme.dark_font_grey,

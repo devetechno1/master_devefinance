@@ -6,7 +6,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/menu_item_mod
 import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class MenuItemList extends StatelessWidget {
   @override
@@ -14,7 +14,7 @@ class MenuItemList extends StatelessWidget {
     final List<MenuItemModel> menuItems = [
       if (homeData.isTodayDeal)
         MenuItemModel(
-          title: AppLocalizations.of(context)!.todays_deal_ucf,
+          title: 'todays_deal_ucf'.tr(context: context),
           image: AppImages.todayDeal,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -26,7 +26,7 @@ class MenuItemList extends StatelessWidget {
         ),
       if (homeData.isFlashDeal)
         MenuItemModel(
-          title: AppLocalizations.of(context)!.flash_deal_ucf,
+          title: 'flash_deal_ucf'.tr(context: context),
           image: AppImages.flashDeal,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -38,7 +38,7 @@ class MenuItemList extends StatelessWidget {
         ),
       if (homeData.isBrands)
         MenuItemModel(
-          title: AppLocalizations.of(context)!.brands_ucf,
+          title: 'brands_ucf'.tr(context: context),
           image: AppImages.brands,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -50,7 +50,7 @@ class MenuItemList extends StatelessWidget {
         ),
       if (AppConfig.businessSettingsData.vendorSystemActivation)
         MenuItemModel(
-          title: AppLocalizations.of(context)!.top_sellers_ucf,
+          title: 'top_sellers_ucf'.tr(context: context),
           image: AppImages.TopSellers,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {

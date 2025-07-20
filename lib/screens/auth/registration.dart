@@ -6,7 +6,6 @@ import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/google_recaptcha.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/intl_phone_input.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -20,7 +19,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:validators/validators.dart';
 
@@ -91,50 +90,49 @@ class _RegistrationState extends State<Registration> {
 
     if (name == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_your_name,
+        'enter_your_name'.tr(context: context),
         isError: true,
       );
       return;
     } else if (email.isNotEmpty && !isEmail(email)) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_correct_email,
+        'enter_correct_email'.tr(context: context),
         isError: true,
       );
       return;
     } else if (_phoneNumberController.text.trim() == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
+        'enter_phone_number'.tr(context: context),
         isError: true,
       );
       return;
     } else if (_isValidPhoneNumber) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.invalid_phone_number,
+        'invalid_phone_number'.tr(context: context),
         isError: true,
       );
       return;
     } else if (password == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_password,
+        'enter_password'.tr(context: context),
         isError: true,
       );
       return;
     } else if (passwordConfirm == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.confirm_your_password,
+        'confirm_your_password'.tr(context: context),
         isError: true,
       );
       return;
     } else if (password.length < 6) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!
-            .password_must_contain_at_least_6_characters,
+        'password_must_contain_at_least_6_characters'.tr(context: context),
         isError: true,
       );
       return;
     } else if (password != passwordConfirm) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.passwords_do_not_match,
+        'passwords_do_not_match'.tr(context: context),
         isError: true,
       );
       return;
@@ -222,8 +220,8 @@ class _RegistrationState extends State<Registration> {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
-        "${AppLocalizations.of(context)!.join_ucf} " +
-            LangText(context).local.app_name,
+        "${'join_ucf'.tr(context: context)} " +
+            'app_name'.tr(context: context),
         buildBody(context, _screen_width));
   }
 
@@ -240,7 +238,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!.name_ucf,
+                  'name_ucf'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -255,7 +253,7 @@ class _RegistrationState extends State<Registration> {
                     controller: _nameController,
                     autofocus: false,
                     decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: LangText(context).local.name_ucf),
+                        hint_text: 'name_ucf'.tr(context: context)),
                   ),
                 ),
               ),
@@ -263,7 +261,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!.email_ucf,
+                  'email_ucf'.tr(context: context),
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600,
@@ -292,7 +290,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!.phone_ucf,
+                  'phone_ucf'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -308,9 +306,9 @@ class _RegistrationState extends State<Registration> {
                       height: 36,
                       child: CustomInternationalPhoneNumberInput(
                         countries: countries_code,
-                        hintText: LangText(context).local.phone_number_ucf,
+                        hintText: 'phone_number_ucf'.tr(context: context),
                         errorMessage:
-                            LangText(context).local.invalid_phone_number,
+                            'invalid_phone_number'.tr(context: context),
                         initialValue:
                             PhoneNumber(isoCode: AppConfig.default_country),
                         onInputChanged: (PhoneNumber number) {
@@ -351,8 +349,7 @@ class _RegistrationState extends State<Registration> {
                     //     });
                     //   },
                     //   child: Text(
-                    //     AppLocalizations.of(context)!
-                    //         .or_register_with_an_email,
+                    //     '//'.tr(context: context)         .or_register_with_an_email,
                     //     style: TextStyle(
                     //         color: MyTheme.accent_color,
                     //         fontStyle: FontStyle.italic,
@@ -366,7 +363,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!.password_ucf,
+                  'password_ucf'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -391,8 +388,7 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!
-                          .password_must_contain_at_least_6_characters,
+                      'password_must_contain_at_least_6_characters'.tr(context: context),
                       style: const TextStyle(
                           color: MyTheme.textfield_grey,
                           fontStyle: FontStyle.italic),
@@ -404,7 +400,7 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!.retype_password_ucf,
+                  'retype_password_ucf'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -474,7 +470,7 @@ class _RegistrationState extends State<Registration> {
                                 children: [
                                   TextSpan(
                                     text:
-                                        LangText(context).local.i_agree_to_the,
+                                        'i_agree_to_the'.tr(context: context),
                                   ),
                                   TextSpan(
                                     recognizer: TapGestureRecognizer()
@@ -484,9 +480,7 @@ class _RegistrationState extends State<Registration> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     CommonWebviewScreen(
-                                                      page_name: AppLocalizations
-                                                              .of(context)!
-                                                          .terms_conditions_ucf,
+                                                      page_name: 'terms_conditions_ucf'.tr(context: context),
                                                       url:
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
                                                     )));
@@ -494,7 +488,7 @@ class _RegistrationState extends State<Registration> {
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor),
                                     text:
-                                        " ${AppLocalizations.of(context)!.terms_conditions_ucf}",
+                                        " ${'terms_conditions_ucf'.tr(context: context)}",
                                   ),
                                   const TextSpan(
                                     text: " &",
@@ -507,15 +501,13 @@ class _RegistrationState extends State<Registration> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     CommonWebviewScreen(
-                                                      page_name: AppLocalizations
-                                                              .of(context)!
-                                                          .privacy_policy_ucf,
+                                                      page_name: 'privacy_policy_ucf'.tr(context: context),
                                                       url:
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
                                                     )));
                                       },
                                     text:
-                                        " ${AppLocalizations.of(context)!.privacy_policy_ucf}",
+                                        " ${'privacy_policy_ucf'.tr(context: context)}",
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor),
                                   )
@@ -538,7 +530,7 @@ class _RegistrationState extends State<Registration> {
                         borderRadius: BorderRadius.all(
                             Radius.circular(AppDimensions.radiusHalfSmall))),
                     child: Text(
-                      AppLocalizations.of(context)!.sign_up_ucf,
+                      'sign_up_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -559,7 +551,7 @@ class _RegistrationState extends State<Registration> {
                   children: [
                     Center(
                         child: Text(
-                      AppLocalizations.of(context)!.already_have_an_account,
+                      'already_have_an_account'.tr(context: context),
                       style: const TextStyle(
                           color: MyTheme.font_grey, fontSize: 12),
                     )),
@@ -568,7 +560,7 @@ class _RegistrationState extends State<Registration> {
                     ),
                     InkWell(
                       child: Text(
-                        AppLocalizations.of(context)!.log_in,
+                        'log_in'.tr(context: context),
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 14,

@@ -1,57 +1,22 @@
-{
+const Map<String, String> enLangs = {
   "add_default_address": "You have to add a default address",
-  "change_default_before_delete": "You have to change default address before deleting this address",
+  "change_default_before_delete":
+      "You have to change default address before deleting this address",
   "notAvailable": "Not available",
-  "productExceedsMaxQuantity": "One of the products exceeds the maximum allowed quantity.",
-  "productBelowMinQuantity": "One of the products is below the minimum order quantity.",
-  "maxOrderQuantityLimit": "The maximum quantity you can order is {maxQuantity}. You cannot order more than that.",
-  "@maxOrderQuantityLimit": {
-    "placeholders": {
-      "maxQuantity": {
-        "type": "int"
-      }
-    }
-  },
-  "minimumOrderQuantity": "The minimum quantity required to order this product is {minQuantity}",
-  "@minimumOrderQuantity": {
-    "placeholders": {
-      "minQuantity": {
-        "type": "int"
-      }
-    }
-  },
-  "minimum_order_amount_with_remaining": "Minimum order amount is {minAmount}, remaining {remaining}",
-  "@minimum_order_amount_with_remaining": {
-    "description": "Message for showing minimum order amount and remaining amount",
-    "placeholders": {
-      "minAmount": {
-        "type": "String"
-      },
-      "remaining": {
-        "type": "String"
-      }
-    }
-  },
-  "minimum_order_quantity_with_remaining": "Minimum order quantity is {minquantity}, remaining {remaining}",
-  "@minimum_order_quantity_with_remaining": {
-    "description": "Message for showing minimum quantity order amount and remaining amount",
-    "placeholders": {
-      "minquantity": {
-        "type": "String"
-      },
-      "remaining": {
-        "type": "String"
-      }
-    }
-  },
-  "freeShippingUnlocked": "You’ve unlocked free shipping because your order exceeded {minOrderForFreeShipping}.",
-  "@freeShippingUnlocked": {
-    "placeholders": {
-      "minOrderForFreeShipping": {
-        "type": "double"
-      }
-    }
-  },
+  "productExceedsMaxQuantity":
+      "One of the products exceeds the maximum allowed quantity.",
+  "productBelowMinQuantity":
+      "One of the products is below the minimum order quantity.",
+  "maxOrderQuantityLimit":
+      "The maximum quantity you can order is {maxQuantity}. You cannot order more than that.",
+  "minimumOrderQuantity":
+      "The minimum quantity required to order this product is {minQuantity}",
+  "minimum_order_amount_with_remaining":
+      "Minimum order amount is {minAmount}, remaining {remaining}",
+  "minimum_order_quantity_with_remaining":
+      "Minimum order quantity is {minquantity}, remaining {remaining}",
+  "freeShippingUnlocked":
+      "You’ve unlocked free shipping because your order exceeded {minOrderForFreeShipping}.",
   "out_of_stock": "Out of stock",
   "you_should_complete": "You should complete",
   "to_take_free_shipping": "to take free shipping",
@@ -80,7 +45,8 @@
   "longitude": "Longitude",
   "you_have_to_add_location_here": "You have to add location here",
   "you_have_to_add_location_first": "You have to add location first",
-  "check_your_WhatsApp_messages_to_retrieve_the_verification_code": "Check your WhatsApp messages to retrieve the verification code",
+  "check_your_WhatsApp_messages_to_retrieve_the_verification_code":
+      "Check your WhatsApp messages to retrieve the verification code",
   "minimum_order_amount_is": "Minimum order amount is",
   "minimum_order_qty_is": "Minimum order quantity for different products is",
   "remaining": "remaining",
@@ -117,9 +83,12 @@
   "highest_bid_ucf": "Highest Bid",
   "place_bid_ucf": "Place Bid",
   "change_bid_ucf": "Change Bid",
-  "are_you_sure_to_mark_this_as_delivered": "Are you sure to mark this as delivered ?",
-  "are_you_sure_to_mark_this_as_picked_up": "Are you sure to mark this as picked up ?",
-  "are_you_sure_to_request_cancellation": "Are you sure to request cancellation ?",
+  "are_you_sure_to_mark_this_as_delivered":
+      "Are you sure to mark this as delivered ?",
+  "are_you_sure_to_mark_this_as_picked_up":
+      "Are you sure to mark this as picked up ?",
+  "are_you_sure_to_request_cancellation":
+      "Are you sure to request cancellation ?",
   "enter_address_ucf": "Enter Address",
   "back_to_shipping_info": "Back to shipping info",
   "select_a_city": "Select a city",
@@ -136,9 +105,11 @@
   "enter_state_ucf": "Enter governorate",
   "phone_ucf": "Phone",
   "enter_phone_ucf": "Enter Phone",
-  "are_you_sure_to_remove_this_address": "Are you sure to remove this address ?",
+  "are_you_sure_to_remove_this_address":
+      "Are you sure to remove this address ?",
   "addresses_of_user": "Addresses of user",
-  "tap_on_an_address_to_make_it_default": "Tap on an address to make it default",
+  "tap_on_an_address_to_make_it_default":
+      "Tap on an address to make it default",
   "no_country_available": "No country available",
   "no_state_available": "No Governorate available",
   "no_city_available": "No city available",
@@ -225,7 +196,8 @@
   "this_app_needs_permission": "This app needs permission",
   "deny_ucf": "Deny",
   "settings_ucf": "Settings",
-  "go_to_your_application_settings_and_give_photo_permission": "Go to your application settings and give photo permission",
+  "go_to_your_application_settings_and_give_photo_permission":
+      "Go to your application settings and give photo permission",
   "no_file_is_chosen": "No file is chosen",
   "yes_ucf": "Yes",
   "no_ucf": "No",
@@ -270,15 +242,6 @@
   "featured_products_ucf": "Featured Products",
   "all_products_ucf": "All Products",
   "search_in_app_name": "Search In {app_name}...",
-  "@search_in_app_name": {
-    "description": "Search bar placeholder with the app name",
-    "placeholders": {
-      "app_name": {
-        "type": "String",
-        "example": "App Name to show it"
-      }
-    }
-  },
   "app_name": "Devefinance Store",
   "no_carousel_image_found": "No carousel image found",
   "no_category_found": "No category found",
@@ -329,7 +292,8 @@
   "upgrade_package_ucf": "Upgrade Package",
   "add_new_products_ucf": "Add New Products",
   "new_products": "New Products",
-  "please_turn_on_your_internet_connection": "Please turn on your internet connection",
+  "please_turn_on_your_internet_connection":
+      "Please turn on your internet connection",
   "please_log_in_to_see_the_profile": "Please log in to see the profile",
   "notification_ucf": "Notifications",
   "purchase_history_ucf": "Purchase History",
@@ -350,8 +314,10 @@
   "wholesale_products_ucf": "Wholesale Products",
   "browse_all_sellers_ucf": "Browse All Sellers",
   "delete_my_account": "Delete my account",
-  "delete_account_warning_title": "Do you want to delete your account from our system?",
-  "delete_account_warning_description": "Once your account is deleted from our system, you will lose your balance and other information from our system.",
+  "delete_account_warning_title":
+      "Do you want to delete your account from our system?",
+  "delete_account_warning_description":
+      "Once your account is deleted from our system, you will lose your balance and other information from our system.",
   "blogs_ucf": "Blogs",
   "check_balance_ucf": "Check Balance",
   "account_ucf": "Account",
@@ -367,7 +333,8 @@
   "product_ucf": "Product",
   "products_ucf": "Products",
   "sellers_ucf": "Sellers",
-  "you_can_use_filters_while_searching_for_products": "You can use filters while searching for products.",
+  "you_can_use_filters_while_searching_for_products":
+      "You can use filters while searching for products.",
   "filter_ucf": "Filter",
   "sort_products_by_ucf": "Sort Products By",
   "price_high_to_low": "Price high to low",
@@ -386,7 +353,8 @@
   "loading_suggestions": "Loading suggestions...",
   "sort_ucf": "Sort",
   "default_ucf": "Default",
-  "you_can_use_sorting_while_searching_for_products": "You can use sorting while searching for products.",
+  "you_can_use_sorting_while_searching_for_products":
+      "You can use sorting while searching for products.",
   "filter_screen_min_max_warning": "Min price cannot be larger than max price",
   "followed_sellers_ucf": "Followed Sellers",
   "copy_product_link_ucf": "Copy Product Link",
@@ -420,7 +388,8 @@
   "available_all_lower": "available",
   "add_to_cart_ucf": "Add to Cart",
   "buy_now_ucf": "Buy Now",
-  "no_top_selling_products_from_this_seller": "No top selling products from this seller",
+  "no_top_selling_products_from_this_seller":
+      "No top selling products from this seller",
   "no_related_product": "No frequently bought products",
   "on_the_way_ucf": "On The Way",
   "all_ucf": "All",
@@ -469,7 +438,8 @@
   "choose_delivery_ucf": "Choose Delivery",
   "home_delivery_ucf": "Home Delivery",
   "choose_an_address_or_pickup_point": "Choose an address or pickup point",
-  "to_add_or_edit_addresses_go_to_address_page": "To add or edit addresses, Go to address page",
+  "to_add_or_edit_addresses_go_to_address_page":
+      "To add or edit addresses, Go to address page",
   "shipping_cost_ucf": "Shipping Cost",
   "shipping_info": "Shipping Info",
   "carrier_points_is_unavailable_ucf": "Carrier Points Is Unavailable",
@@ -492,7 +462,8 @@
   "enter_amount_ucf": "Enter Amount",
   "wholesale_product": "Wholesale product",
   "recharge_wallet_ucf": "Recharge Wallet",
-  "please_log_in_to_see_the_wishlist_items": "Please log in to see the wishlist items",
+  "please_log_in_to_see_the_wishlist_items":
+      "Please log in to see the wishlist items",
   "enter_email": "Enter email",
   "enter_phone_number": "Enter phone number",
   "enter_password": "Enter password",
@@ -509,7 +480,8 @@
   "login_to": "Login to",
   "enter_your_name": "Enter your name",
   "confirm_your_password": "Confirm your password",
-  "password_must_contain_at_least_6_characters": "Password must contain at least 6 characters",
+  "password_must_contain_at_least_6_characters":
+      "Password must contain at least 6 characters",
   "passwords_do_not_match": "Password does not match",
   "join_ucf": "Join",
   "retype_password_ucf": "Retype Password",
@@ -528,20 +500,24 @@
   "verify_your": "Verify your",
   "email_account_ucf": "Email Account",
   "phone_number_ucf": "Phone Number",
-  "enter_the_verification_code_that_sent_to_your_email_recently": "Enter the verification code that sent to your email recently.",
-  "enter_the_verification_code_that_sent_to_your_phone_recently": "Enter the verification code that sent to your phone recently.",
+  "enter_the_verification_code_that_sent_to_your_email_recently":
+      "Enter the verification code that sent to your email recently.",
+  "enter_the_verification_code_that_sent_to_your_phone_recently":
+      "Enter the verification code that sent to your phone recently.",
   "resend_code_ucf": "Resend Code",
   "enter_the_code": "Enter the code",
   "enter_the_code_sent": "Enter the code sent",
   "congratulations_ucf": "Congratulations !!",
-  "you_have_successfully_changed_your_password": "You have successfully changed your password",
+  "you_have_successfully_changed_your_password":
+      "You have successfully changed your password",
   "password_changed_ucf": "Password Changed",
   "back_to_Login_ucf": "Back to Login",
   "cart_ucf": "Cart",
   "fetching_nagad_url": "Fetching nagad url ...",
   "pay_with_nagad": "Pay with Nagad",
   "pay_with_iyzico": "Pay with Iyzico",
-  "if_you_are_finding_any_problem_while_logging_in": "If you are finding any problem while logging in please contact the admin",
+  "if_you_are_finding_any_problem_while_logging_in":
+      "If you are finding any problem while logging in please contact the admin",
   "fetching_paypal_url": "Fetching paypal url ...",
   "fetching_amarpay_url": "Fetching amarpay url ...",
   "pay_with_paypal": "Pay with Paypal",
@@ -560,10 +536,12 @@
   "your_delivery_location": "Your delivery location . . .",
   "calculating": "Calculating...",
   "pick_here": "Pick Here",
-  "amount_name_and_transaction_id_are_necessary": "Amount,Name and Transaction id are necessary",
+  "amount_name_and_transaction_id_are_necessary":
+      "Amount,Name and Transaction id are necessary",
   "photo_proof_is_necessary": "Photo proof is necessary",
   "all_marked_fields_are_mandatory": "All * marked fields are mandatory",
-  "correctly_fill_up_the_necessary_information": "Correctly fill-up the necessary information. Later you cannot edit or re-submit the form",
+  "correctly_fill_up_the_necessary_information":
+      "Correctly fill-up the necessary information. Later you cannot edit or re-submit the form",
   "transaction_id_ucf": "Transaction Id",
   "photo_proof_ucf": "Photo Proof",
   "only_image_file_allowed": "only image file allowed",
@@ -571,7 +549,8 @@
   "type_your_review_here": "Type your review here ...",
   "no_more_reviews_ucf": "No More Reviews",
   "loading_more_reviews_ucf": "Loading More Reviews ...",
-  "no_reviews_yet_be_the_first": "No reviews yet. Be the first one to review this product",
+  "no_reviews_yet_be_the_first":
+      "No reviews yet. Be the first one to review this product",
   "you_need_to_login_to_give_a_review": "You need to login to give a review",
   "review_can_not_empty_warning": "Review cannot be empty",
   "at_least_one_star_must_be_given": "At least one star must be given",
@@ -585,9 +564,11 @@
   "top_selling_ucf": "Top Selling",
   "store_home_ucf": "Store Home",
   "new_arrivals_products_ucf": "New Arrivals Products",
-  "no_featured_product_is_available_from_this_seller": "No featured product is available from this seller",
+  "no_featured_product_is_available_from_this_seller":
+      "No featured product is available from this seller",
   "no_new_arrivals": "No new arrivals",
-  "view_all_products_prom_this_seller_all_capital": "View All Products From This Seller",
+  "view_all_products_prom_this_seller_all_capital":
+      "View All Products From This Seller",
   "search_products_of_shop": "Search products of shop",
   "total_collected_ucf": "Total Collected",
   "yesterday_ucf": "Yesterday",
@@ -632,18 +613,21 @@
   "vat_n_tax_ucf": "Vat & Tax",
   "product_images_ucf": "Product Images",
   "thumbnail_image_300_ucf": "Thumbnail Image (300x300)",
-  "thumbnail_image_300_des": "These images are visible in all products box. Use 300x300 size image. Keep some blank space around main object of your image as we had to crop some edge in different devices to make it responsive. ",
+  "thumbnail_image_300_des":
+      "These images are visible in all products box. Use 300x300 size image. Keep some blank space around main object of your image as we had to crop some edge in different devices to make it responsive. ",
   "product_videos_ucf": "Product Videos",
   "video_provider_ucf": "Video Provider",
   "video_link_ucf": "Video Link",
-  "video_link_des": "Use proper link without extra parameter. Don't use short share link/embedded iframe code.",
+  "video_link_des":
+      "Use proper link without extra parameter. Don't use short share link/embedded iframe code.",
   "pdf_description_ucf": "PDF Description",
   "pdf_specification_ucf": "PDF Specification",
   "unit_price_ucf": "Unit Price",
   "discount_date_range_ucf": "Discount Date Range",
   "sku_all_capital": "SKU",
   "external_link_ucf": "External Link",
-  "leave_it_blank_if_you_do_not_use_external_site_link": "Leave it blank if you do not use external site link",
+  "leave_it_blank_if_you_do_not_use_external_site_link":
+      "Leave it blank if you do not use external site link",
   "external_link_button_text_ucf": "External Link Button Text",
   "low_stock_quantity_warning_ucf": "Low Stock Quantity Warning",
   "stock_visibility_state_ucf": "Stock Visibility State",
@@ -654,11 +638,13 @@
   "meta_title_ucf": "Meta Title",
   "meta_image_ucf": "Meta Image",
   "shipping_configuration_ucf": "Shipping Configuration",
-  "shipping_configuration_is_maintained_by_admin": "Shipping configuration is maintained by Admin.",
+  "shipping_configuration_is_maintained_by_admin":
+      "Shipping configuration is maintained by Admin.",
   "estimate_shipping_time_ucf": "Estimate Shipping Time",
   "shipping_days_ucf": "Shipping Days",
   "gallery_images_600": "Gallery Images (600x600)",
-  "these_images_are_visible_in_product_details_page_gallery_600": "These images are visible in product details page gallery. Use 600x600 sizes images.",
+  "these_images_are_visible_in_product_details_page_gallery_600":
+      "These images are visible in product details page gallery. Use 600x600 sizes images.",
   "photo_ucf": "Photo",
   "general_ucf": "General",
   "media_ucf": "Media",
@@ -672,7 +658,8 @@
   "shop_banner_image_is_required": "Shop banner image is required.",
   "banner_settings": "Banner settings",
   "banner_1500_x_450": "Banner (1500 x 450)",
-  "banner_1500_x_450_des": "We had to limit height to maintain consistency. In some device both side of the banner might be cropped for height limitation.",
+  "banner_1500_x_450_des":
+      "We had to limit height to maintain consistency. In some device both side of the banner might be cropped for height limitation.",
   "delivery_boy_pickup_point": "Delivery boy pickup point",
   "longitude_ucf": "Longitude",
   "latitude_ucf": "Latitude",
@@ -722,15 +709,18 @@
   "total_sales_ucf": "Total Sales",
   "hi_welcome_to_all_lower": "hi, welcome to",
   "login_to_your_account_all_lower": "login to your account",
-  "in_case_of_any_difficulties_contact_with_admin": "In case of any difficulties, contact with admin.",
+  "in_case_of_any_difficulties_contact_with_admin":
+      "In case of any difficulties, contact with admin.",
   "pending_balance_ucf": "Pending Balance",
   "send_withdraw_request_ucf": "Send Withdraw Request",
   "premium_package_for_seller_ucf": "Premium Package for Seller",
   "select_payment_type_ucf": "Select Payment Type",
   "select_payment_option_ucf": "Select Payment Option",
   "enter_phone_number_ucf": "Enter phone number",
-  "we_will_send_you_a_OTP_code_if_the_mail_id_is_correct_ucf": "We will send you a OTP code if the mail id is correct.",
-  "we_will_send_you_a_OTP_code_if_the_phone_no_is_correct_ucf": "We will send you a OTP code if the phone no is correct.",
+  "we_will_send_you_a_OTP_code_if_the_mail_id_is_correct_ucf":
+      "We will send you a OTP code if the mail id is correct.",
+  "we_will_send_you_a_OTP_code_if_the_phone_no_is_correct_ucf":
+      "We will send you a OTP code if the phone no is correct.",
   "reset_password_ucf": "Reset Password",
   "bank_payment": "Bank payment",
   "cash_payment": "Cash payment",
@@ -780,7 +770,8 @@
   "place_bid_price_ucf": "Place Bid Price ",
   "please_fill_out_this_form": "Please fill out this form",
   "value_must_be_greater": "Value must be greater than\n minimum bid",
-  "value_must_be_greater_or_equal": "Value must be greater than\n or equal to Minimum bid",
+  "value_must_be_greater_or_equal":
+      "Value must be greater than\n or equal to Minimum bid",
   "seller_dashboard_support_ticket_ucf": "Support Ticket",
   "view_a_ticket": "View a Ticket",
   "visit_store_ucf": "Visit store",
@@ -816,7 +807,8 @@
   "payment_proof": "Payment Proof",
   "back_ucf": "Back",
   "no_notification_ucf": "No Notification Found!",
-  "already_have_account": "You already have an account with this information. Please Login first.",
+  "already_have_account":
+      "You already have an account with this information. Please Login first.",
   "add_new_classified_product_ucf": "Add New Classified Product",
   "condition_ucf": "Condition ",
   "descriptions_ucf": "Description ",
@@ -837,18 +829,21 @@
   "location_required": "Location Required",
   "product_tag_required": "Product Tag Required",
   "product_description_required": "Product Description Required",
-  "classified_product_limit_expired": "Your classified product upload limit has been reached. Please buy a package.",
+  "classified_product_limit_expired":
+      "Your classified product upload limit has been reached. Please buy a package.",
   "status_ucf": "Status",
   "published_ucf": "Published",
   "unpublished_ucf": "Unpublished",
   "loading_ucf": "Loading",
   "enter_correct_email": "Enter Correct Email",
   "shipping_address_required": "Shipping Address Required",
-  "existing_email_address": "If you have already used the same mail address or phone number before, Please ",
+  "existing_email_address":
+      "If you have already used the same mail address or phone number before, Please ",
   "first_to_continue": " first to continue!",
   "pay_with_flutterwave": "Pay With Flutterwave",
   "pay_with_khalti": "Pay With Khalti",
-  "pirated_app": "This is a pirated app. Do not use this. It may have security issues.",
+  "pirated_app":
+      "This is a pirated app. Do not use this. It may have security issues.",
   "login_or_reg": "Login/Registration",
   "make_payment_ucf": "Make Payment",
   "last_view_product_ucf": "Last View Product",
@@ -867,4 +862,4 @@
   "no_best_selling_products_available": "No best-selling products available.",
   "no_auction_products": "No Auction Products",
   "error_fetching_todays_deal_products": "Error fetching today's deal products"
-}
+};

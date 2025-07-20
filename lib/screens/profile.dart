@@ -5,10 +5,11 @@ import 'dart:async';
 import 'package:active_ecommerce_cms_demo_app/custom/aiz_route.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/unRead_notification_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
@@ -29,7 +30,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/wholesales_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wishlist/widgets/page_animation.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
@@ -304,14 +304,14 @@ class _ProfileState extends State<Profile> {
           //     crossAxisAlignment: CrossAxisAlignment.start,
           //     children: [
           //       buildBottomVerticalCardListItem(
-          //           "assets/coupon.png", LangText(context).local.coupons_ucf,
+          //           "assets/coupon.png", 'coupons_ucf'.tr(context: context),
           //           onPressed: () {}),
           //       Divider(
           //         thickness: 1,
           //         color: MyTheme.light_grey,
           //       ),
           //       buildBottomVerticalCardListItem("assets/favoriteseller.png",
-          //           LangText(context).local.favorite_seller_ucf,
+          //           'favorite_seller_ucf'.tr(context: context),
           //           onPressed: () {}),
           //       Divider(
           //         thickness: 1,
@@ -323,7 +323,7 @@ class _ProfileState extends State<Profile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildBottomVerticalCardListItem(AppImages.products,
-                  LangText(context).local.top_selling_products_ucf,
+                  'top_selling_products_ucf'.tr(context: context),
                   onPressed: () {
                 AIZRoute.push(context, TopSellingProducts());
               }),
@@ -338,7 +338,7 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildBottomVerticalCardListItem(AppImages.wholeSale,
-                    LangText(context).local.wholesale_product, onPressed: () {
+                    'wholesale_product'.tr(context: context), onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -354,7 +354,7 @@ class _ProfileState extends State<Profile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildBottomVerticalCardListItem(
-                  AppImages.blog, LangText(context).local.blog_list_ucf,
+                  AppImages.blog, 'blog_list_ucf'.tr(context: context),
                   onPressed: () {
                 Navigator.push(
                     context,
@@ -369,7 +369,7 @@ class _ProfileState extends State<Profile> {
           ),
 
           buildBottomVerticalCardListItem(AppImages.download,
-              LangText(context).local.all_digital_products_ucf, onPressed: () {
+              'all_digital_products_ucf'.tr(context: context), onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const DigitalProducts();
             }));
@@ -379,7 +379,7 @@ class _ProfileState extends State<Profile> {
             color: MyTheme.light_grey,
           ),
           buildBottomVerticalCardListItem(
-              AppImages.coupon, LangText(context).local.coupons_ucf,
+              AppImages.coupon, 'coupons_ucf'.tr(context: context),
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const Coupons();
@@ -394,7 +394,7 @@ class _ProfileState extends State<Profile> {
             children: [
               if (homeData.isFlashDealInitial != false)
                 buildBottomVerticalCardListItem(AppImages.flashDeal,
-                    AppLocalizations.of(context)!.flash_deal_ucf,
+                    'flash_deal_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return FlashDealList();
@@ -408,7 +408,7 @@ class _ProfileState extends State<Profile> {
           ),
           //flash_deals
           buildBottomVerticalCardListItem(
-              AppImages.brands, AppLocalizations.of(context)!.brands_ucf,
+              AppImages.brands, 'brands_ucf'.tr(context: context),
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const Filter(selected_filter: "brands");
@@ -424,7 +424,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.auction,
-                    LangText(context).local.on_auction_products_ucf,
+                    'on_auction_products_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const AuctionProducts();
@@ -440,7 +440,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.myClassified,
-                    LangText(context).local.my_classified_ads_ucf,
+                    'my_classified_ads_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MyClassifiedAds();
@@ -457,7 +457,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.classifiedProduct,
-                    LangText(context).local.all_classified_ads_ucf,
+                    'all_classified_ads_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ClassifiedAds();
@@ -475,7 +475,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.lastViewProduct,
-                    LangText(context).local.last_view_product_ucf,
+                    'last_view_product_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const LastViewProduct();
@@ -493,7 +493,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.auction,
-                    LangText(context).local.on_auction_products_ucf,
+                    'on_auction_products_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const AuctionProducts();
@@ -542,7 +542,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ),
                                   Text(
-                                    LangText(context).local.auction_ucf,
+                                    'auction_ucf'.tr(context: context),
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: MyTheme.dark_font_grey),
@@ -590,7 +590,7 @@ class _ProfileState extends State<Profile> {
                                           ),
                                         ),
                                         Text(
-                                          " ${LangText(context).local.on_auction_products_ucf}",
+                                          " ${'on_auction_products_ucf'.tr(context: context)}",
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: MyTheme.dark_font_grey,
@@ -621,7 +621,7 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                               ),
                                               Text(
-                                                " ${LangText(context).local.bidded_products_ucf}",
+                                                " ${'bidded_products_ucf'.tr(context: context)}",
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   color: MyTheme.dark_font_grey,
@@ -649,7 +649,7 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                               ),
                                               Text(
-                                                " ${LangText(context).local.purchase_history_ucf}",
+                                                " ${'purchase_history_ucf'.tr(context: context)}",
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   color: MyTheme.dark_font_grey,
@@ -679,7 +679,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.shop,
-                    LangText(context).local.browse_all_sellers_ucf,
+                    'browse_all_sellers_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const Filter(
@@ -699,7 +699,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.followSeller,
-                    LangText(context).local.followed_sellers_ucf,
+                    'followed_sellers_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const FollowedSellers();
@@ -713,14 +713,14 @@ class _ProfileState extends State<Profile> {
             ),
 
           buildBottomVerticalCardListItem(
-              AppImages.delete, LangText(context).local.privacy_policy_ucf,
+              AppImages.delete, 'privacy_policy_ucf'.tr(context: context),
               onPressed: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => CommonWebviewScreen(
                           page_name:
-                              AppLocalizations.of(context)!.privacy_policy_ucf,
+                              'privacy_policy_ucf'.tr(context: context),
                           url:
                               "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
                         )));
@@ -734,7 +734,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(
-                    AppImages.delete, LangText(context).local.delete_my_account,
+                    AppImages.delete, 'delete_my_account'.tr(context: context),
                     onPressed: () {
                   deleteWarningDialog();
                 }),
@@ -796,7 +796,7 @@ class _ProfileState extends State<Profile> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildHorizontalSettingItem(true, AppImages.language,
-              AppLocalizations.of(context)!.language_ucf, () {
+              'language_ucf'.tr(context: context), () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -824,7 +824,7 @@ class _ProfileState extends State<Profile> {
                   height: 5,
                 ),
                 Text(
-                  AppLocalizations.of(context)!.currency_ucf,
+                  'currency_ucf'.tr(context: context),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 10,
@@ -837,7 +837,7 @@ class _ProfileState extends State<Profile> {
           buildHorizontalSettingItem(
               is_logged_in.$,
               AppImages.edit,
-              AppLocalizations.of(context)!.edit_profile_ucf,
+              'edit_profile_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
                       AIZRoute.push(context, ProfileEdit()).then((value) {
@@ -848,7 +848,7 @@ class _ProfileState extends State<Profile> {
           buildHorizontalSettingItem(
               is_logged_in.$,
               AppImages.location,
-              AppLocalizations.of(context)!.address_ucf,
+              'address_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
                       Navigator.push(
@@ -896,7 +896,7 @@ class _ProfileState extends State<Profile> {
 
   dynamic showLoginWarning() {
     return ToastComponent.showDialog(
-      AppLocalizations.of(context)!.you_need_to_log_in,
+      'you_need_to_log_in'.tr(context: context),
     );
   }
 
@@ -905,11 +905,11 @@ class _ProfileState extends State<Profile> {
         context: context,
         builder: (context) => AlertDialog(
               title: Text(
-                LangText(context).local.delete_account_warning_title,
+                'delete_account_warning_title'.tr(context: context),
                 style: TextStyle(fontSize: 15, color: MyTheme.dark_font_grey),
               ),
               content: Text(
-                LangText(context).local.delete_account_warning_description,
+                'delete_account_warning_description'.tr(context: context),
                 style: TextStyle(fontSize: 13, color: MyTheme.dark_font_grey),
               ),
               actions: [
@@ -917,13 +917,13 @@ class _ProfileState extends State<Profile> {
                     onPressed: () {
                       pop(context);
                     },
-                    child: Text(LangText(context).local.no_ucf)),
+                    child: Text('no_ucf'.tr(context: context))),
                 TextButton(
                     onPressed: () {
                       pop(context);
                       deleteAccountReq();
                     },
-                    child: Text(LangText(context).local.yes_ucf))
+                    child: Text('yes_ucf'.tr(context: context)))
               ],
             ));
   }
@@ -952,7 +952,7 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.walletSystem)
             Container(
               child: buildSettingAndAddonsHorizontalMenuItem(
-                  AppImages.wallet, AppLocalizations.of(context)!.my_wallet_ucf,
+                  AppImages.wallet, 'my_wallet_ucf'.tr(context: context),
                   () {
                 Navigator.push(
                     context, PageAnimation.fadeRoute(const Wallet()));
@@ -960,7 +960,7 @@ class _ProfileState extends State<Profile> {
             ),
           buildSettingAndAddonsHorizontalMenuItem(
               AppImages.orders,
-              AppLocalizations.of(context)!.orders_ucf,
+              'orders_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
                       Navigator.push(
@@ -969,7 +969,7 @@ class _ProfileState extends State<Profile> {
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
               AppImages.heart,
-              AppLocalizations.of(context)!.my_wishlist_ucf,
+              'my_wishlist_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
                       Navigator.push(
@@ -979,7 +979,7 @@ class _ProfileState extends State<Profile> {
           if (club_point_addon_installed.$)
             buildSettingAndAddonsHorizontalMenuItem(
                 AppImages.points,
-                AppLocalizations.of(context)!.club_point_ucf,
+                'club_point_ucf'.tr(context: context),
                 is_logged_in.$
                     ? () {
                         Navigator.push(
@@ -1008,7 +1008,7 @@ class _ProfileState extends State<Profile> {
               ),
               child: buildSettingAndAddonsHorizontalMenuItem(
                   AppImages.notification,
-                  AppLocalizations.of(context)!.notification_ucf,
+                  'notification_ucf'.tr(context: context),
                   is_logged_in.$
                       ? () {
                           Navigator.push(
@@ -1025,7 +1025,7 @@ class _ProfileState extends State<Profile> {
           if (refund_addon_installed.$)
             buildSettingAndAddonsHorizontalMenuItem(
                 AppImages.refund,
-                AppLocalizations.of(context)!.refund_requests_ucf,
+                'refund_requests_ucf'.tr(context: context),
                 is_logged_in.$
                     ? () {
                         Navigator.push(
@@ -1035,7 +1035,7 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.conversationSystem)
             buildSettingAndAddonsHorizontalMenuItem(
                 AppImages.messages,
-                AppLocalizations.of(context)!.messages_ucf,
+                'messages_ucf'.tr(context: context),
                 is_logged_in.$
                     ? () {
                         Navigator.push(
@@ -1047,7 +1047,7 @@ class _ProfileState extends State<Profile> {
             if (AppConfig.businessSettingsData.classifiedProduct)
               buildSettingAndAddonsHorizontalMenuItem(
                   AppImages.classifiedProduct,
-                  AppLocalizations.of(context)!.classified_products,
+                  'classified_products'.tr(context: context),
                   is_logged_in.$
                       ? () {
                           Navigator.push(context,
@@ -1057,7 +1057,7 @@ class _ProfileState extends State<Profile> {
 
           buildSettingAndAddonsHorizontalMenuItem(
               AppImages.download,
-              AppLocalizations.of(context)!.downloads_ucf,
+              'downloads_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
                       Navigator.push(
@@ -1068,7 +1068,7 @@ class _ProfileState extends State<Profile> {
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
               AppImages.upload,
-              AppLocalizations.of(context)!.upload_file_ucf,
+              'upload_file_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
                       Navigator.push(
@@ -1129,19 +1129,19 @@ class _ProfileState extends State<Profile> {
       children: [
         buildCountersRowItem(
           _cartCounterString,
-          AppLocalizations.of(context)!.in_your_cart_all_lower,
+          'in_your_cart_all_lower'.tr(context: context),
           onTap: () => Navigator.push(context,
               PageAnimation.fadeRoute(const Cart(has_bottomnav: false))),
         ),
         buildCountersRowItem(
           _wishlistCounterString,
-          AppLocalizations.of(context)!.in_your_wishlist_all_lower,
+          'in_your_wishlist_all_lower'.tr(context: context),
           onTap: () =>
               Navigator.push(context, PageAnimation.fadeRoute(Wishlist())),
         ),
         buildCountersRowItem(
           _orderCounterString,
-          AppLocalizations.of(context)!.your_ordered_all_lower,
+          'your_ordered_all_lower'.tr(context: context),
           onTap: () => Navigator.push(
               context, PageAnimation.fadeRoute(const OrderList())),
         ),
@@ -1248,8 +1248,8 @@ class _ProfileState extends State<Profile> {
                 side: const BorderSide(color: MyTheme.white)),
             child: Text(
               is_logged_in.$
-                  ? AppLocalizations.of(context)!.logout_ucf
-                  : LangText(context).local.login_ucf,
+                  ? 'logout_ucf'.tr(context: context)
+                  : 'login_ucf'.tr(context: context),
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 10,
@@ -1292,7 +1292,7 @@ class _ProfileState extends State<Profile> {
             ],
           )
         : Text(
-            LangText(context).local.login_or_reg,
+            'login_or_reg'.tr(context: context),
             style: const TextStyle(
                 fontSize: 14,
                 color: MyTheme.white,
@@ -1312,7 +1312,7 @@ class _ProfileState extends State<Profile> {
               const SizedBox(
                 width: 10,
               ),
-              Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
+              Text("${'please_wait_ucf'.tr(context: context)}"),
             ],
           ));
         });

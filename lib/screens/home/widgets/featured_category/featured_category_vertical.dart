@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../../../custom/featured_category/featured_categories_widget_vertical.dart';
 
@@ -26,7 +26,7 @@ class CategoryListVertical extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.only(
                     top: 10, start: 20, bottom: 1),
                 child: Text(
-                  AppLocalizations.of(context)!.featured_categories_ucf,
+                  'featured_categories_ucf'.tr(context: context),
                   style: const TextStyle(
                     color: Color(0xff000000),
                     fontSize: 18,

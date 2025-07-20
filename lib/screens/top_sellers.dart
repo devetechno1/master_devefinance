@@ -1,11 +1,12 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/shop_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/shop_square_card.dart';
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../data_model/shop_response.dart';
 
@@ -70,7 +71,7 @@ class _TopSellersState extends State<TopSellers> {
       // centerTitle: true,
       leading: UsefulElements.backButton(),
       title: Text(
-        LangText(context).local.top_sellers_ucf,
+        'top_sellers_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

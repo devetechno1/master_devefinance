@@ -1,7 +1,7 @@
 // import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 // import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 // import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-// import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+// 
 // import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 // import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 // import 'package:active_ecommerce_cms_demo_app/data_model/shop_details_response.dart';
@@ -15,7 +15,7 @@
 // import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
 // import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 // import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -66,7 +66,7 @@
 //           _mainScrollController.position.maxScrollExtent) {
 //         if (tabOptionIndex == 2) {
 //           ToastComponent.showDialog(
-//               LangText(context).local!.loading_more_products_ucf);
+//               'loading_more_products_ucf'.tr(context: context));
 //           setState(() {
 //             _page++;
 //           });
@@ -286,7 +286,7 @@
 //               0.0,
 //             ),
 //             child: Text(
-//               AppLocalizations.of(context)!.top_selling_products_ucf,
+//               'top_selling_products_ucf'.tr(context: context),
 //               style: TextStyle(
 //                   color: MyTheme.font_grey,
 //                   fontSize: 16,
@@ -312,7 +312,7 @@
 //               0.0,
 //             ),
 //             child: Text(
-//               AppLocalizations.of(context)!.all_products_ucf,
+//               'all_products_ucf'.tr(context: context),
 //               style: TextStyle(
 //                   color: MyTheme.font_grey,
 //                   fontSize: 16,
@@ -338,7 +338,7 @@
 //             0.0,
 //           ),
 //           child: Text(
-//             AppLocalizations.of(context)!.new_arrivals_products_ucf,
+//             'new_arrivals_products_ucf'.tr(context: context),
 //             style: TextStyle(
 //                 color: MyTheme.font_grey,
 //                 fontSize: 16,
@@ -385,7 +385,7 @@
 //           Padding(
 //             padding: const EdgeInsets.only(left: 18.0, top: 20),
 //             child: Text(
-//               LangText(context).local!.featured_products_ucf,
+//               'featured_products_ucf'.tr(context: context),
 //               style: TextStyle(
 //                   fontSize: 18,
 //                   fontWeight: FontWeight.bold,
@@ -484,17 +484,17 @@
 //           buildTabOptionItem(
 //             context,
 //             0,
-//             LangText(context).local!.store_home_ucf,
+//             'store_home_ucf'.tr(context: context),
 //           ),
 //           buildTabOptionItem(
 //             context,
 //             1,
-//             LangText(context).local!.top_selling_products_ucf,
+//             'top_selling_products_ucf'.tr(context: context),
 //           ),
 //           buildTabOptionItem(
 //             context,
 //             2,
-//             LangText(context).local!.all_products_ucf,
+//             'all_products_ucf'.tr(context: context),
 //           ),
 //         ],
 //       ),
@@ -701,7 +701,7 @@
 //           });
 //     } else if (_newArrivalProducts.length == 0) {
 //       return Center(
-//           child: Text(AppLocalizations.of(context)!.no_product_is_available));
+//           child: Text('no_product_is_available'.tr(context: context)));
 //     } else {
 //       return Container(); // should never be happening
 //     }
@@ -778,8 +778,7 @@
 //                           actions: [
 //                             FlatButton(
 //                               child: Text(
-//                                 AppLocalizations.of(context)
-//                                     .common_close_in_all_capital,
+//                                 'common_close_in_all_capital'.tr(context: context),
 //                                 style: TextStyle(color: MyTheme.medium_grey),
 //                               ),
 //                               onPressed: () {
@@ -887,8 +886,8 @@
 //                 },
 //                 child: Text(
 //                   _isThisSellerFollowed != null && _isThisSellerFollowed!
-//                       ? LangText(context).local!.followed_ucf
-//                       : LangText(context).local!.follow_ucf,
+//                       ? 'followed_ucf'.tr(context: context)
+//                       : 'follow_ucf'.tr(context: context),
 //                   style: TextStyle(
 //                       fontSize: 10,
 //                       color: _isThisSellerFollowed != null &&
@@ -1016,7 +1015,7 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/shop_details_response.dart';
@@ -1031,7 +1030,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -1083,7 +1082,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           _mainScrollController.position.maxScrollExtent) {
         if (tabOptionIndex == 2) {
           ToastComponent.showDialog(
-              LangText(context).local.loading_more_products_ucf);
+              'loading_more_products_ucf'.tr(context: context));
           setState(() {
             _page++;
           });
@@ -1303,7 +1302,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               0.0,
             ),
             child: Text(
-              AppLocalizations.of(context)!.top_selling_products_ucf,
+              'top_selling_products_ucf'.tr(context: context),
               style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 16,
@@ -1329,7 +1328,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               0.0,
             ),
             child: Text(
-              AppLocalizations.of(context)!.all_products_ucf,
+              'all_products_ucf'.tr(context: context),
               style: const TextStyle(
                   color: MyTheme.font_grey,
                   fontSize: 16,
@@ -1361,7 +1360,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                   4.0,
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.new_arrivals_products_ucf,
+                  'new_arrivals_products_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -1413,7 +1412,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                   left: AppDimensions.paddingLarge,
                   top: AppDimensions.paddingLarge),
               child: Text(
-                LangText(context).local.featured_products_ucf,
+                'featured_products_ucf'.tr(context: context),
                 style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -1516,17 +1515,17 @@ class _SellerDetailsState extends State<SellerDetails> {
           buildTabOptionItem(
             context,
             0,
-            LangText(context).local.store_home_ucf,
+            'store_home_ucf'.tr(context: context),
           ),
           buildTabOptionItem(
             context,
             1,
-            LangText(context).local.top_selling_products_ucf,
+            'top_selling_products_ucf'.tr(context: context),
           ),
           buildTabOptionItem(
             context,
             2,
-            LangText(context).local.all_products_ucf,
+            'all_products_ucf'.tr(context: context),
           ),
         ],
       ),
@@ -1781,7 +1780,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           });
     } else if (_newArrivalProducts.isEmpty) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_product_is_available));
+          child: Text('no_product_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -1954,8 +1953,8 @@ class _SellerDetailsState extends State<SellerDetails> {
                 },
                 child: Text(
                   _isThisSellerFollowed != null && _isThisSellerFollowed!
-                      ? LangText(context).local.followed_ucf
-                      : LangText(context).local.follow_ucf,
+                      ? 'followed_ucf'.tr(context: context)
+                      : 'follow_ucf'.tr(context: context),
                   style: TextStyle(
                       fontSize: 10,
                       color: _isThisSellerFollowed != null &&
@@ -2136,7 +2135,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
-                          widget.name ?? LangText(context).local.no_name,
+                          widget.name ?? 'no_name'.tr(context: context),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(
@@ -2256,7 +2255,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           ],
                         ),
                         child: Text(
-                          LangText(context).local.wholesale,
+                          'wholesale'.tr(context: context),
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white,

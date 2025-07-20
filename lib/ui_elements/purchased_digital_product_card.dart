@@ -10,7 +10,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class PurchasedDigitalProductCard extends StatefulWidget
     with WidgetsBindingObserver {
@@ -45,7 +45,7 @@ class _PurchasedDigitalProductCardState
     _port.listen((dynamic data) {
       if (data[2] >= 100) {
         ToastComponent.showDialog(
-          LangText(context).local.file_download_success,
+          'file_download_success'.tr(context: context),
         );
       }
       setState(() {});
@@ -83,7 +83,7 @@ class _PurchasedDigitalProductCardState
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
             child: Text(
-              widget.name ?? LangText(context).local.no_name,
+              widget.name ?? 'no_name'.tr(context: context),
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
               style: const TextStyle(
@@ -107,7 +107,7 @@ class _PurchasedDigitalProductCardState
               ),
               child: Center(
                 child: Text(
-                  LangText(context).local.download,
+                  'download'.tr(context: context),
                   style: const TextStyle(
                     fontFamily: 'Public Sans',
                     fontSize: 10,

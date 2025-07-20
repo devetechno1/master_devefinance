@@ -1,5 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -7,7 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/classified_product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../data_model/classified_ads_response.dart';
@@ -89,7 +89,7 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
       centerTitle: false,
       leading: UsefulElements.backButton(),
       title: Text(
-        AppLocalizations.of(context)!.classified_ads_ucf,
+        'classified_ads_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -108,7 +108,7 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
 
     if (_classifiedProducts.isEmpty) {
       return Center(
-        child: Text(LangText(context).local.no_data_is_available),
+        child: Text('no_data_is_available'.tr(context: context)),
       );
     }
     return RefreshIndicator(

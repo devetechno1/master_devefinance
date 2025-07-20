@@ -4,7 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/wishlist_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import 'widgets/wishlist_grid_view.dart';
 
@@ -98,7 +98,7 @@ class _WishlistState extends State<Wishlist> {
         height: 100,
         child: Center(
           child: Text(
-            AppLocalizations.of(context)!.you_need_to_log_in,
+            'you_need_to_log_in'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
@@ -115,7 +115,7 @@ class _WishlistState extends State<Wishlist> {
         height: 100,
         child: Center(
           child: Text(
-            AppLocalizations.of(context)!.no_item_is_available,
+            'no_item_is_available'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
@@ -135,7 +135,7 @@ class _WishlistState extends State<Wishlist> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.my_wishlist_ucf,
+        'my_wishlist_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

@@ -13,10 +13,9 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../custom/lang_text.dart';
 
 class ProductReviews extends StatefulWidget {
   final int? id;
@@ -90,7 +89,7 @@ class _ProductReviewsState extends State<ProductReviews> {
   Future<void> onTapReviewSubmit(context) async {
     if (is_logged_in.$ == false) {
       ToastComponent.showDialog(
-        LangText(context).local.you_need_to_login_to_give_a_review,
+        'you_need_to_login_to_give_a_review'.tr(context: context),
       );
       return;
     }
@@ -100,12 +99,12 @@ class _ProductReviewsState extends State<ProductReviews> {
     //print(chatText);
     if (myReviewText == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.review_can_not_empty_warning,
+        'review_can_not_empty_warning'.tr(context: context),
       );
       return;
     } else if (_my_rating < 1.0) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.at_least_one_star_must_be_given,
+        'at_least_one_star_must_be_given'.tr(context: context),
       );
       return;
     }
@@ -217,7 +216,7 @@ class _ProductReviewsState extends State<ProductReviews> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.reviews_ucf,
+        'reviews_ucf'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
@@ -251,7 +250,7 @@ class _ProductReviewsState extends State<ProductReviews> {
         height: 300,
         child: Center(
             child: Text(
-                AppLocalizations.of(context)!.no_reviews_yet_be_the_first)),
+                'no_reviews_yet_be_the_first'.tr(context: context))),
       );
     } else {
       return Container(); // should never be happening
@@ -381,8 +380,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                         return Btn.basic(
                           child: Text(
                             !controller.expanded
-                                ? AppLocalizations.of(context)!.view_more
-                                : AppLocalizations.of(context)!.show_less_ucf,
+                                ? 'view_more'.tr(context: context)
+                                : 'show_less_ucf'.tr(context: context),
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 11),
                           ),
@@ -407,8 +406,8 @@ class _ProductReviewsState extends State<ProductReviews> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _reviewList.length
-            ? AppLocalizations.of(context)!.no_more_reviews_ucf
-            : AppLocalizations.of(context)!.loading_more_reviews_ucf),
+            ? 'no_more_reviews_ucf'.tr(context: context)
+            : 'loading_more_reviews_ucf'.tr(context: context)),
       ),
     );
   }
@@ -456,7 +455,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                     filled: true,
                     fillColor: const Color.fromRGBO(251, 251, 251, 1),
                     hintText:
-                        AppLocalizations.of(context)!.type_your_review_here,
+                        'type_your_review_here'.tr(context: context),
                     hintStyle: const TextStyle(
                         fontSize: 14.0, color: MyTheme.textfield_grey),
                     enabledBorder: const OutlineInputBorder(

@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class InternetHelper {
           SnackBar(
             backgroundColor: Theme.of(context).colorScheme.error,
             content: Text(
-              LangText(context).local.check_your_internet_connection,
+              'check_your_internet_connection'.tr(context: context),
               style: const TextStyle(color: Colors.white),
             ),
             duration: const Duration(days: 1),
@@ -25,7 +25,7 @@ class InternetHelper {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.green,
-              content: Text(LangText(context).local.success_internet_connection,
+              content: Text('success_internet_connection'.tr(context: context),
                   style: const TextStyle(color: Colors.white)),
               duration: const Duration(seconds: 2),
             ),

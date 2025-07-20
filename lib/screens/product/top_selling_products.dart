@@ -7,7 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.da
 import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class TopSellingProducts extends StatefulWidget {
@@ -46,7 +46,7 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.top_selling_products_ucf,
+        'top_selling_products_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

@@ -11,7 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/category_repository.d
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../custom/category_item_card_widget.dart';
 
@@ -119,8 +119,8 @@ class _CategoryListState extends State<CategoryList> {
 
   String getAppBarTitle() {
     final String name = widget.is_top_category
-        ? AppLocalizations.of(context)!.top_categories_ucf
-        : AppLocalizations.of(context)!.categories_ucf;
+        ? 'top_categories_ucf'.tr(context: context)
+        : 'categories_ucf'.tr(context: context);
 
     return name;
   }
@@ -196,7 +196,7 @@ class _CategoryListState extends State<CategoryList> {
                       borderRadius: BorderRadius.all(
                           Radius.circular(AppDimensions.radiusSmall))),
                   child: Text(
-                    AppLocalizations.of(context)!.all_products_of_ucf + " ",
+                    'all_products_of_ucf'.tr(context: context) + " ",
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,

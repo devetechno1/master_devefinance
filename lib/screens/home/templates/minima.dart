@@ -2,7 +2,7 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_banners_list.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
@@ -15,7 +15,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_category/feautured_category_horizontal.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
@@ -123,8 +123,7 @@ class _MinimaScreenState extends State<MinimaScreen>
                                           padding: const EdgeInsetsDirectional
                                               .fromSTEB(22, 10, 10, 10),
                                           child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .flash_deal_ucf,
+                                              'flash_deal_ucf'.tr(context: context),
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18)),
@@ -271,7 +270,7 @@ class _MinimaScreenState extends State<MinimaScreen>
               timerCircularContainer(time.days, 365,
                   timeText((time.days).toString(), default_length: 3)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.days,
+              Text('days'.tr(context: context),
                   style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
@@ -281,7 +280,7 @@ class _MinimaScreenState extends State<MinimaScreen>
               timerCircularContainer(time.hours, 24,
                   timeText((time.hours).toString(), default_length: 2)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.hours,
+              Text('hours'.tr(context: context),
                   style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
@@ -291,7 +290,7 @@ class _MinimaScreenState extends State<MinimaScreen>
               timerCircularContainer(time.min, 60,
                   timeText((time.min).toString(), default_length: 2)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.minutes,
+              Text('minutes'.tr(context: context),
                   style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
@@ -301,7 +300,7 @@ class _MinimaScreenState extends State<MinimaScreen>
               timerCircularContainer(time.sec, 60,
                   timeText((time.sec).toString(), default_length: 2)),
               const SizedBox(height: 5),
-              Text(LangText(context).local.seconds,
+              Text('seconds'.tr(context: context),
                   style: const TextStyle(color: Colors.grey, fontSize: 10))
             ],
           ),
@@ -314,7 +313,7 @@ class _MinimaScreenState extends State<MinimaScreen>
           ),
           Row(
             children: [
-              Text(LangText(context).local.shop_more_ucf,
+              Text('shop_more_ucf'.tr(context: context),
                   style:
                       const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
               const SizedBox(width: 3),

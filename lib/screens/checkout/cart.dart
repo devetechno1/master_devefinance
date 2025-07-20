@@ -8,12 +8,11 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_config.dart';
 import '../../custom/cart_seller_item_list_widget.dart';
-import '../../custom/lang_text.dart';
 import '../../presenter/cart_provider.dart';
 
 class Cart extends StatelessWidget {
@@ -102,10 +101,10 @@ class _CartState extends State<_Cart> {
                         //           children: [
                         //             TextSpan(
                         //                 text:
-                        //                     '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
+                        //                     '${'minimum_order_qty_is'.tr(context: context)} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
                         //             TextSpan(
                         //                 text:
-                        //                     LangText(context).local.remaining),
+                        //                     'remaining'.tr(context: context)),
                         //             TextSpan(
                         //                 text:
                         //                     ' ${AppConfig.businessSettingsData.minimumOrderQuantity - (cartProvider.shopList.firstOrNull?.cartItems?.length ?? 0)} '),
@@ -129,10 +128,10 @@ class _CartState extends State<_Cart> {
                         //           children: [
                         //             TextSpan(
                         //                 text:
-                        //                     '${LangText(context).local.minimum_order_amount_is} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
+                        //                     '${'minimum_order_amount_is'.tr(context: context)} ${AppConfig.businessSettingsData.minimumOrderAmount} , '),
                         //             TextSpan(
                         //                 text:
-                        //                     LangText(context).local.remaining),
+                        //                     'remaining'.tr(context: context)),
                         //             TextSpan(
                         //                 text:
                         //                     ' ${AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal} '),
@@ -151,12 +150,15 @@ class _CartState extends State<_Cart> {
                               isLoading: cartProvider.isInitial,
                               showProgress:
                                   cartProvider.isMinOrderAmountNotEnough,
-                              title: LangText(context)
-                                  .local
-                                  .minimum_order_amount_with_remaining(
-                                    "${AppConfig.businessSettingsData.minimumOrderAmount}",
-                                    "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
-                                  ),
+                              title: 'minimum_order_amount_with_remaining'.tr(
+                                context: context,
+                                args: {
+                                  "{minAmount}":
+                                      "${AppConfig.businessSettingsData.minimumOrderAmount}",
+                                  "{remaining}":
+                                      "${(AppConfig.businessSettingsData.minimumOrderAmount - cartProvider.cartTotal).abs()}",
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -174,12 +176,15 @@ class _CartState extends State<_Cart> {
                               isLoading: cartProvider.isInitial,
                               showProgress:
                                   cartProvider.isMinOrderQuantityNotEnough,
-                              title: LangText(context)
-                                  .local
-                                  .minimum_order_quantity_with_remaining(
-                                    "${AppConfig.businessSettingsData.minimumOrderQuantity}",
-                                    "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
-                                  ),
+                              title: 'minimum_order_quantity_with_remaining'.tr(
+                                context: context,
+                                args: {
+                                  "{minquantity}":
+                                      "${AppConfig.businessSettingsData.minimumOrderQuantity}",
+                                  "{remaining}":
+                                      "${(AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity).abs()}",
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -219,10 +224,10 @@ class _CartState extends State<_Cart> {
                         //         children: [
                         //           TextSpan(
                         //               text:
-                        //                   '${LangText(context).local.minimum_order_qty_is} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
+                        //                   '${'minimum_order_qty_is'.tr(context: context)} ${AppConfig.businessSettingsData.minimumOrderQuantity} , '),
                         //           TextSpan(
                         //               text:
-                        //                   LangText(context).local.remaining),
+                        //                   'remaining'.tr(context: context)),
                         //           TextSpan(
                         //               text:
                         //                   ' ${AppConfig.businessSettingsData.minimumOrderQuantity - currentQuantity} '),
@@ -277,7 +282,7 @@ class _CartState extends State<_Cart> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
-                      AppLocalizations.of(context)!.total_amount_ucf,
+                      'total_amount_ucf'.tr(context: context),
                       style: TextStyle(
                           color: MyTheme.dark_font_grey,
                           fontSize: 13,
@@ -363,7 +368,7 @@ class _CartState extends State<_Cart> {
                         ),
                       ),
                 child: Text(
-                  AppLocalizations.of(context)!.proceed_to_shipping_ucf,
+                  'proceed_to_shipping_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 13,
@@ -390,7 +395,7 @@ class _CartState extends State<_Cart> {
       ),
       centerTitle: widget.from_navigation,
       title: Text(
-        AppLocalizations.of(context)!.shopping_cart_ucf,
+        'shopping_cart_ucf'.tr(context: context),
         style: TextStyles.buildAppBarTexStyle(),
       ),
       elevation: 0.0,
@@ -475,7 +480,7 @@ class _CartState extends State<_Cart> {
         height: MediaQuery.sizeOf(context).height * 0.65,
         child: Center(
           child: Text(
-            AppLocalizations.of(context)!.cart_is_empty,
+            'cart_is_empty'.tr(context: context),
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   color: MyTheme.font_grey,
                 ),

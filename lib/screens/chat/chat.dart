@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -12,7 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/chat_repository.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 // import 'package:intl/intl.dart' as intl;
 import 'package:shimmer/shimmer.dart';
 
@@ -164,8 +163,8 @@ class _ChatState extends State<Chat> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _list.length
-            ? AppLocalizations.of(context)!.no_more_items_ucf
-            : AppLocalizations.of(context)!.loading_more_items_ucf),
+            ? 'no_more_items_ucf'.tr(context: context)
+            : 'loading_more_items_ucf'.tr(context: context)),
       ),
     );
   }
@@ -353,7 +352,7 @@ class _ChatState extends State<Chat> {
       );
     } else if (_totalData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_data_is_available));
+          child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container();
     }
@@ -385,7 +384,7 @@ class _ChatState extends State<Chat> {
             decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color.fromRGBO(251, 251, 251, 1),
-                hintText: AppLocalizations.of(context)!.type_your_message_here,
+                hintText: 'type_your_message_here'.tr(context: context),
                 hintStyle: const TextStyle(
                     fontSize: 14.0, color: MyTheme.textfield_grey),
                 enabledBorder: const OutlineInputBorder(
@@ -639,7 +638,7 @@ class _ChatState extends State<Chat> {
                   textAlign: TextAlign.start,
                   decoration: InputDecoration(
                     hintText:
-                        "  ${LangText(context).local.type_your_message_here}",
+                        "  ${'type_your_message_here'.tr(context: context)}",
                     hintStyle:
                         const TextStyle(color: Color(0xff999999), fontSize: 12),
                     border: InputBorder.none,

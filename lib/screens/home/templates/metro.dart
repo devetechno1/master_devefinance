@@ -17,7 +17,6 @@ import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
-import '../widgets/featured_category/featured_category_vertical.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -217,7 +216,7 @@ class _MetroScreenState extends State<MetroScreen>
   //           children: [
   //             timerCircularContainer(time.days, 365, timeText((time.days).toString(), default_length: 3)),
   //             const SizedBox(height: 5),
-  //             Text(LangText(context).local.days, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //             Text('days'.tr(context: context), style: const TextStyle(color: Colors.grey, fontSize: 10))
   //           ],
   //         ),
   //         const SizedBox(width: 12),
@@ -225,7 +224,7 @@ class _MetroScreenState extends State<MetroScreen>
   //           children: [
   //             timerCircularContainer(time.hours, 24, timeText((time.hours).toString(), default_length: 2)),
   //             const SizedBox(height: 5),
-  //             Text(LangText(context).local.hours, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //             Text('hours'.tr(context: context), style: const TextStyle(color: Colors.grey, fontSize: 10))
   //           ],
   //         ),
   //         const SizedBox(width: 10),
@@ -233,7 +232,7 @@ class _MetroScreenState extends State<MetroScreen>
   //           children: [
   //             timerCircularContainer(time.min, 60, timeText((time.min).toString(), default_length: 2)),
   //             const SizedBox(height: 5),
-  //             Text(LangText(context).local.minutes, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //             Text('minutes'.tr(context: context), style: const TextStyle(color: Colors.grey, fontSize: 10))
   //           ],
   //         ),
   //         const SizedBox(width: 5),
@@ -241,7 +240,7 @@ class _MetroScreenState extends State<MetroScreen>
   //           children: [
   //             timerCircularContainer(time.sec, 60, timeText((time.sec).toString(), default_length: 2)),
   //             const SizedBox(height: 5),
-  //             Text(LangText(context).local.seconds, style: const TextStyle(color: Colors.grey, fontSize: 10))
+  //             Text('seconds'.tr(context: context), style: const TextStyle(color: Colors.grey, fontSize: 10))
   //           ],
   //         ),
   //         const SizedBox(width: 10),
@@ -253,7 +252,7 @@ class _MetroScreenState extends State<MetroScreen>
   //         ),
   //         Row(
   //           children: [
-  //             Text(LangText(context).local.shop_more_ucf, style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
+  //             Text('shop_more_ucf'.tr(context: context), style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3))),
   //             const SizedBox(width: 3),
   //             const Icon(Icons.arrow_forward_outlined, size: 10, color: MyTheme.grey_153),
   //             const SizedBox(width: 10),

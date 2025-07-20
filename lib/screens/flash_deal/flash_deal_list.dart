@@ -2,7 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart';
@@ -14,7 +14,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/flash_deal_repository
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/index.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FlashDealList extends StatefulWidget {
   @override
@@ -52,14 +52,14 @@ class _FlashDealListState extends State<FlashDealList> {
           if (snapshot.hasError) {
             return Center(
               child: Text(
-                AppLocalizations.of(context)!.network_error,
+                'network_error'.tr(context: context),
               ),
             );
           } else if (snapshot.data == null) {
             return Container(
               child: Center(
                   child: Text(
-                AppLocalizations.of(context)!.no_data_is_available,
+                'no_data_is_available'.tr(context: context),
               )),
             );
           } else if (snapshot.hasData) {
@@ -153,7 +153,7 @@ class _FlashDealListState extends State<FlashDealList> {
             onTap: () {
               if (time == null) {
                 ToastComponent.showDialog(
-                  AppLocalizations.of(context)!.flash_deal_has_ended,
+                  'flash_deal_has_ended'.tr(context: context),
                 );
               } else {
                 Navigator.push(
@@ -196,7 +196,7 @@ class _FlashDealListState extends State<FlashDealList> {
                         Center(
                             child: time == null
                                 ? Text(
-                                    AppLocalizations.of(context)!.ended_ucf,
+                                    'ended_ucf'.tr(context: context),
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 16.0,
@@ -418,7 +418,7 @@ class _FlashDealListState extends State<FlashDealList> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.days,
+                'days'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -438,7 +438,7 @@ class _FlashDealListState extends State<FlashDealList> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.hours,
+                'hours'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -458,7 +458,7 @@ class _FlashDealListState extends State<FlashDealList> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.minutes,
+                'minutes'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -478,7 +478,7 @@ class _FlashDealListState extends State<FlashDealList> {
                 height: 5,
               ),
               Text(
-                LangText(context).local.seconds,
+                'seconds'.tr(context: context),
                 style: const TextStyle(color: Colors.grey, fontSize: 10),
               )
             ],
@@ -503,7 +503,7 @@ class _FlashDealListState extends State<FlashDealList> {
           Row(
             children: [
               Text(
-                LangText(context).local.shop_more_ucf,
+                'shop_more_ucf'.tr(context: context),
                 style: const TextStyle(fontSize: 10, color: Color(0xffA8AFB3)),
               ),
               const SizedBox(
@@ -569,7 +569,7 @@ class _FlashDealListState extends State<FlashDealList> {
               child: Row(
                 children: [
                   Text(
-                    LangText(context).local.shop_more_ucf,
+                    'shop_more_ucf'.tr(context: context),
                     style:
                         const TextStyle(fontSize: 10, color: Color(0xffA8AFB3)),
                   ),
@@ -645,7 +645,7 @@ class _FlashDealListState extends State<FlashDealList> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.flash_deals_ucf,
+        'flash_deals_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,

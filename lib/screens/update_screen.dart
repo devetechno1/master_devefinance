@@ -1,9 +1,10 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data_model/business_settings/update_model.dart';
 import '../services/navigation_service.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class UpdateScreen extends StatelessWidget {
   const UpdateScreen({super.key});
@@ -32,7 +33,7 @@ class UpdateScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDimensions.paddingSmall),
                 Text(
-                  LangText(context).local.avaliable_update,
+                  'avaliable_update'.tr(context: context),
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -41,7 +42,7 @@ class UpdateScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDimensions.paddingDefault),
                 Text(
-                  LangText(context).local.please_update_to_continue,
+                  'please_update_to_continue'.tr(context: context),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 14),
                 ),
@@ -52,7 +53,7 @@ class UpdateScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   label: Text(
-                    LangText(context).local.update_now_ucf,
+                    'update_now_ucf'.tr(context: context),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -76,7 +77,7 @@ class UpdateScreen extends StatelessWidget {
                   TextButton(
                     onPressed: () => navigateToHome(context),
                     child: Text(
-                      LangText(context).local.skip_ucf,
+                      'skip_ucf'.tr(context: context),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 16,

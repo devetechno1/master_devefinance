@@ -5,11 +5,9 @@ import 'package:active_ecommerce_cms_demo_app/helpers/check_internet.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/currency_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/providers/locale_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
@@ -55,8 +53,8 @@ class _IndexState extends State<Index> {
     getSharedValueHelperData().then((value) {
       Future.delayed(const Duration(seconds: 3)).then((value) {
         SystemConfig.isShownSplashScreen = true;
-        Provider.of<LocaleProvider>(context, listen: false)
-            .setLocale(app_mobile_language.$!);
+        // Provider.of<LocaleProvider>(context, listen: false)
+        //     .setLocale(app_mobile_language.$!);
         setState(() {});
       });
     });

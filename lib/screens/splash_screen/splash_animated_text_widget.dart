@@ -1,10 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../app_config.dart';
 import '../../constants/app_dimensions.dart';
 import '../../constants/app_images.dart';
-import '../../custom/lang_text.dart';
 import '../../my_theme.dart';
 
 class AnimatedTextWidget extends StatelessWidget {
@@ -41,7 +41,7 @@ class AnimatedTextWidget extends StatelessWidget {
             isRepeatingAnimation: false,
             animatedTexts: [
               TyperAnimatedText(
-                LangText(context).local.app_name,
+                'app_name'.tr(context: context),
                 textStyle: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,

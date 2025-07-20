@@ -4,7 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 
 import 'package:active_ecommerce_cms_demo_app/helpers/file_helper.dart';
@@ -13,7 +13,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -60,24 +60,23 @@ class _ProfileEditState extends State<ProfileEdit> {
     //   showDialog(
     //       context: context,
     //       builder: (BuildContext context) => CupertinoAlertDialog(
-    //             title: Text(AppLocalizations.of(context)!.photo_permission_ucf),
+    //             title: Text('photo_permission_ucf'.tr(context: context)),
     //             content: Text(
-    //                 AppLocalizations.of(context)!.this_app_needs_permission),
+    //                 'this_app_needs_permission'.tr(context: context)),
     //             actions: <Widget>[
     //               CupertinoDialogAction(
-    //                 child: Text(AppLocalizations.of(context)!.deny_ucf),
+    //                 child: Text('deny_ucf'.tr(context: context)),
     //                 onPressed: () => Navigator.of(context).pop(),
     //               ),
     //               CupertinoDialogAction(
-    //                 child: Text(AppLocalizations.of(context)!.settings_ucf),
+    //                 child: Text('settings_ucf'.tr(context: context)),
     //                 onPressed: () => openAppSettings(),
     //               ),
     //             ],
     //           ));
     // } else if (status.isRestricted) {
     //   ToastComponent.showDialog(
-    //       AppLocalizations.of(context)!
-    //           .go_to_your_application_settings_and_give_photo_permission,
+    //       'go_to_your_application_settings_and_give_photo_permission'.tr(context: context),
     //       gravity: Toast.center,
     //       duration: Toast.lengthLong);
     // } else if (status.isGranted) {}
@@ -87,7 +86,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
     if (_file == null) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.no_file_is_chosen,
+        'no_file_is_chosen'.tr(context: context),
       );
       return;
     }
@@ -124,18 +123,18 @@ class _ProfileEditState extends State<ProfileEdit> {
 
     if (name == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_your_name,
+        'enter_your_name'.tr(context: context),
       );
       return;
     }
     if (_phone.trim().isEmpty) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.enter_phone_number,
+          'enter_phone_number'.tr(context: context),
           color: Theme.of(context).colorScheme.error);
       return;
     } else if (!_isValidPhoneNumber) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context)!.invalid_phone_number,
+          'invalid_phone_number'.tr(context: context),
           color: Theme.of(context).colorScheme.error);
       return;
     }
@@ -168,26 +167,25 @@ class _ProfileEditState extends State<ProfileEdit> {
 
     if (!changePassword && password == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_password,
+        'enter_password'.tr(context: context),
       );
       return;
     }
     if (!changePassword && passwordConfirm == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.confirm_your_password,
+        'confirm_your_password'.tr(context: context),
       );
       return;
     }
     if (changePassword && password.length < 6) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!
-            .password_must_contain_at_least_6_characters,
+        'password_must_contain_at_least_6_characters'.tr(context: context),
       );
       return;
     }
     if (changePassword && password != passwordConfirm) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.passwords_do_not_match,
+        'passwords_do_not_match'.tr(context: context),
       );
       return;
     }
@@ -273,7 +271,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.edit_profile_ucf,
+        'edit_profile_ucf'.tr(context: context),
         style: const TextStyle(
             fontSize: 16,
             color: Color(0xff3E4447),
@@ -290,7 +288,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.please_log_in_to_see_the_profile,
+            'please_log_in_to_see_the_profile'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     } else {
@@ -440,7 +438,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               bottom: AppDimensions.paddingSupSmall),
           child: Center(
             child: Text(
-              LangText(context).local.password_changes_ucf,
+              'password_changes_ucf'.tr(context: context),
               style: TextStyle(
                 fontFamily: 'Public Sans',
                 fontSize: 16,
@@ -457,7 +455,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
           child: Text(
-            AppLocalizations.of(context)!.new_password_ucf,
+            'new_password_ucf'.tr(context: context),
             style: const TextStyle(
                 fontSize: 12,
                 color: Color(0xff3E4447),
@@ -508,8 +506,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                 padding:
                     const EdgeInsets.only(top: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!
-                      .password_must_contain_at_least_6_characters,
+                  'password_must_contain_at_least_6_characters'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontStyle: FontStyle.italic),
@@ -521,7 +518,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
           child: Text(
-            AppLocalizations.of(context)!.retype_password_ucf,
+            'retype_password_ucf'.tr(context: context),
             style: TextStyle(
                 fontSize: 12,
                 color: MyTheme.dark_font_grey,
@@ -580,7 +577,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       BorderRadius.circular(AppDimensions.radiusSmall)),
               child: Text(
                 textAlign: TextAlign.center,
-                LangText(context).local.save_changes,
+                'save_changes'.tr(context: context),
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -600,7 +597,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
           child: Text(
-            AppLocalizations.of(context)!.basic_information_ucf,
+            'basic_information_ucf'.tr(context: context),
             style: const TextStyle(
                 color: Color(0xff6B7377),
                 fontWeight: FontWeight.bold,
@@ -610,7 +607,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
           child: Text(
-            AppLocalizations.of(context)!.name_ucf,
+            'name_ucf'.tr(context: context),
             style: const TextStyle(
                 fontSize: 12,
                 color: Color(0xff3E4447),
@@ -631,7 +628,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               autofocus: false,
               style: const TextStyle(color: Color(0xff999999), fontSize: 12),
               decoration: InputDecorations.buildInputDecoration_1(
-                      hint_text: LangText(context).local.name_ucf)
+                      hint_text: 'name_ucf'.tr(context: context))
                   .copyWith(
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
@@ -646,7 +643,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
           child: Text(
-            AppLocalizations.of(context)!.phone_ucf,
+            'phone_ucf'.tr(context: context),
             style: const TextStyle(
                 fontSize: 12,
                 color: Color(0xff3E4447),
@@ -664,8 +661,8 @@ class _ProfileEditState extends State<ProfileEdit> {
           child: CustomInternationalPhoneNumberInput(
             countries: countries_code,
             readOnly : true,
-            hintText: LangText(context).local.phone_number_ucf,
-            errorMessage: LangText(context).local.invalid_phone_number,
+            hintText: 'phone_number_ucf'.tr(context: context),
+            errorMessage: 'invalid_phone_number'.tr(context: context),
             initialValue: initialValue,
             onInputChanged: (PhoneNumber number) {
               setState(() {
@@ -703,7 +700,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               padding:
                   const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
               child: Text(
-                AppLocalizations.of(context)!.email_ucf,
+                'email_ucf'.tr(context: context),
                 style: const TextStyle(
                     fontSize: 12,
                     color: Color(0xff3E4447),
@@ -767,7 +764,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       BorderRadius.circular(AppDimensions.radiusSmall)),
               child: Text(
                 textAlign: TextAlign.center,
-                LangText(context).local.update_profile_ucf,
+                'update_profile_ucf'.tr(context: context),
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,

@@ -5,7 +5,7 @@ import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_products.dart';
 import 'package:flutter/material.dart';
 import '../../my_theme.dart';
-import '../lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FeaturedCategoriesWidget extends StatelessWidget {
   final HomePresenter homeData;
@@ -110,7 +110,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
         height: 100,
         child: Center(
           child: Text(
-            LangText(context).local.no_category_found,
+            'no_category_found'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
@@ -8,7 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/chat_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/chat/chat.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class MessengerList extends StatefulWidget {
   @override
@@ -114,8 +113,8 @@ class _MessengerListState extends State<MessengerList> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _list.length
-            ? AppLocalizations.of(context)!.no_more_items_ucf
-            : AppLocalizations.of(context)!.loading_more_items_ucf),
+            ? 'no_more_items_ucf'.tr(context: context)
+            : 'loading_more_items_ucf'.tr(context: context)),
       ),
     );
   }
@@ -132,7 +131,7 @@ class _MessengerListState extends State<MessengerList> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.messages_ucf,
+        'messages_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -166,7 +165,7 @@ class _MessengerListState extends State<MessengerList> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(child: Text(LangText(context).local.no_data_is_available));
+      return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

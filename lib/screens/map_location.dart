@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +8,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:http/http.dart' as http;
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../app_config.dart';
 import '../custom/btn.dart';
@@ -150,7 +151,7 @@ class MapLocationState extends State<MapLocation>
                 // state == SearchingState.Searching
                 //   ? Center(
                 //       child: Text(
-                //       LangText(context).local.calculating,
+                //       'calculating'.tr(context: context),
                 //       style: TextStyle(color: MyTheme.font_grey),
                 //     ))
                 //   :
@@ -201,7 +202,7 @@ class MapLocationState extends State<MapLocation>
                             Radius.circular(AppDimensions.radiusSmallExtra),
                       )),
                       child: Text(
-                        LangText(context).local.pick_here,
+                        'pick_here'.tr(context: context),
                         style: const TextStyle(color: Colors.white),
                       ),
                       onPressed: onTapPickHere,
@@ -240,7 +241,7 @@ class MapLocationState extends State<MapLocation>
                       onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       decoration: InputDecoration(
                           hintText:
-                              LangText(context).local.your_delivery_location,
+                              'your_delivery_location'.tr(context: context),
                           hintStyle: const TextStyle(
                               fontSize: 12.0, color: MyTheme.textfield_grey),
                           enabledBorder: outlineInputBorder,
@@ -264,7 +265,7 @@ class MapLocationState extends State<MapLocation>
                       height: 50,
                       child: Center(
                         child: Text(
-                          LangText(context).local.loading_countries_ucf,
+                          'loading_countries_ucf'.tr(context: context),
                           style: TextStyle(color: MyTheme.medium_grey),
                         ),
                       ),
@@ -334,7 +335,7 @@ class MapLocationState extends State<MapLocation>
 }
 
 /*PlacePicker(
-      hintText: AppLocalizations.of(context)!.your_delivery_location,
+      hintText: 'your_delivery_location'.tr(context: context),
       apiKey: OtherConfig.GOOGLE_MAP_API_KEY,
       initialPosition: kInitialPosition,
       useCurrentLocation: !widget.address.location_available,
@@ -385,7 +386,7 @@ class MapLocationState extends State<MapLocation>
                 child: state == SearchingState.Searching
                     ? Center(
                         child: Text(
-                        AppLocalizations.of(context)!.calculating,
+                        'calculating'.tr(context: context),
                         style: TextStyle(color: MyTheme.font_grey),
                       ))
                     : Padding(
@@ -421,7 +422,7 @@ class MapLocationState extends State<MapLocation>
                                   bottomRight: const Radius.circular(AppDimensions.radiusSmallExtra),
                                 )),
                                 child: Text(
-                                  AppLocalizations.of(context)!.pick_here,
+                                  'pick_here'.tr(context: context),
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 onPressed: () {

@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
@@ -76,7 +76,7 @@ class _OtpState extends State<Otp> {
 
     if (code == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_verification_code,
+        'enter_verification_code'.tr(context: context),
       );
       return;
     }
@@ -173,7 +173,7 @@ class _OtpState extends State<Otp> {
                                   Radius.circular(
                                       AppDimensions.radiusNormal))),
                           child: Text(
-                            AppLocalizations.of(context)!.confirm_ucf,
+                            'confirm_ucf'.tr(context: context),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -192,8 +192,7 @@ class _OtpState extends State<Otp> {
                 padding:
                     const EdgeInsets.only(top: AppDimensions.paddingLarge),
                 child: Text(
-                    AppLocalizations.of(context)!
-                        .check_your_WhatsApp_messages_to_retrieve_the_verification_code,
+                    'check_your_WhatsApp_messages_to_retrieve_the_verification_code'.tr(context: context),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Theme.of(context).disabledColor,
@@ -203,7 +202,7 @@ class _OtpState extends State<Otp> {
                 padding: const EdgeInsets.only(top: 60),
                 child: InkWell(
                   onTap: canResend ? onTapResend : null,
-                  child: Text(AppLocalizations.of(context)!.resend_code_ucf,
+                  child: Text('resend_code_ucf'.tr(context: context),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: canResend
@@ -239,7 +238,7 @@ class _OtpState extends State<Otp> {
                     onTap: () {
                       onTapLogout(context);
                     },
-                    child: Text(AppLocalizations.of(context)!.logout_ucf,
+                    child: Text('logout_ucf'.tr(context: context),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,

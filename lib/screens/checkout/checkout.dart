@@ -1,10 +1,10 @@
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/cart_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/coupon_repository.dart';
@@ -29,7 +29,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/sslc
 import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/stripe_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 
 import '../../app_config.dart';
@@ -251,7 +250,7 @@ class _CheckoutState extends State<Checkout> {
   onPopped(value) async {
     if (value == true) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.payment_cancelled_ucf,
+        'payment_cancelled_ucf'.tr(context: context),
       );
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const OrderList(from_checkout: true);
@@ -266,7 +265,7 @@ class _CheckoutState extends State<Checkout> {
     final couponCode = _couponController.text.toString();
     if (couponCode == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_coupon_code,
+        'enter_coupon_code'.tr(context: context),
       );
       return;
     }
@@ -313,7 +312,7 @@ class _CheckoutState extends State<Checkout> {
 
       if (!guestUserAccountCreateResponse.result!) {
         ToastComponent.showDialog(
-          LangText(context).local.already_have_account,
+          'already_have_account'.tr(context: context),
         );
 
         // if user not created
@@ -329,14 +328,14 @@ class _CheckoutState extends State<Checkout> {
 
     if (_selected_payment_method == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.please_choose_one_option_to_pay,
+        'please_choose_one_option_to_pay'.tr(context: context),
         isError: true,
       );
       return;
     }
     if (_grandTotalValue == 0.00) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.nothing_to_pay,
+        'nothing_to_pay'.tr(context: context),
         isError: true,
       );
       return;
@@ -347,7 +346,7 @@ class _CheckoutState extends State<Checkout> {
             .integrations
             .isNotEmpty) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.please_choose_one_option_to_pay,
+        'please_choose_one_option_to_pay'.tr(context: context),
         isError: true,
       );
       return;
@@ -501,7 +500,7 @@ class _CheckoutState extends State<Checkout> {
     } else if (_selected_payment_method == "instamojo") {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return OnlinePay(
-          title: LangText(context).local.pay_with_instamojo,
+          title: 'pay_with_instamojo'.tr(context: context),
           amount: _grandTotalValue,
           payment_type: payment_type,
           payment_method_key: _selected_payment_method_key,
@@ -766,7 +765,7 @@ class _CheckoutState extends State<Checkout> {
               readOnly: _coupon_applied!,
               autofocus: false,
               decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.enter_coupon_code,
+                  hintText: 'enter_coupon_code'.tr(context: context),
                   hintStyle: const TextStyle(
                       fontSize: 14.0, color: MyTheme.textfield_grey),
                   enabledBorder: app_language_rtl.$!
@@ -823,7 +822,7 @@ class _CheckoutState extends State<Checkout> {
                               Radius.circular(AppDimensions.radiusSmall),
                         )),
                   child: Text(
-                    AppLocalizations.of(context)!.apply_coupon_all_capital,
+                    'apply_coupon_all_capital'.tr(context: context),
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
@@ -846,7 +845,7 @@ class _CheckoutState extends State<Checkout> {
                     bottomRight: Radius.circular(AppDimensions.radiusSmall),
                   )),
                   child: Text(
-                    AppLocalizations.of(context)!.remove_ucf,
+                    'remove_ucf'.tr(context: context),
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
@@ -915,7 +914,7 @@ class _CheckoutState extends State<Checkout> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_payment_method_is_added,
+            'no_payment_method_is_added'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
@@ -1111,13 +1110,12 @@ class _CheckoutState extends State<Checkout> {
           ),
           child: Text(
             widget.paymentFor == PaymentFor.WalletRecharge
-                ? AppLocalizations.of(context)!.recharge_wallet_ucf
+                ? 'recharge_wallet_ucf'.tr(context: context)
                 : widget.paymentFor == PaymentFor.ManualPayment
-                    ? AppLocalizations.of(context)!.proceed_all_caps
+                    ? 'proceed_all_caps'.tr(context: context)
                     : widget.paymentFor == PaymentFor.PackagePay
-                        ? AppLocalizations.of(context)!.buy_package_ucf
-                        : AppLocalizations.of(context)!
-                            .place_my_order_all_capital,
+                        ? 'buy_package_ucf'.tr(context: context)
+                        : 'place_my_order_all_capital'.tr(context: context),
             style: const TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
@@ -1144,7 +1142,7 @@ class _CheckoutState extends State<Checkout> {
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 16.0),
               child: Text(
-                AppLocalizations.of(context)!.total_amount_ucf,
+                'total_amount_ucf'.tr(context: context),
                 style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
               ),
             ),
@@ -1157,7 +1155,7 @@ class _CheckoutState extends State<Checkout> {
             //         onPressDetails();
             //       },
             //       child: Text(
-            //         AppLocalizations.of(context)!.see_details_all_lower,
+            //         'see_details_all_lower'.tr(context: context),
             //         style: TextStyle(
             //           color: MyTheme.font_grey,
             //           fontSize: 12,
@@ -1194,7 +1192,7 @@ class _CheckoutState extends State<Checkout> {
             const SizedBox(
               width: 10,
             ),
-            Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
+            Text("${'please_wait_ucf'.tr(context: context)}"),
           ],
         ));
       },
@@ -1236,7 +1234,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
       actions: [
         Btn.basic(
           child: Text(
-            AppLocalizations.of(context)!.close_all_lower,
+            'close_all_lower'.tr(context: context),
             style: TextStyle(color: MyTheme.medium_grey),
           ),
           onPressed: () {
@@ -1285,7 +1283,7 @@ class CheckoutDetails extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      AppLocalizations.of(context)!.subtotal_all_capital,
+                      'subtotal_all_capital'.tr(context: context),
                       textAlign: TextAlign.end,
                       style: const TextStyle(
                           color: MyTheme.font_grey,
@@ -1315,7 +1313,7 @@ class CheckoutDetails extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      AppLocalizations.of(context)!.tax_all_capital,
+                      'tax_all_capital'.tr(context: context),
                       textAlign: TextAlign.end,
                       style: const TextStyle(
                           color: MyTheme.font_grey,
@@ -1345,7 +1343,7 @@ class CheckoutDetails extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      AppLocalizations.of(context)!.shipping_cost_all_capital,
+                      'shipping_cost_all_capital'.tr(context: context),
                       textAlign: TextAlign.end,
                       style: const TextStyle(
                           color: MyTheme.font_grey,
@@ -1375,7 +1373,7 @@ class CheckoutDetails extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      AppLocalizations.of(context)!.discount_all_capital,
+                      'discount_all_capital'.tr(context: context),
                       textAlign: TextAlign.end,
                       style: const TextStyle(
                           color: MyTheme.font_grey,
@@ -1409,7 +1407,7 @@ class CheckoutDetails extends StatelessWidget {
                     Container(
                       width: 120,
                       child: Text(
-                        AppLocalizations.of(context)!.grand_total_all_capital,
+                        'grand_total_all_capital'.tr(context: context),
                         textAlign: TextAlign.end,
                         style: const TextStyle(
                             color: MyTheme.font_grey,

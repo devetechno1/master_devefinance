@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/intl_phone_input.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/other_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
@@ -23,14 +24,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 // import 'package:twitter_login/twitter_login.dart';
 
-import '../../custom/lang_text.dart';
 import '../../custom/loading.dart';
 import '../../repositories/address_repository.dart';
 import 'otp.dart';
@@ -85,19 +84,19 @@ class _LoginState extends State<Login> {
 
     if (_login_by == 'email' && email == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_email,
+        "enter_email".tr(context: context),
         isError: true,
       );
       return;
     } else if (_login_by == 'phone' && _phone == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
+        "enter_phone_number".tr(context: context),
         isError: true,
       );
       return;
     } else if (password == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_password,
+        "enter_password".tr(context: context),
         isError: true,
       );
       return;
@@ -380,8 +379,8 @@ class _LoginState extends State<Login> {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
-        "${AppLocalizations.of(context)!.login_to} " +
-            LangText(context).local.app_name,
+        "${"login_to".tr(context: context)} " +
+            'app_name'.tr(context: context),
         buildBody(context, _screen_width));
   }
 
@@ -399,8 +398,8 @@ class _LoginState extends State<Login> {
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   _login_by == "email"
-                      ? AppLocalizations.of(context)!.email_ucf
-                      : AppLocalizations.of(context)!.login_screen_phone,
+                      ? "email_ucf".tr(context: context)
+                      : "login_screen_phone".tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -430,8 +429,7 @@ class _LoginState extends State<Login> {
                                 });
                               },
                               child: Text(
-                                AppLocalizations.of(context)!
-                                    .or_login_with_a_phone,
+                                'or_login_with_a_phone'.tr(context: context),
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontStyle: FontStyle.italic,
@@ -453,9 +451,9 @@ class _LoginState extends State<Login> {
                         height: 36,
                         child: CustomInternationalPhoneNumberInput(
                           countries: countries_code,
-                          hintText: LangText(context).local.phone_number_ucf,
+                          hintText: 'phone_number_ucf'.tr(context: context),
                           errorMessage:
-                              LangText(context).local.invalid_phone_number,
+                              'invalid_phone_number'.tr(context: context),
                           initialValue:
                               PhoneNumber(isoCode: AppConfig.default_country),
                           onInputChanged: (PhoneNumber number) {
@@ -497,7 +495,7 @@ class _LoginState extends State<Login> {
                           });
                         },
                         child: Text(
-                          AppLocalizations.of(context)!.or_login_with_an_email,
+                          "or_login_with_an_email".tr(context: context),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontStyle: FontStyle.italic,
@@ -511,7 +509,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  AppLocalizations.of(context)!.password_ucf,
+                  "password_ucf".tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -543,8 +541,7 @@ class _LoginState extends State<Login> {
                         }));
                       },
                       child: Text(
-                        AppLocalizations.of(context)!
-                            .login_screen_forgot_password,
+                        'login_screen_forgot_password'.tr(context: context),
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontStyle: FontStyle.italic,
@@ -572,7 +569,7 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.all(
                             Radius.circular(AppDimensions.radiusHalfSmall))),
                     child: Text(
-                      AppLocalizations.of(context)!.login_screen_log_in,
+                      "login_screen_log_in".tr(context: context),
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,
@@ -588,8 +585,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                 child: Center(
                     child: Text(
-                  AppLocalizations.of(context)!
-                      .login_screen_or_create_new_account,
+                  'login_screen_or_create_new_account'.tr(context: context),
                   style:
                       const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                 )),
@@ -604,7 +600,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.all(
                           Radius.circular(AppDimensions.radiusHalfSmall))),
                   child: Text(
-                    AppLocalizations.of(context)!.login_screen_sign_up,
+                    "login_screen_sign_up".tr(context: context),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 13,
@@ -637,7 +633,7 @@ class _LoginState extends State<Login> {
                       const EdgeInsets.only(top: AppDimensions.paddingLarge),
                   child: Center(
                       child: Text(
-                    AppLocalizations.of(context)!.login_screen_login_with,
+                    "login_screen_login_with".tr(context: context),
                     style:
                         const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                   )),

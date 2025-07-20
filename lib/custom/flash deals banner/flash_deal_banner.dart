@@ -3,11 +3,10 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../app_config.dart';
 import '../dynamic_size_image_banner.dart';
-import '../lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FlashDealBanner extends StatelessWidget {
   final HomePresenter? homeData;
@@ -23,7 +22,7 @@ class FlashDealBanner extends StatelessWidget {
       return Container(
         height: 100,
         child:
-            Center(child: Text(LangText(context).local.no_data_is_available)),
+            Center(child: Text('no_data_is_available'.tr(context: context))),
       );
     }
 
@@ -74,7 +73,7 @@ class FlashDealBanner extends StatelessWidget {
         height: 100,
         child: Center(
           child: Text(
-            AppLocalizations.of(context)!.no_carousel_image_found,
+            'no_carousel_image_found'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),

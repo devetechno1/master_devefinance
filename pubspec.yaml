@@ -174,7 +174,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
-  generate: true
   assets:
     - assets/
     - assets/htmls/

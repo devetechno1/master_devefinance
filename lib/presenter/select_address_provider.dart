@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +89,7 @@ class SelectAddressProvider with ChangeNotifier {
   Future<void> onPressProceed(BuildContext context) async {
     if (selectedShippingAddress == -1) {
       ToastComponent.showDialog(
-        LangText(context).local.choose_an_address_or_pickup_point,
+        'choose_an_address_or_pickup_point'.tr(context: context),
       );
       return;
     }

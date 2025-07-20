@@ -9,11 +9,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/auth/password_otp.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../app_config.dart';
-import '../../custom/lang_text.dart';
 import '../../repositories/address_repository.dart';
 
 class PasswordForget extends StatefulWidget {
@@ -52,12 +51,12 @@ class _PasswordForgetState extends State<PasswordForget> {
 
     if (_send_code_by == 'email' && email == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_email,
+        'enter_email'.tr(context: context),
       );
       return;
     } else if (_send_code_by == 'phone' && _phone == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.enter_phone_number,
+        'enter_phone_number'.tr(context: context),
       );
       return;
     }
@@ -94,7 +93,7 @@ class _PasswordForgetState extends State<PasswordForget> {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
-        LangText(context).local.forget_password,
+        'forget_password'.tr(context: context),
         buildBody(_screen_width, context));
   }
 
@@ -115,8 +114,8 @@ class _PasswordForgetState extends State<PasswordForget> {
                     bottom: AppDimensions.paddingSmallExtra),
                 child: Text(
                   _send_code_by == "email"
-                      ? AppLocalizations.of(context)!.email_ucf
-                      : AppLocalizations.of(context)!.phone_ucf,
+                      ? 'email_ucf'.tr(context: context)
+                      : 'phone_ucf'.tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600),
@@ -146,8 +145,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                                 });
                               },
                               child: Text(
-                                AppLocalizations.of(context)!
-                                    .or_send_code_via_phone_number,
+                                'or_send_code_via_phone_number'.tr(context: context),
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontStyle: FontStyle.italic,
@@ -169,9 +167,9 @@ class _PasswordForgetState extends State<PasswordForget> {
                         height: 36,
                         child: CustomInternationalPhoneNumberInput(
                           countries: countries_code,
-                          hintText: LangText(context).local.phone_number_ucf,
+                          hintText: 'phone_number_ucf'.tr(context: context),
                           errorMessage:
-                              LangText(context).local.invalid_phone_number,
+                              'invalid_phone_number'.tr(context: context),
                           initialValue:
                               PhoneNumber(isoCode: AppConfig.default_country),
                           onInputChanged: (PhoneNumber number) {
@@ -212,7 +210,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                           });
                         },
                         child: Text(
-                          AppLocalizations.of(context)!.or_send_code_via_email,
+                          'or_send_code_via_email'.tr(context: context),
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontStyle: FontStyle.italic,
@@ -236,7 +234,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                       ),
                     ),
                     child: Text(
-                      LangText(context).local.send_code_ucf,
+                      'send_code_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,

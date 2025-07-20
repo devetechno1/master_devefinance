@@ -8,7 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/refund_request_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class RefundRequest extends StatefulWidget {
   @override
@@ -125,8 +125,8 @@ class _RefundRequestState extends State<RefundRequest> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _list.length
-            ? AppLocalizations.of(context)!.no_more_items_ucf
-            : AppLocalizations.of(context)!.loading_more_items_ucf),
+            ? 'no_more_items_ucf'.tr(context: context)
+            : 'loading_more_items_ucf'.tr(context: context)),
       ),
     );
   }
@@ -143,7 +143,7 @@ class _RefundRequestState extends State<RefundRequest> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.refund_status_ucf,
+        'refund_status_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -179,7 +179,7 @@ class _RefundRequestState extends State<RefundRequest> {
       );
     } else if (_totalData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)!.no_data_is_available));
+          child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

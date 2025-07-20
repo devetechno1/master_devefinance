@@ -2,9 +2,8 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
-import '../../custom/lang_text.dart';
 import '../../custom/my_separator.dart';
 import '../../custom/toast_component.dart';
 import '../../custom/useful_elements.dart';
@@ -120,8 +119,8 @@ class _CouponsState extends State<Coupons> {
       child: Center(
         child: Text(
           _totalData == _couponsList.length
-              ? AppLocalizations.of(context)!.no_more_coupons_ucf
-              : AppLocalizations.of(context)!.loading_coupons_ucf,
+              ? 'no_more_coupons_ucf'.tr(context: context)
+              : 'loading_coupons_ucf'.tr(context: context),
         ),
       ),
     );
@@ -134,7 +133,7 @@ class _CouponsState extends State<Coupons> {
 
     if (_couponsList.isEmpty) {
       return Center(
-        child: Text(LangText(context).local.no_data_is_available),
+        child: Text('no_data_is_available'.tr(context: context)),
       );
     }
     return RefreshIndicator(
@@ -187,7 +186,7 @@ class _CouponsState extends State<Coupons> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      "${LangText(context).local.code}: ${_couponsList[index].code}",
+                      "${'code'.tr(context: context)}: ${_couponsList[index].code}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 9,
@@ -205,7 +204,7 @@ class _CouponsState extends State<Coupons> {
                                 ClipboardData(text: _couponsList[index].code!))
                             .then((_) {
                           ToastComponent.showDialog(
-                            LangText(context).local.copied_ucf,
+                            'copied_ucf'.tr(context: context),
                           );
                         });
                       },
@@ -247,8 +246,8 @@ class _CouponsState extends State<Coupons> {
         const SizedBox(height: 5),
         Text(
           _couponsList[index].discountType == "percent"
-              ? "${_couponsList[index].discount}% ${LangText(context).local.off}"
-              : "${convertPrice(_couponsList[index].discount.toString())} ${LangText(context).local.off}",
+              ? "${_couponsList[index].discount}% ${'off'.tr(context: context)}"
+              : "${convertPrice(_couponsList[index].discount.toString())} ${'off'.tr(context: context)}",
           style: const TextStyle(
             color: Colors.white,
             fontSize: 21,
@@ -265,12 +264,12 @@ class _CouponsState extends State<Coupons> {
           CouponRepository().getCouponProductList(id: _couponsList[index].id!),
       builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
         if (snapshot.hasError) {
-          return Center(child: Text(LangText(context).local.an_error_occurred));
+          return Center(child: Text('an_error_occurred'.tr(context: context)));
         } else if (snapshot.hasData) {
           final products = snapshot.data?.products ?? [];
           if (products.isEmpty) {
             return Text(
-              LangText(context).local.no_products_found,
+              'no_products_found'.tr(context: context),
               style: const TextStyle(color: Colors.white),
             );
           }
@@ -364,7 +363,7 @@ class _CouponsState extends State<Coupons> {
       centerTitle: false,
       leading: UsefulElements.backButton(),
       title: Text(
-        LangText(context).local.coupons_ucf,
+        'coupons_ucf'.tr(context: context),
         style: TextStyle(
           fontSize: 16,
           color: MyTheme.dark_font_grey,

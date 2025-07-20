@@ -1,7 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/clubpoint_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class Clubpoint extends StatefulWidget {
   @override
@@ -94,15 +94,13 @@ class _ClubpointState extends State<Clubpoint> {
   Widget build(BuildContext context) {
     final SnackBar _convertedSnackbar = SnackBar(
       content: Text(
-        AppLocalizations.of(context)?.points_converted_to_wallet ??
-            "Points converted to wallet",
+        'points_converted_to_wallet'.tr(context: context),
         style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
-        label: AppLocalizations.of(context)?.show_wallet_all_capital ??
-            "SHOW WALLET",
+        label: 'show_wallet_all_capital'.tr(context: context),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const Wallet();
@@ -161,9 +159,8 @@ class _ClubpointState extends State<Clubpoint> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _list.length
-            ? AppLocalizations.of(context)?.no_more_items_ucf ?? "No more items"
-            : AppLocalizations.of(context)?.loading_more_items_ucf ??
-                "Loading more items"),
+            ? 'no_more_items_ucf'.tr(context: context)
+            : 'loading_more_items_ucf'.tr(context: context)),
       ),
     );
   }
@@ -180,7 +177,7 @@ class _ClubpointState extends State<Clubpoint> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)?.earned_points_ucf ?? "Earned Points",
+        'earned_points_ucf'.tr(context: context),
         style: TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
@@ -212,8 +209,7 @@ class _ClubpointState extends State<Clubpoint> {
       );
     } else if (_totalData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context)?.no_data_is_available ??
-              "No data available"));
+          child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never happen
     }
@@ -248,15 +244,15 @@ class _ClubpointState extends State<Clubpoint> {
                   Row(
                     children: [
                       Text(
-                        "${AppLocalizations.of(context)?.converted_ucf ?? "Converted"} - ",
+                        "${'converted_ucf'.tr(context: context)} - ",
                         style: TextStyle(
                             fontSize: 12, color: MyTheme.dark_font_grey),
                       ),
                       Text(
                         (item.convert_status == 1 ||
                                 _converted_ids.contains(item.id))
-                            ? LangText(context).local.yes_ucf
-                            : LangText(context).local.no_ucf,
+                            ? 'yes_ucf'.tr(context: context)
+                            : 'no_ucf'.tr(context: context),
                         style: TextStyle(
                           fontSize: 12,
                           color: item.convert_status == 1
@@ -269,7 +265,7 @@ class _ClubpointState extends State<Clubpoint> {
                   Row(
                     children: [
                       Text(
-                        "${AppLocalizations.of(context)?.date_ucf ?? "Date"} : ",
+                        "${'date_ucf'.tr(context: context)} : ",
                         style: TextStyle(
                             fontSize: 12, color: MyTheme.dark_font_grey),
                       ),
@@ -298,8 +294,7 @@ class _ClubpointState extends State<Clubpoint> {
                   const SizedBox(height: 10),
                   item.convert_status == 1 || _converted_ids.contains(item.id)
                       ? Text(
-                          AppLocalizations.of(context)?.done_all_capital ??
-                              "DONE",
+                          'done_all_capital'.tr(context: context),
                           style: const TextStyle(
                               color: MyTheme.grey_153,
                               fontSize: 12,
@@ -307,8 +302,7 @@ class _ClubpointState extends State<Clubpoint> {
                         )
                       : (item.convertible_club_point ?? 0) <= 0
                           ? Text(
-                              AppLocalizations.of(context)?.refunded_ucf ??
-                                  "Refunded",
+                              'refunded_ucf'.tr(context: context),
                               style: const TextStyle(
                                   color: MyTheme.grey_153,
                                   fontSize: 12,
@@ -320,9 +314,7 @@ class _ClubpointState extends State<Clubpoint> {
                               child: Btn.basic(
                                 color: Theme.of(context).primaryColor,
                                 child: Text(
-                                  AppLocalizations.of(context)
-                                          ?.convert_now_ucf ??
-                                      "CONVERT NOW",
+                                  'convert_now_ucf'.tr(context: context),
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10),
                                 ),

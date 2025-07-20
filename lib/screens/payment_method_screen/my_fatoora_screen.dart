@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../helpers/main_helpers.dart';
@@ -164,7 +164,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
         widget.payment_type == "cart_payment") {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context)!.creating_order),
+          child: Text('creating_order'.tr(context: context)),
         ),
       );
     } else {
@@ -195,7 +195,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.pay_with_my_fatoora,
+        'pay_with_my_fatoora'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../../custom/toast_component.dart';
 import '../../data_model/product_mini_response.dart';
 import '../../helpers/shared_value_helper.dart';
@@ -62,7 +62,7 @@ class _CouponProductsState extends State<CouponProducts> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              code ?? LangText(context).local.no_code,
+              code ?? 'no_code'.tr(context: context),
               style: TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
@@ -75,7 +75,7 @@ class _CouponProductsState extends State<CouponProducts> {
                 if (code != null) {
                   Clipboard.setData(ClipboardData(text: code)).then((_) {
                     ToastComponent.showDialog(
-                      LangText(context).local.copied_ucf,
+                      'copied_ucf'.tr(context: context),
                     );
                   });
                 }
@@ -100,13 +100,13 @@ class _CouponProductsState extends State<CouponProducts> {
         builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
           if (snapshot.hasError) {
             return Center(
-                child: Text(LangText(context).local.an_error_occurred));
+                child: Text('an_error_occurred'.tr(context: context)));
           } else if (snapshot.hasData) {
             final productResponse = snapshot.data;
             if (productResponse?.products == null ||
                 productResponse!.products!.isEmpty) {
               return Center(
-                  child: Text(LangText(context).local.no_products_found));
+                  child: Text('no_products_found'.tr(context: context)));
             }
             return SingleChildScrollView(
               child: MasonryGridView.count(

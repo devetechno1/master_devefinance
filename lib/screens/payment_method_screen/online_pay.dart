@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/package/packages.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OnlinePay extends StatefulWidget {
@@ -173,7 +173,7 @@ class _OnlinePayState extends State<OnlinePay> {
         widget.payment_type == "cart_payment") {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context)!.creating_order),
+          child: Text('creating_order'.tr(context: context)),
         ),
       );
     } else {

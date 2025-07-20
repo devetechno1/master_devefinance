@@ -5,13 +5,14 @@ import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/fade_network_image.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
+
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/delivery_info_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
@@ -19,7 +20,6 @@ import 'package:active_ecommerce_cms_demo_app/repositories/shipping_repository.d
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_config.dart';
@@ -169,7 +169,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     if (_sellerWiseShippingOptionErrors.isNotEmpty &&
         AppConfig.businessSettingsData.carrierBaseShipping) {
       ToastComponent.showDialog(
-        LangText(context).local.please_choose_valid_info,
+        'please_choose_valid_info'.tr(context: context),
       );
       return;
     }
@@ -179,14 +179,14 @@ class _ShippingInfoState extends State<ShippingInfo> {
 
     if (shippingCostResponse.result == false) {
       ToastComponent.showDialog(
-        LangText(context).local.network_error,
+        'network_error'.tr(context: context),
       );
       return;
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return Checkout(
-        title: AppLocalizations.of(context)!.checkout_ucf,
+        title: 'checkout_ucf'.tr(context: context),
         paymentFor: PaymentFor.Order,
         guestCheckOutShippingAddress: widget.guestCheckOutShippingAddress,
       );
@@ -263,7 +263,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         ),
       ),
       title: Text(
-        "${AppLocalizations.of(context)!.shipping_cost_ucf} $_shipping_cost_string",
+        "${'shipping_cost_ucf'.tr(context: context)} $_shipping_cost_string",
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,
@@ -284,7 +284,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         height: 100,
         child: Center(
             child: Text(
-          LangText(context).local.you_need_to_log_in,
+          'you_need_to_log_in'.tr(context: context),
           style: const TextStyle(color: MyTheme.font_grey),
         )));
   }
@@ -314,7 +314,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         height: 100,
         child: Center(
           child: Text(
-            AppLocalizations.of(context)!.pickup_point_is_unavailable_ucf,
+            'pickup_point_is_unavailable_ucf'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           ),
         ),
@@ -367,7 +367,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               Container(
                 width: 75,
                 child: Text(
-                  AppLocalizations.of(context)!.address_ucf,
+                  'address_ucf'.tr(context: context),
                   style: TextStyle(
                     fontSize: 13,
                     color: MyTheme.dark_font_grey,
@@ -404,7 +404,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               Container(
                 width: 75,
                 child: Text(
-                  AppLocalizations.of(context)!.phone_ucf,
+                  'phone_ucf'.tr(context: context),
                   style: TextStyle(
                     fontSize: 13,
                     color: MyTheme.dark_font_grey,
@@ -449,7 +449,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       height: 100,
       child: Center(
         child: Text(
-          AppLocalizations.of(context)!.carrier_points_is_unavailable_ucf,
+          'carrier_points_is_unavailable_ucf'.tr(context: context),
           style: const TextStyle(color: MyTheme.font_grey),
         ),
       ),
@@ -561,7 +561,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                                 .transitTime
                                 .toString() +
                             " " +
-                            LangText(context).local.day_ucf,
+                            'day_ucf'.tr(context: context),
                         maxLines: 2,
                         style: TextStyle(
                             fontSize: 13,
@@ -637,7 +637,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             borderRadius: BorderRadius.circular(0.0),
           ),
           child: Text(
-            AppLocalizations.of(context)!.proceed_to_checkout,
+            'proceed_to_checkout'.tr(context: context),
             style: const TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
@@ -668,7 +668,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         child: Row(
           children: [
             Text(
-              "${AppLocalizations.of(context)!.shipping_cost_ucf} ",
+              "${'shipping_cost_ucf'.tr(context: context)} ",
               style: TextStyle(
                 fontSize: 16,
                 color: MyTheme.dark_font_grey,
@@ -678,7 +678,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             ),
             if (cartProvider.isFreeShipping && _isFetchShippingCost)
               Text(
-                "${AppLocalizations.of(context)!.free_shipping_ucf}",
+                "${'free_shipping_ucf'.tr(context: context)}",
                 style: TextStyle(
                   fontSize: 16,
                   color: Theme.of(context).primaryColor,
@@ -763,7 +763,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 }),
             //SizedBox(width: 10,),
             Text(
-              AppLocalizations.of(context)!.pickup_point_ucf,
+              'pickup_point_ucf'.tr(context: context),
               style: TextStyle(
                   fontSize: 12,
                   color:
@@ -817,7 +817,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   changeShippingOption(newOption, sellerIndex);
                 }),
             Text(
-              AppLocalizations.of(context)!.home_delivery_ucf,
+              'home_delivery_ucf'.tr(context: context),
               style: TextStyle(
                   fontSize: 12,
                   color:
@@ -871,7 +871,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   changeShippingOption(newOption, sellerIndex);
                 }),
             Text(
-              AppLocalizations.of(context)!.carrier_ucf,
+              'carrier_ucf'.tr(context: context),
               style: TextStyle(
                   fontSize: 12,
                   color:
@@ -915,7 +915,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.cart_is_empty,
+            'cart_is_empty'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
@@ -956,7 +956,13 @@ class _ShippingInfoState extends State<ShippingInfo> {
           margin: const EdgeInsets.only(bottom: 10),
           child: cartProvider.isFreeShipping && _isFetchShippingCost
               ? Text(
-                  LangText(context).local.freeShippingUnlocked(AppConfig.businessSettingsData.freeShippingMinimumOrderAmount),
+                  'freeShippingUnlocked'.tr(
+                    context: context,
+                    args: {
+                      "{minOrderForFreeShipping}":
+                          "${AppConfig.businessSettingsData.freeShippingMinimumOrderAmount}"
+                    },
+                  ),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w700,
@@ -967,7 +973,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          LangText(context).local.you_should_complete,
+                          'you_should_complete'.tr(context: context),
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w700,
@@ -981,7 +987,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                               fontSize: 12),
                         ),
                         Text(
-                          LangText(context).local.to_take_free_shipping,
+                          'to_take_free_shipping'.tr(context: context),
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w700,
@@ -1011,7 +1017,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             Padding(
               padding: const EdgeInsets.only(top: AppDimensions.paddingMedium),
               child: Text(
-                LangText(context).local.choose_delivery_ucf,
+                'choose_delivery_ucf'.tr(context: context),
                 style: TextStyle(
                     color: MyTheme.dark_font_grey,
                     fontWeight: FontWeight.w700,

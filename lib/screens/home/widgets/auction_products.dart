@@ -1,7 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/custom_horizontal_products_list_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class AuctionProductsSectionSliver extends StatelessWidget {
   final HomePresenter homeData;
@@ -26,7 +26,7 @@ class AuctionProductsSectionSliver extends StatelessWidget {
                 ),
               ),
               CustomHorizontalProductsListSectionWidget(
-                title: AppLocalizations.of(context)!.auction_product_ucf,
+                title: 'auction_product_ucf'.tr(context: context),
                 isProductInitial: homeData.isauctionProductInitial,
                 productList: homeData.auctionProductList,
                 numberOfTotalProducts: homeData.totalauctionProductData ?? 0,

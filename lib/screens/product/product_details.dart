@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photo_view/photo_view.dart';
@@ -23,7 +23,6 @@ import '../../app_config.dart';
 import '../../custom/box_decorations.dart';
 import '../../custom/btn.dart';
 import '../../custom/device_info.dart';
-import '../../custom/lang_text.dart';
 import '../../custom/quantity_input.dart';
 import '../../custom/toast_component.dart';
 import '../../data_model/product_details_response.dart';
@@ -312,7 +311,7 @@ class _ProductDetailsState extends State<ProductDetails>
   void onWishTap() {
     if (is_logged_in.$ == false) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.you_need_to_log_in,
+        'you_need_to_log_in'.tr(context: context),
         isError: true,
       );
       return;
@@ -432,7 +431,7 @@ class _ProductDetailsState extends State<ProductDetails>
     snackbar = null,
   }) async {
     // if (is_logged_in.$ == false) {
-    //   // ToastComponent.showDialog(AppLocalizations.of(context).common_login_warning, context,
+    //   // ToastComponent.showDialog('common_login_warning'.tr(context: context), context,
     //   //     gravity: Toast.center, duration: Toast.lengthLong);
     //   //Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     //   context?.go("/users/login");
@@ -526,7 +525,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.copy_product_link_ucf,
+                            'copy_product_link_ucf'.tr(context: context),
                             style: TextStyle(
                               color: MyTheme.medium_grey,
                             ),
@@ -553,7 +552,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               padding: const EdgeInsets.only(
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
-                                AppLocalizations.of(context)!.copied_ucf,
+                                'copied_ucf'.tr(context: context),
                                 style: TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
@@ -572,7 +571,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               side: const BorderSide(
                                   color: Colors.black, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.share_options_ucf,
+                            'share_options_ucf'.tr(context: context),
                             style: const TextStyle(color: Colors.white),
                           ),
                           onPressed: () async {
@@ -608,7 +607,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             side: const BorderSide(
                                 color: MyTheme.font_grey, width: 1.0)),
                         child: Text(
-                          LangText(context).local.close_all_capital,
+                          'close_all_capital'.tr(context: context),
                           style: const TextStyle(
                             color: MyTheme.font_grey,
                           ),
@@ -646,7 +645,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
-                          child: Text(AppLocalizations.of(context)!.title_ucf,
+                          child: Text('title_ucf'.tr(context: context),
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -659,8 +658,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               controller: sellerChatTitleController,
                               autofocus: false,
                               decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .enter_title_ucf,
+                                  hintText:
+                                      'enter_title_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -690,8 +689,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
-                          child: Text(
-                              "${AppLocalizations.of(context)!.message_ucf} *",
+                          child: Text("${'message_ucf'.tr(context: context)} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -706,8 +704,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
                               decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .enter_message_ucf,
+                                  hintText:
+                                      'enter_message_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -757,7 +755,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.close_all_capital,
+                            'close_all_capital'.tr(context: context),
                             style: const TextStyle(
                               color: MyTheme.font_grey,
                             ),
@@ -782,7 +780,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               side: BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
-                            AppLocalizations.of(context)!.send_all_capital,
+                            'send_all_capital'.tr(context: context),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -813,7 +811,7 @@ class _ProductDetailsState extends State<ProductDetails>
               const SizedBox(
                 width: 10,
               ),
-              Text("${AppLocalizations.of(context)!.please_wait_ucf}"),
+              Text("${'please_wait_ucf'.tr(context: context)}"),
             ],
           ));
         });
@@ -821,7 +819,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   dynamic showLoginWarning() {
     return ToastComponent.showDialog(
-      AppLocalizations.of(context)!.you_need_to_log_in,
+      'you_need_to_log_in'.tr(context: context),
       isError: true,
     );
   }
@@ -837,7 +835,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
     if (title == "" || message == "") {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.title_or_message_empty_warning,
+        'title_or_message_empty_warning'.tr(context: context),
         isError: true,
       );
       return;
@@ -851,7 +849,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
     if (conversationCreateResponse.result == false) {
       ToastComponent.showDialog(
-        AppLocalizations.of(context)!.could_not_create_conversation,
+        'could_not_create_conversation'.tr(context: context),
         isError: true,
       );
       return;
@@ -878,15 +876,15 @@ class _ProductDetailsState extends State<ProductDetails>
     final SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         whenItemInCart<String>(
-          AppLocalizations.of(context)!.update_cart_ucf,
-          AppLocalizations.of(context)!.added_to_cart,
+          'update_cart_ucf'.tr(context: context),
+          'added_to_cart'.tr(context: context),
         ),
         style: const TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
-        label: AppLocalizations.of(context)!.show_cart_all_capital,
+        label: 'show_cart_all_capital'.tr(context: context),
         onPressed: () {
           Navigator.push(OneContext().context!,
               MaterialPageRoute(builder: (context) {
@@ -1247,7 +1245,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   0.0,
                                 ),
                                 child: Text(
-                                  AppLocalizations.of(context)!.description_ucf,
+                                  'description_ucf'.tr(context: context),
                                   style: const TextStyle(
                                       color: Color(0xff3E4447),
                                       fontFamily: 'Public Sans',
@@ -1303,8 +1301,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     child: Row(
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context)!
-                                              .downloads_ucf,
+                                          'downloads_ucf'.tr(context: context),
                                           style: TextStyle(
                                               color: MyTheme.dark_font_grey,
                                               fontSize: 13,
@@ -1334,8 +1331,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             onTap: () {
                               if (_productDetails!.video_link == "") {
                                 ToastComponent.showDialog(
-                                  AppLocalizations.of(context)!
-                                      .video_not_available,
+                                  'video_not_available'.tr(context: context),
                                   isError: true,
                                 );
                                 return;
@@ -1374,7 +1370,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 child: Row(
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.video_ucf,
+                                      'video_ucf'.tr(context: context),
                                       style: const TextStyle(
                                           color: Color(0xff3E4447),
                                           fontSize: 13,
@@ -1430,7 +1426,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               child: Row(
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.reviews_ucf,
+                                    'reviews_ucf'.tr(context: context),
                                     style: const TextStyle(
                                         color: Color(0xff3E4447),
                                         fontFamily: 'Public Sans',
@@ -1461,8 +1457,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           0.0,
                         ),
                         child: Text(
-                          AppLocalizations.of(context)!
-                              .products_you_may_also_like,
+                          'products_you_may_also_like'.tr(context: context),
                           style: const TextStyle(
                               color: Colors.black,
                               fontFamily: 'Roboto',
@@ -1485,7 +1480,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         0.0,
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.top_selling_products_ucf,
+                        'top_selling_products_ucf'.tr(context: context),
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -1554,7 +1549,7 @@ class _ProductDetailsState extends State<ProductDetails>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(AppLocalizations.of(context)!.seller_ucf,
+                  Text('seller_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Color(0xff6B7377),
                           fontFamily: 'Public Sans',
@@ -1594,7 +1589,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         onTap: () {
                           if (is_logged_in.$ == false) {
                             ToastComponent.showDialog(
-                              LangText(context).local.you_need_to_log_in,
+                              'you_need_to_log_in'.tr(context: context),
                               isError: true,
                             );
                             return;
@@ -1629,7 +1624,7 @@ class _ProductDetailsState extends State<ProductDetails>
               child: Container(
                 width: 75,
                 child: Text(
-                  AppLocalizations.of(context)!.total_price_ucf,
+                  'total_price_ucf'.tr(context: context),
                   style:
                       const TextStyle(color: Color(0xff6B7377), fontSize: 10),
                 ),
@@ -1670,7 +1665,7 @@ class _ProductDetailsState extends State<ProductDetails>
           child: Container(
             width: 75,
             child: Text(
-              AppLocalizations.of(context)!.quantity_ucf,
+              'quantity_ucf'.tr(context: context),
               style: const TextStyle(
                   color: Color(0xff6B7377), fontFamily: 'Public Sans'),
             ),
@@ -1686,8 +1681,10 @@ class _ProductDetailsState extends State<ProductDetails>
               QuantityButtonWidget(
                 icon: Icons.remove,
                 doWhen: _quantity > minQuantity,
-                textWhenDont: AppLocalizations.of(context)!
-                    .minimumOrderQuantity(minQuantity),
+                textWhenDont: 'minimumOrderQuantity'.tr(
+                  context: context,
+                  args: {"{minQuantity}": "$minQuantity"},
+                ),
                 onPressed: () {
                   _quantity = _quantity - 1;
                   setState(() {});
@@ -1720,8 +1717,10 @@ class _ProductDetailsState extends State<ProductDetails>
               QuantityButtonWidget(
                 icon: Icons.add,
                 doWhen: _quantity < maxQuantity,
-                textWhenDont: AppLocalizations.of(context)!
-                    .maxOrderQuantityLimit(maxQuantity),
+                textWhenDont: 'maxOrderQuantityLimit'.tr(
+                  context: context,
+                  args: {"{maxQuantity}": "$maxQuantity"},
+                ),
                 onPressed: () {
                   _quantity = _quantity + 1;
                   setState(() {});
@@ -1747,7 +1746,7 @@ class _ProductDetailsState extends State<ProductDetails>
                     duration: const Duration(
                       milliseconds: AppDimensions.animationShortInMillis,
                     ),
-                    child: Text(LangText(context).local.out_of_stock),
+                    child: Text('out_of_stock'.tr(context: context)),
                     textAlign: TextAlign.center,
                     style: _stock == 0
                         ? const TextStyle(color: Colors.red, fontSize: 15)
@@ -1974,7 +1973,7 @@ class _ProductDetailsState extends State<ProductDetails>
           child: Container(
             width: 75,
             child: Text(
-              AppLocalizations.of(context)!.color_ucf,
+              'color_ucf'.tr(context: context),
               style: const TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
             ),
           ),
@@ -2060,13 +2059,13 @@ class _ProductDetailsState extends State<ProductDetails>
 
       columns: [
         DataColumn(
-            label: Text(LangText(context).local.min_qty_ucf,
+            label: Text('min_qty_ucf'.tr(context: context),
                 style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
-            label: Text(LangText(context).local.max_qty_ucf,
+            label: Text('max_qty_ucf'.tr(context: context),
                 style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
-            label: Text(LangText(context).local.unit_price_ucf,
+            label: Text('unit_price_ucf'.tr(context: context),
                 style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
@@ -2127,7 +2126,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   width: 4,
                 ),
                 Text(
-                  AppLocalizations.of(context)!.club_point_ucf,
+                  'club_point_ucf'.tr(context: context),
                   style: const TextStyle(
                       color: Color(0xff6B7377),
                       fontSize: 10,
@@ -2270,7 +2269,7 @@ class _ProductDetailsState extends State<ProductDetails>
         child: whenItemInCart(
           bottomTap(
             context,
-            text: AppLocalizations.of(context)!.update_cart_ucf,
+            text: 'update_cart_ucf'.tr(context: context),
             color: Theme.of(context).primaryColor,
             shadowColor: MyTheme.accent_color_shadow,
             onTap: () => onPressAddToCart(context, _addedToCartSnackbar),
@@ -2280,7 +2279,7 @@ class _ProductDetailsState extends State<ProductDetails>
               Expanded(
                 child: bottomTap(
                   context,
-                  text: AppLocalizations.of(context)!.add_to_cart_ucf,
+                  text: 'add_to_cart_ucf'.tr(context: context),
                   color: Theme.of(context).primaryColor,
                   shadowColor: MyTheme.accent_color_shadow,
                   onTap: () => onPressAddToCart(context, _addedToCartSnackbar),
@@ -2289,7 +2288,7 @@ class _ProductDetailsState extends State<ProductDetails>
               Expanded(
                 child: bottomTap(
                   context,
-                  text: AppLocalizations.of(context)!.buy_now_ucf,
+                  text: 'buy_now_ucf'.tr(context: context),
                   color: MyTheme.golden,
                   shadowColor: MyTheme.golden_shadow,
                   onTap: () => onPressBuyNow(context),
@@ -2389,7 +2388,7 @@ class _ProductDetailsState extends State<ProductDetails>
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
-            LangText(context).local.estimate_shipping_time_ucf,
+            'estimate_shipping_time_ucf'.tr(context: context),
             style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
@@ -2397,7 +2396,7 @@ class _ProductDetailsState extends State<ProductDetails>
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
-            "${_productDetails!.estShippingTime}  ${LangText(context).local.days_ucf}",
+            "${_productDetails!.estShippingTime}  ${'days_ucf'.tr(context: context)}",
             style: const TextStyle(
                 color: Color.fromRGBO(152, 152, 153, 1), fontSize: 10),
           ),
@@ -2425,7 +2424,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   child: Container(
                     width: 75,
                     child: Text(
-                      AppLocalizations.of(context)!.brand_ucf,
+                      'brand_ucf'.tr(context: context),
                       style: const TextStyle(
                           color: Color(0xff6B7377),
                           fontSize: 10,
@@ -2481,8 +2480,8 @@ class _ProductDetailsState extends State<ProductDetails>
                   onPressed: viewMore,
                   child: Text(
                     isExpanded
-                        ? LangText(context).local.less
-                        : LangText(context).local.view_more,
+                        ? 'less'.tr(context: context)
+                        : 'view_more'.tr(context: context),
                     style: TextStyle(
                       color: isExpanded ? null : Colors.white,
                       shadows: [
@@ -2573,8 +2572,8 @@ class _ProductDetailsState extends State<ProductDetails>
           height: 100,
           child: Center(
               child: Text(
-                  AppLocalizations.of(context)!
-                      .no_top_selling_products_from_this_seller,
+                  'no_top_selling_products_from_this_seller'
+                      .tr(context: context),
                   style: const TextStyle(color: MyTheme.font_grey))));
     }
   }
@@ -2634,7 +2633,7 @@ class _ProductDetailsState extends State<ProductDetails>
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context)!.no_related_product,
+            'no_related_product'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }

@@ -10,7 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_cate
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/menu_item_list.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 import '../../custom/home_all_products_2.dart';
 import '../../custom/home_banners_list.dart';
@@ -141,8 +141,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 10),
                                   child: Text(
-                                    AppLocalizations.of(context)!
-                                        .flash_deals_ucf,
+                                    'flash_deals_ucf'.tr(context: context),
                                     style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700),
@@ -188,8 +187,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            AppLocalizations.of(context)!
-                                                .all_products_ucf,
+                                            'all_products_ucf'.tr(context: context),
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w700),
@@ -249,7 +247,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //   final List<Map<String, dynamic>> menuItems = [
   //     if (homeData.isTodayDeal)
   //       {
-  //         "title": AppLocalizations.of(context)!.todays_deal_ucf,
+  //         "title": 'todays_deal_ucf'.tr(context: context),
   //         "image": AppImages.todayDeal,
   //         "onTap": () {
   //           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -261,7 +259,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //       },
   //     if (homeData.isFlashDeal)
   //       {
-  //         "title": AppLocalizations.of(context)!.flash_deal_ucf,
+  //         "title": 'flash_deal_ucf'.tr(context: context),
   //         "image": AppImages.flashDeal,
   //         "onTap": () {
   //           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -273,7 +271,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //       },
   //     if(homeData.isBrands)
   //       {
-  //         "title": AppLocalizations.of(context)!.brands_ucf,
+  //         "title": 'brands_ucf'.tr(context: context),
   //         "image": AppImages.brands,
   //         "onTap": () {
   //           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -286,7 +284,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //     // Ensure `AppConfig.businessSettingsData.classifiedProduct` is valid or properly defined
   //     if (AppConfig.businessSettingsData.vendorSystemActivation)
   //       {
-  //         "title": AppLocalizations.of(context)!.top_sellers_ucf,
+  //         "title": 'top_sellers_ucf'.tr(context: context),
   //         "image": AppImages.TopSellers,
   //         "onTap": () {
   //           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -407,8 +405,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: Center(
         child: Text(
           homeData.totalAllProductData == homeData.allProductList.length
-              ? AppLocalizations.of(context)!.no_more_products_ucf
-              : AppLocalizations.of(context)!.loading_more_products_ucf,
+              ? 'no_more_products_ucf'.tr(context: context)
+              : 'loading_more_products_ucf'.tr(context: context),
         ),
       ),
     );

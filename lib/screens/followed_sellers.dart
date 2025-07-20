@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../custom/box_decorations.dart';
 import '../custom/device_info.dart';
-import '../custom/lang_text.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../custom/style.dart';
 import '../custom/toast_component.dart';
 import '../helpers/shimmer_helper.dart';
@@ -83,7 +83,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
       backgroundColor: MyTheme.mainColor,
       appBar: AppBar(
         title: Text(
-          LangText(context).local.followed_sellers_ucf,
+          'followed_sellers_ucf'.tr(context: context),
           style: MyStyle.appBarStyle,
         ),
         backgroundColor: MyTheme.mainColor,
@@ -132,7 +132,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
         return Container(
           height: DeviceInfo(context).height,
           child: Center(
-            child: Text(LangText(context).local.no_data_is_available),
+            child: Text('no_data_is_available'.tr(context: context)),
           ),
         );
     } else {
@@ -222,7 +222,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                   child: Text(
-                    LangText(context).local.unfollow_ucf,
+                    'unfollow_ucf'.tr(context: context),
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -253,7 +253,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                       borderRadius: BorderRadius.circular(
                           AppDimensions.radiusHalfSmall)),
                   child: Text(
-                    LangText(context).local.visit_store_ucf,
+                    'visit_store_ucf'.tr(context: context),
                     style: TextStyle(
                         fontSize: 10,
                         color: Colors.amber.shade700,
