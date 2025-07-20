@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:active_ecommerce_cms_demo_app/data_model/business_setting_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/business_setting_repository.dart';
@@ -31,7 +33,6 @@ class BusinessSettingHelper {
     if (langs.success != true) return;
 
     CustomLocalization.supportedLocales.clear();
-
     for (Language l in langs.languages ?? []) {
       CustomLocalization.supportedLocales.add(
         Locale(l.code ?? AppConfig.mobile_app_code),
@@ -42,14 +43,21 @@ class BusinessSettingHelper {
       await _setLangConfig(langs.languages!.first);
       return;
     }
+    bool resetLang = true;
     await app_language.load();
-    if (app_language.$ == null) {
-      for (Language lang in langs.languages ?? []) {
-        if (lang.is_default ?? false) {
-          await _setLangConfig(lang);
-          return;
+    Language? defaultLang;
+
+    for (Language lang in langs.languages ?? []) {
+      if (lang.code == app_language.$) {
+        if (app_language.$ != null) {
+          resetLang = false;
+          break;
         }
       }
+      if (lang.is_default ?? false) defaultLang = lang;
+    }
+    if (defaultLang != null && resetLang) {
+      await _setLangConfig(defaultLang);
     }
   }
 
@@ -83,7 +91,7 @@ class BusinessSettingHelper {
       ),
     );
     if (status is Success<Map<String, dynamic>>) {
-      final String lastDate = status.data['data']['date'];
+      final String lastDate = status.data['data']['date'] ?? '';
       if (status.data['data']['lang'].isNotEmpty) {
         final Map<String, dynamic> newTranslations =
             status.data['data']['lang'];
@@ -99,10 +107,22 @@ class BusinessSettingHelper {
     final Map localeTranslations = (localeTranslation.get(langCode) ?? {});
 
     if (localeTranslations.isNotEmpty) {
-      final Map<String, String> allLangs = Map.from(CustomLocalization.localizedValues[langCode] ?? {});
-      allLangs.addAll(localeTranslations.cast());
-      print(allLangs['app_name']);
-      CustomLocalization.localizedValues[langCode] =  allLangs;
+      final Map<String, String> allLangs = {
+        ...(CustomLocalization.localizedValues[langCode] ?? {})
+      };
+
+      allLangs.addAll(
+        await Isolate.run(
+          () {
+            final Map<String, String> _allLangs = allLangs;
+            localeTranslations.entries.forEach(
+              (e) => _allLangs['${e.key}'] = '${e.value ?? e.key}',
+            );
+            return _allLangs;
+          },
+        ),
+      );
+      CustomLocalization.localizedValues[langCode] = allLangs;
     }
   }
 
