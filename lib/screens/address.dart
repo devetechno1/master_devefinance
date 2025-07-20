@@ -23,6 +23,14 @@ import '../custom/intl_phone_input.dart';
 import '../data_model/address_response.dart' as res;
 import 'guest_checkout_pages/map_location.dart';
 
+// class Address extends StatelessWidget {
+//   const Address({super.key, required this.onPressContinue});
+// final void Function(String email, double latitude, double longitude) onPressContinue;
+//   @override
+//   Widget build(BuildContext context) {
+//     return AddressWidgets(onPressContinue: onPressContinue);
+//   }
+// }
 class Address extends StatefulWidget {
   const Address({Key? key, this.from_shipping_info = false}) : super(key: key);
   final bool from_shipping_info;
@@ -113,7 +121,6 @@ class _AddressState extends State<Address> {
     _shippingAddressList.clear();
     _isInitial = true;
 
- 
     //update-ables
     _addressControllerListForUpdate.clear();
     _postalCodeControllerListForUpdate.clear();
@@ -188,7 +195,8 @@ class _AddressState extends State<Address> {
                 child: Text(
                   address.set_default == 1
                       ? 'change_default_before_delete'.tr(context: context)
-                      : 'are_you_sure_to_remove_this_address'.tr(context: context),
+                      : 'are_you_sure_to_remove_this_address'
+                          .tr(context: context),
                   maxLines: 3,
                   style:
                       const TextStyle(color: MyTheme.font_grey, fontSize: 14),
@@ -554,7 +562,8 @@ class _AddressState extends State<Address> {
                                 borderRadius: BorderRadius.circular(
                                     AppDimensions.radiusHalfSmall)),
                             child: Text(
-                              'you_have_to_add_location_here'.tr(context: context),
+                              'you_have_to_add_location_here'
+                                  .tr(context: context),
                               maxLines: 2,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
@@ -715,24 +724,26 @@ class AddAddressDialog extends StatefulWidget {
 
   @override
   State<AddAddressDialog> createState() => _AddAddressDialogState();
-  
 }
 
 class _AddAddressDialogState extends State<AddAddressDialog> {
   double? longitude;
   double? latitude;
-
+  bool passNotMatch = true;
   City? _selected_city;
   Country? _selected_country;
   MyState? _selected_state;
 
   //controllers for add purpose
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _postalCodeController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String _phone = "";
   bool _isValidPhoneNumber = false;
@@ -754,19 +765,35 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   }
 
   void reset() {
+    _nameController.clear();
+    _emailController.clear();
     _addressController.clear();
     _postalCodeController.clear();
     _phoneController.clear();
     _countryController.clear();
     _stateController.clear();
     _cityController.clear();
+    passNotMatch = true;
   }
 
   Future<void> _onAddressAdd() async {
     final String address = _addressController.text.toString();
     final String postalCode = _postalCodeController.text.toString();
     // var phone = _phoneController.text.toString();
-
+    if (_nameController.text.trim().toString().isEmpty && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'name_required'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
+    if (_emailController.text.trim().toString().isEmpty && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'email_required'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
     if (address.trim() == "") {
       ToastComponent.showDialog(
         'enter_address_ucf'.tr(context: context),
@@ -798,8 +825,44 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       );
       return;
     }
+    if (_passwordController.text.isEmpty && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'enter_password'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
 
-    if (_phone.trim().isEmpty) {
+    if (_passwordController.text.isEmpty && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'enter_password'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
+    if (_passwordController.text.length < 6 && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'password_must_contain_at_least_6_characters'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
+    if (passNotMatch && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'passwords_do_not_match'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
+
+    if (_passwordController.text.isEmpty && !is_logged_in.$) {
+      ToastComponent.showDialog(
+        'enter_password'.tr(context: context),
+        isError: true,
+      );
+      return;
+    }
+    if (_passwordController.text.length < 6 && !is_logged_in.$) {
       ToastComponent.showDialog(
         'enter_phone_number'.tr(context: context),
         isError: true,
@@ -812,7 +875,6 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       );
       return;
     }
-
     final addressAddResponse = await AddressRepository().getAddressAddResponse(
         address: address,
         country_id: _selected_country!.id,
@@ -897,12 +959,15 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
 
   @override
   void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
     _addressController.dispose();
     _postalCodeController.dispose();
     _phoneController.dispose();
     _countryController.dispose();
     _stateController.dispose();
     _cityController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -911,21 +976,75 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
     return Scaffold(
       appBar: buildAppBar(context),
       backgroundColor: Colors.white,
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(AppDimensions.radiusDefault)),
-      // insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-      // contentPadding: const EdgeInsets.only(
-      //     top: AppDimensions.paddingLarge,
-      //     left: AppDimensions.paddingLarge,
-      //     right: AppDimensions.paddingLarge,
-      //     bottom: 2.0),
       body: Container(
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingLarge),
         width: 400,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: AppDimensions.paddingSmall),
+              //name
+              if (!is_logged_in.$) ...[
+                Padding(
+                  padding:
+                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                  child: Text(
+                    "${'name_ucf'.tr(context: context)} *",
+                    style: const TextStyle(
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingNormal,
+                  ),
+                  child: Container(
+                    height: 40,
+                    child: TextField(
+                      controller: _nameController,
+                      autofocus: false,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                        'enter_your_name'.tr(context: context),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                  child: Text("${'email_ucf'.tr(context: context)} *",
+                      style: const TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
+                  child: Container(
+                    height: 40,
+                    child: TextField(
+                      controller: _emailController,
+                      textInputAction: TextInputAction.next,
+                      autofocus: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                              'enter_email'.tr(context: context)),
+                    ),
+                  ),
+                ),
+              ],
+              //
               MapLocationWidget(
                 latitude: latitude,
                 longitude: longitude,
@@ -1207,82 +1326,151 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
                   ),
                 ),
               ),
-              Padding(
-              padding: const EdgeInsetsDirectional.only(
-                  start: AppDimensions.paddingDefault),
-              child: Btn.minWidthFixHeight(
-                minWidth: 75,
-                height: 40,
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.radiusHalfSmall),
+              // Padding(
+              //   padding: const EdgeInsetsDirectional.only(
+              //       start: AppDimensions.paddingDefault),
+
+//if statement
+              if (!is_logged_in.$) ...[
+                Padding(
+                  padding:
+                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                  child: Text("${'password_ucf'.tr(context: context)} *",
+                      style: const TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
                 ),
-                child: Text(
-                  'continue_ucf'.tr(context: context),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
+                  child: Container(
+                    height: 40,
+                    child: TextField(
+                      textInputAction: TextInputAction.next,
+                      controller: _passwordController,
+                      autofocus: false,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                              "• • • • • • • •"),
+                    ),
                   ),
                 ),
-                onPressed: _onAddressAdd,
+                Padding(
+                  padding:
+                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                  child: Text(
+                      "${'confirm_your_password'.tr(context: context)} *",
+                      style: const TextStyle(
+                          color: Color(0xff3E4447),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: AppDimensions.paddingNormal),
+                  child: Container(
+                    height: 40,
+                    child: TextField(
+                      textInputAction: TextInputAction.done,
+                      autofocus: false,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.visiblePassword,
+                      onChanged: (val) {
+                        passNotMatch = val != _passwordController.text;
+                      },
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                              "• • • • • • • •"),
+                    ),
+                  ),
+                ),
+              ],
+
+              Center(
+                child: Btn.minWidthFixHeight(
+                  minWidth: 300,
+                  height: 50,
+                  color: Theme.of(context).primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
+                  ),
+                  child: Text(
+                    'continue_ucf'.tr(context: context),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onPressed: _onAddressAdd,
+                ),
               ),
-            )
+              const SizedBox(
+                height: 20,
+              )
+              // )
             ],
           ),
         ),
       ),
-     // actions: [
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     // Btn.minWidthFixHeight(
-        //     //   minWidth: 75,
-        //     //   height: 40,
-        //     //   color: const Color.fromRGBO(253, 253, 253, 1),
-        //     //   shape: RoundedRectangleBorder(
-        //     //       borderRadius:
-        //     //           BorderRadius.circular(AppDimensions.radiusHalfSmall),
-        //     //       side: BorderSide(color: MyTheme.light_grey, width: 1)),
-        //     //   child: Text(
-        //     //     'close_ucf'.tr(context: context),
-        //     //     style: TextStyle(
-        //     //       color: Theme.of(context).primaryColor,
-        //     //       fontSize: 16,
-        //     //       fontWeight: FontWeight.w600,
-        //     //     ),
-        //     //   ),
-        //     //   onPressed: () {
-        //     //     Navigator.of(context, rootNavigator: true).pop();
-        //     //   },
-        //     // ),
-        //     const SizedBox(width: 1),
-        //     Padding(
-        //       padding: const EdgeInsetsDirectional.only(
-        //           start: AppDimensions.paddingDefault),
-        //       child: Btn.minWidthFixHeight(
-        //         minWidth: 75,
-        //         height: 40,
-        //         color: Theme.of(context).primaryColor,
-        //         shape: RoundedRectangleBorder(
-        //           borderRadius:
-        //               BorderRadius.circular(AppDimensions.radiusHalfSmall),
-        //         ),
-        //         child: Text(
-        //           'continue_ucf'.tr(context: context),
-        //           style: const TextStyle(
-        //             color: Colors.white,
-        //             fontSize: 16,
-        //             fontWeight: FontWeight.w600,
-        //           ),
-        //         ),
-        //         onPressed: _onAddressAdd,
-        //       ),
-        //     )
-        //   ],
-        // )
-    //  ],
+      // actions: [
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     // Btn.minWidthFixHeight(
+      //     //   minWidth: 75,
+      //     //   height: 40,
+      //     //   color: const Color.fromRGBO(253, 253, 253, 1),
+      //     //   shape: RoundedRectangleBorder(
+      //     //       borderRadius:
+      //     //           BorderRadius.circular(AppDimensions.radiusHalfSmall),
+      //     //       side: BorderSide(color: MyTheme.light_grey, width: 1)),
+      //     //   child: Text(
+      //     //     'close_ucf'.tr(context: context),
+      //     //     style: TextStyle(
+      //     //       color: Theme.of(context).primaryColor,
+      //     //       fontSize: 16,
+      //     //       fontWeight: FontWeight.w600,
+      //     //     ),
+      //     //   ),
+      //     //   onPressed: () {
+      //     //     Navigator.of(context, rootNavigator: true).pop();
+      //     //   },
+      //     // ),
+      //     const SizedBox(width: 1),
+      //     Padding(
+      //       padding: const EdgeInsetsDirectional.only(
+      //           start: AppDimensions.paddingDefault),
+      //       child: Btn.minWidthFixHeight(
+      //         minWidth: 75,
+      //         height: 40,
+      //         color: Theme.of(context).primaryColor,
+      //         shape: RoundedRectangleBorder(
+      //           borderRadius:
+      //               BorderRadius.circular(AppDimensions.radiusHalfSmall),
+      //         ),
+      //         child: Text(
+      //           'continue_ucf'.tr(context: context),
+      //           style: const TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 16,
+      //             fontWeight: FontWeight.w600,
+      //           ),
+      //         ),
+      //         onPressed: _onAddressAdd,
+      //       ),
+      //     )
+      //   ],
+      // )
+      //  ],
     );
   }
 }
