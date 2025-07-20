@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../presenter/home_presenter.dart';
-import 'home_banners_list.dart';
+import 'home_banners/home_banners_list.dart';
 
 class HomeCarouselSlider extends StatelessWidget {
   final HomePresenter? homeData;

@@ -1,6 +1,7 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -12,13 +13,14 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
-import '../../../custom/home_banners_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../custom/home_banners/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
 import '../home.dart';
+import '../widgets/featured_products/vertical_products_sliver.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 

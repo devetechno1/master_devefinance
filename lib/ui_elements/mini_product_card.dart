@@ -266,7 +266,8 @@ class _MiniProductCardState extends State<MiniProductCard> {
                           fit: BoxFit.cover,
                         ))),
               ),
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(8, 12, 8, 6),
                   width: double.maxFinite,

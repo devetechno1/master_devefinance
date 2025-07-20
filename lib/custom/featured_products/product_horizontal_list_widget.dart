@@ -2,8 +2,8 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../helpers/shimmer_helper.dart';
-import '../ui_elements/mini_product_card.dart';
+import '../../helpers/shimmer_helper.dart';
+import '../../ui_elements/mini_product_card.dart';
 
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
     as productMini;

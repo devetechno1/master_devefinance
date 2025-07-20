@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../home.dart';
-import 'custom_horizontal_products_list_widget.dart';
+import 'featured_products/custom_horizontal_products_list_widget.dart';
 
 // TODO:# change to new products not featured
 

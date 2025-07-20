@@ -1,5 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/custom_horizontal_products_list_widget.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products/custom_horizontal_products_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 

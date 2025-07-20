@@ -11,7 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.da
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import '../../../custom/home_banners_list.dart';
+import '../../../custom/home_banners/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
@@ -121,7 +121,7 @@ class _MetroScreenState extends State<MetroScreen>
 //Featured category-----------------------
                           const CategoryList(),
                           // const CategoryListVertical(crossAxisCount: 3,),
-
+                   
 //BannerList---------------------
 
                           SliverToBoxAdapter(
@@ -139,10 +139,17 @@ class _MetroScreenState extends State<MetroScreen>
                               isBannersInitial: homeData.isBannerTwoInitial,
                             ),
                           ),
+                          // SliverToBoxAdapter(
+                          //   child: HomeBannersListAnimation(
+                          //     bannersImagesList: homeData.bannerTwoImageList,
+                          //     isBannersInitial: homeData.isBannerTwoInitial,
+                          //   ),
+                          // ),
 
 //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                           const BestSellingSectionSliver(),
+                          // const VerticalProductsSectionSliver(),
 //auction products----------------------------
                           AuctionProductsSectionSliver(
                             homeData: homeData,
