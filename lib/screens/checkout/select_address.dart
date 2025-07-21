@@ -96,7 +96,8 @@ class _SelectAddressState extends State<SelectAddress> {
           child: Padding(
             padding: const EdgeInsets.all(AppDimensions.paddingSmall),
             child: Text(
-              'to_add_or_edit_addresses_go_to_address_page'.tr(context: context),
+              'to_add_or_edit_addresses_go_to_address_page'
+                  .tr(context: context),
               style: TextStyle(
                   fontSize: 14,
                   decoration: TextDecoration.underline,
@@ -156,9 +157,13 @@ class _SelectAddressState extends State<SelectAddress> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(
-                  bottom: AppDimensions.paddingSmallExtra),
+                bottom: AppDimensions.paddingSmallExtra,
+              ),
               child: buildShippingInfoItemCard(
-                  index, selectAddressProvider, context),
+                index,
+                selectAddressProvider,
+                context,
+              ),
             );
           },
         ),
@@ -166,12 +171,14 @@ class _SelectAddressState extends State<SelectAddress> {
     } else if (selectAddressProvider.faceData &&
         selectAddressProvider.shippingAddressList.isEmpty) {
       return Container(
-          height: 100,
-          child: Center(
-              child: Text(
+        height: 100,
+        child: Center(
+          child: Text(
             'no_address_is_added'.tr(context: context),
             style: const TextStyle(color: MyTheme.font_grey),
-          )));
+          ),
+        ),
+      );
     }
     return null;
   }
@@ -262,7 +269,8 @@ class _SelectAddressState extends State<SelectAddress> {
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmallExtra)),
                           child: Text(
-                            'you_have_to_add_location_here'.tr(context: context),
+                            'you_have_to_add_location_here'
+                                .tr(context: context),
                             maxLines: 2,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
@@ -500,7 +508,8 @@ class _SelectAddressState extends State<SelectAddress> {
         : Container();
   }
 
-  BottomAppBar buildBottomAppBar(BuildContext context, SelectAddressProvider provider) {
+  BottomAppBar buildBottomAppBar(
+      BuildContext context, SelectAddressProvider provider) {
     return BottomAppBar(
       color: Colors.transparent,
       child: Container(
