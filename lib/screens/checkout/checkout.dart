@@ -299,33 +299,6 @@ class _CheckoutState extends State<Checkout> {
   }
 
   Future<void> onPressPlaceOrderOrProceed() async {
-    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
-      Loading.show(context);
-      // guest checkout user create response
-
-      final guestUserAccountCreateResponse = await GuestCheckoutRepository()
-          .guestUserAccountCreate(widget.guestCheckOutShippingAddress);
-      Loading.close();
-
-      // after creating  guest user save to auth helper
-      AuthHelper().setUserData(guestUserAccountCreateResponse);
-
-      if (!guestUserAccountCreateResponse.result!) {
-        ToastComponent.showDialog(
-          'already_have_account'.tr(context: context),
-        );
-
-        // if user not created
-        // or any issue occurred
-        // then it goes to guest check address page
-        Navigator.pushAndRemoveUntil(OneContext().context!,
-            MaterialPageRoute(builder: (context) {
-          return const GuestCheckoutAddress();
-        }), (Route<dynamic> route) => true);
-      }
-      return;
-    }
-
     if (_selected_payment_method == "") {
       ToastComponent.showDialog(
         'please_choose_one_option_to_pay'.tr(context: context),
@@ -350,6 +323,35 @@ class _CheckoutState extends State<Checkout> {
         isError: true,
       );
       return;
+    }
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
+      Loading.show(context);
+      // guest checkout user create response
+
+      final guestUserAccountCreateResponse = await GuestCheckoutRepository()
+          .guestUserAccountCreate(widget.guestCheckOutShippingAddress);
+      Loading.close();
+
+      // after creating  guest user save to auth helper
+      AuthHelper().setUserData(guestUserAccountCreateResponse);
+
+      if (!guestUserAccountCreateResponse.result!) {
+        ToastComponent.showDialog(
+          'already_have_account'.tr(context: context),
+        );
+
+        // if user not created
+        // or any issue occurred
+        // then it goes to guest check address page
+        Navigator.pushAndRemoveUntil(
+          OneContext().context!,
+          MaterialPageRoute(
+            builder: (context) => const GuestCheckoutAddress(),
+          ),
+          (Route<dynamic> route) => true,
+        );
+        return;
+      }
     }
 
     if (_selected_payment_method == "stripe") {

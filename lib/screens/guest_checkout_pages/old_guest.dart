@@ -15,12 +15,12 @@ import '../../custom/aiz_route.dart';
 import '../../custom/btn.dart';
 import '../../custom/loading.dart';
 import '../../custom/toast_component.dart';
-import '../../custom/useful_elements.dart';
 import '../../data_model/city_response.dart';
 import '../../data_model/country_response.dart';
 import '../../data_model/state_response.dart';
 import '../../my_theme.dart';
 import '../../repositories/address_repository.dart';
+import '../add_address_screen.dart';
 import '../checkout/shipping_info.dart';
 
 class GuestCheckoutAddress extends StatefulWidget {
@@ -588,20 +588,4 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
           left: AppDimensions.paddingSmall, top: 5.0, bottom: 5.0));
 }
 
-AppBar buildAppBar(BuildContext context) {
-  return AppBar(
-    backgroundColor: Colors.white,
-    centerTitle: false,
-    leading: UsefulElements.backButton(),
-    title: Text(
-      'add_new_address'.tr(context: context),
-      style: TextStyle(
-        fontSize: 16,
-        color: MyTheme.dark_font_grey,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    elevation: 0.0,
-    titleSpacing: 0,
-  );
-}
+

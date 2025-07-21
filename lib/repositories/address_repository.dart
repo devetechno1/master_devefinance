@@ -43,13 +43,16 @@ class AddressRepository {
     return addressResponseFromJson(response.body);
   }
 
-  Future<AddressAddResponse> getAddressAddResponse(
-      {required String address,
-      required int? country_id,
-      required int? state_id,
-      required int? city_id,
-      required String postal_code,
-      required String phone}) async {
+  Future<AddressAddResponse> getAddressAddResponse({
+    required String address,
+    required int? country_id,
+    required int? state_id,
+    required int? city_id,
+    required String postal_code,
+    required String phone,
+    required double latitude,
+    required double longitude,
+  }) async {
     final postBody = jsonEncode({
       "user_id": "${user_id.$}",
       "address": "$address",
@@ -57,7 +60,9 @@ class AddressRepository {
       "state_id": "$state_id",
       "city_id": "$city_id",
       "postal_code": "$postal_code",
-      "phone": "$phone"
+      "phone": "$phone",
+      "latitude": "$latitude",
+      "longitude": "$longitude"
     });
 
     const String url = ("${AppConfig.BASE_URL}/user/shipping/create");

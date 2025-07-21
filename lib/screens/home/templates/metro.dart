@@ -11,7 +11,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.da
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import '../../../custom/home_banners/home_banners_animation.dart';
 import '../../../custom/home_banners/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';

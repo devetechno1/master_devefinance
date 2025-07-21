@@ -17,14 +17,10 @@ import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.da
 import 'package:active_ecommerce_cms_demo_app/repositories/guest_checkout_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../custom/aiz_route.dart';
-import '../../custom/input_decorations.dart';
-import '../../custom/intl_phone_input.dart';
+import '../add_address_screen.dart';
 import '../checkout/shipping_info.dart';
-import 'map_location.dart';
 
 class GuestCheckoutAddress extends StatefulWidget {
   const GuestCheckoutAddress({Key? key, this.from_shipping_info = false})
@@ -68,7 +64,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _postalCodeController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  // final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
@@ -85,7 +81,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
   final List<MyState?> _selected_state_list_for_update = [];
   final List<Country> _selected_country_list_for_update = [];
 
-  bool _isValidPhoneNumber = false;
+  // bool _isValidPhoneNumber = false;
 
   List<String?> countries_code = <String?>[];
   Future<void> fetch_country() async {
@@ -157,7 +153,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
 
     _addressController.clear();
     _postalCodeController.clear();
-    _phoneController.clear();
+    // _phoneController.clear();
     _passwordController.clear();
 
     longitude = null;
@@ -228,135 +224,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     });
   }
 
-  // onAddressAdd(context) async {
-  //   var address = _addressController.text.toString();
-  //   var postal_code = _postalCodeController.text.toString();
-  //   var phone = _phoneController.text.toString();
-  //
-  //   if (address == "") {
-  //     ToastComponent.showDialog(
-  //       'enter_address_ucf'.tr(context: context),
-  //     );
-  //     return;
-  //   }
-  //
-  //   if (_selected_country == null) {
-  //     ToastComponent.showDialog(
-  //       'select_a_country'.tr(context: context),
-  //     );
-  //     return;
-  //   }
-  //
-  //   if (_selected_state == null) {
-  //     ToastComponent.showDialog(
-  //       'select_a_state'.tr(context: context),
-  //     );
-  //     return;
-  //   }
-  //
-  //   if (_selected_city == null) {
-  //     ToastComponent.showDialog(
-  //       'select_a_city'.tr(context: context),
-  //     );
-  //     return;
-  //   }
-  //
-  //   var addressAddResponse = await AddressRepository().getAddressAddResponse(
-  //       address: address,
-  //       country_id: _selected_country!.id,
-  //       state_id: _selected_state!.id,
-  //       city_id: _selected_city!.id,
-  //       postal_code: postal_code,
-  //       phone: phone);
-  //
-  //   if (addressAddResponse.result == false) {
-  //     ToastComponent.showDialog(
-  //       addressAddResponse.message,
-  //     );
-  //     return;
-  //   }
-  //
-  //   ToastComponent.showDialog(
-  //     addressAddResponse.message,
-  //   );
-  //
-  //   Navigator.of(context, rootNavigator: true).pop();
-  //   afterAddingAnAddress();
-  // }
-  bool requiredFieldVerification() {
-    emailValid = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(_emailController.text.trim());
-
-    if (_nameController.text.trim().toString().isEmpty) {
-      ToastComponent.showDialog('name_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_emailController.text.trim().toString().isEmpty) {
-      ToastComponent.showDialog('email_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (!emailValid!) {
-      ToastComponent.showDialog('enter_correct_email'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (longitude == null || latitude == null) {
-      ToastComponent.showDialog(
-          'choose_an_address_or_pickup_point'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_addressController.text.trim().toString().isEmpty) {
-      ToastComponent.showDialog(
-          'shipping_address_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_selected_country == null) {
-      ToastComponent.showDialog('country_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_selected_state == null) {
-      ToastComponent.showDialog('state_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_selected_city == null) {
-      ToastComponent.showDialog('city_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-      // } else if (_postalCodeController.text.trim().toString().isEmpty) {
-      //   ToastComponent.showDialog(
-      //     'postal_code_required'.tr(context: context),
-      //     color: Theme.of(context).colorScheme.error,
-      //   );
-      //   return false;
-    } else if (_phoneController.text.trim().toString().isEmpty) {
-      ToastComponent.showDialog('phone_number_required'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (!_isValidPhoneNumber) {
-      ToastComponent.showDialog(
-          'invalid_phone_number'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_passwordController.text.isEmpty) {
-      ToastComponent.showDialog('enter_password'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (_passwordController.text.length < 6) {
-      ToastComponent.showDialog(
-          'password_must_contain_at_least_6_characters'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    } else if (passNotMatch) {
-      ToastComponent.showDialog('passwords_do_not_match'.tr(context: context),
-          color: Theme.of(context).colorScheme.error);
-      return false;
-    }
-    return true;
-  }
-
   Future<void> continueToDeliveryInfo() async {
     FocusManager.instance.primaryFocus?.unfocus();
-    if (!requiredFieldVerification()) return;
 
     Loading.show(context);
     setValues();
@@ -460,7 +329,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     super.dispose();
     _mainScrollController.dispose();
     _emailController.dispose();
-    _phoneController.dispose();
+    // _phoneController.dispose();
     _passwordController.dispose();
     _addressController.dispose();
     _postalCodeController.dispose();
@@ -473,608 +342,108 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyTheme.mainColor,
-        appBar: buildAppBar(context),
-        bottomNavigationBar: buildBottomAppBar(context),
-        body: RefreshIndicator(
-          color: Theme.of(context).primaryColor,
-          backgroundColor: Colors.white,
-          onRefresh: _onRefresh,
-          displacement: 0,
-          child: CustomScrollView(
-            controller: _mainScrollController,
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            slivers: [
-              SliverList(
-                  delegate: SliverChildListDelegate([
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 05, 20, 16),
-                  child: Btn.minWidthFixHeight(
-                    minWidth: MediaQuery.of(context).size.width - 16,
-                    height: 90,
-                    color: const Color(0xffFEF0D7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusSmall),
-                        side: BorderSide(
-                            color: Colors.amber.shade600, width: 1.0)),
-                    child: Column(
-                      children: [
-                        Text(
-                          "${'add_new_address'.tr(context: context)}",
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: MyTheme.dark_font_grey,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Icon(
-                          Icons.add_sharp,
-                          color: Theme.of(context).primaryColor,
-                          size: 30,
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      buildShowAddFormDialog(context);
-                    },
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: buildAddressList(),
-                ),
-                const SizedBox(
-                  height: 100,
-                )
-              ]))
-            ],
-          ),
-        ));
-  }
-
-// Alart Dialog
-  Future buildShowAddFormDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        useRootNavigator: false,
-        builder: (context) {
-          return StatefulBuilder(builder: (BuildContext context,
-              StateSetter setModalState /*You can rename this!*/) {
-            return AlertDialog(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusDefault),
-              ),
-              insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-              contentPadding: const EdgeInsets.only(
-                top: 23.0,
-                left: 20.0,
-                right: 20.0,
-                bottom: 2.0,
-              ),
-              content: Container(
-                width: 400,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(
-                            AppDimensions.paddingSmallExtra),
-                        child: Text(
-                          "${'name_ucf'.tr(context: context)} *",
-                          style: const TextStyle(
-                            color: Color(0xff3E4447),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+      backgroundColor: MyTheme.mainColor,
+      appBar: buildAppBar(context),
+      bottomNavigationBar: buildBottomAppBar(context),
+      body: RefreshIndicator(
+        color: Theme.of(context).primaryColor,
+        backgroundColor: Colors.white,
+        onRefresh: _onRefresh,
+        displacement: 0,
+        child: CustomScrollView(
+          controller: _mainScrollController,
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 05, 20, 16),
+                    child: Btn.minWidthFixHeight(
+                      minWidth: MediaQuery.of(context).size.width - 16,
+                      height: 90,
+                      color: const Color(0xffFEF0D7),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusSmall),
+                          side: BorderSide(
+                              color: Colors.amber.shade600, width: 1.0)),
+                      child: Column(
+                        children: [
+                          Text(
+                            "${'add_new_address'.tr(context: context)}",
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: MyTheme.dark_font_grey,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ),
+                          Icon(
+                            Icons.add_sharp,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingNormal,
-                        ),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            controller: _nameController,
-                            autofocus: false,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.name,
-                            decoration: InputDecorations
-                                .buildInputDecoration_with_border(
-                              'enter_your_name'.tr(context: context),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AddAddressScreen(
+                              initValue: AddressDataEntity(
+                                name: name,
+                                email: email,
+                                address: address,
+                                postalCode: postalCode,
+                                phone: phone,
+                                country: _selected_country,
+                                state: _selected_state,
+                                city: _selected_city,
+                                password: password,
+                                latitude: latitude,
+                                longitude: longitude,
+                              ),
+                              addAddress: (addressEntity) async {
+                                _nameController.text = addressEntity.name!;
+                                _emailController.text = addressEntity.email!;
+                                _passwordController.text =
+                                    addressEntity.password!;
+                                _addressController.text =
+                                    addressEntity.address ?? '';
+                                _postalCodeController.text =
+                                    addressEntity.postalCode ?? '';
+                                _selected_country = addressEntity.country;
+                                _selected_state = addressEntity.state;
+                                _selected_city = addressEntity.city;
+
+                                longitude = addressEntity.longitude;
+                                latitude = addressEntity.latitude;
+
+                                phone = addressEntity.phone;
+
+                                setValues();
+
+                                await continueToDeliveryInfo();
+                              },
                             ),
                           ),
-                        ),
-                      ),
-
-                      ////
-                      //////////////////////////////////////////////email
-                      Padding(
-                        padding: const EdgeInsets.all(
-                            AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'email_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingNormal),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            controller: _emailController,
-                            textInputAction: TextInputAction.next,
-                            autofocus: false,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecorations
-                                .buildInputDecoration_with_border(
-                                    'enter_email'.tr(context: context)),
-                          ),
-                        ),
-                      ),
-                      MapLocationWidget(
-                        latitude: latitude,
-                        longitude: longitude,
-                        onPlacePicked: (latLong) {
-                          latitude = latLong?.latitude;
-                          longitude = latLong?.longitude;
-                        },
-                      ),
-                      const SizedBox(height: AppDimensions.paddingSmall),
-                      Padding(
-                        padding: const EdgeInsets.all(
-                            AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'address_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingNormal),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            controller: _addressController,
-                            textInputAction: TextInputAction.next,
-                            autofocus: false,
-                            keyboardType: TextInputType.streetAddress,
-                            decoration: InputDecorations
-                                .buildInputDecoration_with_border(
-                                    'enter_address_ucf'.tr(context: context)),
-                          ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'country_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingNormal),
-                        child: Container(
-                          height: 40,
-                          child: TypeAheadField(
-                            controller: _countryController,
-                            builder: (context, controller, focusNode) {
-                              return TextField(
-                                controller: controller,
-                                focusNode: focusNode,
-                                textInputAction: TextInputAction.next,
-                                obscureText: false,
-                                decoration: InputDecorations
-                                    .buildInputDecoration_with_border(
-                                        'enter_country_ucf'.tr(context: context)),
-                              );
-                            },
-                            suggestionsCallback: (name) async {
-                              final countryResponse = await AddressRepository()
-                                  .getCountryList(name: name);
-                              return countryResponse.countries;
-                            },
-                            loadingBuilder: (context) {
-                              return Container(
-                                height: 50,
-                                child: Center(
-                                    child: Text(
-                                        'loading_countries_ucf'.tr(context: context),
-                                        style: TextStyle(
-                                            color: MyTheme.medium_grey))),
-                              );
-                            },
-                            itemBuilder: (context, dynamic country) {
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  country.name,
-                                  style:
-                                      const TextStyle(color: MyTheme.font_grey),
-                                ),
-                              );
-                            },
-                            onSelected: (value) {
-                              onSelectCountryDuringAdd(value, setModalState);
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'state_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefault),
-                        child: Container(
-                          height: 40,
-                          child: TypeAheadField(
-                            builder: (context, controller, focusNode) {
-                              return TextField(
-                                textInputAction: TextInputAction.next,
-                                controller: controller,
-                                focusNode: focusNode,
-                                obscureText: false,
-                                decoration: InputDecorations
-                                    .buildInputDecoration_with_border(
-                                        'enter_state_ucf'.tr(context: context)),
-                              );
-                            },
-                            controller: _stateController,
-                            suggestionsCallback: (name) async {
-                              if (_selected_country == null) {
-                                final stateResponse = await AddressRepository()
-                                    .getStateListByCountry(); // blank response
-                                return stateResponse.states;
-                              }
-                              final stateResponse = await AddressRepository()
-                                  .getStateListByCountry(
-                                      country_id: _selected_country!.id,
-                                      name: name);
-                              return stateResponse.states;
-                            },
-                            loadingBuilder: (context) {
-                              return Container(
-                                height: 50,
-                                child: Center(
-                                    child: Text(
-                                        'loading_states_ucf'.tr(context: context),
-                                        style: TextStyle(
-                                            color: MyTheme.medium_grey))),
-                              );
-                            },
-                            itemBuilder: (context, dynamic state) {
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  state.name,
-                                  style:
-                                      const TextStyle(color: MyTheme.font_grey),
-                                ),
-                              );
-                            },
-                            onSelected: (value) {
-                              onSelectStateDuringAdd(value, setModalState);
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'city_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefault),
-                        child: Container(
-                          height: 40,
-                          child: TypeAheadField(
-                            controller: _cityController,
-                            suggestionsCallback: (name) async {
-                              if (_selected_state == null) {
-                                final cityResponse = await AddressRepository()
-                                    .getCityListByState(); // blank response
-                                return cityResponse.cities;
-                              }
-                              final cityResponse = await AddressRepository()
-                                  .getCityListByState(
-                                      state_id: _selected_state!.id,
-                                      name: name);
-                              return cityResponse.cities;
-                            },
-                            loadingBuilder: (context) {
-                              return Container(
-                                height: 50,
-                                child: Center(
-                                    child: Text(
-                                        'loading_cities_ucf'.tr(context: context),
-                                        style: TextStyle(
-                                            color: MyTheme.medium_grey))),
-                              );
-                            },
-                            itemBuilder: (context, dynamic city) {
-                              //print(suggestion.toString());
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  city.name,
-                                  style:
-                                      const TextStyle(color: MyTheme.font_grey),
-                                ),
-                              );
-                            },
-                            onSelected: (value) {
-                              onSelectCityDuringAdd(value, setModalState);
-                            },
-                            builder: (context, controller, focusNode) {
-                              return TextField(
-                                textInputAction: TextInputAction.next,
-                                controller: controller,
-                                focusNode: focusNode,
-                                obscureText: false,
-                                decoration: InputDecorations
-                                    .buildInputDecoration_with_border(
-                                        'enter_city_ucf'.tr(context: context)),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingSmall),
-                        child: Text('postal_code'.tr(context: context),
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingDefault),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            textInputAction: TextInputAction.next,
-                            controller: _postalCodeController,
-                            autofocus: false,
-                            decoration: InputDecorations
-                                .buildInputDecoration_with_border(
-                                    'enter_postal_code_ucf'.tr(context: context)),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'phone_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.radiusHalfSmall),
-                          // boxShadow: [MyTheme.commonShadow()],
-                        ),
-                        height: 40,
-                        child: CustomInternationalPhoneNumberInput(
-                          countries: countries_code,
-                          height: 40,
-                          keyboardAction: TextInputAction.next,
-                          backgroundColor: Colors.transparent,
-                          hintText: 'phone_number_ucf'.tr(context: context),
-                          errorMessage:
-                              'invalid_phone_number'.tr(context: context),
-                          onInputChanged: (PhoneNumber number) {
-                            setState(() {
-                              if (number.isoCode != null)
-                                AppConfig.default_country = number.isoCode!;
-                              phone = number.phoneNumber ?? '';
-                              print(phone);
-                            });
-                          },
-                          onInputValidated: (bool value) {
-                            print(value);
-                            _isValidPhoneNumber = value;
-                            setState(() {});
-                          },
-                          selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.DIALOG),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle:
-                              const TextStyle(color: MyTheme.font_grey),
-                          textStyle: const TextStyle(color: MyTheme.font_grey),
-                          textFieldController: _phoneController,
-                          formatInput: true,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              signed: true),
-                          inputDecoration:
-                              InputDecorations.buildInputDecoration_phone(
-                                  hint_text: "01XXX XXX XXX"),
-                          onSaved: (PhoneNumber number) {},
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(
-                            AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'password_ucf'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingNormal),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            textInputAction: TextInputAction.next,
-                            controller: _passwordController,
-                            autofocus: false,
-                            obscureText: true,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            keyboardType: TextInputType.visiblePassword,
-                            decoration: InputDecorations
-                                .buildInputDecoration_with_border(
-                                    "• • • • • • • •"),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(
-                            AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'confirm_your_password'.tr(context: context)} *",
-                            style: const TextStyle(
-                                color: Color(0xff3E4447),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingNormal),
-                        child: Container(
-                          height: 40,
-                          child: TextField(
-                            textInputAction: TextInputAction.done,
-                            autofocus: false,
-                            obscureText: true,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            keyboardType: TextInputType.visiblePassword,
-                            onChanged: (val) {
-                              passNotMatch = val != _passwordController.text;
-                            },
-                            decoration: InputDecorations
-                                .buildInputDecoration_with_border(
-                                    "• • • • • • • •"),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingSmall),
-                      child: Btn.minWidthFixHeight(
-                        minWidth: 75,
-                        height: 40,
-                        color: const Color.fromRGBO(253, 253, 253, 1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                AppDimensions.radiusHalfSmall),
-                            side: BorderSide(
-                                color: MyTheme.light_grey, width: 1)),
-                        child: Text(
-                          'close_ucf'.tr(context: context),
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
+                        );
+                      },
                     ),
-                    const SizedBox(width: 1),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: AppDimensions.paddingSmall),
-                      child: Btn.minWidthFixHeight(
-                        minWidth: 75,
-                        height: 40,
-                        color: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.radiusHalfSmall),
-                        ),
-                        child: Text(
-                          'continue_ucf'.tr(context: context),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onPressed: () async {
-                          await continueToDeliveryInfo();
-                        },
-                      ),
-                    )
-                  ],
-                )
-              ],
-            );
-          });
-        });
-  }
-
-  InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
-    return InputDecoration(
-        filled: true,
-        fillColor: const Color(0xffF6F7F8),
-        hintText: hintText,
-        hintStyle: const TextStyle(fontSize: 12.0, color: Color(0xff999999)),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.radiusHalfSmall),
-          ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: buildAddressList(),
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  )
+                ],
+              ),
+            )
+          ],
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.radiusHalfSmall),
-          ),
-        ),
-        contentPadding: const EdgeInsets.only(
-            left: AppDimensions.paddingSmall, top: 6.0, bottom: 6.0));
+      ),
+    );
   }
 
   AppBar buildAppBar(BuildContext context) {
