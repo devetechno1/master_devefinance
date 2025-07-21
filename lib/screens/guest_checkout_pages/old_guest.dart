@@ -15,6 +15,7 @@ import '../../custom/aiz_route.dart';
 import '../../custom/btn.dart';
 import '../../custom/loading.dart';
 import '../../custom/toast_component.dart';
+import '../../custom/useful_elements.dart';
 import '../../data_model/city_response.dart';
 import '../../data_model/country_response.dart';
 import '../../data_model/state_response.dart';
@@ -309,8 +310,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     autofocus: false,
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
-                    decoration: buildAddressInputDecoration(context,
-                        'enter_address_ucf'.tr(context: context)),
+                    decoration: buildAddressInputDecoration(
+                        context, 'enter_address_ucf'.tr(context: context)),
                   ),
                 ),
               ),
@@ -357,8 +358,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         controller: controller,
                         focusNode: focusNode,
                         obscureText: true,
-                        decoration: buildAddressInputDecoration(context,
-                            'enter_country_ucf'.tr(context: context)),
+                        decoration: buildAddressInputDecoration(
+                            context, 'enter_country_ucf'.tr(context: context)),
                       );
                     },
                     onSelected: (value) {
@@ -416,8 +417,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         controller: controller,
                         focusNode: focusNode,
                         obscureText: true,
-                        decoration: buildAddressInputDecoration(context,
-                            'enter_state_ucf'.tr(context: context)),
+                        decoration: buildAddressInputDecoration(
+                            context, 'enter_state_ucf'.tr(context: context)),
                       );
                     },
                     onSelected: (dynamic state) {
@@ -445,8 +446,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         controller: controller,
                         focusNode: focusNode,
                         obscureText: true,
-                        decoration: buildAddressInputDecoration(context,
-                            'enter_city_ucf'.tr(context: context)),
+                        decoration: buildAddressInputDecoration(
+                            context, 'enter_city_ucf'.tr(context: context)),
                       );
                     },
                     suggestionsCallback: (name) async {
@@ -501,8 +502,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   child: TextField(
                     controller: _postalCodeController,
                     autofocus: false,
-                    decoration: buildAddressInputDecoration(context,
-                        'enter_postal_code_ucf'.tr(context: context)),
+                    decoration: buildAddressInputDecoration(
+                        context, 'enter_postal_code_ucf'.tr(context: context)),
                   ),
                 ),
               ),
@@ -522,8 +523,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   child: TextField(
                     controller: _phoneController,
                     autofocus: false,
-                    decoration: buildAddressInputDecoration(context,
-                        'enter_phone_number'.tr(context: context)),
+                    decoration: buildAddressInputDecoration(
+                        context, 'enter_phone_number'.tr(context: context)),
                   ),
                 ),
               ),
@@ -591,27 +592,14 @@ AppBar buildAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: Colors.white,
     centerTitle: false,
-    leading: Builder(
-      builder: (context) => IconButton(
-        icon: Icon(
-            app_language_rtl.$!
-                ? CupertinoIcons.arrow_right
-                : CupertinoIcons.arrow_left,
-            color: MyTheme.dark_font_grey),
-        onPressed: () => Navigator.of(context).pop(),
+    leading: UsefulElements.backButton(),
+    title: Text(
+      'add_new_address'.tr(context: context),
+      style: TextStyle(
+        fontSize: 16,
+        color: MyTheme.dark_font_grey,
+        fontWeight: FontWeight.bold,
       ),
-    ),
-    title: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'shipping_info'.tr(context: context),
-          style: TextStyle(
-              fontSize: 16,
-              color: MyTheme.dark_font_grey,
-              fontWeight: FontWeight.bold),
-        ),
-      ],
     ),
     elevation: 0.0,
     titleSpacing: 0,

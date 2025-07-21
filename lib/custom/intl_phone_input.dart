@@ -555,13 +555,14 @@ class CustomSelectorButton extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 8.0),
                 child: Item(
-                    country: country,
-                    showFlag: selectorConfig.showFlags,
-                    trailingSpace: false,
-                    useEmoji: selectorConfig.useEmoji,
-                    textStyle: const TextStyle(
-                        color: MyTheme.textfield_grey) //selectorTextStyle,
-                    ),
+                  country: country,
+                  showFlag: selectorConfig.showFlags,
+                  trailingSpace: false,
+                  useEmoji: selectorConfig.useEmoji,
+                  textStyle: countries.length > 1 && isEnabled
+                      ? null
+                      : const TextStyle(color: MyTheme.textfield_grey),
+                ),
               ),
             ),
           );

@@ -109,29 +109,6 @@ class _SelectAddressState extends State<SelectAddress> {
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(
-              app_language_rtl.$!
-                  ? CupertinoIcons.arrow_right
-                  : CupertinoIcons.arrow_left,
-              color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      title: Text(
-        "${'shipping_cost_ucf'.tr(context: context)}",
-        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
   Widget? buildShippingInfoList(
       SelectAddressProvider selectAddressProvider, BuildContext context) {
     if (is_logged_in.$ == false) {

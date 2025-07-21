@@ -248,29 +248,6 @@ class _ShippingInfoState extends State<ShippingInfo> {
         : buildPickupPoint(sellerIndex);
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(
-              app_language_rtl.$!
-                  ? CupertinoIcons.arrow_right
-                  : CupertinoIcons.arrow_left,
-              color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      title: Text(
-        "${'shipping_cost_ucf'.tr(context: context)} $_shipping_cost_string",
-        style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
   Widget buildHomeDeliveryORCarrier(sellerArrayIndex) {
     if (AppConfig.businessSettingsData.carrierBaseShipping) {
       return buildCarrierSection(sellerArrayIndex);

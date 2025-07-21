@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -52,7 +51,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
 
     selectedPlace = kInitialPosition;
     widget.onPlacePicked?.call(selectedPlace);
-    
+
     setState(() {});
   }
 
@@ -403,24 +402,28 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                         onTapOutside: (event) =>
                             FocusScope.of(context).unfocus(),
                         decoration: InputDecoration(
-                            hintText:
-                                'your_delivery_location'.tr(context: context),
-                            hintStyle: const TextStyle(
-                                fontSize: 12.0, color: MyTheme.textfield_grey),
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            border: outlineInputBorder,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            filled: true,
-                            fillColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            prefixIcon: Icon(Icons.location_on,
-                                color: FocusScope.of(context).hasFocus
-                                    ? Theme.of(context).primaryColor
-                                    : MyTheme.textfield_grey),
-                            suffixIcon: const Icon(Icons.search_rounded,
-                                color: MyTheme.textfield_grey)),
+                          hintText:
+                              'your_delivery_location'.tr(context: context),
+                          hintStyle: const TextStyle(
+                              fontSize: 12.0, color: MyTheme.textfield_grey),
+                          enabledBorder: outlineInputBorder,
+                          focusedBorder: outlineInputBorder,
+                          border: outlineInputBorder,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 16.0),
+                          filled: true,
+                          fillColor: Theme.of(context).scaffoldBackgroundColor,
+                          prefixIcon: Icon(
+                            Icons.location_on,
+                            color: FocusScope.of(context).hasFocus
+                                ? Theme.of(context).primaryColor
+                                : MyTheme.textfield_grey,
+                          ),
+                          suffixIcon: const Icon(
+                            Icons.search_rounded,
+                            color: MyTheme.textfield_grey,
+                          ),
+                        ),
                       );
                     },
                     suggestionsCallback: getSuggestion,

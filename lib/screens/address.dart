@@ -20,6 +20,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../app_config.dart';
 import '../custom/input_decorations.dart';
 import '../custom/intl_phone_input.dart';
+import '../custom/useful_elements.dart';
 import '../data_model/address_response.dart' as res;
 import 'guest_checkout_pages/map_location.dart';
 
@@ -419,16 +420,7 @@ class _AddressState extends State<Address> {
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
       centerTitle: false,
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(
-              app_language_rtl.$!
-                  ? CupertinoIcons.arrow_right
-                  : CupertinoIcons.arrow_left,
-              color: MyTheme.dark_font_grey),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      leading: UsefulElements.backButton(),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -975,450 +967,445 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      backgroundColor: Colors.white,
-      body: Container(
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingLarge),
-        width: 400,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: AppDimensions.paddingSmall),
-              //name
-              if (!is_logged_in.$) ...[
-                Padding(
-                  padding:
-                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-                  child: Text(
-                    "${'name_ucf'.tr(context: context)} *",
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingLarge),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: AppDimensions.paddingSmall),
+            //name
+            if (!is_logged_in.$) ...[
+              Padding(
+                padding:
+                    const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                child: Text(
+                  "${'name_ucf'.tr(context: context)} *",
+                  style: const TextStyle(
+                    color: Color(0xff3E4447),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingNormal,
+                ),
+                child: Container(
+                  height: 40,
+                  child: TextField(
+                    controller: _nameController,
+                    autofocus: false,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    decoration:
+                        InputDecorations.buildInputDecoration_with_border(
+                      'enter_your_name'.tr(context: context),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                child: Text("${'email_ucf'.tr(context: context)} *",
                     style: const TextStyle(
+                        color: Color(0xff3E4447),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingNormal),
+                child: Container(
+                  height: 40,
+                  child: TextField(
+                    controller: _emailController,
+                    textInputAction: TextInputAction.next,
+                    autofocus: false,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration:
+                        InputDecorations.buildInputDecoration_with_border(
+                            'enter_email'.tr(context: context)),
+                  ),
+                ),
+              ),
+            ],
+            //
+            MapLocationWidget(
+              latitude: latitude,
+              longitude: longitude,
+              onPlacePicked: (latLong) {
+                latitude = latLong?.latitude;
+                longitude = latLong?.longitude;
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+              child: Text("${'address_ucf'.tr(context: context)} *",
+                  style: const TextStyle(
                       color: Color(0xff3E4447),
                       fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
+                      fontSize: 12)),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+              child: Container(
+                height: 40,
+                child: TextField(
+                  controller: _addressController,
+                  autofocus: false,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  decoration:
+                      InputDecorations.buildInputDecoration_with_border(
+                          'enter_address_ucf'.tr(context: context)),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingNormal,
-                  ),
-                  child: Container(
-                    height: 40,
-                    child: TextField(
-                      controller: _nameController,
-                      autofocus: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.name,
-                      decoration:
-                          InputDecorations.buildInputDecoration_with_border(
-                        'enter_your_name'.tr(context: context),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-                  child: Text("${'email_ucf'.tr(context: context)} *",
-                      style: const TextStyle(
-                          color: Color(0xff3E4447),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingNormal),
-                  child: Container(
-                    height: 40,
-                    child: TextField(
-                      controller: _emailController,
-                      textInputAction: TextInputAction.next,
-                      autofocus: false,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          InputDecorations.buildInputDecoration_with_border(
-                              'enter_email'.tr(context: context)),
-                    ),
-                  ),
-                ),
-              ],
-              //
-              MapLocationWidget(
-                latitude: latitude,
-                longitude: longitude,
-                onPlacePicked: (latLong) {
-                  latitude = latLong?.latitude;
-                  longitude = latLong?.longitude;
-                },
               ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+              child: Text("${'country_ucf'.tr(context: context)} *",
+                  style: const TextStyle(
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12)),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+              child: Container(
+                height: 40,
+                child: TypeAheadField(
+                  controller: _countryController,
+                  builder: (context, controller, focusNode) {
+                    return TextField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      obscureText: false,
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                              'enter_country_ucf'.tr(context: context)),
+                    );
+                  },
+                  suggestionsCallback: (name) async {
+                    final countryResponse =
+                        await AddressRepository().getCountryList(name: name);
+                    return countryResponse.countries;
+                  },
+                  loadingBuilder: (context) {
+                    return Container(
+                      height: 50,
+                      child: Center(
+                          child: Text(
+                              'loading_countries_ucf'.tr(context: context),
+                              style: TextStyle(color: MyTheme.medium_grey))),
+                    );
+                  },
+                  itemBuilder: (context, dynamic country) {
+                    return ListTile(
+                      dense: true,
+                      title: Text(
+                        country.name,
+                        style: const TextStyle(color: MyTheme.font_grey),
+                      ),
+                    );
+                  },
+                  onSelected: (value) => onSelectCountryDuringAdd(value),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+              child: Text("${'state_ucf'.tr(context: context)} *",
+                  style: const TextStyle(
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12)),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+              child: Container(
+                height: 40,
+                child: TypeAheadField(
+                  builder: (context, controller, focusNode) {
+                    return TextField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      obscureText: false,
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                              'enter_state_ucf'.tr(context: context)),
+                    );
+                  },
+                  controller: _stateController,
+                  suggestionsCallback: (name) async {
+                    if (_selected_country == null) {
+                      final stateResponse = await AddressRepository()
+                          .getStateListByCountry(); // blank response
+                      return stateResponse.states;
+                    }
+                    final stateResponse = await AddressRepository()
+                        .getStateListByCountry(
+                            country_id: _selected_country!.id, name: name);
+                    return stateResponse.states;
+                  },
+                  loadingBuilder: (context) {
+                    return Container(
+                      height: 50,
+                      child: Center(
+                          child: Text(
+                              'loading_states_ucf'.tr(context: context),
+                              style: TextStyle(color: MyTheme.medium_grey))),
+                    );
+                  },
+                  itemBuilder: (context, dynamic state) {
+                    return ListTile(
+                      dense: true,
+                      title: Text(
+                        state.name,
+                        style: const TextStyle(color: MyTheme.font_grey),
+                      ),
+                    );
+                  },
+                  onSelected: (value) => onSelectStateDuringAdd(value),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+              child: Text("${'city_ucf'.tr(context: context)} *",
+                  style: const TextStyle(
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12)),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+              child: Container(
+                height: 40,
+                child: TypeAheadField(
+                  controller: _cityController,
+                  suggestionsCallback: (name) async {
+                    if (_selected_state == null) {
+                      final CityResponse cityResponse =
+                          await AddressRepository()
+                              .getCityListByState(); // blank response
+                      return cityResponse.cities;
+                    }
+                    final CityResponse cityResponse =
+                        await AddressRepository().getCityListByState(
+                            state_id: _selected_state!.id, name: name);
+                    return cityResponse.cities;
+                  },
+                  loadingBuilder: (context) {
+                    return Container(
+                      height: 50,
+                      child: Center(
+                          child: Text(
+                              'loading_cities_ucf'.tr(context: context),
+                              style: TextStyle(color: MyTheme.medium_grey))),
+                    );
+                  },
+                  itemBuilder: (context, dynamic city) {
+                    //print(suggestion.toString());
+                    return ListTile(
+                      dense: true,
+                      title: Text(
+                        city.name,
+                        style: const TextStyle(color: MyTheme.font_grey),
+                      ),
+                    );
+                  },
+                  onSelected: (value) => onSelectCityDuringAdd(value),
+                  builder: (context, controller, focusNode) {
+                    return TextField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      obscureText: false,
+                      decoration:
+                          InputDecorations.buildInputDecoration_with_border(
+                              'enter_city_ucf'.tr(context: context)),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+              child: Text("${'phone_ucf'.tr(context: context)} *",
+                  style: const TextStyle(
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12)),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusHalfSmall),
+                // boxShadow: [MyTheme.commonShadow()],
+              ),
+              height: 40,
+              child: CustomInternationalPhoneNumberInput(
+                countries: countries_code,
+                height: 40,
+                backgroundColor: Colors.transparent,
+                hintText: 'phone_number_ucf'.tr(context: context),
+                errorMessage: 'invalid_phone_number'.tr(context: context),
+                initialValue: initialValue,
+                onInputChanged: (PhoneNumber number) {
+                  setState(() {
+                    if (number.isoCode != null)
+                      AppConfig.default_country = number.isoCode!;
+                    _phone = number.phoneNumber ?? '';
+                    print(_phone);
+                  });
+                },
+                onInputValidated: (bool value) {
+                  print(value);
+                  _isValidPhoneNumber = value;
+                  setState(() {});
+                },
+                selectorConfig: const SelectorConfig(
+                    selectorType: PhoneInputSelectorType.DIALOG),
+                ignoreBlank: false,
+                autoValidateMode: AutovalidateMode.disabled,
+                selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
+                textStyle: const TextStyle(color: MyTheme.font_grey),
+                textFieldController: _phoneController,
+                formatInput: true,
+                keyboardType:
+                    const TextInputType.numberWithOptions(signed: true),
+                inputDecoration: InputDecorations.buildInputDecoration_phone(
+                    hint_text: "01XXX XXX XXX"),
+                onSaved: (PhoneNumber number) {},
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+              child: Text('postal_code'.tr(context: context),
+                  style: const TextStyle(
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12)),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+              child: Container(
+                height: 40,
+                child: TextField(
+                  controller: _postalCodeController,
+                  autofocus: false,
+                  decoration:
+                      InputDecorations.buildInputDecoration_with_border(
+                          'enter_postal_code_ucf'.tr(context: context)),
+                ),
+              ),
+            ),
+            // Padding(
+            //   padding: const EdgeInsetsDirectional.only(
+            //       start: AppDimensions.paddingDefault),
+      
+      //if statement
+            if (!is_logged_in.$) ...[
               Padding(
-                padding: const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-                child: Text("${'address_ucf'.tr(context: context)} *",
+                padding:
+                    const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                child: Text("${'password_ucf'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
                         fontSize: 12)),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingNormal),
                 child: Container(
                   height: 40,
                   child: TextField(
-                    controller: _addressController,
+                    textInputAction: TextInputAction.next,
+                    controller: _passwordController,
                     autofocus: false,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.visiblePassword,
                     decoration:
                         InputDecorations.buildInputDecoration_with_border(
-                            'enter_address_ucf'.tr(context: context)),
+                            "• • • • • • • •"),
                   ),
                 ),
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${'country_ucf'.tr(context: context)} *",
+                    const EdgeInsets.all(AppDimensions.paddingSmallExtra),
+                child: Text(
+                    "${'confirm_your_password'.tr(context: context)} *",
                     style: const TextStyle(
                         color: Color(0xff3E4447),
                         fontWeight: FontWeight.bold,
                         fontSize: 12)),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingNormal),
                 child: Container(
                   height: 40,
-                  child: TypeAheadField(
-                    controller: _countryController,
-                    builder: (context, controller, focusNode) {
-                      return TextField(
-                        controller: controller,
-                        focusNode: focusNode,
-                        obscureText: false,
-                        decoration:
-                            InputDecorations.buildInputDecoration_with_border(
-                                'enter_country_ucf'.tr(context: context)),
-                      );
+                  child: TextField(
+                    textInputAction: TextInputAction.done,
+                    autofocus: false,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (val) {
+                      passNotMatch = val != _passwordController.text;
                     },
-                    suggestionsCallback: (name) async {
-                      final countryResponse =
-                          await AddressRepository().getCountryList(name: name);
-                      return countryResponse.countries;
-                    },
-                    loadingBuilder: (context) {
-                      return Container(
-                        height: 50,
-                        child: Center(
-                            child: Text(
-                                'loading_countries_ucf'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
-                      );
-                    },
-                    itemBuilder: (context, dynamic country) {
-                      return ListTile(
-                        dense: true,
-                        title: Text(
-                          country.name,
-                          style: const TextStyle(color: MyTheme.font_grey),
-                        ),
-                      );
-                    },
-                    onSelected: (value) => onSelectCountryDuringAdd(value),
+                    decoration:
+                        InputDecorations.buildInputDecoration_with_border(
+                            "• • • • • • • •"),
                   ),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${'state_ucf'.tr(context: context)} *",
-                    style: const TextStyle(
-                        color: Color(0xff3E4447),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12)),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
-                child: Container(
-                  height: 40,
-                  child: TypeAheadField(
-                    builder: (context, controller, focusNode) {
-                      return TextField(
-                        controller: controller,
-                        focusNode: focusNode,
-                        obscureText: false,
-                        decoration:
-                            InputDecorations.buildInputDecoration_with_border(
-                                'enter_state_ucf'.tr(context: context)),
-                      );
-                    },
-                    controller: _stateController,
-                    suggestionsCallback: (name) async {
-                      if (_selected_country == null) {
-                        final stateResponse = await AddressRepository()
-                            .getStateListByCountry(); // blank response
-                        return stateResponse.states;
-                      }
-                      final stateResponse = await AddressRepository()
-                          .getStateListByCountry(
-                              country_id: _selected_country!.id, name: name);
-                      return stateResponse.states;
-                    },
-                    loadingBuilder: (context) {
-                      return Container(
-                        height: 50,
-                        child: Center(
-                            child: Text(
-                                'loading_states_ucf'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
-                      );
-                    },
-                    itemBuilder: (context, dynamic state) {
-                      return ListTile(
-                        dense: true,
-                        title: Text(
-                          state.name,
-                          style: const TextStyle(color: MyTheme.font_grey),
-                        ),
-                      );
-                    },
-                    onSelected: (value) => onSelectStateDuringAdd(value),
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${'city_ucf'.tr(context: context)} *",
-                    style: const TextStyle(
-                        color: Color(0xff3E4447),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12)),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
-                child: Container(
-                  height: 40,
-                  child: TypeAheadField(
-                    controller: _cityController,
-                    suggestionsCallback: (name) async {
-                      if (_selected_state == null) {
-                        final CityResponse cityResponse =
-                            await AddressRepository()
-                                .getCityListByState(); // blank response
-                        return cityResponse.cities;
-                      }
-                      final CityResponse cityResponse =
-                          await AddressRepository().getCityListByState(
-                              state_id: _selected_state!.id, name: name);
-                      return cityResponse.cities;
-                    },
-                    loadingBuilder: (context) {
-                      return Container(
-                        height: 50,
-                        child: Center(
-                            child: Text(
-                                'loading_cities_ucf'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
-                      );
-                    },
-                    itemBuilder: (context, dynamic city) {
-                      //print(suggestion.toString());
-                      return ListTile(
-                        dense: true,
-                        title: Text(
-                          city.name,
-                          style: const TextStyle(color: MyTheme.font_grey),
-                        ),
-                      );
-                    },
-                    onSelected: (value) => onSelectCityDuringAdd(value),
-                    builder: (context, controller, focusNode) {
-                      return TextField(
-                        controller: controller,
-                        focusNode: focusNode,
-                        obscureText: false,
-                        decoration:
-                            InputDecorations.buildInputDecoration_with_border(
-                                'enter_city_ucf'.tr(context: context)),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text("${'phone_ucf'.tr(context: context)} *",
-                    style: const TextStyle(
-                        color: Color(0xff3E4447),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12)),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 16.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
+            ],
+      
+            Center(
+              child: Btn.minWidthFixHeight(
+                minWidth: 300,
+                height: 50,
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(AppDimensions.radiusHalfSmall),
-                  // boxShadow: [MyTheme.commonShadow()],
                 ),
-                height: 40,
-                child: CustomInternationalPhoneNumberInput(
-                  countries: countries_code,
-                  height: 40,
-                  backgroundColor: Colors.transparent,
-                  hintText: 'phone_number_ucf'.tr(context: context),
-                  errorMessage: 'invalid_phone_number'.tr(context: context),
-                  initialValue: initialValue,
-                  onInputChanged: (PhoneNumber number) {
-                    setState(() {
-                      if (number.isoCode != null)
-                        AppConfig.default_country = number.isoCode!;
-                      _phone = number.phoneNumber ?? '';
-                      print(_phone);
-                    });
-                  },
-                  onInputValidated: (bool value) {
-                    print(value);
-                    _isValidPhoneNumber = value;
-                    setState(() {});
-                  },
-                  selectorConfig: const SelectorConfig(
-                      selectorType: PhoneInputSelectorType.DIALOG),
-                  ignoreBlank: false,
-                  autoValidateMode: AutovalidateMode.disabled,
-                  selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
-                  textStyle: const TextStyle(color: MyTheme.font_grey),
-                  textFieldController: _phoneController,
-                  formatInput: true,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(signed: true),
-                  inputDecoration: InputDecorations.buildInputDecoration_phone(
-                      hint_text: "01XXX XXX XXX"),
-                  onSaved: (PhoneNumber number) {},
+                child: Text(
+                  'continue_ucf'.tr(context: context),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
+                onPressed: _onAddressAdd,
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Text('postal_code'.tr(context: context),
-                    style: const TextStyle(
-                        color: Color(0xff3E4447),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12)),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
-                child: Container(
-                  height: 40,
-                  child: TextField(
-                    controller: _postalCodeController,
-                    autofocus: false,
-                    decoration:
-                        InputDecorations.buildInputDecoration_with_border(
-                            'enter_postal_code_ucf'.tr(context: context)),
-                  ),
-                ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsetsDirectional.only(
-              //       start: AppDimensions.paddingDefault),
-
-//if statement
-              if (!is_logged_in.$) ...[
-                Padding(
-                  padding:
-                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-                  child: Text("${'password_ucf'.tr(context: context)} *",
-                      style: const TextStyle(
-                          color: Color(0xff3E4447),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingNormal),
-                  child: Container(
-                    height: 40,
-                    child: TextField(
-                      textInputAction: TextInputAction.next,
-                      controller: _passwordController,
-                      autofocus: false,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration:
-                          InputDecorations.buildInputDecoration_with_border(
-                              "• • • • • • • •"),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.all(AppDimensions.paddingSmallExtra),
-                  child: Text(
-                      "${'confirm_your_password'.tr(context: context)} *",
-                      style: const TextStyle(
-                          color: Color(0xff3E4447),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingNormal),
-                  child: Container(
-                    height: 40,
-                    child: TextField(
-                      textInputAction: TextInputAction.done,
-                      autofocus: false,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      keyboardType: TextInputType.visiblePassword,
-                      onChanged: (val) {
-                        passNotMatch = val != _passwordController.text;
-                      },
-                      decoration:
-                          InputDecorations.buildInputDecoration_with_border(
-                              "• • • • • • • •"),
-                    ),
-                  ),
-                ),
-              ],
-
-              Center(
-                child: Btn.minWidthFixHeight(
-                  minWidth: 300,
-                  height: 50,
-                  color: Theme.of(context).primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusHalfSmall),
-                  ),
-                  child: Text(
-                    'continue_ucf'.tr(context: context),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  onPressed: _onAddressAdd,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              )
-              // )
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 20,
+            )
+            // )
+          ],
         ),
       ),
       // actions: [
