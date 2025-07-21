@@ -2204,51 +2204,7 @@ class _ProductDetailsState extends State<ProductDetails>
       ],
     );
   }
-
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(
-              app_language_rtl.$!
-                  ? CupertinoIcons.arrow_right
-                  : CupertinoIcons.arrow_left,
-              color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      title: Container(
-        height: kToolbarHeight +
-            statusBarHeight -
-            (MediaQuery.of(context).viewPadding.top > 40 ? 32.0 : 16.0),
-        //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-        child: Container(
-            width: 300,
-            child: Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
-              child: Text(
-                _appbarPriceString!,
-                style: const TextStyle(fontSize: 16, color: MyTheme.font_grey),
-              ),
-            )),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-      actions: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-          child: IconButton(
-            icon: Icon(Icons.share_outlined, color: MyTheme.dark_grey),
-            onPressed: () {
-              onPressShare(context);
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
+  
   Widget buildBottomAppBar(_addedToCartSnackbar) {
     return Container(
       padding:

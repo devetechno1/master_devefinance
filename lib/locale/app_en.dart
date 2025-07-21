@@ -139,7 +139,7 @@ const Map<String, String> enLangs = {
   "please_choose_one_option_to_pay": "Please choose one option to pay",
   "no_data_is_available": "No data is available",
   "no_address_is_added": "No Addresses is added",
-  "add_new_address": "Add new  addresses",
+  "add_new_address": "Add new addresses",
   "loading_more_products_ucf": "Loading More Products ...",
   "no_more_products_ucf": "No More Products",
   "no_product_is_available": "No product is available",

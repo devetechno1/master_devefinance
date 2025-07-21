@@ -161,13 +161,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
       centerTitle: false,
-      leading: Builder(
-        builder: (context) => IconButton(
-          padding: EdgeInsets.zero,
-          icon: UsefulElements.backButton(),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      leading: UsefulElements.backButton(),
       title: Text(
         "${'change_language_ucf'.tr(context: context)} (${app_language.$}) - (${app_mobile_language.$})",
         style: TextStyle(
