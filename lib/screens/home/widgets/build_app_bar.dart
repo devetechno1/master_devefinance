@@ -54,46 +54,48 @@ class AddressAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-        listenable: homeData,
-        builder: (context, child) {
-          if (homeData.defaultAddress == null) return const SizedBox();
-
-          return InkWell(
-            onTap: homeData.handleAddressNavigation,
-            child: Container(
-              height: 40,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.paddingDefault,
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey.withValues(alpha: 0.1),
-                  ),
-                ),
-              ),
-              child: Row(
-                spacing: AppDimensions.paddingSmall,
-                children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  Expanded(
-                    child: ListenableBuilder(
-                      listenable: homeData,
-                      builder: (context, child) {
-                        return Text(
-                          "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
-                        );
-                      },
-                    ),
-                  ),
-                ],
+    final Widget addressWidget = InkWell(
+      onTap: homeData.handleAddressNavigation,
+      child: Container(
+        height: 40,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.paddingDefault,
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey.withValues(alpha: 0.1),
+            ),
+          ),
+        ),
+        child: Row(
+          spacing: AppDimensions.paddingSmall,
+          children: [
+            Icon(
+              Icons.location_on_outlined,
+              color: Theme.of(context).primaryColor,
+            ),
+            Expanded(
+              child: ListenableBuilder(
+                listenable: homeData,
+                builder: (context, child) {
+                  return Text(
+                    "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
+                  );
+                },
               ),
             ),
-          );
-        });
+          ],
+        ),
+      ),
+    );
+    return ListenableBuilder(
+      listenable: homeData,
+      builder: (context, child) {
+        if (homeData.defaultAddress == null) return const SizedBox();
+
+        return addressWidget;
+      },
+    );
   }
 }
