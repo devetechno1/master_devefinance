@@ -1,5 +1,4 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_search_box.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:flutter/material.dart';
@@ -78,14 +77,17 @@ class AddressAppBarWidget extends StatelessWidget {
               child: Row(
                 spacing: AppDimensions.paddingSmall,
                 children: [
-                  Icon(Icons.location_on_outlined,
-                      color: Theme.of(context).primaryColor),
+                  Icon(
+                    Icons.location_on_outlined,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   Expanded(
                     child: ListenableBuilder(
                       listenable: homeData,
                       builder: (context, child) {
                         return Text(
-                            "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}");
+                          "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
+                        );
                       },
                     ),
                   ),
