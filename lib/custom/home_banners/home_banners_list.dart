@@ -12,6 +12,11 @@ class HomeBannersList extends StatelessWidget {
   final List<AIZSlider> bannersImagesList;
   final double aspectRatio;
   final double viewportFraction;
+  final bool padEnds;
+  final bool? enlargeCenterPage;
+  /// if banners list contain one banner ... it show the banner with it's real aspect ratio
+  final bool makeOneBannerDynamicSize;
+  final CenterPageEnlargeStrategy enlargeStrategy;
 
   const HomeBannersList({
     Key? key,
@@ -19,6 +24,10 @@ class HomeBannersList extends StatelessWidget {
     required this.bannersImagesList,
     this.aspectRatio = 2,
     this.viewportFraction = 0.49,
+    this.padEnds = false,
+    this.enlargeCenterPage = false,
+    this.makeOneBannerDynamicSize = true,
+    this.enlargeStrategy = CenterPageEnlargeStrategy.scale,
   }) : super(key: key);
 
   @override
@@ -30,7 +39,7 @@ class HomeBannersList extends StatelessWidget {
 
     // When banner images are available
     else if (bannersImagesList.isNotEmpty) {
-      if (bannersImagesList.length == 1) {
+      if (bannersImagesList.length == 1 && makeOneBannerDynamicSize) {
         return DynamicSizeImageBanner(
           urlToOpen: bannersImagesList.first.url,
           photo: bannersImagesList.first.photo,
@@ -44,8 +53,9 @@ class HomeBannersList extends StatelessWidget {
             aspectRatio: aspectRatio,
             viewportFraction: viewportFraction,
             initialPage: 0,
-            padEnds: false,
-            enlargeCenterPage: false,
+            padEnds: padEnds,
+            enlargeCenterPage: enlargeCenterPage,
+            enlargeStrategy: enlargeStrategy,
             enableInfiniteScroll: canScroll,
             autoPlay: canScroll,
           ),
@@ -67,7 +77,8 @@ class HomeBannersList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
                 child: InkWell(
-                  onTap: () => NavigationService.handleUrls(i.url, context: context),
+                  onTap: () =>
+                      NavigationService.handleUrls(i.url, context: context),
                   child: AIZImage.radiusImage(i.photo, 6),
                 ),
               ),
