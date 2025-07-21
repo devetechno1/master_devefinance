@@ -57,9 +57,8 @@ class AddressAppBarWidget extends StatelessWidget {
     return ListenableBuilder(
         listenable: homeData,
         builder: (context, child) {
-          if (homeData.defaultAddress == null) {
-            return const SizedBox();
-          }
+          if (homeData.defaultAddress == null) return const SizedBox();
+
           return InkWell(
             onTap: homeData.handleAddressNavigation,
             child: Container(
