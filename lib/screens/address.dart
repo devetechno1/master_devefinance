@@ -73,6 +73,9 @@ class _AddressState extends State<Address> {
 
   Future fetchAll() async {
     await fetchShippingAddressList();
+    if (_shippingAddressList.isNotEmpty) {
+      makeDefaultAddress(_shippingAddressList.first.id);
+    }
 
     setState(() {});
   }
@@ -164,9 +167,9 @@ class _AddressState extends State<Address> {
     fetchAll();
   }
 
-  Future<void> onAddressSwitch(index) async {
+  Future<void> onAddressSwitch(int? id) async {
     final addressMakeDefaultResponse =
-        await AddressRepository().getAddressMakeDefaultResponse(index);
+        await AddressRepository().getAddressMakeDefaultResponse(id);
 
     if (addressMakeDefaultResponse.result == false) {
       ToastComponent.showDialog(
@@ -180,7 +183,7 @@ class _AddressState extends State<Address> {
     );
 
     setState(() {
-      _default_shipping_address = index;
+      _default_shipping_address = id;
     });
 
     fetchShippingAddressList(false);
@@ -272,16 +275,20 @@ class _AddressState extends State<Address> {
     })).then((value) async {
       await onPopped(value);
       if (value != null) {
-        bool hasDefault = false;
-        for (res.Address e in _shippingAddressList) {
-          if (e.set_default == 1) {
-            hasDefault = true;
-            break;
-          }
-        }
-        if (!hasDefault) onAddressSwitch(address.id);
+        makeDefaultAddress(address.id);
       }
     });
+  }
+
+  void makeDefaultAddress(int? id) {
+    bool hasDefault = false;
+    for (res.Address e in _shippingAddressList) {
+      if (e.set_default == 1) {
+        hasDefault = true;
+        break;
+      }
+    }
+    if (!hasDefault) onAddressSwitch(id);
   }
 
   @override
