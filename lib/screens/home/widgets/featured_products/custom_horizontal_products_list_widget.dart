@@ -39,7 +39,7 @@ class CustomHorizontalProductsListSectionWidget extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(
               top: 20,
               start: 20,
-              bottom: 10,
+              
             ),
             child: Text(
               title,
