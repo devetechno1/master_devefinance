@@ -74,14 +74,14 @@ class _MinimaScreenState extends State<MinimaScreen>
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
-          child: Scaffold(
-            floatingActionButton: whatsappFloatingButtonWidget,
-            appBar: BuildAppBar(context: context),
-            backgroundColor: Colors.white,
-            body: ListenableBuilder(
-              listenable: homeData,
-              builder: (context, child) {
-                return Stack(
+          child: ListenableBuilder(
+            listenable: homeData,
+            builder: (context, child) {
+              return Scaffold(
+                floatingActionButton: whatsappFloatingButtonWidget,
+                appBar: BuildAppBar(context: context),
+                backgroundColor: Colors.white,
+                body: Stack(
                   children: [
                     RefreshIndicator(
                       color: Theme.of(context).primaryColor,
@@ -122,7 +122,8 @@ class _MinimaScreenState extends State<MinimaScreen>
                                           padding: const EdgeInsetsDirectional
                                               .fromSTEB(22, 10, 10, 10),
                                           child: Text(
-                                              'flash_deal_ucf'.tr(context: context),
+                                              'flash_deal_ucf'
+                                                  .tr(context: context),
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18)),
@@ -200,7 +201,7 @@ class _MinimaScreenState extends State<MinimaScreen>
                             ),
                           ),
 
-//auction products
+                          //auction products
                           AuctionProductsSectionSliver(
                             homeData: homeData,
                           ),
@@ -209,7 +210,7 @@ class _MinimaScreenState extends State<MinimaScreen>
                             BrandListSectionSliver(
                               homeData: homeData,
                             ),
-//all products ------------
+                          //all products ------------
                           AllProducts(homeData: homeData)
                         ],
                       ),
@@ -220,9 +221,9 @@ class _MinimaScreenState extends State<MinimaScreen>
                           context: context, homeData: homeData),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

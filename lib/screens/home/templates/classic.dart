@@ -71,14 +71,14 @@ class _ClassicScreenState extends State<ClassicScreen>
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
-          child: Scaffold(
-            floatingActionButton: whatsappFloatingButtonWidget,
-            appBar: BuildAppBar(context: context),
-            backgroundColor: Colors.white,
-            body: ListenableBuilder(
-              listenable: homeData,
-              builder: (context, child) {
-                return Stack(
+          child: ListenableBuilder(
+            listenable: homeData,
+            builder: (context, child) {
+              return Scaffold(
+                floatingActionButton: whatsappFloatingButtonWidget,
+                appBar: BuildAppBar(context: context),
+                backgroundColor: Colors.white,
+                body: Stack(
                   children: [
                     RefreshIndicator(
                       color: Theme.of(context).primaryColor,
@@ -176,9 +176,9 @@ class _ClassicScreenState extends State<ClassicScreen>
                           context: context, homeData: homeData),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

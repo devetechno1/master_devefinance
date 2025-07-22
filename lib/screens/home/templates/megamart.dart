@@ -72,14 +72,14 @@ class _MegamartScreenState extends State<MegamartScreen>
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
-          child: Scaffold(
-            appBar: BuildAppBar(context: context),
-            floatingActionButton: whatsappFloatingButtonWidget,
-            backgroundColor: Colors.white,
-            body: ListenableBuilder(
-              listenable: homeData,
-              builder: (context, child) {
-                return Stack(
+          child: ListenableBuilder(
+            listenable: homeData,
+            builder: (context, child) {
+              return Scaffold(
+                appBar: BuildAppBar(context: context),
+                floatingActionButton: whatsappFloatingButtonWidget,
+                backgroundColor: Colors.white,
+                body: Stack(
                   children: [
                     RefreshIndicator(
                       color: MyTheme.primaryColor,
@@ -157,9 +157,9 @@ class _MegamartScreenState extends State<MegamartScreen>
                           context: context, homeData: homeData),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

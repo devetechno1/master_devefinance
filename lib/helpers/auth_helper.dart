@@ -27,22 +27,25 @@ class AuthHelper {
     }
   }
 
-  clearUserData() {
+  Future<void> clearUserData() async{
     SystemConfig.systemUser = null;
     is_logged_in.$ = false;
-    is_logged_in.save();
     access_token.$ = "";
-    access_token.save();
     user_id.$ = 0;
-    user_id.save();
     user_name.$ = "";
-    user_name.save();
     user_email.$ = "";
-    user_email.save();
     user_phone.$ = "";
-    user_phone.save();
     avatar_original.$ = "";
-    avatar_original.save();
+
+    await Future.wait([
+      is_logged_in.save(),
+      access_token.save(),
+      user_id.save(),
+      user_name.save(),
+      user_email.save(),
+      user_phone.save(),
+      avatar_original.save(),
+    ]);
 
     // temp_user_id.$ = "";
     // temp_user_id.save();

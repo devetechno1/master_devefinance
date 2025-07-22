@@ -72,14 +72,14 @@ class _ReClassicScreenState extends State<ReClassicScreen>
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
-          child: Scaffold(
-            floatingActionButton: whatsappFloatingButtonWidget,
-            appBar: BuildAppBar(context: context),
-            backgroundColor: Colors.white,
-            body: ListenableBuilder(
-              listenable: homeData,
-              builder: (context, child) {
-                return Stack(
+          child: ListenableBuilder(
+            listenable: homeData,
+            builder: (context, child) {
+              return Scaffold(
+                floatingActionButton: whatsappFloatingButtonWidget,
+                appBar: BuildAppBar(context: context),
+                backgroundColor: Colors.white,
+                body: Stack(
                   children: [
                     RefreshIndicator(
                       color: Theme.of(context).primaryColor,
@@ -97,7 +97,7 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                             HomeCarouselSlider(homeData: homeData),
                           ])),
                           const CategoryList(),
-                      
+
                           SliverList(
                               delegate: SliverChildListDelegate([
                             Padding(
@@ -140,7 +140,7 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                           //featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
 
-//BannerList---------------------
+                          //BannerList---------------------
                           SliverToBoxAdapter(
                             child: HomeBannersList(
                               bannersImagesList: homeData.bannerTwoImageList,
@@ -148,31 +148,31 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                             ),
                           ),
 
-//Best Selling-------------------
+                          //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                           const BestSellingSectionSliver(),
-//newProducts-----------------------------
+                          //newProducts-----------------------------
                           const NewProductsListSliver(),
-//BannerList---------------------
+                          //BannerList---------------------
                           SliverToBoxAdapter(
                             child: HomeBannersList(
                               bannersImagesList: homeData.bannerThreeImageList,
                               isBannersInitial: homeData.isBannerThreeInitial,
                             ),
                           ),
-//auctionProducts------------
+                          //auctionProducts------------
                           AuctionProductsSectionSliver(
                             homeData: homeData,
                           ),
 
-//Brand List ---------------------------
+                          //Brand List ---------------------------
                           if (homeData.isBrandsInitial ||
                               homeData.brandsList.isNotEmpty)
                             BrandListSectionSliver(
                               homeData: homeData,
                             ),
 
-//all products --------------------------
+                          //all products --------------------------
                           AllProducts(
                             homeData: homeData,
                           ),
@@ -189,9 +189,9 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                       ),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

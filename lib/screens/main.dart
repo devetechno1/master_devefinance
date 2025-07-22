@@ -49,7 +49,12 @@ class _MainState extends State<Main> {
     }
 
     if (i == 3) {
-      routes.push("/dashboard");
+      routes.push("/dashboard").then(
+        (value) async {
+          fetchAll();
+          await homeData.onRefresh();
+        },
+      );
       return;
     }
     setState(() {

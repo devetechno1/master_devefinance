@@ -72,17 +72,12 @@ class AddressAppBarWidget extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             Expanded(
-              child: ListenableBuilder(
-                listenable: homeData,
-                builder: (context, child) {
-                  return Text(
-                    homeData.isLoadingAddress
-                        ? "is_loading".tr(context: context)
-                        : homeData.defaultAddress == null
-                            ? "add_default_address".tr(context: context)
-                            : "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
-                  );
-                },
+              child: Text(
+                homeData.isLoadingAddress
+                    ? "is_loading".tr(context: context)
+                    : homeData.defaultAddress == null
+                        ? "add_default_address".tr(context: context)
+                        : "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
               ),
             ),
           ],

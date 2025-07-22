@@ -71,14 +71,14 @@ class _MetroScreenState extends State<MetroScreen>
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: SafeArea(
-          child: Scaffold(
-            floatingActionButton: whatsappFloatingButtonWidget,
-            appBar: BuildAppBar(context: context),
-            backgroundColor: Colors.white,
-            body: ListenableBuilder(
-              listenable: homeData,
-              builder: (context, child) {
-                return Stack(
+          child: ListenableBuilder(
+            listenable: homeData,
+            builder: (context, child) {
+              return Scaffold(
+                floatingActionButton: whatsappFloatingButtonWidget,
+                appBar: BuildAppBar(context: context),
+                backgroundColor: Colors.white,
+                body: Stack(
                   children: [
                     RefreshIndicator(
                       color: Theme.of(context).primaryColor,
@@ -118,11 +118,11 @@ class _MetroScreenState extends State<MetroScreen>
                               ),
                             ]),
                           ),
-//Featured category-----------------------
+                          //Featured category-----------------------
                           const CategoryList(),
                           // const CategoryListVertical(crossAxisCount: 3,),
-                   
-//BannerList---------------------
+
+                          //BannerList---------------------
 
                           SliverToBoxAdapter(
                             child: HomeBannersList(
@@ -130,9 +130,9 @@ class _MetroScreenState extends State<MetroScreen>
                               isBannersInitial: homeData.isBannerOneInitial,
                             ),
                           ),
-//featuredProducts-----------------------------
+                          //featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
-//BannerList---------------------
+                          //BannerList---------------------
                           SliverToBoxAdapter(
                             child: HomeBannersList(
                               bannersImagesList: homeData.bannerTwoImageList,
@@ -146,21 +146,21 @@ class _MetroScreenState extends State<MetroScreen>
                           //   ),
                           // ),
 
-//Best Selling-------------------
+                          //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                           const BestSellingSectionSliver(),
                           // const VerticalProductsSectionSliver(),
-//auction products----------------------------
+                          //auction products----------------------------
                           AuctionProductsSectionSliver(
                             homeData: homeData,
                           ),
-//Brand List ---------------------------
+                          //Brand List ---------------------------
                           if (homeData.isBrandsInitial ||
                               homeData.brandsList.isNotEmpty)
                             BrandListSectionSliver(
                               homeData: homeData,
                             ),
-//all products --------------------------
+                          //all products --------------------------
                           AllProducts(
                             homeData: homeData,
                           ),
@@ -175,9 +175,9 @@ class _MetroScreenState extends State<MetroScreen>
                           context: context, homeData: homeData),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

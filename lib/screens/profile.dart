@@ -178,8 +178,8 @@ class _ProfileState extends State<Profile> {
 
   List<int> listItem = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  onTapLogout(BuildContext context) async {
-    AuthHelper().clearUserData();
+  Future<void> onTapLogout(BuildContext context) async {
+    await AuthHelper().clearUserData();
     context.go("/");
   }
 

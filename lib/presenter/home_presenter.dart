@@ -108,33 +108,32 @@ class HomePresenter extends ChangeNotifier {
   bool showAllLoadingContainer = false;
   int cartCount = 0;
 
-  fetchAll([bool isRefresh = false]) {
-    fetchAddressLists(isRefresh);
-    fetchCarouselImages();
-    fetchBannerOneImages();
-    fetchBannerTwoImages();
-    fetchBannerThreeImags();
-    fetchFeaturedCategories();
-    fetchFeaturedProducts();
-    fetchAllProducts();
-    fetchTodayDealData();
-    fetchFlashDealData();
-    fetchBannerFlashDeal();
-    fetchFlashDealBannerImages();
-    fetchBrands();
-    fetchBestSellingProducts();
-    fetchAuctionProducts();
-    fetchBrandsProducts();
-    fetchTodayDealProducts();
+  Future<void> fetchAll([bool isRefresh = false]) async {
+    await Future.wait([
+      fetchAddressLists(isRefresh),
+      fetchCarouselImages(),
+      fetchBannerOneImages(),
+      fetchBannerTwoImages(),
+      fetchBannerThreeImags(),
+      fetchFeaturedCategories(),
+      fetchFeaturedProducts(),
+      fetchAllProducts(),
+      fetchTodayDealData(),
+      fetchFlashDealData(),
+      fetchBannerFlashDeal(),
+      fetchFlashDealBannerImages(),
+      fetchBrands(),
+      fetchBestSellingProducts(),
+      fetchAuctionProducts(),
+      fetchBrandsProducts(),
+      fetchTodayDealProducts(),
+    ]);
   }
 
-  void fetchBrands() {
-    BrandRepository().getBrands().then(
-      (value) {
-        isBrands = !value.noBrandsAvailable;
-        notifyListeners();
-      },
-    );
+  Future<void> fetchBrands() async {
+    final BrandResponse value = await BrandRepository().getBrands();
+    isBrands = !value.noBrandsAvailable;
+    notifyListeners();
   }
 
   Future<void> fetchBannerFlashDeal() async {
@@ -143,7 +142,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  fetchTodayDealData() async {
+  Future<void> fetchTodayDealData() async {
     productMini.ProductMiniResponse? deal;
     await executeAndHandleErrors(
         () async => deal = await ProductRepository().getTodaysDealProducts());
@@ -287,7 +286,7 @@ class HomePresenter extends ChangeNotifier {
     ).then((value) => fetchAll(true));
   }
 
-  fetchCarouselImages() async {
+  Future<void> fetchCarouselImages() async {
     SliderResponse? carouselResponse;
     await executeAndHandleErrors(
         () async => carouselResponse = await SlidersRepository().getSliders());
@@ -314,7 +313,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  fetchAuctionProducts() async {
+  Future<void> fetchAuctionProducts() async {
     productMini.ProductMiniResponse? auction;
     await executeAndHandleErrors(() async => auction =
         await AuctionProductsRepository().getAuctionProducts(page: 1));
@@ -326,7 +325,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  fetchBrandsProducts() async {
+  Future<void> fetchBrandsProducts() async {
     BrandResponse? brandsRes;
     await executeAndHandleErrors(
         () async => brandsRes = await BrandRepository().getBrands());
@@ -346,7 +345,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  fetchTodayDealProducts() async {
+  Future<void> fetchTodayDealProducts() async {
     productMini.ProductMiniResponse? deals;
     await executeAndHandleErrors(
         () async => deals = await ProductRepository().getTodaysDealProducts());
@@ -471,7 +470,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  fetchAllProducts() async {
+  Future<void> fetchAllProducts() async {
     productMini.ProductMiniResponse? productResponse;
     await executeAndHandleErrors(() async => productResponse =
         await ProductRepository().getFilteredProducts(page: allProductPage));
@@ -511,18 +510,23 @@ class HomePresenter extends ChangeNotifier {
     showTodayDealContainer = false;
   }
 
-  reset() {
-    carouselImageList.clear();
-    bannerOneImageList.clear();
-    bannerTwoImageList.clear();
-    bannerThreeImageList.clear();
-    featuredCategoryList.clear();
+  void reset([bool isRefresh = false]) {
+    if (!isRefresh) {
+      carouselImageList.clear();
+      bannerOneImageList.clear();
+      bannerTwoImageList.clear();
+      bannerThreeImageList.clear();
+      featuredCategoryList.clear();
+      
+      isCarouselInitial = true;
+      isBannerOneInitial = true;
+      isBannerTwoInitial = true;
+      isBannerThreeInitial = true;
+      isCategoryInitial = true;
+      isFeaturedProductInitial = true;
+      isAllProductInitial = true;
+    }
 
-    isCarouselInitial = true;
-    isBannerOneInitial = true;
-    isBannerTwoInitial = true;
-    isBannerThreeInitial = true;
-    isCategoryInitial = true;
     cartCount = 0;
 
     resetFeaturedProductList();
@@ -533,12 +537,12 @@ class HomePresenter extends ChangeNotifier {
     resetTodayDeals();
   }
 
-  Future<void> onRefresh() async {
-    reset();
-    fetchAll(true);
+  Future<void> onRefresh([bool isRefresh = true]) async {
+    reset(isRefresh);
+    await fetchAll(isRefresh);
   }
 
-  resetFeaturedProductList() {
+  void resetFeaturedProductList() {
     featuredProductList.clear();
     isFeaturedProductInitial = true;
     totalFeaturedProductData = 0;
@@ -547,7 +551,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  resetAllProductList() {
+  void resetAllProductList() {
     allProductList.clear();
     isAllProductInitial = true;
     totalAllProductData = 0;
@@ -556,7 +560,7 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  mainScrollListener(BuildContext context) {
+  void mainScrollListener(BuildContext context) {
     mainScrollController.addListener(() {
       if (mainScrollController.positions.isNotEmpty &&
           mainScrollController.positions.first.pixels ==
@@ -570,7 +574,7 @@ class HomePresenter extends ChangeNotifier {
     });
   }
 
-  initPiratedAnimation(vnc) {
+  void initPiratedAnimation(vnc) {
     pirated_logo_controller = AnimationController(
         vsync: vnc, duration: const Duration(milliseconds: 2000));
     pirated_logo_animation = Tween(begin: 40.0, end: 60.0).animate(
@@ -589,7 +593,7 @@ class HomePresenter extends ChangeNotifier {
     pirated_logo_controller.forward();
   }
 
-  incrementCurrentSlider(index) {
+  void incrementCurrentSlider(index) {
     current_slider = index;
     notifyListeners();
   }

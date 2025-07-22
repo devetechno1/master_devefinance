@@ -73,13 +73,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: SafeArea(
-          child: Scaffold(
-            appBar: BuildAppBar(context: context),
-            backgroundColor: Colors.white,
-            body: ListenableBuilder(
-              listenable: homeData,
-              builder: (context, child) {
-                return Stack(
+          child: ListenableBuilder(
+            listenable: homeData,
+            builder: (context, child) {
+              return Scaffold(
+                appBar: BuildAppBar(context: context),
+                backgroundColor: Colors.white,
+                body: Stack(
                   children: [
                     RefreshIndicator(
                       color: Theme.of(context).primaryColor,
@@ -129,7 +129,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                           //Featured Categories
                           const CategoryList(),
-                        // const  CategoryListVertical(crossAxisCount: 5,),
+                          // const  CategoryListVertical(crossAxisCount: 5,),
 
                           if (homeData.isFlashDeal)
                             SliverList(
@@ -187,7 +187,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'all_products_ucf'.tr(context: context),
+                                            'all_products_ucf'
+                                                .tr(context: context),
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w700),
@@ -221,9 +222,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       child: buildProductLoadingContainer(homeData),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),
