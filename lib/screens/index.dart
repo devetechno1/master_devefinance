@@ -50,13 +50,17 @@ class _IndexState extends State<Index> {
   @override
   void initState() {
     InternetHelper.listenToConnectivityChanges(context);
-    getSharedValueHelperData().then((value) {
-      Future.delayed(const Duration(seconds: 3)).then((value) {
-        SystemConfig.isShownSplashScreen = true;
-        // Provider.of<LocaleProvider>(context, listen: false)
-        //     .setLocale(app_mobile_language.$!);
-        setState(() {});
-      });
+    getSharedValueHelperData().then((value) async {
+      // await Future.wait([
+      //   homeData.fetchAddressLists(false, false),
+      //   await Future.delayed(const Duration(seconds: 3));
+      // ]);
+      // if (homeData.haveToGoAddress) homeData.handleAddressNavigation();
+      await Future.delayed(const Duration(seconds: 3));
+      SystemConfig.isShownSplashScreen = true;
+      // Provider.of<LocaleProvider>(context, listen: false)
+      //     .setLocale(app_mobile_language.$!);
+      setState(() {});
     });
     super.initState();
   }

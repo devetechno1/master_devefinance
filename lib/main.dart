@@ -35,6 +35,7 @@ import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
+import 'screens/address.dart';
 import 'screens/auction/auction_bidded_products.dart';
 import 'screens/auction/auction_products.dart';
 import 'screens/auction/auction_products_details.dart';
@@ -52,6 +53,7 @@ import 'screens/coupon/coupons.dart';
 import 'screens/flash_deal/flash_deal_list.dart';
 import 'screens/flash_deal/flash_deal_products.dart';
 import 'screens/followed_sellers.dart';
+import 'screens/home/home.dart';
 import 'screens/index.dart';
 import 'screens/orders/order_details.dart';
 import 'screens/orders/order_list.dart';
@@ -81,8 +83,10 @@ void main() async {
 
   localeTranslation = await Hive.openBox<Map>('langs');
 
-  await BusinessSettingHelper.handleTranslations();
-
+  await Future.wait([
+    BusinessSettingHelper.handleTranslations(),
+    homeData.fetchAddressLists(false, false),
+  ]);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -131,6 +135,8 @@ var routes = GoRouter(
             _isUpdateScreenOpened = true;
             return '/update?url=${state.uri.path}';
           }
+          if (homeData.haveToGoAddress) return '/address';
+
           return null;
         },
         pageBuilder: (BuildContext context, GoRouterState state) {
@@ -182,6 +188,10 @@ var routes = GoRouter(
               name: "Profile",
               pageBuilder: (BuildContext context, GoRouterState state) =>
                   AIZRoute.rightTransition(const Profile())),
+          GoRoute(
+              path: "address",
+              pageBuilder: (BuildContext context, GoRouterState state) =>
+                  const MaterialPage(child: AddressScreen())),
           GoRoute(
               path: "auction-products",
               pageBuilder: (BuildContext context, GoRouterState state) =>

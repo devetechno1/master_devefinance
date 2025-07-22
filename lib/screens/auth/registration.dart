@@ -26,6 +26,7 @@ import 'package:validators/validators.dart';
 import '../../custom/loading.dart';
 import '../../helpers/auth_helper.dart';
 import '../../repositories/address_repository.dart';
+import '../home/home.dart';
 import 'otp.dart';
 import 'package:go_router/go_router.dart';
 
@@ -207,7 +208,11 @@ class _RegistrationState extends State<Registration> {
           );
         }));
       } else {
+        if (AppConfig.businessSettingsData.sellerWiseShipping) {
+          await homeData.handleAddressNavigation();
+        }
         context.push("/");
+
         // Navigator.push(context, MaterialPageRoute(builder: (context) {
         //   return Home();
         // }));
@@ -220,8 +225,7 @@ class _RegistrationState extends State<Registration> {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
-        "${'join_ucf'.tr(context: context)} " +
-            'app_name'.tr(context: context),
+        "${'join_ucf'.tr(context: context)} " + 'app_name'.tr(context: context),
         buildBody(context, _screen_width));
   }
 
@@ -388,7 +392,8 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
                     Text(
-                      'password_must_contain_at_least_6_characters'.tr(context: context),
+                      'password_must_contain_at_least_6_characters'
+                          .tr(context: context),
                       style: const TextStyle(
                           color: MyTheme.textfield_grey,
                           fontStyle: FontStyle.italic),
@@ -469,8 +474,7 @@ class _RegistrationState extends State<Registration> {
                                     color: MyTheme.font_grey, fontSize: 12),
                                 children: [
                                   TextSpan(
-                                    text:
-                                        'i_agree_to_the'.tr(context: context),
+                                    text: 'i_agree_to_the'.tr(context: context),
                                   ),
                                   TextSpan(
                                     recognizer: TapGestureRecognizer()
@@ -480,7 +484,11 @@ class _RegistrationState extends State<Registration> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     CommonWebviewScreen(
-                                                      page_name: 'terms_conditions_ucf'.tr(context: context),
+                                                      page_name:
+                                                          'terms_conditions_ucf'
+                                                              .tr(
+                                                                  context:
+                                                                      context),
                                                       url:
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
                                                     )));
@@ -501,7 +509,11 @@ class _RegistrationState extends State<Registration> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     CommonWebviewScreen(
-                                                      page_name: 'privacy_policy_ucf'.tr(context: context),
+                                                      page_name:
+                                                          'privacy_policy_ucf'
+                                                              .tr(
+                                                                  context:
+                                                                      context),
                                                       url:
                                                           "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
                                                     )));

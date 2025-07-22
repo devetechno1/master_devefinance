@@ -393,8 +393,8 @@ class _ProfileState extends State<Profile> {
           Column(
             children: [
               if (homeData.isFlashDealInitial != false)
-                buildBottomVerticalCardListItem(AppImages.flashDeal,
-                    'flash_deal_ucf'.tr(context: context),
+                buildBottomVerticalCardListItem(
+                    AppImages.flashDeal, 'flash_deal_ucf'.tr(context: context),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return FlashDealList();
@@ -699,8 +699,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.followSeller,
-                    'followed_sellers_ucf'.tr(context: context),
-                    onPressed: () {
+                    'followed_sellers_ucf'.tr(context: context), onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const FollowedSellers();
                   }));
@@ -719,8 +718,7 @@ class _ProfileState extends State<Profile> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => CommonWebviewScreen(
-                          page_name:
-                              'privacy_policy_ucf'.tr(context: context),
+                          page_name: 'privacy_policy_ucf'.tr(context: context),
                           url:
                               "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
                         )));
@@ -795,8 +793,9 @@ class _ProfileState extends State<Profile> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          buildHorizontalSettingItem(true, AppImages.language,
-              'language_ucf'.tr(context: context), () {
+          buildHorizontalSettingItem(
+              true, AppImages.language, 'language_ucf'.tr(context: context),
+              () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -867,7 +866,11 @@ class _ProfileState extends State<Profile> {
   }
 
   InkWell buildHorizontalSettingItem(
-      bool isLogin, String img, String text, Function() onTap) {
+    bool isLogin,
+    String img,
+    String text,
+    void Function()? onTap,
+  ) {
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -897,6 +900,7 @@ class _ProfileState extends State<Profile> {
   dynamic showLoginWarning() {
     return ToastComponent.showDialog(
       'you_need_to_log_in'.tr(context: context),
+      isError: true,
     );
   }
 
@@ -952,8 +956,7 @@ class _ProfileState extends State<Profile> {
           if (AppConfig.businessSettingsData.walletSystem)
             Container(
               child: buildSettingAndAddonsHorizontalMenuItem(
-                  AppImages.wallet, 'my_wallet_ucf'.tr(context: context),
-                  () {
+                  AppImages.wallet, 'my_wallet_ucf'.tr(context: context), () {
                 Navigator.push(
                     context, PageAnimation.fadeRoute(const Wallet()));
               }),

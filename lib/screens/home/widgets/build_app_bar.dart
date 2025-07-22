@@ -8,7 +8,10 @@ import '../../../helpers/shared_value_helper.dart';
 import '../home.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BuildAppBar({super.key, required this.context});
+  const BuildAppBar({
+    super.key,
+    required this.context
+  });
 
   final BuildContext context;
 
@@ -72,12 +75,17 @@ class AddressAppBarWidget extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             Expanded(
-              child: Text(
-                homeData.isLoadingAddress
-                    ? "is_loading".tr(context: context)
-                    : homeData.defaultAddress == null
-                        ? "add_default_address".tr(context: context)
-                        : "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
+              child: ListenableBuilder(
+                listenable: homeData,
+                builder: (context, child) {
+                  return Text(
+                    homeData.isLoadingAddress
+                        ? "is_loading".tr(context: context)
+                        : homeData.defaultAddress == null
+                            ? "add_default_address".tr(context: context)
+                            : "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
+                  );
+                },
               ),
             ),
           ],

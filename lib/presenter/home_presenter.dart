@@ -235,7 +235,12 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchAddressLists(bool isRefresh) async {
+  bool get haveToGoAddress => shouldHaveAddress && defaultAddress == null;
+
+  Future<void> fetchAddressLists(
+    bool isRefresh, [
+    bool navigateToAddress = true,
+  ]) async {
     if (!shouldHaveAddress) return;
 
     if (!isRefresh) {
@@ -246,7 +251,7 @@ class HomePresenter extends ChangeNotifier {
         await handleErrorsWithMessage(AddressRepository().getAddressList);
     if (addressResponse != null) {
       if (addressResponse.addresses?.isNotEmpty != true) {
-        handleAddressNavigationWithToast();
+        handleAddressNavigationWithToast(navigateToAddress);
         return;
       }
       for (Address a in addressResponse.addresses!) {
@@ -261,7 +266,7 @@ class HomePresenter extends ChangeNotifier {
             await AddressRepository().getAddressMakeDefaultResponse(temp.id);
 
         if (addressMakeDefaultResponse.result == false) {
-          handleAddressNavigationWithToast();
+          handleAddressNavigationWithToast(navigateToAddress);
           return;
         }
         defaultAddress = temp;
@@ -271,7 +276,8 @@ class HomePresenter extends ChangeNotifier {
     }
   }
 
-  void handleAddressNavigationWithToast() {
+  void handleAddressNavigationWithToast(bool navigateToAddress) {
+    if (!navigateToAddress) return;
     ToastComponent.showDialog(
       'add_default_address'.tr(),
       isError: true,
@@ -279,11 +285,16 @@ class HomePresenter extends ChangeNotifier {
     handleAddressNavigation();
   }
 
-  void handleAddressNavigation() {
-    Navigator.push(
+  Future<T?> handleAddressNavigation<T>() async {
+    return Navigator.push<T?>(
       OneContext().context!,
       MaterialPageRoute(builder: (_) => const AddressScreen()),
-    ).then((value) => fetchAll(true));
+    ).then(
+      (value) {
+        fetchAll(true);
+        return value;
+      },
+    );
   }
 
   Future<void> fetchCarouselImages() async {
@@ -359,7 +370,8 @@ class HomePresenter extends ChangeNotifier {
     final BuildContext? context = cntx ?? OneContext().context;
     if (context == null ||
         GoRouter.of(context).state.path != "/" ||
-        _isOpenedBefore) return;
+        _isOpenedBefore ||
+        haveToGoAddress) return;
     _isOpenedBefore = true;
 
     final Status<List<PopupBannerModel>> bannersStatus =
@@ -517,7 +529,7 @@ class HomePresenter extends ChangeNotifier {
       bannerTwoImageList.clear();
       bannerThreeImageList.clear();
       featuredCategoryList.clear();
-      
+
       isCarouselInitial = true;
       isBannerOneInitial = true;
       isBannerTwoInitial = true;
