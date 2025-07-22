@@ -139,6 +139,14 @@ class _MetroScreenState extends State<MetroScreen>
                               isBannersInitial: homeData.isBannerTwoInitial,
                             ),
                           ),
+                          //  HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                          // SliverToBoxAdapter(
+                          //   child: HomeBannersAnimated(
+                          //     bannersImagesList: homeData.bannerTwoImageList,
+                          //     isBannersInitial: homeData.isBannerTwoInitial,
+                          //   ),
+                          // ),
+                          // HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
                           // SliverToBoxAdapter(
                           //   child: HomeBannersListAnimation(
                           //     bannersImagesList: homeData.bannerTwoImageList,
