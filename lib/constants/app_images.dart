@@ -16,6 +16,8 @@ abstract final class AppImages {
   static const String flashDeal = "$_assetDir/flash_deal.png";
   static const String todayDeal = "$_assetDir/todays_deal.png";
   static const String brands = "$_assetDir/brands.png";
+    static const String oops = "$_assetDir/oops.png";
+
 
   static const String TopSellers = "$_assetDir/top_sellers.png";
   static const String trash = "$_assetDir/trash.png";
