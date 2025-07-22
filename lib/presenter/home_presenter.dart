@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
@@ -22,7 +21,7 @@ import '../data_model/category_response.dart';
 import '../data_model/popup_banner_model.dart';
 import '../helpers/shared_value_helper.dart';
 import '../repositories/address_repository.dart';
-import '../screens/address.dart' as screen;
+import '../screens/address.dart';
 import '../status/execute_and_handle_remote_errors.dart';
 import '../status/status.dart';
 import '../ui_elements/pop_up_banner.dart';
@@ -37,6 +36,7 @@ class HomePresenter extends ChangeNotifier {
   DateTime? _flashDealEndTime;
 
   Address? defaultAddress;
+  bool isLoadingAddress = false;
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int current_slider = 0;
@@ -108,8 +108,8 @@ class HomePresenter extends ChangeNotifier {
   bool showAllLoadingContainer = false;
   int cartCount = 0;
 
-  fetchAll() {
-    fetchAddressLists();
+  fetchAll([bool isRefresh = false]) {
+    fetchAddressLists(isRefresh);
     fetchCarouselImages();
     fetchBannerOneImages();
     fetchBannerTwoImages();
@@ -236,11 +236,13 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchAddressLists() async {
-    if (!AppConfig.businessSettingsData.sellerWiseShipping || !is_logged_in.$) {
-      return;
-    }
+  Future<void> fetchAddressLists(bool isRefresh) async {
+    if (!shouldHaveAddress) return;
 
+    if (!isRefresh) {
+      isLoadingAddress = true;
+      notifyListeners();
+    }
     final AddressResponse? addressResponse =
         await handleErrorsWithMessage(AddressRepository().getAddressList);
     if (addressResponse != null) {
@@ -257,7 +259,7 @@ class HomePresenter extends ChangeNotifier {
       if (defaultAddress == null) {
         final Address temp = addressResponse.addresses!.first;
         final addressMakeDefaultResponse =
-            await AddressRepository().getAddressMakeDefaultResponse(-1);
+            await AddressRepository().getAddressMakeDefaultResponse(temp.id);
 
         if (addressMakeDefaultResponse.result == false) {
           handleAddressNavigationWithToast();
@@ -265,6 +267,7 @@ class HomePresenter extends ChangeNotifier {
         }
         defaultAddress = temp;
       }
+      isLoadingAddress = false;
       notifyListeners();
     }
   }
@@ -280,8 +283,8 @@ class HomePresenter extends ChangeNotifier {
   void handleAddressNavigation() {
     Navigator.push(
       OneContext().context!,
-      MaterialPageRoute(builder: (_) => const screen.Address()),
-    ).then((value) => fetchAddressLists());
+      MaterialPageRoute(builder: (_) => const AddressScreen()),
+    ).then((value) => fetchAll(true));
   }
 
   fetchCarouselImages() async {
@@ -532,7 +535,7 @@ class HomePresenter extends ChangeNotifier {
 
   Future<void> onRefresh() async {
     reset();
-    fetchAll();
+    fetchAll(true);
   }
 
   resetFeaturedProductList() {

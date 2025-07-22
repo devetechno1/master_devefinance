@@ -16,6 +16,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/map_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../app_config.dart';
@@ -34,15 +35,19 @@ import 'add_address_screen.dart';
 //     return AddressWidgets(onPressContinue: onPressContinue);
 //   }
 // }
-class Address extends StatefulWidget {
-  const Address({Key? key, this.from_shipping_info = false}) : super(key: key);
+bool get shouldHaveAddress =>
+    AppConfig.businessSettingsData.sellerWiseShipping && is_logged_in.$;
+
+class AddressScreen extends StatefulWidget {
+  const AddressScreen({Key? key, this.from_shipping_info = false})
+      : super(key: key);
   final bool from_shipping_info;
 
   @override
-  _AddressState createState() => _AddressState();
+  _AddressScreenState createState() => _AddressScreenState();
 }
 
-class _AddressState extends State<Address> {
+class _AddressScreenState extends State<AddressScreen> {
   final ScrollController _mainScrollController = ScrollController();
 
   int? _default_shipping_address = 0;
@@ -71,25 +76,28 @@ class _AddressState extends State<Address> {
     }
   }
 
-  Future fetchAll() async {
-    await fetchShippingAddressList();
+  Future fetchAll([bool isRefresh = false]) async {
+    await fetchShippingAddressList(isRefresh);
     if (_shippingAddressList.isNotEmpty) {
-      makeDefaultAddress(_shippingAddressList.first.id);
+      makeDefaultAddress(_shippingAddressList.last.id);
     }
 
     setState(() {});
   }
 
   Future fetchShippingAddressList([bool isRefresh = true]) async {
+    if (isRefresh)
+      setState(() {
+        _isInitial = false;
+      });
     // print("enter fetchShippingAddressList");
     final res.AddressResponse addressResponse =
         await AddressRepository().getAddressList();
     _shippingAddressList.clear();
     _shippingAddressList.addAll(addressResponse.addresses ?? []);
-    if (isRefresh)
-      setState(() {
-        _isInitial = false;
-      });
+    setState(() {
+      _isInitial = false;
+    });
     if (_shippingAddressList.isNotEmpty) {
       // var count = 0;
       _shippingAddressList.forEach((address) {
@@ -124,7 +132,7 @@ class _AddressState extends State<Address> {
 
   reset() {
     _default_shipping_address = 0;
-    _shippingAddressList.clear();
+    // _shippingAddressList.clear();
     _isInitial = true;
 
     //update-ables
@@ -143,7 +151,7 @@ class _AddressState extends State<Address> {
   Future<void> _onRefresh() async {
     reset();
     if (is_logged_in.$ == true) {
-      fetchAll();
+      await fetchAll(true);
     }
   }
 
@@ -152,9 +160,9 @@ class _AddressState extends State<Address> {
     await fetchAll();
   }
 
-  Future afterAddingAnAddress() async {
+  Future afterAddingAnAddress(bool isRefresh) async {
     reset();
-    await fetchAll();
+    await fetchAll(isRefresh);
   }
 
   afterDeletingAnAddress() {
@@ -297,105 +305,128 @@ class _AddressState extends State<Address> {
     _mainScrollController.dispose();
   }
 
+  bool get canPop => shouldHaveAddress ? _shippingAddressList.isNotEmpty : true;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: MyTheme.mainColor,
-        appBar: buildAppBar(context),
-        bottomNavigationBar: buildBottomAppBar(context),
-        body: RefreshIndicator(
-          color: Theme.of(context).primaryColor,
-          backgroundColor: Colors.white,
-          onRefresh: _onRefresh,
-          displacement: 0,
-          child: CustomScrollView(
-            controller: _mainScrollController,
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            slivers: [
-              SliverList(
-                  delegate: SliverChildListDelegate([
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 05, 20, 16),
-                  child: Btn.minWidthFixHeight(
-                    minWidth: MediaQuery.of(context).size.width - 16,
-                    height: 90,
-                    color: const Color(0xffFEF0D7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusSmall),
-                        side: BorderSide(
-                            color: Colors.amber.shade600, width: 1.0)),
-                    child: Column(
-                      children: [
-                        Text(
-                          "${'add_new_address'.tr(context: context)}",
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: MyTheme.dark_font_grey,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Icon(
-                          Icons.add_sharp,
-                          color: Theme.of(context).primaryColor,
-                          size: 30,
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => AddAddressScreen(
-                            addAddress: (addressEntity) async {
-                              final AddressAddResponse addressAddResponse =
-                                  await AddressRepository()
-                                      .getAddressAddResponse(
-                                address: addressEntity.address ?? '',
-                                country_id: addressEntity.country?.id,
-                                state_id: addressEntity.state?.id,
-                                city_id: addressEntity.city?.id,
-                                phone: addressEntity.phone ?? '',
-                                postal_code: addressEntity.postalCode ?? '',
-                                latitude: addressEntity.latitude ?? 0,
-                                longitude: addressEntity.longitude ?? 0,
-                              );
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!canPop)
+          ToastComponent.showDialog(
+            'add_default_address'.tr(context: context),
+            isError: true,
+          );
+      },
+      child: Scaffold(
+          backgroundColor: MyTheme.mainColor,
+          appBar: buildAppBar(context),
+          bottomNavigationBar: buildBottomAppBar(context),
+          body: RefreshIndicator(
+            color: Theme.of(context).primaryColor,
+            backgroundColor: Colors.white,
+            onRefresh: _onRefresh,
+            displacement: 0,
+            child: CustomScrollView(
+              controller: _mainScrollController,
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              slivers: [
+                SliverList(
+                    delegate: SliverChildListDelegate([
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 05, 20, 16),
+                    child: Btn.minWidthFixHeight(
+                      minWidth: MediaQuery.of(context).size.width - 16,
+                      height: 90,
+                      color: const Color(0xffFEF0D7),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusSmall),
+                          side: BorderSide(
+                              color: Colors.amber.shade600, width: 1.0)),
+                      child: Column(
+                        children: [
+                          Text(
+                            "${'add_new_address'.tr(context: context)}",
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: MyTheme.dark_font_grey,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(
+                            Icons.add_sharp,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AddAddressScreen(
+                              addAddress: (addressEntity) async {
+                                final LatLng latLang = LatLng(
+                                  addressEntity.latitude ??
+                                      AppConfig.initPlace.latitude,
+                                  addressEntity.longitude ??
+                                      AppConfig.initPlace.longitude,
+                                );
+                                final AddressAddResponse addressAddResponse =
+                                    await AddressRepository()
+                                        .getAddressAddResponse(
+                                  address: addressEntity.address ?? '',
+                                  country_id: addressEntity.country?.id,
+                                  state_id: addressEntity.state?.id,
+                                  city_id: addressEntity.city?.id,
+                                  phone: addressEntity.phone ?? '',
+                                  postal_code: addressEntity.postalCode ?? '',
+                                  latitude: latLang.latitude,
+                                  longitude: latLang.longitude,
+                                );
 
-                              if (addressAddResponse.result == false) {
+                                if (addressAddResponse.result == false) {
+                                  ToastComponent.showDialog(
+                                    addressAddResponse.message,
+                                    isError: true,
+                                  );
+                                  return;
+                                }
+
                                 ToastComponent.showDialog(
                                   addressAddResponse.message,
-                                  isError: true,
+                                  color: Colors.green,
                                 );
-                                return;
-                              }
 
-                              ToastComponent.showDialog(
-                                addressAddResponse.message,
-                                color: Colors.green,
-                              );
-
-                              Navigator.of(context).pop();
-                              await afterAddingAnAddress();
-                              final int i = _shippingAddressList.length - 1;
-                              _choosePlace(_shippingAddressList[i]);
-                            },
+                                Navigator.of(context).pop();
+                                await afterAddingAnAddress(true);
+                                final int i = _shippingAddressList.length - 1;
+                                // _choosePlace(_shippingAddressList[i]);
+                                await onPickAddress(
+                                  addressId: _shippingAddressList[i].id,
+                                  selectedPlace: latLang,
+                                );
+                                await afterAddingAnAddress(true);
+                              },
+                            ),
                           ),
-                        ),
-                      );
-                      //buildShowAddFormDialog(context);
-                    },
+                        );
+                        //buildShowAddFormDialog(context);
+                      },
+                    ),
                   ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: buildAddressList(),
-                ),
-                const SizedBox(
-                  height: 100,
-                )
-              ]))
-            ],
-          ),
-        ));
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: buildAddressList(),
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  )
+                ]))
+              ],
+            ),
+          )),
+    );
   }
 
 // Alart Dialog
@@ -413,24 +444,28 @@ class _AddressState extends State<Address> {
 
   InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
     return InputDecoration(
-        filled: true,
-        fillColor: const Color(0xffF6F7F8),
-        hintText: hintText,
-        hintStyle: const TextStyle(fontSize: 12.0, color: Color(0xff999999)),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.radiusHalfSmall),
-          ),
+      filled: true,
+      fillColor: const Color(0xffF6F7F8),
+      hintText: hintText,
+      hintStyle: const TextStyle(fontSize: 12.0, color: Color(0xff999999)),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppDimensions.radiusHalfSmall),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.radiusHalfSmall),
-          ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppDimensions.radiusHalfSmall),
         ),
-        contentPadding: const EdgeInsetsDirectional.only(
-            start: 8.0, top: 6.0, bottom: 6.0));
+      ),
+      contentPadding: const EdgeInsetsDirectional.only(
+        start: 8.0,
+        top: 6.0,
+        bottom: 6.0,
+      ),
+    );
   }
 
   Future buildShowUpdateFormDialog(BuildContext context, index) {
@@ -459,7 +494,7 @@ class _AddressState extends State<Address> {
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
       centerTitle: false,
-      leading: UsefulElements.backButton(),
+      leading: canPop ? UsefulElements.backButton() : const SizedBox.shrink(),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

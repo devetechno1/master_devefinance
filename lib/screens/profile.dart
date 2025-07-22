@@ -855,7 +855,7 @@ class _ProfileState extends State<Profile> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const Address();
+                            return const AddressScreen();
                           },
                         ),
                       );

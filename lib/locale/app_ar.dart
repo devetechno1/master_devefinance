@@ -1,5 +1,6 @@
 const Map<String, String> arLangs = {
   "add_default_address": "يرجى تحديد عنوان كافتراضي للمتابعة",
+  "is_loading": "جارٍ التحميل...",
   "change_default_before_delete":
       "يجب تغيير العنوان الافتراضي قبل حذف هذا العنوان",
   "notAvailable": "غير متوفر",

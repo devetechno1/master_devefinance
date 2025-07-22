@@ -86,7 +86,7 @@ class _SelectAddressState extends State<SelectAddress> {
         child: InkWell(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const Address(
+              return const AddressScreen(
                 from_shipping_info: true,
               );
             })).then((value) {

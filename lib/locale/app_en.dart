@@ -1,5 +1,6 @@
 const Map<String, String> enLangs = {
   "add_default_address": "You have to add a default address",
+  "is_loading": "is loading...",
   "change_default_before_delete":
       "You have to change default address before deleting this address",
   "notAvailable": "Not available",

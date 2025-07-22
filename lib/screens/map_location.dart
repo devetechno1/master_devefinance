@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:http/http.dart' as http;
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:one_context/one_context.dart';
 
 import '../app_config.dart';
 import '../custom/btn.dart';
@@ -64,29 +64,6 @@ class MapLocationState extends State<MapLocation>
   setDummyInitialLocation() {
     kInitialPosition = AppConfig.initPlace;
     setState(() {});
-  }
-
-  Future<void> onTapPickHere() async {
-    final addressUpdateLocationResponse =
-        await AddressRepository().getAddressUpdateLocationResponse(
-      widget.address.id,
-      selectedPlace.latitude,
-      selectedPlace.longitude,
-    );
-
-    if (addressUpdateLocationResponse.result == false) {
-      ToastComponent.showDialog(
-        addressUpdateLocationResponse.message,
-        isError: true,
-      );
-      return;
-    }
-
-    Navigator.pop(context, selectedPlace);
-
-    ToastComponent.showDialog(
-      addressUpdateLocationResponse.message,
-    );
   }
 
   LatLng selectedPlace = kInitialPosition;
@@ -205,7 +182,13 @@ class MapLocationState extends State<MapLocation>
                         'pick_here'.tr(context: context),
                         style: const TextStyle(color: Colors.white),
                       ),
-                      onPressed: onTapPickHere,
+                      onPressed: () {
+                        onPickAddress(
+                          addressId: widget.address.id,
+                          selectedPlace: selectedPlace,
+                        );
+                        Navigator.pop(OneContext().context!, selectedPlace);
+                      },
                     ),
                   ),
                 ],
@@ -573,4 +556,29 @@ class Viewport {
     }
     return data;
   }
+}
+
+Future<void> onPickAddress({
+  required int? addressId,
+  required LatLng selectedPlace,
+}) async {
+  final addressUpdateLocationResponse =
+      await AddressRepository().getAddressUpdateLocationResponse(
+    addressId,
+    selectedPlace.latitude,
+    selectedPlace.longitude,
+  );
+
+  if (addressUpdateLocationResponse.result == false) {
+    ToastComponent.showDialog(
+      addressUpdateLocationResponse.message,
+      isError: true,
+    );
+    return;
+  }
+
+  ToastComponent.showDialog(
+    addressUpdateLocationResponse.message,
+    color: Colors.green,
+  );
 }

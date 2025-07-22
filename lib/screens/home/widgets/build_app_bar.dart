@@ -1,5 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_search_box.dart';
+import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +8,15 @@ import '../../../helpers/shared_value_helper.dart';
 import '../home.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BuildAppBar({
-    super.key,
-    required this.context,
-  });
+  const BuildAppBar({super.key, required this.context});
 
   final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) => appBar;
+
+  @override
+  Size get preferredSize => appBar.preferredSize;
 
   AppBar get appBar => AppBar(
         automaticallyImplyLeading: false,
@@ -39,14 +43,6 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       );
-
-  @override
-  Widget build(BuildContext context) {
-    return appBar;
-  }
-
-  @override
-  Size get preferredSize => appBar.preferredSize;
 }
 
 class AddressAppBarWidget extends StatelessWidget {
@@ -54,7 +50,7 @@ class AddressAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget addressWidget = InkWell(
+    return InkWell(
       onTap: homeData.handleAddressNavigation,
       child: Container(
         height: 40,
@@ -80,7 +76,11 @@ class AddressAppBarWidget extends StatelessWidget {
                 listenable: homeData,
                 builder: (context, child) {
                   return Text(
-                    "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
+                    homeData.isLoadingAddress
+                        ? "is_loading".tr(context: context)
+                        : homeData.defaultAddress == null
+                            ? "add_default_address".tr(context: context)
+                            : "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
                   );
                 },
               ),
@@ -88,14 +88,6 @@ class AddressAppBarWidget extends StatelessWidget {
           ],
         ),
       ),
-    );
-    return ListenableBuilder(
-      listenable: homeData,
-      builder: (context, child) {
-        if (homeData.defaultAddress == null) return const SizedBox();
-
-        return addressWidget;
-      },
     );
   }
 }
