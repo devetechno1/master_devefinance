@@ -63,6 +63,18 @@ class _LoginState extends State<Login> {
         overlays: [SystemUiOverlay.bottom]);
     super.initState();
     fetch_country();
+
+    loginWithToken();
+  }
+
+  Future<void> loginWithToken() async {
+    if (widget.token != null) {
+      // Loading.show(context);
+
+      // await AuthRepository().loginWithToken(widget.token!);
+      // saveFCMToken();
+      // Loading.close();
+    }
   }
 
   fetch_country() async {
@@ -136,33 +148,7 @@ class _LoginState extends State<Login> {
       AuthHelper().setUserData(loginResponse);
 
       // push notification starts
-      if (OtherConfig.USE_PUSH_NOTIFICATION) {
-        final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-
-        await _fcm.requestPermission(
-          alert: true,
-          announcement: false,
-          badge: true,
-          carPlay: false,
-          criticalAlert: false,
-          provisional: false,
-          sound: true,
-        );
-
-        String? fcmToken;
-        try {
-          fcmToken = await _fcm.getToken();
-        } catch (e) {
-          print('Caught exception: $e');
-        }
-
-        print("--fcm token-- login");
-        print("fcmToken $fcmToken");
-        // update device token
-        if (fcmToken != null && is_logged_in.$) {
-          await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
-        }
-      }
+      await saveFCMToken();
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
@@ -181,6 +167,36 @@ class _LoginState extends State<Login> {
         } else {
           context.push("/");
         }
+      }
+    }
+  }
+
+  Future<void> saveFCMToken() async {
+    if (OtherConfig.USE_PUSH_NOTIFICATION) {
+      final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
+      await _fcm.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+
+      String? fcmToken;
+      try {
+        fcmToken = await _fcm.getToken();
+      } catch (e) {
+        print('Caught exception: $e');
+      }
+
+      print("--fcm token-- login");
+      print("fcmToken $fcmToken");
+      // update device token
+      if (fcmToken != null && is_logged_in.$) {
+        await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
       }
     }
   }
@@ -382,8 +398,7 @@ class _LoginState extends State<Login> {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
-        "${"login_to".tr(context: context)} " +
-            'app_name'.tr(context: context),
+        "${"login_to".tr(context: context)} " + 'app_name'.tr(context: context),
         buildBody(context, _screen_width));
   }
 
