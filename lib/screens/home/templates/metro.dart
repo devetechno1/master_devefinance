@@ -11,6 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.da
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
+import '../../../custom/home_banners/home_banner.dart';
 import '../../../custom/home_banners/home_banners_list.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
@@ -100,6 +101,7 @@ class _MetroScreenState extends State<MetroScreen>
 
                               // Header Banner
                               HomeCarouselSlider(homeData: homeData),
+                              
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
@@ -132,7 +134,7 @@ class _MetroScreenState extends State<MetroScreen>
                           ),
                           //featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
-                          //BannerList---------------------
+                        //  BannerList---------------------
                           SliverToBoxAdapter(
                             child: HomeBannersList(
                               bannersImagesList: homeData.bannerTwoImageList,
@@ -153,6 +155,7 @@ class _MetroScreenState extends State<MetroScreen>
                           //     isBannersInitial: homeData.isBannerTwoInitial,
                           //   ),
                           // ),
+                          //SliverToBoxAdapter(child: BannerHome(isBannersInitial: homeData.isBannerTwoInitial, bannersImagesList: homeData.bannerTwoImageList)),
 
                           //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
