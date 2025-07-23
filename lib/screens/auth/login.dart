@@ -35,6 +35,9 @@ import '../../repositories/address_repository.dart';
 import 'otp.dart';
 
 class Login extends StatefulWidget {
+  final String? token;
+
+  const Login({super.key, this.token});
   @override
   _LoginState createState() => _LoginState();
 }

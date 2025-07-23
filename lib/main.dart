@@ -181,13 +181,24 @@ var routes = GoRouter(
                       child: AuthMiddleware(const AuctionBiddedProducts())
                           .next())),
           GoRoute(
-              path: "users/login",
-              pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: Login())),
+            path: 'login',
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                child: Login(token: state.uri.queryParameters['token']),
+              );
+            },
+            routes: [
+              GoRoute(
+                path: ':token',
+                redirect: (_, s) => '/login?token=${s.pathParameters['token']}',
+              ),
+            ],
+          ),
           GoRoute(
-              path: "users/registration",
-              pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: Registration())),
+            path: "registration",
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                MaterialPage(child: Registration()),
+          ),
           GoRoute(
               path: "dashboard",
               name: "Profile",
