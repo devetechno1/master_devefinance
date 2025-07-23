@@ -21,6 +21,7 @@ import 'package:device_preview/device_preview.dart';
 import 'app_config.dart';
 import 'custom/aiz_route.dart';
 
+import 'custom/error_widget.dart';
 import 'data_model/business_settings/update_model.dart';
 import 'helpers/business_setting_helper.dart';
 import 'helpers/main_helpers.dart';
@@ -69,6 +70,10 @@ late final Box<Map> localeTranslation;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ErrorWidget.builder = (e) {
+    return CustomErrorWidget(errorMessage: e.summary.value);
+  };
+
   final Widget app = SharedValue.wrapApp(MyApp());
 
   AppConfig.storeType = await StoreType.thisDeviceType();
