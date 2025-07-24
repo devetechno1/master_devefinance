@@ -32,9 +32,13 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../custom/loading.dart';
 import '../../repositories/address_repository.dart';
+import '../home/home.dart';
 import 'otp.dart';
 
 class Login extends StatefulWidget {
+  final String? token;
+
+  const Login({super.key, this.token});
   @override
   _LoginState createState() => _LoginState();
 }
@@ -60,6 +64,10 @@ class _LoginState extends State<Login> {
         overlays: [SystemUiOverlay.bottom]);
     super.initState();
     fetch_country();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => loginWithToken(),
+    );
   }
 
   fetch_country() async {
@@ -74,6 +82,68 @@ class _LoginState extends State<Login> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.dispose();
+  }
+
+  Future<void> loginWithToken() async {
+    if (widget.token == null) return;
+
+    final String token = Uri.decodeComponent(widget.token!);
+
+    access_token.$ = token;
+
+    Loading.show(context);
+    await access_token.save();
+
+    final loginResponse = await AuthRepository().getUserByTokenResponse();
+
+    if (loginResponse.result == false) {
+      AuthHelper().clearUserData();
+      Loading.close();
+
+      if (loginResponse.message.runtimeType == List) {
+        ToastComponent.showDialog(
+          loginResponse.message!.join("\n"),
+          isError: true,
+        );
+        return;
+      }
+      ToastComponent.showDialog(
+        loginResponse.message!.toString(),
+        isError: true,
+      );
+    } else {
+      print("in the success block ");
+
+      AuthHelper().setUserData(loginResponse);
+
+      await Future.wait([
+        // push notification starts
+        saveFCMToken(),
+        homeData.fetchAddressLists(false),
+      ]);
+
+      Loading.close();
+      ToastComponent.showDialog(loginResponse.message!);
+
+      // redirect
+      if (loginResponse.user!.emailVerified!) {
+        context.push("/");
+      } else {
+        if ((AppConfig.businessSettingsData.mailVerificationStatus &&
+                _login_by == "email") ||
+            (AppConfig.businessSettingsData.mustOtp && _login_by == "phone")) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const Otp(
+              fromRegistration: false,
+              // verify_by: _register_by,
+              // user_id: signupResponse.user_id,
+            );
+          }));
+        } else {
+          context.push("/");
+        }
+      }
+    }
   }
 
   Future<void> onPressedLogin(ctx) async {
@@ -105,13 +175,14 @@ class _LoginState extends State<Login> {
 
     final loginResponse = await AuthRepository().getLoginResponse(
         _login_by == 'email' ? email : _phone, password, _login_by);
-    Loading.close();
 
     // // empty temp user id after logged in
     // temp_user_id.$ = "";
     // temp_user_id.save();
 
     if (loginResponse.result == false) {
+      Loading.close();
+
       if (loginResponse.message.runtimeType == List) {
         ToastComponent.showDialog(
           loginResponse.message!.join("\n"),
@@ -126,40 +197,16 @@ class _LoginState extends State<Login> {
     } else {
       print("in the success block ");
 
-      ToastComponent.showDialog(
-        loginResponse.message!,
-      );
-
       AuthHelper().setUserData(loginResponse);
 
-      // push notification starts
-      if (OtherConfig.USE_PUSH_NOTIFICATION) {
-        final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+      await Future.wait([
+        // push notification starts
+        saveFCMToken(),
+        homeData.fetchAddressLists(false),
+      ]);
 
-        await _fcm.requestPermission(
-          alert: true,
-          announcement: false,
-          badge: true,
-          carPlay: false,
-          criticalAlert: false,
-          provisional: false,
-          sound: true,
-        );
-
-        String? fcmToken;
-        try {
-          fcmToken = await _fcm.getToken();
-        } catch (e) {
-          print('Caught exception: $e');
-        }
-
-        print("--fcm token-- login");
-        print("fcmToken $fcmToken");
-        // update device token
-        if (fcmToken != null && is_logged_in.$) {
-          await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
-        }
-      }
+      Loading.close();
+      ToastComponent.showDialog(loginResponse.message!);
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
@@ -182,7 +229,37 @@ class _LoginState extends State<Login> {
     }
   }
 
-  onPressedFacebookLogin() async {
+  Future<void> saveFCMToken() async {
+    if (OtherConfig.USE_PUSH_NOTIFICATION) {
+      final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
+      await _fcm.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+
+      String? fcmToken;
+      try {
+        fcmToken = await _fcm.getToken();
+      } catch (e) {
+        print('Caught exception: $e');
+      }
+
+      print("--fcm token-- login");
+      print("fcmToken $fcmToken");
+      // update device token
+      if (fcmToken != null && is_logged_in.$) {
+        await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
+      }
+    }
+  }
+
+  Future<void> onPressedFacebookLogin() async {
     try {
       final facebookLogin = await FacebookAuth.instance
           .login(loginBehavior: LoginBehavior.webOnly);
@@ -208,6 +285,12 @@ class _LoginState extends State<Login> {
           );
 
           AuthHelper().setUserData(loginResponse);
+          await Future.wait([
+            // push notification starts
+            saveFCMToken(),
+            homeData.fetchAddressLists(false),
+          ]);
+
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const Main();
           }));
@@ -225,7 +308,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  onPressedGoogleLogin() async {
+  Future<void> onPressedGoogleLogin() async {
     try {
       final GoogleSignInAccount googleUser = (await GoogleSignIn().signIn())!;
 
@@ -252,6 +335,11 @@ class _LoginState extends State<Login> {
           loginResponse.message!,
         );
         AuthHelper().setUserData(loginResponse);
+        await Future.wait([
+          // push notification starts
+          saveFCMToken(),
+          homeData.fetchAddressLists(false),
+        ]);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Main();
         }));
@@ -319,7 +407,7 @@ class _LoginState extends State<Login> {
     return digest.toString();
   }
 
-  signInWithApple() async {
+  Future<void> signInWithApple() async {
     // To prevent replay attacks with the credential returned from Apple, we
     // include a nonce in the credential request. When signing in with
     // Firebase, the nonce in the id token returned by Apple, is expected to
@@ -353,6 +441,11 @@ class _LoginState extends State<Login> {
           loginResponse.message!,
         );
         AuthHelper().setUserData(loginResponse);
+        await Future.wait([
+          // push notification starts
+          saveFCMToken(),
+          homeData.fetchAddressLists(false),
+        ]);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Main();
         }));
@@ -379,8 +472,7 @@ class _LoginState extends State<Login> {
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
         context,
-        "${"login_to".tr(context: context)} " +
-            'app_name'.tr(context: context),
+        "${"login_to".tr(context: context)} " + 'app_name'.tr(context: context),
         buildBody(context, _screen_width));
   }
 

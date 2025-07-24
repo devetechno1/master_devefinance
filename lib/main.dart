@@ -4,6 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/middlewares/auth_middleware.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/update_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/services/navigation_service.dart';
 import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -181,13 +182,18 @@ var routes = GoRouter(
                       child: AuthMiddleware(const AuctionBiddedProducts())
                           .next())),
           GoRoute(
-              path: "users/login",
-              pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: Login())),
+            path: 'login',
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                child: Login(token: state.uri.queryParameters['user']),
+              );
+            },
+          ),
           GoRoute(
-              path: "users/registration",
-              pageBuilder: (BuildContext context, GoRouterState state) =>
-                  MaterialPage(child: Registration())),
+            path: "registration",
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                MaterialPage(child: Registration()),
+          ),
           GoRoute(
               path: "dashboard",
               name: "Profile",
@@ -413,14 +419,14 @@ Future<void> _handleDeepLink() async {
   final Uri? uri = await appLinks.getInitialLink();
   WidgetsBinding.instance.addPostFrameCallback(
     (_) {
-      if (uri != null) OneContext().key.currentContext!.go(uri.path);
+      if (uri != null) OneContext().key.currentContext!.go(uri.paramPath);
     },
   );
   appLinks.uriLinkStream.listen((Uri? uriStream) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         if (uriStream != null)
-          OneContext().key.currentContext!.go(uriStream.path);
+          OneContext().key.currentContext!.go(uriStream.paramPath);
       },
     );
   });
