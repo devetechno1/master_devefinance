@@ -32,6 +32,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../custom/loading.dart';
 import '../../repositories/address_repository.dart';
+import '../home/home.dart';
 import 'otp.dart';
 
 class Login extends StatefulWidget {
@@ -120,13 +121,14 @@ class _LoginState extends State<Login> {
 
     final loginResponse = await AuthRepository().getLoginResponse(
         _login_by == 'email' ? email : _phone, password, _login_by);
-    Loading.close();
 
     // // empty temp user id after logged in
     // temp_user_id.$ = "";
     // temp_user_id.save();
 
     if (loginResponse.result == false) {
+      Loading.close();
+
       if (loginResponse.message.runtimeType == List) {
         ToastComponent.showDialog(
           loginResponse.message!.join("\n"),
@@ -147,8 +149,13 @@ class _LoginState extends State<Login> {
 
       AuthHelper().setUserData(loginResponse);
 
-      // push notification starts
-      await saveFCMToken();
+      await Future.wait([
+        // push notification starts
+        saveFCMToken(),
+        homeData.fetchAddressLists(false),
+      ]);
+
+      Loading.close();
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
