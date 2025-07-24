@@ -1,4 +1,4 @@
-package com.devefinance
+package com.devefinancestore
 
 import io.flutter.embedding.android.FlutterActivity
 
