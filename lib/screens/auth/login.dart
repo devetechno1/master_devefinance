@@ -17,6 +17,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.da
 import 'package:active_ecommerce_cms_demo_app/screens/auth/password_forget.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/registration.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
+import 'package:active_ecommerce_cms_demo_app/status/execute_and_handle_remote_errors.dart';
 // import 'package:active_ecommerce_cms_demo_app/social_config.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:crypto/crypto.dart';
@@ -31,7 +32,9 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 // import 'package:twitter_login/twitter_login.dart';
 
 import '../../custom/loading.dart';
+import '../../data_model/login_response.dart';
 import '../../repositories/address_repository.dart';
+import '../../status/status.dart';
 import '../home/home.dart';
 import 'otp.dart';
 
@@ -94,24 +97,13 @@ class _LoginState extends State<Login> {
     Loading.show(context);
     await access_token.save();
 
-    final loginResponse = await AuthRepository().getUserByTokenResponse();
+    final Status<LoginResponse> loginStatus = await executeAndHandleErrors(
+      () => AuthRepository().getUserByTokenResponse(),
+    );
+    if (loginStatus is Success<LoginResponse> &&
+        loginStatus.data.result == true) {
+      final loginResponse = loginStatus.data;
 
-    if (loginResponse.result == false) {
-      AuthHelper().clearUserData();
-      Loading.close();
-
-      if (loginResponse.message.runtimeType == List) {
-        ToastComponent.showDialog(
-          loginResponse.message!.join("\n"),
-          isError: true,
-        );
-        return;
-      }
-      ToastComponent.showDialog(
-        loginResponse.message!.toString(),
-        isError: true,
-      );
-    } else {
       print("in the success block ");
 
       AuthHelper().setUserData(loginResponse);
@@ -132,17 +124,28 @@ class _LoginState extends State<Login> {
         if ((AppConfig.businessSettingsData.mailVerificationStatus &&
                 _login_by == "email") ||
             (AppConfig.businessSettingsData.mustOtp && _login_by == "phone")) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Otp(
-              fromRegistration: false,
-              // verify_by: _register_by,
-              // user_id: signupResponse.user_id,
-            );
-          }));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const Otp(fromRegistration: false),
+            ),
+          );
         } else {
           context.push("/");
         }
       }
+    } else {
+      AuthHelper().clearUserData();
+      Loading.close();
+
+      String error = "an_error_occurred".tr(context: context);
+
+      if (loginStatus.data?.message.runtimeType == List) {
+        error = loginStatus.data!.message!.join("\n");
+      } else if (loginStatus.data?.message != null) {
+        error = loginStatus.data!.message.toString();
+      }
+      ToastComponent.showDialog(error, isError: true);
     }
   }
 
