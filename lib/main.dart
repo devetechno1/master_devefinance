@@ -26,6 +26,7 @@ import 'custom/error_widget.dart';
 import 'data_model/business_settings/update_model.dart';
 import 'helpers/business_setting_helper.dart';
 import 'helpers/main_helpers.dart';
+import 'helpers/shared_value_helper.dart';
 import 'locale/custom_localization.dart';
 import 'my_theme.dart';
 import 'other_config.dart';
@@ -66,8 +67,6 @@ import 'screens/profile.dart';
 import 'screens/seller_details.dart';
 import 'services/push_notification_service.dart';
 import 'single_banner/photo_provider.dart';
-
-late final Box<Map> localeTranslation;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
