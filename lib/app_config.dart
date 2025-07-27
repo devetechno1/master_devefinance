@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -24,10 +23,14 @@ class AppConfig {
   /// To make force update to app
   static String version = '1.0.0';
 
-  /// Internal development version shown on the splash screen.
-  /// Used to verify the app build matches the master app.
-  static const String deveVersion = '9.8.1';
-  static const String VersionMobile = '9.8.2';
+  /// App Version (AV) shown on the splash screen.
+  /// Used to verify the app build matches the master version.
+  static const String mobileVersion = '9.9.2';
+
+  /// Backend Version (BV) used for compatibility checks.
+  /// Used to verify the app is compatible with backend data.
+  static const String backendVersion = '9.8.1';
+
 
   //configure this
   // static String copyright_text =
