@@ -33,7 +33,7 @@ class AppConfig {
   // static String copyright_text =
   //     "@ Deve Finance " + this_year; //this shows in the splash screen
   static const String app_name_ar = "متجر ديفي تكنو";
-  static const String app_name_en = "Deve Tecno Store";
+  static const String app_name_en = "Deve Techno Store";
 
   /// This get the name of the application in deviceLocale
   static String appNameOnDeviceLang =
@@ -41,7 +41,7 @@ class AppConfig {
           ? app_name_ar
           : app_name_en;
 
-  static bool isDebugMode = kDebugMode;
+  static bool isDebugMode = false;
   static bool turnDevicePreviewOn = isDebugMode;
 
   static String search_bar_text(BuildContext context) {
