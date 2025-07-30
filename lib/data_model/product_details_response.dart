@@ -288,13 +288,17 @@ class Wholesale {
     this.name,
   });
 
-  factory Wholesale.fromJson(Map<String, dynamic> json) => Wholesale(
-        minQty: int.tryParse("${json["min_qty"]}") ?? 0,
-        maxQty: int.tryParse("${json["max_qty"]}"),
-        price: (json["price"] as String?)?.trim(),
-        priceDouble: double.tryParse("${json["price_double"]}") ?? 0,
-        name: json["name"] as String?,
-      );
+  factory Wholesale.fromJson(Map<String, dynamic> json) {
+    return Wholesale(
+      minQty: int.tryParse("${json["min_qty"]}") ?? 0,
+      maxQty: int.tryParse("${json["max_qty"]}"),
+      price: json["price"] == null ? null : "${json["price"]}".trim(),
+      priceDouble: double.tryParse("${json["price_double"]}") ??
+          double.tryParse("${json["price"]}") ??
+          0,
+      name: json["name"] as String?,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "min_qty": minQty,

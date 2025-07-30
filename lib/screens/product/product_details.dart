@@ -874,10 +874,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   Widget build(BuildContext context) {
-    final bool isWholesale = (whole_sale_addon_installed.$ &&
-        _productDetails?.wholesale?.isNotEmpty == true &&
-        AppConfig.businessSettingsData.usePackingWholesaleProduct);
-
+    final bool isWholesale = makeNewVisualWholesale(_productDetails?.wholesale);
     final SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         whenItemInCart<String>(
@@ -1507,7 +1504,7 @@ class _ProductDetailsState extends State<ProductDetails>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-         Text(
+        Text(
           "Quantity : $_quantity",
           textAlign: TextAlign.center,
           style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
@@ -3060,3 +3057,8 @@ int distributeWholesale({
 
   return resultCount;
 }
+
+bool makeNewVisualWholesale(List<Wholesale>? wholesales) =>
+    whole_sale_addon_installed.$ &&
+    wholesales?.isNotEmpty == true &&
+    AppConfig.businessSettingsData.usePackingWholesaleProduct;
