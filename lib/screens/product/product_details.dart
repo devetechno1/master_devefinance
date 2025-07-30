@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:active_ecommerce_cms_demo_app/helpers/num_ex.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -873,6 +874,10 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   Widget build(BuildContext context) {
+    final bool isWholesale = (whole_sale_addon_installed.$ &&
+        _productDetails?.wholesale?.isNotEmpty == true &&
+        AppConfig.businessSettingsData.usePackingWholesaleProduct);
+
     final SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         whenItemInCart<String>(
@@ -1123,12 +1128,14 @@ class _ProductDetailsState extends State<ProductDetails>
                                       : ShimmerHelper().buildBasicShimmer(
                                           height: 30.0,
                                         ),
-                                const SizedBox(height: 12),
-                                _productDetails != null
-                                    ? buildMainPriceRow()
-                                    : ShimmerHelper().buildBasicShimmer(
-                                        height: 30.0,
-                                      ),
+                                if (!isWholesale) ...[
+                                  const SizedBox(height: 12),
+                                  _productDetails != null
+                                      ? buildMainPriceRow()
+                                      : ShimmerHelper().buildBasicShimmer(
+                                          height: 30.0,
+                                        ),
+                                ],
                                 const SizedBox(height: 14),
                                 Visibility(
                                   visible: club_point_addon_installed.$,
@@ -1152,52 +1159,51 @@ class _ProductDetailsState extends State<ProductDetails>
                               : ShimmerHelper().buildBasicShimmer(
                                   height: 50.0,
                                 ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 11),
+                          if (isWholesale)
+                            wholeSalePackingWidget()
+                          else
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 11),
 
-                                _productDetails != null
-                                    ? buildChoiceOptionList()
-                                    : buildVariantShimmers(),
+                                  _productDetails != null
+                                      ? buildChoiceOptionList()
+                                      : buildVariantShimmers(),
 
-                                _productDetails != null
-                                    ? (_colorList.isNotEmpty
-                                        ? buildColorRow()
-                                        : Container())
-                                    : ShimmerHelper().buildBasicShimmer(
-                                        height: 30.0,
-                                      ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-
-                                ///whole sale
-                                Visibility(
-                                  visible: whole_sale_addon_installed.$,
-                                  child: _productDetails != null
-                                      ? _productDetails!
-                                                  .wholesale?.isNotEmpty ==
-                                              true
-                                          ? buildWholeSaleQuantityPrice()
-                                          : const SizedBox.shrink()
+                                  _productDetails != null
+                                      ? (_colorList.isNotEmpty
+                                          ? buildColorRow()
+                                          : const SizedBox())
                                       : ShimmerHelper().buildBasicShimmer(
                                           height: 30.0,
                                         ),
-                                ),
+                                  const SizedBox(height: 20),
 
-                                _productDetails != null
-                                    ? buildQuantityRow()
-                                    : ShimmerHelper().buildBasicShimmer(
-                                        height: 30.0,
-                                      ),
-                              ],
+                                  ///whole sale
+                                  Visibility(
+                                    visible: whole_sale_addon_installed.$,
+                                    child: _productDetails != null
+                                        ? _productDetails!
+                                                    .wholesale?.isNotEmpty ==
+                                                true
+                                            ? buildWholeSaleQuantityPrice()
+                                            : const SizedBox.shrink()
+                                        : ShimmerHelper().buildBasicShimmer(
+                                            height: 30.0,
+                                          ),
+                                  ),
+
+                                  _productDetails != null
+                                      ? buildQuantityRow()
+                                      : ShimmerHelper().buildBasicShimmer(
+                                          height: 30.0,
+                                        ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 27,
-                          ),
+                          const SizedBox(height: 27),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: _productDetails != null
@@ -1206,9 +1212,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     height: 30.0,
                                   ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          )
+                          const SizedBox(height: 10)
                         ],
                       ),
                     ),
@@ -1497,6 +1501,119 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
+  Widget wholeSalePackingWidget() {
+    final List<Wholesale> wholesaleList = _productDetails!.wholesale!;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+         Text(
+          "Quantity : $_quantity",
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
+        ),
+        const SizedBox(height: AppDimensions.paddingDefault),
+        Text(
+          _stock > 0
+              ? "${'in_stock'.tr(context: context)}: $_stock_txt"
+              : 'out_of_stock'.tr(context: context),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: _stock > 0 ? null : Colors.red,
+            fontSize: 14,
+          ),
+        ),
+        const SizedBox(height: AppDimensions.paddingDefault),
+        ...List.generate(
+          wholesaleList.length,
+          (index) {
+            final Wholesale wholeSale = wholesaleList[index];
+            final int quantityText = distributeWholesale(
+              index: index,
+              total: _quantity,
+              list: wholesaleList,
+            );
+            return Card(
+              margin: const EdgeInsets.all(AppDimensions.paddingNormal),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Wrap(
+                        runSpacing: AppDimensions.paddingDefault,
+                        spacing: AppDimensions.paddingDefault,
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        alignment: WrapAlignment.spaceBetween,
+                        direction: Axis.horizontal,
+                        children: [
+                          if (wholeSale.name?.trim().isNotEmpty == true)
+                            _ItemDataWidget(
+                              title: 'wholesale_pkg_name'.tr(context: context),
+                              data: wholeSale.name!,
+                            ),
+                          if (AppConfig.businessSettingsData
+                              .showPackingQtyWholesaleProduct)
+                            _ItemDataWidget(
+                              title: 'pkg_quantity'.tr(context: context),
+                              data: wholeSale.minQty.withSeparator,
+                            ),
+                          if (AppConfig.businessSettingsData
+                              .showPackingQtyPriceWholesaleProduct)
+                            _ItemDataWidget(
+                              title: 'unit_price_ucf'.tr(context: context),
+                              data: wholeSale.priceDouble.withSeparator,
+                            ),
+                          _ItemDataWidget(
+                            title: 'pkg_price'.tr(context: context),
+                            data: (wholeSale.minQty * wholeSale.priceDouble)
+                                .withSeparator,
+                            beforeDataInLine: [
+                              if (AppConfig.businessSettingsData
+                                      .showPackingBeforePriceWholesaleProduct &&
+                                  index != 0) ...[
+                                TextSpan(
+                                  text: (wholesaleList[0].priceDouble *
+                                          wholeSale.minQty)
+                                      .withSeparator,
+                                  style: const TextStyle(
+                                    color: MyTheme.font_grey,
+                                    decoration: TextDecoration.lineThrough,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                const WidgetSpan(
+                                  child: SizedBox(
+                                    width: AppDimensions.paddingSmall,
+                                  ),
+                                )
+                              ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: AppDimensions.paddingDefault),
+                    buildQuantityWholeSale(
+                      changedQuantity: wholeSale.minQty,
+                      quantityText: quantityText,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
   Widget buildSellerRow(BuildContext context) {
     //print("sl:" +  _productDetails!.shop_logo);
     return Container(
@@ -1652,6 +1769,49 @@ class _ProductDetailsState extends State<ProductDetails>
           )
         ],
       ),
+    );
+  }
+
+  Widget buildQuantityWholeSale({
+    int changedQuantity = 1,
+    required int quantityText,
+  }) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: AppDimensions.paddingSmall,
+      children: [
+        QuantityButtonWidget(
+          icon: Icons.add,
+          doWhen: (_quantity + changedQuantity) <= maxQuantity,
+          textWhenDont: 'maxOrderQuantityLimit'.tr(
+            context: context,
+            args: {"maxQuantity": "$maxQuantity"},
+          ),
+          onPressed: () {
+            _quantity = _quantity + changedQuantity;
+            setState(() {});
+            fetchAndSetVariantWiseInfo();
+          },
+        ),
+        Text(
+          quantityText.toString(),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 16),
+        ),
+        QuantityButtonWidget(
+          icon: Icons.remove,
+          doWhen: (_quantity - changedQuantity) >= minQuantity,
+          textWhenDont: 'minimumOrderQuantity'.tr(
+            context: context,
+            args: {"minQuantity": "$minQuantity"},
+          ),
+          onPressed: () {
+            _quantity = _quantity - changedQuantity;
+            setState(() {});
+            fetchAndSetVariantWiseInfo();
+          },
+        ),
+      ],
     );
   }
 
@@ -2204,7 +2364,7 @@ class _ProductDetailsState extends State<ProductDetails>
       ],
     );
   }
-  
+
   Widget buildBottomAppBar(_addedToCartSnackbar) {
     return Container(
       padding:
@@ -2794,6 +2954,47 @@ $string
   }
 }
 
+class _ItemDataWidget extends StatelessWidget {
+  const _ItemDataWidget({
+    this.beforeDataInLine = const [],
+    required this.title,
+    required this.data,
+  });
+
+  final String title;
+  final String data;
+  final List<InlineSpan> beforeDataInLine;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 14,
+          ),
+        ),
+        RichText(
+          text: TextSpan(
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+            children: [
+              ...beforeDataInLine,
+              TextSpan(text: data),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class QuantityButtonWidget extends StatelessWidget {
   const QuantityButtonWidget({
     super.key,
@@ -2838,4 +3039,24 @@ class QuantityButtonWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+int distributeWholesale({
+  required int index,
+  required int total,
+  required List<Wholesale> list,
+}) {
+  int remainder = total;
+  int resultCount = 0;
+
+  for (int i = list.length - 1; i >= index; i--) {
+    final int minQty = list[i].minQty;
+    resultCount = 0;
+    if (remainder < minQty) continue;
+
+    resultCount = (remainder / minQty).floor();
+    remainder = remainder % minQty;
+  }
+
+  return resultCount;
 }

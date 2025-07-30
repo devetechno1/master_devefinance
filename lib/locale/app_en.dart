@@ -1,4 +1,9 @@
 const Map<String, String> enLangs = {
+  "pkg_price": "Package Price",
+  "wholesale_pkg_name": "Wholesale Package Name",
+  "pkg_quantity": "Quantity in package",
+  "in_stock": "In stock",
+  "quantity": "Quantity",
   "add_default_address": "You have to add a default address",
   "is_loading": "is loading...",
   "change_default_before_delete":

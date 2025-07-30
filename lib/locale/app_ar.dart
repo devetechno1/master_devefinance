@@ -1,4 +1,8 @@
 const Map<String, String> arLangs = {
+  "pkg_price": "سعر العبوة",
+  "wholesale_pkg_name": "اسم باقة الجملة",
+  "pkg_quantity": "الكمية داخل العبوة",
+  "in_stock": "متوفر في المخزون",
   "add_default_address": "يرجى تحديد عنوان كافتراضي للمتابعة",
   "is_loading": "جارٍ التحميل...",
   "change_default_before_delete":
