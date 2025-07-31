@@ -12,19 +12,31 @@ This file contains a complete changelog for both the **Mobile App** and the **Ba
 
 ## 📱 Mobile App Updates
 
-### AV 9.10.3
+<details>
+<summary><strong>AV 9.10.3</strong> - [New]</summary>
+
 - Added a confirmation dialog when changing the default address if **sellerWiseShipping** is enabled, warning users that the cart will be cleared.
 - Integrated `ShippingInfo` screen dynamically based on business setting instead of always using `SelectAddress`.
 - Enhanced safety by switching from `double.parse()` to `double.tryParse()` in the `ShippingCostResponse` model to prevent crashes.
 - Added new localization key: `change_default_address_make_cart_empty` (Arabic + English).
 
-### AV 9.10.2
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.2</strong></summary>
+
 - Implemented a new layout and functionality for the **wholesale** system across the entire app.
 - Improved user experience on the product details screen.
+</details>
 
-### AV 9.10.1
+
+<details>
+<summary><strong>AV 9.10.1</strong></summary>
+
 - Fixed a login issue that occurred under poor network conditions.
 - Improved automatic language loading from the server.
+</details>
 
 ---
 
