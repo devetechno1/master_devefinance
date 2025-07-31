@@ -347,9 +347,12 @@ class _ProductDetailsState extends State<ProductDetails>
     );
     _stock = variantResponse.variantData!.stock ?? _stock;
     _stock_txt = variantResponse.variantData!.stockTxt;
-    _inCart = variantResponse.variantData!.inCart ?? 0;
+    _inCart = variantResponse.variantData!.inCart ?? _quantity;
 
-    if (inInit) _quantity = _inCart;
+    if (inInit) {
+      _quantity = _inCart;
+      return fetchAndSetVariantWiseInfo();
+    }
 
     if (_quantity > maxQuantity) {
       _quantity = maxQuantity;
@@ -1504,11 +1507,11 @@ class _ProductDetailsState extends State<ProductDetails>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          "Quantity : $_quantity",
-          textAlign: TextAlign.center,
-          style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
-        ),
+        // Text(
+        //   "Quantity : $_quantity",
+        //   textAlign: TextAlign.center,
+        //   style: const TextStyle(color: Color(0xff6B7377), fontSize: 14),
+        // ),
         const SizedBox(height: AppDimensions.paddingDefault),
         Text(
           _stock > 0
@@ -1759,7 +1762,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 fontWeight: FontWeight.w600,
               ),
               formatter: (value) {
-                return '${value.toStringAsFixed(2)} ${SystemConfig.systemCurrency?.symbol ?? ''}'
+                return '${value.withSeparator} ${SystemConfig.systemCurrency?.symbol ?? ''}'
                     .trim();
               },
             ),

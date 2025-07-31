@@ -1,16 +1,19 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/num_ex.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:flutter/material.dart';
 
 import '../data_model/cart_response.dart';
 import '../data_model/product_details_response.dart';
+import '../helpers/system_config.dart';
 import '../my_theme.dart';
 import '../presenter/cart_provider.dart';
 import '../screens/product/product_details.dart';
 import 'box_decorations.dart';
 import 'device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+
+import 'wholesale_text_widget.dart';
 
 class CartSellerItemCardWidget extends StatelessWidget {
   final int sellerIndex;
@@ -107,7 +110,10 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                       ),
-                      formatter: (value) => '${value.toStringAsFixed(2)}',
+                      formatter: (value) {
+                        return '${value.withSeparator} ${SystemConfig.systemCurrency?.symbol ?? ''}'
+                            .trim();
+                      },
                     ),
                     if (hasWholesale)
                       WholesaleAddedData(
@@ -321,33 +327,9 @@ class WholesaleAddedData extends StatelessWidget {
             },
           ),
           Expanded(
-            child: RichText(
-              maxLines: 3,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              textDirection: wholesales[0].name?.direction,
-              text: TextSpan(
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 14,
-                  ),
-                  children: [
-                    ...List.generate(
-                      wholesales.length,
-                      (index) {
-                        final int quantityText = distributeWholesale(
-                          index: index,
-                          total: item.quantity,
-                          list: wholesales,
-                        );
-                        if (quantityText == 0) return const TextSpan();
-                        return TextSpan(
-                          text:
-                              "${index == 0 ? '' : ', '}$quantityText ${wholesales[index].name}",
-                        );
-                      },
-                    ),
-                  ]),
+            child: WholesaleTextWidget(
+              wholesales: wholesales,
+              quantity: item.quantity,
             ),
           ),
           _AddRemoveItemFromCart(

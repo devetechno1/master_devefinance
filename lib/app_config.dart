@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -44,7 +45,7 @@ class AppConfig {
           ? app_name_ar
           : app_name_en;
 
-  static bool isDebugMode = true;
+  static bool isDebugMode = kDebugMode;
   static bool turnDevicePreviewOn = isDebugMode;
 
   static String search_bar_text(BuildContext context) {
@@ -71,7 +72,7 @@ class AppConfig {
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
   static const DOMAIN_PATH =
-      "devefinance.com"; //use only domain name without http:// or https://
+      "sellerwise.devefinance.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
