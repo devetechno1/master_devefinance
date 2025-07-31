@@ -265,6 +265,7 @@ import '../helpers/debouncer.dart';
 import '../helpers/shared_value_helper.dart';
 import '../my_theme.dart';
 import '../screens/checkout/select_address.dart';
+import '../screens/checkout/shipping_info.dart';
 import '../screens/guest_checkout_pages/guest_checkout_address.dart';
 
 ValueNotifier<double> cartTotalAmount = ValueNotifier<double>(0.0);
@@ -574,7 +575,12 @@ class CartProvider extends ChangeNotifier {
           Future.delayed(
             Duration.zero,
             () {
-              AIZRoute.push(context, const SelectAddress()).then((value) {
+              AIZRoute.push(
+                context,
+                AppConfig.businessSettingsData.sellerWiseShipping
+                    ? const ShippingInfo()
+                    : const SelectAddress(),
+              ).then((value) {
                 onPopped(context, value);
               });
             },

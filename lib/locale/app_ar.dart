@@ -1,4 +1,6 @@
 const Map<String, String> arLangs = {
+  "change_default_address_make_cart_empty":
+      "سيؤدي تغيير العنوان الافتراضي إلى إفراغ السلة",
   "pkg_price": "سعر العبوة",
   "wholesale_pkg_name": "اسم باقة الجملة",
   "pkg_quantity": "الكمية داخل العبوة",

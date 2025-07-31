@@ -174,6 +174,57 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   Future<void> onAddressSwitch(int? id) async {
+    bool canSwitch = true;
+    if (AppConfig.businessSettingsData.sellerWiseShipping) {
+      canSwitch = await showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              contentPadding: const EdgeInsets.only(
+                top: 16.0,
+                left: 2.0,
+                right: 2.0,
+                bottom: 2.0,
+              ),
+              content: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 16.0,
+                ),
+                child: Text(
+                  'change_default_address_make_cart_empty'.tr(context: context),
+                  maxLines: 3,
+                  style: const TextStyle(
+                    color: MyTheme.font_grey,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              actions: [
+                Btn.basic(
+                  child: Text(
+                    'cancel_ucf'.tr(context: context),
+                    style: TextStyle(color: MyTheme.medium_grey),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop(false);
+                  },
+                ),
+                Btn.basic(
+                  color: MyTheme.soft_accent_color,
+                  child: Text(
+                    'confirm_ucf'.tr(context: context),
+                    style: TextStyle(color: MyTheme.dark_grey),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop(true);
+                  },
+                ),
+              ],
+            ),
+          ) ==
+          true;
+    }
+    if (!canSwitch) return;
     final addressMakeDefaultResponse =
         await AddressRepository().getAddressMakeDefaultResponse(id);
 
