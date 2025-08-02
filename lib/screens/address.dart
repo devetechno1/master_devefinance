@@ -13,11 +13,11 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/map_location.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:provider/provider.dart';
 
 import '../app_config.dart';
 import '../custom/input_decorations.dart';
@@ -25,6 +25,7 @@ import '../custom/intl_phone_input.dart';
 import '../custom/useful_elements.dart';
 import '../data_model/address_add_response.dart';
 import '../data_model/address_response.dart' as res;
+import '../presenter/cart_counter.dart';
 import 'add_address_screen.dart';
 
 // class Address extends StatelessWidget {
@@ -173,9 +174,11 @@ class _AddressScreenState extends State<AddressScreen> {
     fetchAll();
   }
 
-  Future<void> onAddressSwitch(int? id) async {
+  Future<void> onTapAddressToSwitch(int? id) async {
     bool canSwitch = true;
-    if (AppConfig.businessSettingsData.sellerWiseShipping) {
+    final CartCounter cart = Provider.of<CartCounter>(context, listen: false);
+    if (AppConfig.businessSettingsData.sellerWiseShipping &&
+        cart.cartCounter > 0) {
       canSwitch = await showDialog(
             context: context,
             builder: (_) => AlertDialog(
@@ -225,6 +228,10 @@ class _AddressScreenState extends State<AddressScreen> {
           true;
     }
     if (!canSwitch) return;
+    return onAddressSwitch(id);
+  }
+
+  Future<void> onAddressSwitch(int? id) async {
     final addressMakeDefaultResponse =
         await AddressRepository().getAddressMakeDefaultResponse(id);
 
@@ -638,7 +645,7 @@ class _AddressScreenState extends State<AddressScreen> {
           return;
         }
         if (_default_shipping_address != _shippingAddressList[index].id) {
-          onAddressSwitch(_shippingAddressList[index].id);
+          onTapAddressToSwitch(_shippingAddressList[index].id);
         }
       },
       child: AnimatedContainer(
