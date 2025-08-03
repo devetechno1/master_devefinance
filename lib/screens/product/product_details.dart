@@ -347,9 +347,9 @@ class _ProductDetailsState extends State<ProductDetails>
     );
     _stock = variantResponse.variantData!.stock ?? _stock;
     _stock_txt = variantResponse.variantData!.stockTxt;
-    _inCart = variantResponse.variantData!.inCart ?? _quantity;
+    _inCart = variantResponse.variantData!.inCart ?? 0;
 
-    if (inInit) {
+    if (inInit && _inCart > 0) {
       _quantity = _inCart;
       return fetchAndSetVariantWiseInfo();
     }
