@@ -5,7 +5,6 @@ import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:flip_card/flip_card.dart';
@@ -13,6 +12,7 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:one_context/one_context.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:timer_count_down/timer_controller.dart';
 
@@ -136,8 +136,8 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
   }
 
   gotoLoginScreen() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Login()));
+    Navigator.pop(context);
+    Navigator.pop(OneContext().context!);
   }
 
   @override
