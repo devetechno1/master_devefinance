@@ -17,11 +17,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
 import '../custom/input_decorations.dart';
 import '../custom/intl_phone_input.dart';
+import '../custom/loading.dart';
 import '../custom/useful_elements.dart';
 import '../data_model/address_add_response.dart';
 import '../data_model/address_response.dart' as res;
@@ -448,6 +450,10 @@ class _AddressScreenState extends State<AddressScreen> {
                                   addressEntity.longitude ??
                                       AppConfig.initPlace.longitude,
                                 );
+                                if(Loading.isLoading) return;
+
+                                Loading.show(OneContext().context!);
+                                
                                 final AddressAddResponse addressAddResponse =
                                     await AddressRepository()
                                         .getAddressAddResponse(
@@ -483,6 +489,8 @@ class _AddressScreenState extends State<AddressScreen> {
                                   selectedPlace: latLang,
                                 );
                                 await afterAddingAnAddress(true);
+
+                                Loading.close();
                               },
                             ),
                           ),

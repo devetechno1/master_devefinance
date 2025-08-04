@@ -103,7 +103,7 @@ class AuthRepository {
   ) async {
     final postBody = jsonEncode({
       "name": "$name",
-      if (email != null) "email": "$email",
+      if (email?.trim().isNotEmpty == true) "email": "$email",
       "phone": "$phone",
       "password": "$password",
       if (AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
