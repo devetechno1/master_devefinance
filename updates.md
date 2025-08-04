@@ -5,12 +5,27 @@ This file contains a complete changelog for both the **Mobile App** and the **Ba
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.4'`
+- `mobileVersion = '9.10.5'`
 - `backendVersion = '9.8.1'` <!-- Replace with your current backend version -->
 
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.5</strong></summary>
+
+- Added a `Loading.isLoading` getter to prevent showing duplicate loading dialogs.
+- Improved **loading behavior** during:
+  - Registration
+  - Adding a new address
+- Integrated `OneContext` for global context handling in registration and address flows.
+- Fixed potential null/empty issues with the email field during sign-up.
+- Enhanced `commonHeader` to include `Authorization` header if access token is available.
+- Ensured cart data is fetched when returning to home screen via `HomePresenter`.
+- Improved UI consistency by calling `reset()` before re-fetching home data.
+
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.4</strong></summary>
