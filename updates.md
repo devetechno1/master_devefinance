@@ -5,7 +5,7 @@ This file contains a complete changelog for both the **Mobile App** and the **Ba
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.2'`
+- `mobileVersion = '9.10.4'`
 - `backendVersion = '9.8.1'` <!-- Replace with your current backend version -->
 
 ---
@@ -13,7 +13,21 @@ This file contains a complete changelog for both the **Mobile App** and the **Ba
 ## 📱 Mobile App Updates
 
 <details>
-<summary><strong>AV 9.10.3</strong> - [New]</summary>
+<summary><strong>AV 9.10.4</strong></summary>
+
+- Integrated **sms_autofill** package to support automatic SMS code detection during password reset.
+- Updated password reset flow:
+  - `getPasswordForgetResponse()` now requires `app_signature`.
+  - Auto-fills OTP code using `CodeAutoFill` and `TextFieldPinAutoFill`.
+- Extended OTP timer duration from 20 to 90 seconds.
+- Fixed minor formatting issues and improved error handling in password reset process.
+- Added safety around `device_info` usage with better spacing and conditionals.
+
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.3</strong></summary>
 
 - Added a confirmation dialog when changing the default address if **sellerWiseShipping** is enabled, warning users that the cart will be cleared.
 - Integrated `ShippingInfo` screen dynamically based on business setting instead of always using `SelectAddress`.
