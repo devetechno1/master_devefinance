@@ -1616,6 +1616,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   Widget buildSellerRow(BuildContext context) {
     //print("sl:" +  _productDetails!.shop_logo);
+    if(_productDetails?.shop_slug?.trim().isNotEmpty != true) return const SizedBox();
     return Container(
       color: const Color(0xffF6F7F8),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
