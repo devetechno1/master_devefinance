@@ -26,7 +26,7 @@ class AppConfig {
 
   /// App Version (AV) shown on the splash screen.
   /// Used to verify the app build matches the master version.
-  static const String mobileVersion = '9.10.5';
+  static const String mobileVersion = '9.10.6';
 
   /// Backend Version (BV) used for compatibility checks.
   /// Used to verify the app is compatible with backend data.
@@ -77,6 +77,7 @@ class AppConfig {
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
   static const String PROTOCOL = HTTPS ? "https://" : "http://";
+  // static const String RAW_BASE_URL = "http://192.168.100.200:8080/devef";
   static const String RAW_BASE_URL = "$PROTOCOL$DOMAIN_PATH";
   static const String BASE_URL = "$RAW_BASE_URL/$API_ENDPATH";
 

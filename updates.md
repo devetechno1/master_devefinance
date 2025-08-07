@@ -1,16 +1,34 @@
 # 🔄 Updates Log
 
-This file contains a complete changelog for both the **Mobile App** and the **Backend**.
+This file tracks all update versions for both the **Mobile App** and the **Backend**.
 
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.5'`
+- `mobileVersion = '9.10.6'`
 - `backendVersion = '9.8.1'` <!-- Replace with your current backend version -->
 
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.6</strong></summary>
+
+- Improved shared value loading (`user_id`, `is_logged_in`) in `main.dart`.
+- Added conditional headers (`user_id`, `device_info`) to Business Settings API.
+- Added error handling to `getProductDetails()` with translated fallback message.
+- Handled product detail API failure:
+  - Added `errorMessage` state.
+  - Displayed `CustomErrorWidget` on failure.
+  - Prevented rendering of bottom app bar when product is invalid.
+- Handled seller image failure using `imageErrorBuilder`.
+- Fixed wishlist logic with proper boolean check.
+- Conditionally rendered flash deal in profile screen.
+- Marked review submit failures with `isError: true`.
+
+</details>
+
+
 <details>
 <summary><strong>AV 9.10.5</strong></summary>
 
