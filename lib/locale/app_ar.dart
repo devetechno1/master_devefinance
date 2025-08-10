@@ -1,4 +1,10 @@
 const Map<String, String> arLangs = {
+  "locationIsDenied": "تم رفض إذن الموقع.",
+  "locationIsDeniedPermanently":
+      "تم رفض إذن الموقع نهائيًا. من فضلك فعِّله من الإعدادات.",
+  "pleaseGoToVerifyYourLocation": "من فضلك تحقَّق من موقعك.",
+  "locationNotAccessed": "الوصول إلى الموقع غير مُفعَّل.",
+  "goToSetting": "اذهب إلى الإعدادات",
   "change_default_address_make_cart_empty":
       "سيؤدي تغيير العنوان الافتراضي إلى إفراغ السلة",
   "pkg_price": "سعر العبوة",

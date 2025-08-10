@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +10,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../app_config.dart';
 import '../../custom/btn.dart';
+import '../../helpers/handle_permissions.dart';
 import '../../my_theme.dart';
 import '../../other_config.dart';
 import '../map_location.dart';
@@ -43,16 +45,32 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
   @override
   void initState() {
     super.initState();
-
     kInitialPosition = LatLng(
       widget.latitude ?? AppConfig.initPlace.latitude,
       widget.longitude ?? AppConfig.initPlace.longitude,
     );
+    initLocation(kInitialPosition);
 
-    selectedPlace = kInitialPosition;
-    widget.onPlacePicked?.call(selectedPlace);
+    if (widget.latitude == null && widget.longitude == null) {
+      HandlePermissions.getCurrentLocation().then(
+        (value) {
+          if (value != null) {
+            kInitialPosition = LatLng(value.latitude, value.longitude);
+            initLocation(kInitialPosition);
+          }
+        },
+      );
+    }
+  }
 
-    setState(() {});
+  void initLocation(LatLng initPosition) {
+    selectedPlace = initPosition;
+    widget.onPlacePicked?.call(initPosition);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _controller!.animateCamera(
+        CameraUpdate.newLatLngZoom(initPosition, 14),
+      ),
+    );
   }
 
   void openFullScreenMap() {
@@ -138,8 +156,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
                     isCameraIdle = false;
                     setState(() {});
                   },
-                  myLocationEnabled:
-                      !(widget.latitude != null && widget.longitude != null),
+                  myLocationEnabled: true,
                   onMapCreated: (GoogleMapController controller) =>
                       _controller = controller,
                 ),
@@ -243,6 +260,15 @@ class MapLocationScreenState extends State<MapLocationScreen> {
     Navigator.pop(context, selectedPlace);
   }
 
+  Future<void> getCurrentLocation() async {
+    final Position? value = await HandlePermissions.getCurrentLocation();
+    if (value != null) {
+      _controller!.animateCamera(
+        CameraUpdate.newLatLngZoom(LatLng(value.latitude, value.longitude), 14),
+      );
+    }
+  }
+
   LatLng selectedPlace = kInitialPosition;
   bool isCameraIdle = false;
   bool isLoadingFormattedAddress = true;
@@ -257,6 +283,12 @@ class MapLocationScreenState extends State<MapLocationScreen> {
         if (!didPop) Navigator.pop(context);
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton.small(
+          onPressed: getCurrentLocation,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.my_location_rounded),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
         body: Stack(
           alignment: Alignment.center,
           fit: StackFit.expand,
@@ -271,6 +303,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
               compassEnabled: false,
               indoorViewEnabled: true,
               mapToolbarEnabled: true,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
               onCameraIdle: () async {
                 // locationController.updateMapPosition(_cameraPosition, false, null, context);
                 // await onTapPickHere();
@@ -281,7 +315,9 @@ class MapLocationScreenState extends State<MapLocationScreen> {
 
                 try {
                   final List<Placemark> temp = await placemarkFromCoordinates(
-                      selectedPlace.latitude, selectedPlace.longitude);
+                    selectedPlace.latitude,
+                    selectedPlace.longitude,
+                  );
                   formattedAddress =
                       '${temp.first.street}, ${temp.first.locality}, ${temp.first.administrativeArea}, ${temp.first.country}';
                 } catch (e) {}
@@ -296,14 +332,12 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                 isCameraIdle = false;
                 setState(() {});
               },
-              myLocationEnabled:
-                  !(widget.latitude != null && widget.longitude != null),
               onMapCreated: (GoogleMapController controller) =>
                   _controller = controller,
             ),
             Positioned(
               height: 50,
-              bottom: 40.0,
+              bottom: 80.0,
               // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
               left: 16.0,
               right: 16.0,
@@ -367,6 +401,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                           style: const TextStyle(color: Colors.white),
                         ),
                         onPressed: onTapPickHere,
+                        isLoading: formattedAddress == null,
                       ),
                     ),
                   ],
@@ -471,6 +506,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                 child: Image.asset(
                   AppImages.deliveryMapIcon,
                   height: 60,
+                  colorBlendMode: BlendMode.srcIn,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             )

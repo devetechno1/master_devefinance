@@ -1,13 +1,11 @@
 # 🔄 Updates Log
 
-This file tracks all update versions for both the **Mobile App** and the **Backend**.
+This file tracks all update versions for both the **Mobile App**.
 
 ---
 
 ## ✅ Latest Versions:
 - `mobileVersion = '9.10.6'`
-- `backendVersion = '9.8.1'` <!-- Replace with your current backend version -->
-
 ---
 
 ## 📱 Mobile App Updates
@@ -84,17 +82,3 @@ This file tracks all update versions for both the **Mobile App** and the **Backe
 - Fixed a login issue that occurred under poor network conditions.
 - Improved automatic language loading from the server.
 </details>
-
----
-
-## 🛠 Backend Updates
-
-### BV 2.5.0
-- Added support for the new **wholesale** package system in product data.
-- Updated `getProductDetails` API to include the revised wholesale logic.
-
-### BV 2.4.9
-- Fixed filtering issue with categories and brands in product listings.
-- Optimized database queries to reduce server load and improve performance.
-
----
