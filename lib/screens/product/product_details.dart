@@ -2080,25 +2080,23 @@ class _ProductDetailsState extends State<ProductDetails>
               ),
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width - (107 + 45),
+          Expanded(
             child: Scrollbar(
               controller: _variantScrollController,
               child: Wrap(
+                alignment: WrapAlignment.spaceAround,
                 children: List.generate(
                     choiceOptions[choiceOptionsIndex].options.length,
-                    (index) => Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: AppDimensions.paddingSmall),
-                        child: Container(
-                          width: 75,
+                    (index) => Container(
+                          margin: const EdgeInsets.only(
+                              bottom: AppDimensions.paddingSmall),
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
                           child: buildChoiceItem(
                               choiceOptions[choiceOptionsIndex].options[index],
                               choiceOptionsIndex,
                               index),
-                        ))),
+                        )),
               ),
             ),
           )
@@ -2111,12 +2109,13 @@ class _ProductDetailsState extends State<ProductDetails>
     return Padding(
       padding: app_language_rtl.$!
           ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
-          : const EdgeInsets.only(right: 8.0),
+          : const EdgeInsets.only(right: AppDimensions.paddingSmall),
       child: InkWell(
         onTap: () {
           _onVariantChange(choiceOptionsIndex, option);
         },
         child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 3.0),
           decoration: BoxDecoration(
             border: Border.all(
                 color: _selectedChoices[choiceOptionsIndex] == option
@@ -2130,25 +2129,18 @@ class _ProductDetailsState extends State<ProductDetails>
                 color: Colors.black.withValues(alpha: 0.12),
                 blurRadius: 6,
                 spreadRadius: 1,
-                offset:
-                    const Offset(0.0, 3.0), // shadow direction: bottom right
+                offset: const Offset(0.0, 3.0),
               )
             ],
           ),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 3.0),
-            child: Center(
-              child: Text(
-                option,
-                style: TextStyle(
-                    color: _selectedChoices[choiceOptionsIndex] == option
-                        ? Theme.of(context).primaryColor
-                        : const Color.fromRGBO(224, 224, 225, 1),
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
+          child: Text(
+            option,
+            style: TextStyle(
+                color: _selectedChoices[choiceOptionsIndex] == option
+                    ? Theme.of(context).primaryColor
+                    : const Color.fromRGBO(224, 224, 225, 1),
+                fontSize: 12.0,
+                fontWeight: FontWeight.w600),
           ),
         ),
       ),
