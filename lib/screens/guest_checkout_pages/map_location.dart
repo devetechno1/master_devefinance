@@ -165,10 +165,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
                 child: AnimatedScale(
                   duration: const Duration(milliseconds: 200),
                   scale: isCameraIdle ? 0.7 : 1.1,
-                  child: Image.asset(
-                    AppImages.deliveryMapIcon,
-                    height: 60,
-                  ),
+                  child: const _MarkImage(),
                 ),
               ),
               Positioned(
@@ -288,7 +285,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
           foregroundColor: Colors.white,
           child: const Icon(Icons.my_location_rounded),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
         body: Stack(
           alignment: Alignment.center,
           fit: StackFit.expand,
@@ -503,12 +501,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
               child: AnimatedScale(
                 duration: const Duration(milliseconds: 200),
                 scale: isCameraIdle ? 1 : 1.3,
-                child: Image.asset(
-                  AppImages.deliveryMapIcon,
-                  height: 60,
-                  colorBlendMode: BlendMode.srcIn,
-                  color: Theme.of(context).primaryColor,
-                ),
+                child: const _MarkImage(),
               ),
             )
           ],
@@ -536,5 +529,19 @@ class MapLocationScreenState extends State<MapLocationScreen> {
       print("Error e = $e");
       return [];
     }
+  }
+}
+
+class _MarkImage extends StatelessWidget {
+  const _MarkImage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      AppImages.deliveryMapIcon,
+      height: 60,
+      colorBlendMode: BlendMode.srcIn,
+      color: Theme.of(context).primaryColor,
+    );
   }
 }
