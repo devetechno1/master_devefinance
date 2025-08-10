@@ -5,10 +5,44 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.6'`
+- `mobileVersion = '9.10.7'`
 ---
 
 ## 📱 Mobile App Updates
+
+
+<details>
+<summary><strong>AV 9.10.7</strong></summary>
+
+### Android
+- AGP → **8.1.1** (settings.gradle).
+- Temporarily use **debug signing** for `release` (testing only).
+- Ensure **AndroidX** & **Jetifier** enabled.
+
+### iOS
+- `firebase_core` → **3.15.2**, `firebase_messaging` → **15.2.10**.
+- Added `geolocator_apple`, `sms_autofill`.
+
+### Dependencies
+- Added: `geolocator`, `geolocator_android`.
+- Updates: `go_router` **16.1.0**, `http` **1.5.0**, `google_maps_flutter*`, `webview_flutter*`, `shared_preferences_android`, etc.
+
+### Location & Maps
+- New `HandlePermissions.getCurrentLocation()` (Geolocator) with denied/forever/service-off handling.
+- Map: auto-center to GPS if no coords, **myLocationEnabled**, recenter **FAB**, smooth camera, safer placemark try/catch.
+
+### UI/UX
+- `Btn.basic`: new `isLoading` (disables press + themed disabled color).
+- Loading bar height **36 → 40**.
+- Map pin tinted with theme; action bar lifted to avoid FAB overlap.
+
+### Notes
+- Suggest `version: 9.10.7+91007` in `pubspec.yaml`.
+- **Before production**: restore `release { signingConfig signingConfigs.release }`.
+</details>
+
+
+
 <details>
 <summary><strong>AV 9.10.6</strong></summary>
 

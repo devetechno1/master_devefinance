@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
@@ -26,7 +24,7 @@ class AppConfig {
 
   /// App Version (AV) shown on the splash screen.
   /// Used to verify the app build matches the master version.
-  static const String mobileVersion = '9.10.6';
+  static const String mobileVersion = '9.10.7';
 
   /// Backend Version (BV) used for compatibility checks.
   /// Used to verify the app is compatible with backend data.
