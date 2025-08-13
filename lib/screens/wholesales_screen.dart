@@ -14,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../custom/box_decorations.dart';
 
 class WholesalesScreen extends StatefulWidget {
   const WholesalesScreen({super.key});
@@ -23,24 +26,138 @@ class WholesalesScreen extends StatefulWidget {
 }
 
 class _WholesalesScreenState extends State<WholesalesScreen> {
-  ScrollController? _scrollController;
+  final ScrollController _scrollController = ScrollController();
+
+  int page = 1;
+  bool _isLoading = true;
+  bool _isLoadingMore = false;
+  final List<Product> _products = [];
+
+  bool _hasMoreProducts = true;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
+    getInitWholesaleProducts();
+    _scrollController.addListener(
+      () {
+        if (_scrollController.position.pixels >=
+            0.7 * _scrollController.position.maxScrollExtent) {
+          if (!_isLoadingMore && _hasMoreProducts) {
+            getMoreWholesaleProducts();
+          }
+        }
+      },
+    );
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    return super.dispose();
+  }
+
+  Future<void> getInitWholesaleProducts() async {
+    page = 1;
+    _products.clear();
+    final ProductData? p = await getWholesaleProducts(1);
+    if (p != null) _products.addAll(p.data);
+
+    _isLoading = false;
+    setState(() {});
+  }
+
+  Future<void> getMoreWholesaleProducts() async {
+    page++;
+    _isLoadingMore = true;
+    setState(() {});
+    final ProductData? p = await getWholesaleProducts(page);
+    if (p != null) {
+      if (p.data.isEmpty) _hasMoreProducts = false;
+      _products.addAll(p.data);
+    }
+    _isLoadingMore = false;
+    setState(() {});
+  }
+
+  Future<ProductData?> getWholesaleProducts(int page) async {
+    try {
+      final WholesaleProductModel res =
+          await ProductRepository().getWholesaleProducts(page);
+      if (!res.result) throw 'Failed to fetch wholesale products';
+      return res.products;
+    } catch (e) {
+      print('Error fetching wholesale products: $e');
+    }
+
+    return null;
+  }
+
+  late final AppBar appBar = buildAppBar();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyTheme.mainColor,
-      appBar: buildAppBar(context),
-      body: buildProductList(context),
+      appBar: appBar,
+      body: RefreshIndicator(
+        onRefresh: getInitWholesaleProducts,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          child: Builder(builder: (context) {
+            if (_isLoading) return ShimmerHelper().buildProductGridShimmer();
+
+            if (_products.isEmpty) {
+              return Container(
+                height: MediaQuery.sizeOf(context).height,
+                alignment: Alignment.center,
+                child: Text('no_data_is_available'.tr(context: context)),
+              );
+            }
+            return MasonryGridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 14,
+              crossAxisSpacing: 14,
+              itemCount: _products.length + (_hasMoreProducts ? 3 : 0),
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(
+                  top: AppDimensions.paddingLarge,
+                  bottom: AppDimensions.paddingSupSmall,
+                  left: 18,
+                  right: 18),
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                if (index >= _products.length) {
+                  return Shimmer.fromColors(
+                    baseColor: MyTheme.shimmer_base,
+                    highlightColor: MyTheme.shimmer_highlighted,
+                    child: Container(
+                      height: (index + 1) % 2 != 0 ? 250 : 300,
+                      width: double.infinity,
+                      decoration: BoxDecorations.buildBoxDecoration_1(),
+                    ),
+                  );
+                }
+                final product = _products[index]; // Fix index issue here
+                return WholeSalesProductCard(
+                  id: product.id,
+                  slug: product.slug,
+                  image: product.thumbnailImage,
+                  name: product.name,
+                  main_price: product.basePrice.toString(),
+                  stroked_price: product.baseDiscountedPrice.toString(),
+                  has_discount: product.discount != 0.0,
+                  discount: product.discount_percentage,
+                  isWholesale: true,
+                );
+              },
+            );
+          }),
+        ),
+      ),
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
+  AppBar buildAppBar() {
     return AppBar(
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
@@ -65,76 +182,6 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
       elevation: 0.0,
       titleSpacing: 0,
     );
-  }
-
-  Widget buildProductList(context) {
-    return FutureBuilder<WholesaleProductModel>(
-      // future: ApiService().fetchWholesaleProducts(),
-      future: ProductRepository().getWholesaleProducts(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return ShimmerHelper()
-              .buildProductGridShimmer(scontroller: _scrollController);
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return Center(
-                child: Text('error_loading_products'.tr(context: context)));
-          }
-
-          // Safely check if data and products exist
-          final productResponse = snapshot.data;
-          if (productResponse == null || productResponse.products.isEmpty) {
-            return Center(
-              child: Text('no_data_is_available'.tr(context: context)),
-            );
-          }
-
-          final products = productResponse.products.data; // Access product list
-          return SingleChildScrollView(
-            child: MasonryGridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 14,
-              crossAxisSpacing: 14,
-              itemCount: products.length, // Fix length issue here
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(
-                  top: AppDimensions.paddingLarge,
-                  bottom: AppDimensions.paddingSupSmall,
-                  left: 18,
-                  right: 18),
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final product = products[index]; // Fix index issue here
-                return WholeSalesProductCard(
-                  id: product.id,
-                  slug: product.slug,
-                  image: product.thumbnailImage,
-                  name: product.name,
-                  main_price: product.basePrice.toString(),
-                  stroked_price: product.baseDiscountedPrice.toString(),
-                  has_discount: product.discount != 0.0,
-                  discount: product.discount_percentage,
-                  isWholesale: true,
-                );
-              },
-            ),
-          );
-        }
-
-        // Default: still loading
-        return ShimmerHelper()
-            .buildProductGridShimmer(scontroller: _scrollController);
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _scrollController
-        ?.dispose(); // Dispose the scroll controller when not needed
-    super.dispose();
   }
 }
 

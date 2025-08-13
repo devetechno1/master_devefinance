@@ -250,8 +250,8 @@ class ProductRepository {
     return productMiniResponseFromJson(response.body);
   }
 
-  Future<WholesaleProductModel> getWholesaleProducts() async {
-    const String url = "${AppConfig.BASE_URL}/wholesale/all-products";
+  Future<WholesaleProductModel> getWholesaleProducts(int page) async {
+    final String url = "${AppConfig.BASE_URL}/wholesale/all-products?page=$page";
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
     });

@@ -5,10 +5,32 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.7'`
+- `mobileVersion = '9.10.8'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.8</strong></summary>
+
+### Config
+- **RAW_BASE_URL** now points to local dev server: `http://192.168.100.200:8080/devef` (dynamic domain commented).  
+  ⚠️ Dev-only — revert before production.
+
+### Repository / API
+- `getWholesaleProducts` now accepts `int page` and calls `/wholesale/all-products?page={page}`.
+
+### Wholesale Screen
+- Implemented **pagination + infinite scroll** (prefetch at ~70%), **pull-to-refresh**, and **shimmer** placeholders while loading more.
+- Replaced `FutureBuilder` with state-driven flow (`page`, `_isLoading`, `_isLoadingMore`, `_hasMoreProducts`).
+- Fixed item count/index issues; proper controller disposal; extracted `AppBar` builder.
+
+### Product Details
+- **pkg price** line: show strikethrough **only if discounted** (`firstPrice != price`) to avoid false strikes.
+
+### Notes
+- Suggested app version: `9.10.8+91008`.
+</details>
 
 
 <details>
