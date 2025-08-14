@@ -21,6 +21,18 @@ class ShimmerHelper {
     );
   }
 
+  static Widget loadingItemBuilder(int index) {
+    return Shimmer.fromColors(
+      baseColor: MyTheme.shimmer_base,
+      highlightColor: MyTheme.shimmer_highlighted,
+      child: Container(
+        height: (index + 1) % 2 != 0 ? 250 : 300,
+        width: double.infinity,
+        decoration: BoxDecorations.buildBoxDecoration_1(),
+      ),
+    );
+  }
+
   Widget buildCircleShimmer(
       {double height = double.infinity,
       double? width = double.infinity,
@@ -187,7 +199,8 @@ class ShimmerHelper {
           );
         });
   }
- GridView buildGridShimmerWithAxisCount(
+
+  GridView buildGridShimmerWithAxisCount(
       {item_count = 10,
       int crossAxisCount = 2,
       crossAxisSpacing = 10.0,
@@ -218,6 +231,7 @@ class ShimmerHelper {
           );
         });
   }
+
   ListView buildSeparatedHorizontalListShimmer(
       {double separationWidth = 16.0,
       int itemCount = 10,

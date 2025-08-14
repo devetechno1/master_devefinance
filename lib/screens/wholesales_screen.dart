@@ -1,163 +1,42 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
-
 import 'package:active_ecommerce_cms_demo_app/data_model/wholesale_model.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_details.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../app_config.dart';
 import '../custom/box_decorations.dart';
 
-class WholesalesScreen extends StatefulWidget {
+import '../custom/paged_view.dart';
+
+class WholesalesScreen extends StatelessWidget {
   const WholesalesScreen({super.key});
 
-  @override
-  State<WholesalesScreen> createState() => _WholesalesScreenState();
-}
-
-class _WholesalesScreenState extends State<WholesalesScreen> {
-  final ScrollController _scrollController = ScrollController();
-
-  int page = 1;
-  bool _isLoading = true;
-  bool _isLoadingMore = false;
-  final List<Product> _products = [];
-
-  bool _hasMoreProducts = true;
-
-  @override
-  void initState() {
-    super.initState();
-    getInitWholesaleProducts();
-    _scrollController.addListener(
-      () {
-        if (_scrollController.position.pixels >=
-            0.7 * _scrollController.position.maxScrollExtent) {
-          if (!_isLoadingMore && _hasMoreProducts) {
-            getMoreWholesaleProducts();
-          }
-        }
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    return super.dispose();
-  }
-
-  Future<void> getInitWholesaleProducts() async {
-    page = 1;
-    _products.clear();
-    final ProductData? p = await getWholesaleProducts(1);
-    if (p != null) _products.addAll(p.data);
-
-    _isLoading = false;
-    setState(() {});
-  }
-
-  Future<void> getMoreWholesaleProducts() async {
-    page++;
-    _isLoadingMore = true;
-    setState(() {});
-    final ProductData? p = await getWholesaleProducts(page);
-    if (p != null) {
-      if (p.data.isEmpty) _hasMoreProducts = false;
-      _products.addAll(p.data);
-    }
-    _isLoadingMore = false;
-    setState(() {});
-  }
-
-  Future<ProductData?> getWholesaleProducts(int page) async {
+  Future<PageResult<Product>> _fetchWholesale(int page) async {
     try {
       final WholesaleProductModel res =
           await ProductRepository().getWholesaleProducts(page);
-      if (!res.result) throw 'Failed to fetch wholesale products';
-      return res.products;
-    } catch (e) {
-      print('Error fetching wholesale products: $e');
+      if (res.result != true) {
+        return const PageResult<Product>(data: [], hasMore: false);
+      }
+      final List<Product> list = res.products.data;
+      final bool hasMore = list.isNotEmpty;
+      return PageResult<Product>(data: list, hasMore: hasMore);
+    } catch (_) {
+      return const PageResult<Product>(data: [], hasMore: false);
     }
-
-    return null;
   }
 
-  late final AppBar appBar = buildAppBar();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: MyTheme.mainColor,
-      appBar: appBar,
-      body: RefreshIndicator(
-        onRefresh: getInitWholesaleProducts,
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: Builder(builder: (context) {
-            if (_isLoading) return ShimmerHelper().buildProductGridShimmer();
-
-            if (_products.isEmpty) {
-              return Container(
-                height: MediaQuery.sizeOf(context).height,
-                alignment: Alignment.center,
-                child: Text('no_data_is_available'.tr(context: context)),
-              );
-            }
-            return MasonryGridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 14,
-              crossAxisSpacing: 14,
-              itemCount: _products.length + (_hasMoreProducts ? 3 : 0),
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(
-                  top: AppDimensions.paddingLarge,
-                  bottom: AppDimensions.paddingSupSmall,
-                  left: 18,
-                  right: 18),
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                if (index >= _products.length) {
-                  return Shimmer.fromColors(
-                    baseColor: MyTheme.shimmer_base,
-                    highlightColor: MyTheme.shimmer_highlighted,
-                    child: Container(
-                      height: (index + 1) % 2 != 0 ? 250 : 300,
-                      width: double.infinity,
-                      decoration: BoxDecorations.buildBoxDecoration_1(),
-                    ),
-                  );
-                }
-                final product = _products[index]; // Fix index issue here
-                return WholeSalesProductCard(
-                  id: product.id,
-                  slug: product.slug,
-                  image: product.thumbnailImage,
-                  name: product.name,
-                  main_price: product.basePrice.toString(),
-                  stroked_price: product.baseDiscountedPrice.toString(),
-                  has_discount: product.discount != 0.0,
-                  discount: product.discount_percentage,
-                  isWholesale: true,
-                );
-              },
-            );
-          }),
-        ),
-      ),
-    );
-  }
-
-  AppBar buildAppBar() {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
@@ -173,7 +52,7 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
       ),
       title: Text(
         'wholesale_products_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: MyTheme.dark_font_grey,
           fontWeight: FontWeight.bold,
@@ -181,6 +60,51 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
       ),
       elevation: 0.0,
       titleSpacing: 0,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MyTheme.mainColor,
+      appBar: _buildAppBar(context),
+      body: PagedView<Product>(
+        fetchPage: _fetchWholesale,
+        layout: PagedLayout.masonry,
+        gridCrossAxisCount: 2,
+        mainAxisSpacing: 14,
+        crossAxisSpacing: 14,
+        padding: const EdgeInsets.only(
+          top: AppDimensions.paddingLarge,
+          bottom: AppDimensions.paddingSupSmall,
+          left: 18,
+          right: 18,
+        ),
+        itemBuilder: (context, product, index) {
+          return WholeSalesProductCard(
+            id: product.id,
+            slug: product.slug,
+            image: product.thumbnailImage,
+            name: product.name,
+            main_price: product.basePrice.toString(),
+            stroked_price: product.baseDiscountedPrice.toString(),
+            has_discount: product.discount != 0.0,
+            discount: product.discount_percentage,
+            isWholesale: true,
+          );
+        },
+        loadingItemBuilder: (context, index) {
+          return Shimmer.fromColors(
+            baseColor: MyTheme.shimmer_base,
+            highlightColor: MyTheme.shimmer_highlighted,
+            child: Container(
+              height: (index + 1) % 2 != 0 ? 250 : 300,
+              width: double.infinity,
+              decoration: BoxDecorations.buildBoxDecoration_1(),
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -207,10 +131,9 @@ class WholeSalesProductCard extends StatefulWidget {
     this.main_price,
     this.stroked_price,
     this.has_discount = false,
-    bool? isWholesale = false, // Corrected to use isWholesale
+    this.isWholesale = false,
     this.discount,
-  })  : isWholesale = isWholesale, // Assigning isWholesale to isWholesale
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _WholeSalesProductCardState createState() => _WholeSalesProductCardState();
@@ -219,8 +142,6 @@ class WholeSalesProductCard extends StatefulWidget {
 class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        'Wholesale status: ${widget.isWholesale}'); // Debug print to check wholesale status
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -242,7 +163,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                 AspectRatio(
                   aspectRatio: 1,
                   child: Stack(children: [
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
@@ -255,7 +176,9 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                         ),
                       ),
                     ),
-                    if (whole_sale_addon_installed.$ && widget.isWholesale!)
+                    if (whole_sale_addon_installed.$ &&
+                        widget.isWholesale == true &&
+                        AppConfig.businessSettingsData.showWholesaleLabel)
                       Positioned(
                         bottom: 0,
                         child: Container(
@@ -293,7 +216,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       ),
                   ]),
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -326,7 +249,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: MyTheme.medium_grey,
                               fontSize: 12,

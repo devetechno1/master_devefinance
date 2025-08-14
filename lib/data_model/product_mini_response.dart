@@ -172,12 +172,12 @@ class ProductMiniResponse {
   ProductMiniResponse({
     this.products,
     this.meta,
-    this.success,
+    required this.success,
     this.status,
   });
 
   List<Product>? products;
-  bool? success;
+  bool success;
   int? status;
   Meta? meta;
 
@@ -189,7 +189,7 @@ class ProductMiniResponse {
               )
             : null,
         meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
-        success: json["success"],
+        success: json["success"] == true,
         status: json["status"],
       );
 

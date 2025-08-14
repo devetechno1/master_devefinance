@@ -5,10 +5,37 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.8'`
+- `mobileVersion = '9.10.9'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.9</strong></summary>
+
+### Widgets / Infra
+- New generic **`PagedView<T>`** with infinite scroll, pull-to-refresh, and flexible layouts (**list / grid / masonry**).
+- Supports `preloadTriggerFraction`, custom `itemBuilder`, `loadingItemBuilder`, `emptyBuilder`, and scroll `physics`.
+- Grid tuning via `gridCrossAxisCount`, `gridAspectRatio`, `gridMainAxisExtent`. Sliver-based for performance.
+
+### Product Screens
+- **TopSellingProducts** migrated to `PagedView<Product>`; single-shot fetch (`hasMore=false`), masonry 2-col, shimmer placeholders.
+- **Wholesale** screen migrated to `PagedView<Product>` with real paging via `getWholesaleProducts(page)`; shimmer while loading more.
+- Wholesale badge now shows **only if**: wholesale addon installed **and** `BusinessSettingsData.showWholesaleLabel` is true.
+
+### Models
+- `BusinessSettingsData`: add `showWholesaleLabel` (maps backend key `wholesale_lable == "1"`).
+- `ProductMiniResponse`: `success` -> **required non-nullable bool**; JSON parsed with `json["success"] == true`.
+
+### UI
+- `ShimmerHelper`: add `loadingItemBuilder(int index)` helper.
+- `MyTheme`: normalize color fields; prefer `const` where safe.
+
+### Notes
+- **No API endpoint changes** → _no MUST UPDATE_ for server.
+- Suggested app version: `9.10.9+91009`.
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.8</strong></summary>
