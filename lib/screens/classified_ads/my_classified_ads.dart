@@ -70,8 +70,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
 
   getUserInfo() async {
     final userInfoRes = await ProfileRepository().getUserInfoResponse();
-    if (userInfoRes.data.isNotEmpty) {
-      _userInfo = userInfoRes.data.first;
+    if (userInfoRes.data?.isNotEmpty == true) {
+      _userInfo = userInfoRes.data!.first;
       _remainingProduct = _userInfo!.remainingUploads.toString();
       _currentPackageName = _userInfo!.packageName;
     }

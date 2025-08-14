@@ -5,10 +5,27 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.9'`
+- `mobileVersion = '9.10.10'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.10</strong></summary>
+
+### Stability & Null-Safety
+- **ClassifiedAdsResponse**: resilient JSON parsing (nullable `links`/`meta`, strict `success`, empty list when `data` isn't a List).
+- **UserInfoResponse**: same guards; strict boolean `success`.
+- **ProfileRepository.getUserInfoResponse()**: return type → `UserInfoResponse` (was `dynamic`).
+- **My Classified Ads**: null-safe checks before accessing first element.
+- **Guest Checkout / Map**: null-safe `animateCamera` with controller existence check.
+- **Profile screen**: show Classifieds entry only if feature enabled **and** user is logged in.
+
+### Notes
+- **No API changes** → _no MUST UPDATE_ for server.
+- Suggested app version: `9.10.10+91010`.
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.9</strong></summary>
