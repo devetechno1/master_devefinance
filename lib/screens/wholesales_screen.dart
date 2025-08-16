@@ -16,7 +16,8 @@ import 'package:shimmer/shimmer.dart';
 import '../app_config.dart';
 import '../custom/box_decorations.dart';
 
-import '../custom/paged_view.dart';
+import '../custom/paged_view/models/page_result.dart';
+import '../custom/paged_view/paged_view.dart';
 
 class WholesalesScreen extends StatelessWidget {
   const WholesalesScreen({super.key});

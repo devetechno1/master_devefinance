@@ -9,7 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
-import '../../custom/paged_view.dart';
+import '../../custom/paged_view/models/page_result.dart';
+import '../../custom/paged_view/paged_view.dart';
 
 class TopSellingProducts extends StatefulWidget {
   @override

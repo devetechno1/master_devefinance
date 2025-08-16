@@ -5,10 +5,29 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.10'`
+- `mobileVersion = '9.10.11'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.11 – PagedView modularization</strong></summary>
+
+### Infra / Widgets
+- Split monolithic PagedView into separate files:
+  - `lib/custom/paged_view/models/page_result.dart`
+  - `lib/custom/paged_view/paged_view.dart`
+  - `lib/helpers/grid_responsive.dart`
+- Updated imports in:
+  - `lib/screens/product/top_selling_products.dart`
+  - `lib/screens/wholesales_screen.dart`
+- UX/Perf: load-more triggers at bottom edge; prefetch when first page doesn't fill viewport.
+
+### Notes
+- No API changes.
+- No store updates required.
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.10</strong></summary>
