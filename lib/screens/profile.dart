@@ -437,7 +437,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-          if (AppConfig.businessSettingsData.classifiedProduct)
+          if (AppConfig.businessSettingsData.classifiedProduct && is_logged_in.$)
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.myClassified,

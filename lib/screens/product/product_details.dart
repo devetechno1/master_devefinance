@@ -1597,32 +1597,36 @@ class _ProductDetailsState extends State<ProductDetails>
                               title: 'unit_price_ucf'.tr(context: context),
                               data: wholeSale.priceDouble.withSeparator,
                             ),
-                          _ItemDataWidget(
-                            title: 'pkg_price'.tr(context: context),
-                            data: (wholeSale.minQty * wholeSale.priceDouble)
-                                .withSeparator,
-                            beforeDataInLine: [
-                              if (AppConfig.businessSettingsData
-                                      .showPackingBeforePriceWholesaleProduct &&
-                                  index != 0) ...[
-                                TextSpan(
-                                  text: (wholesaleList[0].priceDouble *
-                                          wholeSale.minQty)
-                                      .withSeparator,
-                                  style: const TextStyle(
-                                    color: MyTheme.font_grey,
-                                    decoration: TextDecoration.lineThrough,
-                                    fontWeight: FontWeight.normal,
+                          Builder(builder: (context) {
+                            final double firstPrice =
+                                wholesaleList[0].priceDouble * wholeSale.minQty;
+                            final double price =
+                                wholeSale.minQty * wholeSale.priceDouble;
+                            return _ItemDataWidget(
+                              title: 'pkg_price'.tr(context: context),
+                              data: price.withSeparator,
+                              beforeDataInLine: [
+                                if (AppConfig.businessSettingsData
+                                        .showPackingBeforePriceWholesaleProduct &&
+                                    index != 0 &&
+                                    firstPrice != price) ...[
+                                  TextSpan(
+                                    text: firstPrice.withSeparator,
+                                    style: const TextStyle(
+                                      color: MyTheme.font_grey,
+                                      decoration: TextDecoration.lineThrough,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                                   ),
-                                ),
-                                const WidgetSpan(
-                                  child: SizedBox(
-                                    width: AppDimensions.paddingSmall,
-                                  ),
-                                )
+                                  const WidgetSpan(
+                                    child: SizedBox(
+                                      width: AppDimensions.paddingSmall,
+                                    ),
+                                  )
+                                ],
                               ],
-                            ],
-                          ),
+                            );
+                          }),
                         ],
                       ),
                     ),

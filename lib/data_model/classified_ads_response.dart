@@ -25,15 +25,19 @@ class ClassifiedAdsResponse {
   bool? success;
   int? status;
 
-  factory ClassifiedAdsResponse.fromJson(Map<String, dynamic> json) =>
-      ClassifiedAdsResponse(
-        data: List<ClassifiedAdsMiniData>.from(
-            json["data"].map((x) => ClassifiedAdsMiniData.fromJson(x))),
-        links: Links.fromJson(json["links"]),
-        meta: Meta.fromJson(json["meta"]),
-        success: json["success"],
-        status: json["status"],
-      );
+  factory ClassifiedAdsResponse.fromJson(Map<String, dynamic> json) {
+    final data = json["data"];
+    return ClassifiedAdsResponse(
+      data: data is! List
+          ? []
+          : List<ClassifiedAdsMiniData>.from(
+              json["data"].map((x) => ClassifiedAdsMiniData.fromJson(x))),
+      links: json["links"] == null ? null : Links.fromJson(json["links"]),
+      meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
+      success: json["success"] == true,
+      status: json["status"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data!.map((x) => x.toJson())),

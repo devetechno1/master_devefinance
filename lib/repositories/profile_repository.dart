@@ -86,7 +86,7 @@ class ProfileRepository {
     return phoneEmailAvailabilityResponseFromJson(response.body);
   }
 
-  Future<dynamic> getUserInfoResponse() async {
+  Future<UserInfoResponse> getUserInfoResponse() async {
     const String url = ("${AppConfig.BASE_URL}/customer/info");
 
     final response = await ApiRequest.get(url: url, headers: {

@@ -10,6 +10,7 @@ import 'update_model.dart';
 import 'verification_form.dart';
 
 class BusinessSettingsData extends Equatable {
+  final bool showWholesaleLabel;
   final bool showPackingQtyWholesaleProduct;
   final bool showPackingQtyPriceWholesaleProduct;
   final bool showPackingBeforePriceWholesaleProduct;
@@ -269,6 +270,7 @@ class BusinessSettingsData extends Equatable {
   bool get sellerWiseShipping => shippingType == "seller_wise_shipping";
 
   const BusinessSettingsData({
+    this.showWholesaleLabel = false,
     this.showPackingQtyWholesaleProduct = false,
     this.showPackingQtyPriceWholesaleProduct = false,
     this.showPackingBeforePriceWholesaleProduct = false,
@@ -553,6 +555,7 @@ class BusinessSettingsData extends Equatable {
     }
     return BusinessSettingsData(
         updateData: updateData,
+        showWholesaleLabel: (data['wholesale_lable'] as String?) == "1",
         showPackingQtyWholesaleProduct: (data['packing_quty_wholesale_product'] as String?) == "1",
         showPackingQtyPriceWholesaleProduct: (data['packing_unit_price_wholesale_product'] as String?) == "1",
         showPackingBeforePriceWholesaleProduct: (data['packing_before_price_wholesale_product'] as String?) == "1",

@@ -67,7 +67,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
     selectedPlace = initPosition;
     widget.onPlacePicked?.call(initPosition);
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _controller!.animateCamera(
+      (_) => _controller?.animateCamera(
         CameraUpdate.newLatLngZoom(initPosition, 14),
       ),
     );

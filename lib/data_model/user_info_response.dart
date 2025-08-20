@@ -21,13 +21,17 @@ class UserInfoResponse {
   bool? success;
   int? status;
 
-  factory UserInfoResponse.fromJson(Map<String, dynamic> json) =>
-      UserInfoResponse(
-        data: List<UserInformation>.from(
-            json["data"].map((x) => UserInformation.fromJson(x))),
-        success: json["success"],
-        status: json["status"],
-      );
+  factory UserInfoResponse.fromJson(Map<String, dynamic> json) {
+    final data = json["data"];
+    return UserInfoResponse(
+      data: data is! List
+          ? []
+          : List<UserInformation>.from(
+              json["data"].map((x) => UserInformation.fromJson(x))),
+      success: json["success"] == true,
+      status: json["status"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data!.map((x) => x.toJson())),

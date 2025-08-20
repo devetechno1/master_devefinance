@@ -5,10 +5,95 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.7'`
+- `mobileVersion = '9.10.11'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.11 – PagedView modularization</strong></summary>
+
+### Infra / Widgets
+- Split monolithic PagedView into separate files:
+  - `lib/custom/paged_view/models/page_result.dart`
+  - `lib/custom/paged_view/paged_view.dart`
+  - `lib/helpers/grid_responsive.dart`
+- Updated imports in:
+  - `lib/screens/product/top_selling_products.dart`
+  - `lib/screens/wholesales_screen.dart`
+- UX/Perf: load-more triggers at bottom edge; prefetch when first page doesn't fill viewport.
+
+### Notes
+- No API changes.
+- No store updates required.
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.10</strong></summary>
+
+### Stability & Null-Safety
+- **ClassifiedAdsResponse**: resilient JSON parsing (nullable `links`/`meta`, strict `success`, empty list when `data` isn't a List).
+- **UserInfoResponse**: same guards; strict boolean `success`.
+- **ProfileRepository.getUserInfoResponse()**: return type → `UserInfoResponse` (was `dynamic`).
+- **My Classified Ads**: null-safe checks before accessing first element.
+- **Guest Checkout / Map**: null-safe `animateCamera` with controller existence check.
+- **Profile screen**: show Classifieds entry only if feature enabled **and** user is logged in.
+
+### Notes
+- **No API changes** → _no MUST UPDATE_ for server.
+- Suggested app version: `9.10.10+91010`.
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.9</strong></summary>
+
+### Widgets / Infra
+- New generic **`PagedView<T>`** with infinite scroll, pull-to-refresh, and flexible layouts (**list / grid / masonry**).
+- Supports `preloadTriggerFraction`, custom `itemBuilder`, `loadingItemBuilder`, `emptyBuilder`, and scroll `physics`.
+- Grid tuning via `gridCrossAxisCount`, `gridAspectRatio`, `gridMainAxisExtent`. Sliver-based for performance.
+
+### Product Screens
+- **TopSellingProducts** migrated to `PagedView<Product>`; single-shot fetch (`hasMore=false`), masonry 2-col, shimmer placeholders.
+- **Wholesale** screen migrated to `PagedView<Product>` with real paging via `getWholesaleProducts(page)`; shimmer while loading more.
+- Wholesale badge now shows **only if**: wholesale addon installed **and** `BusinessSettingsData.showWholesaleLabel` is true.
+
+### Models
+- `BusinessSettingsData`: add `showWholesaleLabel` (maps backend key `wholesale_lable == "1"`).
+- `ProductMiniResponse`: `success` -> **required non-nullable bool**; JSON parsed with `json["success"] == true`.
+
+### UI
+- `ShimmerHelper`: add `loadingItemBuilder(int index)` helper.
+- `MyTheme`: normalize color fields; prefer `const` where safe.
+
+### Notes
+- **No API endpoint changes** → _no MUST UPDATE_ for server.
+- Suggested app version: `9.10.9+91009`.
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.8</strong></summary>
+
+### Config
+- **RAW_BASE_URL** now points to local dev server: `http://192.168.100.200:8080/devef` (dynamic domain commented).  
+  ⚠️ Dev-only — revert before production.
+
+### Repository / API
+- `getWholesaleProducts` now accepts `int page` and calls `/wholesale/all-products?page={page}`.
+
+### Wholesale Screen
+- Implemented **pagination + infinite scroll** (prefetch at ~70%), **pull-to-refresh**, and **shimmer** placeholders while loading more.
+- Replaced `FutureBuilder` with state-driven flow (`page`, `_isLoading`, `_isLoadingMore`, `_hasMoreProducts`).
+- Fixed item count/index issues; proper controller disposal; extracted `AppBar` builder.
+
+### Product Details
+- **pkg price** line: show strikethrough **only if discounted** (`firstPrice != price`) to avoid false strikes.
+
+### Notes
+- Suggested app version: `9.10.8+91008`.
+</details>
 
 
 <details>

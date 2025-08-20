@@ -44,8 +44,6 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        'Wholesale status: ${widget.isWholesale}'); // Debug print to check wholesale status
     return InkWell(
       onTap: () {
         Navigator.push(
