@@ -127,7 +127,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
       ),
       title: Text(
         'in_house_products_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

@@ -288,7 +288,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
           elevation: 0,
           title: Text(
             "add_new_classified_product_ucf".tr(context: context),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: MyTheme.dark_font_grey,
@@ -349,7 +349,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                 children: [
                   Text(
                     'general_ucf'.tr(context: context),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: MyTheme.dark_font_grey,
                       fontWeight: FontWeight.bold,
@@ -525,7 +525,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                 children: [
                   Text(
                     'media_ucf'.tr(context: context),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 13,
                         color: MyTheme.dark_font_grey,
                         fontWeight: FontWeight.bold),
@@ -878,7 +878,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                 children: [
                   Text(
                     'auction_price_ucf'.tr(context: context),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 13,
                         color: MyTheme.dark_font_grey,
                         fontWeight: FontWeight.bold),

@@ -283,7 +283,7 @@ class _CartState extends State<_Cart> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
                       'total_amount_ucf'.tr(context: context),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.dark_font_grey,
                           fontSize: 13,
                           fontWeight: FontWeight.w700),
@@ -430,7 +430,7 @@ class _CartState extends State<_Cart> {
                     children: [
                       Text(
                         cartProvider.shopList[index].name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.dark_font_grey,
                             fontWeight: FontWeight.bold,
                             fontSize: 12),

@@ -648,7 +648,7 @@ class _FlashDealListState extends State<FlashDealList> {
       ),
       title: Text(
         'flash_deals_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

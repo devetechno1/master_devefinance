@@ -79,9 +79,9 @@ class _VideoDescriptionState extends State<VideoDescription> {
                   ? Alignment.centerRight
                   : Alignment.centerLeft,
               child: Container(
-                decoration: ShapeDecoration(
+                decoration: const ShapeDecoration(
                   color: MyTheme.medium_grey_50,
-                  shape: const RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(AppDimensions.radius),
                       bottomRight: Radius.circular(AppDimensions.radius),

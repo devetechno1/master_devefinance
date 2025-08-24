@@ -234,7 +234,7 @@ class _ChatState extends State<Chat> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyTheme.medium_grey,
                               fontSize: 12,
                               height: 1.6,
@@ -304,7 +304,7 @@ class _ChatState extends State<Chat> {
                           widget.messenger_name!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: MyTheme.dark_font_grey),
@@ -394,10 +394,10 @@ class _ChatState extends State<Chat> {
                     Radius.circular(AppDimensions.radiusVeryLarge),
                   ),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(color: MyTheme.medium_grey, width: 0.5),
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(AppDimensions.radiusVeryLarge),
                   ),
                 ),
@@ -456,7 +456,7 @@ class _ChatState extends State<Chat> {
               style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
             ),
             Text('$date $time',
-                style: TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
+                style: const TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
           ],
         ),
       ),
@@ -488,7 +488,7 @@ class _ChatState extends State<Chat> {
                 ),
               ),
               Text(date + " " + time,
-                  style: TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
+                  style: const TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
             ],
           ),
         ),

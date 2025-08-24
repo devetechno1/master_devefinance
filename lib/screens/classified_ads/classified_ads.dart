@@ -90,7 +90,7 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
       leading: UsefulElements.backButton(),
       title: Text(
         'classified_ads_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

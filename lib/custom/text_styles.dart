@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 
 class TextStyles {
   static TextStyle buildAppBarTexStyle() {
-    return TextStyle(
+    return const TextStyle(
         fontSize: 16,
         color: MyTheme.dark_font_grey,
         fontWeight: FontWeight.w700);
   }
 
   static TextStyle largeTitleTexStyle() {
-    return TextStyle(
+    return const TextStyle(
         fontSize: 16,
         color: MyTheme.dark_font_grey,
         fontWeight: FontWeight.w700);
   }
 
   static TextStyle smallTitleTexStyle() {
-    return TextStyle(
+    return const TextStyle(
         fontSize: 13,
         color: MyTheme.dark_font_grey,
         fontWeight: FontWeight.w700);
   }
 
   static TextStyle verySmallTitleTexStyle() {
-    return TextStyle(
+    return const TextStyle(
         fontSize: 10,
         color: MyTheme.dark_font_grey,
         fontWeight: FontWeight.normal);

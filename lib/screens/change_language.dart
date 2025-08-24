@@ -164,7 +164,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       leading: UsefulElements.backButton(),
       title: Text(
         "${'change_language_ucf'.tr(context: context)} (${app_language.$}) - (${app_mobile_language.$})",
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

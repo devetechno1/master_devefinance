@@ -210,10 +210,10 @@ class _RegistrationState extends State<Registration> {
           );
         }));
       } else {
-        if (AppConfig.businessSettingsData.sellerWiseShipping) {
-          await homeData.handleAddressNavigation();
-        }
         OneContext().context!.push("/");
+        if (AppConfig.businessSettingsData.sellerWiseShipping) {
+          homeData.handleAddressNavigation();
+        }
 
         // Navigator.push(context, MaterialPageRoute(builder: (context) {
         //   return Home();
@@ -583,7 +583,7 @@ class _RegistrationState extends State<Registration> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return Login();
+                          return const Login();
                         }));
                       },
                     ),

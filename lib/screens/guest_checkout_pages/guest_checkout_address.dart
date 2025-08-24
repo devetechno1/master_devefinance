@@ -373,7 +373,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         children: [
                           Text(
                             "${'add_new_address'.tr(context: context)}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 13,
                                 color: MyTheme.dark_font_grey,
                                 fontWeight: FontWeight.bold),
@@ -586,7 +586,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].address,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -614,7 +614,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].city_name,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -642,7 +642,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].state_name,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -670,7 +670,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].country_name,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -698,7 +698,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].postal_code,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -726,7 +726,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].phone,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),

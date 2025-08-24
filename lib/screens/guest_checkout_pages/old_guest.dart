@@ -6,7 +6,6 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/guest_checkout_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -297,7 +296,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text("${'address_ucf'.tr(context: context)} *",
                     style:
-                        TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
+                        const TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
               ),
 
               Padding(
@@ -341,7 +340,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         child: Center(
                             child: Text(
                                 'loading_countries_ucf'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic country) {
@@ -399,7 +398,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         child: Center(
                             child: Text(
                                 'loading_states_ucf'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic state) {
@@ -467,7 +466,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         child: Center(
                             child: Text(
                                 'loading_cities_ucf'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic city) {
@@ -545,7 +544,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          AIZRoute.push(context, Login());
+                          AIZRoute.push(context, const Login());
                         },
                       text: 'login_ucf'.tr(context: context),
                       style: TextStyle(
@@ -572,15 +571,15 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
       fillColor: MyTheme.white,
       hintText: hintText,
       hintStyle: const TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
-        borderRadius: const BorderRadius.all(
+        borderRadius: BorderRadius.all(
           Radius.circular(AppDimensions.radiusSmall),
         ),
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
-        borderRadius: const BorderRadius.all(
+        borderRadius: BorderRadius.all(
           Radius.circular(AppDimensions.radiusSmall),
         ),
       ),

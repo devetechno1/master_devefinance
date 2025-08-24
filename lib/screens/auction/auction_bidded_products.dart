@@ -393,7 +393,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
       leading: UsefulElements.backButton(),
       title: Text(
         'all_bidded_products'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

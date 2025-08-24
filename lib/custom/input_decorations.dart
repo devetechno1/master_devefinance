@@ -9,9 +9,9 @@ class InputDecorations {
         filled: true,
         fillColor: MyTheme.white,
         hintStyle: const TextStyle(fontSize: 12.0, color: Color(0xffA8AFB3)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.2),
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(AppDimensions.radiusHalfSmall),
           ),
         ),

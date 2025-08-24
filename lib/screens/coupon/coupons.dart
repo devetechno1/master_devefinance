@@ -364,7 +364,7 @@ class _CouponsState extends State<Coupons> {
       leading: UsefulElements.backButton(),
       title: Text(
         'coupons_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: MyTheme.dark_font_grey,
           fontWeight: FontWeight.bold,

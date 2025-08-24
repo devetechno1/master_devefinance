@@ -519,7 +519,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
           child: Text(
             'retype_password_ucf'.tr(context: context),
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 12,
                 color: MyTheme.dark_font_grey,
                 fontWeight: FontWeight.normal),

@@ -210,7 +210,7 @@ class _WalletState extends State<Wallet> {
       ),
       title: Text(
         'my_wallet_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),
@@ -235,7 +235,7 @@ class _WalletState extends State<Wallet> {
                   left: AppDimensions.paddingDefault),
               child: Text(
                 'wallet_recharge_history_ucf'.tr(context: context),
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.dark_font_grey,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
@@ -307,7 +307,7 @@ class _WalletState extends State<Wallet> {
                 width: 40,
                 child: Text(
                   getFormattedRechargeListIndex(index),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.dark_font_grey,
                       fontSize: 12,
                       fontWeight: FontWeight.w600),
@@ -320,7 +320,7 @@ class _WalletState extends State<Wallet> {
                   children: [
                     Text(
                       _rechargeList[index].date,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: MyTheme.dark_font_grey,
                         fontSize: 12,
                       ),
@@ -330,12 +330,12 @@ class _WalletState extends State<Wallet> {
                     // ),
                     Text(
                       'payment_method_ucf'.tr(context: context),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.dark_font_grey, fontSize: 12),
                     ),
                     Text(
                       _rechargeList[index].payment_method,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.dark_font_grey, fontSize: 12),
                     ),
                   ],
@@ -358,7 +358,7 @@ class _WalletState extends State<Wallet> {
                   ),
                   Text(
                     _rechargeList[index].approval_string,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.dark_grey,
                     ),
                   ),
@@ -417,7 +417,7 @@ class _WalletState extends State<Wallet> {
               const Spacer(),
               Text(
                 "${'last_recharged'.tr(context: context)} : ${_balanceDetails.last_recharged}",
-                style: TextStyle(
+                style: const TextStyle(
                   color: MyTheme.light_grey,
                   fontSize: 10,
                 ),
@@ -502,7 +502,7 @@ class _WalletState extends State<Wallet> {
                     padding: const EdgeInsets.only(
                         bottom: AppDimensions.paddingSmall),
                     child: Text('amount_ucf'.tr(context: context),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.dark_font_grey,
                             fontSize: 13,
                             fontWeight: FontWeight.bold)),
@@ -525,17 +525,17 @@ class _WalletState extends State<Wallet> {
                                 'enter_amount_ucf'.tr(context: context),
                             hintStyle: const TextStyle(
                                 fontSize: 12.0, color: MyTheme.textfield_grey),
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: MyTheme.noColor, width: 0.0),
-                              borderRadius: const BorderRadius.all(
+                              borderRadius: BorderRadius.all(
                                 Radius.circular(AppDimensions.radiusSmall),
                               ),
                             ),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: MyTheme.noColor, width: 0.0),
-                              borderRadius: const BorderRadius.all(
+                              borderRadius: BorderRadius.all(
                                 Radius.circular(AppDimensions.radiusSmall),
                               ),
                             ),

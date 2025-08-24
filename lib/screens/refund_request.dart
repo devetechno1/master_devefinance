@@ -144,7 +144,7 @@ class _RefundRequestState extends State<RefundRequest> {
       ),
       title: Text(
         'refund_status_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),
@@ -204,7 +204,7 @@ class _RefundRequestState extends State<RefundRequest> {
                       child: Text(
                         _list[index].product_name,
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: MyTheme.dark_font_grey,
                           fontSize: 12,
                         ),
@@ -223,7 +223,7 @@ class _RefundRequestState extends State<RefundRequest> {
                     ),
                     Text(
                       "Date: " + _list[index].date,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: MyTheme.dark_font_grey,
                       ),
                     ),

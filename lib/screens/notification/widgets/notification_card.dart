@@ -128,7 +128,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                     const SizedBox(height: 5),
                     Text(
                       '${widget.dateTime}',
-                      style: TextStyle(color: MyTheme.medium_grey),
+                      style: const TextStyle(color: MyTheme.medium_grey),
                     ),
                   ],
                 ),

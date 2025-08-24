@@ -536,11 +536,13 @@ class _DropDownFieldWidget<T> extends StatefulWidget {
     required this.hintText,
     required this.loadingText,
     this.onSelected,
-    required this.suggestionsCallback,
+    required this.suggestionsCallback, 
+    this.textInputAction,
   });
   final TextEditingController? controller;
   final String hintText;
   final String loadingText;
+  final TextInputAction? textInputAction;
   final void Function(T)? onSelected;
   final FutureOr<List<T>?> Function(String) suggestionsCallback;
 
@@ -571,6 +573,7 @@ class _DropDownFieldWidgetState<T> extends State<_DropDownFieldWidget<T>> {
             if (!focusNode.hasFocus) suggestionsController.refresh();
           },
           focusNode: focusNode,
+          textInputAction: widget.textInputAction,
           obscureText: false,
           decoration: InputDecorations.buildInputDecoration_with_border(
             widget.hintText,
@@ -584,7 +587,7 @@ class _DropDownFieldWidgetState<T> extends State<_DropDownFieldWidget<T>> {
           child: Center(
             child: Text(
               widget.loadingText,
-              style: TextStyle(color: MyTheme.medium_grey),
+              style: const TextStyle(color: MyTheme.medium_grey),
             ),
           ),
         );
@@ -655,7 +658,7 @@ AppBar buildAppBar(BuildContext context) {
     leading: UsefulElements.backButton(),
     title: Text(
       'add_new_address'.tr(context: context),
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
         color: MyTheme.dark_font_grey,
         fontWeight: FontWeight.bold,

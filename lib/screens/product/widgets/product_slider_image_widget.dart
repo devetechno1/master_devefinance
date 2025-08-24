@@ -139,7 +139,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                   top: AppDimensions.paddingHalfSmall,
                   right: AppDimensions.paddingHalfSmall,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: MyTheme.medium_grey_50,
                       shape: BoxShape.circle,
                     ),

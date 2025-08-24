@@ -26,7 +26,7 @@ class ProductVerticalListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemWidth = 160.0;
+    const itemWidth = 160.0;
     if (isProductInitial && productList.isEmpty) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),

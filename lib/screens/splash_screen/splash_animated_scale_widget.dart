@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../app_config.dart';
-import '../../constants/app_dimensions.dart';
-import '../../constants/app_images.dart';
 import '../../my_theme.dart';
 
 class AnimatedScaleIconWidget extends StatefulWidget {

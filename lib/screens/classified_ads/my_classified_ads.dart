@@ -197,7 +197,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
           elevation: 0,
           title: Text(
             'my_products_ucf'.tr(context: context),
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: MyTheme.dark_font_grey),

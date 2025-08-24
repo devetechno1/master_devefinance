@@ -441,7 +441,7 @@ class CartProvider extends ChangeNotifier {
           Btn.basic(
             child: Text(
               'cancel_ucf'.tr(context: context),
-              style: TextStyle(color: MyTheme.medium_grey),
+              style: const TextStyle(color: MyTheme.medium_grey),
             ),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
@@ -452,7 +452,7 @@ class CartProvider extends ChangeNotifier {
             color: MyTheme.soft_accent_color,
             child: Text(
               'confirm_ucf'.tr(context: context),
-              style: TextStyle(color: MyTheme.dark_grey),
+              style: const TextStyle(color: MyTheme.dark_grey),
             ),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();

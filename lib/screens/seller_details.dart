@@ -1937,7 +1937,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                   if (!is_logged_in.$) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return Login();
+                      return const Login();
                     }));
                     return;
                   }
@@ -2021,7 +2021,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           _shopDetails?.name ?? "",
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style: TextStyle(
+          style: const TextStyle(
               color: MyTheme.dark_font_grey,
               fontSize: 16,
               fontWeight: FontWeight.w600),
@@ -2159,7 +2159,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: MyTheme.medium_grey,
                               fontSize: 12,

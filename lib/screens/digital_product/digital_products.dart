@@ -137,7 +137,7 @@ class _DigitalProductsState extends State<DigitalProducts> {
           children: [
             Text(
               'digital_product_ucf'.tr(context: context),
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
                   fontWeight: FontWeight.bold),
@@ -345,7 +345,7 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: MyTheme.medium_grey,
                               fontSize: 12,

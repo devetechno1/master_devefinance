@@ -178,12 +178,12 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
                               .tr(context: context),
                           textAlign: TextAlign.center,
                           style:
-                              TextStyle(color: MyTheme.dark_grey, fontSize: 14))
+                              const TextStyle(color: MyTheme.dark_grey, fontSize: 14))
                       : Text(
                           'check_your_WhatsApp_messages_to_retrieve_the_verification_code'
                               .tr(context: context),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: MyTheme.dark_grey, fontSize: 14))),
             ),
             Container(

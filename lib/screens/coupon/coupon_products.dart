@@ -63,7 +63,7 @@ class _CouponProductsState extends State<CouponProducts> {
           children: [
             Text(
               code ?? 'no_code'.tr(context: context),
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
                   fontWeight: FontWeight.bold),

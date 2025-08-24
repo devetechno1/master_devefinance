@@ -88,7 +88,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
         ),
         backgroundColor: MyTheme.mainColor,
         scrolledUnderElevation: 0.0,
-        iconTheme: IconThemeData(color: MyTheme.dark_font_grey),
+        iconTheme: const IconThemeData(color: MyTheme.dark_font_grey),
       ),
       body: RefreshIndicator(
         onRefresh: () {
@@ -181,7 +181,7 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.dark_font_grey,
                       fontSize: 13,
                       height: 1.6,

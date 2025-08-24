@@ -162,7 +162,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                   color: Colors.black, width: 1.0)),
                           child: Text(
                             'copy_product_link_ucf'.tr(context: context),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyTheme.medium_grey,
                             ),
                           ),
@@ -180,7 +180,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
                                 'copied_ucf'.tr(context: context),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
@@ -317,7 +317,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                 .buildCircularButtonDecoration_1(),
                             width: 36,
                             height: 36,
-                            child: Center(
+                            child: const Center(
                               child: Icon(
                                 CupertinoIcons.arrow_left,
                                 color: MyTheme.dark_font_grey,
@@ -334,7 +334,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               width: DeviceInfo(context).width! / 1.8,
                               child: Text(
                                 "${_productDetails != null ? _productDetails!.name : ''}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.dark_font_grey,
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold),
@@ -349,7 +349,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               BoxDecorations.buildCircularButtonDecoration_1(),
                           width: 36,
                           height: 36,
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.share_outlined,
                               color: MyTheme.dark_font_grey,
@@ -456,7 +456,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                 ),
                                 child: Text(
                                   'description_ucf'.tr(context: context),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: MyTheme.dark_font_grey,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600),
@@ -508,7 +508,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                 children: [
                                   Text(
                                     'seller_policy_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -550,7 +550,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                 children: [
                                   Text(
                                     'return_policy_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -592,7 +592,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                 children: [
                                   Text(
                                     'support_policy_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -626,7 +626,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                             (_productDetails != null
                                 ? _productDetails!.category!
                                 : ""),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.dark_font_grey,
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
@@ -661,7 +661,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             child: Text(
               _productDetails!.location!,
               maxLines: 1,
-              style: TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
+              style: const TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
             ))
       ],
     );
@@ -688,7 +688,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             },
             child: Text(
               showPhone ? _productDetails!.phone! : "01XXXXXXXXX",
-              style: TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
+              style: const TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
             ),
           ),
         ),
@@ -1035,9 +1035,9 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: const RoundedRectangleBorder(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(AppDimensions.radius),
                           bottomRight: Radius.circular(AppDimensions.radius),

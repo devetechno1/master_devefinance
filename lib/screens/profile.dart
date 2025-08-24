@@ -327,7 +327,7 @@ class _ProfileState extends State<Profile> {
                   onPressed: () {
                 AIZRoute.push(context, TopSellingProducts());
               }),
-              Divider(
+              const Divider(
                 thickness: 1,
                 color: MyTheme.light_grey,
               ),
@@ -344,7 +344,7 @@ class _ProfileState extends State<Profile> {
                       MaterialPageRoute(
                           builder: (context) => const WholesalesScreen()));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -361,7 +361,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(
                         builder: (context) => const BlogListScreen()));
               }),
-              Divider(
+              const Divider(
                 thickness: 1,
                 color: MyTheme.light_grey,
               ),
@@ -374,7 +374,7 @@ class _ProfileState extends State<Profile> {
               return const DigitalProducts();
             }));
           }),
-          Divider(
+          const Divider(
             thickness: 1,
             color: MyTheme.light_grey,
           ),
@@ -385,7 +385,7 @@ class _ProfileState extends State<Profile> {
               return const Coupons();
             }));
           }),
-          Divider(
+          const Divider(
             thickness: 1,
             color: MyTheme.light_grey,
           ),
@@ -400,7 +400,7 @@ class _ProfileState extends State<Profile> {
                     return FlashDealList();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -415,7 +415,7 @@ class _ProfileState extends State<Profile> {
               return const Filter(selected_filter: "brands");
             }));
           }),
-          Divider(
+          const Divider(
             thickness: 1,
             color: MyTheme.light_grey,
           ),
@@ -431,7 +431,7 @@ class _ProfileState extends State<Profile> {
                     return const AuctionProducts();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -447,7 +447,7 @@ class _ProfileState extends State<Profile> {
                     return const MyClassifiedAds();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -464,7 +464,7 @@ class _ProfileState extends State<Profile> {
                     return const ClassifiedAds();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -482,7 +482,7 @@ class _ProfileState extends State<Profile> {
                     return const LastViewProduct();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -500,7 +500,7 @@ class _ProfileState extends State<Profile> {
                     return const AuctionProducts();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -544,7 +544,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                   Text(
                                     'auction_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 12,
                                         color: MyTheme.dark_font_grey),
                                   ),
@@ -584,7 +584,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     child: Row(
                                       children: [
-                                        Text(
+                                        const Text(
                                           '-',
                                           style: TextStyle(
                                             color: MyTheme.dark_font_grey,
@@ -592,7 +592,7 @@ class _ProfileState extends State<Profile> {
                                         ),
                                         Text(
                                           " ${'on_auction_products_ucf'.tr(context: context)}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 12,
                                             color: MyTheme.dark_font_grey,
                                           ),
@@ -615,7 +615,7 @@ class _ProfileState extends State<Profile> {
                                           ),
                                           child: Row(
                                             children: [
-                                              Text(
+                                              const Text(
                                                 '-',
                                                 style: TextStyle(
                                                   color: MyTheme.dark_font_grey,
@@ -623,7 +623,7 @@ class _ProfileState extends State<Profile> {
                                               ),
                                               Text(
                                                 " ${'bidded_products_ucf'.tr(context: context)}",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 12,
                                                   color: MyTheme.dark_font_grey,
                                                 ),
@@ -643,7 +643,7 @@ class _ProfileState extends State<Profile> {
                                           ),
                                           child: Row(
                                             children: [
-                                              Text(
+                                              const Text(
                                                 '-',
                                                 style: TextStyle(
                                                   color: MyTheme.dark_font_grey,
@@ -651,7 +651,7 @@ class _ProfileState extends State<Profile> {
                                               ),
                                               Text(
                                                 " ${'purchase_history_ucf'.tr(context: context)}",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 12,
                                                   color: MyTheme.dark_font_grey,
                                                 ),
@@ -670,7 +670,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                 ),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -688,7 +688,7 @@ class _ProfileState extends State<Profile> {
                     );
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -705,7 +705,7 @@ class _ProfileState extends State<Profile> {
                     return const FollowedSellers();
                   }));
                 }),
-                Divider(
+                const Divider(
                   thickness: 1,
                   color: MyTheme.light_grey,
                 ),
@@ -724,7 +724,7 @@ class _ProfileState extends State<Profile> {
                               "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
                         )));
           }, icon: Icons.lock_outline_rounded),
-          Divider(
+          const Divider(
             thickness: 1,
             color: MyTheme.light_grey,
           ),
@@ -911,11 +911,11 @@ class _ProfileState extends State<Profile> {
         builder: (context) => AlertDialog(
               title: Text(
                 'delete_account_warning_title'.tr(context: context),
-                style: TextStyle(fontSize: 15, color: MyTheme.dark_font_grey),
+                style: const TextStyle(fontSize: 15, color: MyTheme.dark_font_grey),
               ),
               content: Text(
                 'delete_account_warning_description'.tr(context: context),
-                style: TextStyle(fontSize: 13, color: MyTheme.dark_font_grey),
+                style: const TextStyle(fontSize: 13, color: MyTheme.dark_font_grey),
               ),
               actions: [
                 TextButton(
@@ -1174,7 +1174,7 @@ class _ProfileState extends State<Profile> {
             Text(
               counter,
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 18,
                   color: MyTheme.dark_font_grey,
                   fontWeight: FontWeight.bold),
@@ -1289,7 +1289,7 @@ class _ProfileState extends State<Profile> {
                   child: Text(
                     //if user email is not available then check user phone if user phone is not available use empty string
                     "${user_email.$ != "" ? user_email.$ : user_phone.$ != "" ? user_phone.$ : ''}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: MyTheme.light_grey,
                     ),
                   )),
