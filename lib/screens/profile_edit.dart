@@ -640,114 +640,117 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
-          child: Text(
-            'phone_ucf'.tr(context: context),
-            style: const TextStyle(
-                fontSize: 12,
-                color: Color(0xff3E4447),
-                fontWeight: FontWeight.normal),
+        if(_phoneController.text.trim().isNotEmpty)...[
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
+            child: Text(
+              'phone_ucf'.tr(context: context),
+              style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xff3E4447),
+                  fontWeight: FontWeight.normal),
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
-            boxShadow: [MyTheme.commonShadow()],
+          Container(
+            margin: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
+              boxShadow: [MyTheme.commonShadow()],
+            ),
+            height: 36,
+            child: CustomInternationalPhoneNumberInput(
+              countries: countries_code,
+              readOnly : true,
+              hintText: 'phone_number_ucf'.tr(context: context),
+              errorMessage: 'invalid_phone_number'.tr(context: context),
+              initialValue: initialValue,
+              onInputChanged: (PhoneNumber number) {
+                setState(() {
+                  if (number.isoCode != null)
+                    AppConfig.default_country = number.isoCode!;
+                  _phone = number.phoneNumber ?? '';
+                  print(_phone);
+                });
+              },
+              onInputValidated: (bool value) {
+                print(value);
+                _isValidPhoneNumber = value;
+                setState(() {});
+              },
+              selectorConfig: const SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DIALOG),
+              ignoreBlank: false,
+              autoValidateMode: AutovalidateMode.disabled,
+              selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
+              textStyle: const TextStyle(color: MyTheme.font_grey),
+              textFieldController: _phoneController,
+              formatInput: true,
+              keyboardType: const TextInputType.numberWithOptions(signed: true),
+              inputDecoration: InputDecorations.buildInputDecoration_phone(
+                  hint_text: "01XXX XXX XXX"),
+              onSaved: (PhoneNumber number) {
+                print('On Saved: $number');
+              },
+            ),
           ),
-          height: 36,
-          child: CustomInternationalPhoneNumberInput(
-            countries: countries_code,
-            readOnly : true,
-            hintText: 'phone_number_ucf'.tr(context: context),
-            errorMessage: 'invalid_phone_number'.tr(context: context),
-            initialValue: initialValue,
-            onInputChanged: (PhoneNumber number) {
-              setState(() {
-                if (number.isoCode != null)
-                  AppConfig.default_country = number.isoCode!;
-                _phone = number.phoneNumber ?? '';
-                print(_phone);
-              });
-            },
-            onInputValidated: (bool value) {
-              print(value);
-              _isValidPhoneNumber = value;
-              setState(() {});
-            },
-            selectorConfig: const SelectorConfig(
-                selectorType: PhoneInputSelectorType.DIALOG),
-            ignoreBlank: false,
-            autoValidateMode: AutovalidateMode.disabled,
-            selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
-            textStyle: const TextStyle(color: MyTheme.font_grey),
-            textFieldController: _phoneController,
-            formatInput: true,
-            keyboardType: const TextInputType.numberWithOptions(signed: true),
-            inputDecoration: InputDecorations.buildInputDecoration_phone(
-                hint_text: "01XXX XXX XXX"),
-            onSaved: (PhoneNumber number) {
-              print('On Saved: $number');
-            },
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
-              child: Text(
-                'email_ucf'.tr(context: context),
-                style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xff3E4447),
-                    fontWeight: FontWeight.normal),
+        ],
+        if(_emailController.text.trim().isNotEmpty)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
+                child: Text(
+                  'email_ucf'.tr(context: context),
+                  style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xff3E4447),
+                      fontWeight: FontWeight.normal),
+                ),
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
-                          BorderRadius.circular(AppDimensions.radiusHalfSmall),
-                      boxShadow: [MyTheme.commonShadow()]),
-                  height: 36,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    _emailController.text,
-                    style:
-                        const TextStyle(fontSize: 12, color: Color(0xff999999)),
-                  )
-                  /*TextField(
-                        style: TextStyle(color:MyTheme.grey_153,fontSize: 12),
-                        enabled: false,
-                        enableIMEPersonalizedLearning: true,
-                        controller: _emailController,
-                        autofocus: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-        
-                            hint_text: "jhon@example.com").copyWith(
-                          //enabled: false,
-                      labelStyle: TextStyle(color: MyTheme.grey_153),
-                      enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      ),
-        
-                      focusedBorder: OutlineInputBorder(
+              Padding(
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusHalfSmall),
+                        boxShadow: [MyTheme.commonShadow()]),
+                    height: 36,
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      _emailController.text,
+                      style:
+                          const TextStyle(fontSize: 12, color: Color(0xff999999)),
+                    )
+                    /*TextField(
+                          style: TextStyle(color:MyTheme.grey_153,fontSize: 12),
+                          enabled: false,
+                          enableIMEPersonalizedLearning: true,
+                          controller: _emailController,
+                          autofocus: false,
+                          decoration: InputDecorations.buildInputDecoration_1(
+          
+                              hint_text: "jhon@example.com").copyWith(
+                            //enabled: false,
+                        labelStyle: TextStyle(color: MyTheme.grey_153),
+                        enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide.none,
-        
-                      ),),
-                      ),*/
-                  ),
-            ),
-          ],
-        ),
+                        ),
+          
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+          
+                        ),),
+                        ),*/
+                    ),
+              ),
+            ],
+          ),
         Align(
           alignment: Alignment.centerRight,
           child: GestureDetector(

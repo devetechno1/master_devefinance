@@ -1288,7 +1288,8 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Text(
                     //if user email is not available then check user phone if user phone is not available use empty string
-                    "${user_email.$ != "" ? user_email.$ : user_phone.$ != "" ? user_phone.$ : ''}",
+                    "${user_phone.$.trim().isEmpty ? user_email.$ : user_phone.$}",
+                    // "${user_email.$ != "" ? user_email.$ : user_phone.$ != "" ? user_phone.$ : ''}",
                     style: const TextStyle(
                       color: MyTheme.light_grey,
                     ),

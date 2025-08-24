@@ -5,10 +5,26 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.11'`
+- `mobileVersion = '9.10.12'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.12 – Profile contact display cleanup</strong></summary>
+
+### UI/UX
+- **Profile**: prefer showing **Phone** if available; fallback to **Email**.
+- **Profile Edit**: hide **Phone** block when empty; hide **Email** block when empty (no more empty fields).
+
+### Infra / Widgets
+- Reused existing `CustomInternationalPhoneNumberInput` and current input decorations/shadows.
+
+### Notes
+- No API changes.
+- No store updates required.
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.11 – PagedView modularization</strong></summary>
