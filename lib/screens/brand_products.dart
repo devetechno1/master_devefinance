@@ -160,7 +160,7 @@ class _BrandProductsState extends State<BrandProducts> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
           child: IconButton(
-            icon: Icon(Icons.search, color: MyTheme.dark_grey),
+            icon: const Icon(Icons.search, color: MyTheme.dark_grey),
             onPressed: () {
               _searchKey = _searchController.text.toString();
               setState(() {});

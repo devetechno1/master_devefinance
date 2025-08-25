@@ -105,7 +105,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
       textAlign: TextAlign.left,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
-      style: TextStyle(
+      style: const TextStyle(
         color: MyTheme.dark_font_grey,
         fontSize: 13,
         height: 1.6,

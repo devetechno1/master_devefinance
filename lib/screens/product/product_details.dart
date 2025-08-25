@@ -538,7 +538,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   color: Colors.black, width: 1.0)),
                           child: Text(
                             'copy_product_link_ucf'.tr(context: context),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyTheme.medium_grey,
                             ),
                           ),
@@ -565,7 +565,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
                                 'copied_ucf'.tr(context: context),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
@@ -764,7 +764,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmall),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             'close_all_capital'.tr(context: context),
@@ -789,7 +789,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmall),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             'send_all_capital'.tr(context: context),
@@ -944,7 +944,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           width: DeviceInfo(context).width! / 2,
                           child: Text(
                             "${_productDetails != null ? _productDetails!.name : ''}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_font_grey,
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold),
@@ -1057,7 +1057,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                       onTap: () {
                                         onPressShare(context);
                                       },
-                                      child: TappableIconWidget(
+                                      child: const TappableIconWidget(
                                         icon: Icons.share_outlined,
                                         color: MyTheme.dark_font_grey,
                                       ),
@@ -1073,7 +1073,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                               color:
                                                   Color.fromRGBO(230, 46, 4, 1),
                                             )
-                                          : TappableIconWidget(
+                                          : const TappableIconWidget(
                                               icon: Icons.favorite_border,
                                               color: MyTheme.dark_font_grey,
                                             ),
@@ -1330,7 +1330,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                           Text(
                                             'downloads_ucf'
                                                 .tr(context: context),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: MyTheme.dark_font_grey,
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.w600),
@@ -2248,13 +2248,13 @@ class _ProductDetailsState extends State<ProductDetails>
       columns: [
         DataColumn(
             label: Text('min_qty_ucf'.tr(context: context),
-                style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('max_qty_ucf'.tr(context: context),
-                style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('unit_price_ucf'.tr(context: context),
-                style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
         _productDetails!.wholesale!.length,
@@ -2924,9 +2924,9 @@ class _ProductDetailsState extends State<ProductDetails>
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: const RoundedRectangleBorder(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(AppDimensions.radius),
                           bottomRight: Radius.circular(AppDimensions.radius),

@@ -125,7 +125,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
     );
   }
 
-  void getData() async {
+  Future<void> getData() async {
     final data = await _webViewController
         .runJavaScriptReturningResult("document.body.innerText");
 

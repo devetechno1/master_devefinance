@@ -19,7 +19,6 @@ import 'package:active_ecommerce_cms_demo_app/presenter/cart_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/shipping_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/checkout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -348,7 +347,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 width: 75,
                 child: Text(
                   'address_ucf'.tr(context: context),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     color: MyTheme.dark_font_grey,
                   ),
@@ -361,7 +360,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       .pickupPoints![pickupPointIndex]
                       .name!,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 13,
                       color: MyTheme.dark_grey,
                       fontWeight: FontWeight.w600),
@@ -385,7 +384,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                 width: 75,
                 child: Text(
                   'phone_ucf'.tr(context: context),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     color: MyTheme.dark_font_grey,
                   ),
@@ -398,7 +397,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       .pickupPoints![pickupPointIndex]
                       .phone!,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 13,
                       color: MyTheme.dark_grey,
                       fontWeight: FontWeight.w600),
@@ -525,7 +524,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             .data![carrierIndex]
                             .name!,
                         maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 13,
                             color: MyTheme.dark_font_grey,
                             fontWeight: FontWeight.bold),
@@ -543,7 +542,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             " " +
                             'day_ucf'.tr(context: context),
                         maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 13,
                             color: MyTheme.dark_font_grey,
                             fontWeight: FontWeight.bold),
@@ -561,7 +560,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       .transitPrice
                       .toString(),
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 13,
                       color: MyTheme.dark_font_grey,
                       fontWeight: FontWeight.w600),
@@ -649,7 +648,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           children: [
             Text(
               "${'shipping_cost_ucf'.tr(context: context)} ",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: MyTheme.dark_font_grey,
                 fontWeight: FontWeight.bold,
@@ -668,7 +667,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             else
               Text(
                 "${SystemConfig.systemCurrency != null ? _shipping_cost_string!.replaceAll(SystemConfig.systemCurrency!.code!, SystemConfig.systemCurrency!.symbol!) : _shipping_cost_string}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
                   fontWeight: FontWeight.bold,
@@ -998,7 +997,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               padding: const EdgeInsets.only(top: AppDimensions.paddingMedium),
               child: Text(
                 'choose_delivery_ucf'.tr(context: context),
-                style: TextStyle(
+                style: const TextStyle(
                     color: MyTheme.dark_font_grey,
                     fontWeight: FontWeight.w700,
                     fontSize: 12),

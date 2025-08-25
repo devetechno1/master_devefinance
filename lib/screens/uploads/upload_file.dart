@@ -217,10 +217,10 @@ class _UploadFileState extends State<UploadFile> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: MyTheme.white,
-          iconTheme: IconThemeData(color: MyTheme.dark_grey),
+          iconTheme: const IconThemeData(color: MyTheme.dark_grey),
           title: Text(
             'upload_file_ucf'.tr(context: context),
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: MyTheme.dark_font_grey),
@@ -233,7 +233,7 @@ class _UploadFileState extends State<UploadFile> {
                 },
                 child: Text(
                   'select_ucf'.tr(context: context),
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                       color: MyTheme.green),
@@ -402,12 +402,12 @@ class _UploadFileState extends State<UploadFile> {
           children: [
             Text(
               'upload_file_ucf'.tr(context: context),
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                   color: MyTheme.dark_font_grey),
             ),
-            Icon(
+            const Icon(
               Icons.upload_file,
               size: 18,
               color: MyTheme.dark_font_grey,

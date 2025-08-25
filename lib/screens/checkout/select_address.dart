@@ -7,7 +7,6 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/select_address_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/address.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../map_location.dart';
@@ -185,7 +184,7 @@ class _SelectAddressState extends State<SelectAddress> {
           side: selectAddressProvider.selectedShippingAddress ==
                   selectAddressProvider.shippingAddressList[index].id
               ? BorderSide(color: Theme.of(context).primaryColor, width: 2.0)
-              : BorderSide(color: MyTheme.light_grey, width: 1.0),
+              : const BorderSide(color: MyTheme.light_grey, width: 1.0),
           borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
         ),
         elevation: 0.0,
@@ -545,7 +544,7 @@ class _SelectAddressState extends State<SelectAddress> {
       width: MediaQuery.of(context).size.width - 40,
       child: Text(
         "${'shipping_info'.tr(context: context)}",
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: MyTheme.dark_font_grey,
           fontWeight: FontWeight.bold,

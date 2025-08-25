@@ -120,7 +120,7 @@ class _LastViewProductState extends State<LastViewProduct> {
       leading: UsefulElements.backButton(),
       title: Text(
         'last_view_product_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

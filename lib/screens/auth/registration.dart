@@ -139,7 +139,7 @@ class _RegistrationState extends State<Registration> {
       );
       return;
     }
-    if(Loading.isLoading) return;
+    if (Loading.isLoading) return;
     Loading.show(context);
 
     // final String tempEmail =
@@ -210,10 +210,10 @@ class _RegistrationState extends State<Registration> {
           );
         }));
       } else {
-        if (AppConfig.businessSettingsData.sellerWiseShipping) {
-          await homeData.handleAddressNavigation();
-        }
         OneContext().context!.push("/");
+        if (AppConfig.businessSettingsData.sellerWiseShipping) {
+          homeData.handleAddressNavigation();
+        }
 
         // Navigator.push(context, MaterialPageRoute(builder: (context) {
         //   return Home();
@@ -240,194 +240,79 @@ class _RegistrationState extends State<Registration> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  'name_ucf'.tr(context: context),
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
-                ),
+              _SignUpField(
+                fieldController: _nameController,
+                keyboardType: TextInputType.name,
+                label: 'name_ucf'.tr(context: context),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Container(
-                  height: 36,
-                  child: TextField(
-                    controller: _nameController,
-                    autofocus: false,
-                    decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: 'name_ucf'.tr(context: context)),
+              _SignUpField(
+                isRequired: false,
+                fieldController: _emailController,
+                label: 'email_ucf'.tr(context: context),
+                hint: 'johndoe@example.com',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              _SignUpField(
+                label: 'phone_ucf'.tr(context: context),
+                customWidget: CustomInternationalPhoneNumberInput(
+                  countries: countries_code,
+                  hintText: 'phone_number_ucf'.tr(context: context),
+                  errorMessage: 'invalid_phone_number'.tr(context: context),
+                  initialValue: PhoneNumber(isoCode: AppConfig.default_country),
+                  keyboardAction: TextInputAction.next,
+                  onInputChanged: (PhoneNumber number) {
+                    _phoneNumberController.text = number.parseNumber();
+                    setState(() {
+                      if (number.isoCode != null)
+                        AppConfig.default_country = number.isoCode!;
+                      _phone = number.phoneNumber ?? '';
+                    });
+                  },
+                  onInputValidated: (bool isNotValid) {
+                    print(isNotValid);
+                    _isValidPhoneNumber = !isNotValid;
+                  },
+                  selectorConfig: const SelectorConfig(
+                    selectorType: PhoneInputSelectorType.DIALOG,
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  'email_ucf'.tr(context: context),
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w600,
+                  ignoreBlank: false,
+                  autoValidateMode: AutovalidateMode.disabled,
+                  selectorTextStyle: const TextStyle(color: MyTheme.font_grey),
+                  // initialValue: PhoneNumber(
+                  //     isoCode: countries_code[0].toString()),
+                  formatInput: true,
+                  inputDecoration: InputDecorations.buildInputDecoration_phone(
+                    hint_text: "01XXX XXX XXX",
                   ),
+                  onSaved: (PhoneNumber number) {
+                    //print('On Saved: $number');
+                  },
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        controller: _emailController,
-                        autofocus: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "johndoe@example.com"),
-                      ),
+              _SignUpField(
+                fieldController: _passwordController,
+                label: 'password_ucf'.tr(context: context),
+                hint: '• • • • • • • •',
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+                otherWidgets: [
+                  Text(
+                    'password_must_contain_at_least_6_characters'
+                        .tr(context: context),
+                    style: const TextStyle(
+                      color: MyTheme.textfield_grey,
+                      fontStyle: FontStyle.italic,
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  'phone_ucf'.tr(context: context),
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: 36,
-                      child: CustomInternationalPhoneNumberInput(
-                        countries: countries_code,
-                        hintText: 'phone_number_ucf'.tr(context: context),
-                        errorMessage:
-                            'invalid_phone_number'.tr(context: context),
-                        initialValue:
-                            PhoneNumber(isoCode: AppConfig.default_country),
-                        onInputChanged: (PhoneNumber number) {
-                          _phoneNumberController.text = number.parseNumber();
-                          setState(() {
-                            if (number.isoCode != null)
-                              AppConfig.default_country = number.isoCode!;
-                            _phone = number.phoneNumber ?? '';
-                          });
-                        },
-                        onInputValidated: (bool isNotValid) {
-                          print(isNotValid);
-                          _isValidPhoneNumber = !isNotValid;
-                        },
-                        selectorConfig: const SelectorConfig(
-                          selectorType: PhoneInputSelectorType.DIALOG,
-                        ),
-                        ignoreBlank: false,
-                        autoValidateMode: AutovalidateMode.disabled,
-                        selectorTextStyle:
-                            const TextStyle(color: MyTheme.font_grey),
-                        // initialValue: PhoneNumber(
-                        //     isoCode: countries_code[0].toString()),
-                        formatInput: true,
-                        inputDecoration:
-                            InputDecorations.buildInputDecoration_phone(
-                          hint_text: "01XXX XXX XXX",
-                        ),
-                        onSaved: (PhoneNumber number) {
-                          //print('On Saved: $number');
-                        },
-                      ),
-                    ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     setState(() {
-                    //       _register_by = "email";
-                    //     });
-                    //   },
-                    //   child: Text(
-                    //     '//'.tr(context: context)         .or_register_with_an_email,
-                    //     style: TextStyle(
-                    //         color: MyTheme.accent_color,
-                    //         fontStyle: FontStyle.italic,
-                    //         decoration: TextDecoration.underline),
-                    //   ),
-                    // )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  'password_ucf'.tr(context: context),
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        controller: _passwordController,
-                        autofocus: false,
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "• • • • • • • •"),
-                      ),
-                    ),
-                    Text(
-                      'password_must_contain_at_least_6_characters'
-                          .tr(context: context),
-                      style: const TextStyle(
-                          color: MyTheme.textfield_grey,
-                          fontStyle: FontStyle.italic),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  'retype_password_ucf'.tr(context: context),
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Container(
-                  height: 36,
-                  child: TextField(
-                    controller: _passwordConfirmController,
-                    autofocus: false,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: "• • • • • • • •"),
                   ),
-                ),
+                ],
+              ),
+              _SignUpField(
+                fieldController: _passwordConfirmController,
+                label: 'retype_password_ucf'.tr(context: context),
+                hint: '• • • • • • • •',
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.done,
               ),
               if (AppConfig.businessSettingsData.googleRecaptcha)
                 Container(
@@ -583,7 +468,7 @@ class _RegistrationState extends State<Registration> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return Login();
+                          return const Login();
                         }));
                       },
                     ),
@@ -593,6 +478,62 @@ class _RegistrationState extends State<Registration> {
             ],
           ),
         )
+      ],
+    );
+  }
+}
+
+class _SignUpField extends StatelessWidget {
+  const _SignUpField({
+    this.isRequired = true,
+    this.obscureText = false,
+    this.fieldController,
+    this.customWidget,
+    this.keyboardType,
+    required this.label,
+    this.hint,
+    this.otherWidgets = const [],
+    this.textInputAction = TextInputAction.next,
+  });
+
+  final TextEditingController? fieldController;
+  final bool isRequired;
+  final bool obscureText;
+  final String label;
+  final String? hint;
+  final TextInputType? keyboardType;
+  final Widget? customWidget;
+  final TextInputAction textInputAction;
+  final List<Widget> otherWidgets;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      spacing: AppDimensions.paddingSmallExtra,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          "$label${isRequired ? ' *' : ''}",
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.w600),
+        ),
+        SizedBox(
+          height: 36,
+          child: customWidget ??
+              TextField(
+                controller: fieldController,
+                autofocus: false,
+                obscureText: obscureText,
+                textInputAction: textInputAction,
+                keyboardType: keyboardType,
+                decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: hint ?? label,
+                ),
+              ),
+        ),
+        ...otherWidgets,
+        const SizedBox(height: AppDimensions.paddingSmallExtra),
       ],
     );
   }

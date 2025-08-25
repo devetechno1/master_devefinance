@@ -437,7 +437,7 @@ class _FilterState extends State<Filter> {
       children: [
         Expanded(
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border.symmetric(
                     vertical: BorderSide(color: MyTheme.light_grey, width: .5),
@@ -485,7 +485,7 @@ class _FilterState extends State<Filter> {
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   border: Border.symmetric(
                       vertical:
@@ -644,7 +644,7 @@ class _FilterState extends State<Filter> {
                                   child: Text(
                                     'close_all_capital'.tr(context: context),
                                     style:
-                                        TextStyle(color: MyTheme.medium_grey),
+                                        const TextStyle(color: MyTheme.medium_grey),
                                   ),
                                   onPressed: () {
                                     Navigator.of(context, rootNavigator: true)
@@ -660,7 +660,7 @@ class _FilterState extends State<Filter> {
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   border: Border.symmetric(
                       vertical:
@@ -731,7 +731,7 @@ class _FilterState extends State<Filter> {
                               child: Text(
                                   'loading_suggestions'.tr(context: context),
                                   style:
-                                      TextStyle(color: MyTheme.medium_grey))),
+                                      const TextStyle(color: MyTheme.medium_grey))),
                         );
                       },
                       itemBuilder: (context, dynamic suggestion) {
@@ -773,24 +773,24 @@ class _FilterState extends State<Filter> {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: MyTheme.white,
-                              suffixIcon: Icon(Icons.search,
+                              suffixIcon: const Icon(Icons.search,
                                   color: MyTheme.medium_grey),
                               hintText:
                                   'search_here_ucf'.tr(context: context),
                               hintStyle: const TextStyle(
                                   fontSize: 12.0,
                                   color: MyTheme.textfield_grey),
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: MyTheme.noColor, width: 0.5),
-                                borderRadius: const BorderRadius.all(
+                                borderRadius: BorderRadius.all(
                                   Radius.circular(AppDimensions.radiusSmall),
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: MyTheme.noColor, width: 1.0),
-                                borderRadius: const BorderRadius.all(
+                                borderRadius: BorderRadius.all(
                                   Radius.circular(AppDimensions.radiusSmall),
                                 ),
                               ),

@@ -127,7 +127,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
           children: [
             Text(
               'auction_product_screen_title'.tr(context: context),
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 16,
                   color: MyTheme.dark_font_grey,
                   fontWeight: FontWeight.bold),

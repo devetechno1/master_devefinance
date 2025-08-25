@@ -240,7 +240,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   color: Colors.black, width: 1.0)),
                           child: Text(
                             'copy_product_link_ucf'.tr(context: context),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyTheme.medium_grey,
                             ),
                           ),
@@ -267,7 +267,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
                                 'copied_ucf'.tr(context: context),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
@@ -461,7 +461,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmall),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             'close_all_capital'.tr(context: context),
@@ -486,7 +486,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmall),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             'send_all_capital'.tr(context: context),
@@ -621,7 +621,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       is_logged_in.$
                           ? showAlertDialog(context)
                           : Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Login()));
+                              MaterialPageRoute(builder: (context) => const Login()));
                     },
                     child: Container(
                       margin: const EdgeInsets.only(
@@ -684,7 +684,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 .buildCircularButtonDecoration_1(),
                             width: 36,
                             height: 36,
-                            child: Center(
+                            child: const Center(
                               child: Icon(
                                 CupertinoIcons.arrow_left,
                                 color: MyTheme.dark_font_grey,
@@ -705,7 +705,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               width: DeviceInfo(context).width! / 2,
                               child: Text(
                                 "${_auctionproductDetails != null ? _auctionproductDetails.name : ''}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.dark_font_grey,
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold),
@@ -817,7 +817,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 ),
                                 child: Text(
                                   'description_ucf'.tr(context: context),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: MyTheme.dark_font_grey,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600),
@@ -876,7 +876,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 children: [
                                   Text(
                                     'video_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -918,7 +918,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 children: [
                                   Text(
                                     'seller_policy_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -960,7 +960,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 children: [
                                   Text(
                                     'return_policy_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -1002,7 +1002,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 children: [
                                   Text(
                                     'support_policy_ucf'.tr(context: context),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: MyTheme.dark_font_grey,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
@@ -1167,7 +1167,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     children: [
                       Text(
                         'bid_for_product_ucf'.tr(context: context),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 13, color: MyTheme.dark_font_grey),
                       ),
                       Text(
@@ -1561,7 +1561,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
           child: IconButton(
-            icon: Icon(Icons.share_outlined, color: MyTheme.dark_grey),
+            icon: const Icon(Icons.share_outlined, color: MyTheme.dark_grey),
             onPressed: () {
               onPressShare(context);
             },
@@ -1669,9 +1669,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: const RoundedRectangleBorder(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(AppDimensions.radius),
                           bottomRight: Radius.circular(AppDimensions.radius),

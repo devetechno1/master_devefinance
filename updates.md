@@ -5,10 +5,42 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.11'`
+- `mobileVersion = '9.10.13'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.13 – Auth/Phone LTR & Registration fields refactor</strong></summary>
+
+### UI/UX
+- Phone input row now enforced as **LTR** regardless of app locale.
+- Registration form fields refactored into a reusable `_SignUpField` to reduce duplication and keep consistent styling.
+
+### Tech
+- Reused existing input decorations, theme, and phone input widget.
+- No API changes.
+
+### Notes
+- Requires Flutter version supporting `Column(spacing:)`; otherwise, replace with `SizedBox` spacing.
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.12 – Profile contact display cleanup</strong></summary>
+
+### UI/UX
+- **Profile**: prefer showing **Phone** if available; fallback to **Email**.
+- **Profile Edit**: hide **Phone** block when empty; hide **Email** block when empty (no more empty fields).
+
+### Infra / Widgets
+- Reused existing `CustomInternationalPhoneNumberInput` and current input decorations/shadows.
+
+### Notes
+- No API changes.
+- No store updates required.
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.11 – PagedView modularization</strong></summary>

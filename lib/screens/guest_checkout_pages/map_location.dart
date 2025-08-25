@@ -196,7 +196,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
                 ? 'your_delivery_location'.tr(context: context)
                 : formattedAddress!,
             maxLines: 2,
-            style: TextStyle(color: MyTheme.medium_grey),
+            style: const TextStyle(color: MyTheme.medium_grey),
           ),
         )
       ],
@@ -373,7 +373,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                                     formattedAddress!,
                                     maxLines: 2,
                                     style:
-                                        TextStyle(color: MyTheme.medium_grey),
+                                        const TextStyle(color: MyTheme.medium_grey),
                                   ),
                                 ),
                         ),
@@ -466,7 +466,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                         child: Center(
                           child: Text(
                             'loading_countries_ucf'.tr(context: context),
-                            style: TextStyle(color: MyTheme.medium_grey),
+                            style: const TextStyle(color: MyTheme.medium_grey),
                           ),
                         ),
                       );

@@ -247,7 +247,7 @@ class _CheckoutState extends State<Checkout> {
     fetchAll();
   }
 
-  onPopped(value) async {
+  Future<void> onPopped(value) async {
     if (value == true) {
       ToastComponent.showDialog(
         'payment_cancelled_ucf'.tr(context: context),
@@ -790,10 +790,10 @@ class _CheckoutState extends State<Checkout> {
                                 Radius.circular(AppDimensions.radiusSmall),
                           ),
                         ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(color: MyTheme.medium_grey, width: 0.5),
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(AppDimensions.radiusSmall),
                       bottomLeft: Radius.circular(AppDimensions.radiusSmall),
                     ),
@@ -1237,7 +1237,7 @@ class _AlertDialogDetailsWidget extends StatelessWidget {
         Btn.basic(
           child: Text(
             'close_all_lower'.tr(context: context),
-            style: TextStyle(color: MyTheme.medium_grey),
+            style: const TextStyle(color: MyTheme.medium_grey),
           ),
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();

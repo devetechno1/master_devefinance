@@ -157,7 +157,7 @@ class MapLocationState extends State<MapLocation>
                                 child: Text(
                                   formattedAddress!,
                                   maxLines: 2,
-                                  style: TextStyle(color: MyTheme.medium_grey),
+                                  style: const TextStyle(color: MyTheme.medium_grey),
                                 ),
                               ),
                       ),
@@ -249,7 +249,7 @@ class MapLocationState extends State<MapLocation>
                       child: Center(
                         child: Text(
                           'loading_countries_ucf'.tr(context: context),
-                          style: TextStyle(color: MyTheme.medium_grey),
+                          style: const TextStyle(color: MyTheme.medium_grey),
                         ),
                       ),
                     );

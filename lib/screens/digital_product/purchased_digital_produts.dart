@@ -101,7 +101,7 @@ class _PurchasedDigitalProductsState extends State<PurchasedDigitalProducts> {
       // ],
       title: Text(
         'digital_product_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             fontFamily: 'Public Sans',
             color: MyTheme.dark_font_grey,

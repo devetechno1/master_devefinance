@@ -391,7 +391,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       children: [
                         Text(
                           "${'add_new_address'.tr(context: context)}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 13,
                               color: MyTheme.dark_font_grey,
                               fontWeight: FontWeight.bold),
@@ -563,7 +563,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 child: Center(
                                     child: Text(
                                         'loading_countries_ucf'.tr(context: context),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
                             },
@@ -628,7 +628,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 child: Center(
                                     child: Text(
                                         'loading_states_ucf'.tr(context: context),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
                             },
@@ -683,7 +683,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 child: Center(
                                     child: Text(
                                         'loading_cities_ucf'.tr(context: context),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
                             },
@@ -778,7 +778,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 AppDimensions.radiusHalfSmall),
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: MyTheme.light_grey, width: 1)),
                         child: Text(
                           'close_ucf'.tr(context: context),
@@ -834,15 +834,15 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         fillColor: const Color(0xffF6F7F8),
         hintText: hintText,
         hintStyle: const TextStyle(fontSize: 12.0, color: Color(0xff999999)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(AppDimensions.radiusHalfSmall),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(AppDimensions.radiusHalfSmall),
           ),
         ),
@@ -917,7 +917,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 child: Center(
                                     child: Text(
                                         'loading_countries_ucf'.tr(context: context),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
                             },
@@ -967,7 +967,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 child: Center(
                                     child: Text(
                                         'loading_states_ucf'.tr(context: context),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
                             },
@@ -1022,7 +1022,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 child: Center(
                                     child: Text(
                                         'loading_cities_ucf'.tr(context: context),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
                             },
@@ -1102,7 +1102,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 AppDimensions.radiusHalfSmall),
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
                           'close_all_capital'.tr(context: context),
@@ -1272,7 +1272,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].address,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -1300,7 +1300,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].city_name,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -1328,7 +1328,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].state_name,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -1356,7 +1356,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].country_name,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -1384,7 +1384,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].postal_code,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -1412,7 +1412,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: Text(
                             _shippingAddressList[index].phone,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_grey,
                                 fontWeight: FontWeight.w600),
                           ),

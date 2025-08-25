@@ -56,13 +56,13 @@ class _NotificationListState extends State<NotificationList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyTheme.white,
-        iconTheme: IconThemeData(color: MyTheme.dark_grey),
+        iconTheme: const IconThemeData(color: MyTheme.dark_grey),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'notification_ucf'.tr(context: context),
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: MyTheme.dark_font_grey),

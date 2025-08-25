@@ -468,7 +468,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                   color: Colors.black, width: 1.0)),
                           child: Text(
                             'copy_product_link_ucf'.tr(context: context),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyTheme.medium_grey,
                             ),
                           ),
@@ -495,7 +495,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                   bottom: AppDimensions.paddingSmall),
                               child: Text(
                                 'copied_ucf'.tr(context: context),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
@@ -688,7 +688,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmall),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             'close_all_capital'.tr(context: context),
@@ -713,7 +713,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   AppDimensions.radiusSmall),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: MyTheme.light_grey, width: 1.0)),
                           child: Text(
                             'send_all_capital'.tr(context: context),
@@ -859,7 +859,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           width: DeviceInfo(context).width! / 2,
                           child: Text(
                             "${_productDetails != null ? _productDetails!.name : ''}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyTheme.dark_font_grey,
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold),
@@ -889,7 +889,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                         .buildCircularButtonDecoration_for_productDetails(),
                                     width: 36,
                                     height: 36,
-                                    child: Center(
+                                    child: const Center(
                                       child: Icon(
                                         CupertinoIcons.arrow_left,
                                         color: MyTheme.dark_font_grey,
@@ -961,7 +961,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                 onTap: () {
                                   onPressShare(context);
                                 },
-                                child: TappableIconWidget(
+                                child: const TappableIconWidget(
                                   icon: Icons.share_outlined,
                                   color: MyTheme.dark_font_grey,
                                 ),
@@ -1219,7 +1219,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                       children: [
                                         Text(
                                           'downloads_ucf'.tr(context: context),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: MyTheme.dark_font_grey,
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600),
@@ -1877,13 +1877,13 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
       columns: [
         DataColumn(
             label: Text('min_qty_ucf'.tr(context: context),
-                style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('max_qty_ucf'.tr(context: context),
-                style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('unit_price_ucf'.tr(context: context),
-                style: TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
         _productDetails!.wholesale!.length,
@@ -2053,7 +2053,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
           child: IconButton(
-            icon: Icon(Icons.share_outlined, color: MyTheme.dark_grey),
+            icon: const Icon(Icons.share_outlined, color: MyTheme.dark_grey),
             onPressed: () {
               onPressShare(context);
             },
@@ -2118,12 +2118,12 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                 borderRadius:
                     BorderRadius.circular(AppDimensions.radiusHalfSmall),
                 color: MyTheme.golden,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: MyTheme.golden_shadow,
                     blurRadius: 20,
                     spreadRadius: 0.0,
-                    offset: const Offset(
+                    offset: Offset(
                         0.0, 10.0), // shadow direction: bottom right
                   )
                 ],
@@ -2417,7 +2417,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         ),
         width: 36,
         child: IconButton(
-            icon: Icon(Icons.add, size: 16, color: MyTheme.dark_grey),
+            icon: const Icon(Icons.add, size: 16, color: MyTheme.dark_grey),
             onPressed: () {
               if (_quantity! < _stock!) {
                 _quantity = (_quantity!) + 1;
@@ -2597,9 +2597,9 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: MyTheme.medium_grey_50,
-                      shape: const RoundedRectangleBorder(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(AppDimensions.radius),
                           bottomRight: Radius.circular(AppDimensions.radius),

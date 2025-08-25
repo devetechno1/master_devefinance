@@ -44,7 +44,7 @@ class _MainState extends State<Main> {
     } else if (!AppConfig.businessSettingsData.guestCheckoutStatus &&
         (i == 2) &&
         !is_logged_in.$) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
       return;
     }
 

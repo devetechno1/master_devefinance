@@ -112,7 +112,7 @@ class _ListProductCardState extends State<ListProductCard> {
                                     : widget.strokedPrice!,
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     color: MyTheme.medium_grey,
                                     fontSize: 12,

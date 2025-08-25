@@ -151,7 +151,7 @@ class _ProductCardState extends State<ProductCard> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: MyTheme.medium_grey,
                               fontSize: 12,

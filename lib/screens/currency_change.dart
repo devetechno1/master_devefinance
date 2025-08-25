@@ -85,7 +85,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
       ),
       title: Text(
         "${'currency_change_ucf'.tr(context: context)}",
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

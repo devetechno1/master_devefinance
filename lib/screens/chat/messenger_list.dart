@@ -132,7 +132,7 @@ class _MessengerListState extends State<MessengerList> {
       ),
       title: Text(
         'messages_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),
@@ -235,7 +235,7 @@ class _MessengerListState extends State<MessengerList> {
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyTheme.medium_grey,
                             height: 1.6,
                             fontWeight: FontWeight.w600),
@@ -247,8 +247,8 @@ class _MessengerListState extends State<MessengerList> {
             ),
           ),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(AppDimensions.paddingDefault),
+          const Padding(
+            padding: EdgeInsets.all(AppDimensions.paddingDefault),
             child: Icon(
               Icons.arrow_forward_ios_rounded,
               color: MyTheme.medium_grey,

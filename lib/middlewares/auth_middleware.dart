@@ -11,7 +11,7 @@ class AuthMiddleware extends RouteMiddleware {
   @override
   Widget next() {
     if (!userIsLogedIn) {
-      return Login();
+      return const Login();
     }
     return _goto;
   }

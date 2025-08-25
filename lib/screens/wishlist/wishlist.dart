@@ -136,7 +136,7 @@ class _WishlistState extends State<Wishlist> {
       ),
       title: Text(
         'my_wishlist_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

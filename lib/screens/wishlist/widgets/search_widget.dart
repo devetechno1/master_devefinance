@@ -645,7 +645,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                               Btn.basic(
                                 child: Text(
                                   'close_all_capital'.tr(context: context),
-                                  style: TextStyle(color: MyTheme.medium_grey),
+                                  style: const TextStyle(color: MyTheme.medium_grey),
                                 ),
                                 onPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -733,7 +733,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         child: Center(
                             child: Text(
                                 'loading_suggestions'.tr(context: context),
-                                style: TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic suggestion) {
@@ -1320,15 +1320,15 @@ class _SearchWidgetState extends State<SearchWidget> {
         fillColor: const Color(0xffE4E3E8),
         hintText: hintText,
         hintStyle: const TextStyle(fontSize: 12.0, color: MyTheme.grey_153),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(AppDimensions.radiusSmall),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.noColor, width: 1.0),
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(AppDimensions.radiusSmall),
           ),
         ),

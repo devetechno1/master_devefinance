@@ -137,11 +137,11 @@ class _BlogListScreenState extends State<BlogListScreen> {
           ,
           hintStyle: const TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
+              borderSide: const BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius:
                   BorderRadius.circular(AppDimensions.radiusHalfSmall)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
+              borderSide: const BorderSide(color: MyTheme.noColor, width: 0.0),
               borderRadius:
                   BorderRadius.circular(AppDimensions.radiusHalfSmall)),
           contentPadding: const EdgeInsets.all(8.0),

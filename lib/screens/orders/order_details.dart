@@ -436,7 +436,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 AppDimensions.radiusSmall),
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
                           'close_all_capital'.tr(context: context),
@@ -463,7 +463,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 AppDimensions.radiusSmall),
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: MyTheme.light_grey, width: 1.0)),
                         child: Text(
                           'submit_ucf'.tr(context: context),
@@ -887,7 +887,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     color: Colors.green,
                     thickness: 5,
                   )
-                : LineStyle(
+                : const LineStyle(
                     color: MyTheme.medium_grey,
                     thickness: 4,
                   ),
@@ -949,7 +949,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     color: Colors.green,
                     thickness: 5,
                   )
-                : LineStyle(
+                : const LineStyle(
                     color: MyTheme.medium_grey,
                     thickness: 4,
                   ),
@@ -958,7 +958,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     color: Colors.green,
                     thickness: 5,
                   )
-                : LineStyle(
+                : const LineStyle(
                     color: MyTheme.medium_grey,
                     thickness: 4,
                   ),
@@ -1022,7 +1022,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     color: Colors.green,
                     thickness: 5,
                   )
-                : LineStyle(
+                : const LineStyle(
                     color: MyTheme.medium_grey,
                     thickness: 4,
                   ),
@@ -1031,7 +1031,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     color: Colors.green,
                     thickness: 5,
                   )
-                : LineStyle(
+                : const LineStyle(
                     color: MyTheme.medium_grey,
                     thickness: 4,
                   ),
@@ -1094,7 +1094,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     color: Colors.green,
                     thickness: 5,
                   )
-                : LineStyle(
+                : const LineStyle(
                     color: MyTheme.medium_grey,
                     thickness: 4,
                   ),
@@ -1583,7 +1583,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       child: SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) =>
-              Divider(color: MyTheme.medium_grey),
+              const Divider(color: MyTheme.medium_grey),
           itemCount: _orderedItemList.length,
           scrollDirection: Axis.vertical,
           physics: const NeverScrollableScrollPhysics(),
@@ -1619,7 +1619,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       ),
       title: Text(
         'order_details_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),

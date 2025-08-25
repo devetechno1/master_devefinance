@@ -368,7 +368,7 @@ class _OrderListState extends State<OrderList> {
           ),
           Text(
             'purchase_history_ucf'.tr(context: context),
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 16,
                 color: MyTheme.dark_font_grey,
                 fontWeight: FontWeight.bold),
@@ -473,7 +473,7 @@ class _OrderListState extends State<OrderList> {
               child: Row(
                 children: [
                   Text(_orderList[index].date!,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: MyTheme.dark_font_grey, fontSize: 12)),
                   const Spacer(),
                   Text(
@@ -494,7 +494,7 @@ class _OrderListState extends State<OrderList> {
                   Text(
                     "${'payment_status_ucf'.tr(context: context)} - ",
                     style:
-                        TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                        const TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                   ),
                   Text(
                     _orderList[index].payment_status_string!,
@@ -512,11 +512,11 @@ class _OrderListState extends State<OrderList> {
               children: [
                 Text(
                   "${'delivery_status_ucf'.tr(context: context)} -",
-                  style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                  style: const TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                 ),
                 Text(
                   _orderList[index].delivery_status_string!,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: MyTheme.dark_font_grey,
                       fontSize: 12,
                       fontWeight: FontWeight.w500),

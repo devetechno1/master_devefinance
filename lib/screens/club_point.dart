@@ -178,7 +178,7 @@ class _ClubpointState extends State<Clubpoint> {
       ),
       title: Text(
         'earned_points_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),
@@ -236,7 +236,7 @@ class _ClubpointState extends State<Clubpoint> {
                 children: [
                   Text(
                     item.orderCode ?? "",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyTheme.dark_font_grey,
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
@@ -245,7 +245,7 @@ class _ClubpointState extends State<Clubpoint> {
                     children: [
                       Text(
                         "${'converted_ucf'.tr(context: context)} - ",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12, color: MyTheme.dark_font_grey),
                       ),
                       Text(
@@ -266,12 +266,12 @@ class _ClubpointState extends State<Clubpoint> {
                     children: [
                       Text(
                         "${'date_ucf'.tr(context: context)} : ",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12, color: MyTheme.dark_font_grey),
                       ),
                       Text(
                         item.date ?? "",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12, color: MyTheme.dark_font_grey),
                       ),
                     ],

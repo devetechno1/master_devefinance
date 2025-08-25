@@ -313,7 +313,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                               bottom: AppDimensions.paddingSmallExtra),
                           child: Text(
                             _reviewList[index].time,
-                            style: TextStyle(color: MyTheme.medium_grey),
+                            style: const TextStyle(color: MyTheme.medium_grey),
                           ),
                         ),
                       ],
@@ -466,10 +466,10 @@ class _ProductReviewsState extends State<ProductReviews> {
                         Radius.circular(AppDimensions.radiusVeryLarge),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: MyTheme.medium_grey, width: 0.5),
-                      borderRadius: const BorderRadius.all(
+                      borderRadius: BorderRadius.all(
                         Radius.circular(AppDimensions.radiusVeryLarge),
                       ),
                     ),

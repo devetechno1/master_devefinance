@@ -47,7 +47,7 @@ class _TodaysDealProductsState extends State<TodaysDealProducts> {
       ),
       title: Text(
         'todays_deal_ucf'.tr(context: context),
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 16,
             color: MyTheme.dark_font_grey,
             fontWeight: FontWeight.bold),
