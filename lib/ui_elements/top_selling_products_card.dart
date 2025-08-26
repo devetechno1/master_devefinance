@@ -69,7 +69,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
           Flexible(
             child: Container(
               padding: const EdgeInsets.only(
-                  top: 14, left: 14, right: 34, bottom: 14),
+                  top: 14, left: 14, right: 34, bottom: 10),
               //width: 240,
               height: 90,
               //color: Colors.red,
