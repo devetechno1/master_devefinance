@@ -211,7 +211,7 @@ const Map<String, String> arLangs = {
   "refund_requests_ucf": "طلبات الاسترداد",
   "in_your_cart_all_lower": "في سلتك",
   "in_your_wishlist_all_lower": "في قائمة رغباتك",
-  "your_ordered_all_lower": "طلبت",
+  "your_ordered_all_lower": "طلباتك",
   "language_ucf": "اللغة",
   "currency_ucf": "العملة",
   "my_orders_ucf": "طلباتي",
