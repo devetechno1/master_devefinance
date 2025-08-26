@@ -493,15 +493,13 @@ class _OrderListState extends State<OrderList> {
                 children: [
                   Text(
                     "${'payment_status_ucf'.tr(context: context)} - ",
-                    style:
-                        const TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                    style: const TextStyle(
+                        color: MyTheme.dark_font_grey, fontSize: 12),
                   ),
                   Text(
                     _orderList[index].payment_status_string!,
                     style: TextStyle(
-                        color: _orderList[index].payment_status == "Paid"
-                            ? Colors.green
-                            : Colors.red,
+                        color: _orderList[index].paymentColor,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
                   ),
@@ -512,12 +510,13 @@ class _OrderListState extends State<OrderList> {
               children: [
                 Text(
                   "${'delivery_status_ucf'.tr(context: context)} -",
-                  style: const TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                  style: const TextStyle(
+                      color: MyTheme.dark_font_grey, fontSize: 12),
                 ),
                 Text(
                   _orderList[index].delivery_status_string!,
-                  style: const TextStyle(
-                      color: MyTheme.dark_font_grey,
+                  style: TextStyle(
+                      color: _orderList[index].deliveryColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w500),
                 ),
