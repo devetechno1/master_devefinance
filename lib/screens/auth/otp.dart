@@ -16,6 +16,7 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../../main.dart';
+import '../home/home.dart';
 
 class Otp extends StatefulWidget {
   final String? title;
@@ -97,7 +98,10 @@ class _OtpState extends State<Otp> {
       } else {
         context.pop();
       }
+      await Future.delayed(Duration.zero);
+
       ToastComponent.showDialog(confirmCodeResponse.message);
+      homeData.fetchAddressLists(false);
     }
   }
 
@@ -127,7 +131,7 @@ class _OtpState extends State<Otp> {
                 child: Container(
                   width: 75,
                   height: 75,
-                  child: Image.asset(AppImages.loginRegisteration),
+                  child: Image.asset(AppImages.loginRegistration),
                 ),
               ),
               Container(

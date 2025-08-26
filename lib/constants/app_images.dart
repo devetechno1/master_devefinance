@@ -21,7 +21,7 @@ abstract final class AppImages {
 
   static const String TopSellers = "$_assetDir/top_sellers.png";
   static const String trash = "$_assetDir/trash.png";
-  static const String loginRegisteration =
+  static const String loginRegistration =
       "$_assetDir/login_registration_form_logo.png";
   static const String maintenance = "$_assetDir/maintenance.png";
   static const String more = "$_assetDir/more.png";
@@ -61,6 +61,7 @@ abstract final class AppImages {
   static const String changedPassword = "$_assetDir/changed_password.png";
   static const String facebook = "$_assetDir/facebook_logo.png";
   static const String google = "$_assetDir/google_logo.png";
+  static const String otp = "$_assetDir/otp.png";
   static const String huawei = "$_assetDir/huawei.png";
   static const String googleplay = "$_assetDir/googleplay.png";
   static const String applestore = "$_assetDir/applestore.png";

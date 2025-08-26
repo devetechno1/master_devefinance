@@ -15,7 +15,7 @@ final List<Messenger> messengerList = [
   ),
   Messenger(
     id: "2",
-    image: AppImages.loginRegisteration,
+    image: AppImages.loginRegistration,
     name: "Deve Techno Store",
   ),
   Messenger(

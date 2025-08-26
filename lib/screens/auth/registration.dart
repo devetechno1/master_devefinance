@@ -37,7 +37,6 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  String initialCountry = 'EG';
 
   List<String?> countries_code = <String?>[];
 
@@ -211,6 +210,7 @@ class _RegistrationState extends State<Registration> {
         }));
       } else {
         OneContext().context!.push("/");
+        await Future.delayed(Duration.zero);
         if (AppConfig.businessSettingsData.sellerWiseShipping) {
           homeData.handleAddressNavigation();
         }

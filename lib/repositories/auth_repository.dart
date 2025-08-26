@@ -36,6 +36,59 @@ class AuthRepository {
     return loginResponseFromJson(response.body);
   }
 
+  Future<LoginResponse> getOTPLoginResponse({
+    required String countryCode,
+    required String phone,
+  }) async {
+    final postBody = jsonEncode({
+      "phone": "$phone",
+      "country_code": "$countryCode",
+      "identity_matrix": AppConfig.purchase_code,
+      "temp_user_id": temp_user_id.$
+    });
+
+    const String url = ("${AppConfig.BASE_URL}/auth/send-otp");
+    final response = await ApiRequest.post(
+      url: url,
+      headers: {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "App-Language": app_language.$!,
+      },
+      body: postBody,
+    );
+
+    return loginResponseFromJson(response.body);
+  }
+
+  Future<LoginResponse> verifyOTPLoginResponse({
+    required String countryCode,
+    required String phone,
+    required String otpCode,
+  }) async {
+    final postBody = jsonEncode({
+      "phone": "$phone",
+      "country_code": "$countryCode",
+      "otp_code" : "$otpCode",
+      "identity_matrix": AppConfig.purchase_code,
+      "temp_user_id": temp_user_id.$,
+      if (AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
+    });
+
+    const String url = ("${AppConfig.BASE_URL}/auth/verify-otp");
+    final response = await ApiRequest.post(
+      url: url,
+      headers: {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "App-Language": app_language.$!,
+      },
+      body: postBody,
+    );
+
+    return loginResponseFromJson(response.body);
+  }
+
   Future<LoginResponse> getSocialLoginResponse(
     String socialProvider,
     String? name,

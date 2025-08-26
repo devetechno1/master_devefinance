@@ -1,4 +1,5 @@
 const Map<String, String> enLangs = {
+  "check_your_messages_to_retrieve_the_verification_code": "Enter the verification code sent to {phone}",
   "locationIsDenied": "Location permission is denied.",
   "locationIsDeniedPermanently":
       "Location permission is permanently denied. Please enable it from Settings.",

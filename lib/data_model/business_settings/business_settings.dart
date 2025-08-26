@@ -15,6 +15,7 @@ class BusinessSettingsData extends Equatable {
   final bool showPackingQtyPriceWholesaleProduct;
   final bool showPackingBeforePriceWholesaleProduct;
   final bool usePackingWholesaleProduct;
+  final bool allowOTPLogin;
   final bool allowTwitterLogin;
   final bool allowGoogleLogin;
   final bool allowFacebookLogin;
@@ -269,6 +270,8 @@ class BusinessSettingsData extends Equatable {
   bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
   bool get sellerWiseShipping => shippingType == "seller_wise_shipping";
 
+  bool get otherLogins => allowFacebookLogin || allowGoogleLogin || allowOTPLogin;
+
   const BusinessSettingsData({
     this.showWholesaleLabel = false,
     this.showPackingQtyWholesaleProduct = false,
@@ -279,6 +282,7 @@ class BusinessSettingsData extends Equatable {
     this.updateData,
     this.isBlogActive = false,
     this.allowTwitterLogin = false,
+    this.allowOTPLogin = false,
     this.allowGoogleLogin = false,
     this.allowFacebookLogin = false,
     this.allowAppleLogin = false,
@@ -562,6 +566,7 @@ class BusinessSettingsData extends Equatable {
         usePackingWholesaleProduct: (data['packing_wholesale_product'] as String?) == "1", 
         whatsappNumber: data['whatsapp_number'] as String?,
         allowTwitterLogin: (data['twitter_login'] as String?) == "1",
+        allowOTPLogin: (data['login_with_otp'] as String?) == "1",
         allowGoogleLogin: (data['google_login'] as String?) == "1",
         allowFacebookLogin: (data['facebook_login'] as String?) == "1",
         allowAppleLogin: (data['apple_login'] as String?) == "1",

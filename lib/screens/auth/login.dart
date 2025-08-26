@@ -37,6 +37,7 @@ import '../../repositories/address_repository.dart';
 import '../../status/status.dart';
 import '../home/home.dart';
 import 'otp.dart';
+import 'otp_login.dart';
 
 class Login extends StatefulWidget {
   final String? token;
@@ -48,7 +49,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String _login_by = otp_addon_installed.$ ? "phone" : "email"; //phone or email
-  String initialCountry = 'US';
 
   // PhoneNumber phoneCode = PhoneNumber(isoCode: 'US', dialCode: "+1");
   List<String?> countries_code = <String?>[];
@@ -147,6 +147,8 @@ class _LoginState extends State<Login> {
       }
       ToastComponent.showDialog(error, isError: true);
     }
+    await Future.delayed(Duration.zero);
+
   }
 
   Future<void> onPressedLogin(ctx) async {
@@ -205,7 +207,6 @@ class _LoginState extends State<Login> {
       await Future.wait([
         // push notification starts
         saveFCMToken(),
-        homeData.fetchAddressLists(false),
       ]);
 
       Loading.close();
@@ -229,36 +230,10 @@ class _LoginState extends State<Login> {
           context.push("/");
         }
       }
-    }
-  }
 
-  Future<void> saveFCMToken() async {
-    if (OtherConfig.USE_PUSH_NOTIFICATION) {
-      final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+      await Future.delayed(Duration.zero);
+      homeData.fetchAddressLists(false);
 
-      await _fcm.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
-
-      String? fcmToken;
-      try {
-        fcmToken = await _fcm.getToken();
-      } catch (e) {
-        print('Caught exception: $e');
-      }
-
-      print("--fcm token-- login");
-      print("fcmToken $fcmToken");
-      // update device token
-      if (fcmToken != null && is_logged_in.$) {
-        await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
-      }
     }
   }
 
@@ -352,6 +327,13 @@ class _LoginState extends State<Login> {
       print("error is ....... $e");
       // TODO
     }
+  }
+
+  Future<void> onPressedOTPLogin() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const OTPLoginScreen()),
+    );
   }
 
   // onPressedTwitterLogin() async {
@@ -712,95 +694,57 @@ class _LoginState extends State<Login> {
               if (Platform.isIOS &&
                   AppConfig.businessSettingsData.allowAppleLogin)
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: AppDimensions.paddingLarge),
-                  child: SignInWithAppleButton(
-                    onPressed: () async {
-                      signInWithApple();
-                    },
+                  padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingLarge,
                   ),
+                  child: SignInWithAppleButton(onPressed: signInWithApple),
                 ),
               Visibility(
-                visible: AppConfig.businessSettingsData.allowGoogleLogin ||
-                    AppConfig.businessSettingsData.allowFacebookLogin,
+                visible: AppConfig.businessSettingsData.otherLogins,
                 child: Padding(
                   padding:
                       const EdgeInsets.only(top: AppDimensions.paddingLarge),
                   child: Center(
-                      child: Text(
-                    "login_screen_login_with".tr(context: context),
-                    style:
-                        const TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                  )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Center(
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Visibility(
-                          visible:
-                              AppConfig.businessSettingsData.allowGoogleLogin,
-                          child: InkWell(
-                            onTap: () {
-                              onPressedGoogleLogin();
-                            },
-                            child: Container(
-                              width: 28,
-                              child: Image.asset(AppImages.google),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingDefault),
-                          child: Visibility(
-                            visible: AppConfig
-                                .businessSettingsData.allowFacebookLogin,
-                            child: InkWell(
-                              onTap: () {
-                                onPressedFacebookLogin();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset(AppImages.facebook),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // if (AppConfig.businessSettingsData.allow_twitter_login.$)
-                        //   Padding(
-                        //     padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
-                        //     child: InkWell(
-                        //       onTap: () {
-                        //         onPressedTwitterLogin();
-                        //       },
-                        //       child: Container(
-                        //         width: 28,
-                        //         child: Image.asset("assets/twitter_logo.png"),
-                        //       ),
-                        //     ),
-                        //   ),
-                        /* if (Platform.isIOS)
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
-                            // visible: true,
-                            child: A(
-                              onTap: () async {
-                                signInWithApple();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/apple_logo.png"),
-                              ),
-                            ),
-                          ),*/
-                      ],
+                    child: Text(
+                      "login_screen_login_with".tr(context: context),
+                      style: const TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(top: 15.0),
+                width: double.maxFinite,
+                child: Wrap(
+                  runAlignment: WrapAlignment.center,
+                  alignment: WrapAlignment.spaceAround,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: AppDimensions.paddingSmall,
+                  runSpacing: AppDimensions.paddingSmall,
+                  children: [
+                    if (AppConfig.businessSettingsData.allowGoogleLogin)
+                      LoginWith3rd(
+                        onTap: onPressedGoogleLogin,
+                        name: 'google_ucf'.tr(context: context),
+                        image: AppImages.google,
+                      ),
+                    if (AppConfig.businessSettingsData.allowFacebookLogin)
+                      LoginWith3rd(
+                        onTap: onPressedFacebookLogin,
+                        name: 'facebook_ucf'.tr(context: context),
+                        image: AppImages.facebook,
+                      ),
+                    if (AppConfig.businessSettingsData.allowOTPLogin)
+                      LoginWith3rd(
+                        onTap: onPressedOTPLogin,
+                        name: "OTP",
+                        image: AppImages.otp,
+                        imageColor: Theme.of(context).primaryColor,
+                      ),
+                  ],
                 ),
               ),
             ],
@@ -808,5 +752,65 @@ class _LoginState extends State<Login> {
         )
       ],
     );
+  }
+}
+
+class LoginWith3rd extends StatelessWidget {
+  const LoginWith3rd({
+    super.key,
+    required this.name,
+    required this.image,
+    this.imageColor,
+    this.onTap,
+  });
+  final String name;
+  final String image;
+  final Color? imageColor;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: name,
+      margin: const EdgeInsets.all(AppDimensions.paddingDefault),
+      child: InkWell(
+        onTap: onTap,
+        splashFactory: NoSplash.splashFactory,
+        child: SizedBox(
+          width: 46,
+          child: Image.asset(image, color: imageColor),
+        ),
+      ),
+    );
+  }
+}
+
+Future<void> saveFCMToken() async {
+  if (OtherConfig.USE_PUSH_NOTIFICATION) {
+    final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
+    await _fcm.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    String? fcmToken;
+    try {
+      fcmToken = await _fcm.getToken();
+    } catch (e) {
+      print('Caught exception: $e');
+    }
+
+    print("--fcm token-- login");
+    print("fcmToken $fcmToken");
+    // update device token
+    if (fcmToken != null && is_logged_in.$) {
+      await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
+    }
   }
 }
