@@ -5,10 +5,29 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.14'`
+- `mobileVersion = '9.10.22'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.22 – Router fallback to WebView + domain update</strong></summary>
+
+### Routing
+- Added `errorPageBuilder` to `GoRouter` that opens unknown routes in `CommonWebviewScreen` with `backHome=true` and URL `${RAW_BASE_URL}/mobile-page{path}`.
+- `CommonWebviewScreen` now intercepts navigation and forwards it to `NavigationService` (deep links use router; external links use `url_launcher`).
+- Back behavior: go back within WebView if possible; otherwise navigate to `/`.
+
+### Config
+- Updated `DOMAIN_PATH` to `sellerwise.devefinance.com`.
+
+### Tech
+- `NavigationService.handleUrls` now supports `useGo` to choose between `context.go` and `context.push`.
+
+### Notes
+- No API path changes.
+- Store update: **yes** (routing behavior visible to users).
+</details>
+
 
 
 <details>

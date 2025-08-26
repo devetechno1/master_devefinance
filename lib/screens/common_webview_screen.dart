@@ -2,13 +2,19 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../services/navigation_service.dart';
 
 class CommonWebviewScreen extends StatefulWidget {
   final String url;
   final String page_name;
+  final bool backHome;
 
-  const CommonWebviewScreen({Key? key, this.url = "", this.page_name = ""})
+  const CommonWebviewScreen(
+      {Key? key, this.url = "", this.page_name = "", this.backHome = false})
       : super(key: key);
 
   @override
@@ -31,6 +37,13 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
+          onNavigationRequest: (request) async {
+            final Uri? uri = Uri.tryParse(request.url);
+            if (uri != null && await canLaunchUrl(uri)) {
+              NavigationService.handleUrls(request.url, useGo: true);
+            }
+            return NavigationDecision.prevent;
+          },
           onWebResourceError: (error) {},
           onPageFinished: (page) {},
         ),
@@ -46,12 +59,18 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: direction,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar(context),
-        body: buildBody(),
+    return PopScope(
+      canPop: !widget.backHome,
+      onPopInvokedWithResult: (didPop, result) {
+        if (widget.backHome) onPop();
+      },
+      child: Directionality(
+        textDirection: direction,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: buildAppBar(context),
+          body: buildBody(),
+        ),
       ),
     );
   }
@@ -60,7 +79,9 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
     return SizedBox.expand(
       child: Container(
         child: WebViewWidget(
-            controller: _webViewController, layoutDirection: direction),
+          controller: _webViewController,
+          layoutDirection: direction,
+        ),
       ),
     );
   }
@@ -76,7 +97,13 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            if (widget.backHome) {
+              onPop();
+            } else {
+              Navigator.of(context).pop();
+            }
+          },
         ),
       ),
       title: Text(
@@ -86,5 +113,14 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
       elevation: 0.0,
       titleSpacing: 0,
     );
+  }
+
+  Future<void> onPop() async {
+    if (await _webViewController.canGoBack()) {
+      await _webViewController.goBack();
+    } else {
+      context.go('/');
+      // if (widget.backHome) context.go('/');
+    }
   }
 }

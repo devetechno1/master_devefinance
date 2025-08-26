@@ -52,6 +52,7 @@ import 'screens/classified_ads/classified_ads.dart';
 import 'screens/classified_ads/classified_product_details.dart';
 import 'screens/classified_ads/classified_provider.dart';
 import 'screens/classified_ads/my_classified_ads.dart';
+import 'screens/common_webview_screen.dart';
 import 'screens/coupon/coupons.dart';
 import 'screens/flash_deal/flash_deal_list.dart';
 import 'screens/flash_deal/flash_deal_products.dart';
@@ -122,6 +123,14 @@ var routes = GoRouter(
   overridePlatformDefaultLocation: false,
   navigatorKey: OneContext().key,
   initialLocation: "/",
+  errorPageBuilder: (BuildContext context, GoRouterState state) {
+    return MaterialPage(
+      child: CommonWebviewScreen(
+        backHome: true,
+        url: "${AppConfig.RAW_BASE_URL}/mobile-page${state.uri.path}",
+      ),
+    );
+  },
   routes: [
     GoRoute(
         path: '/',

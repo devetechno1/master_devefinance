@@ -24,7 +24,7 @@ class AppConfig {
 
   /// App Version (AV) shown on the splash screen.
   /// Used to verify the app build matches the master version.
-  static const String mobileVersion = '9.10.14';
+  static const String mobileVersion = '9.10.22';
 
   /// Backend Version (BV) used for compatibility checks.
   /// Used to verify the app is compatible with backend data.
@@ -70,7 +70,7 @@ class AppConfig {
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
   static const DOMAIN_PATH =
-      "192.168.100.200:8080/devef"; //use only domain name without http:// or https://
+      "sellerwise.devefinance.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
