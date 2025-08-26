@@ -5,13 +5,24 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.13'`
+- `mobileVersion = '9.10.15'`
 ---
 
 ## 📱 Mobile App Updates
 
 <details>
-<summary><strong>AV 9.10.13 – Auth/Phone LTR & Registration fields refactor</strong></summary>
+<summary><strong>AV 9.10.15 – Auth/Phone LTR & Registration fields refactor</strong></summary>
+### UI/UX
+- Consolidated payment/delivery color logic into the `Order` model (`paymentColor`, `deliveryColor`).
+- Order list now uses model-provided colors instead of inline UI conditions.
+
+### Tech
+- Added `material.dart` import in the order mini response model.
+
+### Notes
+- No API changes.
+- Store update: **no** (UI-only refactor).
+</details>
 
 ### UI/UX
 - Phone input row now enforced as **LTR** regardless of app locale.
