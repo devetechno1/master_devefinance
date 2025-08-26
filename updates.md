@@ -10,6 +10,37 @@ This file tracks all update versions for both the **Mobile App**.
 
 ## 📱 Mobile App Updates
 
+
+<details>
+<summary><strong>AV 9.10.14 – OTP Login, LTR phone row & Auth UI polish</strong></summary>
+
+### APIs (new)
+- **POST** `/auth/send-otp` — Sends an OTP to the provided phone.
+  - **Request (JSON)**: `{ "phone": string, "country_code": string, "identity_matrix": string, "temp_user_id": string }`
+  - **Expected**: `200 OK` with `{ result, message, ... }`
+  - **Errors**: `400/422` (validation), `401/429` (auth/rate limit)
+- **POST** `/auth/verify-otp` — Verifies the OTP and logs the user in.
+  - **Request (JSON)**: `{ "phone": string, "country_code": string, "otp_code": string, "identity_matrix": string, "temp_user_id": string, "device_info"?: object }`
+  - **Expected**: `200 OK` with `LoginResponse` payload
+  - **Errors**: `400/422` for invalid code
+
+### UI/UX
+- New **OTP** login provider (visible when `login_with_otp=1`).
+- Phone input row is now **forced LTR** across locales.
+- Unified third-party login icons via `LoginWith3rd` widget.
+- Auth container uses `AlignmentDirectional` / `PositionedDirectional` and removes the outer `Directionality`.
+
+### Settings
+- Added `allowOTPLogin` and aggregated getter `otherLogins` in `BusinessSettingsData`.
+
+### Notes
+- No breaking changes to existing endpoints.
+- Store update: **no** (feature addition only).
+</details>
+
+
+
+
 <details>
 <summary><strong>AV 9.10.15 – Auth/Phone LTR & Registration fields refactor</strong></summary>
 ### UI/UX
