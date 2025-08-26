@@ -109,7 +109,9 @@ class _ProductDetailsState extends State<ProductDetails>
   int _inCart = 0;
   var _stock_txt;
 
-  int get maxQuantity => min(_stock, _productDetails?.maxQty ?? _stock);
+  int get _s => _stock.onlyPositive?.toInt() ?? 0;
+
+  int get maxQuantity => min(_s, _productDetails?.maxQty ?? _s);
   int get minQuantity => _productDetails?.minQty ?? 1;
 
   double get totalBasePrice => _basePrice * _quantity;
@@ -1541,9 +1543,10 @@ class _ProductDetailsState extends State<ProductDetails>
         // ),
         const SizedBox(height: AppDimensions.paddingDefault),
         Text(
-          _stock > 0
-              ? "${'in_stock'.tr(context: context)}: $_stock_txt"
-              : 'out_of_stock'.tr(context: context),
+          _stock_txt,
+          // _stock > 0
+          //     ? "${'in_stock'.tr(context: context)}: $_stock_txt"
+          //     : 'out_of_stock'.tr(context: context),
           textAlign: TextAlign.center,
           style: TextStyle(
             color: _stock > 0 ? null : Colors.red,
@@ -1789,7 +1792,7 @@ class _ProductDetailsState extends State<ProductDetails>
               bottom: AppDimensions.paddingSmallExtra,
             ),
             child: AnimatedNumberText<double>(
-            _stock<0 ? 0:totalBasePrice,
+              totalBasePrice,
               duration: const Duration(
                   milliseconds: AppDimensions.animationDefaultInMillis),
               style: TextStyle(
@@ -1892,7 +1895,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 height: 36,
                 child: Center(
                   child: QuantityInputField.show(
-                    _stock <0 ? TextEditingController(text: '0') : quantityText,
+                    quantityText,
                     isDisable: _stock == 0,
                     onChanged: (val) {
                       _quantity = int.parse(quantityText.text);
@@ -1931,17 +1934,11 @@ class _ProductDetailsState extends State<ProductDetails>
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
-                
-                  Text(
-                    _stock > 0? "$_stock_txt":0.toString(),
-                    style: const TextStyle(
-                        color: Color(0xff6B7377), fontSize: 14),
-                  ),
-                // Text(
-                //   "$_stock_txt",
-                //   style:
-                //       const TextStyle(color: Color(0xff6B7377), fontSize: 14),
-                // ),
+                Text(
+                  "$_stock_txt",
+                  style:
+                      const TextStyle(color: Color(0xff6B7377), fontSize: 14),
+                ),
                 const SizedBox(width: 20),
                 Expanded(
                   child: AnimatedDefaultTextStyle(
@@ -1950,7 +1947,7 @@ class _ProductDetailsState extends State<ProductDetails>
                     ),
                     child: Text('out_of_stock'.tr(context: context)),
                     textAlign: TextAlign.center,
-                    style: _stock == 0 || _stock < 0
+                    style: _stock == 0
                         ? const TextStyle(color: Colors.red, fontSize: 15)
                         : const TextStyle(
                             color: Colors.transparent, fontSize: 0),
@@ -2254,13 +2251,16 @@ class _ProductDetailsState extends State<ProductDetails>
       columns: [
         DataColumn(
             label: Text('min_qty_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('max_qty_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('unit_price_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
         _productDetails!.wholesale!.length,
@@ -2472,8 +2472,8 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
-            color: _stock == 0 || _stock < 0 ? Colors.grey : color,
-            boxShadow: _stock == 0 || _stock < 0
+            color: _stock == 0 ? Colors.grey : color,
+            boxShadow: _stock == 0
                 ? null
                 : [
                     BoxShadow(
