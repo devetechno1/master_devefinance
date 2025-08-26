@@ -1789,7 +1789,7 @@ class _ProductDetailsState extends State<ProductDetails>
               bottom: AppDimensions.paddingSmallExtra,
             ),
             child: AnimatedNumberText<double>(
-              totalBasePrice,
+            _stock<0 ? 0:totalBasePrice,
               duration: const Duration(
                   milliseconds: AppDimensions.animationDefaultInMillis),
               style: TextStyle(
@@ -1892,7 +1892,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 height: 36,
                 child: Center(
                   child: QuantityInputField.show(
-                    quantityText,
+                    _stock <0 ? TextEditingController(text: '0') : quantityText,
                     isDisable: _stock == 0,
                     onChanged: (val) {
                       _quantity = int.parse(quantityText.text);
@@ -1931,11 +1931,17 @@ class _ProductDetailsState extends State<ProductDetails>
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
-                Text(
-                  "$_stock_txt",
-                  style:
-                      const TextStyle(color: Color(0xff6B7377), fontSize: 14),
-                ),
+                
+                  Text(
+                    _stock > 0? "$_stock_txt":0.toString(),
+                    style: const TextStyle(
+                        color: Color(0xff6B7377), fontSize: 14),
+                  ),
+                // Text(
+                //   "$_stock_txt",
+                //   style:
+                //       const TextStyle(color: Color(0xff6B7377), fontSize: 14),
+                // ),
                 const SizedBox(width: 20),
                 Expanded(
                   child: AnimatedDefaultTextStyle(
@@ -1944,7 +1950,7 @@ class _ProductDetailsState extends State<ProductDetails>
                     ),
                     child: Text('out_of_stock'.tr(context: context)),
                     textAlign: TextAlign.center,
-                    style: _stock == 0
+                    style: _stock == 0 || _stock < 0
                         ? const TextStyle(color: Colors.red, fontSize: 15)
                         : const TextStyle(
                             color: Colors.transparent, fontSize: 0),
@@ -2466,8 +2472,8 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
-            color: _stock == 0 ? Colors.grey : color,
-            boxShadow: _stock == 0
+            color: _stock == 0 || _stock < 0 ? Colors.grey : color,
+            boxShadow: _stock == 0 || _stock < 0
                 ? null
                 : [
                     BoxShadow(
