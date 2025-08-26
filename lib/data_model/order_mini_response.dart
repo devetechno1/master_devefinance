@@ -4,6 +4,8 @@
 // https://app.quicktype.io/
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 OrderMiniResponse orderMiniResponseFromJson(String str) =>
     OrderMiniResponse.fromJson(json.decode(str));
 
@@ -69,6 +71,30 @@ class Order {
   String? grand_total;
   String? date;
   OrderLinks? links;
+
+  Color get paymentColor {
+    switch (payment_status) {
+      case "paid":
+        return Colors.green;
+      case "unpaid":
+        return Colors.red;
+      default:
+        return Colors.orangeAccent;
+    }
+  }
+
+  Color get deliveryColor {
+    switch (delivery_status) {
+      case "confirmed":
+        return Colors.green;
+      case "pending":
+        return Colors.orangeAccent;
+      case "delivered":
+        return Colors.green;
+      default:
+        return Colors.red;
+    }
+  }
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
         id: json["id"],

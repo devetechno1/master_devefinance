@@ -29,6 +29,122 @@ This file tracks all update versions for both the **Mobile App**.
 </details>
 
 
+<details>
+<summary><strong>AV 9.10.21 – Positive-only stock handling & simplified stock label</strong></summary>
+
+### Logic
+- Added `NumEx.onlyPositive` to normalize negative numbers to zero.
+- Product details now use a sanitized stock getter (`_s`) for `maxQuantity`.
+
+### UI/UX
+- Simplified stock label to use `_stock_txt` directly from backend, keeping red color when out of stock.
+
+### Notes
+- No API changes.
+- Store update: **no** (internal helper + UI logic tweak).
+</details>
+
+<details>
+<summary><strong>AV 9.10.20 – Point API to local dev server</strong></summary>
+
+### Config
+- `DOMAIN_PATH` set to `devefinance.com`.
+- `RAW_BASE_URL` switched to `http://192.168.100.200:8080/devef` (overrides `PROTOCOL + DOMAIN_PATH`).
+- Effective `BASE_URL`: `http://192.168.100.200:8080/devef/api/v2`.
+
+### Notes
+- No endpoint path changes; only the base URL changed.
+- **Store update: yes** (changing the app’s API base requires shipping a new build).
+- On Android 9+, ensure cleartext HTTP is allowed (e.g., `usesCleartextTraffic=true` or network security config).
+</details>
+
+<details>
+<summary><strong>AV 9.10.19 – Guard product details UI against negative stock</strong></summary>
+
+### UI/UX
+- When `_stock < 0`, the product details screen now shows:
+  - total price as `0`,
+  - quantity field fixed to `0`,
+  - left stock text as `0`,
+  - “out of stock” label active,
+  - add-to-cart button disabled (grey, no shadow).
+
+### Notes
+- No API changes.
+- Store update: **no** (logic/UI safeguards only).
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.18 – Add rating stars to MiniProductCard</strong></summary>
+
+### UI/UX
+- Added star rating row to `MiniProductCard` using `RatingBarIndicator`.
+- Reduced bottom padding of the name line from 6 to 0 to make room for stars.
+
+### Tech
+- Optional `rating` parameter (int) on `MiniProductCard`; internally clamped to 0–5.
+- Reuses existing `flutter_rating_bar` dependency already present in the project.
+
+### Notes
+- No API changes.
+- Store update: **no** (minor UI enhancement).
+</details>
+<details>
+<summary><strong>AV 9.10.17 – Order details spacing & top selling card padding</strong></summary>
+
+### UI/UX
+- Added a small left padding for order status labels (“Order placed”, “Confirmed”, “On the way”, “Delivered”) to improve alignment in the timeline row.
+- Reduced bottom padding from 14 to 10 in the Top Selling product card content.
+
+### Notes
+- No API changes.
+- Store update: **no** (minor UI tweaks).
+</details>
+<details>
+<summary><strong>AV 9.10.16 – Arabic copy fix for orders string</strong></summary>
+
+### UI/UX
+- Corrected Arabic translation for `your_ordered_all_lower` from "طلبت" to "طلباتك".
+
+### Notes
+- No API changes.
+- Store update: **no** (copy-only change).
+</details>
+
+<details>
+<summary><strong>AV 9.10.15 – Order status colors moved to model</strong></summary>
+
+### UI/UX
+- Consolidated payment/delivery color logic into the `Order` model (`paymentColor`, `deliveryColor`).
+- Order list now uses model-provided colors instead of inline UI conditions.
+
+### Tech
+- Added `material.dart` import in the order mini response model.
+
+### Notes
+- No API changes.
+- Store update: **no** (UI-only refactor).
+</details><details>
+<summary><strong>AV 9.10.22 – Router fallback to WebView + domain update</strong></summary>
+
+### Routing
+- Added `errorPageBuilder` to `GoRouter` that opens unknown routes in `CommonWebviewScreen` with `backHome=true` and URL `${RAW_BASE_URL}/mobile-page{path}`.
+- `CommonWebviewScreen` now intercepts navigation and forwards it to `NavigationService` (deep links use router; external links use `url_launcher`).
+- Back behavior: go back within WebView if possible; otherwise navigate to `/`.
+
+### Config
+- Updated `DOMAIN_PATH` to `sellerwise.devefinance.com`.
+
+### Tech
+- `NavigationService.handleUrls` now supports `useGo` to choose between `context.go` and `context.push`.
+
+### Notes
+- No API path changes.
+- Store update: **yes** (routing behavior visible to users).
+</details>
+
+
 
 <details>
 <summary><strong>AV 9.10.14 – OTP Login, LTR phone row & Auth UI polish</strong></summary>

@@ -865,11 +865,15 @@ class _OrderDetailsState extends State<OrderDetails> {
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
-                  Text(
-                    'order_placed'.tr(context: context),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: MyTheme.font_grey),
-                  )
+                  Padding(
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    child: Text(
+                      'order_placed'.tr(context: context),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: MyTheme.font_grey),
+                    ),
+                  ),
+                  
                 ],
               ),
             ),
@@ -927,10 +931,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
-                  Text(
-                    'confirmed_ucf'.tr(context: context),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: MyTheme.font_grey),
+                  Padding(
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    child: Text(
+                      'confirmed_ucf'.tr(context: context),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: MyTheme.font_grey),
+                    ),
                   )
                 ],
               ),
@@ -1000,10 +1007,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
-                  Text(
-                    'on_the_way_ucf'.tr(context: context),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: MyTheme.font_grey),
+                  Padding(
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    child: Text(
+                      'on_the_way_ucf'.tr(context: context),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: MyTheme.font_grey),
+                    ),
                   )
                 ],
               ),
@@ -1072,10 +1082,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
-                  Text(
-                    'delivered_ucf'.tr(context: context),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: MyTheme.font_grey),
+                  Padding(
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    child: Text(
+                      'delivered_ucf'.tr(context: context),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: MyTheme.font_grey),
+                    ),
                   )
                 ],
               ),

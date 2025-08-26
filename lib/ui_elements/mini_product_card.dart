@@ -206,6 +206,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MiniProductCard extends StatefulWidget {
   final int? id;
@@ -218,6 +219,7 @@ class MiniProductCard extends StatefulWidget {
   final bool? isWholesale;
   final TextStyle? priceTextStyle;
   final TextStyle? nameTextStyle;
+  final int? rating;
   const MiniProductCard({
     Key? key,
     this.id,
@@ -230,6 +232,7 @@ class MiniProductCard extends StatefulWidget {
     this.isWholesale = false,
     this.priceTextStyle,
     this.nameTextStyle,
+    this.rating,
   }) : super(key: key);
 
   @override
@@ -239,6 +242,7 @@ class MiniProductCard extends StatefulWidget {
 class _MiniProductCardState extends State<MiniProductCard> {
   @override
   Widget build(BuildContext context) {
+    final double ratingValue = (widget.rating ?? 0).toDouble().clamp(0, 5);
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -269,7 +273,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
               Flexible(
                 fit: FlexFit.loose,
                 child: Container(
-                  padding: const EdgeInsets.fromLTRB(8, 12, 8, 6),
+                  padding: const EdgeInsets.fromLTRB(8, 12, 8, 0),
                   width: double.maxFinite,
                   child: Text(
                     widget.name!,
@@ -303,6 +307,14 @@ class _MiniProductCardState extends State<MiniProductCard> {
                   ),
                 ),
               ),
+              RatingBarIndicator(
+          rating: ratingValue,
+          itemCount: 5,
+          itemSize: 18,
+          itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
+          unratedColor: Colors.grey,
+          direction: Axis.horizontal,
+        ),
             ]),
       ),
     );

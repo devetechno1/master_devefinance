@@ -22,4 +22,9 @@ extension NumEx on num? {
   String localeCustomPattern(String pattern) => custom(pattern);
 
   String get withSeparator => localeCustomPattern('#,##0.##');
+
+  num? get onlyPositive {
+    if (this == null) return null;
+    return this! < 0 ? 0 : this!;
+  }
 }

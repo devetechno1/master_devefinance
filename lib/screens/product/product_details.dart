@@ -109,7 +109,9 @@ class _ProductDetailsState extends State<ProductDetails>
   int _inCart = 0;
   var _stock_txt;
 
-  int get maxQuantity => min(_stock, _productDetails?.maxQty ?? _stock);
+  int get _s => _stock.onlyPositive?.toInt() ?? 0;
+
+  int get maxQuantity => min(_s, _productDetails?.maxQty ?? _s);
   int get minQuantity => _productDetails?.minQty ?? 1;
 
   double get totalBasePrice => _basePrice * _quantity;
@@ -1541,9 +1543,10 @@ class _ProductDetailsState extends State<ProductDetails>
         // ),
         const SizedBox(height: AppDimensions.paddingDefault),
         Text(
-          _stock > 0
-              ? "${'in_stock'.tr(context: context)}: $_stock_txt"
-              : 'out_of_stock'.tr(context: context),
+          _stock_txt,
+          // _stock > 0
+          //     ? "${'in_stock'.tr(context: context)}: $_stock_txt"
+          //     : 'out_of_stock'.tr(context: context),
           textAlign: TextAlign.center,
           style: TextStyle(
             color: _stock > 0 ? null : Colors.red,
@@ -2248,13 +2251,16 @@ class _ProductDetailsState extends State<ProductDetails>
       columns: [
         DataColumn(
             label: Text('min_qty_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('max_qty_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('unit_price_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
         _productDetails!.wholesale!.length,
