@@ -9,6 +9,8 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## 📱 Mobile App Updates
+
+
 <details>
 <summary><strong>AV 9.10.14 – OTP Login, LTR phone row & Auth UI polish</strong></summary>
 
