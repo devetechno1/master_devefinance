@@ -148,7 +148,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                     child: IconButton(
                       icon: const Icon(Icons.clear, color: MyTheme.white),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pop(context);
                       },
                     ),
                   ),

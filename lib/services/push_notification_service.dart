@@ -169,12 +169,12 @@ class PushNotificationService {
         actions: <Widget>[
           Btn.basic(
             child: Text('close_ucf'.tr(context: context)),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.pop(context),
           ),
           Btn.basic(
             child: Text('go'.tr(context: context)),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
               _serialiseAndNavigate(message.toMap());
             },
           ),
@@ -193,12 +193,12 @@ class PushNotificationService {
                 actions: <Widget>[
                   Btn.basic(
                     child: Text('close_ucf'.tr(context: context)),
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => Navigator.pop(context),
                   ),
                   Btn.basic(
                       child: Text('log_in'.tr(context: context)),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pop(context);
                         OneContext().push(MaterialPageRoute(builder: (_) {
                           return const Login();
                         }));

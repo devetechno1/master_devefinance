@@ -221,7 +221,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
           color: Colors.transparent,
           height: 50,
           child: Btn.minWidthFixHeight(
-            minWidth: MediaQuery.of(context).size.width,
+            minWidth: MediaQuery.sizeOf(context).width,
             height: 50,
             color: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(

@@ -127,7 +127,7 @@ class _MessengerListState extends State<MessengerList> {
       leading: Builder(
         builder: (context) => IconButton(
           icon: UsefulElements.backButton(),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Text(

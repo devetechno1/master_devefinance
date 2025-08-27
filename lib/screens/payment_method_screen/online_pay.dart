@@ -62,7 +62,7 @@ class _OnlinePayState extends State<OnlinePay> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
     _combined_order_id = orderCreateResponse.combined_order_id;
@@ -79,10 +79,10 @@ class _OnlinePayState extends State<OnlinePay> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           
           
           // },
@@ -121,7 +121,7 @@ class _OnlinePayState extends State<OnlinePay> {
             }
             if (page.contains("/online-pay/failed")) {
               getData();
-              Navigator.of(context).pop(goToOrdersScreen);
+              Navigator.pop(context, goToOrdersScreen);
             }
           },
         ),
@@ -198,7 +198,7 @@ class _OnlinePayState extends State<OnlinePay> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

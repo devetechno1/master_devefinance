@@ -65,11 +65,11 @@ class _PaymobScreenState extends State<PaymobScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
           //   print(error);
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           onPageFinished: (page) {
             canPop = true;
@@ -96,7 +96,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      if (canPop) Navigator.of(context).pop(goToOrdersScreen);
+      if (canPop) Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -112,7 +112,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (!didPop && canPop) {
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -135,7 +135,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
     }
     if (responseJSON["result"] == false) {
       ToastComponent.showDialog(responseJSON["message"]);
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
     } else if (responseJSON["result"] == true) {
       ToastComponent.showDialog(responseJSON["message"]);
 
@@ -197,7 +197,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
                         ? CupertinoIcons.arrow_right
                         : CupertinoIcons.arrow_left,
                     color: MyTheme.dark_grey),
-                onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+                onPressed: () => Navigator.pop(context, goToOrdersScreen),
               ),
             )
           : const SizedBox(),

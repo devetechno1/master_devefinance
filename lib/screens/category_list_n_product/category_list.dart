@@ -102,7 +102,7 @@ class _CategoryListState extends State<CategoryList> {
                         ? CupertinoIcons.arrow_right
                         : CupertinoIcons.arrow_left,
                     color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.pop(context),
               ),
             ),
       title: Text(
@@ -187,10 +187,10 @@ class _CategoryListState extends State<CategoryList> {
             Padding(
               padding: const EdgeInsets.only(top: AppDimensions.paddingSmall),
               child: Container(
-                width: (MediaQuery.of(context).size.width - 32),
+                width: (MediaQuery.sizeOf(context).width - 32),
                 height: 40,
                 child: Btn.basic(
-                  minWidth: MediaQuery.of(context).size.width,
+                  minWidth: MediaQuery.sizeOf(context).width,
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(

@@ -615,7 +615,7 @@ class _CheckoutState extends State<Checkout> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop();
+      Navigator.pop(context);
       return;
     }
 
@@ -633,7 +633,7 @@ class _CheckoutState extends State<Checkout> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop();
+      Navigator.pop(context);
       return;
     }
 
@@ -761,7 +761,7 @@ class _CheckoutState extends State<Checkout> {
           key: _formKey,
           child: Container(
             height: 42,
-            width: (MediaQuery.of(context).size.width - 32) * (2 / 3),
+            width: (MediaQuery.sizeOf(context).width - 32) * (2 / 3),
             child: TextFormField(
               controller: _couponController,
               readOnly: _coupon_applied!,
@@ -805,10 +805,10 @@ class _CheckoutState extends State<Checkout> {
         ),
         !_coupon_applied!
             ? Container(
-                width: (MediaQuery.of(context).size.width - 32) * (1 / 3),
+                width: (MediaQuery.sizeOf(context).width - 32) * (1 / 3),
                 height: 42,
                 child: Btn.basic(
-                  minWidth: MediaQuery.of(context).size.width,
+                  minWidth: MediaQuery.sizeOf(context).width,
                   color: Theme.of(context).primaryColor,
                   shape: app_language_rtl.$!
                       ? const RoundedRectangleBorder(
@@ -836,10 +836,10 @@ class _CheckoutState extends State<Checkout> {
                 ),
               )
             : Container(
-                width: (MediaQuery.of(context).size.width - 32) * (1 / 3),
+                width: (MediaQuery.sizeOf(context).width - 32) * (1 / 3),
                 height: 42,
                 child: Btn.basic(
-                  minWidth: MediaQuery.of(context).size.width,
+                  minWidth: MediaQuery.sizeOf(context).width,
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -874,7 +874,7 @@ class _CheckoutState extends State<Checkout> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Text(
@@ -1104,7 +1104,7 @@ class _CheckoutState extends State<Checkout> {
         color: Colors.transparent,
         height: 50,
         child: Btn.minWidthFixHeight(
-          minWidth: MediaQuery.of(context).size.width,
+          minWidth: MediaQuery.sizeOf(context).width,
           height: 50,
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(

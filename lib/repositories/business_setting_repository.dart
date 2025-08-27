@@ -4,6 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/business_setting_response.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
 
+import '../data_model/otp_provider_model.dart';
 import '../helpers/shared_value_helper.dart';
 
 class BusinessSettingRepository {
@@ -36,5 +37,12 @@ class BusinessSettingRepository {
     });
 
     return businessSettingListResponseFromJson(response.body);
+  }
+
+  Future<List<OTPProviderModel>> getActivatedOTPLoginList() async {
+    const String url = ("${AppConfig.BASE_URL}/activated-otp-login");
+    final response = await ApiRequest.get(url: url);
+
+    return OTPProviderModel.parseList(jsonDecode(response.body));
   }
 }

@@ -125,7 +125,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height ?? MediaQuery.of(context).size.height,
+      height: widget.height ?? MediaQuery.sizeOf(context).height,
       decoration: widget.decoration ??
           BoxDecoration(
             borderRadius: const BorderRadius.all(

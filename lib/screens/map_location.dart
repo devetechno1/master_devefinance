@@ -106,7 +106,7 @@ class MapLocationState extends State<MapLocation>
 
               isLoadingFormattedAddress = false;
               // print("onPlacePicked..."+result.toString());
-              // Navigator.of(context).pop();
+              // Navigator.pop(context);
               setState(() {});
             },
             onCameraMove: (position) {
@@ -333,7 +333,7 @@ class MapLocationState extends State<MapLocation>
         selectedPlace = result;
 
         // print("onPlacePicked..."+result.toString());
-        // Navigator.of(context).pop();
+        // Navigator.pop(context);
         setState(() {});
       },
       //forceSearchOnZoomChanged: true,

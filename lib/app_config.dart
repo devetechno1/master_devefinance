@@ -24,12 +24,11 @@ class AppConfig {
 
   /// App Version (AV) shown on the splash screen.
   /// Used to verify the app build matches the master version.
-  static const String mobileVersion = '9.10.21';
+  static const String mobileVersion = '9.10.24';
 
   /// Backend Version (BV) used for compatibility checks.
   /// Used to verify the app is compatible with backend data.
   static const String backendVersion = '9.8.1';
-
 
   //configure this
   // static String copyright_text =
@@ -59,8 +58,10 @@ class AppConfig {
       r"a"; //enter your purchase code for the app from codecanyon
 
   //Default language config
-  static String default_language = CustomLocalization.supportedLocales.first.languageCode;
-  static String mobile_app_code = CustomLocalization.supportedLocales.first.languageCode;
+  static String default_language =
+      CustomLocalization.supportedLocales.first.languageCode;
+  static String mobile_app_code =
+      CustomLocalization.supportedLocales.first.languageCode;
   static bool app_language_rtl = mobile_app_code == "ar";
 
   //Default country config
@@ -70,20 +71,19 @@ class AppConfig {
   static const bool HTTPS =
       true; //if you are using localhost , set this to false
   static const DOMAIN_PATH =
-      "devefinance.com"; //use only domain name without http:// or https://
+      "sellerwise.devefinance.com"; //use only domain name without http:// or https://
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
   static const String PROTOCOL = HTTPS ? "https://" : "http://";
-  static const String RAW_BASE_URL = "http://192.168.100.200:8080/devef";
-  // static const String RAW_BASE_URL = "$PROTOCOL$DOMAIN_PATH";
+  // static const String RAW_BASE_URL = "http://192.168.100.200:8080/devef";
+  static const String RAW_BASE_URL = "$PROTOCOL$DOMAIN_PATH";
   static const String BASE_URL = "$RAW_BASE_URL/$API_ENDPATH";
 
   static const LatLng initPlace = LatLng(30.723003387451172, 31.02609634399414);
 
   // static HomePageType selectedHomePageType = HomePageType.home;
-  static BusinessSettingsData businessSettingsData =
-      const BusinessSettingsData();
+  static BusinessSettingsData businessSettingsData = BusinessSettingsData();
 
   static Map<String, dynamic> deviceInfo = {};
 }

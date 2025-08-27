@@ -698,17 +698,17 @@ class _FilterState extends State<Filter> {
           IconButton(
             padding: EdgeInsets.zero,
             icon: UsefulElements.backButton(),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.pop(context),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Container(
-              width: MediaQuery.of(context).size.width * .85,
+              width: MediaQuery.sizeOf(context).width * .85,
               height: 70,
               child: Container(
                 child: Padding(
-                    padding: MediaQuery.of(context).viewPadding.top >
-                            30 //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                    padding: MediaQuery.viewPaddingOf(context).top >
+                            30 //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                         ? const EdgeInsets.symmetric(
                             vertical: 15.0, horizontal: 0.0)
                         : const EdgeInsets.symmetric(
@@ -1123,8 +1123,8 @@ class _FilterState extends State<Filter> {
             children: [
               SizedBox(
                   height:
-                      MediaQuery.of(context).viewPadding.top > 40 ? 150 : 135
-                  //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      MediaQuery.viewPaddingOf(context).top > 40 ? 150 : 135
+                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               MasonryGridView.count(
                 // 2
@@ -1198,8 +1198,8 @@ class _FilterState extends State<Filter> {
             children: [
               SizedBox(
                   height:
-                      MediaQuery.of(context).viewPadding.top > 40 ? 140 : 135
-                  //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
+                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               GridView.builder(
                 // 2
@@ -1271,8 +1271,8 @@ class _FilterState extends State<Filter> {
             children: [
               SizedBox(
                   height:
-                      MediaQuery.of(context).viewPadding.top > 40 ? 140 : 135
-                  //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
+                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               GridView.builder(
                 // 2

@@ -47,7 +47,7 @@ class CaptchaState extends State<Captcha> {
               //in Run/LogCat window of android studio
               //print(message.message);
               widget.callback(message.message);
-              //Navigator.of(context).pop();
+              //Navigator.pop(context);
             },
           )
           ..addJavaScriptChannel(
@@ -61,7 +61,7 @@ class CaptchaState extends State<Captcha> {
               final bool value = message.message == "true";
               widget.handleCaptcha!(value);
               // widget.callback(message.message);
-              //Navigator.of(context).pop();
+              //Navigator.pop(context);
             },
           );
       });

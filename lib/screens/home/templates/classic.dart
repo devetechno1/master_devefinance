@@ -202,7 +202,7 @@ class _ClassicScreenState extends State<ClassicScreen>
   //       padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
   //       child: GestureDetector(
   //         onTap: () {
-  //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Filter()));
+  //           Navigator.push(context, MaterialPageRoute(builder: (context) => const Filter()));
   //         },
   //         child: HomeSearchBox(context: context),
   //       ),

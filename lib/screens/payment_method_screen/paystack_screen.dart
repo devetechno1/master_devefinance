@@ -62,10 +62,10 @@ class _PaystackScreenState extends State<PaystackScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //    Navigator.of(context).pop(goToOrdersScreen);
+          //    Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           
           // },
           onPageFinished: (page) {
@@ -85,7 +85,7 @@ class _PaystackScreenState extends State<PaystackScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -101,7 +101,7 @@ class _PaystackScreenState extends State<PaystackScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -150,7 +150,7 @@ class _PaystackScreenState extends State<PaystackScreen> {
       ToastComponent.showDialog(
         paystackPaymentSuccessResponse.message!,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -210,7 +210,7 @@ class _PaystackScreenState extends State<PaystackScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

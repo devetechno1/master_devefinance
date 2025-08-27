@@ -623,7 +623,7 @@ class CustomSelectorButton extends StatelessWidget {
       builder: (BuildContext context) {
         return AnimatedPadding(
           padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
           duration: const Duration(milliseconds: 100),
           child: Stack(children: [
             GestureDetector(

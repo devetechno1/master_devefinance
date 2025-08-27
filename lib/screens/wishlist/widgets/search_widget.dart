@@ -445,7 +445,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           ),
           padding: const EdgeInsets.fromLTRB(16, 5, 8, 5),
           height: 36,
-          width: MediaQuery.of(context).size.width * .33,
+          width: MediaQuery.sizeOf(context).width * .33,
           child: DropdownButton<WhichFilter>(
             dropdownColor: Colors.white,
             isExpanded: true,
@@ -494,7 +494,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               //         BorderSide(color: MyTheme.light_grey, width: 1))
             ),
             height: 36,
-            width: MediaQuery.of(context).size.width * .33,
+            width: MediaQuery.sizeOf(context).width * .33,
             child: Center(
                 child: Container(
               width: 50,
@@ -668,7 +668,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               //         BorderSide(color: MyTheme.light_grey, width: 1))
             ),
             height: 36,
-            width: MediaQuery.of(context).size.width * .33,
+            width: MediaQuery.sizeOf(context).width * .33,
             child: Center(
                 child: Container(
               width: 50,
@@ -703,16 +703,16 @@ class _SearchWidgetState extends State<SearchWidget> {
           IconButton(
             padding: EdgeInsets.zero,
             icon: UsefulElements.backButton(),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.pop(context),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * .84,
+            width: MediaQuery.sizeOf(context).width * .84,
             child: Container(
               height: 58,
               //color: Colors.amber,
               child: Padding(
-                  padding: MediaQuery.of(context).viewPadding.top >
-                          30 //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                  padding: MediaQuery.viewPaddingOf(context).top >
+                          30 //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                       ? const EdgeInsets.fromLTRB(0, 14, 0, 10)
                       : const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 0.0),
@@ -1118,8 +1118,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             children: [
               SizedBox(
                   height:
-                      MediaQuery.of(context).viewPadding.top > 40 ? 135 : 135
-                  //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      MediaQuery.viewPaddingOf(context).top > 40 ? 135 : 135
+                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               MasonryGridView.count(
                 // 2
@@ -1193,8 +1193,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             children: [
               SizedBox(
                   height:
-                      MediaQuery.of(context).viewPadding.top > 40 ? 126 : 135
-                  //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      MediaQuery.viewPaddingOf(context).top > 40 ? 126 : 135
+                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               GridView.builder(
                 // 2
@@ -1266,8 +1266,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             children: [
               SizedBox(
                   height:
-                      MediaQuery.of(context).viewPadding.top > 40 ? 126 : 135
-                  //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      MediaQuery.viewPaddingOf(context).top > 40 ? 126 : 135
+                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               GridView.builder(
                 // 2

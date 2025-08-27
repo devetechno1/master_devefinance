@@ -25,8 +25,8 @@ class _SelectAddressState extends State<SelectAddress> {
 
   @override
   Widget build(BuildContext context) {
-    mHeight = MediaQuery.of(context).size.height;
-    mWidth = MediaQuery.of(context).size.width;
+    mHeight = MediaQuery.sizeOf(context).height;
+    mWidth = MediaQuery.sizeOf(context).width;
     return ChangeNotifierProvider(
       create: (_) => SelectAddressProvider()..init(context),
       child: Consumer<SelectAddressProvider>(
@@ -491,7 +491,7 @@ class _SelectAddressState extends State<SelectAddress> {
       child: Container(
         height: 50,
         child: Btn.minWidthFixHeight(
-          minWidth: MediaQuery.of(context).size.width,
+          minWidth: MediaQuery.sizeOf(context).width,
           height: 50,
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
@@ -541,7 +541,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
   Container buildAppbarTitle(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width - 40,
+      width: MediaQuery.sizeOf(context).width - 40,
       child: Text(
         "${'shipping_info'.tr(context: context)}",
         style: const TextStyle(

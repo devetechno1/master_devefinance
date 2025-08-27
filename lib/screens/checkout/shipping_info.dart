@@ -215,8 +215,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
 
   @override
   Widget build(BuildContext context) {
-    mHeight = MediaQuery.of(context).size.height;
-    mWidth = MediaQuery.of(context).size.width;
+    mHeight = MediaQuery.sizeOf(context).height;
+    mWidth = MediaQuery.sizeOf(context).width;
     return Directionality(
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
@@ -609,7 +609,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
       child: Container(
         height: 50,
         child: Btn.minWidthFixHeight(
-          minWidth: MediaQuery.of(context).size.width,
+          minWidth: MediaQuery.sizeOf(context).width,
           height: 50,
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
@@ -643,7 +643,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         Provider.of<CartProvider>(context, listen: false);
 
     return Container(
-        width: MediaQuery.of(context).size.width - 40,
+        width: MediaQuery.sizeOf(context).width - 40,
         child: Row(
           children: [
             Text(

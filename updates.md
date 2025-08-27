@@ -5,10 +5,62 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.21'`
+- `mobileVersion = '9.10.24'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.24 – Dynamic OTP providers & login flow</strong></summary>
+
+### Features
+- Added dynamic OTP login providers fetched at app startup.
+- Login screen now renders provider-specific OTP buttons with icon (network or local fallback) and label.
+
+### API
+- **GET** `/api/v2/activated-otp-login` → returns list of providers (`id`, `type`, `send_otp_text`, `image`). Expected: `200 OK`, JSON array.
+- **POST** `/api/v2/auth/send-otp` → request body now includes `"provider"`. Expected: `200 OK` with `LoginResponse` (`result`, `message`, ...).
+
+### i18n
+- Added `by` key used to show “By {provider}” on OTP login header.
+
+### Notes
+- No breaking changes to existing endpoints.
+- Store update: **no** (feature uses new endpoints; client-side addition only).
+</details>
+
+<details>
+<summary><strong>AV 9.10.23 – Profile & Auth UI visual polish</strong></summary>
+
+### UI/UX
+- Added a subtle shadow (`spreadRadius: 0.08`) to profile containers and the Auth UI form card.
+- Streamlined the classified section visibility condition with login check.
+- Reworked the privacy policy entry and gated the "Delete my account" section behind a divider only when logged in.
+
+### Notes
+- No API changes.
+- Store update: **no** (visual tweaks only).
+</details>
+
+<details>
+<summary><strong>AV 9.10.22 – Router fallback to WebView + domain update</strong></summary>
+
+### Routing
+- Added `errorPageBuilder` to `GoRouter` that opens unknown routes in `CommonWebviewScreen` with `backHome=true` and URL `${RAW_BASE_URL}/mobile-page{path}`.
+- `CommonWebviewScreen` now intercepts navigation and forwards it to `NavigationService` (deep links use router; external links use `url_launcher`).
+- Back behavior: go back within WebView if possible; otherwise navigate to `/`.
+
+### Config
+- Updated `DOMAIN_PATH` to `sellerwise.devefinance.com`.
+
+### Tech
+- `NavigationService.handleUrls` now supports `useGo` to choose between `context.go` and `context.push`.
+
+### Notes
+- No API path changes.
+- Store update: **yes** (routing behavior visible to users).
+</details>
+
+
 <details>
 <summary><strong>AV 9.10.21 – Positive-only stock handling & simplified stock label</strong></summary>
 
@@ -105,7 +157,26 @@ This file tracks all update versions for both the **Mobile App**.
 ### Notes
 - No API changes.
 - Store update: **no** (UI-only refactor).
+</details><details>
+<summary><strong>AV 9.10.22 – Router fallback to WebView + domain update</strong></summary>
+
+### Routing
+- Added `errorPageBuilder` to `GoRouter` that opens unknown routes in `CommonWebviewScreen` with `backHome=true` and URL `${RAW_BASE_URL}/mobile-page{path}`.
+- `CommonWebviewScreen` now intercepts navigation and forwards it to `NavigationService` (deep links use router; external links use `url_launcher`).
+- Back behavior: go back within WebView if possible; otherwise navigate to `/`.
+
+### Config
+- Updated `DOMAIN_PATH` to `sellerwise.devefinance.com`.
+
+### Tech
+- `NavigationService.handleUrls` now supports `useGo` to choose between `context.go` and `context.push`.
+
+### Notes
+- No API path changes.
+- Store update: **yes** (routing behavior visible to users).
 </details>
+
+
 
 <details>
 <summary><strong>AV 9.10.14 – OTP Login, LTR phone row & Auth UI polish</strong></summary>

@@ -14,6 +14,7 @@ class NavigationService {
   static Future<void> handleUrls(
     String? url, {
     BuildContext? context,
+    bool useGo = false,
     FutureOr<void> Function()? callBackDeepLink,
     FutureOr<void> Function()? callBackURL,
     FutureOr<void> Function()? callBackError,
@@ -25,7 +26,11 @@ class NavigationService {
       if (uri?.hasAbsolutePath ?? false) {
         if (uri?.host == AppConfig.DOMAIN_PATH) {
           await callBackDeepLink?.call();
-          context.push(uri!.paramPath);
+          if (useGo) {
+            context.go(uri!.paramPath);
+          } else {
+            context.push(uri!.paramPath);
+          }
         } else {
           await callBackURL?.call();
           await launchUrl(uri!);

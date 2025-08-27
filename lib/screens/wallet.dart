@@ -135,7 +135,7 @@ class _WalletState extends State<Wallet> {
             return const Main();
           }));
         } else {
-          Navigator.of(context).pop();
+          Navigator.pop(context);
         }
         return Future.delayed(Duration.zero);
       },
@@ -203,7 +203,7 @@ class _WalletState extends State<Wallet> {
                 return const Main();
               }));
             } else {
-              return Navigator.of(context).pop();
+              return Navigator.pop(context);
             }
           },
         ),
@@ -440,7 +440,7 @@ class _WalletState extends State<Wallet> {
             borderRadius: BorderRadius.circular(
                 10), // Clip the child to the same border radius
             child: Btn.basic(
-              minWidth: MediaQuery.of(context).size.width,
+              minWidth: MediaQuery.sizeOf(context).width,
               color: MyTheme.amber,
               shape: const RoundedRectangleBorder(
                 borderRadius:

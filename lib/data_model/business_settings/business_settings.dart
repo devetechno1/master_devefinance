@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../app_config.dart';
 import '../../screens/home/home_page_type_enum.dart';
+import '../otp_provider_model.dart';
 import 'update_model.dart';
 import 'verification_form.dart';
 
@@ -15,7 +16,7 @@ class BusinessSettingsData extends Equatable {
   final bool showPackingQtyPriceWholesaleProduct;
   final bool showPackingBeforePriceWholesaleProduct;
   final bool usePackingWholesaleProduct;
-  final bool allowOTPLogin;
+  // final bool allowOTPLogin;
   final bool allowTwitterLogin;
   final bool allowGoogleLogin;
   final bool allowFacebookLogin;
@@ -267,12 +268,15 @@ class BusinessSettingsData extends Equatable {
   final String? whatsappNumber;
   final UpdateDataModel? updateData;
 
+  final List<OTPProviderModel> _otpProviders = List.empty(growable: true) ;
+  List<OTPProviderModel> get otpProviders=> _otpProviders;
+
   bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
   bool get sellerWiseShipping => shippingType == "seller_wise_shipping";
 
-  bool get otherLogins => allowFacebookLogin || allowGoogleLogin || allowOTPLogin;
+  bool get otherLogins => allowFacebookLogin || allowGoogleLogin || otpProviders.isNotEmpty;
 
-  const BusinessSettingsData({
+  BusinessSettingsData({
     this.showWholesaleLabel = false,
     this.showPackingQtyWholesaleProduct = false,
     this.showPackingQtyPriceWholesaleProduct = false,
@@ -282,7 +286,7 @@ class BusinessSettingsData extends Equatable {
     this.updateData,
     this.isBlogActive = false,
     this.allowTwitterLogin = false,
-    this.allowOTPLogin = false,
+    // this.allowOTPLogin = false,
     this.allowGoogleLogin = false,
     this.allowFacebookLogin = false,
     this.allowAppleLogin = false,
@@ -566,7 +570,7 @@ class BusinessSettingsData extends Equatable {
         usePackingWholesaleProduct: (data['packing_wholesale_product'] as String?) == "1", 
         whatsappNumber: data['whatsapp_number'] as String?,
         allowTwitterLogin: (data['twitter_login'] as String?) == "1",
-        allowOTPLogin: (data['login_with_otp'] as String?) == "1",
+        // allowOTPLogin: (data['login_with_otp'] as String?) == "1",
         allowGoogleLogin: (data['google_login'] as String?) == "1",
         allowFacebookLogin: (data['facebook_login'] as String?) == "1",
         allowAppleLogin: (data['apple_login'] as String?) == "1",
@@ -837,6 +841,12 @@ class BusinessSettingsData extends Equatable {
         deliveryPickupLongitude: double.tryParse(data['delivery_pickup_longitude']?.toString() ?? ''),
         deliveryPickupLatitude: double.tryParse(data['delivery_pickup_latitude']?.toString() ?? ''));
   }
+
+  void setOTPProviders(List<OTPProviderModel> newList){
+    _otpProviders.clear();
+    _otpProviders.addAll(newList);
+  }
+  
   static List<String>? _decodeJsonList(String? data) {
     if (data == null) return null;
     return (json.decode(data) as List).cast<String>();

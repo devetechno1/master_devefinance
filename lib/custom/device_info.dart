@@ -5,7 +5,7 @@ class DeviceInfo {
   double? height, width;
 
   DeviceInfo(this.context) {
-    height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.sizeOf(context).height;
+    width = MediaQuery.sizeOf(context).width;
   }
 }

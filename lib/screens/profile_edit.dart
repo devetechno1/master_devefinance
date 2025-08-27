@@ -66,7 +66,7 @@ class _ProfileEditState extends State<ProfileEdit> {
     //             actions: <Widget>[
     //               CupertinoDialogAction(
     //                 child: Text('deny_ucf'.tr(context: context)),
-    //                 onPressed: () => Navigator.of(context).pop(),
+    //                 onPressed: () => Navigator.pop(context),
     //               ),
     //               CupertinoDialogAction(
     //                 child: Text('settings_ucf'.tr(context: context)),
@@ -267,7 +267,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Text(

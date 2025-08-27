@@ -24,8 +24,13 @@ import 'login.dart';
 import 'otp_login.dart';
 
 class CustomOTPScreen extends StatefulWidget {
-  const CustomOTPScreen({Key? key, required this.phone}) : super(key: key);
+  const CustomOTPScreen({
+    Key? key,
+    required this.phone,
+    required this.provider,
+  }) : super(key: key);
   final PhoneNumber phone;
+  final String provider;
 
   @override
   _CustomOTPScreenState createState() => _CustomOTPScreenState();
@@ -106,7 +111,7 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
     setState(() {
       canResend = false;
     });
-    await sendOTPLoginCode(context, widget.phone);
+    await sendOTPLoginCode(context, widget.phone, widget.provider);
   }
 
   @override
@@ -181,7 +186,7 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
                     ),
                   ),
                   child: Btn.basic(
-                    minWidth: MediaQuery.of(context).size.width,
+                    minWidth: MediaQuery.sizeOf(context).width,
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(

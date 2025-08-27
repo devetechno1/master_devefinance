@@ -33,7 +33,7 @@
 //               child: IconButton(
 //                 icon: Icon(Icons.close, color: MyTheme.white, size: 24),
 //                 onPressed: () {
-//                   Navigator.of(context).pop();
+//                   Navigator.pop(context);
 //                   print('click');
 //                 },
 //               ),
@@ -171,7 +171,7 @@ class AuthScreen {
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       decoration:
                           BoxDecorations.buildBoxDecoration_1(radius: 16)
-                              .copyWith(boxShadow: [const BoxShadow()]),
+                              .copyWith(boxShadow: [const BoxShadow(spreadRadius: 0.08)]),
                       child: child,
                     ),
                   ],
@@ -181,7 +181,7 @@ class AuthScreen {
           ),
           // Cross Button
           PositionedDirectional(
-            top: MediaQuery.of(context).padding.top + 10,
+            top: MediaQuery.paddingOf(context).top + 10,
             end: 10,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),

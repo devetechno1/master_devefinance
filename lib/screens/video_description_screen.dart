@@ -47,7 +47,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+        if (MediaQuery.orientationOf(context) == Orientation.landscape) {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
@@ -97,14 +97,14 @@ class _VideoDescriptionState extends State<VideoDescription> {
                           : CupertinoIcons.arrow_left,
                       color: MyTheme.white),
                   onPressed: () {
-                    if (MediaQuery.of(context).orientation ==
+                    if (MediaQuery.orientationOf(context) ==
                         Orientation.landscape) {
                       SystemChrome.setPreferredOrientations([
                         DeviceOrientation.portraitUp,
                         DeviceOrientation.portraitDown
                       ]);
                     }
-                    return Navigator.of(context).pop();
+                    return Navigator.pop(context);
                   },
                 ),
               ),
