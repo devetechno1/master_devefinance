@@ -295,7 +295,8 @@ class _ProfileState extends State<Profile> {
       margin:
           const EdgeInsets.only(bottom: 120, top: AppDimensions.paddingNormal),
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
-      decoration: BoxDecorations.buildBoxDecoration_1(),
+      decoration: BoxDecorations.buildBoxDecoration_1()
+          .copyWith(boxShadow: [const BoxShadow(spreadRadius: 0.08)]),
       child: Column(
         children: [
           // if (false)
@@ -437,7 +438,8 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-          if (AppConfig.businessSettingsData.classifiedProduct && is_logged_in.$)
+          if (AppConfig.businessSettingsData.classifiedProduct &&
+              is_logged_in.$)
             Column(
               children: [
                 buildBottomVerticalCardListItem(AppImages.myClassified,
@@ -713,32 +715,32 @@ class _ProfileState extends State<Profile> {
             ),
 
           buildBottomVerticalCardListItem(
-              AppImages.delete, 'privacy_policy_ucf'.tr(context: context),
-              onPressed: () {
-            Navigator.push(
+            AppImages.delete,
+            'privacy_policy_ucf'.tr(context: context),
+            icon: Icons.lock_outline_rounded,
+            onPressed: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => CommonWebviewScreen(
-                          page_name: 'privacy_policy_ucf'.tr(context: context),
-                          url:
-                              "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
-                        )));
-          }, icon: Icons.lock_outline_rounded),
-          const Divider(
-            thickness: 1,
-            color: MyTheme.light_grey,
+                  builder: (context) => CommonWebviewScreen(
+                    page_name: 'privacy_policy_ucf'.tr(context: context),
+                    url: "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
+                  ),
+                ),
+              );
+            },
           ),
-
-          if (is_logged_in.$)
-            Column(
-              children: [
-                buildBottomVerticalCardListItem(
-                    AppImages.delete, 'delete_my_account'.tr(context: context),
-                    onPressed: () {
-                  deleteWarningDialog();
-                }),
-              ],
+          if (is_logged_in.$) ...[
+            const Divider(
+              thickness: 1,
+              color: MyTheme.light_grey,
             ),
+            buildBottomVerticalCardListItem(
+              AppImages.delete,
+              'delete_my_account'.tr(context: context),
+              onPressed: deleteWarningDialog,
+            )
+          ],
         ],
       ),
     );
@@ -911,11 +913,13 @@ class _ProfileState extends State<Profile> {
         builder: (context) => AlertDialog(
               title: Text(
                 'delete_account_warning_title'.tr(context: context),
-                style: const TextStyle(fontSize: 15, color: MyTheme.dark_font_grey),
+                style: const TextStyle(
+                    fontSize: 15, color: MyTheme.dark_font_grey),
               ),
               content: Text(
                 'delete_account_warning_description'.tr(context: context),
-                style: const TextStyle(fontSize: 13, color: MyTheme.dark_font_grey),
+                style: const TextStyle(
+                    fontSize: 13, color: MyTheme.dark_font_grey),
               ),
               actions: [
                 TextButton(
@@ -941,6 +945,7 @@ class _ProfileState extends State<Profile> {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Colors.white,
+          boxShadow: const [BoxShadow(spreadRadius: 0.08)],
           borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall)),
       child: GridView(
         scrollDirection: Axis.horizontal,

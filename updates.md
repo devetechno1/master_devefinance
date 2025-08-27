@@ -5,10 +5,23 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.22'`
+- `mobileVersion = '9.10.23'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.23 – Profile & Auth UI visual polish</strong></summary>
+
+### UI/UX
+- Added a subtle shadow (`spreadRadius: 0.08`) to profile containers and the Auth UI form card.
+- Streamlined the classified section visibility condition with login check.
+- Reworked the privacy policy entry and gated the "Delete my account" section behind a divider only when logged in.
+
+### Notes
+- No API changes.
+- Store update: **no** (visual tweaks only).
+</details>
+
 <details>
 <summary><strong>AV 9.10.22 – Router fallback to WebView + domain update</strong></summary>
 
