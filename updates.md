@@ -5,10 +5,29 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.23'`
+- `mobileVersion = '9.10.24'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.24 – Dynamic OTP providers & login flow</strong></summary>
+
+### Features
+- Added dynamic OTP login providers fetched at app startup.
+- Login screen now renders provider-specific OTP buttons with icon (network or local fallback) and label.
+
+### API
+- **GET** `/api/v2/activated-otp-login` → returns list of providers (`id`, `type`, `send_otp_text`, `image`). Expected: `200 OK`, JSON array.
+- **POST** `/api/v2/auth/send-otp` → request body now includes `"provider"`. Expected: `200 OK` with `LoginResponse` (`result`, `message`, ...).
+
+### i18n
+- Added `by` key used to show “By {provider}” on OTP login header.
+
+### Notes
+- No breaking changes to existing endpoints.
+- Store update: **no** (feature uses new endpoints; client-side addition only).
+</details>
+
 <details>
 <summary><strong>AV 9.10.23 – Profile & Auth UI visual polish</strong></summary>
 

@@ -96,6 +96,7 @@ void main() async {
 
   await Future.wait([
     BusinessSettingHelper.handleTranslations(),
+    BusinessSettingHelper.getOTPLoginProviders(),
     homeData.fetchAddressLists(false, false),
   ]);
 

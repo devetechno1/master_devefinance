@@ -21,9 +21,14 @@ import '../../status/status.dart';
 import 'custom_otp.dart';
 
 class OTPLoginScreen extends StatefulWidget {
-  final String? token;
+  final String providerType;
+  final String providerName;
 
-  const OTPLoginScreen({super.key, this.token});
+  const OTPLoginScreen({
+    super.key,
+    required this.providerName,
+    required this.providerType,
+  });
   @override
   _OTPLoginScreenState createState() => _OTPLoginScreenState();
 }
@@ -63,14 +68,21 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
     if (_phone?.parseNumber().isNotEmpty != true) {
       return onError("enter_phone_number".tr(context: context));
     }
-    final bool isSuccess = await sendOTPLoginCode(context, _phone);
+    final bool isSuccess = await sendOTPLoginCode(
+      context,
+      _phone,
+      widget.providerType,
+    );
 
     if (!isSuccess) return;
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => CustomOTPScreen(phone: _phone!),
+        builder: (_) => CustomOTPScreen(
+          phone: _phone!,
+          provider: widget.providerType,
+        ),
       ),
     );
   }
@@ -80,7 +92,10 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
     final double screenWidth = MediaQuery.sizeOf(context).width;
     return AuthScreen.buildScreen(
       context,
-      "${"login_to".tr(context: context)} " + 'app_name'.tr(context: context),
+      "${"login_to".tr(context: context)} " +
+          'app_name'.tr(context: context) +
+          '\n' +
+          "by".tr(context: context, args: {"provider": widget.providerName}),
       buildBody(context, screenWidth),
     );
   }
@@ -100,8 +115,9 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
                 child: Text(
                   "login_screen_phone".tr(context: context),
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               Padding(
@@ -214,12 +230,14 @@ void onError(message) {
   );
 }
 
-Future<bool> sendOTPLoginCode(BuildContext context, PhoneNumber? phone) async {
+Future<bool> sendOTPLoginCode(
+    BuildContext context, PhoneNumber? phone, String provider) async {
   Loading.show(context);
   final Status<LoginResponse> status = await executeAndHandleErrors(
     () => AuthRepository().getOTPLoginResponse(
       countryCode: phone?.dialCode ?? '',
       phone: phone?.parseNumber() ?? '',
+      provider: provider,
     ),
   );
   Loading.close();

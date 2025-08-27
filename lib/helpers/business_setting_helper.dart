@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../app_config.dart';
 import '../data_model/business_settings/business_settings.dart';
 import '../data_model/language_list_response.dart';
+import '../data_model/otp_provider_model.dart';
 import '../locale/custom_localization.dart';
 import '../repositories/language_repository.dart';
 
@@ -89,6 +90,15 @@ class BusinessSettingHelper {
       app_mobile_language.save(),
       app_language_rtl.save(),
     ]);
+  }
+
+  static Future<void> getOTPLoginProviders() async {
+    final Status<List<OTPProviderModel>> status = await executeAndHandleErrors(
+      () => BusinessSettingRepository().getActivatedOTPLoginList(),
+    );
+    if (status is Success<List<OTPProviderModel>>) {
+      AppConfig.businessSettingsData.setOTPProviders(status.data);
+    }
   }
 
   static Future<void> handleTranslations() async {

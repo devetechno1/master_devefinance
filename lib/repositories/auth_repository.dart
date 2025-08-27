@@ -39,8 +39,10 @@ class AuthRepository {
   Future<LoginResponse> getOTPLoginResponse({
     required String countryCode,
     required String phone,
+    required String provider,
   }) async {
     final postBody = jsonEncode({
+      "provider": "$provider",
       "phone": "$phone",
       "country_code": "$countryCode",
       "identity_matrix": AppConfig.purchase_code,

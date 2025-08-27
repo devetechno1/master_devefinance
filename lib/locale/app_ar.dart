@@ -1,4 +1,5 @@
 const Map<String, String> arLangs = {
+  "by": "بواسطة {provider}",
   "check_your_messages_to_retrieve_the_verification_code": "أدخل رمز التحقق المُرسل إلى {phone}",
   "locationIsDenied": "تم رفض إذن الموقع.",
   "locationIsDeniedPermanently":

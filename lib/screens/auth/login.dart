@@ -20,6 +20,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/main.dart';
 import 'package:active_ecommerce_cms_demo_app/status/execute_and_handle_remote_errors.dart';
 // import 'package:active_ecommerce_cms_demo_app/social_config.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../custom/loading.dart';
 import '../../data_model/login_response.dart';
+import '../../data_model/otp_provider_model.dart';
 import '../../repositories/address_repository.dart';
 import '../../status/status.dart';
 import '../home/home.dart';
@@ -148,7 +150,6 @@ class _LoginState extends State<Login> {
       ToastComponent.showDialog(error, isError: true);
     }
     await Future.delayed(Duration.zero);
-
   }
 
   Future<void> onPressedLogin(ctx) async {
@@ -233,7 +234,6 @@ class _LoginState extends State<Login> {
 
       await Future.delayed(Duration.zero);
       homeData.fetchAddressLists(false);
-
     }
   }
 
@@ -329,10 +329,18 @@ class _LoginState extends State<Login> {
     }
   }
 
-  Future<void> onPressedOTPLogin() async {
+  Future<void> onPressedOTPLogin({
+    required String providerName,
+    required String providerType,
+  }) async {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const OTPLoginScreen()),
+      MaterialPageRoute(
+        builder: (_) => OTPLoginScreen(
+          providerName: providerName,
+          providerType: providerType,
+        ),
+      ),
     );
   }
 
@@ -722,28 +730,47 @@ class _LoginState extends State<Login> {
                   runAlignment: WrapAlignment.center,
                   alignment: WrapAlignment.spaceAround,
                   crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: AppDimensions.paddingSmall,
-                  runSpacing: AppDimensions.paddingSmall,
+                  spacing: AppDimensions.paddingDefault,
+                  runSpacing: AppDimensions.paddingLarge,
                   children: [
                     if (AppConfig.businessSettingsData.allowGoogleLogin)
                       LoginWith3rd(
                         onTap: onPressedGoogleLogin,
                         name: 'google_ucf'.tr(context: context),
-                        image: AppImages.google,
+                        assetImage: AppImages.google,
                       ),
                     if (AppConfig.businessSettingsData.allowFacebookLogin)
                       LoginWith3rd(
                         onTap: onPressedFacebookLogin,
                         name: 'facebook_ucf'.tr(context: context),
-                        image: AppImages.facebook,
+                        assetImage: AppImages.facebook,
                       ),
-                    if (AppConfig.businessSettingsData.allowOTPLogin)
-                      LoginWith3rd(
-                        onTap: onPressedOTPLogin,
-                        name: "OTP",
-                        image: AppImages.otp,
-                        imageColor: Theme.of(context).primaryColor,
-                      ),
+                    // if (AppConfig.businessSettingsData.allowOTPLogin)
+                    //   LoginWith3rd(
+                    //     onTap: onPressedOTPLogin,
+                    //     name: "OTP",
+                    //     assetImage: AppImages.otp,
+                    //     imageColor: Theme.of(context).primaryColor,
+                    //   ),
+                    ...List.generate(
+                      AppConfig.businessSettingsData.otpProviders.length,
+                      (i) {
+                        final OTPProviderModel otpProvider =
+                            AppConfig.businessSettingsData.otpProviders[i];
+
+                        final String providerName =
+                            otpProvider.sendOTPText ?? "OTP";
+                        return LoginWith3rd(
+                          onTap: () => onPressedOTPLogin(
+                            providerName: providerName,
+                            providerType: otpProvider.type,
+                          ),
+                          name: providerName,
+                          networkImage: otpProvider.image,
+                          assetImage: AppImages.otp,
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -759,26 +786,44 @@ class LoginWith3rd extends StatelessWidget {
   const LoginWith3rd({
     super.key,
     required this.name,
-    required this.image,
+    required this.assetImage,
+    this.networkImage,
     this.imageColor,
     this.onTap,
   });
   final String name;
-  final String image;
+  final String assetImage;
+  final String? networkImage;
   final Color? imageColor;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
+    final Image assetImageWidget = Image.asset(assetImage, color: imageColor);
     return Tooltip(
       message: name,
       margin: const EdgeInsets.all(AppDimensions.paddingDefault),
       child: InkWell(
         onTap: onTap,
         splashFactory: NoSplash.splashFactory,
-        child: SizedBox(
-          width: 46,
-          child: Image.asset(image, color: imageColor),
+        child: Column(
+          spacing: AppDimensions.paddingSmall,
+          children: [
+            SizedBox.square(
+              dimension: 46,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
+                child: networkImage != null
+                    ? CachedNetworkImage(
+                        imageUrl: networkImage!,
+                        color: imageColor,
+                        errorWidget: (context, url, error) => assetImageWidget,
+                      )
+                    : assetImageWidget,
+              ),
+            ),
+            Text(name),
+          ],
         ),
       ),
     );
