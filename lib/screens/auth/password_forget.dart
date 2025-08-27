@@ -93,7 +93,7 @@ class _PasswordForgetState extends State<PasswordForget> {
 
   @override
   Widget build(BuildContext context) {
-    final _screen_width = MediaQuery.of(context).size.width;
+    final _screen_width = MediaQuery.sizeOf(context).width;
     return AuthScreen.buildScreen(
         context,
         'forget_password'.tr(context: context),
@@ -230,7 +230,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                 child: Container(
                   height: 45,
                   child: Btn.basic(
-                    minWidth: MediaQuery.of(context).size.width,
+                    minWidth: MediaQuery.sizeOf(context).width,
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(

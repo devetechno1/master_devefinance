@@ -677,7 +677,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       Builder(
                         builder: (context) => InkWell(
                           onTap: () {
-                            return Navigator.of(context).pop();
+                            return Navigator.pop(context);
                           },
                           child: Container(
                             decoration: BoxDecorations
@@ -1089,7 +1089,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   ),
                 ),
           Container(
-            width: MediaQuery.of(context).size.width * (.5),
+            width: MediaQuery.sizeOf(context).width * (.5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1537,14 +1537,14 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Container(
         height: kToolbarHeight +
             statusBarHeight -
-            (MediaQuery.of(context).viewPadding.top > 40 ? 32.0 : 16.0),
-        //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+            (MediaQuery.viewPaddingOf(context).top > 40 ? 32.0 : 16.0),
+        //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
         child: Container(
             width: 300,
             child: Padding(
@@ -1807,7 +1807,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             },
             child: Container(
               height: 250,
-              width: MediaQuery.of(context).size.width - 96,
+              width: MediaQuery.sizeOf(context).width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
                 placeholder: AppImages.placeholderRectangle,

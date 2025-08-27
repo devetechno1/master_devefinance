@@ -61,10 +61,10 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           onPageFinished: (page) {
             if (page.contains("/myfatoorah/callback")) {
@@ -84,7 +84,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -100,7 +100,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -125,7 +125,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
         ToastComponent.showDialog(
           responseJSON["message"],
         );
-        Navigator.of(context).pop(goToOrdersScreen);
+        Navigator.pop(context, goToOrdersScreen);
       } else if (responseJSON["result"] == true) {
         ToastComponent.showDialog(
           responseJSON["message"],
@@ -170,8 +170,8 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -191,7 +191,7 @@ class _MyFatooraScreenState extends State<MyFatooraScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

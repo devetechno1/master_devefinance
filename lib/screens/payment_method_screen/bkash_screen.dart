@@ -67,7 +67,7 @@ class _BkashScreenState extends State<BkashScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -97,7 +97,7 @@ class _BkashScreenState extends State<BkashScreen> {
   //   // if (bkashUrlResponse.result == false) {
   //   //   ToastComponent.showDialog(bkashUrlResponse.message!,
   //   //       gravity: Toast.center, duration: Toast.lengthLong);
-  //   //   Navigator.of(context).pop();
+  //   //   Navigator.pop(context);
   //   //   return;
   //   // }
   //   // _token = bkashUrlResponse.token;
@@ -125,10 +125,10 @@ class _BkashScreenState extends State<BkashScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           
           // },
           onPageFinished: (page) {
@@ -138,7 +138,7 @@ class _BkashScreenState extends State<BkashScreen> {
             // else if (page.contains("/bkash/api/fail")) {
             //   ToastComponent.showDialog("Payment cancelled",
             //       gravity: Toast.center, duration: Toast.lengthLong);
-            //   Navigator.of(context).pop();
+            //   Navigator.pop(context);
             //   return;
             // }
           },
@@ -290,8 +290,8 @@ class _BkashScreenState extends State<BkashScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -311,7 +311,7 @@ class _BkashScreenState extends State<BkashScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

@@ -143,7 +143,7 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
   @override
   Widget build(BuildContext context) {
     final String _verify_by = widget.verify_by; //phone or email
-    final _screen_width = MediaQuery.of(context).size.width;
+    final _screen_width = MediaQuery.sizeOf(context).width;
     return AuthScreen.buildScreen(
         context,
         headeText,
@@ -295,7 +295,7 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
                           borderRadius: const BorderRadius.all(
                               Radius.circular(AppDimensions.radiusNormal))),
                       child: Btn.basic(
-                        minWidth: MediaQuery.of(context).size.width,
+                        minWidth: MediaQuery.sizeOf(context).width,
                         color: Theme.of(context).primaryColor,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
@@ -394,7 +394,7 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 45,
                 child: Btn.basic(
-                  minWidth: MediaQuery.of(context).size.width,
+                  minWidth: MediaQuery.sizeOf(context).width,
                   color: Theme.of(context).primaryColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(

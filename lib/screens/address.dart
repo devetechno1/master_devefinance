@@ -415,7 +415,7 @@ class _AddressScreenState extends State<AddressScreen> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 05, 20, 16),
                     child: Btn.minWidthFixHeight(
-                      minWidth: MediaQuery.of(context).size.width - 16,
+                      minWidth: MediaQuery.sizeOf(context).width - 16,
                       height: 90,
                       color: const Color(0xffFEF0D7),
                       shape: RoundedRectangleBorder(
@@ -440,7 +440,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         ],
                       ),
                       onPressed: () {
-                        Navigator.of(context).push(
+                        Navigator.push(context, 
                           MaterialPageRoute(
                             builder: (context) => AddAddressScreen(
                               addAddress: (addressEntity) async {
@@ -480,7 +480,7 @@ class _AddressScreenState extends State<AddressScreen> {
                                   color: Colors.green,
                                 );
 
-                                Navigator.of(context).pop();
+                                Navigator.pop(context);
                                 await afterAddingAnAddress(true);
                                 final int i = _shippingAddressList.length - 1;
                                 // _choosePlace(_shippingAddressList[i]);
@@ -759,7 +759,7 @@ class _AddressScreenState extends State<AddressScreen> {
         child: Container(
           height: 50,
           child: Btn.minWidthFixHeight(
-            minWidth: MediaQuery.of(context).size.width,
+            minWidth: MediaQuery.sizeOf(context).width,
             height: 50,
             color: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(
@@ -773,7 +773,7 @@ class _AddressScreenState extends State<AddressScreen> {
                   fontWeight: FontWeight.w600),
             ),
             onPressed: () {
-              return Navigator.of(context).pop();
+              return Navigator.pop(context);
             },
           ),
         ),

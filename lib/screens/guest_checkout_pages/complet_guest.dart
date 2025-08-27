@@ -379,7 +379,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 05, 20, 16),
                   child: Btn.minWidthFixHeight(
-                    minWidth: MediaQuery.of(context).size.width - 16,
+                    minWidth: MediaQuery.sizeOf(context).width - 16,
                     height: 90,
                     color: const Color(0xffFEF0D7),
                     shape: RoundedRectangleBorder(
@@ -1159,7 +1159,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_font_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Column(
@@ -1448,7 +1448,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         child: Container(
           height: 50,
           child: Btn.minWidthFixHeight(
-            minWidth: MediaQuery.of(context).size.width,
+            minWidth: MediaQuery.sizeOf(context).width,
             height: 50,
             color: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(
@@ -1462,7 +1462,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                   fontWeight: FontWeight.w600),
             ),
             onPressed: () {
-              return Navigator.of(context).pop();
+              return Navigator.pop(context);
             },
           ),
         ),

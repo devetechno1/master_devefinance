@@ -180,7 +180,7 @@ class _ChatState extends State<Chat> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Container(
@@ -376,7 +376,7 @@ class _ChatState extends State<Chat> {
       children: [
         Container(
           height: 40,
-          width: (MediaQuery.of(context).size.width - 32) * (4 / 5),
+          width: (MediaQuery.sizeOf(context).width - 32) * (4 / 5),
           child: TextField(
             autofocus: false,
             maxLines: null,
@@ -446,7 +446,7 @@ class _ChatState extends State<Chat> {
       backGroundColor: MyTheme.soft_accent_color,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.7,
+          maxWidth: MediaQuery.sizeOf(context).width * 0.7,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -472,8 +472,8 @@ class _ChatState extends State<Chat> {
         margin: const EdgeInsets.only(top: AppDimensions.paddingSupSmall),
         child: Container(
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.6,
-            minWidth: MediaQuery.of(context).size.width * 0.6,
+            maxWidth: MediaQuery.sizeOf(context).width * 0.6,
+            minWidth: MediaQuery.sizeOf(context).width * 0.6,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,

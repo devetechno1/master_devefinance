@@ -66,10 +66,10 @@ class _PayfastScreenState extends State<PayfastScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //    Navigator.of(context).pop(goToOrdersScreen);
+          //    Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           
           // },
           onPageFinished: (page) {
@@ -79,7 +79,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
               ToastComponent.showDialog(
                 'payment_cancelled_ucf'.tr(context: context),
               );
-              Navigator.of(context).pop(goToOrdersScreen);
+              Navigator.pop(context, goToOrdersScreen);
               return;
             }
           },
@@ -96,7 +96,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -112,7 +112,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -179,8 +179,8 @@ class _PayfastScreenState extends State<PayfastScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -200,7 +200,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

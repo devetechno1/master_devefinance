@@ -50,7 +50,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -110,10 +110,10 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           onPageFinished: (page) {
             if (page.contains("/amarpay/success")) {
@@ -122,7 +122,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
               ToastComponent.showDialog(
                 'payment_cancelled_ucf'.tr(context: context),
               );
-              Navigator.of(context).pop(goToOrdersScreen);
+              Navigator.pop(context, goToOrdersScreen);
               return;
             }
           },
@@ -149,7 +149,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -175,8 +175,8 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -197,7 +197,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

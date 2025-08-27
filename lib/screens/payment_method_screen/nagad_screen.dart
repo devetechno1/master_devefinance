@@ -65,7 +65,7 @@ class _NagadScreenState extends State<NagadScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -88,7 +88,7 @@ class _NagadScreenState extends State<NagadScreen> {
       ToastComponent.showDialog(
         nagadUrlResponse.message!,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -109,10 +109,10 @@ class _NagadScreenState extends State<NagadScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           onPageFinished: (page) {
             if (page.contains("/nagad/verify/") ||
@@ -153,7 +153,7 @@ class _NagadScreenState extends State<NagadScreen> {
         ToastComponent.showDialog(
           responseJSON["message"],
         );
-        Navigator.of(context).pop(goToOrdersScreen);
+        Navigator.pop(context, goToOrdersScreen);
       } else if (widget.payment_type == "order_re_payment") {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const OrderList(from_checkout: true);
@@ -174,7 +174,7 @@ class _NagadScreenState extends State<NagadScreen> {
       ToastComponent.showDialog(
         nagadPaymentProcessResponse.message!,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -215,8 +215,8 @@ class _NagadScreenState extends State<NagadScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -236,7 +236,7 @@ class _NagadScreenState extends State<NagadScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

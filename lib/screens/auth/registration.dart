@@ -224,7 +224,7 @@ class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
-    final _screen_width = MediaQuery.of(context).size.width;
+    final _screen_width = MediaQuery.sizeOf(context).width;
     return AuthScreen.buildScreen(
         context,
         "${'join_ucf'.tr(context: context)} " + 'app_name'.tr(context: context),
@@ -422,7 +422,7 @@ class _RegistrationState extends State<Registration> {
                 child: Container(
                   height: 45,
                   child: Btn.minWidthFixHeight(
-                    minWidth: MediaQuery.of(context).size.width,
+                    minWidth: MediaQuery.sizeOf(context).width,
                     height: 50,
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(

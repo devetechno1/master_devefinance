@@ -249,7 +249,7 @@ class _OrderListState extends State<OrderList> {
           Container(
             decoration: BoxDecorations.buildBoxDecoration_1(),
             height: 36,
-            width: MediaQuery.of(context).size.width * .4,
+            width: MediaQuery.sizeOf(context).width * .4,
             child: DropdownButton<PaymentStatus>(
               dropdownColor: Colors.white,
               borderRadius:
@@ -280,7 +280,7 @@ class _OrderListState extends State<OrderList> {
           Container(
             decoration: BoxDecorations.buildBoxDecoration_1(),
             height: 36,
-            width: MediaQuery.of(context).size.width * .4,
+            width: MediaQuery.sizeOf(context).width * .4,
             child: DropdownButton<DeliveryStatus>(
               dropdownColor: Colors.white,
               borderRadius:
@@ -331,8 +331,8 @@ class _OrderListState extends State<OrderList> {
             child: Column(
               children: [
                 Padding(
-                  padding: MediaQuery.of(context).viewPadding.top >
-                          30 //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                  padding: MediaQuery.viewPaddingOf(context).top >
+                          30 //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                       ? const EdgeInsets.only(
                           top: AppDimensions.paddingVeryExtraLarge)
                       : const EdgeInsets.only(top: 14.0),
@@ -351,7 +351,7 @@ class _OrderListState extends State<OrderList> {
         return const Main();
       }));
     } else {
-      return Navigator.of(context).pop();
+      return Navigator.pop(context);
     }
   }
 

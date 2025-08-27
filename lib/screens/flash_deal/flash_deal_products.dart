@@ -164,7 +164,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
       leading: Builder(
         builder: (context) => IconButton(
           icon: UsefulElements.backButton(),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: flashDealInfo != null

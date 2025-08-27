@@ -187,7 +187,7 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
                             borderRadius: const BorderRadius.all(
                                 Radius.circular(AppDimensions.radiusNormal))),
                         child: Btn.minWidthFixHeight(
-                          minWidth: MediaQuery.of(context).size.width,
+                          minWidth: MediaQuery.sizeOf(context).width,
                           height: 50,
                           color: Theme.of(context).primaryColor,
                           shape: const RoundedRectangleBorder(

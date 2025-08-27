@@ -101,7 +101,7 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
             if (widget.backHome) {
               onPop();
             } else {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             }
           },
         ),

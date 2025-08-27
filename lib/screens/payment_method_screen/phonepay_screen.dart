@@ -65,10 +65,10 @@ class _PhonepayScreenState extends State<PhonepayScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //    Navigator.of(context).pop(goToOrdersScreen);
+          //    Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           onPageFinished: (page) {
             if (page.contains("/phonepe/redirecturl")) {
@@ -97,7 +97,7 @@ class _PhonepayScreenState extends State<PhonepayScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -113,7 +113,7 @@ class _PhonepayScreenState extends State<PhonepayScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -181,8 +181,8 @@ class _PhonepayScreenState extends State<PhonepayScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -202,7 +202,7 @@ class _PhonepayScreenState extends State<PhonepayScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

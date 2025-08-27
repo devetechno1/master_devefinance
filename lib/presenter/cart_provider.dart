@@ -157,11 +157,11 @@
 //             content: Text("Are you sure you want to delete this item?"),
 //             actions: [
 //               TextButton(
-//                 onPressed: () => Navigator.of(context).pop(false),
+//                 onPressed: () => Navigator.pop(contextfalse),
 //                 child: Text("Cancel"),
 //               ),
 //               TextButton(
-//                 onPressed: () => Navigator.of(context).pop(true),
+//                 onPressed: () => Navigator.pop(contexttrue),
 //                 child: Text("Delete"),
 //               ),
 //             ],

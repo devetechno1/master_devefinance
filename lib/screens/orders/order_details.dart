@@ -861,7 +861,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.sizeOf(context).width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
@@ -927,7 +927,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.sizeOf(context).width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
@@ -1003,7 +1003,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.sizeOf(context).width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
@@ -1078,7 +1078,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                         height: 1.0,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.sizeOf(context).width * .4,
                         color: MyTheme.medium_grey_50),
                   ),
                   const Spacer(),
@@ -1626,7 +1626,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   return const Main();
                 }));
               } else {
-                return Navigator.of(context).pop();
+                return Navigator.pop(context);
               }
             }),
       ),

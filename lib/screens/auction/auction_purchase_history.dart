@@ -623,8 +623,8 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
             child: Column(
               children: [
                 Padding(
-                  padding: MediaQuery.of(context).viewPadding.top >
-                          30 //MediaQuery.of(context).viewPadding.top is the status bar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                  padding: MediaQuery.viewPaddingOf(context).top >
+                          30 //MediaQuery.viewPaddingOf(context).top is the status bar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                       ? const EdgeInsets.only(
                           top: AppDimensions.paddingVeryExtraLarge)
                       : const EdgeInsets.only(top: 14.0),
@@ -650,7 +650,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                     BorderRadius.circular(AppDimensions.radiusSmallExtra)),
             padding: const EdgeInsets.symmetric(horizontal: 14),
             height: 36,
-            width: MediaQuery.of(context).size.width * .35,
+            width: MediaQuery.sizeOf(context).width * .35,
             child: DropdownButton<PaymentStatus>(
               isExpanded: true,
               icon: const Icon(Icons.expand_more, color: Colors.black54),
@@ -682,7 +682,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                     BorderRadius.circular(AppDimensions.radiusSmallExtra)),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
-            width: MediaQuery.of(context).size.width * .35,
+            width: MediaQuery.sizeOf(context).width * .35,
             child: DropdownButton<DeliveryStatus>(
               icon: const Icon(Icons.expand_more, color: Colors.black54),
               isExpanded: true,
@@ -720,7 +720,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
               padding: EdgeInsets.zero,
               icon: UsefulElements.backIcon(),
               onPressed: () {
-                return Navigator.of(context).pop();
+                return Navigator.pop(context);
               },
             ),
           ),

@@ -310,7 +310,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                       Builder(
                         builder: (context) => InkWell(
                           onTap: () {
-                            return Navigator.of(context).pop();
+                            return Navigator.pop(context);
                           },
                           child: Container(
                             decoration: BoxDecorations
@@ -732,7 +732,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
       child: Row(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * (.5),
+            width: MediaQuery.sizeOf(context).width * (.5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -972,19 +972,19 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 32) / 3)),
+                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
           Padding(
               padding: app_language_rtl.$!
                   ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 32) / 3)),
+                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
           Padding(
               padding: const EdgeInsets.only(right: 0.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 32) / 3)),
+                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
         ],
       );
     } else if (_relatedProductInit && _relatedProducts.isNotEmpty) {
@@ -1174,7 +1174,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             },
             child: Container(
               height: 250,
-              width: MediaQuery.of(context).size.width - 96,
+              width: MediaQuery.sizeOf(context).width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
                 placeholder: AppImages.placeholderRectangle,

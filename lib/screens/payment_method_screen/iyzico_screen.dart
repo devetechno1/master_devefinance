@@ -60,7 +60,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -79,10 +79,10 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
           
           // },
           onPageFinished: (page) {
@@ -100,7 +100,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       // textDirection:
@@ -128,7 +128,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
           responseJSON["message"],
         );
 
-        Navigator.of(context).pop(goToOrdersScreen);
+        Navigator.pop(context, goToOrdersScreen);
       } else if (responseJSON["result"] == true) {
         paymentDetails = responseJSON['payment_details'];
         onPaymentSuccess(paymentDetails);
@@ -144,7 +144,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
       ToastComponent.showDialog(
         iyzicoPaymentSuccessResponse.message!,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -205,7 +205,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

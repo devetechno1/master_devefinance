@@ -64,7 +64,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
       ToastComponent.showDialog(
         orderCreateResponse.message,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -82,10 +82,10 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           // onWebResourceError: (error) {
-          //      Navigator.of(context).pop(goToOrdersScreen);
+          //      Navigator.pop(context, goToOrdersScreen);
           // },
           // onHttpError: (error) {
-          //   Navigator.of(context).pop(goToOrdersScreen);
+          //   Navigator.pop(context, goToOrdersScreen);
         
           // },
           onPageFinished: (page) {
@@ -96,7 +96,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
              ToastComponent.showDialog(
                 'payment_cancelled_ucf'.tr(context: context),
               );
-              Navigator.of(context).pop(goToOrdersScreen);
+              Navigator.pop(context, goToOrdersScreen);
               return;
             }
           },
@@ -114,7 +114,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
       ToastComponent.showDialog(
         sslcommerzUrlResponse.message!,
       );
-      Navigator.of(context).pop(goToOrdersScreen);
+      Navigator.pop(context, goToOrdersScreen);
       return;
     }
 
@@ -135,7 +135,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
       canPop: false,
       onPopInvokedWithResult:(didPop, result) {
         if(!didPop){
-          Navigator.of(context).pop(goToOrdersScreen);
+          Navigator.pop(context, goToOrdersScreen);
         }
       },
       child: Scaffold(
@@ -205,8 +205,8 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
     } else {
       return SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
           child: WebViewWidget(
             controller: _webViewController,
           ),
@@ -226,7 +226,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(goToOrdersScreen),
+          onPressed: () => Navigator.pop(context, goToOrdersScreen),
         ),
       ),
       title: Text(

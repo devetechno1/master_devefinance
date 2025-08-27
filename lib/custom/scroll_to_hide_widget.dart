@@ -38,7 +38,7 @@ class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       // Use the properties stored in the State class.
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.sizeOf(context).width,
       height: isVisible ? widget.childHeight : 0,
       // Define how long the animation should take.
       duration: const Duration(seconds: 1),

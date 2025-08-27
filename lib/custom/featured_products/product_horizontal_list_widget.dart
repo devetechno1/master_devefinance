@@ -38,21 +38,21 @@ class ProductHorizontalListWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
-                      width: (MediaQuery.of(context).size.width - 64) / 3)),
+                      width: (MediaQuery.sizeOf(context).width - 64) / 3)),
             ),
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
-                      width: (MediaQuery.of(context).size.width - 64) / 3)),
+                      width: (MediaQuery.sizeOf(context).width - 64) / 3)),
             ),
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                   child: ShimmerHelper().buildBasicShimmer(
                       height: 120.0,
-                      width: (MediaQuery.of(context).size.width - 160) / 3)),
+                      width: (MediaQuery.sizeOf(context).width - 160) / 3)),
             ),
           ],
         ),

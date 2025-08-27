@@ -186,7 +186,7 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
                     ),
                   ),
                   child: Btn.basic(
-                    minWidth: MediaQuery.of(context).size.width,
+                    minWidth: MediaQuery.sizeOf(context).width,
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(

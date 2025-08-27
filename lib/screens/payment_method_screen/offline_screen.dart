@@ -227,7 +227,7 @@ class _OfflineState extends State<OfflineScreen> {
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Text(
@@ -405,7 +405,7 @@ class _OfflineState extends State<OfflineScreen> {
                         borderRadius: const BorderRadius.all(
                             Radius.circular(AppDimensions.radiusSmall))),
                     child: Btn.basic(
-                      minWidth: MediaQuery.of(context).size.width,
+                      minWidth: MediaQuery.sizeOf(context).width,
                       color: MyTheme.medium_grey,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
@@ -462,7 +462,7 @@ class _OfflineState extends State<OfflineScreen> {
                         borderRadius: const BorderRadius.all(
                             Radius.circular(AppDimensions.radiusSmall))),
                     child: Btn.basic(
-                      minWidth: MediaQuery.of(context).size.width,
+                      minWidth: MediaQuery.sizeOf(context).width,
                       color: Theme.of(context).primaryColor,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(

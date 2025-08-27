@@ -80,7 +80,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
         builder: (context) => IconButton(
           padding: EdgeInsets.zero,
           icon: UsefulElements.backButton(),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Text(

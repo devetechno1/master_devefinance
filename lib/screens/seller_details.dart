@@ -715,7 +715,7 @@
 //         builder: (context) => IconButton(
 //           padding: EdgeInsets.zero,
 //           icon: UsefulElements.backButton(),
-//           onPressed: () => Navigator.of(context).pop(),
+//           onPressed: () => Navigator.pop(context),
 //         ),
 //       ),
 //       title: Container(
@@ -1823,7 +1823,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         builder: (context) => IconButton(
           padding: EdgeInsets.zero,
           icon: UsefulElements.backButton(),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: buildAppbarShopTitle(),

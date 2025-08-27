@@ -311,8 +311,8 @@ class _CartState extends State<_Cart> {
             ),
             Container(
               height: 58,
-              width: (MediaQuery.of(context).size.width - 48),
-              // width: (MediaQuery.of(context).size.width - 48) * (2 / 3),
+              width: (MediaQuery.sizeOf(context).width - 48),
+              // width: (MediaQuery.sizeOf(context).width - 48) * (2 / 3),
               margin: const EdgeInsets.only(top: AppDimensions.paddingSmall),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -342,7 +342,7 @@ class _CartState extends State<_Cart> {
                       ),
               ),
               child: Btn.basic(
-                minWidth: MediaQuery.of(context).size.width,
+                minWidth: MediaQuery.sizeOf(context).width,
                 color: cartProvider.shopList.isNotEmpty
                     ? Theme.of(context).primaryColor
                     : Colors.grey,

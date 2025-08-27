@@ -147,7 +147,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
 
                     isLoadingFormattedAddress = false;
                     // print("onPlacePicked..."+result.toString());
-                    // Navigator.of(context).pop();
+                    // Navigator.pop(context);
                     setState(() {});
                   },
                   onCameraMove: (position) {
@@ -322,7 +322,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
 
                 isLoadingFormattedAddress = false;
                 // print("onPlacePicked..."+result.toString());
-                // Navigator.of(context).pop();
+                // Navigator.pop(context);
                 setState(() {});
               },
               onCameraMove: (position) {

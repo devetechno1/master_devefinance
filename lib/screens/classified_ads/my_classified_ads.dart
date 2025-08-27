@@ -186,8 +186,8 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
 
   @override
   Widget build(BuildContext context) {
-    mHeight = MediaQuery.of(context).size.height;
-    mWidht = MediaQuery.of(context).size.width;
+    mHeight = MediaQuery.sizeOf(context).height;
+    mWidht = MediaQuery.sizeOf(context).width;
     return Directionality(
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
@@ -643,7 +643,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
             TextButton(
               child: Text('cancel_ucf'.tr(context: context)),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
             ),
             TextButton(

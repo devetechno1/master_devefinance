@@ -88,7 +88,7 @@
 //                     runSpacing: 8,
 //                     children: images
 //                         .map((e) => SizedBox(
-//                               width: MediaQuery.of(context).size.width / 2 - 30,
+//                               width: MediaQuery.sizeOf(context).width / 2 - 30,
 //                               child: _buildBanner(e),
 //                             ))
 //                         .toList(),

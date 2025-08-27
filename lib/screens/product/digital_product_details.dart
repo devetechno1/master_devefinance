@@ -882,7 +882,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               Builder(
                                 builder: (context) => InkWell(
                                   onTap: () {
-                                    return Navigator.of(context).pop();
+                                    return Navigator.pop(context);
                                   },
                                   child: Container(
                                     decoration: BoxDecorations
@@ -1464,7 +1464,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   ),
                 ),
           Container(
-            width: MediaQuery.of(context).size.width * (.5),
+            width: MediaQuery.sizeOf(context).width * (.5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1697,7 +1697,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width - (107 + 45),
+            width: MediaQuery.sizeOf(context).width - (107 + 45),
             child: Scrollbar(
               controller: _variantScrollController,
               child: Wrap(
@@ -1791,7 +1791,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               ? Alignment.centerRight
               : Alignment.centerLeft,
           height: 40,
-          width: MediaQuery.of(context).size.width - (107 + 44),
+          width: MediaQuery.sizeOf(context).width - (107 + 44),
           child: Scrollbar(
             controller: _colorScrollController,
             child: ListView.separated(
@@ -2029,14 +2029,14 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   ? CupertinoIcons.arrow_right
                   : CupertinoIcons.arrow_left,
               color: MyTheme.dark_grey),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       title: Container(
         height: kToolbarHeight +
             statusBarHeight -
-            (MediaQuery.of(context).viewPadding.top > 40 ? 32.0 : 16.0),
-        //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+            (MediaQuery.viewPaddingOf(context).top > 40 ? 32.0 : 16.0),
+        //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
         child: Container(
             width: 300,
             child: Padding(
@@ -2351,19 +2351,19 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 32) / 3)),
+                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
           Padding(
               padding: app_language_rtl.$!
                   ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
                   : const EdgeInsets.only(right: 8.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 32) / 3)),
+                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
           Padding(
               padding: const EdgeInsets.only(right: 0.0),
               child: ShimmerHelper().buildBasicShimmer(
                   height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 32) / 3)),
+                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
         ],
       );
     } else if (_relatedProducts.isNotEmpty) {
@@ -2568,7 +2568,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             },
             child: Container(
               height: 250,
-              width: MediaQuery.of(context).size.width - 96,
+              width: MediaQuery.sizeOf(context).width - 96,
               child: Container(
                   child: FadeInImage.assetNetwork(
                 placeholder: AppImages.placeholderRectangle,

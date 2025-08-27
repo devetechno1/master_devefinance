@@ -113,7 +113,7 @@ class _UpdatePackageState extends State<UpdatePackage> {
                           ? CupertinoIcons.arrow_right
                           : CupertinoIcons.arrow_left,
                       color: MyTheme.dark_font_grey),
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => Navigator.pop(context),
                 ),
         ),
         body: RefreshIndicator(
