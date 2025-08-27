@@ -866,7 +866,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra, right: AppDimensions.paddingSmallExtra),
                     child: Text(
                       'order_placed'.tr(context: context),
                       textAlign: TextAlign.center,
@@ -932,7 +932,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra, right: AppDimensions.paddingSmallExtra),
                     child: Text(
                       'confirmed_ucf'.tr(context: context),
                       textAlign: TextAlign.center,
@@ -1008,7 +1008,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra, right: AppDimensions.paddingSmallExtra),
                     child: Text(
                       'on_the_way_ucf'.tr(context: context),
                       textAlign: TextAlign.center,
@@ -1083,7 +1083,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra),
+                    padding: const EdgeInsets.only(left: AppDimensions.paddingSmallExtra,
+                        right: AppDimensions.paddingSmallExtra),
                     child: Text(
                       'delivered_ucf'.tr(context: context),
                       textAlign: TextAlign.center,
