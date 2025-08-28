@@ -37,7 +37,6 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-
   List<String?> countries_code = <String?>[];
 
   String _phone = "";

@@ -141,8 +141,7 @@ class _BrandProductsState extends State<BrandProducts> {
           },
           autofocus: true,
           decoration: InputDecoration(
-              hintText:
-                  "${'search_product_here'.tr(context: context)} : ",
+              hintText: "${'search_product_here'.tr(context: context)} : ",
               hintStyle: const TextStyle(
                   fontSize: 14.0, color: MyTheme.textfield_grey),
               enabledBorder: const OutlineInputBorder(
@@ -218,8 +217,7 @@ class _BrandProductsState extends State<BrandProducts> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(
-          child: Text('no_data_is_available'.tr(context: context)));
+      return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

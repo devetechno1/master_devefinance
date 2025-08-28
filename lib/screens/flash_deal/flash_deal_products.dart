@@ -18,7 +18,6 @@ import 'package:flutter_countdown_timer/index.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-
 class FlashDealProducts extends StatefulWidget {
   const FlashDealProducts({
     Key? key,

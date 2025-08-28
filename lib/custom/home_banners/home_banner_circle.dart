@@ -66,12 +66,11 @@ class HomeBannersListCircle extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100.0),
                 color: Colors.grey.withValues(alpha: 0.1),
               ),
-              margin: const EdgeInsets.all( AppDimensions.paddingHalfSmall),
-              padding:const EdgeInsets.symmetric(
+              margin: const EdgeInsets.all(AppDimensions.paddingHalfSmall),
+              padding: const EdgeInsets.symmetric(
                   horizontal: AppDimensions.paddingSupSmall,
                   vertical: AppDimensions.paddingSupSmall),
               child: ClipRRect(
-                
                 borderRadius: BorderRadius.circular(100.0),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(100.0),

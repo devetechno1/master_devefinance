@@ -169,9 +169,10 @@ class AuthScreen {
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 18.0),
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration:
-                          BoxDecorations.buildBoxDecoration_1(radius: 16)
-                              .copyWith(boxShadow: [const BoxShadow(spreadRadius: 0.08)]),
+                      decoration: BoxDecorations.buildBoxDecoration_1(
+                              radius: 16)
+                          .copyWith(
+                              boxShadow: [const BoxShadow(spreadRadius: 0.08)]),
                       child: child,
                     ),
                   ],

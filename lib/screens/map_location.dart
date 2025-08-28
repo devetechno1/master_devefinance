@@ -157,7 +157,8 @@ class MapLocationState extends State<MapLocation>
                                 child: Text(
                                   formattedAddress!,
                                   maxLines: 2,
-                                  style: const TextStyle(color: MyTheme.medium_grey),
+                                  style: const TextStyle(
+                                      color: MyTheme.medium_grey),
                                 ),
                               ),
                       ),

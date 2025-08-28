@@ -14,6 +14,7 @@ class HomeBannersList extends StatelessWidget {
   final double viewportFraction;
   final bool padEnds;
   final bool? enlargeCenterPage;
+
   /// if banners list contain one banner ... it show the banner with it's real aspect ratio
   final bool makeOneBannerDynamicSize;
   final CenterPageEnlargeStrategy enlargeStrategy;

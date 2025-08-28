@@ -71,7 +71,7 @@ class AuthRepository {
     final postBody = jsonEncode({
       "phone": "$phone",
       "country_code": "$countryCode",
-      "otp_code" : "$otpCode",
+      "otp_code": "$otpCode",
       "identity_matrix": AppConfig.purchase_code,
       "temp_user_id": temp_user_id.$,
       if (AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,

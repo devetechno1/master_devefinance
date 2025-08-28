@@ -16,7 +16,6 @@ class QuantityInputField {
       inputFormatters: [OnlyNumberFormatter()],
       onSubmitted: (str) => onSubmitted(),
       onChanged: onChanged,
-      
       decoration: const InputDecoration(
         hintText: "0",
         contentPadding: EdgeInsets.zero,

@@ -151,7 +151,8 @@ class CartItem {
         "product_price": productPrice,
         "product_quantity": productQuantity,
         "product_thumbnail_image": productThumbnailImage,
-        "wholesale_variation": List<dynamic>.from(wholesales.map((x) => x.toJson())),
+        "wholesale_variation":
+            List<dynamic>.from(wholesales.map((x) => x.toJson())),
       };
 }
 

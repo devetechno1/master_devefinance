@@ -21,8 +21,7 @@ class FlashDealBanner extends StatelessWidget {
     if (homeData == null) {
       return Container(
         height: 100,
-        child:
-            Center(child: Text('no_data_is_available'.tr(context: context))),
+        child: Center(child: Text('no_data_is_available'.tr(context: context))),
       );
     }
 

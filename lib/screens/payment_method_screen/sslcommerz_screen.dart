@@ -41,7 +41,8 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
   bool _initial_url_fetched = false;
 
   final WebViewController _webViewController = WebViewController();
-  bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -86,14 +87,14 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
           // },
           // onHttpError: (error) {
           //   Navigator.pop(context, goToOrdersScreen);
-        
+
           // },
           onPageFinished: (page) {
             if (page.contains("/sslcommerz/success")) {
               getData();
             } else if (page.contains("/sslcommerz/cancel") ||
                 page.contains("/sslcommerz/fail")) {
-             ToastComponent.showDialog(
+              ToastComponent.showDialog(
                 'payment_cancelled_ucf'.tr(context: context),
               );
               Navigator.pop(context, goToOrdersScreen);
@@ -133,8 +134,8 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
       // textDirection:
       //     app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
       canPop: false,
-      onPopInvokedWithResult:(didPop, result) {
-        if(!didPop){
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

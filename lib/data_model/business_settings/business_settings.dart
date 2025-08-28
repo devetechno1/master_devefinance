@@ -236,7 +236,7 @@ class BusinessSettingsData extends Equatable {
   final dynamic flashDealBanner;
   final dynamic flashDealBannerSmall;
   final bool minimumOrderAmountCheck;
-  
+
   final bool minimumOrderQuantityCheck;
   final int minimumOrderQuantity;
   final bool homeBanner3Images;
@@ -268,13 +268,14 @@ class BusinessSettingsData extends Equatable {
   final String? whatsappNumber;
   final UpdateDataModel? updateData;
 
-  final List<OTPProviderModel> _otpProviders = List.empty(growable: true) ;
-  List<OTPProviderModel> get otpProviders=> _otpProviders;
+  final List<OTPProviderModel> _otpProviders = List.empty(growable: true);
+  List<OTPProviderModel> get otpProviders => _otpProviders;
 
   bool get carrierBaseShipping => shippingType == "carrier_wise_shipping";
   bool get sellerWiseShipping => shippingType == "seller_wise_shipping";
 
-  bool get otherLogins => allowFacebookLogin || allowGoogleLogin || otpProviders.isNotEmpty;
+  bool get otherLogins =>
+      allowFacebookLogin || allowGoogleLogin || otpProviders.isNotEmpty;
 
   BusinessSettingsData({
     this.showWholesaleLabel = false,
@@ -383,7 +384,7 @@ class BusinessSettingsData extends Equatable {
     this.authorizenetSandbox,
     this.minOrderAmountCheckActivat,
     this.minimumOrderAmount = 0.0,
-    this.freeShippingMinimumOrderAmount=0.0,
+    this.freeShippingMinimumOrderAmount = 0.0,
     this.freeShippingMinimumCheck = false,
     this.itemName,
     this.aamarpaySandbox = false,
@@ -535,27 +536,25 @@ class BusinessSettingsData extends Equatable {
   });
 
   factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
-
     UpdateDataModel? updateData;
 
     switch (AppConfig.storeType) {
-
       case StoreType.appGallery:
         updateData = UpdateDataModel(
-          mustUpdate: '${data['must_appgallery_update']}' == '1', 
-          version: data['appgallery_version']?.toString(), 
+          mustUpdate: '${data['must_appgallery_update']}' == '1',
+          version: data['appgallery_version']?.toString(),
           storeLink: data['appgallery_link']?.toString(),
         );
       case StoreType.playStore:
         updateData = UpdateDataModel(
-          mustUpdate: '${data['must_googleplay_update']}' == '1', 
-          version: data['googleplay_version']?.toString(), 
+          mustUpdate: '${data['must_googleplay_update']}' == '1',
+          version: data['googleplay_version']?.toString(),
           storeLink: data['googleplay_link']?.toString(),
         );
       case StoreType.appleStore:
         updateData = UpdateDataModel(
-          mustUpdate: '${data['must_appstore_update']}' == '1', 
-          version: data['appstore_version']?.toString(), 
+          mustUpdate: '${data['must_appstore_update']}' == '1',
+          version: data['appstore_version']?.toString(),
           storeLink: data['appstore_link']?.toString(),
         );
       case StoreType.unknown:
@@ -564,10 +563,14 @@ class BusinessSettingsData extends Equatable {
     return BusinessSettingsData(
         updateData: updateData,
         showWholesaleLabel: (data['wholesale_lable'] as String?) == "1",
-        showPackingQtyWholesaleProduct: (data['packing_quty_wholesale_product'] as String?) == "1",
-        showPackingQtyPriceWholesaleProduct: (data['packing_unit_price_wholesale_product'] as String?) == "1",
-        showPackingBeforePriceWholesaleProduct: (data['packing_before_price_wholesale_product'] as String?) == "1",
-        usePackingWholesaleProduct: (data['packing_wholesale_product'] as String?) == "1", 
+        showPackingQtyWholesaleProduct:
+            (data['packing_quty_wholesale_product'] as String?) == "1",
+        showPackingQtyPriceWholesaleProduct:
+            (data['packing_unit_price_wholesale_product'] as String?) == "1",
+        showPackingBeforePriceWholesaleProduct:
+            (data['packing_before_price_wholesale_product'] as String?) == "1",
+        usePackingWholesaleProduct:
+            (data['packing_wholesale_product'] as String?) == "1",
         whatsappNumber: data['whatsapp_number'] as String?,
         allowTwitterLogin: (data['twitter_login'] as String?) == "1",
         // allowOTPLogin: (data['login_with_otp'] as String?) == "1",
@@ -678,43 +681,31 @@ class BusinessSettingsData extends Equatable {
             data['min_order_amount_check_activat'] as dynamic,
         minimumOrderAmount:
             double.parse(data['minimum_order_amount'] as String? ?? '0.0'),
-             freeShippingMinimumOrderAmount:
-            double.parse(data['free_shipping_minimum_order_amount'] as String? ?? '0.0'),
+        freeShippingMinimumOrderAmount: double.parse(data['free_shipping_minimum_order_amount'] as String? ?? '0.0'),
         itemName: data['item_name'] as String?,
         aamarpaySandbox: (data['aamarpay_sandbox'] as String?) == "1",
-        secondaryColor:
-            ColorHelper.stringToColor(data['secondary_base_color'] as String?),
-        secondaryHovColor: ColorHelper.stringToColor(
-            data['secondary_base_hov_color'] as String?),
+        secondaryColor: ColorHelper.stringToColor(data['secondary_base_color'] as String?),
+        secondaryHovColor: ColorHelper.stringToColor(data['secondary_base_hov_color'] as String?),
         headerNavMenuText: data['header_nav_menu_text'] as String?,
-        selectedHomePage:
-            HomePageType.fromString(data['homepage_select'] as String?),
+        selectedHomePage: HomePageType.fromString(data['homepage_select'] as String?),
         todaysDealSectionBg: (data['todays_deal_section_bg'] as dynamic),
-        todaysDealSectionBgColor: ColorHelper.stringToColor(
-            data['todays_deal_section_bg_color'] as String?),
-        flashDealBgColor:
-            ColorHelper.stringToColor(data['flash_deal_bg_color'] as String?),
+        todaysDealSectionBgColor: ColorHelper.stringToColor(data['todays_deal_section_bg_color'] as String?),
+        flashDealBgColor: ColorHelper.stringToColor(data['flash_deal_bg_color'] as String?),
         flashDealBgFullWidth: data['flash_deal_bg_full_width'] as dynamic,
         flashDealBannerMenuText: data['flash_deal_banner_menu_text'] as String?,
-        isLightFlashDealTextColor:
-            (data['flash_deal_banner_menu_text'] as String?) == "light",
-        todaysDealBannerTextColor: ColorHelper.stringToColor(
-            data['todays_deal_banner_text_color'] as String?),
+        isLightFlashDealTextColor: (data['flash_deal_banner_menu_text'] as String?) == "light",
+        todaysDealBannerTextColor: ColorHelper.stringToColor(data['todays_deal_banner_text_color'] as String?),
         couponBackgroundImage: data['coupon_background_image'] as String?,
         adminLoginPageImage: (data['admin_login_page_image'] as String?) == "1",
         customerLoginPageImage: data['customer_login_page_image'] as String?,
-        customerRegisterPageImage:
-            data['customer_register_page_image'] as dynamic,
+        customerRegisterPageImage: data['customer_register_page_image'] as dynamic,
         sellerLoginPageImage: data['seller_login_page_image'] as dynamic,
         sellerRegisterPageImage: data['seller_register_page_image'] as dynamic,
-        deliveryBoyLoginPageImage:
-            data['delivery_boy_login_page_image'] as dynamic,
+        deliveryBoyLoginPageImage: data['delivery_boy_login_page_image'] as dynamic,
         forgotPasswordPageImage: data['forgot_password_page_image'] as String?,
         passwordResetPageImage: data['password_reset_page_image'] as dynamic,
-        phoneNumberVerifyPageImage:
-            data['phone_number_verify_page_image'] as dynamic,
-        authenticationLayoutSelect:
-            data['authentication_layout_select'] as String?,
+        phoneNumberVerifyPageImage: data['phone_number_verify_page_image'] as dynamic,
+        authenticationLayoutSelect: data['authentication_layout_select'] as String?,
         flashDealCardBgImage: data['flash_deal_card_bg_image'] as String?,
         flashDealCardBgTitle: data['flash_deal_card_bg_title'] as String?,
         flashDealCardBgSubtitle: data['flash_deal_card_bg_subtitle'] as String?,
@@ -842,11 +833,11 @@ class BusinessSettingsData extends Equatable {
         deliveryPickupLatitude: double.tryParse(data['delivery_pickup_latitude']?.toString() ?? ''));
   }
 
-  void setOTPProviders(List<OTPProviderModel> newList){
+  void setOTPProviders(List<OTPProviderModel> newList) {
     _otpProviders.clear();
     _otpProviders.addAll(newList);
   }
-  
+
   static List<String>? _decodeJsonList(String? data) {
     if (data == null) return null;
     return (json.decode(data) as List).cast<String>();

@@ -40,8 +40,8 @@ class _PaytmScreenState extends State<PaytmScreen> {
   bool _order_init = false;
 
   final WebViewController _webViewController = WebViewController();
-      bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
-
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -92,7 +92,7 @@ class _PaytmScreenState extends State<PaytmScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

@@ -128,13 +128,11 @@ class _ProfileEditState extends State<ProfileEdit> {
       return;
     }
     if (_phone.trim().isEmpty) {
-      ToastComponent.showDialog(
-          'enter_phone_number'.tr(context: context),
+      ToastComponent.showDialog('enter_phone_number'.tr(context: context),
           color: Theme.of(context).colorScheme.error);
       return;
     } else if (!_isValidPhoneNumber) {
-      ToastComponent.showDialog(
-          'invalid_phone_number'.tr(context: context),
+      ToastComponent.showDialog('invalid_phone_number'.tr(context: context),
           color: Theme.of(context).colorScheme.error);
       return;
     }
@@ -506,7 +504,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                 padding:
                     const EdgeInsets.only(top: AppDimensions.paddingSmallExtra),
                 child: Text(
-                  'password_must_contain_at_least_6_characters'.tr(context: context),
+                  'password_must_contain_at_least_6_characters'
+                      .tr(context: context),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontStyle: FontStyle.italic),
@@ -640,9 +639,10 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ),
-        if(_phoneController.text.trim().isNotEmpty)...[
+        if (_phoneController.text.trim().isNotEmpty) ...[
           Padding(
-            padding: const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
+            padding:
+                const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
             child: Text(
               'phone_ucf'.tr(context: context),
               style: const TextStyle(
@@ -655,13 +655,14 @@ class _ProfileEditState extends State<ProfileEdit> {
             margin: const EdgeInsets.only(bottom: AppDimensions.paddingNormal),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusHalfSmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.radiusHalfSmall),
               boxShadow: [MyTheme.commonShadow()],
             ),
             height: 36,
             child: CustomInternationalPhoneNumberInput(
               countries: countries_code,
-              readOnly : true,
+              readOnly: true,
               hintText: 'phone_number_ucf'.tr(context: context),
               errorMessage: 'invalid_phone_number'.tr(context: context),
               initialValue: initialValue,
@@ -695,13 +696,13 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ],
-        if(_emailController.text.trim().isNotEmpty)
+        if (_emailController.text.trim().isNotEmpty)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
+                padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingSupSmall),
                 child: Text(
                   'email_ucf'.tr(context: context),
                   style: const TextStyle(
@@ -716,16 +717,16 @@ class _ProfileEditState extends State<ProfileEdit> {
                 child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusHalfSmall),
+                        borderRadius: BorderRadius.circular(
+                            AppDimensions.radiusHalfSmall),
                         boxShadow: [MyTheme.commonShadow()]),
                     height: 36,
                     padding: const EdgeInsets.symmetric(horizontal: 14),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       _emailController.text,
-                      style:
-                          const TextStyle(fontSize: 12, color: Color(0xff999999)),
+                      style: const TextStyle(
+                          fontSize: 12, color: Color(0xff999999)),
                     )
                     /*TextField(
                           style: TextStyle(color:MyTheme.grey_153,fontSize: 12),

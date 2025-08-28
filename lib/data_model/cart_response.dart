@@ -156,6 +156,7 @@ class CartItem {
         "quantity": quantity,
         "lower_limit": lowerLimit,
         "upper_limit": upperLimit,
-        "wholesale_variation": List<dynamic>.from(wholesales.map((x) => x.toJson())),
+        "wholesale_variation":
+            List<dynamic>.from(wholesales.map((x) => x.toJson())),
       };
 }

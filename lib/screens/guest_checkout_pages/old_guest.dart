@@ -295,8 +295,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                 padding:
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: Text("${'address_ucf'.tr(context: context)} *",
-                    style:
-                        const TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
+                    style: const TextStyle(
+                        color: MyTheme.dark_font_grey, fontSize: 12)),
               ),
 
               Padding(
@@ -340,7 +340,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         child: Center(
                             child: Text(
                                 'loading_countries_ucf'.tr(context: context),
-                                style: const TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic country) {
@@ -398,7 +399,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         child: Center(
                             child: Text(
                                 'loading_states_ucf'.tr(context: context),
-                                style: const TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic state) {
@@ -466,7 +468,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         child: Center(
                             child: Text(
                                 'loading_cities_ucf'.tr(context: context),
-                                style: const TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic city) {
@@ -586,5 +589,3 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
       contentPadding: const EdgeInsets.only(
           left: AppDimensions.paddingSmall, top: 5.0, bottom: 5.0));
 }
-
-

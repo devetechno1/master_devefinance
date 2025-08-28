@@ -121,7 +121,8 @@ class _AuctionProductsState extends State<AuctionProducts> {
       centerTitle: false,
       leading: UsefulElements.backButton(),
       title: Padding(
-        padding: const EdgeInsets.only(bottom: AppDimensions.paddingVeryExtraLarge),
+        padding:
+            const EdgeInsets.only(bottom: AppDimensions.paddingVeryExtraLarge),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

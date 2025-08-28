@@ -259,8 +259,7 @@ class _WalletState extends State<Wallet> {
         ),
       );
     } else if (_totalRechargeData == 0) {
-      return Center(
-          child: Text('no_recharges_yet'.tr(context: context)));
+      return Center(child: Text('no_recharges_yet'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -521,8 +520,7 @@ class _WalletState extends State<Wallet> {
                         decoration: InputDecoration(
                             fillColor: MyTheme.light_grey,
                             filled: true,
-                            hintText:
-                                'enter_amount_ucf'.tr(context: context),
+                            hintText: 'enter_amount_ucf'.tr(context: context),
                             hintStyle: const TextStyle(
                                 fontSize: 12.0, color: MyTheme.textfield_grey),
                             enabledBorder: const OutlineInputBorder(

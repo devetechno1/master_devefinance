@@ -10,7 +10,7 @@ class FailureBody {
     this.type = 'unKnown',
     this.message = 'unKnownMessage',
   });
-  
+
   String get status => 'Failure';
 
   factory FailureBody.fromMap(Map<String, dynamic> data) => FailureBody(

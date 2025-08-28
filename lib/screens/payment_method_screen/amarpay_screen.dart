@@ -37,7 +37,8 @@ class AmarpayScreen extends StatefulWidget {
 class _AmarpayScreenState extends State<AmarpayScreen> {
   //controller
   final WebViewController _webViewController = WebViewController();
-    bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   int? _combined_order_id = 0;
   bool _order_init = false;
@@ -148,7 +149,7 @@ class _AmarpayScreenState extends State<AmarpayScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

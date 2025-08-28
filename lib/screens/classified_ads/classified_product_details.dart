@@ -490,7 +490,8 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/seller-policy",
-                                page_name: 'seller_policy_ucf'.tr(context: context),
+                                page_name:
+                                    'seller_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -532,7 +533,8 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/return-policy",
-                                page_name: 'return_policy_ucf'.tr(context: context),
+                                page_name:
+                                    'return_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -574,7 +576,8 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/support-policy",
-                                page_name: 'support_policy_ucf'.tr(context: context),
+                                page_name:
+                                    'support_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -661,7 +664,8 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             child: Text(
               _productDetails!.location!,
               maxLines: 1,
-              style: const TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
+              style:
+                  const TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
             ))
       ],
     );
@@ -688,7 +692,8 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             },
             child: Text(
               showPhone ? _productDetails!.phone! : "01XXXXXXXXX",
-              style: const TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
+              style:
+                  const TextStyle(fontSize: 12, color: MyTheme.dark_font_grey),
             ),
           ),
         ),

@@ -37,8 +37,7 @@ class UsefulElements {
               ? CupertinoIcons.arrow_right
               : CupertinoIcons.arrow_left,
           color: color == 'white' ? Colors.white : MyTheme.dark_font_grey),
-      onPressed: () => Navigator.push(
-          OneContext().context!,
+      onPressed: () => Navigator.push(OneContext().context!,
           MaterialPageRoute(builder: (context) => const Main())),
     );
   }

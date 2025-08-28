@@ -18,8 +18,7 @@ class CommonFunctions {
               textDirection:
                   app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
               child: AlertDialog(
-                content: Text(
-                    'do_you_want_close_the_app'.tr(context: context)),
+                content: Text('do_you_want_close_the_app'.tr(context: context)),
                 actions: [
                   TextButton(
                       onPressed: () {

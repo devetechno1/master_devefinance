@@ -843,7 +843,7 @@ class _ProfileState extends State<Profile> {
               is_logged_in.$
                   ? () {
                       AIZRoute.push(context, ProfileEdit()).then((value) {
-                        //onPopped(value);
+                        onPopped(value);
                       });
                     }
                   : () => showLoginWarning()),

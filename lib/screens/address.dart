@@ -440,7 +440,8 @@ class _AddressScreenState extends State<AddressScreen> {
                         ],
                       ),
                       onPressed: () {
-                        Navigator.push(context, 
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
                             builder: (context) => AddAddressScreen(
                               addAddress: (addressEntity) async {
@@ -450,10 +451,10 @@ class _AddressScreenState extends State<AddressScreen> {
                                   addressEntity.longitude ??
                                       AppConfig.initPlace.longitude,
                                 );
-                                if(Loading.isLoading) return;
+                                if (Loading.isLoading) return;
 
                                 Loading.show(OneContext().context!);
-                                
+
                                 final AddressAddResponse addressAddResponse =
                                     await AddressRepository()
                                         .getAddressAddResponse(
@@ -1153,7 +1154,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         child: Center(
                             child: Text(
                                 'loading_countries_ucf'.tr(context: context),
-                                style: const TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic country) {
@@ -1208,7 +1210,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         child: Center(
                             child: Text(
                                 'loading_states_ucf'.tr(context: context),
-                                style: const TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, dynamic state) {
@@ -1269,7 +1272,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         child: Center(
                             child: Text(
                                 'loading_cities_ucf'.tr(context: context),
-                                style: const TextStyle(color: MyTheme.medium_grey))),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
                       );
                     },
                     itemBuilder: (context, City city) {
@@ -1381,7 +1385,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                 shape: RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.circular(AppDimensions.radiusHalfSmall),
-                    side: const BorderSide(color: MyTheme.light_grey, width: 1.0)),
+                    side: const BorderSide(
+                        color: MyTheme.light_grey, width: 1.0)),
                 child: Text(
                   'close_all_capital'.tr(context: context),
                   style: TextStyle(

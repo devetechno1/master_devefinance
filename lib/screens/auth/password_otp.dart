@@ -26,7 +26,7 @@ class PasswordOtp extends StatefulWidget {
   _PasswordOtpState createState() => _PasswordOtpState();
 }
 
-class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
+class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
   //controllers
   String _code = '';
   final TextEditingController _passwordController = TextEditingController();
@@ -122,7 +122,8 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
       canResend = false;
     });
     final passwordResendCodeResponse = await AuthRepository()
-        .getPasswordForgetResponse(widget.email_or_code, widget.verify_by, await SmsAutoFill().getAppSignature);
+        .getPasswordForgetResponse(widget.email_or_code, widget.verify_by,
+            await SmsAutoFill().getAppSignature);
 
     if (passwordResendCodeResponse.result == false) {
       ToastComponent.showDialog(
@@ -177,8 +178,8 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
                           'enter_the_verification_code_that_sent_to_your_email_recently'
                               .tr(context: context),
                           textAlign: TextAlign.center,
-                          style:
-                              const TextStyle(color: MyTheme.dark_grey, fontSize: 14))
+                          style: const TextStyle(
+                              color: MyTheme.dark_grey, fontSize: 14))
                       : Text(
                           'check_your_WhatsApp_messages_to_retrieve_the_verification_code'
                               .tr(context: context),
@@ -417,7 +418,7 @@ class _PasswordOtpState extends State<PasswordOtp>  with CodeAutoFill{
       ),
     );
   }
-  
+
   @override
   void codeUpdated() {
     _code = code ?? '';

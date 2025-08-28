@@ -536,7 +536,7 @@ class _DropDownFieldWidget<T> extends StatefulWidget {
     required this.hintText,
     required this.loadingText,
     this.onSelected,
-    required this.suggestionsCallback, 
+    required this.suggestionsCallback,
     this.textInputAction,
   });
   final TextEditingController? controller;

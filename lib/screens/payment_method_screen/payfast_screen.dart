@@ -39,7 +39,8 @@ class _PayfastScreenState extends State<PayfastScreen> {
   bool _order_init = false;
 
   final WebViewController _webViewController = WebViewController();
-  bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -70,7 +71,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
           // },
           // onHttpError: (error) {
           //   Navigator.pop(context, goToOrdersScreen);
-          
+
           // },
           onPageFinished: (page) {
             if (page.contains("/payfast/return")) {
@@ -111,7 +112,7 @@ class _PayfastScreenState extends State<PayfastScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

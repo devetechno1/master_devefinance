@@ -16,7 +16,6 @@ import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-
 class ProductReviews extends StatefulWidget {
   final int? id;
 
@@ -250,8 +249,7 @@ class _ProductReviewsState extends State<ProductReviews> {
       return Container(
         height: 300,
         child: Center(
-            child: Text(
-                'no_reviews_yet_be_the_first'.tr(context: context))),
+            child: Text('no_reviews_yet_be_the_first'.tr(context: context))),
       );
     } else {
       return Container(); // should never be happening
@@ -455,8 +453,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: const Color.fromRGBO(251, 251, 251, 1),
-                    hintText:
-                        'type_your_review_here'.tr(context: context),
+                    hintText: 'type_your_review_here'.tr(context: context),
                     hintStyle: const TextStyle(
                         fontSize: 14.0, color: MyTheme.textfield_grey),
                     enabledBorder: const OutlineInputBorder(

@@ -62,7 +62,7 @@ class UpdateScreen extends StatelessWidget {
                   ),
                   onPressed: () => NavigationService.handleUrls(
                     updateData.storeLink,
-                     context: context,
+                    context: context,
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,

@@ -178,8 +178,7 @@ class _RefundRequestState extends State<RefundRequest> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(
-          child: Text('no_data_is_available'.tr(context: context)));
+      return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

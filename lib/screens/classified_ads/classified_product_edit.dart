@@ -86,8 +86,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
   void setConstDropdownValues() {
     videoType.addAll([
       CommonDropDownItem("youtube", 'youtube_ucf'.tr(context: context)),
-      CommonDropDownItem(
-          "dailymotion", 'dailymotion_ucf'.tr(context: context)),
+      CommonDropDownItem("dailymotion", 'dailymotion_ucf'.tr(context: context)),
       CommonDropDownItem("vimeo", 'vimeo_ucf'.tr(context: context)),
     ]);
     selectedVideoType = videoType.first;
@@ -134,20 +133,16 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
 
   bool requiredFieldVerification() {
     if (productNameEditTextController.text.trim().isEmpty) {
-      ToastComponent.showDialog(
-          'product_name_required'.tr(context: context));
+      ToastComponent.showDialog('product_name_required'.tr(context: context));
       return false;
     } else if (unitEditTextController.text.trim().isEmpty) {
-      ToastComponent.showDialog(
-          'product_unit_required'.tr(context: context));
+      ToastComponent.showDialog('product_unit_required'.tr(context: context));
       return false;
     } else if (locationTextController.text.trim().isEmpty) {
-      ToastComponent.showDialog(
-          'location_required'.tr(context: context));
+      ToastComponent.showDialog('location_required'.tr(context: context));
       return false;
     } else if (tags.isEmpty) {
-      ToastComponent.showDialog(
-          'product_tag_required'.tr(context: context));
+      ToastComponent.showDialog('product_tag_required'.tr(context: context));
       return false;
     } else if (description == "") {
       ToastComponent.showDialog(
@@ -479,8 +474,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                     itemSpacer(),
                     buildGroupItems(
                       'descriptions_ucf'.tr(context: context),
-                      summerNote(
-                          'descriptions_ucf'.tr(context: context)),
+                      summerNote('descriptions_ucf'.tr(context: context)),
                     ),
                     itemSpacer(),
                   ],
@@ -560,8 +554,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                       buildGroupItems(
                           'video_form_ucf'.tr(context: context),
                           _buildDropDownField(
-                              'video_url_ucf'.tr(context: context),
-                              (newValue) {
+                              'video_url_ucf'.tr(context: context), (newValue) {
                             selectedVideoType = newValue;
                             setChange();
                           }, selectedVideoType, videoType)),
@@ -578,8 +571,8 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                         setChange();
                       }, pdfSpecification),
                       chooseSingleFileField(
-                          'pdf_specification_ucf'.tr(context: context),
-                          "", (onChosenFile) {
+                          'pdf_specification_ucf'.tr(context: context), "",
+                          (onChosenFile) {
                         pdfSpecification = onChosenFile;
                         setChange();
                       }, pdfSpecification),
@@ -612,8 +605,8 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
             const SizedBox(
               height: 10,
             ),
-            fileField('document'.tr(context: context), onChosenFile,
-                selectedFile)
+            fileField(
+                'document'.tr(context: context), onChosenFile, selectedFile)
           ],
         ),
       ],
@@ -950,7 +943,8 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                             enabled: true,
                             style: const TextStyle(fontSize: 12),
                             decoration: InputDecoration.collapsed(
-                                hintText: 'meta_description_ucf'.tr(context: context)),
+                                hintText: 'meta_description_ucf'
+                                    .tr(context: context)),
                           ),
                         ),
                       ),
@@ -1276,8 +1270,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                 maxLines: 1,
                 style: const TextStyle(fontSize: 16),
                 decoration: InputDecoration.collapsed(
-                  hintText:
-                      'type_and_hit_submit_ucf'.tr(context: context),
+                  hintText: 'type_and_hit_submit_ucf'.tr(context: context),
                   hintStyle: const TextStyle(fontSize: 12),
                 ).copyWith(
                   constraints: const BoxConstraints(maxWidth: 150),

@@ -142,7 +142,8 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingDefault),
+        padding:
+            const EdgeInsets.symmetric(vertical: AppDimensions.paddingDefault),
         constraints: const BoxConstraints(maxWidth: 600),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -151,7 +152,6 @@ class CustomDialog extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                
                 Flexible(
                   child: Text(
                     title,
@@ -159,7 +159,8 @@ class CustomDialog extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                if(icon != null) Icon(icon, color: Theme.of(context).primaryColor),
+                if (icon != null)
+                  Icon(icon, color: Theme.of(context).primaryColor),
               ],
             ),
             DialogBody(
@@ -215,7 +216,8 @@ class DialogBody extends StatelessWidget {
         crossAxisAlignment: crossAxisAlignment,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2 * AppDimensions.paddingDefault),
+            padding: const EdgeInsets.symmetric(
+                vertical: 2 * AppDimensions.paddingDefault),
             child: Visibility(
               visible: customBody == null,
               replacement: customBody ?? const SizedBox.shrink(),
@@ -238,7 +240,6 @@ class DialogBody extends StatelessWidget {
     );
   }
 }
-
 
 class DialogButtons extends StatelessWidget {
   const DialogButtons({
@@ -283,7 +284,7 @@ class DialogButtons extends StatelessWidget {
           child: Expanded(
             flex: 10,
             child: OutlinedButton(
-              onPressed: onPressCancel ?? ()=> Navigator.maybePop(context),
+              onPressed: onPressCancel ?? () => Navigator.maybePop(context),
               child: Text(textCancel ?? "cancel_ucf".tr()),
             ),
           ),

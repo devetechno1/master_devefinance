@@ -31,9 +31,7 @@ abstract final class AppDimensions {
   //constrained width
   static const double constrainedBoxDefaultWidth = 500;
 
-
   //animation
   static const int animationShortInMillis = 100;
   static const int animationDefaultInMillis = 300;
-
 }

@@ -1,7 +1,7 @@
 // import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 // import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 // import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
-// 
+//
 // import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 // import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 // import 'package:active_ecommerce_cms_demo_app/data_model/shop_details_response.dart';
@@ -2234,7 +2234,8 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           ),
                         ),
                       ),
-                    if (whole_sale_addon_installed.$ && widget.isWholesale == true)
+                    if (whole_sale_addon_installed.$ &&
+                        widget.isWholesale == true)
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 4),

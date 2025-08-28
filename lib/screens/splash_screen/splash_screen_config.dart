@@ -19,10 +19,11 @@ enum SplashScreenType {
         return const AnimatedScaleIconWidget();
       case splashAnimatedImageWidget:
         return const AnimatedImageWidget();
-        case AnimatedImage:
+      case AnimatedImage:
         return const SplashAnimatedImage();
     }
   }
+
   Color screenBackgroundColor(BuildContext context) {
     switch (this) {
       case splashAnimatedTextWidget:
@@ -31,7 +32,7 @@ enum SplashScreenType {
         return Theme.of(context).primaryColor;
       case splashAnimatedImageWidget:
         return Theme.of(context).primaryColor;
-        case AnimatedImage:
+      case AnimatedImage:
         return Theme.of(context).primaryColor;
     }
   }

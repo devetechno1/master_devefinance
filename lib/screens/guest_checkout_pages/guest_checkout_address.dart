@@ -386,7 +386,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         ],
                       ),
                       onPressed: () {
-                        Navigator.push(context, 
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
                             builder: (context) => AddAddressScreen(
                               initValue: AddressDataEntity(

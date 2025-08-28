@@ -18,7 +18,7 @@ class MyTheme {
   static const Color blue_grey = Color.fromRGBO(168, 175, 179, 1);
   static const Color medium_grey_50 = Color.fromRGBO(167, 175, 179, .5);
   static const Color grey_153 = Color.fromRGBO(153, 153, 153, 1);
-  static const Color dark_font_grey =  Color.fromRGBO(62, 68, 71, 1);
+  static const Color dark_font_grey = Color.fromRGBO(62, 68, 71, 1);
   static const Color font_grey = Color.fromRGBO(107, 115, 119, 1);
   static const Color textfield_grey = Color.fromRGBO(209, 209, 209, 1);
   static const Color font_grey_Light = Color(0xff6B7377);

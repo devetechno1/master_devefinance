@@ -51,8 +51,7 @@ class _MiniProductCardState extends State<ClassifiedMiniProductCard> {
                     child: ClipRRect(
                         clipBehavior: Clip.hardEdge,
                         borderRadius: const BorderRadius.vertical(
-                            top:
-                                Radius.circular(AppDimensions.radiusHalfSmall),
+                            top: Radius.circular(AppDimensions.radiusHalfSmall),
                             bottom: Radius.zero),
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,

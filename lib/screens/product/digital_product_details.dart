@@ -162,8 +162,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   }
 
   fetchProductDetails() async {
-    final productDetailsResponse = await ProductRepository()
-        .getProductDetails(slug: widget.slug);
+    final productDetailsResponse =
+        await ProductRepository().getProductDetails(slug: widget.slug);
 
     if (productDetailsResponse.detailed_products!.isNotEmpty) {
       _productDetails = productDetailsResponse.detailed_products![0];
@@ -595,7 +595,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               controller: sellerChatTitleController,
                               autofocus: false,
                               decoration: InputDecoration(
-                                  hintText: 'enter_title_ucf'.tr(context: context),
+                                  hintText:
+                                      'enter_title_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -625,8 +626,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
-                          child: Text(
-                              "${'message_ucf'.tr(context: context)} *",
+                          child: Text("${'message_ucf'.tr(context: context)} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -641,7 +641,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
                               decoration: InputDecoration(
-                                  hintText: 'enter_message_ucf'.tr(context: context),
+                                  hintText:
+                                      'enter_message_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -1877,13 +1878,16 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
       columns: [
         DataColumn(
             label: Text('min_qty_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('max_qty_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
         DataColumn(
             label: Text('unit_price_ucf'.tr(context: context),
-                style: const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
+                style:
+                    const TextStyle(fontSize: 12, color: MyTheme.dark_grey))),
       ],
       rows: List<DataRow>.generate(
         _productDetails!.wholesale!.length,
@@ -2123,8 +2127,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                     color: MyTheme.golden_shadow,
                     blurRadius: 20,
                     spreadRadius: 0.0,
-                    offset: Offset(
-                        0.0, 10.0), // shadow direction: bottom right
+                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
                   )
                 ],
               ),
@@ -2336,7 +2339,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           height: 100,
           child: Center(
               child: Text(
-                  'no_top_selling_products_from_this_seller'.tr(context: context),
+                  'no_top_selling_products_from_this_seller'
+                      .tr(context: context),
                   style: const TextStyle(color: MyTheme.font_grey))));
     }
   }

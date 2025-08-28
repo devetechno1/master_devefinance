@@ -34,9 +34,9 @@ class ProductVerticalListWidget extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: 6,
-          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-           // maxCrossAxisExtent: itemWidth,
+            // maxCrossAxisExtent: itemWidth,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
             childAspectRatio: 0.55,
@@ -56,9 +56,9 @@ class ProductVerticalListWidget extends StatelessWidget {
           itemCount: numberOfTotalProducts > productList.length
               ? productList.length + 1
               : productList.length,
-          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-           // maxCrossAxisExtent: itemWidth,
+            // maxCrossAxisExtent: itemWidth,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
             childAspectRatio: 0.55,
@@ -66,7 +66,7 @@ class ProductVerticalListWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             if (index == productList.length &&
                 numberOfTotalProducts > productList.length) {
-              onArriveTheEndOfList(); 
+              onArriveTheEndOfList();
               return Center(
                 child: SpinKitFadingFour(
                   size: 30.0,

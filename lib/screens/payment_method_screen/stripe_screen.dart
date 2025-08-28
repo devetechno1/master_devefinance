@@ -41,7 +41,8 @@ class _StripeScreenState extends State<StripeScreen> {
 
   final WebViewController _webViewController = WebViewController();
 
-  bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -105,7 +106,7 @@ class _StripeScreenState extends State<StripeScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

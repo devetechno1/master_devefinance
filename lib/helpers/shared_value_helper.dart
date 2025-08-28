@@ -7,7 +7,6 @@ import '../app_config.dart';
 
 late final Box<Map> localeTranslation;
 
-
 final SharedValue<bool> is_logged_in = SharedValue(
   value: false, // initial value
   key: "is_logged_in", // disk storage key for shared_preferences

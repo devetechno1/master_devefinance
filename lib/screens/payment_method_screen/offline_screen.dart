@@ -308,7 +308,8 @@ class _OfflineState extends State<OfflineScreen> {
               padding:
                   const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
-                'correctly_fill_up_the_necessary_information'.tr(context: context),
+                'correctly_fill_up_the_necessary_information'
+                    .tr(context: context),
                 style: const TextStyle(color: MyTheme.grey_153, fontSize: 14.0),
               ),
             ),
@@ -331,8 +332,7 @@ class _OfflineState extends State<OfflineScreen> {
                   controller: _amountController,
                   autofocus: false,
                   decoration: InputDecorations.buildInputDecoration_1(
-                      hint_text:
-                          'twelve_thousand_only'.tr(context: context)),
+                      hint_text: 'twelve_thousand_only'.tr(context: context)),
                 ),
               ),
             ),

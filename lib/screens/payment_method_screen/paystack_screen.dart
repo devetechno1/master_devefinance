@@ -39,8 +39,8 @@ class _PaystackScreenState extends State<PaystackScreen> {
   bool _order_init = false;
 
   final WebViewController _webViewController = WebViewController();
-        bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
-
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _PaystackScreenState extends State<PaystackScreen> {
           // },
           // onHttpError: (error) {
           //   Navigator.pop(context, goToOrdersScreen);
-          
+
           // },
           onPageFinished: (page) {
             print(page.toString());
@@ -100,7 +100,7 @@ class _PaystackScreenState extends State<PaystackScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

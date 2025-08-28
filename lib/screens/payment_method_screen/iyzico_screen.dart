@@ -39,7 +39,8 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
   bool _order_init = false;
 
   final WebViewController _webViewController = WebViewController();
-    bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -83,7 +84,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
           // },
           // onHttpError: (error) {
           //   Navigator.pop(context, goToOrdersScreen);
-          
+
           // },
           onPageFinished: (page) {
             print(page.toString());
@@ -99,7 +100,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

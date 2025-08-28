@@ -351,8 +351,7 @@ class _ChatState extends State<Chat> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(
-          child: Text('no_data_is_available'.tr(context: context)));
+      return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
       return Container();
     }
@@ -456,7 +455,8 @@ class _ChatState extends State<Chat> {
               style: const TextStyle(color: MyTheme.font_grey, fontSize: 14),
             ),
             Text('$date $time',
-                style: const TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
+                style:
+                    const TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
           ],
         ),
       ),
@@ -488,7 +488,8 @@ class _ChatState extends State<Chat> {
                 ),
               ),
               Text(date + " " + time,
-                  style: const TextStyle(color: MyTheme.medium_grey, fontSize: 10)),
+                  style: const TextStyle(
+                      color: MyTheme.medium_grey, fontSize: 10)),
             ],
           ),
         ),

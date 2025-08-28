@@ -40,8 +40,8 @@ class _NagadScreenState extends State<NagadScreen> {
   bool _initial_url_fetched = false;
 
   final WebViewController _webViewController = WebViewController();
-    bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
-
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {

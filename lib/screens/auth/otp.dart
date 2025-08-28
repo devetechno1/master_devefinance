@@ -123,8 +123,8 @@ class _OtpState extends State<Otp> {
               if (widget.title != null)
                 Text(
                   widget.title!,
-                  style: const TextStyle(
-                      fontSize: 25, color: MyTheme.font_grey),
+                  style:
+                      const TextStyle(fontSize: 25, color: MyTheme.font_grey),
                 ),
               Padding(
                 padding: const EdgeInsets.only(top: 40.0, bottom: 15),
@@ -167,15 +167,13 @@ class _OtpState extends State<Otp> {
                             border: Border.all(
                                 color: MyTheme.textfield_grey, width: 1),
                             borderRadius: const BorderRadius.all(
-                                Radius.circular(
-                                    AppDimensions.radiusNormal))),
+                                Radius.circular(AppDimensions.radiusNormal))),
                         child: Btn.basic(
                           minWidth: MediaQuery.sizeOf(context).width,
                           color: Theme.of(context).primaryColor,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      AppDimensions.radiusNormal))),
+                                  Radius.circular(AppDimensions.radiusNormal))),
                           child: Text(
                             'confirm_ucf'.tr(context: context),
                             style: const TextStyle(
@@ -193,14 +191,13 @@ class _OtpState extends State<Otp> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.only(top: AppDimensions.paddingLarge),
+                padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
                 child: Text(
-                    'check_your_WhatsApp_messages_to_retrieve_the_verification_code'.tr(context: context),
+                    'check_your_WhatsApp_messages_to_retrieve_the_verification_code'
+                        .tr(context: context),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Theme.of(context).disabledColor,
-                        fontSize: 13)),
+                        color: Theme.of(context).disabledColor, fontSize: 13)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 60),

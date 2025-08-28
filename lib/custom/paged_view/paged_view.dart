@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 typedef PageFetcher<T> = Future<PageResult<T>> Function(int page);
-typedef ItemBuilder<T> = Widget Function(BuildContext context, T item, int index);
+typedef ItemBuilder<T> = Widget Function(
+    BuildContext context, T item, int index);
 typedef LoadingItemBuilder = Widget Function(BuildContext context, int index);
 typedef EmptyBuilder = Widget Function(BuildContext context);
 
@@ -186,7 +187,8 @@ class _PagedViewState<T> extends State<PagedView<T>> {
       switch (widget.layout) {
         case PagedLayout.list:
           return SliverList.separated(
-            separatorBuilder: (_, __) => SizedBox(height: widget.mainAxisSpacing),
+            separatorBuilder: (_, __) =>
+                SizedBox(height: widget.mainAxisSpacing),
             itemCount: widget.loadingPlaceholdersCount,
             itemBuilder: (c, i) => widget.loadingItemBuilder!(c, i),
           );
@@ -268,7 +270,8 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   // ===== Responsive helpers (via GridResponsive) =====
   int _effectiveCrossAxisCount(double width) {
     if (!widget.responsiveGrid) return widget.gridCrossAxisCount;
-    return GridResponsive.columnsForWidth(width, minTileWidth: widget.minTileWidth);
+    return GridResponsive.columnsForWidth(width,
+        minTileWidth: widget.minTileWidth);
   }
 
   double _aspectRatioForWidth(double width) {
@@ -303,7 +306,8 @@ class _PagedViewState<T> extends State<PagedView<T>> {
           switch (widget.layout) {
             PagedLayout.list => SliverList.separated(
                 itemCount: _items.length,
-                separatorBuilder: (_, __) => SizedBox(height: widget.mainAxisSpacing),
+                separatorBuilder: (_, __) =>
+                    SizedBox(height: widget.mainAxisSpacing),
                 itemBuilder: (c, i) => widget.itemBuilder(c, _items[i], i),
               ),
             PagedLayout.grid => _buildGridSliver(context),

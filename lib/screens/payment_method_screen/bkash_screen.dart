@@ -43,7 +43,8 @@ class _BkashScreenState extends State<BkashScreen> {
   bool showLoading = false;
 
   final WebViewController _webViewController = WebViewController();
-    bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -129,7 +130,7 @@ class _BkashScreenState extends State<BkashScreen> {
           // },
           // onHttpError: (error) {
           //   Navigator.pop(context, goToOrdersScreen);
-          
+
           // },
           onPageFinished: (page) {
             if (page.contains("/bkash/api/callback")) {

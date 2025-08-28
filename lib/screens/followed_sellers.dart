@@ -250,8 +250,8 @@ class _FollowedSellersState extends State<FollowedSellers> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.amber),
                       color: MyTheme.amber,
-                      borderRadius: BorderRadius.circular(
-                          AppDimensions.radiusHalfSmall)),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusHalfSmall)),
                   child: Text(
                     'visit_store_ucf'.tr(context: context),
                     style: TextStyle(

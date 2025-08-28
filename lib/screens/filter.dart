@@ -29,12 +29,9 @@ class WhichFilter {
 
   static List<WhichFilter> getWhichFilterList() {
     return <WhichFilter>[
-      WhichFilter(
-          'product', 'product_ucf'.tr()),
-      WhichFilter(
-          'sellers', 'sellers_ucf'.tr()),
-      WhichFilter(
-          'brands', 'brands_ucf'.tr()),
+      WhichFilter('product', 'product_ucf'.tr()),
+      WhichFilter('sellers', 'sellers_ucf'.tr()),
+      WhichFilter('brands', 'brands_ucf'.tr()),
     ];
   }
 }
@@ -479,7 +476,8 @@ class _FilterState extends State<Filter> {
               _selectedFilter!.option_key == "product"
                   ? _scaffoldKey.currentState!.openEndDrawer()
                   : ToastComponent.showDialog(
-                      'you_can_use_sorting_while_searching_for_products'.tr(context: context),
+                      'you_can_use_sorting_while_searching_for_products'
+                          .tr(context: context),
                     );
               ;
             },
@@ -538,7 +536,8 @@ class _FilterState extends State<Filter> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 24.0),
                                         child: Text(
-                                          'sort_products_by_ucf'.tr(context: context),
+                                          'sort_products_by_ucf'
+                                              .tr(context: context),
                                         )),
                                     RadioListTile(
                                       dense: true,
@@ -547,7 +546,8 @@ class _FilterState extends State<Filter> {
                                       activeColor: MyTheme.font_grey,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
-                                      title: Text('default_ucf'.tr(context: context)),
+                                      title: Text(
+                                          'default_ucf'.tr(context: context)),
                                       onChanged: (dynamic value) {
                                         setState(() {
                                           _selectedSort = value;
@@ -563,7 +563,8 @@ class _FilterState extends State<Filter> {
                                       activeColor: MyTheme.font_grey,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
-                                      title: Text('price_high_to_low'.tr(context: context)),
+                                      title: Text('price_high_to_low'
+                                          .tr(context: context)),
                                       onChanged: (dynamic value) {
                                         setState(() {
                                           _selectedSort = value;
@@ -579,7 +580,8 @@ class _FilterState extends State<Filter> {
                                       activeColor: MyTheme.font_grey,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
-                                      title: Text('price_low_to_high'.tr(context: context)),
+                                      title: Text('price_low_to_high'
+                                          .tr(context: context)),
                                       onChanged: (dynamic value) {
                                         setState(() {
                                           _selectedSort = value;
@@ -595,7 +597,8 @@ class _FilterState extends State<Filter> {
                                       activeColor: MyTheme.font_grey,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
-                                      title: Text('new_arrival_ucf'.tr(context: context)),
+                                      title: Text('new_arrival_ucf'
+                                          .tr(context: context)),
                                       onChanged: (dynamic value) {
                                         setState(() {
                                           _selectedSort = value;
@@ -611,7 +614,8 @@ class _FilterState extends State<Filter> {
                                       activeColor: MyTheme.font_grey,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
-                                      title: Text('popularity_ucf'.tr(context: context)),
+                                      title: Text('popularity_ucf'
+                                          .tr(context: context)),
                                       onChanged: (dynamic value) {
                                         setState(() {
                                           _selectedSort = value;
@@ -627,7 +631,8 @@ class _FilterState extends State<Filter> {
                                       activeColor: MyTheme.font_grey,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
-                                      title: Text('top_rated_ucf'.tr(context: context)),
+                                      title: Text(
+                                          'top_rated_ucf'.tr(context: context)),
                                       onChanged: (dynamic value) {
                                         setState(() {
                                           _selectedSort = value;
@@ -643,8 +648,8 @@ class _FilterState extends State<Filter> {
                                 Btn.basic(
                                   child: Text(
                                     'close_all_capital'.tr(context: context),
-                                    style:
-                                        const TextStyle(color: MyTheme.medium_grey),
+                                    style: const TextStyle(
+                                        color: MyTheme.medium_grey),
                                   ),
                                   onPressed: () {
                                     Navigator.of(context, rootNavigator: true)
@@ -655,7 +660,8 @@ class _FilterState extends State<Filter> {
                             ),
                           ))
                   : ToastComponent.showDialog(
-                      'you_can_use_filters_while_searching_for_products'.tr(context: context),
+                      'you_can_use_filters_while_searching_for_products'
+                          .tr(context: context),
                     );
             },
             child: Container(
@@ -730,8 +736,8 @@ class _FilterState extends State<Filter> {
                           child: Center(
                               child: Text(
                                   'loading_suggestions'.tr(context: context),
-                                  style:
-                                      const TextStyle(color: MyTheme.medium_grey))),
+                                  style: const TextStyle(
+                                      color: MyTheme.medium_grey))),
                         );
                       },
                       itemBuilder: (context, dynamic suggestion) {
@@ -775,8 +781,7 @@ class _FilterState extends State<Filter> {
                               fillColor: MyTheme.white,
                               suffixIcon: const Icon(Icons.search,
                                   color: MyTheme.medium_grey),
-                              hintText:
-                                  'search_here_ucf'.tr(context: context),
+                              hintText: 'search_here_ucf'.tr(context: context),
                               hintStyle: const TextStyle(
                                   fontSize: 12.0,
                                   color: MyTheme.textfield_grey),
@@ -852,7 +857,8 @@ class _FilterState extends State<Filter> {
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [_amountValidator],
                                 decoration: InputDecoration(
-                                    hintText: 'minimum_ucf'.tr(context: context),
+                                    hintText:
+                                        'minimum_ucf'.tr(context: context),
                                     hintStyle: const TextStyle(
                                         fontSize: 12.0,
                                         color: MyTheme.textfield_grey),
@@ -890,7 +896,8 @@ class _FilterState extends State<Filter> {
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [_amountValidator],
                                 decoration: InputDecoration(
-                                    hintText: 'maximum_ucf'.tr(context: context),
+                                    hintText:
+                                        'maximum_ucf'.tr(context: context),
                                     hintStyle: const TextStyle(
                                         fontSize: 12.0,
                                         color: MyTheme.textfield_grey),
@@ -939,7 +946,8 @@ class _FilterState extends State<Filter> {
                               height: 100,
                               child: Center(
                                 child: Text(
-                                  'no_category_is_available'.tr(context: context),
+                                  'no_category_is_available'
+                                      .tr(context: context),
                                   style:
                                       const TextStyle(color: MyTheme.font_grey),
                                 ),
@@ -1005,7 +1013,8 @@ class _FilterState extends State<Filter> {
                         if (min != "" && max != "") {
                           if (max.compareTo(min) < 0) {
                             ToastComponent.showDialog(
-                              'filter_screen_min_max_warning'.tr(context: context),
+                              'filter_screen_min_max_warning'
+                                  .tr(context: context),
                             );
                             apply = false;
                           }
@@ -1122,8 +1131,7 @@ class _FilterState extends State<Filter> {
           child: Column(
             children: [
               SizedBox(
-                  height:
-                      MediaQuery.viewPaddingOf(context).top > 40 ? 150 : 135
+                  height: MediaQuery.viewPaddingOf(context).top > 40 ? 150 : 135
                   //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               MasonryGridView.count(
@@ -1197,8 +1205,7 @@ class _FilterState extends State<Filter> {
           child: Column(
             children: [
               SizedBox(
-                  height:
-                      MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
+                  height: MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
                   //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               GridView.builder(
@@ -1233,8 +1240,7 @@ class _FilterState extends State<Filter> {
         ),
       );
     } else if (_totalBrandData == 0) {
-      return Center(
-          child: Text('no_brand_is_available'.tr(context: context)));
+      return Center(child: Text('no_brand_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }
@@ -1270,8 +1276,7 @@ class _FilterState extends State<Filter> {
           child: Column(
             children: [
               SizedBox(
-                  height:
-                      MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
+                  height: MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
                   //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
               GridView.builder(
@@ -1307,8 +1312,7 @@ class _FilterState extends State<Filter> {
         ),
       );
     } else if (_totalShopData == 0) {
-      return Center(
-          child: Text('no_shop_is_available'.tr(context: context)));
+      return Center(child: Text('no_shop_is_available'.tr(context: context)));
     } else {
       return Container(); // should never be happening
     }

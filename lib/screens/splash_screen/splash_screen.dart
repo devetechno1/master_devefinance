@@ -4,6 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'custom_statusbar.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
   @override
@@ -25,7 +26,9 @@ class SplashScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "BV ${AppConfig.backendVersion}", /// Backend version
+                  "BV ${AppConfig.backendVersion}",
+
+                  /// Backend version
                   style: TextStyle(
                     // fontWeight: FontWeight.bold,
                     fontSize: 10.0,
@@ -39,7 +42,9 @@ class SplashScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "AV ${AppConfig.mobileVersion}", /// App version
+                  "AV ${AppConfig.mobileVersion}",
+
+                  /// App version
                   style: TextStyle(
                     // fontWeight: FontWeight.bold,
                     fontSize: 10.0,

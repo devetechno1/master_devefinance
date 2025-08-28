@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
-
 class BlogListScreen extends StatefulWidget {
   const BlogListScreen({super.key});
 
@@ -152,9 +151,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
 
   Widget buildBlogList(context) {
     return RefreshIndicator(
-      onRefresh: Provider.of<BlogProvider>(context, listen: false).fetchBlogs,
-      child: Consumer<BlogProvider>(
-        builder: (context, blogProvider, child) {
+        onRefresh: Provider.of<BlogProvider>(context, listen: false).fetchBlogs,
+        child: Consumer<BlogProvider>(builder: (context, blogProvider, child) {
           if (blogProvider.isLoading) {
             return ShimmerHelper()
                 .buildListShimmer(item_count: 10, item_height: 100.0);

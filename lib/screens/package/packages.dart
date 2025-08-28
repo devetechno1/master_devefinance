@@ -211,7 +211,8 @@ class _UpdatePackageState extends State<UpdatePackage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Checkout(
-                                        title: 'purchase_package'.tr(context: context),
+                                        title: 'purchase_package'
+                                            .tr(context: context),
                                         rechargeAmount:
                                             double.parse(price.toString()),
                                         paymentFor: PaymentFor.PackagePay,
@@ -219,8 +220,10 @@ class _UpdatePackageState extends State<UpdatePackage> {
                                       )));
                         }
                       } else {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const Login()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Login()));
                       }
                     },
                     radius: 3.0,

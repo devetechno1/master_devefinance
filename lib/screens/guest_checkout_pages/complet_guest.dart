@@ -447,8 +447,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.all(
                             AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'name_ucf'.tr(context: context)} *",
+                        child: Text("${'name_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontWeight: FontWeight.bold,
@@ -475,8 +474,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.all(
                             AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'email_ucf'.tr(context: context)} *",
+                        child: Text("${'email_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontWeight: FontWeight.bold,
@@ -492,8 +490,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                             autofocus: false,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
-                            decoration: buildAddressInputDecoration(context,
-                                'enter_email'.tr(context: context)),
+                            decoration: buildAddressInputDecoration(
+                                context, 'enter_email'.tr(context: context)),
                           ),
                         ),
                       ),
@@ -502,8 +500,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.all(
                             AppDimensions.paddingSmallExtra),
-                        child: Text(
-                            "${'address_ucf'.tr(context: context)} *",
+                        child: Text("${'address_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontWeight: FontWeight.bold,
@@ -519,8 +516,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                             autofocus: false,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
-                            decoration: buildAddressInputDecoration(
-                                context,
+                            decoration: buildAddressInputDecoration(context,
                                 'enter_address_ucf'.tr(context: context)),
                           ),
                         ),
@@ -528,8 +524,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'country_ucf'.tr(context: context)} *",
+                        child: Text("${'country_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontWeight: FontWeight.bold,
@@ -547,8 +542,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 controller: controller,
                                 focusNode: focusNode,
                                 obscureText: false,
-                                decoration: buildAddressInputDecoration(
-                                    context,
+                                decoration: buildAddressInputDecoration(context,
                                     'enter_country_ucf'.tr(context: context)),
                               );
                             },
@@ -562,7 +556,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 height: 50,
                                 child: Center(
                                     child: Text(
-                                        'loading_countries_ucf'.tr(context: context),
+                                        'loading_countries_ucf'
+                                            .tr(context: context),
                                         style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
@@ -586,8 +581,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'state_ucf'.tr(context: context)} *",
+                        child: Text("${'state_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontWeight: FontWeight.bold,
@@ -604,8 +598,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 controller: controller,
                                 focusNode: focusNode,
                                 obscureText: false,
-                                decoration: buildAddressInputDecoration(
-                                    context,
+                                decoration: buildAddressInputDecoration(context,
                                     'enter_state_ucf'.tr(context: context)),
                               );
                             },
@@ -627,7 +620,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 height: 50,
                                 child: Center(
                                     child: Text(
-                                        'loading_states_ucf'.tr(context: context),
+                                        'loading_states_ucf'
+                                            .tr(context: context),
                                         style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
@@ -651,8 +645,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'city_ucf'.tr(context: context)} *",
+                        child: Text("${'city_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: Color(0xff3E4447),
                                 fontWeight: FontWeight.bold,
@@ -682,7 +675,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 height: 50,
                                 child: Center(
                                     child: Text(
-                                        'loading_cities_ucf'.tr(context: context),
+                                        'loading_cities_ucf'
+                                            .tr(context: context),
                                         style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
@@ -706,8 +700,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 controller: controller,
                                 focusNode: focusNode,
                                 obscureText: false,
-                                decoration: buildAddressInputDecoration(
-                                    context,
+                                decoration: buildAddressInputDecoration(context,
                                     'enter_city_ucf'.tr(context: context)),
                               );
                             },
@@ -731,8 +724,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: TextField(
                             controller: _postalCodeController,
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(
-                                context,
+                            decoration: buildAddressInputDecoration(context,
                                 'enter_postal_code_ucf'.tr(context: context)),
                           ),
                         ),
@@ -754,8 +746,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: TextField(
                             controller: _phoneController,
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(
-                                context,
+                            decoration: buildAddressInputDecoration(context,
                                 'enter_phone_number'.tr(context: context)),
                           ),
                         ),
@@ -870,8 +861,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'address_ucf'.tr(context: context)} *",
+                        child: Text("${'address_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
@@ -885,8 +875,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                             autofocus: false,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
-                            decoration: buildAddressInputDecoration(
-                                context,
+                            decoration: buildAddressInputDecoration(context,
                                 'enter_address_ucf'.tr(context: context)),
                           ),
                         ),
@@ -894,8 +883,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'country_ucf'.tr(context: context)} *",
+                        child: Text("${'country_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
@@ -916,7 +904,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 height: 50,
                                 child: Center(
                                     child: Text(
-                                        'loading_countries_ucf'.tr(context: context),
+                                        'loading_countries_ucf'
+                                            .tr(context: context),
                                         style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
@@ -939,8 +928,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'state_ucf'.tr(context: context)} *",
+                        child: Text("${'state_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
@@ -966,7 +954,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 height: 50,
                                 child: Center(
                                     child: Text(
-                                        'loading_states_ucf'.tr(context: context),
+                                        'loading_states_ucf'
+                                            .tr(context: context),
                                         style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
@@ -989,8 +978,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
-                        child: Text(
-                            "${'city_ucf'.tr(context: context)} *",
+                        child: Text("${'city_ucf'.tr(context: context)} *",
                             style: const TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
                       ),
@@ -1021,7 +1009,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                                 height: 50,
                                 child: Center(
                                     child: Text(
-                                        'loading_cities_ucf'.tr(context: context),
+                                        'loading_cities_ucf'
+                                            .tr(context: context),
                                         style: const TextStyle(
                                             color: MyTheme.medium_grey))),
                               );
@@ -1057,8 +1046,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                             controller:
                                 _postalCodeControllerListForUpdate[index],
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(
-                                context,
+                            decoration: buildAddressInputDecoration(context,
                                 'enter_postal_code_ucf'.tr(context: context)),
                           ),
                         ),
@@ -1078,8 +1066,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                           child: TextField(
                             controller: _phoneControllerListForUpdate[index],
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(
-                                context,
+                            decoration: buildAddressInputDecoration(context,
                                 'enter_phone_number'.tr(context: context)),
                           ),
                         ),

@@ -98,10 +98,13 @@ class SlidersRepository {
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         return (data['data'] as List<dynamic>?)
-            ?.map((e) => PopupBannerModel.fromMap(e as Map<String, dynamic>))
-            .toList() ?? [];
+                ?.map(
+                    (e) => PopupBannerModel.fromMap(e as Map<String, dynamic>))
+                .toList() ??
+            [];
       } else {
-        throw Exception('Failed to load popup banner, status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to load popup banner, status code: ${response.statusCode}');
       }
     } catch (e) {
       rethrow;

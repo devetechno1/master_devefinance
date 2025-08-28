@@ -368,7 +368,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               controller: sellerChatTitleController,
                               autofocus: false,
                               decoration: InputDecoration(
-                                  hintText: 'enter_title_ucf'.tr(context: context),
+                                  hintText:
+                                      'enter_title_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -398,8 +399,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: AppDimensions.paddingSmall),
-                          child: Text(
-                              "${'message_ucf'.tr(context: context)} *",
+                          child: Text("${'message_ucf'.tr(context: context)} *",
                               style: const TextStyle(
                                   color: MyTheme.font_grey, fontSize: 12)),
                         ),
@@ -414,7 +414,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
                               decoration: InputDecoration(
-                                  hintText: 'enter_message_ucf'.tr(context: context),
+                                  hintText:
+                                      'enter_message_ucf'.tr(context: context),
                                   hintStyle: const TextStyle(
                                       fontSize: 12.0,
                                       color: MyTheme.textfield_grey),
@@ -620,8 +621,10 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     onTap: () {
                       is_logged_in.$
                           ? showAlertDialog(context)
-                          : Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const Login()));
+                          : Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()));
                     },
                     child: Container(
                       margin: const EdgeInsets.only(
@@ -900,7 +903,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/seller-policy",
-                                page_name: 'seller_policy_ucf'.tr(context: context),
+                                page_name:
+                                    'seller_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -942,7 +946,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/return-policy",
-                                page_name: 'return_policy_ucf'.tr(context: context),
+                                page_name:
+                                    'return_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -984,7 +989,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                               return CommonWebviewScreen(
                                 url:
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/support-policy",
-                                page_name: 'support_policy_ucf'.tr(context: context),
+                                page_name:
+                                    'support_policy_ucf'.tr(context: context),
                               );
                             }));
                           },
@@ -1219,8 +1225,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       keyboardType: TextInputType.number,
                       controller: _bidPriceController,
                       decoration: InputDecoration(
-                        hintText:
-                            'enter_amount_ucf'.tr(context: context),
+                        hintText: 'enter_amount_ucf'.tr(context: context),
                         isDense: true,
                         border: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
@@ -1228,7 +1233,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'please_fill_out_this_form'.tr(context: context);
+                          return 'please_fill_out_this_form'
+                              .tr(context: context);
                         }
 
                         if (_auctionproductDetails.highestBid != '') {
@@ -1240,7 +1246,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         if (_auctionproductDetails.highestBid == '') {
                           if (double.parse(value) <
                               _auctionproductDetails.minBidPrice.toDouble()) {
-                            return 'value_must_be_greater_or_equal'.tr(context: context);
+                            return 'value_must_be_greater_or_equal'
+                                .tr(context: context);
                           }
                         }
 

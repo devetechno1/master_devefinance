@@ -8,10 +8,7 @@ import '../../../helpers/shared_value_helper.dart';
 import '../home.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BuildAppBar({
-    super.key,
-    required this.context
-  });
+  const BuildAppBar({super.key, required this.context});
 
   final BuildContext context;
 

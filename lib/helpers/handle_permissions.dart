@@ -34,7 +34,8 @@ abstract final class HandlePermissions {
       if (!serviceEnabled) return null;
     }
 
-    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   // static  Future<bool> requestCameraPermission() async {

@@ -10,7 +10,6 @@ class CategoryListVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ListenableBuilder(
       listenable: homeData,
       builder: (context, child) {
@@ -34,7 +33,10 @@ class CategoryListVertical extends StatelessWidget {
                   ),
                 ),
               ),
-              FeatureCategoriesWidgetVertical(homeData: homeData, crossAxisCount: crossAxisCount,),
+              FeatureCategoriesWidgetVertical(
+                homeData: homeData,
+                crossAxisCount: crossAxisCount,
+              ),
             ],
           ),
         );

@@ -100,7 +100,7 @@ class _MetroScreenState extends State<MetroScreen>
 
                               // Header Banner
                               HomeCarouselSlider(homeData: homeData),
-                              
+
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
@@ -133,7 +133,7 @@ class _MetroScreenState extends State<MetroScreen>
                           ),
                           //featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
-                        //  BannerList---------------------
+                          //  BannerList---------------------
                           SliverToBoxAdapter(
                             child: HomeBannersList(
                               bannersImagesList: homeData.bannerTwoImageList,

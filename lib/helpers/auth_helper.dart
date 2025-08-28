@@ -27,7 +27,7 @@ class AuthHelper {
     }
   }
 
-  Future<void> clearUserData() async{
+  Future<void> clearUserData() async {
     SystemConfig.systemUser = null;
     is_logged_in.$ = false;
     access_token.$ = "";

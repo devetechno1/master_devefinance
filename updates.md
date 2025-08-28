@@ -5,10 +5,28 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.24'`
+- `mobileVersion = '9.10.25'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.25 – Profile refresh on return & dependency updates</strong></summary>
+
+### UX
+- Enabled `onPopped(value)` after returning from `ProfileEdit` so the Profile screen refreshes user data immediately.
+
+### Dependencies
+- Bumped multiple packages (e.g., `permission_handler` 12.x, `share_plus` 11.x, `flutter_local_notifications` 19.x, `sign_in_with_apple` 7.x, `package_info_plus` 8.x, `image_picker` 1.2.0, etc.). See `pubspec.yaml`/`pubspec.lock` for exact versions.
+
+### Notes
+- No API changes.
+- Store update: **no** (minor UX refresh + dependency bumps).
+</details>
+
+
+
+
 <details>
 <summary><strong>AV 9.10.24 – Dynamic OTP providers & login flow</strong></summary>
 

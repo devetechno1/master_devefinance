@@ -39,7 +39,8 @@ class _KhaltiScreenState extends State<KhaltiScreen> {
   bool _order_init = false;
 
   final WebViewController _webViewController = WebViewController();
-    bool get goToOrdersScreen => widget.payment_type != "cart_payment" || _order_init;
+  bool get goToOrdersScreen =>
+      widget.payment_type != "cart_payment" || _order_init;
 
   @override
   void initState() {
@@ -68,7 +69,7 @@ class _KhaltiScreenState extends State<KhaltiScreen> {
           // },
           // onHttpError: (error) {
           //   Navigator.pop(context, goToOrdersScreen);
-          
+
           // },
           onPageFinished: (page) {
             if (page.contains("/khalti/payment/success")) {
@@ -125,7 +126,7 @@ class _KhaltiScreenState extends State<KhaltiScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if(!didPop){
+        if (!didPop) {
           Navigator.pop(context, goToOrdersScreen);
         }
       },

@@ -13,7 +13,7 @@ String addressMakeDefaultResponseToJson(AddressMakeDefaultResponse data) =>
 class AddressMakeDefaultResponse {
   AddressMakeDefaultResponse({
     this.result,
-    this.message ='',
+    this.message = '',
   });
 
   bool? result;
