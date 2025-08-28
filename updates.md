@@ -5,10 +5,26 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.25'`
+- `mobileVersion = '9.10.26'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.26 – Android build: 16KB alignment & Java 17</strong></summary>
+
+### Build System
+- Pin NDK r28 and upgraded AGP to 8.5.1 to support default 16KB zip alignment on uncompressed `.so` files.
+- Moved Java/Kotlin to 17 (`sourceCompatibility`/`targetCompatibility`/`jvmTarget=17`).
+- Enabled core library desugaring; added `com.android.tools:desugar_jdk_libs:2.1.4`.
+- Set `packagingOptions.jniLibs.useLegacyPackaging=false` to keep modern packaging.
+- Removed `jcenter()` from repositories.
+
+### Notes
+- No app code or API changes.
+- Store update: **no** (build/infra only).
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.25 – Profile refresh on return & dependency updates</strong></summary>

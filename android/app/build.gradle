@@ -31,15 +31,27 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "com.devefinancestore"
     compileSdk 35
-    ndkVersion flutter.ndkVersion
+    // Pin NDK r28 which builds 16KB-aligned by default
+    ndkVersion "28.0.13004108"
+
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        
+        // Required by flutter_local_notifications on older APIs
+        coreLibraryDesugaringEnabled true
+    }
+    packagingOptions {
+        jniLibs {
+            // keep default (no legacy) to ensure uncompressed .so for proper 16KB zip alignment
+            useLegacyPackaging = false
+        }
     }
 
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -65,7 +77,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -85,5 +97,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.0.0' 
-
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
 }
