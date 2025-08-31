@@ -121,6 +121,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
               discount: product.discount,
               isWholesale: product.isWholesale,
               has_discount: product.has_discount == true,
+              searchedText: _searchKey,
             );
           },
           loadingItemBuilder: (context, index) {

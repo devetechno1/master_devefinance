@@ -1159,6 +1159,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     has_discount: _productList[index].has_discount,
                     discount: _productList[index].discount,
                     isWholesale: _productList[index].isWholesale,
+                    searchedText: _searchKey,
                   );
                 },
               )

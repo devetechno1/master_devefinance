@@ -20,6 +20,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../repositories/search_repository.dart';
+import '../ui_elements/highlighted_searched_word.dart';
 
 class WhichFilter {
   String option_key;
@@ -698,6 +699,7 @@ class _FilterState extends State<Filter> {
   }
 
   Row buildTopAppbar(BuildContext context) {
+    String searchedWord = '';
     return Row(
         //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -708,103 +710,108 @@ class _FilterState extends State<Filter> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.sizeOf(context).width * .85,
               height: 70,
-              child: Container(
-                child: Padding(
-                    padding: MediaQuery.viewPaddingOf(context).top >
-                            30 //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                        ? const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 0.0)
-                        : const EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: 0.0),
-                    child: TypeAheadField(
-                      suggestionsCallback: (pattern) async {
-                        //return await BackendService.getSuggestions(pattern);
-                        final suggestions = await SearchRepository()
-                            .getSearchSuggestionListResponse(
-                                query_key: pattern,
-                                type: _selectedFilter!.option_key);
-                        //print(suggestions.toString());
-                        return suggestions;
-                      },
-                      loadingBuilder: (context) {
-                        return Container(
-                          height: 40,
-                          color: Colors.white,
-                          child: Center(
-                              child: Text(
-                                  'loading_suggestions'.tr(context: context),
-                                  style: const TextStyle(
-                                      color: MyTheme.medium_grey))),
-                        );
-                      },
-                      itemBuilder: (context, dynamic suggestion) {
-                        //print(suggestion.toString());
-                        var subtitle =
-                            "${'searched_for_all_lower'.tr(context: context)} ${suggestion.count} ${'times_all_lower'.tr(context: context)}";
-                        if (suggestion.type != "search") {
-                          subtitle =
-                              "${suggestion.type_string} ${'found_all_lower'.tr(context: context)}";
-                        }
-                        return ListTile(
-                          tileColor: Colors.white,
-                          dense: true,
-                          title: Text(
-                            suggestion.query,
-                            style: TextStyle(
-                                color: suggestion.type != "search"
-                                    ? Theme.of(context).primaryColor
-                                    : MyTheme.font_grey),
+              child: Padding(
+                  padding: MediaQuery.viewPaddingOf(context).top >
+                          30 //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
+                      ? const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 0.0)
+                      : const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 0.0),
+                  child: TypeAheadField(
+                    suggestionsCallback: (pattern) async {
+                      //return await BackendService.getSuggestions(pattern);
+                      final suggestions = await SearchRepository()
+                          .getSearchSuggestionListResponse(
+                              query_key: pattern,
+                              type: _selectedFilter!.option_key);
+                      //print(suggestions.toString());
+                      return suggestions;
+                    },
+                    loadingBuilder: (context) {
+                      return Container(
+                        height: 40,
+                        color: Colors.white,
+                        child: Center(
+                            child: Text(
+                                'loading_suggestions'.tr(context: context),
+                                style: const TextStyle(
+                                    color: MyTheme.medium_grey))),
+                      );
+                    },
+                    itemBuilder: (context, dynamic suggestion) {
+                      //print(suggestion.toString());
+                      var subtitle =
+                          "${'searched_for_all_lower'.tr(context: context)} ${suggestion.count} ${'times_all_lower'.tr(context: context)}";
+                      if (suggestion.type != "search") {
+                        subtitle =
+                            "${suggestion.type_string} ${'found_all_lower'.tr(context: context)}";
+                      }
+                      return ListTile(
+                        tileColor: Colors.white,
+                        dense: true,
+                        title: HighlightedSearchedWord(
+                          suggestion.query,
+                          searchedText: searchedWord,
+                          style: TextStyle(
+                            color: suggestion.type != "search"
+                                ? Theme.of(context).primaryColor
+                                : MyTheme.font_grey,
                           ),
-                          subtitle: Text(subtitle,
-                              style: TextStyle(
-                                  color: suggestion.type != "search"
-                                      ? MyTheme.font_grey
-                                      : MyTheme.medium_grey)),
-                        );
-                      },
-                      onSelected: (dynamic suggestion) {
-                        _searchController.text = suggestion.query;
-                        _searchKey = suggestion.query;
-                        setState(() {});
-                        _onSearchSubmit();
-                      },
-                      builder: (context, controller, focusNode) {
-                        return TextField(
-                          controller: controller,
-                          focusNode: focusNode,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                              filled: true,
-                              fillColor: MyTheme.white,
-                              suffixIcon: const Icon(Icons.search,
-                                  color: MyTheme.medium_grey),
-                              hintText: 'search_here_ucf'.tr(context: context),
-                              hintStyle: const TextStyle(
-                                  fontSize: 12.0,
-                                  color: MyTheme.textfield_grey),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: MyTheme.noColor, width: 0.5),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(AppDimensions.radiusSmall),
-                                ),
+                        ),
+                        subtitle: HighlightedSearchedWord(
+                          subtitle,
+                          searchedText: searchedWord,
+                          style: TextStyle(
+                            color: suggestion.type != "search"
+                                ? MyTheme.font_grey
+                                : MyTheme.medium_grey,
+                          ),
+                        ),
+                      );
+                    },
+                    onSelected: (dynamic suggestion) {
+                      _searchController.text = suggestion.query;
+                      _searchKey = suggestion.query;
+                      setState(() {});
+                      _onSearchSubmit();
+                    },
+                    builder: (context, controller, focusNode) {
+                      searchedWord = controller.text;
+                      return TextField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        obscureText: false,
+                        onChanged: (value) => searchedWord = value,
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: MyTheme.white,
+                            suffixIcon: const Icon(Icons.search,
+                                color: MyTheme.medium_grey),
+                            hintText: 'search_here_ucf'.tr(context: context),
+                            hintStyle: const TextStyle(
+                                fontSize: 12.0, color: MyTheme.textfield_grey),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: MyTheme.noColor, width: 0.5),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(AppDimensions.radiusSmall),
                               ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: MyTheme.noColor, width: 1.0),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(AppDimensions.radiusSmall),
-                                ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: MyTheme.noColor, width: 1.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(AppDimensions.radiusSmall),
                               ),
-                              contentPadding: const EdgeInsetsDirectional.only(
-                                  start: 8.0, top: 5.0, bottom: 5.0)),
-                        );
-                      },
-                    )),
-              ),
+                            ),
+                            contentPadding: const EdgeInsetsDirectional.only(
+                                start: 8.0, top: 5.0, bottom: 5.0)),
+                      );
+                    },
+                  )),
             ),
           ),
           // IconButton(

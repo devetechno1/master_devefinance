@@ -8,6 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../helpers/shared_value_helper.dart';
 import '../screens/auction/auction_products_details.dart';
 import '../screens/product/product_details.dart';
+import 'highlighted_searched_word.dart';
 
 class ProductCard extends StatefulWidget {
   final dynamic identifier;
@@ -20,6 +21,7 @@ class ProductCard extends StatefulWidget {
   final bool has_discount;
   final bool? isWholesale;
   final String? discount;
+  final String? searchedText;
   final void Function()? onPopFromProduct;
 
   const ProductCard({
@@ -35,6 +37,7 @@ class ProductCard extends StatefulWidget {
     this.isWholesale = false, // Corrected to use isWholesale
     this.discount,
     this.onPopFromProduct,
+    this.searchedText,
   }) : super(key: key);
 
   @override
@@ -126,8 +129,9 @@ class _ProductCardState extends State<ProductCard> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                        child: Text(
+                        child: HighlightedSearchedWord(
                           widget.name ?? 'no_name'.tr(context: context),
+                          searchedText: widget.searchedText,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(

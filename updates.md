@@ -5,10 +5,30 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.28'`
+- `mobileVersion = '9.10.29'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.29 – Search term highlighting in products & suggestions</strong></summary>
+
+### UX
+- Highlight matching search terms in product names across Brand, Category, and Wishlist grids.
+- TypeAhead suggestions now highlight the typed text (title + subtitle).
+- No visual change when the search box is empty.
+
+### Tech
+- New reusable `HighlightedSearchedWord` widget powered by `highlight_text` (v1.8.0).
+- `ProductCard` now accepts optional `searchedText` and callers pass current `_searchKey`.
+
+### API impact
+- None.
+
+### Store update
+- **No** (UI-only enhancement).
+
+</details>
+
 <details>
 <summary><strong>AV 9.10.28 – UX – Paged list controller & category search flow</strong></summary>
 
