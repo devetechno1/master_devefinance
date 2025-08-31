@@ -9,6 +9,19 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.26 – Normalize CartItem.shippingCost type</strong></summary>
+
+### Model
+- Changed `CartItem.shippingCost` type from `int?` to `double?` with safe JSON parsing to accept both integer and floating values.
+
+### Impact
+- Internal refactor only; verified `CartItem.shippingCost` is **not referenced** anywhere else in the app (project-wide search across `lib/`).
+
+### Store update
+- **No** (non-user-facing model normalization; no behavioral change).
+
+</details>
 
 <details>
 <summary><strong>AV 9.10.26 – Android build: 16KB alignment & Java 17</strong></summary>
