@@ -81,7 +81,7 @@ class CartItem {
   String? price;
   String? currencySymbol;
   String? tax;
-  int? shippingCost;
+  double? shippingCost;
   int quantity;
   int? lowerLimit;
   int upperLimit;
