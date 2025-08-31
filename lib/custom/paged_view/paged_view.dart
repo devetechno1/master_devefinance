@@ -14,11 +14,72 @@ typedef EmptyBuilder = Widget Function(BuildContext context);
 
 enum PagedLayout { list, grid, masonry }
 
+/// Controller for [PagedView] to allow external imperative actions.
+class PagedViewController<T> {
+  _PagedViewState<T>? _state;
+
+  /// Whether the controller is currently attached to a [PagedView].
+  bool get hasClients => _state != null && _state!.mounted;
+
+  /// Current page index inside the attached [PagedView], or null if detached.
+  int? get currentPage => _state?._page;
+
+  /// Whether the [PagedView] is fetching the first page.
+  bool get isLoading => _state?._isLoading ?? false;
+
+  /// Whether the [PagedView] is fetching more pages.
+  bool get isLoadingMore => _state?._isLoadingMore ?? false;
+
+  /// Whether there are more pages to load.
+  bool get hasMore => _state?._hasMore ?? false;
+
+  // ---- Attach / Detach (internal) ----
+  void _attach(_PagedViewState<T> state) {
+    _state = state;
+  }
+
+  void _detach(_PagedViewState<T> state) {
+    if (identical(_state, state)) {
+      _state = null;
+    }
+  }
+
+  /// Reload data from the first page. By default scrolls to top without animation.
+  Future<void> refresh({bool jumpToTop = true}) async {
+    final s = _state;
+    if (s == null || !s.mounted) return;
+    await s._resetToFirstPage(jumpToTop: jumpToTop);
+  }
+
+  /// Reset to a specific [page] and reload. If null, uses the widget's [initialPage].
+  Future<void> reset({int? page, bool jumpToTop = true}) async {
+    final s = _state;
+    if (s == null || !s.mounted) return;
+    await s._reset(page: page, jumpToTop: jumpToTop);
+  }
+
+  /// Programmatically load the next page if available.
+  Future<void> loadNextPage() async {
+    final s = _state;
+    if (s == null || !s.mounted) return;
+    if (!s._hasMore || s._isLoadingMore) return;
+    await s._loadMore();
+  }
+
+  /// Scroll to the top of the list/grid.
+  Future<void> jumpToTop({bool animate = true}) async {
+    final s = _state;
+    if (s == null || !s.mounted) return;
+    await s._jumpToTop(animate: animate);
+  }
+}
+
 class PagedView<T> extends StatefulWidget {
   const PagedView({
     super.key,
     required this.fetchPage,
     required this.itemBuilder,
+    this.controller,
     this.layout = PagedLayout.list,
 
     // Grid settings
@@ -50,6 +111,7 @@ class PagedView<T> extends StatefulWidget {
   });
 
   // Data
+  final PagedViewController<T>? controller;
   final PageFetcher<T> fetchPage;
   final ItemBuilder<T> itemBuilder;
 
@@ -99,9 +161,21 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   @override
   void initState() {
     super.initState();
+    // Attach controller if provided
+    widget.controller?._attach(this);
     _page = widget.initialPage;
     _loadFirstPage();
     _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void didUpdateWidget(covariant PagedView<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Re-attach controller if it changed.
+    if (!identical(widget.controller, oldWidget.controller)) {
+      oldWidget.controller?._detach(this);
+      widget.controller?._attach(this);
+    }
   }
 
   void _onScroll() {
@@ -121,6 +195,10 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   Future<void> _loadFirstPage() async {
+    // Safety: ensure we are not far scrolled when clearing items (avoids Masonry assertion)
+    if (_scrollController.hasClients && _scrollController.position.pixels > 0) {
+      _scrollController.jumpTo(0);
+    }
     setState(() {
       _isLoading = true;
       _hasMore = true;
@@ -174,8 +252,36 @@ class _PagedViewState<T> extends State<PagedView<T>> {
     });
   }
 
+  // ===== Imperative helpers (used by PagedViewController) =====
+  Future<void> _resetToFirstPage({bool jumpToTop = true}) async {
+    await _reset(page: widget.initialPage, jumpToTop: jumpToTop);
+  }
+
+  Future<void> _reset({int? page, bool jumpToTop = true}) async {
+    final nextPage = page ?? widget.initialPage;
+    _page = nextPage;
+    if (jumpToTop) {
+      await _jumpToTop(animate: false);
+    }
+    await _loadFirstPage();
+  }
+
+  Future<void> _jumpToTop({bool animate = true}) async {
+    if (!_scrollController.hasClients) return;
+    if (animate) {
+      await _scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    } else {
+      _scrollController.jumpTo(0);
+    }
+  }
+
   @override
   void dispose() {
+    widget.controller?._detach(this);
     _scrollController.dispose();
     super.dispose();
   }
@@ -331,8 +437,7 @@ class _PagedViewState<T> extends State<PagedView<T>> {
 
     return RefreshIndicator.adaptive(
       onRefresh: () async {
-        _page = widget.initialPage;
-        await _loadFirstPage();
+        await _resetToFirstPage();
       },
       child: body,
     );
