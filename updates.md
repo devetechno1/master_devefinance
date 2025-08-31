@@ -5,7 +5,7 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.26'`
+- `mobileVersion = '9.10.27'`
 ---
 
 ## 📱 Mobile App Updates
@@ -22,6 +22,22 @@ This file tracks all update versions for both the **Mobile App**.
 - **No** (non-user-facing model normalization; no behavioral change).
 
 </details>
+
+<details>
+<summary><strong>AV 9.10.27 – UX – Paged list controller & category search flow</strong></summary>
+
+### Frontend
+- Added `PagedViewController` to control `PagedView` (refresh/reset/loadNextPage/jumpToTop).
+- Improved `PagedView` lifecycle: safely jump to top before reloading first page to avoid Masonry layout assertions; re-attach controller on widget updates.
+- Category products screen now uses `PagedViewController` + `Debouncer` and `PopScope` to provide smoother search and back navigation.
+
+### API impact
+- None.
+
+### Store update
+- **No** (internal UI/UX enhancements).
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.26 – Android build: 16KB alignment & Java 17</strong></summary>
