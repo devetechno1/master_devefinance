@@ -30,8 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.devefinancestore"
-    compileSdk 35
-    // Pin NDK r28 which builds 16KB-aligned by default
+    compileSdk 36
     ndkVersion "28.0.13004108"
 
 
@@ -39,12 +38,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
         
-        // Required by flutter_local_notifications on older APIs
         coreLibraryDesugaringEnabled true
     }
     packagingOptions {
         jniLibs {
-            // keep default (no legacy) to ensure uncompressed .so for proper 16KB zip alignment
             useLegacyPackaging = false
         }
     }
@@ -60,7 +57,7 @@ android {
 
     defaultConfig {
         applicationId "com.devefinancestore"
-        minSdkVersion 23
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -91,11 +88,11 @@ flutter {
 
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation platform("com.google.firebase:firebase-bom:33.6.0")
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation platform("com.google.firebase:firebase-bom:33.15.0")
+    implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation 'com.google.android.gms:play-services-auth:19.0.0' 
+    implementation 'com.google.android.gms:play-services-auth:21.3.0'
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
 }

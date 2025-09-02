@@ -5,10 +5,31 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.29'`
+- `mobileVersion = '9.10.30'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.30 – Flutter 3.35.2 platform/tooling upgrades</strong></summary>
+
+### Build System
+- Android: compileSdk **36**, AGP **8.6.0**, Kotlin **2.1.0**, Google Services **4.4.3**.
+- iOS: MinimumOSVersion **13.0**, updated Runner scheme (LLDB init + GPU validation).
+
+### Dependencies
+- Firebase BoM **33.15.0**, `firebase-messaging` managed via BoM.
+- Google Play Services Auth **21.3.0**.
+- Dart `intl` **0.20.2**.
+
+### Notes
+- Regenerate lockfiles with `dart pub get` and `pod install`.
+
+### API / Store
+- No API changes.
+- must update in play store or apple store: **no** (tooling upgrades only).
+
+</details>
+
 <details>
 <summary><strong>AV 9.10.29 – Search term highlighting in products & suggestions</strong></summary>
 
