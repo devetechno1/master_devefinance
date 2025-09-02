@@ -210,11 +210,14 @@ class AuthRepository {
   }
 
   Future<PasswordForgetResponse> getPasswordForgetResponse(
-      String? emailOrPhone, String sendCodeBy, String appSignature) async {
+    String? emailOrPhone,
+    String sendCodeBy,
+    String? otpProvider,
+  ) async {
     final postBody = jsonEncode({
       "email_or_phone": "$emailOrPhone",
       "send_code_by": "$sendCodeBy",
-      "app_signature": "$appSignature"
+      if (otpProvider != null) "otp_provider": otpProvider,
     });
 
     const String url = ("${AppConfig.BASE_URL}/auth/password/forget_request");

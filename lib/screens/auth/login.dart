@@ -789,12 +789,14 @@ class LoginWith3rd extends StatelessWidget {
     required this.assetImage,
     this.networkImage,
     this.imageColor,
+    this.isSelected = false,
     this.onTap,
   });
   final String name;
   final String assetImage;
   final String? networkImage;
   final Color? imageColor;
+  final bool isSelected;
   final void Function()? onTap;
 
   @override
@@ -803,27 +805,48 @@ class LoginWith3rd extends StatelessWidget {
     return Tooltip(
       message: name,
       margin: const EdgeInsets.all(AppDimensions.paddingDefault),
-      child: InkWell(
-        onTap: onTap,
-        splashFactory: NoSplash.splashFactory,
-        child: Column(
-          spacing: AppDimensions.paddingSmall,
-          children: [
-            SizedBox.square(
-              dimension: 46,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
-                child: networkImage != null
-                    ? CachedNetworkImage(
-                        imageUrl: networkImage!,
-                        color: imageColor,
-                        errorWidget: (context, url, error) => assetImageWidget,
-                      )
-                    : assetImageWidget,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingSmall,
+          horizontal: AppDimensions.paddingSmallExtra,
+        ),
+        decoration: isSelected
+            ? BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall))
+            : null,
+        child: InkWell(
+          onTap: onTap,
+          splashFactory: NoSplash.splashFactory,
+          child: Column(
+            spacing: AppDimensions.paddingSmall,
+            children: [
+              SizedBox.square(
+                dimension: 46,
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusSmall),
+                  child: networkImage != null
+                      ? CachedNetworkImage(
+                          imageUrl: networkImage!,
+                          color: imageColor,
+                          errorWidget: (context, url, error) =>
+                              assetImageWidget,
+                        )
+                      : assetImageWidget,
+                ),
               ),
-            ),
-            Text(name),
-          ],
+              Text(
+                name,
+                style: isSelected
+                    ? TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      )
+                    : null,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -13,22 +13,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:one_context/one_context.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:timer_count_down/timer_controller.dart';
 
+import '../../ui_elements/otp_input_widget.dart';
+
 class PasswordOtp extends StatefulWidget {
-  const PasswordOtp({Key? key, this.verify_by = "email", this.email_or_code})
-      : super(key: key);
+  const PasswordOtp({
+    Key? key,
+    this.verify_by = "email",
+    this.email_or_code,
+    this.otpProvider,
+  }) : super(key: key);
   final String verify_by;
   final String? email_or_code;
+  final String? otpProvider;
 
   @override
   _PasswordOtpState createState() => _PasswordOtpState();
 }
 
-class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
+class _PasswordOtpState extends State<PasswordOtp> {
   //controllers
   String _code = '';
+  final OtpInputController otpCtrl = OtpInputController();
+
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
@@ -42,12 +50,11 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
 
   @override
   void initState() {
+    otpCtrl.listenOnceUserConsent();
     Future.delayed(Duration.zero).then((value) {
       headeText = 'enter_the_code_sent'.tr(context: context);
       setState(() {});
     });
-
-    SmsAutoFill().listenForCode();
     //on Splash Screen hide statusbar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
@@ -56,8 +63,7 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
 
   @override
   void dispose() {
-    SmsAutoFill().unregisterListener();
-    cancel();
+    otpCtrl.dispose();
     _passwordController.dispose();
     _passwordConfirmController.dispose();
     countdownController.pause();
@@ -105,6 +111,7 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
     if (passwordConfirmResponse.result == false) {
       ToastComponent.showDialog(
         passwordConfirmResponse.message!,
+        isError: true,
       );
     } else {
       ToastComponent.showDialog(
@@ -118,16 +125,21 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
   }
 
   onTapResend() async {
+    otpCtrl.listenOnceUserConsent();
     setState(() {
       canResend = false;
     });
-    final passwordResendCodeResponse = await AuthRepository()
-        .getPasswordForgetResponse(widget.email_or_code, widget.verify_by,
-            await SmsAutoFill().getAppSignature);
+    final passwordResendCodeResponse =
+        await AuthRepository().getPasswordForgetResponse(
+      widget.email_or_code,
+      widget.verify_by,
+      widget.otpProvider,
+    );
 
     if (passwordResendCodeResponse.result == false) {
       ToastComponent.showDialog(
         passwordResendCodeResponse.message!,
+        isError: true,
       );
     } else {
       ToastComponent.showDialog(
@@ -181,8 +193,11 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
                           style: const TextStyle(
                               color: MyTheme.dark_grey, fontSize: 14))
                       : Text(
-                          'check_your_WhatsApp_messages_to_retrieve_the_verification_code'
-                              .tr(context: context),
+                          'check_your_messages_to_retrieve_the_verification_code'
+                              .tr(
+                            context: context,
+                            args: {"phone": "${widget.email_or_code}"},
+                          ),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: MyTheme.dark_grey, fontSize: 14))),
@@ -204,21 +219,14 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingSmall),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          height: 55,
-                          child: TextFieldPinAutoFill(
-                            currentCode: _code,
-                            onCodeChanged: (val) => _code = val.trim(),
-                            decoration: InputDecorations.buildInputDecoration_1(
-                              hint_text: 'enter_the_code'.tr(context: context),
-                            ),
-                          ),
-                        ),
-                      ],
+                      bottom: AppDimensions.paddingSmall,
+                    ),
+                    child: SizedBox(
+                      height: 55,
+                      child: OtpInputWidget(
+                        controller: otpCtrl,
+                        onChanged: (val) => _code = val,
+                      ),
                     ),
                   ),
                   Padding(
@@ -417,11 +425,5 @@ class _PasswordOtpState extends State<PasswordOtp> with CodeAutoFill {
         ),
       ),
     );
-  }
-
-  @override
-  void codeUpdated() {
-    _code = code ?? '';
-    setState(() {});
   }
 }

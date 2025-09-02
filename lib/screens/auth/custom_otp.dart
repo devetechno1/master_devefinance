@@ -1,6 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
@@ -11,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:timer_count_down/timer_controller.dart';
 
 import '../../custom/loading.dart';
@@ -19,6 +17,7 @@ import '../../data_model/login_response.dart';
 import '../../helpers/auth_helper.dart';
 import '../../status/execute_and_handle_remote_errors.dart';
 import '../../status/status.dart';
+import '../../ui_elements/otp_input_widget.dart';
 import '../home/home.dart';
 import 'login.dart';
 import 'otp_login.dart';
@@ -36,9 +35,11 @@ class CustomOTPScreen extends StatefulWidget {
   _CustomOTPScreenState createState() => _CustomOTPScreenState();
 }
 
-class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
+class _CustomOTPScreenState extends State<CustomOTPScreen> {
   //controllers
   String _code = '';
+
+  final OtpInputController otpCtrl = OtpInputController();
 
   CountdownController countdownController =
       CountdownController(autoStart: true);
@@ -46,17 +47,16 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
 
   @override
   void initState() {
-    SmsAutoFill().listenForCode();
-    //on Splash Screen hide statusbar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
+    otpCtrl.listenOnceUserConsent();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom,
+    ]);
     super.initState();
   }
 
   @override
   void dispose() {
-    SmsAutoFill().unregisterListener();
-    cancel();
+    otpCtrl.dispose();
     countdownController.pause();
     //before going to other screen show statusbar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
@@ -108,6 +108,8 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
   }
 
   Future<void> onTapResend() async {
+    otpCtrl.listenOnceUserConsent();
+
     setState(() {
       canResend = false;
     });
@@ -165,12 +167,13 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
                     const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                 child: SizedBox(
                   height: 55,
-                  child: TextFieldPinAutoFill(
-                    currentCode: _code,
-                    onCodeChanged: (val) => _code = val.trim(),
-                    decoration: InputDecorations.buildInputDecoration_1(
-                      hint_text: 'enter_the_code'.tr(context: context),
-                    ),
+                  child: OtpInputWidget(
+                    controller: otpCtrl,
+                    onChanged: (val) => _code = val,
+                    onCompleted: (val) {
+                      _code = val;
+                      onPressConfirm();
+                    },
                   ),
                 ),
               ),
@@ -241,11 +244,5 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> with CodeAutoFill {
         ),
       ],
     );
-  }
-
-  @override
-  void codeUpdated() {
-    _code = code ?? '';
-    setState(() {});
   }
 }

@@ -11,10 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../app_config.dart';
+import '../../data_model/otp_provider_model.dart';
 import '../../repositories/address_repository.dart';
+import 'login.dart';
 
 class PasswordForget extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class PasswordForget extends StatefulWidget {
 }
 
 class _PasswordForgetState extends State<PasswordForget> {
+  OTPProviderModel? provider;
   String _send_code_by =
       otp_addon_installed.$ ? "phone" : "email"; //phone or email
   String? _phone = "";
@@ -53,11 +55,13 @@ class _PasswordForgetState extends State<PasswordForget> {
     if (_send_code_by == 'email' && email == "") {
       ToastComponent.showDialog(
         'enter_email'.tr(context: context),
+        isError: true,
       );
       return;
     } else if (_send_code_by == 'phone' && _phone == "") {
       ToastComponent.showDialog(
         'enter_phone_number'.tr(context: context),
+        isError: true,
       );
       return;
     }
@@ -65,12 +69,13 @@ class _PasswordForgetState extends State<PasswordForget> {
         await AuthRepository().getPasswordForgetResponse(
       _send_code_by == 'email' ? email : _phone,
       _send_code_by,
-      await SmsAutoFill().getAppSignature,
+      provider?.type,
     );
 
     if (passwordForgetResponse.result == false) {
       ToastComponent.showDialog(
         passwordForgetResponse.message!,
+        isError: true,
       );
     } else {
       ToastComponent.showDialog(
@@ -81,6 +86,7 @@ class _PasswordForgetState extends State<PasswordForget> {
         return PasswordOtp(
           verify_by: _send_code_by,
           email_or_code: _send_code_by == 'email' ? email : _phone,
+          otpProvider: provider?.type,
         );
       }));
     }
@@ -160,14 +166,14 @@ class _PasswordForgetState extends State<PasswordForget> {
                     ],
                   ),
                 )
-              else
+              else ...[
                 Padding(
                   padding:
                       const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 36,
                         child: CustomInternationalPhoneNumberInput(
                           countries: countries_code,
@@ -211,6 +217,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                         onTap: () {
                           setState(() {
                             _send_code_by = "email";
+                            provider = null;
                           });
                         },
                         child: Text(
@@ -220,14 +227,44 @@ class _PasswordForgetState extends State<PasswordForget> {
                               fontStyle: FontStyle.italic,
                               decoration: TextDecoration.underline),
                         ),
-                      )
+                      ),
+                      const SizedBox(height: AppDimensions.paddingDefault),
+                      SizedBox(
+                        width: double.maxFinite,
+                        child: Wrap(
+                          runAlignment: WrapAlignment.center,
+                          alignment: WrapAlignment.spaceAround,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: AppDimensions.paddingDefault,
+                          runSpacing: AppDimensions.paddingLarge,
+                          children: List.generate(
+                            AppConfig.businessSettingsData.otpProviders.length,
+                            (i) {
+                              final OTPProviderModel otpProvider = AppConfig
+                                  .businessSettingsData.otpProviders[i];
+
+                              final String providerName =
+                                  otpProvider.sendOTPText ?? "OTP";
+                              return LoginWith3rd(
+                                onTap: () =>
+                                    setState(() => provider = otpProvider),
+                                isSelected: provider == otpProvider,
+                                name: providerName,
+                                networkImage: otpProvider.image,
+                                assetImage: AppImages.otp,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
+              ],
               Padding(
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingVeryExtraLarge),
-                child: Container(
+                child: SizedBox(
                   height: 45,
                   child: Btn.basic(
                     minWidth: MediaQuery.sizeOf(context).width,

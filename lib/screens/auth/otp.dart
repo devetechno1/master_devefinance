@@ -64,6 +64,7 @@ class _OtpState extends State<Otp> {
     if (resendCodeResponse.result == false) {
       ToastComponent.showDialog(
         resendCodeResponse.message!,
+        isError: true,
       );
     } else {
       ToastComponent.showDialog(
@@ -78,6 +79,7 @@ class _OtpState extends State<Otp> {
     if (code == "") {
       ToastComponent.showDialog(
         'enter_verification_code'.tr(context: context),
+        isError: true,
       );
       return;
     }
@@ -88,6 +90,7 @@ class _OtpState extends State<Otp> {
     if (!(confirmCodeResponse.result)) {
       ToastComponent.showDialog(
         confirmCodeResponse.message,
+        isError: true,
       );
     } else {
       if (SystemConfig.systemUser != null) {

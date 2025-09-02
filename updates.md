@@ -5,10 +5,33 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.30'`
+- `mobileVersion = '9.10.31'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.31 – OTP input revamp & Flutter 3.35.2 polish</strong></summary>
+
+### Auth / OTP
+- Replaced `sms_autofill` with `pinput` + `smart_auth` (Android User Consent API).
+- New `OtpInputWidget` and `OtpInputController` with auto-fill (Android) and iOS one-time-code hint.
+- Added `otp_provider` field to password-forget flow; selectable provider UI.
+
+### UX
+- Highlight selected 3rd-party login option.
+- `Loading.show(context, canPop)` to allow/deny dismiss; safer `close()`.
+
+### Infra
+- Logging via `dart:developer log` in API POST.
+
+### API / Store
+- Endpoint: `POST /auth/password/forget_request`—request may include `"otp_provider": "<provider-type>"`.
+- must update in play store or apple store: **no** (feature-level changes without breaking endpoints).
+
+</details>
+
+
 <details>
 <summary><strong>AV 9.10.30 – Flutter 3.35.2 platform/tooling upgrades</strong></summary>
 

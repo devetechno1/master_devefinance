@@ -39,7 +39,7 @@ class ApiRequest {
       headerMap.addAll(headers);
     }
     if (kDebugMode)
-      print("post api request url: $url headers: $headerMap body: $body");
+      log("post api request url: $url headers: $headerMap body: $body");
     final response = await http.post(uri, headers: headerMap, body: body);
     if (kDebugMode)
       log("post api response url: $url response: ${response.body}");

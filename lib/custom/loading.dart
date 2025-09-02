@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 class Loading {
   static BuildContext? _context;
 
-  static Future<Future> show(BuildContext context) async {
+  static Future<Future> show(BuildContext context, [bool canPop = false]) async {
     return showDialog(
       context: context,
+      barrierDismissible: canPop,
       builder: (BuildContext context) {
         Loading._context = context;
         return AlertDialog(
@@ -26,8 +27,8 @@ class Loading {
   static bool get isLoading => _context != null && _context!.mounted;
 
   static close() {
-    if (Loading._context != null) {
-      Navigator.of(Loading._context!).pop();
+    if (_context != null && _context!.mounted) {
+      Navigator.of(_context!).pop();
     }
   }
 
