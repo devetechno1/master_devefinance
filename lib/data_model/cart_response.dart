@@ -81,7 +81,7 @@ class CartItem {
   String? price;
   String? currencySymbol;
   String? tax;
-  double? shippingCost;
+  // double? shippingCost;
   int quantity;
   int? lowerLimit;
   int upperLimit;
@@ -105,7 +105,7 @@ class CartItem {
     this.price,
     this.currencySymbol,
     this.tax,
-    this.shippingCost,
+    // this.shippingCost,
     this.quantity = 0,
     this.lowerLimit,
     this.upperLimit = 0,
@@ -129,7 +129,7 @@ class CartItem {
         price: json["price"],
         currencySymbol: json["currency_symbol"],
         tax: json["tax"],
-        shippingCost: json["shipping_cost"],
+        // shippingCost: json["shipping_cost"],
         quantity: json["quantity"] ?? 0,
         lowerLimit: json["lower_limit"],
         upperLimit: json["upper_limit"] ?? 0,
@@ -152,7 +152,7 @@ class CartItem {
         "price": price,
         "currency_symbol": currencySymbol,
         "tax": tax,
-        "shipping_cost": shippingCost,
+        // "shipping_cost": shippingCost,
         "quantity": quantity,
         "lower_limit": lowerLimit,
         "upper_limit": upperLimit,
