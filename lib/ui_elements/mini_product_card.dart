@@ -307,15 +307,15 @@ class _MiniProductCardState extends State<MiniProductCard> {
                   ),
                 ),
               ),
-              RatingBarIndicator(
-                rating: ratingValue,
-                itemCount: 5,
-                itemSize: 18,
-                itemBuilder: (context, _) =>
-                    const Icon(Icons.star, color: Colors.amber),
-                unratedColor: Colors.grey,
-                direction: Axis.horizontal,
-              ),
+              // RatingBarIndicator(
+              //   rating: ratingValue,
+              //   itemCount: 5,
+              //   itemSize: 18,
+              //   itemBuilder: (context, _) =>
+              //       const Icon(Icons.star, color: Colors.amber),
+              //   unratedColor: Colors.grey,
+              //   direction: Axis.horizontal,
+              // ),
             ]),
       ),
     );
