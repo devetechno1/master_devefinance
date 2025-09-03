@@ -36,7 +36,7 @@ class VariantData {
   double basePrice;
   int? stock;
   int? inCart;
-  var stockTxt;
+  String? stockTxt;
   int? digital;
   String? variant;
   String? variation;
@@ -63,7 +63,7 @@ class VariantData {
         basePrice: double.tryParse(json["base_price"].toString()) ?? 0,
         stock: int.parse(json["stock"].toString()),
         inCart: int.tryParse(json["in_cart"].toString()),
-        stockTxt: json["stock_txt"],
+        stockTxt: "${json["stock_txt"]}",
         digital: int.parse(json["digital"].toString()),
         variant: json["variant"],
         variation: json["variation"],

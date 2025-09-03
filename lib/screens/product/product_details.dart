@@ -107,7 +107,7 @@ class _ProductDetailsState extends State<ProductDetails>
   int _stock = 0;
   int _quantity = 1;
   int _inCart = 0;
-  var _stock_txt;
+  String? _stock_txt;
 
   int get _s => _stock.onlyPositive?.toInt() ?? 0;
 
@@ -1543,7 +1543,7 @@ class _ProductDetailsState extends State<ProductDetails>
         // ),
         const SizedBox(height: AppDimensions.paddingDefault),
         Text(
-          _stock_txt,
+          _stock_txt ?? '',
           // _stock > 0
           //     ? "${'in_stock'.tr(context: context)}: $_stock_txt"
           //     : 'out_of_stock'.tr(context: context),
