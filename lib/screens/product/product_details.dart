@@ -180,9 +180,6 @@ class _ProductDetailsState extends State<ProductDetails>
         },
       ),
     );
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      getDescriptionHeight();
-    });
   }
 
   @override
@@ -245,7 +242,13 @@ class _ProductDetailsState extends State<ProductDetails>
 
   setProductDetailValues() {
     if (_productDetails != null) {
-      controller.loadHtmlString(makeHtml(_productDetails!.description!));
+      controller.loadHtmlString(makeHtml(_productDetails!.description!)).then(
+        (value) {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            getDescriptionHeight();
+          });
+        },
+      );
       _appbarPriceString = _productDetails!.price_high_low;
       _singlePrice = _productDetails!.calculable_price;
       _singlePriceString = _productDetails!.main_price;
@@ -2662,7 +2665,6 @@ class _ProductDetailsState extends State<ProductDetails>
 
   Future<void> getDescriptionHeight() async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
       final String value = (await controller.runJavaScriptReturningResult(
         "document.getElementById('scaled-frame').clientHeight",
       ))

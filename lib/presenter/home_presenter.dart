@@ -583,7 +583,7 @@ class HomePresenter extends ChangeNotifier {
       if (mainScrollController.positions.isNotEmpty &&
           mainScrollController.positions.first.pixels ==
               mainScrollController.positions.first.maxScrollExtent &&
-          (totalAllProductData ?? 10000) > allProductList.length) {
+          (totalAllProductData ?? allProductList.length) > allProductList.length) {
         allProductPage++;
         // ToastComponent.showDialog('loading_more_products_ucf'.tr(context: context));
         showAllLoadingContainer = true;

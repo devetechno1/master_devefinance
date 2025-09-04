@@ -5,10 +5,28 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.32'`
+- `mobileVersion = '9.10.33'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.33 – Product details description render fix</strong></summary>
+
+### Bug Fix
+- Ensure product **description** height is measured only **after** the HTML is injected and the first frame is rendered.
+- Removed artificial delay from `getDescriptionHeight()` and eliminated early post-frame measure in `initState`.
+- Effect: fixes cases where the description collapsed (height=0) and remained invisible on first open.
+
+### UX / Stability
+- `HomePresenter`: safer load-more condition when `totalAllProductData` is null.
+- `MiniProductCard`: remove unused rating import/variable to keep `flutter analyze` clean.
+
+### API / Store
+- **No endpoint changes**.
+- **must update in play store or apple store: yes** (fixing a Flutter client bug against a working endpoint).
+
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.32 – Multi-OTP provider flow & safer navigation</strong></summary>
