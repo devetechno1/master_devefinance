@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+import '../data_model/search_suggestion_response.dart';
 import '../repositories/search_repository.dart';
 import '../ui_elements/highlighted_searched_word.dart';
 
@@ -720,7 +721,7 @@ class _FilterState extends State<Filter> {
                           vertical: 15.0, horizontal: 0.0)
                       : const EdgeInsets.symmetric(
                           vertical: 5.0, horizontal: 0.0),
-                  child: TypeAheadField(
+                  child: TypeAheadField<SearchSuggestionResponse>(
                     suggestionsCallback: (pattern) async {
                       //return await BackendService.getSuggestions(pattern);
                       final suggestions = await SearchRepository()
@@ -741,7 +742,7 @@ class _FilterState extends State<Filter> {
                                     color: MyTheme.medium_grey))),
                       );
                     },
-                    itemBuilder: (context, dynamic suggestion) {
+                    itemBuilder: (context, suggestion) {
                       //print(suggestion.toString());
                       var subtitle =
                           "${'searched_for_all_lower'.tr(context: context)} ${suggestion.count} ${'times_all_lower'.tr(context: context)}";
@@ -753,7 +754,7 @@ class _FilterState extends State<Filter> {
                         tileColor: Colors.white,
                         dense: true,
                         title: HighlightedSearchedWord(
-                          suggestion.query,
+                          suggestion.query ?? '',
                           searchedText: searchedWord,
                           style: TextStyle(
                             color: suggestion.type != "search"
