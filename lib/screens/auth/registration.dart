@@ -25,8 +25,10 @@ import 'package:one_context/one_context.dart';
 import 'package:validators/validators.dart';
 
 import '../../custom/loading.dart';
+import '../../data_model/otp_provider_model.dart';
 import '../../helpers/auth_helper.dart';
 import '../../repositories/address_repository.dart';
+import '../../ui_elements/select_otp_provider_widget.dart';
 import '../home/home.dart';
 import 'otp.dart';
 import 'package:go_router/go_router.dart';
@@ -44,6 +46,9 @@ class _RegistrationState extends State<Registration> {
   bool? _isAgree = false;
   bool _isCaptchaShowing = false;
   String googleRecaptchaKey = "";
+
+  OTPProviderModel? provider =
+      AppConfig.businessSettingsData.otpProviders.firstOrNull;
 
   //controllers
   final TextEditingController _nameController = TextEditingController();
@@ -112,6 +117,12 @@ class _RegistrationState extends State<Registration> {
         isError: true,
       );
       return;
+    } else if (AppConfig.businessSettingsData.mustOtp && provider == null) {
+      ToastComponent.showDialog(
+        'please_select_otp_provider'.tr(context: context),
+        isError: true,
+      );
+      return;
     } else if (password == "") {
       ToastComponent.showDialog(
         'enter_password'.tr(context: context),
@@ -144,13 +155,13 @@ class _RegistrationState extends State<Registration> {
     //     email.trim().isEmpty ? "$_phone@email.com" : email.trim();
 
     final signupResponse = await AuthRepository().getSignupResponse(
-      name,
-      email.trim(),
-      _phone,
-      password,
-      passwordConfirm,
-      googleRecaptchaKey,
-    );
+        name,
+        email.trim(),
+        _phone,
+        password,
+        passwordConfirm,
+        googleRecaptchaKey,
+        provider?.type);
     Loading.close();
 
     if (signupResponse.result == false) {
@@ -201,8 +212,12 @@ class _RegistrationState extends State<Registration> {
       if (AppConfig.businessSettingsData.mailVerificationStatus ||
           AppConfig.businessSettingsData.mustOtp) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const Otp(
+          return Otp(
             fromRegistration: true,
+            isPhone: AppConfig.businessSettingsData.mustOtp,
+            emailOrPhone:
+                AppConfig.businessSettingsData.mustOtp ? _phone : email,
+            provider: provider,
             // verify_by: _register_by,
             // user_id: signupResponse.user_id,
           );
@@ -288,6 +303,15 @@ class _RegistrationState extends State<Registration> {
                   },
                 ),
               ),
+              if (AppConfig.businessSettingsData.mustOtp)
+                SelectOTPProviderWidget(
+                  margin: const EdgeInsets.only(
+                    top: AppDimensions.paddingSmall,
+                    bottom: AppDimensions.paddingDefault,
+                  ),
+                  selectedProvider: provider,
+                  onSelect: (val) => setState(() => provider = val),
+                ),
               _SignUpField(
                 fieldController: _passwordController,
                 label: 'password_ucf'.tr(context: context),

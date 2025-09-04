@@ -1,6 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/num_ex.dart';
@@ -15,14 +14,26 @@ import 'package:go_router/go_router.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
+import '../../data_model/otp_provider_model.dart';
 import '../../main.dart';
+import '../../ui_elements/otp_input_widget.dart';
+import '../../ui_elements/select_otp_provider_widget.dart';
 import '../home/home.dart';
 
 class Otp extends StatefulWidget {
   final String? title;
   final bool fromRegistration;
-  const Otp({Key? key, this.title, required this.fromRegistration})
-      : super(key: key);
+  final bool isPhone;
+  final String? emailOrPhone;
+  final OTPProviderModel? provider;
+  const Otp({
+    Key? key,
+    this.title,
+    required this.fromRegistration,
+    required this.emailOrPhone,
+    required this.provider,
+    required this.isPhone,
+  }) : super(key: key);
 
   @override
   _OtpState createState() => _OtpState();
@@ -30,15 +41,22 @@ class Otp extends StatefulWidget {
 
 class _OtpState extends State<Otp> {
   //controllers
-  final TextEditingController _verificationCodeController =
-      TextEditingController();
+  String _code = '';
+  final OtpInputController otpCtrl = OtpInputController();
+
+  OTPProviderModel? selectedProvider;
+
   CountdownController countdownController =
       CountdownController(autoStart: true);
   bool canResend = false;
   @override
   void initState() {
+    selectedProvider = widget.provider;
     //on Splash Screen hide statusbar
-    if (!widget.fromRegistration) AuthRepository().getResendCodeResponse();
+    if (!widget.fromRegistration) {
+      AuthRepository().getResendCodeResponse(selectedProvider?.type);
+    }
+    otpCtrl.listenOnceUserConsent();
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
@@ -48,7 +66,7 @@ class _OtpState extends State<Otp> {
   @override
   void dispose() {
     countdownController.pause();
-    _verificationCodeController.dispose();
+    otpCtrl.dispose();
     //before going to other screen show statusbar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
@@ -56,12 +74,14 @@ class _OtpState extends State<Otp> {
   }
 
   onTapResend() async {
+    otpCtrl.listenOnceUserConsent();
     setState(() {
       canResend = false;
     });
-    final resendCodeResponse = await AuthRepository().getResendCodeResponse();
+    final resendCodeResponse =
+        await AuthRepository().getResendCodeResponse(selectedProvider?.type);
 
-    if (resendCodeResponse.result == false) {
+    if (resendCodeResponse.result != true) {
       ToastComponent.showDialog(
         resendCodeResponse.message!,
         isError: true,
@@ -74,9 +94,7 @@ class _OtpState extends State<Otp> {
   }
 
   Future<void> onPressConfirm() async {
-    final code = _verificationCodeController.text.toString();
-
-    if (code == "") {
+    if (_code.trim() == "") {
       ToastComponent.showDialog(
         'enter_verification_code'.tr(context: context),
         isError: true,
@@ -85,7 +103,7 @@ class _OtpState extends State<Otp> {
     }
 
     final confirmCodeResponse =
-        await AuthRepository().getConfirmCodeResponse(code);
+        await AuthRepository().getConfirmCodeResponse(_code);
 
     if (!(confirmCodeResponse.result)) {
       ToastComponent.showDialog(
@@ -137,7 +155,27 @@ class _OtpState extends State<Otp> {
                   child: Image.asset(AppImages.loginRegistration),
                 ),
               ),
-              Container(
+              Padding(
+                padding:
+                    const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
+                child: Container(
+                  width: _screen_width * (3 / 4),
+                  child: Text(
+                    'check_your_messages_to_retrieve_the_verification_code'.tr(
+                      context: context,
+                      args: {
+                        "phone": "${widget.emailOrPhone ?? ''}",
+                      },
+                    ),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: MyTheme.dark_grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
                 width: _screen_width * 0.7,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,25 +183,21 @@ class _OtpState extends State<Otp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           bottom: AppDimensions.paddingSmall),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            height: 36,
-                            child: TextField(
-                              controller: _verificationCodeController,
-                              autofocus: false,
-                              textAlign: TextAlign.center,
-                              decoration:
-                                  InputDecorations.buildInputDecoration_1(
-                                      hint_text: "A X B 4 J H"),
-                            ),
-                          ),
-                        ],
+                      child: SizedBox(
+                        height: 55,
+                        child: OtpInputWidget(
+                          controller: otpCtrl,
+                          isDigitOnly: widget.isPhone,
+                          onChanged: (val) => _code = val,
+                          onCompleted: (val) {
+                            _code = val;
+                            onPressConfirm();
+                          },
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: _screen_height * 0.2),
+                      padding: EdgeInsets.only(top: _screen_height * 0.1),
                       child: Container(
                         height: 45,
                         decoration: BoxDecoration(
@@ -184,26 +218,25 @@ class _OtpState extends State<Otp> {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
                           ),
-                          onPressed: () {
-                            onPressConfirm();
-                          },
+                          onPressed: onPressConfirm,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(height: 50),
+              if (widget.isPhone)
+                SelectOTPProviderWidget(
+                  margin: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingExtraLarge,
+                  ),
+                  selectedProvider: selectedProvider,
+                  onSelect: (val) => setState(() => selectedProvider = val),
+                ),
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.paddingLarge),
-                child: Text(
-                    'check_your_WhatsApp_messages_to_retrieve_the_verification_code'
-                        .tr(context: context),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Theme.of(context).disabledColor, fontSize: 13)),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
+                padding:
+                    const EdgeInsets.only(top: AppDimensions.paddingDefault),
                 child: InkWell(
                   onTap: canResend ? onTapResend : null,
                   child: Text('resend_code_ucf'.tr(context: context),
@@ -218,11 +251,13 @@ class _OtpState extends State<Otp> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingVeryExtraLarge, bottom: 60),
+                  top: AppDimensions.paddingVeryExtraLarge,
+                  bottom: 60,
+                ),
                 child: Visibility(
                   visible: !canResend,
                   child: TimerWidget(
-                    duration: const Duration(seconds: 20),
+                    duration: const Duration(seconds: 90),
                     callback: () {
                       setState(() {
                         countdownController.restart();

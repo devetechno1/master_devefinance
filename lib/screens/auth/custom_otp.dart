@@ -132,7 +132,7 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.paddingDefault),
-          child: Container(
+          child: SizedBox(
             width: screenWidth * (3 / 4),
             child: Text(
               'check_your_messages_to_retrieve_the_verification_code'.tr(
@@ -169,6 +169,7 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
                   height: 55,
                   child: OtpInputWidget(
                     controller: otpCtrl,
+                    isDigitOnly: true,
                     onChanged: (val) => _code = val,
                     onCompleted: (val) {
                       _code = val;

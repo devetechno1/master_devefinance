@@ -585,6 +585,9 @@ class CartProvider extends ChangeNotifier {
                 AppConfig.businessSettingsData.sellerWiseShipping
                     ? const ShippingInfo()
                     : const SelectAddress(),
+                null,
+                null,
+                false,
               ).then((value) {
                 onPopped(context, value);
               });

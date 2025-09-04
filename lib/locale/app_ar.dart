@@ -479,6 +479,7 @@ const Map<String, String> arLangs = {
       "يرجى تسجيل الدخول لرؤية العناصر في قائمة الأمنيات",
   "enter_email": "أدخل البريد الإلكتروني",
   "enter_phone_number": "أدخل رقم الهاتف",
+  "please_select_otp_provider": "من فضلك اختر مزوّد رمز التحقق.",
   "enter_password": "أدخل كلمة المرور",
   "or_login_with_a_phone": "أو، تسجيل الدخول باستخدام رقم الهاتف",
   "or_login_with_an_email": "أو، تسجيل الدخول باستخدام البريد الإلكتروني",

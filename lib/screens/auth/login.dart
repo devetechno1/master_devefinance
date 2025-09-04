@@ -123,18 +123,7 @@ class _LoginState extends State<Login> {
       if (loginResponse.user!.emailVerified!) {
         context.push("/");
       } else {
-        if ((AppConfig.businessSettingsData.mailVerificationStatus &&
-                _login_by == "email") ||
-            (AppConfig.businessSettingsData.mustOtp && _login_by == "phone")) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const Otp(fromRegistration: false),
-            ),
-          );
-        } else {
-          context.push("/");
-        }
+        goOTPOrHome(loginResponse);
       }
     } else {
       AuthHelper().clearUserData();
@@ -150,6 +139,29 @@ class _LoginState extends State<Login> {
       ToastComponent.showDialog(error, isError: true);
     }
     await Future.delayed(Duration.zero);
+  }
+
+  void goOTPOrHome(LoginResponse loginResponse) {
+    final isPhone =
+        AppConfig.businessSettingsData.mustOtp && _login_by == "phone";
+    if ((AppConfig.businessSettingsData.mailVerificationStatus &&
+            _login_by == "email") ||
+        isPhone) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => Otp(
+            fromRegistration: false,
+            isPhone: isPhone,
+            emailOrPhone:
+                isPhone ? loginResponse.user?.phone : loginResponse.user?.email,
+            provider: AppConfig.businessSettingsData.otpProviders.firstOrNull,
+          ),
+        ),
+      );
+    } else {
+      context.push("/");
+    }
   }
 
   Future<void> onPressedLogin(ctx) async {
@@ -217,19 +229,7 @@ class _LoginState extends State<Login> {
       if (loginResponse.user!.emailVerified!) {
         context.push("/");
       } else {
-        if ((AppConfig.businessSettingsData.mailVerificationStatus &&
-                _login_by == "email") ||
-            (AppConfig.businessSettingsData.mustOtp && _login_by == "phone")) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Otp(
-              fromRegistration: false,
-              // verify_by: _register_by,
-              // user_id: signupResponse.user_id,
-            );
-          }));
-        } else {
-          context.push("/");
-        }
+        goOTPOrHome(loginResponse);
       }
 
       await Future.delayed(Duration.zero);

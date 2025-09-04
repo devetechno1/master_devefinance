@@ -9,36 +9,93 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../app_config.dart';
+import '../data_model/otp_provider_model.dart';
 
 class AIZRoute {
-  static Otp otpRoute(BuildContext context) => Otp(
+  static Otp otpRoute(
+    BuildContext context,
+    String? emailOrPhone,
+    OTPProviderModel? provider,
+  ) =>
+      Otp(
         title: 'verifyYourAccount'.tr(context: context),
+        isPhone: provider != null,
         fromRegistration: false,
+        emailOrPhone: emailOrPhone,
+        provider: provider,
       );
 
   static Future<T?> push<T extends Object?>(
-      BuildContext context, Widget route) {
+    BuildContext context,
+    Widget route,
+    String? emailOrPhone,
+    OTPProviderModel? provider,
+    bool isPhone,
+  ) {
     if (_isMailVerifiedRoute(route)) {
       return Navigator.push(
-          context, MaterialPageRoute(builder: (context) => otpRoute(context)));
+        context,
+        MaterialPageRoute(
+          builder: (context) => otpRoute(
+            context,
+            emailOrPhone,
+            getProvider(isPhone, provider),
+          ),
+        ),
+      );
     }
     return Navigator.push(
         context, MaterialPageRoute(builder: (context) => route));
   }
 
   static Future<T?> slideLeft<T extends Object?>(
-      BuildContext context, Widget route) {
+    BuildContext context,
+    Widget route,
+    String? emailOrPhone,
+    OTPProviderModel? provider,
+    bool isPhone,
+  ) {
     if (_isMailVerifiedRoute(route)) {
-      return Navigator.push(context, _leftTransition<T>(otpRoute(context)));
+      return Navigator.push(
+        context,
+        _leftTransition<T>(
+          otpRoute(
+            context,
+            emailOrPhone,
+            getProvider(isPhone, provider),
+          ),
+        ),
+      );
     }
 
     return Navigator.push(context, _leftTransition<T>(route));
   }
 
+  static OTPProviderModel? getProvider(
+      bool isPhone, OTPProviderModel? provider) {
+    return isPhone
+        ? provider ?? AppConfig.businessSettingsData.otpProviders.firstOrNull
+        : null;
+  }
+
   static Future<T?> slideRight<T extends Object?>(
-      BuildContext context, Widget route) {
+    BuildContext context,
+    Widget route,
+    String? emailOrPhone,
+    OTPProviderModel? provider,
+    bool isPhone,
+  ) {
     if (_isMailVerifiedRoute(route)) {
-      return Navigator.push(context, _rightTransition<T>(otpRoute(context)));
+      return Navigator.push(
+        context,
+        _rightTransition<T>(
+          otpRoute(
+            context,
+            emailOrPhone,
+            getProvider(isPhone, provider),
+          ),
+        ),
+      );
     }
     return Navigator.push(context, _rightTransition<T>(route));
   }

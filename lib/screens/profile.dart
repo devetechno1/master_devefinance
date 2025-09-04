@@ -326,7 +326,15 @@ class _ProfileState extends State<Profile> {
               buildBottomVerticalCardListItem(AppImages.products,
                   'top_selling_products_ucf'.tr(context: context),
                   onPressed: () {
-                AIZRoute.push(context, TopSellingProducts());
+                final bool isPhone = user_phone.$.trim().isNotEmpty == true &&
+                    AppConfig.businessSettingsData.otpProviders.isNotEmpty;
+                AIZRoute.push(
+                  context,
+                  TopSellingProducts(),
+                  isPhone ? user_phone.$.trim() : user_email.$.trim(),
+                  null,
+                  isPhone,
+                );
               }),
               const Divider(
                 thickness: 1,
@@ -842,7 +850,17 @@ class _ProfileState extends State<Profile> {
               'edit_profile_ucf'.tr(context: context),
               is_logged_in.$
                   ? () {
-                      AIZRoute.push(context, ProfileEdit()).then((value) {
+                      final bool isPhone =
+                          user_phone.$.trim().isNotEmpty == true &&
+                              AppConfig
+                                  .businessSettingsData.otpProviders.isNotEmpty;
+                      AIZRoute.push(
+                        context,
+                        ProfileEdit(),
+                        isPhone ? user_phone.$.trim() : user_email.$.trim(),
+                        null,
+                        isPhone,
+                      ).then((value) {
                         onPopped(value);
                       });
                     }

@@ -267,11 +267,17 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
 
       Navigator.pop(context);
 
+      final bool isPhone = phone?.trim().isNotEmpty == true &&
+          AppConfig.businessSettingsData.otpProviders.isNotEmpty;
+
       await AIZRoute.push(
         context,
         ShippingInfo(
           guestCheckOutShippingAddress: postBody,
         ),
+        isPhone ? phone : email!,
+        null,
+        isPhone,
       );
     }
   }

@@ -294,12 +294,16 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
 
       guestEmail.$ = email!;
       guestEmail.save();
-
+      final bool isPhone = phone?.trim().isNotEmpty == true &&
+          AppConfig.businessSettingsData.otpProviders.isNotEmpty;
       AIZRoute.push(
         context,
         ShippingInfo(
           guestCheckOutShippingAddress: postBody,
         ),
+        isPhone ? phone : email!,
+        null,
+        isPhone,
       );
     }
   }
