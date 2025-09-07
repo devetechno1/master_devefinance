@@ -12,6 +12,8 @@ extension StringHelperEx on String {
     return padLeft(defaultLength, '0');
   }
 
+  String get langCode => isRTL ? "eg" : "en";
+
   bool get isRTL => intl.Bidi.detectRtlDirectionality(this);
 
   TextDirection get direction => isRTL ? TextDirection.rtl : TextDirection.ltr;

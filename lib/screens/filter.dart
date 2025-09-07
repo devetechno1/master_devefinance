@@ -76,9 +76,7 @@ class _FilterState extends State<Filter> {
 
   //--------------------
   final List<dynamic> _filterBrandList = [];
-  bool _filteredBrandsCalled = false;
   final List<dynamic> _filterCategoryList = [];
-  bool _filteredCategoriesCalled = false;
 
   final List<dynamic> _searchSuggestionList = [];
 
@@ -108,7 +106,6 @@ class _FilterState extends State<Filter> {
   fetchFilteredBrands() async {
     final filteredBrandResponse = await BrandRepository().getFilterPageBrands();
     _filterBrandList.addAll(filteredBrandResponse.brands!);
-    _filteredBrandsCalled = true;
     setState(() {});
   }
 
@@ -116,7 +113,6 @@ class _FilterState extends State<Filter> {
     final filteredCategoriesResponse =
         await CategoryRepository().getFilterPageCategories();
     _filterCategoryList.addAll(filteredCategoriesResponse.categories!);
-    _filteredCategoriesCalled = true;
     setState(() {});
   }
 
@@ -339,41 +335,38 @@ class _FilterState extends State<Filter> {
     return items;
   }
 
-  Container buildProductLoadingContainer() {
+  Widget buildProductLoadingContainer() {
+    if (_totalProductData != _productList.length) return const SizedBox();
     return Container(
       height: _showProductLoadingContainer ? 36 : 0,
       width: double.infinity,
       color: Colors.white,
       child: Center(
-        child: Text(_totalProductData == _productList.length
-            ? 'no_more_products_ucf'.tr(context: context)
-            : 'loading_more_products_ucf'.tr(context: context)),
+        child: Text('no_more_products_ucf'.tr(context: context)),
       ),
     );
   }
 
-  Container buildBrandLoadingContainer() {
+  Widget buildBrandLoadingContainer() {
+    if (_totalBrandData != _brandList.length) return const SizedBox();
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,
       color: Colors.white,
       child: Center(
-        child: Text(_totalBrandData == _brandList.length
-            ? 'no_more_brands_ucf'.tr(context: context)
-            : 'loading_more_brands_ucf'.tr(context: context)),
+        child: Text('no_more_brands_ucf'.tr(context: context)),
       ),
     );
   }
 
-  Container buildShopLoadingContainer() {
+  Widget buildShopLoadingContainer() {
+    if (_totalShopData != _shopList.length) return const SizedBox();
     return Container(
       height: _showShopLoadingContainer ? 36 : 0,
       width: double.infinity,
       color: Colors.white,
       child: Center(
-        child: Text(_totalShopData == _shopList.length
-            ? 'no_more_shops_ucf'.tr(context: context)
-            : 'loading_more_shops_ucf'.tr(context: context)),
+        child: Text('no_more_shops_ucf'.tr(context: context)),
       ),
     );
   }
@@ -722,6 +715,7 @@ class _FilterState extends State<Filter> {
                       : const EdgeInsets.symmetric(
                           vertical: 5.0, horizontal: 0.0),
                   child: TypeAheadField<SearchSuggestionResponse>(
+                    controller: _searchController,
                     suggestionsCallback: (pattern) async {
                       //return await BackendService.getSuggestions(pattern);
                       final suggestions = await SearchRepository()
@@ -773,12 +767,7 @@ class _FilterState extends State<Filter> {
                         ),
                       );
                     },
-                    onSelected: (dynamic suggestion) {
-                      _searchController.text = suggestion.query;
-                      _searchKey = suggestion.query;
-                      setState(() {});
-                      _onSearchSubmit();
-                    },
+                    onSelected: (s) => onSearch(s.query ?? ''),
                     builder: (context, controller, focusNode) {
                       searchedWord = controller.text;
                       return TextField(
@@ -786,6 +775,7 @@ class _FilterState extends State<Filter> {
                         focusNode: focusNode,
                         obscureText: false,
                         onChanged: (value) => searchedWord = value,
+                        onSubmitted: onSearch,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: MyTheme.white,
@@ -823,6 +813,13 @@ class _FilterState extends State<Filter> {
           //       _onSearchSubmit();
           //     }),
         ]);
+  }
+
+  void onSearch(String query) {
+    _searchController.text = query;
+    _searchKey = query;
+    setState(() {});
+    _onSearchSubmit();
   }
 
   Directionality buildFilterDrawer() {
@@ -1128,6 +1125,8 @@ class _FilterState extends State<Filter> {
           child: ShimmerHelper()
               .buildProductGridShimmer(scontroller: _scrollController));
     } else if (_productList.isNotEmpty) {
+      final bool hasMoreProducts =
+          (_totalProductData ?? 0) > _productList.length;
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: Theme.of(context).primaryColor,
@@ -1145,7 +1144,9 @@ class _FilterState extends State<Filter> {
               MasonryGridView.count(
                 // 2
                 //addAutomaticKeepAlives: true,
-                itemCount: _productList.length,
+                itemCount: hasMoreProducts
+                    ? _productList.length + 2
+                    : _productList.length,
                 controller: _scrollController,
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
@@ -1158,6 +1159,9 @@ class _FilterState extends State<Filter> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+                  if (index >= _productList.length) {
+                    return ShimmerHelper.shimmerInGrid(index);
+                  }
                   // 3
                   return ProductCard(
                     id: _productList[index].id,
@@ -1202,6 +1206,7 @@ class _FilterState extends State<Filter> {
           child: ShimmerHelper()
               .buildSquareGridShimmer(scontroller: _scrollController));
     } else if (_brandList.isNotEmpty) {
+      final bool hasMoreBrands = (_totalBrandData ?? 0) > _brandList.length;
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: Theme.of(context).primaryColor,
@@ -1219,7 +1224,7 @@ class _FilterState extends State<Filter> {
               GridView.builder(
                 // 2
                 //addAutomaticKeepAlives: true,
-                itemCount: _brandList.length,
+                itemCount: _brandList.length + (hasMoreBrands ? 2 : 0),
                 controller: _scrollController,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -1234,6 +1239,9 @@ class _FilterState extends State<Filter> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+                  if (index >= _brandList.length) {
+                    return ShimmerHelper.shimmerInGrid(index);
+                  }
                   // 3
                   return BrandSquareCard(
                     id: _brandList[index].id,
@@ -1273,6 +1281,7 @@ class _FilterState extends State<Filter> {
           child: ShimmerHelper()
               .buildSquareGridShimmer(scontroller: _scrollController));
     } else if (_shopList.isNotEmpty) {
+      final bool hasMoreShops = (_totalShopData ?? 0) > _shopList.length;
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: Theme.of(context).primaryColor,
@@ -1290,7 +1299,7 @@ class _FilterState extends State<Filter> {
               GridView.builder(
                 // 2
                 //addAutomaticKeepAlives: true,
-                itemCount: _shopList.length,
+                itemCount: _shopList.length + (hasMoreShops ? 2 : 0),
                 controller: _scrollController,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -1305,6 +1314,9 @@ class _FilterState extends State<Filter> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+                  if (index >= _shopList.length) {
+                    return ShimmerHelper.shimmerInGrid(index);
+                  }
                   // 3
                   return ShopSquareCard(
                     id: _shopList[index].id,

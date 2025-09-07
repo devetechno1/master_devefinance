@@ -5,10 +5,38 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.33'`
+- `mobileVersion = '9.10.34'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.34 – Search & Filter UX polish</strong></summary>
+
+### Helpers
+- Extracted `shimmerInGrid(int)` in `lib/helpers/shimmer_helper.dart` and reused in grids.
+
+### Search
+- `lib/repositories/search_repository.dart`
+  - GET `${AppConfig.BASE_URL}/get-search-suggestions?query_key=<q>&type=<type>`
+  - Header: `App-Language` now dynamic:
+    - If `query_key` non-empty → `query_key.langCode`
+    - Else → `app_language.$!`
+  - Response schema unchanged. Expected codes: 200 / 4xx / 5xx (unchanged).
+
+### Filter Screen
+- Unified loading containers to show “no more …” only when data finished.
+- Show shimmer placeholders at the end of lists while loading more.
+- TypeAhead wired with controller and submit via `onSearch`.
+
+### i18n
+- No new keys. Stopped using `loading_more_*_ucf` in filter.
+
+### Must Update (Stores)
+- No.
+</details>
+
+
 <details>
 <summary><strong>AV 9.10.33 – Product details description render fix</strong></summary>
 

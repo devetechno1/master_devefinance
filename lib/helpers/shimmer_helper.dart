@@ -106,16 +106,20 @@ class ShimmerHelper {
             top: AppDimensions.paddingLarge, bottom: 10, left: 18, right: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return Shimmer.fromColors(
-            baseColor: MyTheme.shimmer_base,
-            highlightColor: MyTheme.shimmer_highlighted,
-            child: Container(
-              height: (index + 1) % 2 != 0 ? 250 : 300,
-              width: double.infinity,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-            ),
-          );
+          return shimmerInGrid(index);
         });
+  }
+
+  static Shimmer shimmerInGrid(int index) {
+    return Shimmer.fromColors(
+      baseColor: MyTheme.shimmer_base,
+      highlightColor: MyTheme.shimmer_highlighted,
+      child: Container(
+        height: (index + 1) % 2 != 0 ? 250 : 300,
+        width: double.infinity,
+        decoration: BoxDecorations.buildBoxDecoration_1(),
+      ),
+    );
   }
 
   GridView buildCategoryCardShimmer({is_base_category}) {
