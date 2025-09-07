@@ -487,6 +487,7 @@ const Map<String, String> enLangs = {
       "Please log in to see the wishlist items",
   "enter_email": "Enter email",
   "enter_phone_number": "Enter phone number",
+  "please_select_otp_provider": "Please select an OTP provider.",
   "enter_password": "Enter password",
   "or_login_with_a_phone": "or, Login with a phone number",
   "or_login_with_an_email": "or, Login with an email",

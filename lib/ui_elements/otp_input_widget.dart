@@ -38,6 +38,14 @@ class OtpInputController extends ChangeNotifier {
 
   Future<String?> listenOnceUserConsent() async {
     if (!Platform.isAndroid) return null;
+    try {
+      return await _listenOnceUserConsent();
+    } catch (e) {
+      return await _listenOnceUserConsent();
+    }
+  }
+
+  Future<String?> _listenOnceUserConsent() async {
     final res = await _smartAuth.getSmsWithUserConsentApi();
     if (res.hasData) {
       final data = res.requireData;
@@ -77,12 +85,14 @@ class OtpInputWidget extends StatelessWidget {
     this.onCompleted,
     this.onChanged,
     this.autofocus = true,
+    required this.isDigitOnly,
   });
 
   final OtpInputController controller;
   final void Function(String)? onCompleted;
   final void Function(String)? onChanged;
   final bool autofocus;
+  final bool isDigitOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -104,12 +114,15 @@ class OtpInputWidget extends StatelessWidget {
         focusNode: controller.focusNode,
         defaultPinTheme: defaultTheme,
         crossAxisAlignment: CrossAxisAlignment.center,
-        separatorBuilder: (index) => const SizedBox(width: AppDimensions.paddingNormal),
+        separatorBuilder: (index) =>
+            const SizedBox(width: AppDimensions.paddingNormal),
         autofocus: autofocus,
         // iOS hint
         autofillHints: const [AutofillHints.oneTimeCode],
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        keyboardType: isDigitOnly ? TextInputType.number : TextInputType.text,
+        inputFormatters: [
+          if (isDigitOnly) FilteringTextInputFormatter.digitsOnly,
+        ],
         onChanged: onChanged,
         onCompleted: onCompleted,
       ),

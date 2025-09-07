@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -147,12 +148,17 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
 
       guestEmail.$ = email!;
       guestEmail.save();
+      final bool isPhone = phone?.trim().isNotEmpty == true &&
+          AppConfig.businessSettingsData.otpProviders.isNotEmpty;
       AIZRoute.push(
         context,
         ShippingInfo(
           // this is only for when guest checkout shipping address to calculate shipping cost
           guestCheckOutShippingAddress: postBody,
         ),
+        isPhone ? phone! : email!,
+        null,
+        isPhone,
       );
     }
   }
@@ -547,7 +553,13 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          AIZRoute.push(context, const Login());
+                          AIZRoute.push(
+                            context,
+                            const Login(),
+                            null,
+                            null,
+                            false,
+                          );
                         },
                       text: 'login_ucf'.tr(context: context),
                       style: TextStyle(

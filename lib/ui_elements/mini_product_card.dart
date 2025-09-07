@@ -206,7 +206,6 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MiniProductCard extends StatefulWidget {
   final int? id;
@@ -242,7 +241,6 @@ class MiniProductCard extends StatefulWidget {
 class _MiniProductCardState extends State<MiniProductCard> {
   @override
   Widget build(BuildContext context) {
-    final double ratingValue = (widget.rating ?? 0).toDouble().clamp(0, 5);
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {

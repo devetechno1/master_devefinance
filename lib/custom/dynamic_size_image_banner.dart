@@ -34,9 +34,10 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
     final Image image = Image.network(widget.photo ?? '');
     image.image.resolve(const ImageConfiguration()).addListener(
       ImageStreamListener((ImageInfo info, bool _) {
-        setState(() {
-          _aspectRatio = info.image.width / info.image.height;
-        });
+        if (mounted)
+          setState(() {
+            _aspectRatio = info.image.width / info.image.height;
+          });
       }),
     );
   }

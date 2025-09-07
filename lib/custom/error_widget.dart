@@ -38,7 +38,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
       error = widget.errorMessage.toString();
     }
     return PopScope(
-      canPop: widget.canPop,
+      canPop: widget.canPop && Navigator.canPop(context),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(AppDimensions.paddingDefault),

@@ -15,7 +15,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../../app_config.dart';
 import '../../data_model/otp_provider_model.dart';
 import '../../repositories/address_repository.dart';
-import 'login.dart';
+import '../../ui_elements/select_otp_provider_widget.dart';
 
 class PasswordForget extends StatefulWidget {
   @override
@@ -23,9 +23,9 @@ class PasswordForget extends StatefulWidget {
 }
 
 class _PasswordForgetState extends State<PasswordForget> {
-  OTPProviderModel? provider;
-  String _send_code_by =
-      otp_addon_installed.$ ? "phone" : "email"; //phone or email
+  OTPProviderModel? provider =
+      AppConfig.businessSettingsData.otpProviders.firstOrNull;
+  String _send_code_by = otp_addon_installed.$ ? "phone" : "email";
   String? _phone = "";
   var countries_code = <String?>[];
   //controllers
@@ -58,12 +58,20 @@ class _PasswordForgetState extends State<PasswordForget> {
         isError: true,
       );
       return;
-    } else if (_send_code_by == 'phone' && _phone == "") {
-      ToastComponent.showDialog(
-        'enter_phone_number'.tr(context: context),
-        isError: true,
-      );
-      return;
+    } else if (_send_code_by == 'phone') {
+      if (_phone?.trim().isNotEmpty != true) {
+        ToastComponent.showDialog(
+          'enter_phone_number'.tr(context: context),
+          isError: true,
+        );
+        return;
+      } else if (provider == null) {
+        ToastComponent.showDialog(
+          'please_select_otp_provider'.tr(context: context),
+          isError: true,
+        );
+        return;
+      }
     }
     final passwordForgetResponse =
         await AuthRepository().getPasswordForgetResponse(
@@ -86,7 +94,7 @@ class _PasswordForgetState extends State<PasswordForget> {
         return PasswordOtp(
           verify_by: _send_code_by,
           email_or_code: _send_code_by == 'email' ? email : _phone,
-          otpProvider: provider?.type,
+          provider: provider,
         );
       }));
     }
@@ -217,7 +225,6 @@ class _PasswordForgetState extends State<PasswordForget> {
                         onTap: () {
                           setState(() {
                             _send_code_by = "email";
-                            provider = null;
                           });
                         },
                         child: Text(
@@ -229,33 +236,9 @@ class _PasswordForgetState extends State<PasswordForget> {
                         ),
                       ),
                       const SizedBox(height: AppDimensions.paddingDefault),
-                      SizedBox(
-                        width: double.maxFinite,
-                        child: Wrap(
-                          runAlignment: WrapAlignment.center,
-                          alignment: WrapAlignment.spaceAround,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: AppDimensions.paddingDefault,
-                          runSpacing: AppDimensions.paddingLarge,
-                          children: List.generate(
-                            AppConfig.businessSettingsData.otpProviders.length,
-                            (i) {
-                              final OTPProviderModel otpProvider = AppConfig
-                                  .businessSettingsData.otpProviders[i];
-
-                              final String providerName =
-                                  otpProvider.sendOTPText ?? "OTP";
-                              return LoginWith3rd(
-                                onTap: () =>
-                                    setState(() => provider = otpProvider),
-                                isSelected: provider == otpProvider,
-                                name: providerName,
-                                networkImage: otpProvider.image,
-                                assetImage: AppImages.otp,
-                              );
-                            },
-                          ),
-                        ),
+                      SelectOTPProviderWidget(
+                        selectedProvider: provider,
+                        onSelect: (val) => setState(() => provider = val),
                       ),
                     ],
                   ),

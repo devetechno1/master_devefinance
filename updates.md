@@ -5,10 +5,56 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.31'`
+- `mobileVersion = '9.10.33'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.33 – Product details description render fix</strong></summary>
+
+### Bug Fix
+- Ensure product **description** height is measured only **after** the HTML is injected and the first frame is rendered.
+- Removed artificial delay from `getDescriptionHeight()` and eliminated early post-frame measure in `initState`.
+- Effect: fixes cases where the description collapsed (height=0) and remained invisible on first open.
+
+### UX / Stability
+- `HomePresenter`: safer load-more condition when `totalAllProductData` is null.
+- `MiniProductCard`: remove unused rating import/variable to keep `flutter analyze` clean.
+
+### API / Store
+- **No endpoint changes**.
+- **must update in play store or apple store: yes** (fixing a Flutter client bug against a working endpoint).
+
+</details>
+
+
+<details>
+<summary><strong>AV 9.10.32 – Multi-OTP provider flow & safer navigation</strong></summary>
+
+### Auth / OTP
+- Added optional OTP provider support across **registration**, **login**, **password reset**, and **guest checkout** flows.
+- `Otp` screen now accepts `isPhone`, `emailOrPhone`, and initial `provider` and auto-submits on completion.
+- Android: resilient SMS User Consent (retry on failure); iOS keeps one-time-code hint.
+- Resend timer increased to **90s**.
+
+### Routing / UX
+- `AIZRoute.push/slideLeft/slideRight` extended to accept OTP context (`emailOrPhone`, `provider`, `isPhone`) and auto-redirect to OTP when needed.
+- Error screen back behavior hardened: respects `Navigator.canPop(context)` before allowing pop.
+
+### i18n
+- New key: `please_select_otp_provider` (en/ar).
+
+### API / Store
+- **POST** `/auth/signup` — client optionally sends `"otp_provider"` when `mustOtp` is enabled. Expected: `200 OK` or validation errors.
+- **GET** `/auth/resend_code` — now supports query `?otp_provider={type}` when provided. Expected: `200 OK` (boolean `result` + `message`).
+- must update in play store or apple store: **no** (client-side flow & UX only; optional request fields).
+
+### Notes
+- **Breaking (internal):** Call sites that navigate to OTP should use the new `AIZRoute` signatures or pass `null`/`false` defaults.
+- Widgets: new reusable `SelectOTPProviderWidget`; `OtpInputWidget` gains `isDigitOnly`.
+
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.31 – OTP input revamp & Flutter 3.35.2 polish</strong></summary>

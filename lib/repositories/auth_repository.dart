@@ -155,12 +155,15 @@ class AuthRepository {
     String password,
     String passowrdConfirmation,
     String capchaKey,
+    String? provider,
   ) async {
     final postBody = jsonEncode({
       "name": "$name",
       if (email?.trim().isNotEmpty == true) "email": "$email",
       "phone": "$phone",
       "password": "$password",
+      if (AppConfig.businessSettingsData.mustOtp && provider != null)
+        "otp_provider": provider,
       if (AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
       "password_confirmation": "$passowrdConfirmation",
       "g-recaptcha-response": "$capchaKey",
@@ -179,8 +182,9 @@ class AuthRepository {
     return loginResponseFromJson(response.body);
   }
 
-  Future<ResendCodeResponse> getResendCodeResponse() async {
-    const String url = ("${AppConfig.BASE_URL}/auth/resend_code");
+  Future<ResendCodeResponse> getResendCodeResponse(String? provider) async {
+    final String url =
+        ("${AppConfig.BASE_URL}/auth/resend_code${provider != null ? "?otp_provider=$provider" : ''}");
     final response = await ApiRequest.get(
       url: url,
       headers: {

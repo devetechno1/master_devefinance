@@ -15,18 +15,20 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:one_context/one_context.dart';
 import 'package:timer_count_down/timer_controller.dart';
 
+import '../../data_model/otp_provider_model.dart';
 import '../../ui_elements/otp_input_widget.dart';
+import '../../ui_elements/select_otp_provider_widget.dart';
 
 class PasswordOtp extends StatefulWidget {
   const PasswordOtp({
     Key? key,
     this.verify_by = "email",
     this.email_or_code,
-    this.otpProvider,
+    this.provider,
   }) : super(key: key);
   final String verify_by;
   final String? email_or_code;
-  final String? otpProvider;
+  final OTPProviderModel? provider;
 
   @override
   _PasswordOtpState createState() => _PasswordOtpState();
@@ -36,6 +38,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
   //controllers
   String _code = '';
   final OtpInputController otpCtrl = OtpInputController();
+  OTPProviderModel? selectedProvider;
 
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
@@ -50,6 +53,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
 
   @override
   void initState() {
+    selectedProvider = widget.provider;
     otpCtrl.listenOnceUserConsent();
     Future.delayed(Duration.zero).then((value) {
       headeText = 'enter_the_code_sent'.tr(context: context);
@@ -133,10 +137,10 @@ class _PasswordOtpState extends State<PasswordOtp> {
         await AuthRepository().getPasswordForgetResponse(
       widget.email_or_code,
       widget.verify_by,
-      widget.otpProvider,
+      selectedProvider?.type,
     );
 
-    if (passwordResendCodeResponse.result == false) {
+    if (passwordResendCodeResponse.result != true) {
       ToastComponent.showDialog(
         passwordResendCodeResponse.message!,
         isError: true,
@@ -225,6 +229,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                       height: 55,
                       child: OtpInputWidget(
                         controller: otpCtrl,
+                        isDigitOnly: widget.verify_by != "email",
                         onChanged: (val) => _code = val,
                       ),
                     ),
@@ -325,8 +330,17 @@ class _PasswordOtpState extends State<PasswordOtp> {
                 ],
               ),
             ),
+            const SizedBox(height: 50),
+            if (_verify_by != 'email')
+              SelectOTPProviderWidget(
+                margin: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingExtraLarge,
+                ),
+                selectedProvider: selectedProvider,
+                onSelect: (val) => setState(() => selectedProvider = val),
+              ),
             Padding(
-              padding: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.only(top: AppDimensions.paddingDefault),
               child: InkWell(
                 onTap: canResend ? onTapResend : null,
                 child: Text('resend_code_ucf'.tr(context: context),
