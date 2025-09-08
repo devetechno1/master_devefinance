@@ -24,6 +24,7 @@ class CustomErrorWidget extends StatefulWidget {
 class _CustomErrorWidgetState extends State<CustomErrorWidget> {
   bool _goingUp = true;
 
+
   @override
   Widget build(BuildContext context) {
     String error = '';
@@ -37,8 +38,12 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
     } else {
       error = widget.errorMessage.toString();
     }
+    final bool canPop = widget.canPop && Navigator.canPop(context);
     return PopScope(
-      canPop: widget.canPop && Navigator.canPop(context),
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!canPop) context.go('/');
+      },
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(AppDimensions.paddingDefault),

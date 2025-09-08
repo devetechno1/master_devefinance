@@ -9,7 +9,7 @@ import '../my_theme.dart';
 import '../screens/main.dart';
 
 class UsefulElements {
-  static IconButton backButton({color = 'black'}) {
+  static IconButton backButton({color = 'black', void Function()? onPressed}) {
     return IconButton(
       padding: EdgeInsets.zero,
       icon: Icon(
@@ -17,7 +17,7 @@ class UsefulElements {
               ? CupertinoIcons.arrow_right
               : CupertinoIcons.arrow_left,
           color: color == 'white' ? Colors.white : MyTheme.dark_font_grey),
-      onPressed: () => Navigator.pop(OneContext().context!),
+      onPressed: onPressed ?? () => Navigator.pop(OneContext().context!),
     );
   }
 

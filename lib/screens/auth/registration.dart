@@ -175,7 +175,7 @@ class _RegistrationState extends State<Registration> {
       ToastComponent.showDialog(
         signupResponse.message,
       );
-      AuthHelper().setUserData(signupResponse);
+      await AuthHelper().setUserData(signupResponse);
 
       // redirect to main
       // Navigator.pushAndRemoveUntil(context,
@@ -226,7 +226,7 @@ class _RegistrationState extends State<Registration> {
         OneContext().context!.push("/");
         await Future.delayed(Duration.zero);
         if (AppConfig.businessSettingsData.sellerWiseShipping) {
-          homeData.handleAddressNavigation();
+          homeData.handleAddressNavigation(true);
         }
 
         // Navigator.push(context, MaterialPageRoute(builder: (context) {

@@ -333,7 +333,7 @@ class _CheckoutState extends State<Checkout> {
       Loading.close();
 
       // after creating  guest user save to auth helper
-      AuthHelper().setUserData(guestUserAccountCreateResponse);
+      await AuthHelper().setUserData(guestUserAccountCreateResponse);
 
       if (!guestUserAccountCreateResponse.result!) {
         ToastComponent.showDialog(

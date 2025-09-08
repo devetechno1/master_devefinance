@@ -83,25 +83,26 @@ class _BlogListScreenState extends State<BlogListScreen> {
                 end: AppDimensions.paddingDefault),
             child: UsefulElements.backButton(color: "black"),
           ),
-          Container(
-            padding:
-                const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
-            width: DeviceInfo(context).width! / 2,
-            child: Text(
-              'all_blogs_ucf'.tr(context: context),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Expanded(
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
+              child: Text(
+                'all_blogs_ucf'.tr(context: context),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-          SizedBox(
-              width: 20,
-              child: GestureDetector(
-                  onTap: () {
-                    _showSearchBar = true;
-                    setState(() {});
-                  },
-                  child: Image.asset(AppImages.search)))
+          // SizedBox(
+          //     width: 20,
+          //     child: GestureDetector(
+          //         onTap: () {
+          //           _showSearchBar = true;
+          //           setState(() {});
+          //         },
+          //         child: Image.asset(AppImages.search)))
         ],
       ),
     );

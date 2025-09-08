@@ -5,10 +5,38 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.34'`
+- `mobileVersion = '9.10.35'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.35 – Address & Auth UX hardening</strong></summary>
+
+### Highlights
+- Safe back navigation with `PopScope`: fallback to Home when users cannot pop.
+- Global `Directionality` at app root; removed redundant screen wrappers.
+- Address workflow:
+  - Awaited auth persistence to avoid race conditions.
+  - Prefetch addresses post-login/OTP/registration/guest flows.
+  - Auto-redirect to Address screen only when required; back can be blocked until a default address is set.
+  - Immediate in-memory default address assignment on selection.
+  - Logout now clears default address state.
+
+### UI/UX
+- Filter: compact sort dialog (RadioGroup), AppBar polish, consistent borders; better search suggestion subtitles and text direction.
+- Blog list: prevent title overflow.
+- Profile: correct text direction for name/phone, safer loading dialog context.
+- Misc: Useful `backButton(onPressed)`, home app bar address tap fixed, pagination guard formatting.
+
+### API / Backend
+- No endpoint or schema changes.
+
+### Must Update (Stores)
+- **Yes** – fixes user-visible navigation/state issues after login and ensures address requirement flow works reliably.
+</details>
+
+
 
 <details>
 <summary><strong>AV 9.10.34 – Search & Filter UX polish</strong></summary>

@@ -95,16 +95,22 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
       return onError(response.message);
     }
 
-    AuthHelper().setUserData(response);
-    await saveFCMToken();
+    await AuthHelper().setUserData(response);
+
+    Future.wait([
+      saveFCMToken(),
+      homeData.fetchAddressLists(false, false),
+    ]);
 
     Loading.close();
+
+    final bool needHandleAddress = homeData.needHandleAddressNavigation();
+    if (needHandleAddress) return;
+
     context.go("/");
     await Future.delayed(Duration.zero);
 
     ToastComponent.showDialog(response.message!);
-
-    homeData.fetchAddressLists(false);
   }
 
   Future<void> onTapResend() async {

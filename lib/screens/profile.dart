@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/unRead_notification_counter.dart';
@@ -76,7 +77,7 @@ class _ProfileState extends State<Profile> {
   String _wishlistCounterString = "00";
   int? _orderCounter = 0;
   String _orderCounterString = "00";
-  late BuildContext loadingcontext;
+  late BuildContext loadingContext;
 
   @override
   void initState() {
@@ -136,7 +137,7 @@ class _ProfileState extends State<Profile> {
 
     if (response.result) {
       AuthHelper().clearUserData();
-      Navigator.pop(loadingcontext);
+      Navigator.pop(loadingContext);
       context.go("/");
     }
     ToastComponent.showDialog(response.message);
@@ -875,7 +876,7 @@ class _ProfileState extends State<Profile> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const AddressScreen();
+                            return const AddressScreen(goHome: false);
                           },
                         ),
                       );
@@ -1303,46 +1304,49 @@ class _ProfileState extends State<Profile> {
               Text(
                 "${user_name.$}",
                 style: const TextStyle(
-                    fontSize: 14,
-                    color: MyTheme.white,
-                    fontWeight: FontWeight.w600),
+                  fontSize: 14,
+                  color: MyTheme.white,
+                  fontWeight: FontWeight.w600,
+                ),
+                textDirection: "${user_name.$}".direction,
               ),
               Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
-                    //if user email is not available then check user phone if user phone is not available use empty string
-                    "${user_phone.$.trim().isEmpty ? user_email.$ : user_phone.$}",
-                    // "${user_email.$ != "" ? user_email.$ : user_phone.$ != "" ? user_phone.$ : ''}",
-                    style: const TextStyle(
-                      color: MyTheme.light_grey,
-                    ),
-                  )),
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Text(
+                  "${user_phone.$.trim().isEmpty ? user_email.$ : user_phone.$}",
+                  // "${user_email.$ != "" ? user_email.$ : user_phone.$ != "" ? user_phone.$ : ''}",
+                  style: const TextStyle(color: MyTheme.light_grey),
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
             ],
           )
         : Text(
             'login_or_reg'.tr(context: context),
             style: const TextStyle(
-                fontSize: 14,
-                color: MyTheme.white,
-                fontWeight: FontWeight.bold),
+              fontSize: 14,
+              color: MyTheme.white,
+              fontWeight: FontWeight.bold,
+            ),
           );
   }
 
-  loading() {
+  void loading() {
     showDialog(
         context: context,
         builder: (context) {
-          loadingcontext = context;
+          loadingContext = context;
           return AlertDialog(
-              content: Row(
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(
-                width: 10,
-              ),
-              Text("${'please_wait_ucf'.tr(context: context)}"),
-            ],
-          ));
+            content: Row(
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text("${'please_wait_ucf'.tr(context: context)}"),
+              ],
+            ),
+          );
         });
   }
 }

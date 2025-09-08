@@ -38,31 +38,27 @@ class CategoryList extends StatefulWidget {
 class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection:
-          app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-      child: Stack(children: [
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: PreferredSize(
-            child: buildAppBar(context),
-            preferredSize: Size(
-              DeviceInfo(context).width!,
-              50,
-            ),
+    return Stack(children: [
+      Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PreferredSize(
+          child: buildAppBar(context),
+          preferredSize: Size(
+            DeviceInfo(context).width!,
+            50,
           ),
-          body: buildBody(),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: widget.is_base_category || widget.is_top_category
-              ? Container(
-                  height: 0,
-                )
-              : buildBottomContainer(),
-        )
-      ]),
-    );
+        body: buildBody(),
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: widget.is_base_category || widget.is_top_category
+            ? Container(
+                height: 0,
+              )
+            : buildBottomContainer(),
+      )
+    ]);
   }
 
   Widget buildBody() {

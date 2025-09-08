@@ -216,7 +216,7 @@ var routes = GoRouter(
           GoRoute(
               path: "address",
               pageBuilder: (BuildContext context, GoRouterState state) =>
-                  const MaterialPage(child: AddressScreen())),
+                  const MaterialPage(child: AddressScreen(goHome: false))),
           GoRoute(
               path: "auction-products",
               pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -385,7 +385,11 @@ class MyMaterialApp extends StatelessWidget {
           builder: (context, child) {
             if (AppConfig.turnDevicePreviewOn)
               child = DevicePreview.appBuilder(context, child);
-            return OneContext().builder(context, child);
+            return Directionality(
+              textDirection:
+                  app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+              child: OneContext().builder(context, child),
+            );
           },
           theme: appTheme(theme),
           localizationsDelegates: const [

@@ -108,16 +108,20 @@ class _LoginState extends State<Login> {
 
       print("in the success block ");
 
-      AuthHelper().setUserData(loginResponse);
+      await AuthHelper().setUserData(loginResponse);
 
       await Future.wait([
         // push notification starts
         saveFCMToken(),
-        homeData.fetchAddressLists(false),
+        homeData.fetchAddressLists(false, false),
       ]);
 
       Loading.close();
       ToastComponent.showDialog(loginResponse.message!);
+
+      final bool needHandleAddress =
+          homeData.needHandleAddressNavigation();
+      if (needHandleAddress) return;
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
@@ -215,15 +219,19 @@ class _LoginState extends State<Login> {
     } else {
       print("in the success block ");
 
-      AuthHelper().setUserData(loginResponse);
+      await AuthHelper().setUserData(loginResponse);
 
       await Future.wait([
         // push notification starts
         saveFCMToken(),
+        homeData.fetchAddressLists(false, false),
       ]);
 
       Loading.close();
       ToastComponent.showDialog(loginResponse.message!);
+
+      final bool needHandleAddress = homeData.needHandleAddressNavigation();
+      if (needHandleAddress) return;
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
@@ -231,9 +239,6 @@ class _LoginState extends State<Login> {
       } else {
         goOTPOrHome(loginResponse);
       }
-
-      await Future.delayed(Duration.zero);
-      homeData.fetchAddressLists(false);
     }
   }
 
@@ -262,7 +267,7 @@ class _LoginState extends State<Login> {
             loginResponse.message!,
           );
 
-          AuthHelper().setUserData(loginResponse);
+          await AuthHelper().setUserData(loginResponse);
           await Future.wait([
             // push notification starts
             saveFCMToken(),
@@ -312,7 +317,7 @@ class _LoginState extends State<Login> {
         ToastComponent.showDialog(
           loginResponse.message!,
         );
-        AuthHelper().setUserData(loginResponse);
+        await AuthHelper().setUserData(loginResponse);
         await Future.wait([
           // push notification starts
           saveFCMToken(),
@@ -433,7 +438,7 @@ class _LoginState extends State<Login> {
         ToastComponent.showDialog(
           loginResponse.message!,
         );
-        AuthHelper().setUserData(loginResponse);
+        await AuthHelper().setUserData(loginResponse);
         await Future.wait([
           // push notification starts
           saveFCMToken(),

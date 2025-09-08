@@ -51,7 +51,7 @@ class AddressAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: homeData.handleAddressNavigation,
+      onTap: () => homeData.handleAddressNavigation(false),
       child: Container(
         height: 40,
         padding: const EdgeInsets.symmetric(

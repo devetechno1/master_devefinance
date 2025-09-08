@@ -5,6 +5,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/reg_ex_inpur_formatter.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/brand_repository.dart';
@@ -389,7 +390,7 @@ class _FilterState extends State<Filter> {
                   ? buildBrandList()
                   : buildShopList()),
           Positioned(
-            top: 10.0,
+            top: 0.0,
             left: 0.0,
             right: 0.0,
             child: buildAppBar(context),
@@ -408,19 +409,22 @@ class _FilterState extends State<Filter> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-        backgroundColor: MyTheme.mainColor.withValues(alpha: 0.95),
-        automaticallyImplyLeading: false,
-        scrolledUnderElevation: 0.0,
-        actions: [
-          Container(),
-        ],
-        centerTitle: false,
-        flexibleSpace: Padding(
-          padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
-          child: Column(
-            children: [buildTopAppbar(context), buildBottomAppBar(context)],
-          ),
-        ));
+      backgroundColor: MyTheme.mainColor.withValues(alpha: 0.95),
+      automaticallyImplyLeading: false,
+      scrolledUnderElevation: 0.0,
+      forceMaterialTransparency: false,
+      actions: const [SizedBox()],
+      centerTitle: false,
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
+        child: Column(
+          children: [
+            buildTopAppBar(context),
+            buildBottomAppBar(context),
+          ],
+        ),
+      ),
+    );
   }
 
   Row buildBottomAppBar(BuildContext context) {
@@ -430,11 +434,15 @@ class _FilterState extends State<Filter> {
         Expanded(
           child: Container(
             decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border.symmetric(
-                    vertical: BorderSide(color: MyTheme.light_grey, width: .5),
-                    horizontal:
-                        BorderSide(color: MyTheme.light_grey, width: 1))),
+              color: Colors.white,
+              border: Border.symmetric(
+                vertical: BorderSide(color: MyTheme.light_grey, width: .5),
+                horizontal: BorderSide(
+                  color: MyTheme.light_grey,
+                  width: 1,
+                ),
+              ),
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
             child: DropdownButton<WhichFilter>(
@@ -479,27 +487,24 @@ class _FilterState extends State<Filter> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: const BoxDecoration(
-                  color: Colors.white,
-                  border: Border.symmetric(
-                      vertical:
-                          BorderSide(color: MyTheme.light_grey, width: .5),
-                      horizontal:
-                          BorderSide(color: MyTheme.light_grey, width: 1))),
+                color: Colors.white,
+                border: Border.symmetric(
+                  vertical: BorderSide(
+                    color: MyTheme.light_grey,
+                    width: .5,
+                  ),
+                  horizontal: BorderSide(color: MyTheme.light_grey, width: 1),
+                ),
+              ),
               height: 36,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'filter_ucf'.tr(context: context),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(color: Colors.black, fontSize: 13),
                   ),
-                  const Icon(
-                    Icons.filter_alt_outlined,
-                    size: 13,
-                  ),
+                  const Icon(Icons.filter_alt_outlined, size: 13),
                 ],
               ),
             ),
@@ -511,149 +516,116 @@ class _FilterState extends State<Filter> {
               _selectedFilter!.option_key == "product"
                   ? showDialog(
                       context: context,
-                      builder: (_) => Directionality(
-                            textDirection: app_language_rtl.$!
-                                ? TextDirection.rtl
-                                : TextDirection.ltr,
-                            child: AlertDialog(
-                              contentPadding: const EdgeInsets.only(
-                                  top: 16.0,
-                                  left: 2.0,
-                                  right: 2.0,
-                                  bottom: 2.0),
-                              content: StatefulBuilder(builder:
-                                  (BuildContext context, StateSetter setState) {
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24.0),
-                                        child: Text(
-                                          'sort_products_by_ucf'
-                                              .tr(context: context),
-                                        )),
-                                    RadioListTile(
-                                      dense: true,
-                                      value: "",
-                                      groupValue: _selectedSort,
-                                      activeColor: MyTheme.font_grey,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      title: Text(
-                                          'default_ucf'.tr(context: context)),
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _selectedSort = value;
-                                        });
-                                        _onSortChange();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    RadioListTile(
-                                      dense: true,
-                                      value: "price_high_to_low",
-                                      groupValue: _selectedSort,
-                                      activeColor: MyTheme.font_grey,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      title: Text('price_high_to_low'
-                                          .tr(context: context)),
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _selectedSort = value;
-                                        });
-                                        _onSortChange();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    RadioListTile(
-                                      dense: true,
-                                      value: "price_low_to_high",
-                                      groupValue: _selectedSort,
-                                      activeColor: MyTheme.font_grey,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      title: Text('price_low_to_high'
-                                          .tr(context: context)),
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _selectedSort = value;
-                                        });
-                                        _onSortChange();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    RadioListTile(
-                                      dense: true,
-                                      value: "new_arrival",
-                                      groupValue: _selectedSort,
-                                      activeColor: MyTheme.font_grey,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      title: Text('new_arrival_ucf'
-                                          .tr(context: context)),
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _selectedSort = value;
-                                        });
-                                        _onSortChange();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    RadioListTile(
-                                      dense: true,
-                                      value: "popularity",
-                                      groupValue: _selectedSort,
-                                      activeColor: MyTheme.font_grey,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      title: Text('popularity_ucf'
-                                          .tr(context: context)),
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _selectedSort = value;
-                                        });
-                                        _onSortChange();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    RadioListTile(
-                                      dense: true,
-                                      value: "top_rated",
-                                      groupValue: _selectedSort,
-                                      activeColor: MyTheme.font_grey,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      title: Text(
-                                          'top_rated_ucf'.tr(context: context)),
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _selectedSort = value;
-                                        });
-                                        _onSortChange();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              }),
-                              actions: [
-                                Btn.basic(
+                      builder: (_) => AlertDialog(
+                        contentPadding: const EdgeInsets.only(
+                          top: 16.0,
+                          left: 2.0,
+                          right: 2.0,
+                          bottom: 2.0,
+                        ),
+                        content: StatefulBuilder(builder:
+                            (BuildContext context, StateSetter setState) {
+                          return RadioGroup(
+                            groupValue: _selectedSort,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedSort = value;
+                              });
+                              _onSortChange();
+                              Navigator.pop(context);
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24.0),
                                   child: Text(
-                                    'close_all_capital'.tr(context: context),
-                                    style: const TextStyle(
-                                        color: MyTheme.medium_grey),
+                                    'sort_products_by_ucf'
+                                        .tr(context: context),
                                   ),
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop();
-                                  },
+                                ),
+                                RadioListTile(
+                                  dense: true,
+                                  value: "",
+                                  activeColor: MyTheme.font_grey,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'default_ucf'.tr(context: context),
+                                  ),
+                                ),
+                                RadioListTile(
+                                  dense: true,
+                                  value: "price_high_to_low",
+                                  activeColor: MyTheme.font_grey,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'price_high_to_low'
+                                        .tr(context: context),
+                                  ),
+                                ),
+                                RadioListTile(
+                                  dense: true,
+                                  value: "price_low_to_high",
+                                  activeColor: MyTheme.font_grey,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'price_low_to_high'
+                                        .tr(context: context),
+                                  ),
+                                ),
+                                RadioListTile(
+                                  dense: true,
+                                  value: "new_arrival",
+                                  activeColor: MyTheme.font_grey,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text('new_arrival_ucf'
+                                      .tr(context: context)),
+                                ),
+                                RadioListTile(
+                                  dense: true,
+                                  value: "popularity",
+                                  activeColor: MyTheme.font_grey,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'popularity_ucf'.tr(context: context),
+                                  ),
+                                ),
+                                RadioListTile(
+                                  dense: true,
+                                  value: "top_rated",
+                                  activeColor: MyTheme.font_grey,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'top_rated_ucf'.tr(context: context),
+                                  ),
                                 ),
                               ],
                             ),
-                          ))
+                          );
+                        }),
+                        actions: [
+                          Btn.basic(
+                            child: Text(
+                              'close_all_capital'.tr(context: context),
+                              style: const TextStyle(
+                                  color: MyTheme.medium_grey),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop();
+                            },
+                          ),
+                        ],
+                      ))
                   : ToastComponent.showDialog(
                       'you_can_use_filters_while_searching_for_products'
                           .tr(context: context),
@@ -692,7 +664,7 @@ class _FilterState extends State<Filter> {
     );
   }
 
-  Row buildTopAppbar(BuildContext context) {
+  Row buildTopAppBar(BuildContext context) {
     String searchedWord = '';
     return Row(
         //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -738,31 +710,37 @@ class _FilterState extends State<Filter> {
                     },
                     itemBuilder: (context, suggestion) {
                       //print(suggestion.toString());
-                      var subtitle =
+                      String subtitle =
                           "${'searched_for_all_lower'.tr(context: context)} ${suggestion.count} ${'times_all_lower'.tr(context: context)}";
                       if (suggestion.type != "search") {
+                        final String key =
+                            "${suggestion.type_string?.toLowerCase()}_ucf";
+                        final String tr = key.tr(context: context);
                         subtitle =
-                            "${suggestion.type_string} ${'found_all_lower'.tr(context: context)}";
+                            "${tr == key ? suggestion.type_string : tr} ${'found_all_lower'.tr(context: context)}";
                       }
-                      return ListTile(
-                        tileColor: Colors.white,
-                        dense: true,
-                        title: HighlightedSearchedWord(
-                          suggestion.query ?? '',
-                          searchedText: searchedWord,
-                          style: TextStyle(
-                            color: suggestion.type != "search"
-                                ? Theme.of(context).primaryColor
-                                : MyTheme.font_grey,
+                      final q = suggestion.query ?? '';
+                      return Directionality(
+                        textDirection: q.direction,
+                        child: ListTile(
+                          tileColor: Colors.white,
+                          dense: true,
+                          title: HighlightedSearchedWord(
+                            q,
+                            searchedText: searchedWord,
+                            style: TextStyle(
+                              color: suggestion.type != "search"
+                                  ? Theme.of(context).primaryColor
+                                  : MyTheme.font_grey,
+                            ),
                           ),
-                        ),
-                        subtitle: HighlightedSearchedWord(
-                          subtitle,
-                          searchedText: searchedWord,
-                          style: TextStyle(
-                            color: suggestion.type != "search"
-                                ? MyTheme.font_grey
-                                : MyTheme.medium_grey,
+                          subtitle: Text(
+                            subtitle,
+                            style: TextStyle(
+                              color: suggestion.type != "search"
+                                  ? MyTheme.font_grey
+                                  : MyTheme.medium_grey,
+                            ),
                           ),
                         ),
                       );

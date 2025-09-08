@@ -114,15 +114,16 @@ class _OtpState extends State<Otp> {
       if (SystemConfig.systemUser != null) {
         SystemConfig.systemUser!.emailVerified = true;
       }
+      await homeData.fetchAddressLists(false, false);
+      final bool needHandleAddress = homeData.needHandleAddressNavigation();
+      if (needHandleAddress) return;
       if (widget.fromRegistration) {
         context.go("/");
       } else {
         context.pop();
       }
-      await Future.delayed(Duration.zero);
 
       ToastComponent.showDialog(confirmCodeResponse.message);
-      homeData.fetchAddressLists(false);
     }
   }
 

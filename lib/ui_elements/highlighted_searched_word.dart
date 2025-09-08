@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 
@@ -37,8 +38,9 @@ class HighlightedSearchedWord extends StatelessWidget {
       maxLines: maxLines,
       textStyle: style,
       textAlign: textAlign,
-      textDirection: textDirection,
+      textDirection: textDirection ?? text.direction,
       overflow: overflow,
     );
   }
 }
+

@@ -242,6 +242,12 @@ class HomePresenter extends ChangeNotifier {
 
   bool get haveToGoAddress => shouldHaveAddress && defaultAddress == null;
 
+  void logOutAddress([bool forceRemove = false]) {
+    if (!(is_logged_in.$ || forceRemove)) return;
+    defaultAddress = null;
+    notifyListeners();
+  }
+
   Future<void> fetchAddressLists(
     bool isRefresh, [
     bool navigateToAddress = true,
@@ -256,7 +262,8 @@ class HomePresenter extends ChangeNotifier {
         await handleErrorsWithMessage(AddressRepository().getAddressList);
     if (addressResponse != null) {
       if (addressResponse.addresses?.isNotEmpty != true) {
-        handleAddressNavigationWithToast(navigateToAddress);
+        defaultAddress = null;
+        _handleAddressNavigationWithToast(navigateToAddress);
         return;
       }
       for (Address a in addressResponse.addresses!) {
@@ -271,7 +278,7 @@ class HomePresenter extends ChangeNotifier {
             await AddressRepository().getAddressMakeDefaultResponse(temp.id);
 
         if (addressMakeDefaultResponse.result == false) {
-          handleAddressNavigationWithToast(navigateToAddress);
+          _handleAddressNavigationWithToast(navigateToAddress);
           return;
         }
         defaultAddress = temp;
@@ -281,19 +288,27 @@ class HomePresenter extends ChangeNotifier {
     }
   }
 
-  void handleAddressNavigationWithToast(bool navigateToAddress) {
-    if (!navigateToAddress) return;
+  bool needHandleAddressNavigation() {
+    return _handleAddressNavigationWithToast(haveToGoAddress, true);
+  }
+
+  bool _handleAddressNavigationWithToast([
+    bool navigateToAddress = true,
+    bool goHome = false,
+  ]) {
+    if (!navigateToAddress) return false;
     ToastComponent.showDialog(
       'add_default_address'.tr(),
       isError: true,
     );
-    handleAddressNavigation();
+    handleAddressNavigation(goHome);
+    return true;
   }
 
-  Future<T?> handleAddressNavigation<T>() async {
+  Future<T?> handleAddressNavigation<T>(bool goHome) async {
     return Navigator.push<T?>(
       OneContext().context!,
-      MaterialPageRoute(builder: (_) => const AddressScreen()),
+      MaterialPageRoute(builder: (_) => AddressScreen(goHome: goHome)),
     ).then(
       (value) {
         reset();
@@ -583,7 +598,8 @@ class HomePresenter extends ChangeNotifier {
       if (mainScrollController.positions.isNotEmpty &&
           mainScrollController.positions.first.pixels ==
               mainScrollController.positions.first.maxScrollExtent &&
-          (totalAllProductData ?? allProductList.length) > allProductList.length) {
+          (totalAllProductData ?? allProductList.length) >
+              allProductList.length) {
         allProductPage++;
         // ToastComponent.showDialog('loading_more_products_ucf'.tr(context: context));
         showAllLoadingContainer = true;

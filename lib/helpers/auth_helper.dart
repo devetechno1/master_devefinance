@@ -2,28 +2,32 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 
 import '../data_model/login_response.dart';
+import '../screens/home/home.dart';
 import 'shared_value_helper.dart';
 
 class AuthHelper {
-  void setUserData(LoginResponse loginResponse) {
+  Future<void> setUserData(LoginResponse loginResponse) async {
     if (loginResponse.result == true) {
       SystemConfig.systemUser = loginResponse.user;
       is_logged_in.$ = true;
-      is_logged_in.save();
       access_token.$ = loginResponse.access_token;
-      access_token.save();
       user_id.$ = loginResponse.user?.id;
-      user_id.save();
       user_name.$ = loginResponse.user?.name;
-      user_name.save();
       user_email.$ = loginResponse.user?.email ?? "";
-      user_email.save();
       user_phone.$ = loginResponse.user?.phone ?? "";
-      user_phone.save();
       avatar_original.$ = loginResponse.user?.avatar_original;
-      avatar_original.save();
       temp_user_id.$ = '';
-      temp_user_id.save();
+
+      await Future.wait([
+        is_logged_in.save(),
+        access_token.save(),
+        user_id.save(),
+        user_name.save(),
+        user_email.save(),
+        user_phone.save(),
+        avatar_original.save(),
+        temp_user_id.save(),
+      ]);
     }
   }
 
@@ -36,6 +40,7 @@ class AuthHelper {
     user_email.$ = "";
     user_phone.$ = "";
     avatar_original.$ = "";
+    homeData.logOutAddress(true);
 
     await Future.wait([
       is_logged_in.save(),

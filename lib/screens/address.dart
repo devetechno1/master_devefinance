@@ -15,6 +15,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.da
 import 'package:active_ecommerce_cms_demo_app/screens/map_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:one_context/one_context.dart';
@@ -29,6 +30,7 @@ import '../data_model/address_add_response.dart';
 import '../data_model/address_response.dart' as res;
 import '../presenter/cart_counter.dart';
 import 'add_address_screen.dart';
+import 'home/home.dart';
 
 // class Address extends StatelessWidget {
 //   const Address({super.key, required this.onPressContinue});
@@ -42,9 +44,11 @@ bool get shouldHaveAddress =>
     AppConfig.businessSettingsData.sellerWiseShipping && is_logged_in.$;
 
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({Key? key, this.from_shipping_info = false})
+  const AddressScreen(
+      {Key? key, this.from_shipping_info = false, required this.goHome})
       : super(key: key);
   final bool from_shipping_info;
+  final bool goHome;
 
   @override
   _AddressScreenState createState() => _AddressScreenState();
@@ -176,7 +180,7 @@ class _AddressScreenState extends State<AddressScreen> {
     fetchAll();
   }
 
-  Future<void> onTapAddressToSwitch(int? id) async {
+  Future<void> onTapAddressToSwitch(res.Address address) async {
     bool canSwitch = true;
     final CartCounter cart = Provider.of<CartCounter>(context, listen: false);
     if (AppConfig.businessSettingsData.sellerWiseShipping &&
@@ -230,12 +234,12 @@ class _AddressScreenState extends State<AddressScreen> {
           true;
     }
     if (!canSwitch) return;
-    return onAddressSwitch(id);
+    return onAddressSwitch(address);
   }
 
-  Future<void> onAddressSwitch(int? id) async {
+  Future<void> onAddressSwitch(res.Address address) async {
     final addressMakeDefaultResponse =
-        await AddressRepository().getAddressMakeDefaultResponse(id);
+        await AddressRepository().getAddressMakeDefaultResponse(address.id);
 
     if (addressMakeDefaultResponse.result == false) {
       ToastComponent.showDialog(
@@ -249,8 +253,10 @@ class _AddressScreenState extends State<AddressScreen> {
     );
 
     setState(() {
-      _default_shipping_address = id;
+      _default_shipping_address = address.id;
     });
+
+    homeData.defaultAddress = address;
 
     fetchShippingAddressList(false);
   }
@@ -341,12 +347,12 @@ class _AddressScreenState extends State<AddressScreen> {
     })).then((value) async {
       await onPopped(value);
       if (value != null) {
-        makeDefaultAddress(address.id);
+        makeDefaultAddress(address);
       }
     });
   }
 
-  void makeDefaultAddress(int? id) {
+  void makeDefaultAddress(res.Address address) {
     bool hasDefault = false;
     for (res.Address e in _shippingAddressList) {
       if (e.set_default == 1) {
@@ -354,7 +360,7 @@ class _AddressScreenState extends State<AddressScreen> {
         break;
       }
     }
-    if (!hasDefault) onAddressSwitch(id);
+    if (!hasDefault) onAddressSwitch(address);
   }
 
   void makeInitDefaultAddress() {
@@ -373,7 +379,7 @@ class _AddressScreenState extends State<AddressScreen> {
         defaultAddress = _shippingAddressList.last;
       }
 
-      onAddressSwitch(defaultAddress.id);
+      onAddressSwitch(defaultAddress);
     }
   }
 
@@ -388,13 +394,16 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: canPop,
+      canPop: canPop && !widget.goHome,
       onPopInvokedWithResult: (didPop, result) {
-        if (!canPop)
+        if (!canPop) {
           ToastComponent.showDialog(
             'add_default_address'.tr(context: context),
             isError: true,
           );
+        } else if (widget.goHome) {
+          context.go('/');
+        }
       },
       child: Scaffold(
           backgroundColor: MyTheme.mainColor,
@@ -579,7 +588,11 @@ class _AddressScreenState extends State<AddressScreen> {
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
       centerTitle: false,
-      leading: canPop ? UsefulElements.backButton() : const SizedBox.shrink(),
+      leading: canPop
+          ? UsefulElements.backButton(
+              onPressed: widget.goHome ? () => context.go("/") : null,
+            )
+          : const SizedBox.shrink(),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -654,7 +667,7 @@ class _AddressScreenState extends State<AddressScreen> {
           return;
         }
         if (_default_shipping_address != _shippingAddressList[index].id) {
-          onTapAddressToSwitch(_shippingAddressList[index].id);
+          onTapAddressToSwitch(_shippingAddressList[index]);
         }
       },
       child: AnimatedContainer(

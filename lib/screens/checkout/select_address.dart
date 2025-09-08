@@ -87,6 +87,7 @@ class _SelectAddressState extends State<SelectAddress> {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const AddressScreen(
                 from_shipping_info: true,
+                goHome: false,
               );
             })).then((value) {
               provider.onPopped(value, context);
