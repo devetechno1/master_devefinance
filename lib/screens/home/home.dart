@@ -54,15 +54,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   void change() {
     homeData.onRefresh();
     homeData.mainScrollListener(context);
-    homeData.initPiratedAnimation(this);
   }
 
-  @override
-  void dispose() {
-    homeData.pirated_logo_controller.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
