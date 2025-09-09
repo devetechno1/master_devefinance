@@ -42,7 +42,7 @@ class AuthRepository {
     required String provider,
   }) async {
     final postBody = jsonEncode({
-      "provider": "$provider",
+      "otp_provider": "$provider",
       "phone": "$phone",
       "country_code": "$countryCode",
       "identity_matrix": AppConfig.purchase_code,
@@ -104,7 +104,7 @@ class AuthRepository {
     final postBody = jsonEncode({
       "name": name,
       "email": email,
-      "provider": "$provider",
+      "otp_provider": "$provider",
       if (AppConfig.deviceInfo.isNotEmpty) "device_info": AppConfig.deviceInfo,
       "social_provider": "$socialProvider",
       "access_token": "$access_token",
