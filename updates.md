@@ -5,7 +5,7 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.35'`
+- `mobileVersion = '9.10.36'`
 ---
 
 ## 📱 Mobile App Updates
