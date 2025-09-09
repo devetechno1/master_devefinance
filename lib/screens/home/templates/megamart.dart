@@ -42,11 +42,13 @@ class _MegamartScreenState extends State<MegamartScreen>
     with TickerProviderStateMixin {
   @override
   void initState() {
-    Future.delayed(Duration.zero).then((value) {
-      if (OtherConfig.USE_PUSH_NOTIFICATION)
-        PushNotificationService.updateDeviceToken();
-      change();
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        if (OtherConfig.USE_PUSH_NOTIFICATION)
+          PushNotificationService.updateDeviceToken();
+        change();
+      },
+    );
     super.initState();
   }
 
@@ -153,8 +155,7 @@ class _MegamartScreenState extends State<MegamartScreen>
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child: ProductLoadingcontainer(
-                          context: context, homeData: homeData),
+                      child: ProductLoadingContainer(homeData: homeData),
                     ),
                   ],
                 ),

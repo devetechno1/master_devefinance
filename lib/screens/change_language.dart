@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../data_model/language_list_response.dart';
 import '../providers/locale_provider.dart';
+import 'home/home.dart';
 
 class ChangeLanguage extends StatefulWidget {
   const ChangeLanguage({Key? key}) : super(key: key);
@@ -107,15 +108,15 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
         app_mobile_language.save(),
         app_language_rtl.save(),
       ]);
+      context.go('/');
 
       await Provider.of<LocaleProvider>(context, listen: false).setLocale(
         app_mobile_language.$ ??
             CustomLocalization.supportedLocales.first.languageCode,
       );
 
-      // await homeData.onRefresh();
+      await homeData.onRefresh();
 
-      context.go('/');
     }
   }
 

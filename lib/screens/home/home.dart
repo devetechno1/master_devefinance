@@ -40,11 +40,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   void initState() {
-    Future.delayed(Duration.zero).then((value) {
-      if (OtherConfig.USE_PUSH_NOTIFICATION)
-        PushNotificationService.updateDeviceToken();
-      change();
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        if (OtherConfig.USE_PUSH_NOTIFICATION)
+          PushNotificationService.updateDeviceToken();
+        change();
+      },
+    );
 
     super.initState();
   }
@@ -200,9 +202,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     SingleChildScrollView(
                                       child: Column(
                                         children: [
-                                          HomeAllProducts2(
-                                              context: context,
-                                              homeData: homeData),
+                                          HomeAllProducts2(homeData: homeData),
                                         ],
                                       ),
                                     ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
@@ -104,9 +105,9 @@ class HomePresenter extends ChangeNotifier {
 
   bool isBrands = false;
 
-  var allProductList = [];
+  List<productMini.Product> allProductList = [];
   bool isAllProductInitial = true;
-  int? totalAllProductData = 0;
+  int totalAllProductData = 0;
   int allProductPage = 1;
   bool showAllLoadingContainer = false;
   int cartCount = 0;
@@ -512,12 +513,17 @@ class HomePresenter extends ChangeNotifier {
       allProductList.addAll(productResponse?.products ?? []);
     }
     isAllProductInitial = false;
-    if (productResponse?.meta != null) {
-      totalAllProductData = productResponse?.meta!.total;
-    }
+    totalAllProductData = productResponse?.meta?.total ?? allProductList.length;
+
     showAllLoadingContainer = false;
 
     notifyListeners();
+
+    if (productResponse?.meta?.total == null && AppConfig.isDebugMode) {
+      print(
+          "There is Error here total products from endpoint not work correctly");
+      throw "There is Error here total products from endpoint not work correctly";
+    }
   }
 
   resetBestSellingProducts() {
@@ -596,10 +602,10 @@ class HomePresenter extends ChangeNotifier {
   void mainScrollListener(BuildContext context) {
     mainScrollController.addListener(() {
       if (mainScrollController.positions.isNotEmpty &&
-          mainScrollController.positions.first.pixels ==
-              mainScrollController.positions.first.maxScrollExtent &&
-          (totalAllProductData ?? allProductList.length) >
-              allProductList.length) {
+          mainScrollController.positions.first.pixels >=
+              0.8 * mainScrollController.positions.first.maxScrollExtent &&
+          !showAllLoadingContainer &&
+          totalAllProductData > allProductList.length) {
         allProductPage++;
         // ToastComponent.showDialog('loading_more_products_ucf'.tr(context: context));
         showAllLoadingContainer = true;

@@ -41,12 +41,12 @@ class HomeAllProducts extends StatelessWidget {
           // 3
           return ProductCard(
             id: homeData!.allProductList[index].id,
-            slug: homeData!.allProductList[index].slug,
+            slug: homeData!.allProductList[index].slug ?? '',
             image: homeData!.allProductList[index].thumbnail_image,
             name: homeData!.allProductList[index].name,
             main_price: homeData!.allProductList[index].main_price,
             stroked_price: homeData!.allProductList[index].stroked_price,
-            has_discount: homeData!.allProductList[index].has_discount,
+            has_discount: homeData!.allProductList[index].has_discount == true,
             discount: homeData!.allProductList[index].discount,
             isWholesale: null,
           );
