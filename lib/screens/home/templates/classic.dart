@@ -54,28 +54,9 @@ class _ClassicScreenState extends State<ClassicScreen>
   void change() {
     homeData.onRefresh();
     homeData.mainScrollListener(context);
-    homeData.initPiratedAnimation(this);
   }
 
-  @override
-  void dispose() {
-    _stopAnimate();
-    homeData.pirated_logo_controller.removeListener((){});
-    homeData.pirated_logo_controller.dispose();
-    super.dispose();
-  }
 
-  @override
-  void deactivate() {
-    _stopAnimate();
-    super.deactivate();
-  }
-
-  void _stopAnimate() {
-    if (homeData.pirated_logo_controller.isAnimating) {
-      homeData.pirated_logo_controller.stop();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

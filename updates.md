@@ -9,6 +9,20 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.36 — Fix: remove pirated logo ticker animation to prevent disposal crash</strong></summary>
+
+### Bugfix
+- Removed bouncing animation for “pirated” logo to stop `_WidgetTicker` assertion during language changes and rapid navigation.
+- Replaced `AnimatedBuilder` with a static image.
+- Cleaned up all calls to `initPiratedAnimation` and controller disposals.
+
+### API
+- No changes.
+
+### Must update (Stores)
+- **Yes** — fixes a client-side crash/assertion.
+</details>
 
 <details>
 <summary><strong>AV 9.10.35 – Address & Auth UX hardening</strong></summary>

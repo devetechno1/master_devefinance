@@ -48,8 +48,8 @@ class HomePresenter extends ChangeNotifier {
   ScrollController? featuredCategoryScrollController;
   ScrollController mainScrollController = ScrollController();
 
-  late AnimationController pirated_logo_controller;
-  late Animation pirated_logo_animation;
+  // late AnimationController pirated_logo_controller;
+  // late Animation pirated_logo_animation;
 
   List<AIZSlider> carouselImageList = [];
   List<AIZSlider> bannerOneImageList = [];
@@ -614,24 +614,24 @@ class HomePresenter extends ChangeNotifier {
     });
   }
 
-  void initPiratedAnimation(vnc) {
-    pirated_logo_controller = AnimationController(
-        vsync: vnc, duration: const Duration(milliseconds: 2000));
-    pirated_logo_animation = Tween(begin: 40.0, end: 60.0).animate(
-      CurvedAnimation(
-        curve: Curves.bounceOut,
-        parent: pirated_logo_controller,
-      ),
-    );
+  // void initPiratedAnimation(vnc) {
+  //   pirated_logo_controller = AnimationController(
+  //       vsync: vnc, duration: const Duration(milliseconds: 2000));
+  //   pirated_logo_animation = Tween(begin: 40.0, end: 60.0).animate(
+  //     CurvedAnimation(
+  //       curve: Curves.bounceOut,
+  //       parent: pirated_logo_controller,
+  //     ),
+  //   );
 
-    pirated_logo_controller.addStatusListener((AnimationStatus status) {
-      if (status == AnimationStatus.completed) {
-        pirated_logo_controller.repeat();
-      }
-    });
+  //   pirated_logo_controller.addStatusListener((AnimationStatus status) {
+  //     if (status == AnimationStatus.completed) {
+  //       pirated_logo_controller.repeat();
+  //     }
+  //   });
 
-    pirated_logo_controller.forward();
-  }
+  //   pirated_logo_controller.forward();
+  // }
 
   void incrementCurrentSlider(index) {
     current_slider = index;
@@ -640,7 +640,7 @@ class HomePresenter extends ChangeNotifier {
 
   @override
   void dispose() {
-    pirated_logo_controller.dispose();
+    // pirated_logo_controller.dispose();
     _flashDealTimer?.cancel();
     super.dispose();
   }

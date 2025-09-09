@@ -25,15 +25,10 @@ class PiratedWidget extends StatelessWidget {
             Positioned(
                 left: 20,
                 top: 0,
-                child: AnimatedBuilder(
-                    animation: homeData!.pirated_logo_animation,
-                    builder: (context, child) {
-                      return Image.asset(
-                        AppImages.piratedSquare,
-                        height: homeData!.pirated_logo_animation.value,
-                        color: Colors.white,
-                      );
-                    })),
+                child: Image.asset(
+                  AppImages.piratedSquare,
+                  color: Colors.white,
+                )),
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(
