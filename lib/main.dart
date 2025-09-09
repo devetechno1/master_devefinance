@@ -82,6 +82,7 @@ void main() async {
   await Future.wait([
     user_id.load(),
     is_logged_in.load(),
+    access_token.load(),
   ]);
 
   await Future.wait([
