@@ -15,7 +15,7 @@ class LocaleProvider with ChangeNotifier {
             '');
   }
 
-  void setLocale(String code) {
+  Future<void> setLocale(String code) async{
     BusinessSettingHelper.handleTranslations();
     _locale = Locale(code, '');
     notifyListeners();
