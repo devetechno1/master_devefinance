@@ -38,7 +38,7 @@ class ClassicScreen extends StatefulWidget {
 }
 
 class _ClassicScreenState extends State<ClassicScreen>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
@@ -59,8 +59,22 @@ class _ClassicScreenState extends State<ClassicScreen>
 
   @override
   void dispose() {
+    _stopAnimate();
+    homeData.pirated_logo_controller.removeListener((){});
     homeData.pirated_logo_controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    _stopAnimate();
+    super.deactivate();
+  }
+
+  void _stopAnimate() {
+    if (homeData.pirated_logo_controller.isAnimating) {
+      homeData.pirated_logo_controller.stop();
+    }
   }
 
   @override
