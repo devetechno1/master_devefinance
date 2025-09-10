@@ -1,39 +1,42 @@
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../constants/app_dimensions.dart';
 import '../helpers/shimmer_helper.dart';
 import '../presenter/home_presenter.dart';
 import '../ui_elements/product_card_black.dart';
 
-class HomeAllProducts2 extends StatelessWidget {
+class HomeAllProductsSliver extends StatelessWidget {
   final HomePresenter homeData;
-  const HomeAllProducts2({super.key, required this.homeData});
+  const HomeAllProductsSliver({super.key, required this.homeData});
 
   @override
   Widget build(BuildContext context) {
+    return SliverPadding(
+      padding: const EdgeInsets.only(
+        top: AppDimensions.paddingLarge,
+        bottom: AppDimensions.paddingSupSmall,
+        left: AppDimensions.paddingMedium,
+        right: AppDimensions.paddingMedium,
+      ),
+      sliver: _slivers(context),
+    );
+  }
+
+  RenderObjectWidget _slivers(BuildContext context) {
     if (homeData.isAllProductInitial) {
-      return SingleChildScrollView(
-          child: ShimmerHelper().buildProductGridShimmer(
-              scontroller: homeData.allProductScrollController));
+      return ShimmerHelper().buildProductSliverGridShimmer();
     } else if (homeData.allProductList.isNotEmpty) {
       final bool isLoadingMore =
           homeData.allProductList.length < homeData.totalAllProductData;
-      return MasonryGridView.count(
+      return SliverMasonryGrid.count(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
-          itemCount: isLoadingMore
+          childCount: isLoadingMore
               ? homeData.allProductList.length + 2
               : homeData.allProductList.length,
-          shrinkWrap: true,
-          padding: const EdgeInsets.only(
-              top: AppDimensions.paddingLarge,
-              bottom: AppDimensions.paddingSupSmall,
-              left: 18,
-              right: 18),
-          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             if (index > homeData.allProductList.length - 1) {
               return ShimmerHelper().buildBasicShimmer(height: 200);
@@ -51,10 +54,13 @@ class HomeAllProducts2 extends StatelessWidget {
             );
           });
     } else if (homeData.totalAllProductData == 0) {
-      return Center(
-          child: Text('no_product_is_available'.tr(context: context)));
+      return SliverToBoxAdapter(
+        child: Center(
+          child: Text('no_product_is_available'.tr(context: context)),
+        ),
+      );
     } else {
-      return Container(); // should never be happening
+      return const SliverToBoxAdapter(); // should never be happening
     }
   }
 }

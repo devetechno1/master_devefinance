@@ -87,6 +87,8 @@ class Order {
     switch (delivery_status) {
       case "confirmed":
         return Colors.green;
+      case "picked_up":
+        return Colors.orangeAccent.shade400;
       case "pending":
         return Colors.orangeAccent;
       case "delivered":

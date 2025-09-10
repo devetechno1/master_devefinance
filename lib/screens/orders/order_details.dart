@@ -17,6 +17,7 @@ import 'package:active_ecommerce_cms_demo_app/data_model/order_detail_response.d
 import 'package:active_ecommerce_cms_demo_app/helpers/main_helpers.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/order_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/refund_request_repository.dart';
@@ -30,6 +31,8 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+
+import '../../data_model/order_item_response.dart';
 
 class OrderDetails extends StatefulWidget {
   final int? id;
@@ -69,7 +72,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   int _stepIndex = 0;
   final ReceivePort _port = ReceivePort();
   DetailedOrder? _orderDetails;
-  final List<dynamic> _orderedItemList = [];
+  final List<OrderItem> _orderedItemList = [];
   bool _orderItemsInit = false;
 
   @override
@@ -172,7 +175,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   fetchOrderedItems() async {
     final orderItemResponse =
         await OrderRepository().getOrderItems(id: widget.id);
-    _orderedItemList.addAll(orderItemResponse.ordered_items);
+    _orderedItemList.addAll(orderItemResponse.ordered_items ?? []);
     _orderItemsInit = true;
 
     setState(() {});
@@ -1474,8 +1477,9 @@ class _OrderDetailsState extends State<OrderDetails> {
               padding:
                   const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
               child: Text(
-                _orderedItemList[index].product_name,
+                _orderedItemList[index].product_name ?? '',
                 maxLines: 2,
+                textDirection: (_orderedItemList[index].product_name ?? '').direction,
                 style: const TextStyle(
                   color: MyTheme.font_grey,
                 ),
@@ -1496,7 +1500,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   _orderedItemList[index].variation != "" &&
                           _orderedItemList[index].variation != null
                       ? Text(
-                          _orderedItemList[index].variation,
+                          _orderedItemList[index].variation!,
                           style: const TextStyle(
                               color: MyTheme.font_grey,
                               fontSize: 13,
@@ -1511,7 +1515,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ),
                   const Spacer(),
                   Text(
-                    convertPrice(_orderedItemList[index].price),
+                    convertPrice(_orderedItemList[index].price ?? '0'),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 14,
@@ -1520,8 +1524,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ],
               ),
             ),
-            _orderedItemList[index].refund_section &&
-                    _orderedItemList[index].refund_button
+            _orderedItemList[index].refund_section == true &&
+                    _orderedItemList[index].refund_button == true
                 ? InkWell(
                     onTap: () {
                       onTapAskRefund(
@@ -1555,7 +1559,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ),
                   )
                 : Container(),
-            _orderedItemList[index].refund_section &&
+            _orderedItemList[index].refund_section == true &&
                     _orderedItemList[index].refund_label != ""
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -1568,7 +1572,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             style: const TextStyle(color: MyTheme.font_grey),
                           ),
                           Text(
-                            _orderedItemList[index].refund_label,
+                            _orderedItemList[index].refund_label ?? '',
                             style: TextStyle(
                                 color: getRefundRequestLabelColor(
                                     _orderedItemList[index]

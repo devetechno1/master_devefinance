@@ -2,7 +2,6 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_banners/home_banners_list.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
@@ -48,44 +47,37 @@ class _MinimaScreenState extends State<MinimaScreen>
       (timeStamp) {
         if (OtherConfig.USE_PUSH_NOTIFICATION)
           PushNotificationService.updateDeviceToken();
-        change();
+        homeData.onRefresh();
       },
     );
     super.initState();
   }
 
-  void change() {
-    homeData.onRefresh();
-    homeData.mainScrollListener(context);
-  }
-
-  
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return widget.go_back;
-      },
-      child: Directionality(
-        textDirection:
-            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-        child: SafeArea(
-          child: ListenableBuilder(
-            listenable: homeData,
-            builder: (context, child) {
-              return Scaffold(
-                floatingActionButton: whatsappFloatingButtonWidget,
-                appBar: BuildAppBar(context: context),
-                backgroundColor: Colors.white,
-                body: Stack(
-                  children: [
-                    RefreshIndicator(
-                      color: Theme.of(context).primaryColor,
-                      backgroundColor: Colors.white,
-                      onRefresh: homeData.onRefresh,
-                      displacement: 0,
+    return PopScope(
+      canPop: widget.go_back,
+      child: SafeArea(
+        child: ListenableBuilder(
+          listenable: homeData,
+          builder: (context, child) {
+            return Scaffold(
+              floatingActionButton: whatsappFloatingButtonWidget,
+              appBar: BuildAppBar(context: context),
+              backgroundColor: Colors.white,
+              body: Stack(
+                children: [
+                  RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.white,
+                    onRefresh: homeData.onRefresh,
+                    displacement: 0,
+                    child: NotificationListener<ScrollUpdateNotification>(
+                      onNotification: (notification) {
+                        homeData.paginationListener(notification.metrics);
+                        return false;
+                      },
                       child: CustomScrollView(
-                        controller: homeData.mainScrollController,
                         physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics(),
                         ),
@@ -207,19 +199,19 @@ class _MinimaScreenState extends State<MinimaScreen>
                               homeData: homeData,
                             ),
                           //all products ------------
-                          AllProducts(homeData: homeData)
+                          ...allProductsSliver(context, homeData),
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ProductLoadingContainer(homeData: homeData),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: ProductLoadingContainer(homeData: homeData),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

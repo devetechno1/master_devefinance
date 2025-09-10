@@ -109,6 +109,16 @@ class ShimmerHelper {
           return shimmerInGrid(index);
         });
   }
+  SliverMasonryGrid buildProductSliverGridShimmer({scontroller, item_count = 10}) {
+    return SliverMasonryGrid.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 14,
+        crossAxisSpacing: 14,
+        childCount: item_count,
+        itemBuilder: (context, index) {
+          return shimmerInGrid(index);
+        });
+  }
 
   static Shimmer shimmerInGrid(int index) {
     return Shimmer.fromColors(

@@ -44,9 +44,8 @@ class HomePresenter extends ChangeNotifier {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int current_slider = 0;
-  ScrollController? allProductScrollController;
   ScrollController? featuredCategoryScrollController;
-  ScrollController mainScrollController = ScrollController();
+  // ScrollController mainScrollController = ScrollController();
 
   // late AnimationController pirated_logo_controller;
   // late Animation pirated_logo_animation;
@@ -599,19 +598,18 @@ class HomePresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  void mainScrollListener(BuildContext context) {
-    mainScrollController.addListener(() {
-      if (mainScrollController.positions.isNotEmpty &&
-          mainScrollController.positions.first.pixels >=
-              0.8 * mainScrollController.positions.first.maxScrollExtent &&
-          !showAllLoadingContainer &&
-          totalAllProductData > allProductList.length) {
-        allProductPage++;
-        // ToastComponent.showDialog('loading_more_products_ucf'.tr(context: context));
-        showAllLoadingContainer = true;
-        fetchAllProducts();
-      }
-    });
+  void paginationListener(ScrollMetrics metrics) {
+    final bool reached80 = metrics.pixels >= 0.8 * metrics.maxScrollExtent;
+
+    if (reached80 &&
+        !showAllLoadingContainer &&
+        totalAllProductData > allProductList.length &&
+        (metrics.pixels != metrics.maxScrollExtent ||
+            metrics.pixels == metrics.minScrollExtent)) {
+      allProductPage++;
+      showAllLoadingContainer = true;
+      fetchAllProducts();
+    }
   }
 
   // void initPiratedAnimation(vnc) {

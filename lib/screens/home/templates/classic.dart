@@ -1,6 +1,5 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -45,45 +44,37 @@ class _ClassicScreenState extends State<ClassicScreen>
       (timeStamp) {
         if (OtherConfig.USE_PUSH_NOTIFICATION)
           PushNotificationService.updateDeviceToken();
-        change();
+        homeData.onRefresh();
       },
     );
     super.initState();
   }
 
-  void change() {
-    homeData.onRefresh();
-    homeData.mainScrollListener(context);
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return widget.go_back;
-      },
-      child: Directionality(
-        textDirection:
-            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-        child: SafeArea(
-          child: ListenableBuilder(
-            listenable: homeData,
-            builder: (context, child) {
-              return Scaffold(
-                floatingActionButton: whatsappFloatingButtonWidget,
-                appBar: BuildAppBar(context: context),
-                backgroundColor: Colors.white,
-                body: Stack(
-                  children: [
-                    RefreshIndicator(
-                      color: Theme.of(context).primaryColor,
-                      backgroundColor: Colors.white,
-                      onRefresh: homeData.onRefresh,
-                      displacement: 0,
+    return PopScope(
+      canPop: widget.go_back,
+      child: SafeArea(
+        child: ListenableBuilder(
+          listenable: homeData,
+          builder: (context, child) {
+            return Scaffold(
+              floatingActionButton: whatsappFloatingButtonWidget,
+              appBar: BuildAppBar(context: context),
+              backgroundColor: Colors.white,
+              body: Stack(
+                children: [
+                  RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.white,
+                    onRefresh: homeData.onRefresh,
+                    displacement: 0,
+                    child: NotificationListener<ScrollUpdateNotification>(
+                      onNotification: (notification) {
+                        homeData.paginationListener(notification.metrics);
+                        return false;
+                      },
                       child: CustomScrollView(
-                        controller: homeData.mainScrollController,
                         physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics(),
                         ),
@@ -164,27 +155,23 @@ class _ClassicScreenState extends State<ClassicScreen>
                           //Brand List ---------------------------
                           if (homeData.isBrandsInitial ||
                               homeData.brandsList.isNotEmpty)
-                            BrandListSectionSliver(
-                              homeData: homeData,
-                            ),
+                            BrandListSectionSliver(homeData: homeData),
                           //all products --------------------------
-                          AllProducts(
-                            homeData: homeData,
-                          ),
+                          ...allProductsSliver(context, homeData),
 
                           ///
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ProductLoadingContainer(homeData: homeData),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: ProductLoadingContainer(homeData: homeData),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
