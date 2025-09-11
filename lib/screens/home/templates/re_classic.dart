@@ -1,6 +1,5 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
@@ -46,45 +45,37 @@ class _ReClassicScreenState extends State<ReClassicScreen>
       (timeStamp) {
         if (OtherConfig.USE_PUSH_NOTIFICATION)
           PushNotificationService.updateDeviceToken();
-        change();
+        homeData.onRefresh();
       },
     );
     super.initState();
   }
 
-  void change() {
-    homeData.onRefresh();
-    homeData.mainScrollListener(context);
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return widget.go_back;
-      },
-      child: Directionality(
-        textDirection:
-            app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-        child: SafeArea(
-          child: ListenableBuilder(
-            listenable: homeData,
-            builder: (context, child) {
-              return Scaffold(
-                floatingActionButton: whatsappFloatingButtonWidget,
-                appBar: BuildAppBar(context: context),
-                backgroundColor: Colors.white,
-                body: Stack(
-                  children: [
-                    RefreshIndicator(
-                      color: Theme.of(context).primaryColor,
-                      backgroundColor: Colors.white,
-                      onRefresh: homeData.onRefresh,
-                      displacement: 0,
+    return PopScope(
+      canPop: widget.go_back,
+      child: SafeArea(
+        child: ListenableBuilder(
+          listenable: homeData,
+          builder: (context, child) {
+            return Scaffold(
+              floatingActionButton: whatsappFloatingButtonWidget,
+              appBar: BuildAppBar(context: context),
+              backgroundColor: Colors.white,
+              body: Stack(
+                children: [
+                  RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.white,
+                    onRefresh: homeData.onRefresh,
+                    displacement: 0,
+                    child: NotificationListener<ScrollUpdateNotification>(
+                      onNotification: (notification) {
+                        homeData.paginationListener(notification.metrics);
+                        return false;
+                      },
                       child: CustomScrollView(
-                        controller: homeData.mainScrollController,
                         physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics(),
                         ),
@@ -170,68 +161,23 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                             ),
 
                           //all products --------------------------
-                          AllProducts(
-                            homeData: homeData,
-                          ),
+                          ...allProductsSliver(context, homeData),
 
                           ///
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ProductLoadingContainer(homeData: homeData),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: ProductLoadingContainer(homeData: homeData),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
   }
-
-// Widget buildTimerRow(CurrentRemainingTime time) {
-//   return Container(
-//     height: 35,
-//     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-//     decoration: BoxDecoration(
-//       color: Colors.white,
-//       borderRadius: BorderRadius.circular(AppDimensions.radiusSmallExtra)
-//     ),
-//     child: SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       padding: const EdgeInsets.symmetric(horizontal: 10),
-//       child: Container(
-//         color: Colors.white,
-//         child: Row(
-//           children: [
-//             Container(
-//               width: 50,
-//               color: Theme.of(context).primaryColor,
-//               child: RowTimeDataWidget(time: "${time.days}", timeType: 'days'.tr(context: context), isFirst: true)),
-//             const  SizedBox(width: 20,),
-//             Container(
-//               width: 50,
-//               color: Theme.of(context).primaryColor,
-//               child: RowTimeDataWidget(time: "${time.hours}", timeType: 'hours'.tr(context: context), isFirst: true)),
-//            const   SizedBox(width: 20,),
-//             Container(
-//               width: 60,
-//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.min}", timeType: 'minutes'.tr(context: context), isFirst: true)),
-//          const   SizedBox(width: 20,),
-//             Container(
-//               width: 60,
-//               color: Theme.of(context).primaryColor,child: RowTimeDataWidget(time: "${time.sec}", timeType: 'seconds'.tr(context: context), isFirst: true)),
-
-//           ],
-//         ),
-//       ),
-//     ),
-//   );
-// }
-//   String timeText(String val, {int default_length = 2}) {
-//     return val.padLeft(default_length, '0');
-  // }
 }

@@ -43,18 +43,11 @@ class _MetroScreenState extends State<MetroScreen>
       (timeStamp) {
         if (OtherConfig.USE_PUSH_NOTIFICATION)
           PushNotificationService.updateDeviceToken();
-        change();
+        homeData.onRefresh();
       },
     );
     super.initState();
   }
-
-  void change() {
-    homeData.onRefresh();
-    homeData.mainScrollListener(context);
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,98 +68,101 @@ class _MetroScreenState extends State<MetroScreen>
                     backgroundColor: Colors.white,
                     onRefresh: homeData.onRefresh,
                     displacement: 0,
-                    child: CustomScrollView(
-                      controller: homeData.mainScrollController,
-                      physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics(),
-                      ),
-                      slivers: <Widget>[
-                        SliverList(
-                          delegate: SliverChildListDelegate([
-                            AppConfig.purchase_code == ""
-                                ? PiratedWidget(homeData: homeData)
-                                : const SizedBox(),
-                            const SizedBox(height: 10),
-
-                            // Header Banner
-                            HomeCarouselSlider(homeData: homeData),
-
-                            const SizedBox(height: 16),
-
-                            // Flash Sale Section
-                            const FlashSale(isCircle: true)
-                          ]),
+                    child: NotificationListener<ScrollUpdateNotification>(
+                      onNotification: (notification) {
+                        homeData.paginationListener(notification.metrics);
+                        return false;
+                      },
+                      child: CustomScrollView(
+                        physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics(),
                         ),
-                        //move banner
-                        SliverList(
-                          delegate: SliverChildListDelegate([
-                            // Padding(
-                            //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                            //   child: Image.network("https://sellerwise.devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                            // ),
-                            TodaysDealProductsWidget(
-                              homePresenter: homeData,
+                        slivers: <Widget>[
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              AppConfig.purchase_code == ""
+                                  ? PiratedWidget(homeData: homeData)
+                                  : const SizedBox(),
+                              const SizedBox(height: 10),
+
+                              // Header Banner
+                              HomeCarouselSlider(homeData: homeData),
+
+                              const SizedBox(height: 16),
+
+                              // Flash Sale Section
+                              const FlashSale(isCircle: true)
+                            ]),
+                          ),
+                          //move banner
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              // Padding(
+                              //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              //   child: Image.network("https://sellerwise.devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
+                              // ),
+                              TodaysDealProductsWidget(
+                                homePresenter: homeData,
+                              ),
+                            ]),
+                          ),
+                          //Featured category-----------------------
+                          const CategoryList(),
+                          // const CategoryListVertical(crossAxisCount: 3,),
+
+                          //BannerList---------------------
+
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerOneImageList,
+                              isBannersInitial: homeData.isBannerOneInitial,
                             ),
-                          ]),
-                        ),
-                        //Featured category-----------------------
-                        const CategoryList(),
-                        // const CategoryListVertical(crossAxisCount: 3,),
-
-                        //BannerList---------------------
-
-                        SliverToBoxAdapter(
-                          child: HomeBannersList(
-                            bannersImagesList: homeData.bannerOneImageList,
-                            isBannersInitial: homeData.isBannerOneInitial,
                           ),
-                        ),
-                        //featuredProducts-----------------------------
-                        const FeaturedProductsListSliver(),
-                        //  BannerList---------------------
-                        SliverToBoxAdapter(
-                          child: HomeBannersList(
-                            bannersImagesList: homeData.bannerTwoImageList,
-                            isBannersInitial: homeData.isBannerTwoInitial,
+                          //featuredProducts-----------------------------
+                          const FeaturedProductsListSliver(),
+                          //  BannerList---------------------
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerTwoImageList,
+                              isBannersInitial: homeData.isBannerTwoInitial,
+                            ),
                           ),
-                        ),
-                        //  HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
-                        // SliverToBoxAdapter(
-                        //   child: HomeBannersAnimated(
-                        //     bannersImagesList: homeData.bannerTwoImageList,
-                        //     isBannersInitial: homeData.isBannerTwoInitial,
-                        //   ),
-                        // ),
-                        // HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
-                        // SliverToBoxAdapter(
-                        //   child: HomeBannersListAnimation(
-                        //     bannersImagesList: homeData.bannerTwoImageList,
-                        //     isBannersInitial: homeData.isBannerTwoInitial,
-                        //   ),
-                        // ),
-                        //SliverToBoxAdapter(child: BannerHome(isBannersInitial: homeData.isBannerTwoInitial, bannersImagesList: homeData.bannerTwoImageList)),
+                          //  HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                          // SliverToBoxAdapter(
+                          //   child: HomeBannersAnimated(
+                          //     bannersImagesList: homeData.bannerTwoImageList,
+                          //     isBannersInitial: homeData.isBannerTwoInitial,
+                          //   ),
+                          // ),
+                          // HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                          // SliverToBoxAdapter(
+                          //   child: HomeBannersListAnimation(
+                          //     bannersImagesList: homeData.bannerTwoImageList,
+                          //     isBannersInitial: homeData.isBannerTwoInitial,
+                          //   ),
+                          // ),
+                          //SliverToBoxAdapter(child: BannerHome(isBannersInitial: homeData.isBannerTwoInitial, bannersImagesList: homeData.bannerTwoImageList)),
 
-                        //Best Selling-------------------
-                        // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                        const BestSellingSectionSliver(),
-                        // const VerticalProductsSectionSliver(),
-                        //auction products----------------------------
-                        AuctionProductsSectionSliver(
-                          homeData: homeData,
-                        ),
-                        //Brand List ---------------------------
-                        if (homeData.isBrandsInitial ||
-                            homeData.brandsList.isNotEmpty)
-                          BrandListSectionSliver(
+                          //Best Selling-------------------
+                          // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
+                          const BestSellingSectionSliver(),
+                          // const VerticalProductsSectionSliver(),
+                          //auction products----------------------------
+                          AuctionProductsSectionSliver(
                             homeData: homeData,
                           ),
-                        //all products --------------------------
-                        AllProducts(
-                          homeData: homeData,
-                        ),
+                          //Brand List ---------------------------
+                          if (homeData.isBrandsInitial ||
+                              homeData.brandsList.isNotEmpty)
+                            BrandListSectionSliver(
+                              homeData: homeData,
+                            ),
+                          //all products --------------------------
+                          ...allProductsSliver(context, homeData),
 
-                        ///
-                      ],
+                          ///
+                        ],
+                      ),
                     ),
                   ),
                   Align(

@@ -380,12 +380,11 @@ class _OrderListState extends State<OrderList> {
 
   Widget buildOrderListList() {
     if (_isInitial && _orderList.isEmpty) {
-      return SingleChildScrollView(
-          child: ListView.builder(
+      return ListView.builder(
         controller: _scrollController,
         itemCount: 10,
         scrollDirection: Axis.vertical,
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Padding(
@@ -402,43 +401,40 @@ class _OrderListState extends State<OrderList> {
             ),
           );
         },
-      ));
+      );
     } else if (_orderList.isNotEmpty) {
       return RefreshIndicator(
         color: Theme.of(context).primaryColor,
         backgroundColor: Colors.white,
         displacement: 0,
         onRefresh: _onRefresh,
-        child: SingleChildScrollView(
+        child: ListView.separated(
           controller: _xcrollController,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          child: ListView.separated(
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 14,
-            ),
-            padding: const EdgeInsets.only(
-                left: AppDimensions.paddingMedium,
-                right: AppDimensions.paddingMedium,
-                top: 10,
-                bottom: 0),
-            itemCount: _orderList.length,
-            scrollDirection: Axis.vertical,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return OrderDetails(
-                      id: _orderList[index].id,
-                    );
-                  }));
-                },
-                child: buildOrderListItemCard(index),
-              );
-            },
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 14,
           ),
+          padding: const EdgeInsets.only(
+            left: AppDimensions.paddingMedium,
+            right: AppDimensions.paddingMedium,
+            top: 10,
+            bottom: 0,
+          ),
+          itemCount: _orderList.length,
+          scrollDirection: Axis.vertical,
+          physics: const AlwaysScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return OrderDetails(
+                    id: _orderList[index].id,
+                  );
+                }));
+              },
+              child: buildOrderListItemCard(index),
+            );
+          },
         ),
       );
     } else if (_totalData == 0) {

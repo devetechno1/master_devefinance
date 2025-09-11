@@ -19,8 +19,8 @@ class HomeAllProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     if (homeData!.isAllProductInitial && homeData!.allProductList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper().buildProductGridShimmer(
-              scontroller: homeData!.allProductScrollController));
+        child: ShimmerHelper().buildProductGridShimmer(),
+      );
     } else if (homeData!.allProductList.isNotEmpty) {
       //snapshot.hasData
 
@@ -28,7 +28,6 @@ class HomeAllProducts extends StatelessWidget {
         // 2
         //addAutomaticKeepAlives: true,
         itemCount: homeData!.allProductList.length,
-        controller: homeData!.allProductScrollController,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,

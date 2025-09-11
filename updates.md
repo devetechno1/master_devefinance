@@ -5,12 +5,43 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.36'`
+- `mobileVersion = '9.10.37'`
 ---
 
 ## 📱 Mobile App Updates
+
 <details>
-<summary><strong>AV 9.10.36 — Fix: remove pirated logo ticker animation to prevent disposal crash</strong></summary>
+<summary><strong>AV 9.10.37 – Home sliver pagination, masonry shimmer, and orders null-safety</strong></summary>
+
+### UX / Performance
+- Replaced nested scrolls with true **sliver-based** *All Products* section.
+- Infinite scroll now uses `NotificationListener<ScrollUpdateNotification>` + `paginationListener(ScrollMetrics)` with prefetch at **80%** of scroll extent.
+- Centered overlay loading container; **Masonry sliver** shimmer placeholders while loading more.
+- Replaced `WillPopScope` with `PopScope` across home templates for safer back navigation.
+
+### Tech
+- New `ShimmerHelper.buildProductSliverGridShimmer()` for sliver grids.
+- New `HomeAllProductsSliver` widget (replaces `HomeAllProducts2`) and `allProductsSliver(...)` helper.
+- Removed `mainScrollController` / per-grid controllers in favor of metrics-based pagination.
+- Guarded duplicate fetch when at exact `maxScrollExtent`.
+
+### Orders
+- `OrderRepository.getOrderItems()` now returns **OrderItemResponse** instead of dynamic.
+- `OrderDetails`: typed list, null-safety for fields, uses `StringHelper.direction` for product name, safer price string.
+- `Order` model: added color for **picked_up** status.
+
+### Lists
+- `OrderList`: initial skeleton now scrollable; switched to `ListView.separated` with `AlwaysScrollableScrollPhysics`.
+
+### API impact
+- **None** (no endpoint/path changes).
+
+### Store update
+- must update in play store or apple store: **Yes** fixes a client-side crash/assertion (Products not get with pagination successfully in home ).
+</details>
+
+<details>
+<summary><strong>AV 9.10.36 - Fix: remove pirated logo ticker animation to prevent disposal crash</strong></summary>
 
 ### Bugfix
 - Removed bouncing animation for “pirated” logo to stop `_WidgetTicker` assertion during language changes and rapid navigation.

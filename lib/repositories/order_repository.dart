@@ -68,7 +68,7 @@ class OrderRepository {
     return commonResponseFromJson(response.body);
   }
 
-  Future<dynamic> getOrderItems({int? id = 0}) async {
+  Future<OrderItemResponse> getOrderItems({int? id = 0}) async {
     final String url =
         ("${AppConfig.BASE_URL}/purchase-history-items/" + id.toString());
     final Map<String, String> header = commonHeader;
