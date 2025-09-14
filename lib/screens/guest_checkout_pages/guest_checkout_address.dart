@@ -231,7 +231,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     setValues();
 
     final Map<String, String> postValue = {
-      "email": email!,
+      if (email?.trim().isNotEmpty == true) "email": email!,
       "phone": phone!,
     };
 
@@ -411,7 +411,8 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                               ),
                               addAddress: (addressEntity) async {
                                 _nameController.text = addressEntity.name!;
-                                _emailController.text = addressEntity.email!;
+                                _emailController.text =
+                                    addressEntity.email ?? '';
                                 _passwordController.text =
                                     addressEntity.password!;
                                 _addressController.text =

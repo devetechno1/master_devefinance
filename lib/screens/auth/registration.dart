@@ -27,6 +27,7 @@ import 'package:validators/validators.dart';
 import '../../custom/loading.dart';
 import '../../data_model/otp_provider_model.dart';
 import '../../helpers/auth_helper.dart';
+import '../../helpers/business_setting_helper.dart';
 import '../../repositories/address_repository.dart';
 import '../../ui_elements/select_otp_provider_widget.dart';
 import '../home/home.dart';
@@ -118,6 +119,8 @@ class _RegistrationState extends State<Registration> {
       );
       return;
     } else if (AppConfig.businessSettingsData.mustOtp && provider == null) {
+      BusinessSettingHelper.getOTPLoginProviders();
+      setState(() {});
       ToastComponent.showDialog(
         'please_select_otp_provider'.tr(context: context),
         isError: true,

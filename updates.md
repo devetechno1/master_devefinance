@@ -5,10 +5,35 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.38'`
+- `mobileVersion = '9.10.39'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.39 – Checkout settings & OTP flow polish</strong></summary>
+
+### UI/UX
+- Checkout: Show optional `checkout_message` above payment methods (auto RTL/LTR).
+- Address: Conditionally hide **Email** (`hide_email_checkout`) and **Postal Code** (`hide_postal_code_checkout`) fields; validation adapts accordingly.
+
+### Auth / Flow
+- Registration: When OTP is required but no provider selected, refresh OTP providers and prompt selection.
+- Routing: Simplified mail verification gating in `AIZRoute` (broader coverage).
+
+### Cart
+- Totals parsing made null-safe for currency code/symbol.
+
+### Guest Checkout
+- Send `email` only if non-empty; safer form prefill.
+
+### API / Backend
+- No endpoint changes. Client now consumes new business settings keys:
+  - `hide_email_checkout`, `hide_postal_code_checkout`, `checkout_message`.
+
+### Must Update (Stores)
+- **No** – client-side UI/flow only.
+</details>
+
 <details>
 <summary><strong>AV 9.10.38 – Filter grid stabilization & debug logging</strong></summary>
 

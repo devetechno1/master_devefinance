@@ -11,6 +11,8 @@ import 'update_model.dart';
 import 'verification_form.dart';
 
 class BusinessSettingsData extends Equatable {
+  final bool hideEmailCheckout;
+  final bool hidePostalCodeCheckout;
   final bool showWholesaleLabel;
   final bool showPackingQtyWholesaleProduct;
   final bool showPackingQtyPriceWholesaleProduct;
@@ -106,6 +108,7 @@ class BusinessSettingsData extends Equatable {
   final String? bkashSandbox;
   final bool headerMenuLabels;
   final bool headerMenuLinks;
+  final String? checkoutMessage;
   final String? proxypay;
   final String? proxypaySandbox;
   final String? googleMap;
@@ -278,6 +281,9 @@ class BusinessSettingsData extends Equatable {
       allowFacebookLogin || allowGoogleLogin || otpProviders.isNotEmpty;
 
   BusinessSettingsData({
+    this.hideEmailCheckout = false,
+    this.hidePostalCodeCheckout = false,
+    this.checkoutMessage,
     this.showWholesaleLabel = false,
     this.showPackingQtyWholesaleProduct = false,
     this.showPackingQtyPriceWholesaleProduct = false,
@@ -562,6 +568,11 @@ class BusinessSettingsData extends Equatable {
     }
     return BusinessSettingsData(
         updateData: updateData,
+        hideEmailCheckout: "${data['hide_email_checkout']}" == "1",
+        hidePostalCodeCheckout: "${data['hide_postal_code_checkout']}" == "1",
+        checkoutMessage: data['checkout_message'] == null
+            ? null
+            : "${data['checkout_message']}".trim(),
         showWholesaleLabel: (data['wholesale_lable'] as String?) == "1",
         showPackingQtyWholesaleProduct:
             (data['packing_quty_wholesale_product'] as String?) == "1",
@@ -679,8 +690,7 @@ class BusinessSettingsData extends Equatable {
         authorizenetSandbox: data['authorizenet_sandbox'] as String?,
         minOrderAmountCheckActivat:
             data['min_order_amount_check_activat'] as dynamic,
-        minimumOrderAmount:
-            double.parse(data['minimum_order_amount'] as String? ?? '0.0'),
+        minimumOrderAmount: double.parse(data['minimum_order_amount'] as String? ?? '0.0'),
         freeShippingMinimumOrderAmount: double.parse(data['free_shipping_minimum_order_amount'] as String? ?? '0.0'),
         itemName: data['item_name'] as String?,
         aamarpaySandbox: (data['aamarpay_sandbox'] as String?) == "1",

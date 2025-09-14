@@ -122,13 +122,17 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         isError: true,
       );
       return;
-    } else if (_emailController.text.trim().isEmpty && !is_logged_in.$) {
+    } else if (!AppConfig.businessSettingsData.hideEmailCheckout &&
+        _emailController.text.trim().isEmpty &&
+        !is_logged_in.$) {
       ToastComponent.showDialog(
         'email_required'.tr(context: context),
         isError: true,
       );
       return;
-    } else if ((!emailValid) && !is_logged_in.$) {
+    } else if (!AppConfig.businessSettingsData.hideEmailCheckout &&
+        (!emailValid) &&
+        !is_logged_in.$) {
       ToastComponent.showDialog(
         'enter_correct_email'.tr(context: context),
         isError: true,
@@ -208,7 +212,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     widget.addAddress(
       AddressDataEntity(
         name: _nameController.text.trim(),
-        email: _emailController.text.trim(),
+        email: AppConfig.businessSettingsData.hideEmailCheckout
+            ? null
+            : _emailController.text.trim(),
         address: address,
         postalCode: postalCode,
         phone: _phone,
@@ -310,18 +316,20 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   ),
                 ),
               ),
-              _TitleFieldWidget(
-                title: "${'email_ucf'.tr(context: context)} *",
-                fieldWidget: TextField(
-                  controller: _emailController,
-                  textInputAction: TextInputAction.next,
-                  autofocus: false,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecorations.buildInputDecoration_with_border(
-                    'enter_email'.tr(context: context),
+              if (!AppConfig.businessSettingsData.hideEmailCheckout)
+                _TitleFieldWidget(
+                  title: "${'email_ucf'.tr(context: context)} *",
+                  fieldWidget: TextField(
+                    controller: _emailController,
+                    textInputAction: TextInputAction.next,
+                    autofocus: false,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration:
+                        InputDecorations.buildInputDecoration_with_border(
+                      'enter_email'.tr(context: context),
+                    ),
                   ),
                 ),
-              ),
             ],
             _TitleFieldWidget(
               fieldWidgetHeight: null,
@@ -415,17 +423,18 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 ),
               ),
             ),
-            _TitleFieldWidget(
-              title: 'postal_code'.tr(context: context),
-              fieldWidget: TextField(
-                controller: _postalCodeController,
-                autofocus: false,
-                maxLines: null,
-                decoration: InputDecorations.buildInputDecoration_with_border(
-                  'enter_postal_code_ucf'.tr(context: context),
+            if (!AppConfig.businessSettingsData.hidePostalCodeCheckout)
+              _TitleFieldWidget(
+                title: 'postal_code'.tr(context: context),
+                fieldWidget: TextField(
+                  controller: _postalCodeController,
+                  autofocus: false,
+                  maxLines: null,
+                  decoration: InputDecorations.buildInputDecoration_with_border(
+                    'enter_postal_code_ucf'.tr(context: context),
+                  ),
                 ),
               ),
-            ),
 
             //if statement
             if (!is_logged_in.$) ...[

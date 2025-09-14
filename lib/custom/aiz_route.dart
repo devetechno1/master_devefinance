@@ -1,10 +1,7 @@
-import 'package:active_ecommerce_cms_demo_app/data_model/address_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/checkout/select_address.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -72,7 +69,9 @@ class AIZRoute {
   }
 
   static OTPProviderModel? getProvider(
-      bool isPhone, OTPProviderModel? provider) {
+    bool isPhone,
+    OTPProviderModel? provider,
+  ) {
     return isPhone
         ? provider ?? AppConfig.businessSettingsData.otpProviders.firstOrNull
         : null;
@@ -162,11 +161,11 @@ class AIZRoute {
   }
 
   static bool _isMailVerifiedRoute(Widget widget) {
-    bool mailVerifiedRoute = false;
-    mailVerifiedRoute = <Type>[SelectAddress, Address, Profile]
-        .any((element) => widget.runtimeType == element);
+    // bool mailVerifiedRoute = true;
+    // mailVerifiedRoute = <Type>[SelectAddress, Address, Profile]
+    //     .any((element) => widget.runtimeType == element);
     if (is_logged_in.$ &&
-        mailVerifiedRoute &&
+        // mailVerifiedRoute &&
         SystemConfig.systemUser != null) {
       final bool isMailVerified =
           SystemConfig.systemUser!.emailVerified ?? false;

@@ -3,6 +3,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -693,14 +694,26 @@ class _CheckoutState extends State<Checkout> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
+                        if (AppConfig.businessSettingsData.checkoutMessage
+                                ?.isNotEmpty ==
+                            true)
+                          Padding(
+                            padding: const EdgeInsets.all(
+                              AppDimensions.paddingDefault,
+                            ),
+                            child: Text(
+                              AppConfig.businessSettingsData.checkoutMessage!,
+                              textDirection: AppConfig.businessSettingsData
+                                  .checkoutMessage!.direction,
+                            ),
+                          ),
                         Padding(
                           padding: const EdgeInsets.all(
-                              AppDimensions.paddingDefault),
+                            AppDimensions.paddingDefault,
+                          ),
                           child: buildPaymentMethodList(),
                         ),
-                        Container(
-                          height: 292,
-                        )
+                        const SizedBox(height: 292)
                       ],
                     ),
                   )

@@ -340,12 +340,12 @@ class CartProvider extends ChangeNotifier {
 
   void getSetCartTotal() {
     _cartTotalString = _shopResponse!.grandTotal!.replaceAll(
-        SystemConfig.systemCurrency!.code!,
-        SystemConfig.systemCurrency!.symbol!);
+        SystemConfig.systemCurrency?.code ?? '',
+        SystemConfig.systemCurrency?.symbol ?? '');
     _cartTotal = double.tryParse(_cartTotalString
             .replaceAll(",", '')
-            .replaceAll("${SystemConfig.systemCurrency!.symbol}", '')
-            .replaceAll("${SystemConfig.systemCurrency!.code}", '')) ??
+            .replaceAll("${SystemConfig.systemCurrency?.symbol}", '')
+            .replaceAll("${SystemConfig.systemCurrency?.code}", '')) ??
         0;
 
     notifyListeners();
@@ -585,9 +585,9 @@ class CartProvider extends ChangeNotifier {
                 AppConfig.businessSettingsData.sellerWiseShipping
                     ? const ShippingInfo()
                     : const SelectAddress(),
+                SystemConfig.systemUser?.phone,
                 null,
-                null,
-                false,
+                SystemConfig.systemUser?.phone != null,
               ).then((value) {
                 onPopped(context, value);
               });
