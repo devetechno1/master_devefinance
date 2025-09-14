@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/category.dart';
@@ -122,8 +123,9 @@ class ProductRepository {
     final response = await ApiRequest.get(url: url, headers: {
       "App-Language": app_language.$!,
     });
-
+    log("reeeees ${response.body}");
     return productMiniResponseFromJson(response.body);
+    
   }
 
   Future<ProductMiniResponse> getDigitalProducts({

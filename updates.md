@@ -5,10 +5,26 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.37'`
+- `mobileVersion = '9.10.38'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.38 – Filter grid stabilization & debug logging</strong></summary>
+
+### UI/UX
+- Filter: Replaced `MasonryGridView.count` with `GridView.builder` + `SliverGridDelegateWithFixedCrossAxisCount(2)` and fixed `childAspectRatio = 0.63` (centralized in `AppDimensions.productGridChildAspectRatio`) to stabilize the layout and reduce masonry-related issues during load-more.
+
+### Infra / Debug
+- `ProductRepository.getFilteredProducts`: Added `dart:developer log()` to print the response body for easier troubleshooting during development.
+
+### API / Backend
+- No changes to endpoints or schema.
+
+### Must Update (Stores)
+- **No** – UI layout and logging only.
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.37 – Home sliver pagination, masonry shimmer, and orders null-safety</strong></summary>

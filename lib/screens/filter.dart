@@ -1119,16 +1119,19 @@ class _FilterState extends State<Filter> {
                   height: MediaQuery.viewPaddingOf(context).top > 40 ? 150 : 135
                   //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
                   ),
-              MasonryGridView.count(
+              GridView.builder(
                 // 2
                 //addAutomaticKeepAlives: true,
                 itemCount: hasMoreProducts
                     ? _productList.length + 2
                     : _productList.length,
                 controller: _scrollController,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
+                childAspectRatio: 0.63,  
+                ),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingSupSmall,
                     bottom: AppDimensions.paddingSupSmall,
