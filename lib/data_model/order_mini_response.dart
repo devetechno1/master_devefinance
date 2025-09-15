@@ -88,9 +88,9 @@ class Order {
       case "confirmed":
         return Colors.green;
       case "picked_up":
-        return Colors.orangeAccent.shade400;
+        return Colors.orangeAccent.shade200;
       case "pending":
-        return Colors.orangeAccent;
+        return Colors.orangeAccent.shade700;
       case "delivered":
         return Colors.green;
       default:

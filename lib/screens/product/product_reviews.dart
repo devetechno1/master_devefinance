@@ -308,8 +308,10 @@ class _ProductReviewsState extends State<ProductReviews> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingSmallExtra),
+                              bottom: AppDimensions.paddingSmallExtra,
+                              right: AppDimensions.paddingDefault),
                           child: Text(
+                            textDirection:TextDirection.ltr,
                             _reviewList[index].time,
                             style: const TextStyle(color: MyTheme.medium_grey),
                           ),

@@ -37,13 +37,18 @@ class DeliveryStatus {
   static List<DeliveryStatus> getDeliveryStatusList() {
     return <DeliveryStatus>[
       DeliveryStatus('', 'all_ucf'.tr()),
+      DeliveryStatus('pending', 'pending_ucf'.tr()),
       DeliveryStatus('confirmed', 'confirmed_ucf'.tr()),
+      DeliveryStatus('picked_up', 'picked_up_ucf'.tr()),
       DeliveryStatus('on_the_way', 'on_the_way_ucf'.tr()),
       DeliveryStatus('delivered', 'delivered_ucf'.tr()),
     ];
   }
 }
 
+
+      // case "picked_up":
+      //   return Colors.orangeAccent.shade200;
 class OrderList extends StatefulWidget {
   const OrderList({Key? key, this.from_checkout = false}) : super(key: key);
   final bool from_checkout;
