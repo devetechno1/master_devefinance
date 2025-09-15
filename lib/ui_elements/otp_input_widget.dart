@@ -108,23 +108,26 @@ class OtpInputWidget extends StatelessWidget {
 
     return SizedBox(
       width: double.maxFinite,
-      child: Pinput(
-        length: controller.length,
-        controller: controller.pinController,
-        focusNode: controller.focusNode,
-        defaultPinTheme: defaultTheme,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        separatorBuilder: (index) =>
-            const SizedBox(width: AppDimensions.paddingNormal),
-        autofocus: autofocus,
-        // iOS hint
-        autofillHints: const [AutofillHints.oneTimeCode],
-        keyboardType: isDigitOnly ? TextInputType.number : TextInputType.text,
-        inputFormatters: [
-          if (isDigitOnly) FilteringTextInputFormatter.digitsOnly,
-        ],
-        onChanged: onChanged,
-        onCompleted: onCompleted,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Pinput(
+          length: controller.length,
+          controller: controller.pinController,
+          focusNode: controller.focusNode,
+          defaultPinTheme: defaultTheme,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          separatorBuilder: (index) =>
+              const SizedBox(width: AppDimensions.paddingNormal),
+          autofocus: autofocus,
+          // iOS hint
+          autofillHints: const [AutofillHints.oneTimeCode],
+          keyboardType: isDigitOnly ? TextInputType.number : TextInputType.text,
+          inputFormatters: [
+            if (isDigitOnly) FilteringTextInputFormatter.digitsOnly,
+          ],
+          onChanged: onChanged,
+          onCompleted: onCompleted,
+        ),
       ),
     );
   }

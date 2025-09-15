@@ -5,10 +5,32 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.39'`
+- `mobileVersion = '9.10.40'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.40 – OTP input LTR consistency</strong></summary>
+
+### Why
+Users on RTL locales (e.g., Arabic) saw OTP cells flow right-to-left, which is confusing for numeric codes.
+
+### Changes
+- Force LTR for OTP entry by wrapping `Pinput` with `Directionality(textDirection: TextDirection.ltr)`.
+
+### UX
+- OTP digits always fill from left to right, across locales.
+
+### API / Backend
+- No endpoint or schema changes.
+
+### Store update required?
+- **Yes** (client-side UX fix).
+
+</details>
+
+<!-- Update the Latest Versions block if you keep it in-sync -->
+
 <details>
 <summary><strong>AV 9.10.39 – Checkout settings & OTP flow polish</strong></summary>
 
