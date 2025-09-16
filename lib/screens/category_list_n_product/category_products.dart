@@ -204,14 +204,16 @@ class _CategoryProductsState extends State<CategoryProducts> {
     );
   }
 
-  void changeSearchMode(bool inSearchMode) {
+  Future<void> changeSearchMode(bool inSearchMode) async {
     _showSearchBar = inSearchMode;
+    _searchKey = "";
+    _searchController.clear();
     if (_showSearchBar) {
       reset();
     } else {
       getSubCategory();
+      controller.reset();
     }
-    setState(() {});
   }
 
   Container buildAppBarSearchOption(BuildContext context) {
