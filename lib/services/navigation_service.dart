@@ -23,17 +23,17 @@ class NavigationService {
     context ??= OneContext().context!;
     final Uri? uri = Uri.tryParse(url ?? '');
     try {
-      if (uri?.hasAbsolutePath ?? false) {
-        if (uri?.host == AppConfig.DOMAIN_PATH) {
+      if (uri != null) {
+        if (uri.host == AppConfig.DOMAIN_PATH) {
           await callBackDeepLink?.call();
           if (useGo) {
-            context.go(uri!.paramPath);
+            context.go(uri.paramPath);
           } else {
-            context.push(uri!.paramPath);
+            context.push(uri.paramPath);
           }
         } else {
           await callBackURL?.call();
-          await launchUrl(uri!);
+          await launchUrl(uri);
         }
       } else {
         throw 'invalidURL'.tr(context: context);

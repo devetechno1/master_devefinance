@@ -5,10 +5,35 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.40'`
+- `mobileVersion = '9.10.41'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.41 – External link handling & package visibility</strong></summary>
+
+### Android
+- Added **package visibility** queries for `mailto:`, `sms:`, `tel:`, `http:`, and `https:` under `android/app/src/main/AndroidManifest.xml` to ensure `url_launcher` can resolve external handlers on Android 11+.
+- No runtime permission changes.
+
+### iOS
+- Updated **LSApplicationQueriesSchemes** in `ios/Runner/Info.plist` to include `mailto`, `ms-outlook`, `googlegmail`, `tel`, `sms`, `http`, `https`, `comgooglemaps`, and `waze` for safer `canOpenURL` checks.
+
+### Flutter
+- Hardened `NavigationService.handleUrls()` logic:
+  - Treats router-relative paths (e.g., `/product/1?ref=...`) as in-app routes.
+  - Routes links with host **`${AppConfig.DOMAIN_PATH}`** via `GoRouter`.
+  - Opens all other schemes/hosts externally via `url_launcher` with `LaunchMode.externalApplication`.
+  - Preserves translated error message on invalid URLs.
+
+### API / Backend
+- No endpoint or schema changes.
+
+### Must Update (Stores)
+- **Yes** – manifest/plist changes + user-visible link handling.
+
+</details>
+
 <details>
 <summary><strong>AV 9.10.40 – OTP input LTR consistency</strong></summary>
 
