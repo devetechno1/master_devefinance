@@ -5,10 +5,31 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.41'`
+- `mobileVersion = '9.10.42'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.42 – Monitoring & Error Tracking Integration</strong></summary>
+
+### Features
+- Integrated **Firebase Crashlytics (NDK)** for fatal error reporting.
+- Added **Sentry** for extended monitoring (optional via `sentry_dsn` from Business Settings).
+- Added **Microsoft Clarity** session recording (optional via `clarity_project_id`).
+- Unified error handler: forwards Flutter and platform errors to Crashlytics and Sentry.
+- Clarity sets `user_id` or `temp_user_id` when available.
+
+### API / Backend
+- `BusinessSettingsData` now maps optional keys:
+  - `"sentry_dsn"` → `sentryDSN`
+  - `"clarity_project_id"` → `clarityProjectId`
+- No existing endpoint schema changes.
+
+### Must Update (Stores)
+- **No** – adds new monitoring behavior and Crashlytics NDK.
+
+</details>
+
 <details>
 <summary><strong>AV 9.10.41 – External link handling & package visibility</strong></summary>
 

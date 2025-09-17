@@ -6,7 +6,9 @@ import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/update_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/services/navigation_service.dart';
 import 'package:app_links/app_links.dart';
+import 'package:clarity_flutter/clarity_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +18,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_value/shared_value.dart';
 import 'package:device_preview/device_preview.dart';
 
@@ -70,12 +73,34 @@ import 'services/push_notification_service.dart';
 import 'single_banner/photo_provider.dart';
 
 void main() async {
+  if (AppConfig.businessSettingsData.useSentry) {
+    SentryWidgetsFlutterBinding.ensureInitialized();
+    await SentryFlutter.init(
+      (options) {
+        options.dsn = AppConfig.businessSettingsData.sentryDSN;
+        options.sendDefaultPii = true;
+      },
+      appRunner: appRunner,
+    );
+  } else {
+    await appRunner();
+  }
+}
+
+Future<void> appRunner() async {
   WidgetsFlutterBinding.ensureInitialized();
   ErrorWidget.builder = (e) {
     return CustomErrorWidget(errorMessage: e.summary.value);
   };
-
-  final Widget app = SharedValue.wrapApp(MyApp());
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    recordError(details.exception, details.stack);
+  };
+  WidgetsBinding.instance.platformDispatcher.onError = (error, stack) {
+    recordError(error, stack);
+    return true; // Mark as handled
+  };
+  Widget app = SharedValue.wrapApp(MyApp());
 
   AppConfig.storeType = await StoreType.thisDeviceType();
 
@@ -110,12 +135,30 @@ void main() async {
     systemNavigationBarDividerColor: Colors.transparent,
   ));
 
+  if (AppConfig.businessSettingsData.useClarity) {
+    app = ClarityWidget(
+      clarityConfig: ClarityConfig(
+        projectId: AppConfig.businessSettingsData.clarityProjectId!,
+        logLevel: LogLevel.None,
+      ),
+      app: app,
+    );
+  }
+  if (AppConfig.businessSettingsData.useSentry) app = SentryWidget(child: app);
+
   runApp(
     DevicePreview(
       enabled: AppConfig.turnDevicePreviewOn,
       builder: (context) => app,
     ),
   );
+}
+
+void setCustomUserIdClarity() {
+  if ((user_id.$ != null || temp_user_id.$.isNotEmpty) &&
+      AppConfig.businessSettingsData.useClarity) {
+    Clarity.setCustomUserId("${user_id.$ ?? temp_user_id.$}");
+  }
 }
 
 bool _isUpdateScreenOpened = false;
@@ -138,6 +181,7 @@ var routes = GoRouter(
         path: '/',
         name: "Home",
         redirect: (context, state) {
+          setCustomUserIdClarity();
           final extra = state.extra;
           if (extra is Map<String, dynamic>) {
             if (extra["skipUpdate"] == true) skipUpdate = true;
@@ -374,6 +418,7 @@ class MyMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setCustomUserIdClarity();
     return Consumer<LocaleProvider>(
       builder: (context, provider, snapshot) {
         final ThemeProvider theme =
@@ -449,4 +494,11 @@ Future<void> _handleDeepLink() async {
       },
     );
   });
+}
+
+void recordError(Object error, StackTrace? stack) {
+  FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  if (AppConfig.businessSettingsData.useSentry) {
+    Sentry.captureException(error, stackTrace: stack);
+  }
 }

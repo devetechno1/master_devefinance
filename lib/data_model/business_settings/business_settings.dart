@@ -269,6 +269,8 @@ class BusinessSettingsData extends Equatable {
   final double? deliveryPickupLongitude;
   final double? deliveryPickupLatitude;
   final String? whatsappNumber;
+  final String? clarityProjectId;
+  final String? sentryDSN;
   final UpdateDataModel? updateData;
 
   final List<OTPProviderModel> _otpProviders = List.empty(growable: true);
@@ -279,6 +281,9 @@ class BusinessSettingsData extends Equatable {
 
   bool get otherLogins =>
       allowFacebookLogin || allowGoogleLogin || otpProviders.isNotEmpty;
+
+  bool get useSentry => sentryDSN?.isNotEmpty == true;
+  bool get useClarity => clarityProjectId?.isNotEmpty == true;
 
   BusinessSettingsData({
     this.hideEmailCheckout = false,
@@ -539,6 +544,8 @@ class BusinessSettingsData extends Equatable {
     this.cuponSubtitle = false,
     this.deliveryPickupLongitude,
     this.deliveryPickupLatitude,
+    this.clarityProjectId,
+    this.sentryDSN,
   });
 
   factory BusinessSettingsData.fromMap(Map<String, dynamic> data) {
@@ -567,6 +574,8 @@ class BusinessSettingsData extends Equatable {
         updateData = null;
     }
     return BusinessSettingsData(
+        sentryDSN: (data['sentry_dsn'] as String?)?.trim(),
+        clarityProjectId: (data['clarity_project_id'] as String?)?.trim(),
         updateData: updateData,
         hideEmailCheckout: "${data['hide_email_checkout']}" == "1",
         hidePostalCodeCheckout: "${data['hide_postal_code_checkout']}" == "1",
