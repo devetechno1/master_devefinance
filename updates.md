@@ -5,10 +5,39 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.42'`
+- `mobileVersion = '9.10.43'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.43 – iOS Crashlytics & safer WebView link handling</strong></summary>
+
+### iOS
+- Added **Firebase Crashlytics** integration:
+  - Pod dependencies (`Firebase/Crashlytics`, `FirebaseSessions`, `FirebaseRemoteConfigInterop`).
+  - Xcode build phase **“Firebase Crashlytics”** run script.
+  - Set `DEBUG_INFORMATION_FORMAT` to **dwarf-with-dsym** to ensure symbolicated reports.
+- `Info.plist`: added `facetime` to **LSApplicationQueriesSchemes**.
+
+### Flutter (WebView & Navigation)
+- `CommonWebviewScreen` & `ProductDetails`:
+  - Do **not** intercept navigation during the **initial page load**.
+  - Intercept external/deep links **after** `onPageFinished` only.
+- `NavigationService.handleUrls(...)`:
+  - Now returns `Future<bool>` (true when handled).
+  - Deep links to `${AppConfig.DOMAIN_PATH}` are routed via `GoRouter`.
+  - Ignores paths containing `/mobile-page` to allow router fallback pages to render inside WebView.
+  - External URLs launched via `url_launcher`; errors surface via `SnackBar`.
+
+### API / Backend
+- No endpoint or schema changes.
+
+### Must Update (Stores)
+- **Yes** — iOS native build config + user-visible link handling behavior.
+
+</details>
+
+
 <details>
 <summary><strong>AV 9.10.42 – Monitoring & Error Tracking Integration</strong></summary>
 

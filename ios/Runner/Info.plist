@@ -76,6 +76,7 @@
 			<string>ms-outlook</string>
 			<string>googlegmail</string>
 			<string>tel</string>
+			<string>facetime</string>
 			<string>sms</string>
 			<string>http</string>
 			<string>https</string>

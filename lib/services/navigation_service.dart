@@ -11,7 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static Future<void> handleUrls(
+  static Future<bool> handleUrls(
     String? url, {
     BuildContext? context,
     bool useGo = false,
@@ -19,21 +19,23 @@ class NavigationService {
     FutureOr<void> Function()? callBackURL,
     FutureOr<void> Function()? callBackError,
   }) async {
-    if (url?.isNotEmpty != true) return;
+    if (url?.isNotEmpty != true) return false;
     context ??= OneContext().context!;
     final Uri? uri = Uri.tryParse(url ?? '');
     try {
       if (uri != null) {
         if (uri.host == AppConfig.DOMAIN_PATH) {
+          if (uri.paramPath.contains("/mobile-page")) return false;
           await callBackDeepLink?.call();
           if (useGo) {
             context.go(uri.paramPath);
           } else {
             context.push(uri.paramPath);
           }
+          return true;
         } else {
           await callBackURL?.call();
-          await launchUrl(uri);
+          return await launchUrl(uri);
         }
       } else {
         throw 'invalidURL'.tr(context: context);
@@ -43,6 +45,7 @@ class NavigationService {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
+      return false;
     }
   }
 

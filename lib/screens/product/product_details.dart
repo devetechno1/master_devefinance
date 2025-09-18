@@ -132,6 +132,7 @@ class _ProductDetailsState extends State<ProductDetails>
   bool _relatedProductInit = false;
   final List<dynamic> _topProducts = [];
   bool _topProductInit = false;
+  bool _isInitialLoadDone = false;
   @override
   void initState() {
     quantityText.text = "$_quantity";
@@ -166,20 +167,30 @@ class _ProductDetailsState extends State<ProductDetails>
     });
     fetchAll();
     super.initState();
-    controller.setNavigationDelegate(
-      NavigationDelegate(
-        onNavigationRequest: (request) async {
-          final Uri? uri = Uri.tryParse(request.url);
-          if (uri != null && await canLaunchUrl(uri)) {
-            NavigationService.handleUrls(
-              request.url,
-              callBackDeepLink: Navigator.of(context).pop,
-            );
-          }
-          return NavigationDecision.prevent;
-        },
-      ),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.setNavigationDelegate(
+        NavigationDelegate(
+          onNavigationRequest: (request) async {
+            final Uri? uri = Uri.tryParse(request.url);
+            if (uri != null && _isInitialLoadDone) {
+              final bool handled = await NavigationService.handleUrls(
+                request.url,
+                callBackDeepLink: Navigator.of(context).pop,
+              );
+              if (handled) {
+                return NavigationDecision.prevent;
+              }
+            }
+            return NavigationDecision.navigate;
+          },
+          onPageFinished: (url) {
+            _isInitialLoadDone = true;
+            getDescriptionHeight();
+          },
+          onPageStarted: (url) => _isInitialLoadDone = false,
+        ),
+      );
+    });
   }
 
   @override
@@ -242,13 +253,14 @@ class _ProductDetailsState extends State<ProductDetails>
 
   setProductDetailValues() {
     if (_productDetails != null) {
-      controller.loadHtmlString(makeHtml(_productDetails!.description!)).then(
-        (value) {
-          WidgetsBinding.instance.addPostFrameCallback((_) async {
-            getDescriptionHeight();
-          });
-        },
-      );
+      controller.loadHtmlString(makeHtml(_productDetails!.description!));
+      // .then(
+      //   (value) {
+      //     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      //       getDescriptionHeight();
+      //     });
+      //   },
+      // );
       _appbarPriceString = _productDetails!.price_high_low;
       _singlePrice = _productDetails!.calculable_price;
       _singlePriceString = _productDetails!.main_price;
@@ -2663,20 +2675,27 @@ class _ProductDetailsState extends State<ProductDetails>
     getDescriptionHeight();
   }
 
+  int errorsTimes = 0;
+
   Future<void> getDescriptionHeight() async {
+    if (errorsTimes > 3) return;
+
+    errorsTimes++;
     try {
       final String value = (await controller.runJavaScriptReturningResult(
         "document.getElementById('scaled-frame').clientHeight",
       ))
           .toString();
       if (value.trim() == 'null' && webViewHeight == null) {
-        return await getDescriptionHeight();
+        throw "value (webViewHeight) is null";
       }
       webViewHeight = double.parse(value.toString());
+      errorsTimes = 0;
 
       setState(() {});
     } catch (e) {
-      print("Error in runJavaScriptReturningResult : $e");
+      print("Error in runJavaScriptReturningResult : $e - times $errorsTimes");
+      return await getDescriptionHeight();
     }
   }
 
