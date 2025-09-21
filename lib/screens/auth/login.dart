@@ -757,6 +757,7 @@ class _LoginState extends State<Login> {
                     //     assetImage: AppImages.otp,
                     //     imageColor: Theme.of(context).primaryColor,
                     //   ),
+                    if (AppConfig.businessSettingsData.allowOTPLogin)
                     ...List.generate(
                       AppConfig.businessSettingsData.otpProviders.length,
                       (i) {
