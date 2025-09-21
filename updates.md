@@ -5,10 +5,83 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.43'`
+- `mobileVersion = '9.10.44'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.44 – Centralized downloads, digital items logic, and unified crash capture</strong></summary>
+
+### Flutter — Downloads & Error Reporting
+
+* **Centralized file downloads** in `ApiRequest.downloadFile(endPoint)`:
+
+  * Initializes `FlutterDownloader` (registers callback) and isolates safely.
+  * Creates platform-appropriate **Download** directory and requests storage permission when needed.
+  * Passes **auth/headers** via `commonHeader`.
+  * Shows localized toasts: `"download_started"` / `"download_failed"`.
+* Replaced ad-hoc download code with the centralized helper:
+
+  * **OrderDetails**: `_downloadInvoice(int id)` → `ApiRequest.downloadFile("/invoice/download/$id")`.
+  * **PurchasedDigitalProductCard**: direct call to `ApiRequest.downloadFile("/purchased-products/download/<id>")`.
+* **Crash capture**: added `recordError(e, StackTrace.current)` in multiple catch blocks:
+
+  * `aiz_summer_note.dart`, `paged_view.dart`, `map_location.dart`, `product_details.dart`,
+    `navigation_service.dart`, `execute_and_handle_remote_errors.dart`.
+* `main.dart`:
+
+  * Uses `AppConfig.isDebugMode` for `FlutterDownloader.initialize`.
+  * Registers global downloader callback.
+  * **Clarity**: renamed & expanded to `setCustomUserDataClarity()`; now sets `userId` and tags:
+    `id`, `name`, `email`, `phone`, `language`. Updated call sites.
+
+### Cart & Checkout (Digital items)
+
+* **`CartItem`**:
+
+  * New field: `isDigital` (parsed from `"is_digital"`), defaults to `false`.
+  * `maxQuantity` now `999999` for digital items; otherwise `min(upperLimit, _maxQty ?? upperLimit)`.
+* **Cart UI**:
+
+  * Adjusted padding and **hide quantity controls** when `item.isDigital == true`.
+* **ShippingInfo**:
+
+  * For digital items with `quantity == 1`, show `price_ucf: <price>` instead of `qty × price = total`.
+
+### Product Details
+
+* Description overlay refactor:
+
+  * Replaced fixed `Positioned.fill` with **`AnimatedPositioned`** for smoother “view more/less” transitions.
+  * Added error reporting around `runJavaScriptReturningResult`.
+
+### i18n
+
+* Added keys (EN/AR):
+
+  * `"download_started"`, `"download_failed"`, `"Newest"`, `"Oldest"`, `"Smallest"`, `"Largest"`.
+* **UploadFile** sort labels now localized via `.tr()`.
+
+### Cleanups
+
+* Removed duplicated platform download helpers and scattered downloader init.
+* Minor imports alignment (`main.dart` & others).
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+### Must Update (Stores)
+
+* **No** – runtime behavior only (downloads/error capture/i18n). No manifest/plist changes in this patch.
+
+</details>
+
+
+
+
+
 <details>
 <summary><strong>AV 9.10.43 – iOS Crashlytics & safer WebView link handling</strong></summary>
 

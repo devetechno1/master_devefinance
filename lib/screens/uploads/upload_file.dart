@@ -42,10 +42,10 @@ class _UploadFileState extends State<UploadFile> {
 
   CommonDropDownItem? sortBy;
   List<CommonDropDownItem> sortList = [
-    CommonDropDownItem("newest", "Newest"),
-    CommonDropDownItem("oldest", "Oldest"),
-    CommonDropDownItem("smallest", "Smallest"),
-    CommonDropDownItem("largest", "Largest")
+    CommonDropDownItem("newest", "Newest".tr()),
+    CommonDropDownItem("oldest", "Oldest".tr()),
+    CommonDropDownItem("smallest", "Smallest".tr()),
+    CommonDropDownItem("largest", "Largest".tr())
   ];
 
   List<FileInfo> _images = [];

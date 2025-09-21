@@ -86,9 +86,11 @@ class CartItem {
   int? lowerLimit;
   int upperLimit;
   int? _maxQty;
+  bool isDigital;
   bool isLoading;
   List<Wholesale> wholesales;
-  int get maxQuantity => min(upperLimit, _maxQty ?? upperLimit);
+  int get maxQuantity =>
+      isDigital ? 999999 : min(upperLimit, _maxQty ?? upperLimit);
   int get minQuantity => lowerLimit ?? 1;
 
   bool get isNotAvailable => maxQuantity < quantity || quantity < minQuantity;
@@ -109,6 +111,7 @@ class CartItem {
     this.quantity = 0,
     this.lowerLimit,
     this.upperLimit = 0,
+    this.isDigital = false,
     int? maxQty,
     this.isLoading = false,
     this.wholesales = const [],
@@ -133,6 +136,7 @@ class CartItem {
         quantity: json["quantity"] ?? 0,
         lowerLimit: json["lower_limit"],
         upperLimit: json["upper_limit"] ?? 0,
+        isDigital: "${json["is_digital"]}" == "1",
         wholesales: json["wholesale_variation"] == null
             ? []
             : List<Wholesale>.from((json["wholesale_variation"] as List)

@@ -395,8 +395,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
     final cartAddResponse = await CartRepository()
         .getCartAddResponse(_productDetails!.id, _variant, 1);
 
-    temp_user_id.$ = cartAddResponse.tempUserId;
-    temp_user_id.save();
+    // temp_user_id.$ = cartAddResponse.tempUserId;
+    // temp_user_id.save();
 
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(

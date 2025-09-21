@@ -1,16 +1,14 @@
-import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+
+import '../repositories/api-request.dart';
 
 class PurchasedDigitalProductCard extends StatefulWidget
     with WidgetsBindingObserver {
@@ -95,7 +93,11 @@ class _PurchasedDigitalProductCardState
             ),
           ),
           InkWell(
-            onTap: requestDownload,
+            onTap: () {
+              ApiRequest.downloadFile(
+                "/purchased-products/download/${widget.id}",
+              );
+            },
             child: Container(
               height: 24,
               width: 170,
@@ -122,42 +124,5 @@ class _PurchasedDigitalProductCardState
         ],
       ),
     );
-  }
-
-  Future<void> requestDownload() async {
-    final folder = await createFolder();
-    try {
-      await FlutterDownloader.enqueue(
-        url: '${AppConfig.BASE_URL}/purchased-products/download/${widget.id}',
-        saveInPublicStorage: false,
-        savedDir: folder,
-        showNotification: true,
-        headers: {
-          "Authorization": "Bearer ${access_token.$}",
-          "System-Key": AppConfig.system_key,
-        },
-      );
-    } catch (e) {
-      print("Error: ${e.toString()}");
-    }
-  }
-
-  Future<String> createFolder() async {
-    final dirPath = Platform.isIOS
-        ? (await getApplicationDocumentsDirectory()).path
-        : "storage/emulated/0/Download/";
-
-    final dir = Directory(dirPath);
-
-    final status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    if (await dir.exists()) {
-      return dir.path;
-    } else {
-      await dir.create(recursive: true);
-      return dir.path;
-    }
   }
 }

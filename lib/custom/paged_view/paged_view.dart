@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../main.dart';
+
 typedef PageFetcher<T> = Future<PageResult<T>> Function(int page);
 typedef ItemBuilder<T> = Widget Function(
     BuildContext context, T item, int index);
@@ -214,6 +216,8 @@ class _PagedViewState<T> extends State<PagedView<T>> {
       });
       _maybePrefetchToFillViewport();
     } catch (_) {
+      recordError(_, StackTrace.current);
+
       if (!mounted) return;
       setState(() {
         _isLoading = false;
@@ -235,6 +239,7 @@ class _PagedViewState<T> extends State<PagedView<T>> {
         _isLoadingMore = false;
       });
     } catch (_) {
+      recordError(_, StackTrace.current);
       if (!mounted) return;
       setState(() => _isLoadingMore = false);
     }

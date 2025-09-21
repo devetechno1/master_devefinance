@@ -41,6 +41,7 @@ import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
+import 'repositories/api-request.dart';
 import 'screens/address.dart';
 import 'screens/auction/auction_bidded_products.dart';
 import 'screens/auction/auction_products.dart';
@@ -114,9 +115,10 @@ Future<void> appRunner() async {
     BusinessSettingHelper().setBusinessSettingData(),
     BusinessSettingHelper.setInitLang(),
     Firebase.initializeApp(),
-    FlutterDownloader.initialize(debug: kDebugMode, ignoreSsl: true),
+    FlutterDownloader.initialize(debug: AppConfig.isDebugMode, ignoreSsl: true),
     Hive.initFlutter(),
   ]);
+  FlutterDownloader.registerCallback(downloadCallback);
 
   localeTranslation = await Hive.openBox<Map>('langs');
 
@@ -154,10 +156,23 @@ Future<void> appRunner() async {
   );
 }
 
-void setCustomUserIdClarity() {
+void _setTag(String key, String? value) {
+  if (value?.trim().isNotEmpty == true) {
+    final b = Clarity.setCustomTag(key, value!);
+
+    print(b);
+  }
+}
+
+void setCustomUserDataClarity() {
   if ((user_id.$ != null || temp_user_id.$.isNotEmpty) &&
       AppConfig.businessSettingsData.useClarity) {
     Clarity.setCustomUserId("${user_id.$ ?? temp_user_id.$}");
+    _setTag("id", "${user_id.$ ?? temp_user_id.$}");
+    _setTag("name", user_name.$);
+    _setTag("email", user_email.$);
+    _setTag("phone", user_phone.$);
+    _setTag("language", app_language.$);
   }
 }
 
@@ -181,7 +196,7 @@ var routes = GoRouter(
         path: '/',
         name: "Home",
         redirect: (context, state) {
-          setCustomUserIdClarity();
+          setCustomUserDataClarity();
           final extra = state.extra;
           if (extra is Map<String, dynamic>) {
             if (extra["skipUpdate"] == true) skipUpdate = true;
@@ -418,7 +433,7 @@ class MyMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setCustomUserIdClarity();
+    setCustomUserDataClarity();
     return Consumer<LocaleProvider>(
       builder: (context, provider, snapshot) {
         final ThemeProvider theme =
