@@ -1101,7 +1101,9 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   }
 
                   return Text(
-                    "${item.productQuantity} × ${item.productPrice.withSeparator} = $total",
+                    item.isDigital == true && item.productQuantity == 1
+                        ? "${'price_ucf'.tr(context: context)}: ${item.productPrice.withSeparator} ${SystemConfig.systemCurrency?.symbol ?? ''}"
+                        : "${item.productQuantity} × ${item.productPrice.withSeparator} = $total",
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

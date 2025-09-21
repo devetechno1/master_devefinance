@@ -8,6 +8,8 @@ import 'package:one_context/one_context.dart';
 import '../app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
+import '../main.dart';
+
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -45,6 +47,8 @@ class NavigationService {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
+      recordError(e, StackTrace.current);
+
       return false;
     }
   }

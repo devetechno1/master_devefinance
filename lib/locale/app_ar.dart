@@ -1,4 +1,10 @@
 const Map<String, String> arLangs = {
+  "download_started": "تم بدء التحميل",
+  "download_failed": "فشل التنزيل",
+  "Newest": "الأحدث",
+  "Oldest": "الأقدم",
+  "Smallest": "الأصغر",
+  "Largest": "الأكبر",
   "by": "بواسطة {provider}",
   "check_your_messages_to_retrieve_the_verification_code":
       "أدخل رمز التحقق المُرسل إلى {phone}",

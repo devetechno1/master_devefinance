@@ -1,4 +1,10 @@
 const Map<String, String> enLangs = {
+  "download_started": "Download started",
+  "download_failed": "Download failed",
+  "Newest": "Newest",
+  "Oldest": "Oldest",
+  "Smallest": "Smallest",
+  "Largest": "Largest",
   "by": "By {provider}",
   "check_your_messages_to_retrieve_the_verification_code":
       "Enter the verification code sent to {phone}",

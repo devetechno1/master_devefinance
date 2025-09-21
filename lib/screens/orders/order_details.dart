@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -28,11 +27,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../data_model/order_item_response.dart';
+import '../../repositories/api-request.dart';
 
 class OrderDetails extends StatefulWidget {
   final int? id;
@@ -105,49 +103,8 @@ class _OrderDetailsState extends State<OrderDetails> {
     super.dispose();
   }
 
-  // TODO:# make this fn work any time
-  // Future<void> _downloadInvoice(id) async {
-  //   final folder = await createFolder();
-  //   try {
-  //     final String? _taskid = await FlutterDownloader.enqueue(
-  //         url: AppConfig.BASE_URL + "/invoice/download/$id",
-  //         // saveInPublicStorage: true,
-  //         savedDir: folder,
-  //         showNotification: true,
-  //         headers: {
-  //           "Authorization": "Bearer ${access_token.$}",
-  //           "Currency-Code": SystemConfig.systemCurrency!.code!,
-  //           "Currency-Exchange-Rate":
-  //               SystemConfig.systemCurrency!.exchangeRate.toString(),
-  //           "App-Language": app_language.$!,
-  //           "System-Key": AppConfig.system_key
-  //         });
-  //   } on Exception catch (e) {
-  //     print("e.toString()");
-  //     print(e.toString());
-  //     // TODO
-  //   }
-  // }
-
-  Future<String> createFolder() async {
-    var mPath = "storage/emulated/0/Download/";
-    if (Platform.isIOS) {
-      final iosPath = await getApplicationDocumentsDirectory();
-      mPath = iosPath.path;
-    }
-    // print("path = $mPath");
-    final dir = Directory(mPath);
-
-    final status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    if ((await dir.exists())) {
-      return dir.path;
-    } else {
-      await dir.create();
-      return dir.path;
-    }
+  Future<String?> _downloadInvoice(int id) async {
+    return ApiRequest.downloadFile("/invoice/download/$id");
   }
 
   fetchAll() {
@@ -1387,41 +1344,40 @@ class _OrderDetailsState extends State<OrderDetails> {
                               ],
                             ),
                           )),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      /*
+                      const SizedBox(height: AppDimensions.paddingSmall),
                       Btn.basic(
-                        // shape: RoundedRectangleBorder(side: Border()),
-
                         minWidth: 60,
-                        // color: MyTheme.font_grey,
-                        onPressed: () {
-                          _downloadInvoice(_orderDetails!.id);
-                        },
+                        onPressed: () =>
+                            _downloadInvoice(_orderDetails?.id ?? -1),
                         child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppDimensions.paddingNormal,
+                            vertical: AppDimensions.paddingSmall,
+                          ),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
-                              border: Border.all(color: MyTheme.medium_grey)),
+                            borderRadius: BorderRadius.circular(
+                              AppDimensions.radiusSmall,
+                            ),
+                            border: Border.all(color: MyTheme.medium_grey),
+                          ),
                           child: Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.file_download_outlined,
                                 color: MyTheme.grey_153,
                                 size: 16,
                               ),
                               Text(
                                 'invoice_ucf'.tr(context: context),
-                                style: TextStyle(
-                                    color: MyTheme.grey_153, fontSize: 14),
+                                style: const TextStyle(
+                                  color: MyTheme.grey_153,
+                                  fontSize: 14,
+                                ),
                               ),
                             ],
                           ),
                         ),
                       )
-                      */
                     ],
                   ),
                 ],
@@ -1479,7 +1435,8 @@ class _OrderDetailsState extends State<OrderDetails> {
               child: Text(
                 _orderedItemList[index].product_name ?? '',
                 maxLines: 2,
-                textDirection: (_orderedItemList[index].product_name ?? '').direction,
+                textDirection:
+                    (_orderedItemList[index].product_name ?? '').direction,
                 style: const TextStyle(
                   color: MyTheme.font_grey,
                 ),

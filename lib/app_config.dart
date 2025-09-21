@@ -24,7 +24,7 @@ class AppConfig {
 
   /// App Version (AV) shown on the splash screen.
   /// Used to verify the app build matches the master version.
-  static const String mobileVersion = '9.10.43';
+  static const String mobileVersion = '9.10.44';
 
   /// Backend Version (BV) used for compatibility checks.
   /// Used to verify the app is compatible with backend data.

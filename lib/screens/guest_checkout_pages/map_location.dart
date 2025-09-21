@@ -11,6 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../../app_config.dart';
 import '../../custom/btn.dart';
 import '../../helpers/handle_permissions.dart';
+import '../../main.dart';
 import '../../my_theme.dart';
 import '../../other_config.dart';
 import '../map_location.dart';
@@ -526,6 +527,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
       final PlaceRes placeRes = PlaceRes.fromJson(jsonDecode(response.body));
       return placeRes.results ?? [];
     } catch (e) {
+      recordError(e, StackTrace.current);
       print("Error e = $e");
       return [];
     }

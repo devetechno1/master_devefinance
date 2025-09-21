@@ -11,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../main.dart';
+
 /*
 * Created by: Chandra Abdul Fattah on 13 July 2020
 * Inspired from: https://github.com/xrb21/flutter-html-editor
@@ -64,6 +66,8 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
           request.uri.queryParameters['query'] == 'getRawTeXHTML') {
       } else {}
     } catch (e) {
+      recordError(e, StackTrace.current);
+
       debugPrint('Exception in handleRequest: $e');
     }
   }

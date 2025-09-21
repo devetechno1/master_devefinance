@@ -171,7 +171,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 const Spacer(),
                 ////////////////////////////////////////////////
                 Padding(
-                  padding: hasWholesale
+                  padding: hasWholesale || item.isDigital
                       ? const EdgeInsets.only(
                           bottom: AppDimensions.paddingNormal,
                           left: AppDimensions.paddingNormal,
@@ -198,7 +198,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            if (!hasWholesale)
+            if (!hasWholesale && !item.isDigital)
               Padding(
                 padding: const EdgeInsets.all(AppDimensions.paddingDefault),
                 child: Column(
