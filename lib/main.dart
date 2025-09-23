@@ -17,6 +17,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_value/shared_value.dart';
 import 'package:device_preview/device_preview.dart';
 
@@ -25,6 +26,8 @@ import 'custom/aiz_route.dart';
 
 import 'custom/error_widget.dart';
 import 'data_model/business_settings/update_model.dart';
+import 'data_model/login_response.dart';
+import 'helpers/auth_helper.dart';
 import 'helpers/business_setting_helper.dart';
 import 'helpers/main_helpers.dart';
 import 'helpers/shared_value_helper.dart';
@@ -39,6 +42,7 @@ import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
+import 'repositories/auth_repository.dart';
 import 'screens/address.dart';
 import 'screens/auction/auction_bidded_products.dart';
 import 'screens/auction/auction_products.dart';
@@ -69,6 +73,8 @@ import 'screens/profile.dart';
 import 'screens/seller_details.dart';
 import 'services/push_notification_service.dart';
 import 'single_banner/photo_provider.dart';
+import 'status/execute_and_handle_remote_errors.dart';
+import 'status/status.dart';
 
 void main() async {
   if (AppConfig.businessSettingsData.useSentry) {
@@ -114,6 +120,7 @@ Future<void> appRunner() async {
     Firebase.initializeApp(),
     Hive.initFlutter(),
   ]);
+  await _getUserData();
 
   localeTranslation = await Hive.openBox<Map>('langs');
 
@@ -149,6 +156,47 @@ Future<void> appRunner() async {
       builder: (context) => app,
     ),
   );
+}
+
+Future<void> _getUserData() async {
+  if (AppConfig.oldTokenKey.trim().isEmpty) return;
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  final String? token = prefs.getString(AppConfig.oldTokenKey);
+
+  if (token?.trim().isNotEmpty != true) return;
+
+  access_token.$ = token;
+  await access_token.save();
+
+  final Status<LoginResponse> loginStatus = await executeAndHandleErrors(
+    () => AuthRepository().getUserByTokenResponse(),
+  );
+  if (loginStatus is Success<LoginResponse> &&
+      loginStatus.data.result == true) {
+    final loginResponse = loginStatus.data;
+
+    print("in the success block ");
+
+    prefs.remove(AppConfig.oldTokenKey);
+
+    await AuthHelper().setUserData(loginResponse);
+
+    await saveFCMToken();
+  } else {
+    AuthHelper().clearUserData();
+
+    String error = "an_error_occurred".tr();
+
+    if (loginStatus.data?.message.runtimeType == List) {
+      error = loginStatus.data!.message!.join("\n");
+    } else if (loginStatus.data?.message != null) {
+      error = loginStatus.data!.message.toString();
+    }
+
+    recordError(error, StackTrace.current);
+  }
 }
 
 void _setTag(String key, String? value) {

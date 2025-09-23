@@ -5,10 +5,50 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.45'`
+- `mobileVersion = '9.10.46'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.46 – Release signing fix & legacy token migration</strong></summary>
+
+### Android (Build)
+
+* **Release signing**: switch `buildTypes.release.signingConfig` from **debug** → **release** in `android/app/build.gradle` to ensure proper signing for Play builds.
+* No changes to minSdk/targetSdk or ProGuard rules.
+
+### App Config
+
+* `AppConfig`:
+
+  * Added docs for `DOMAIN_PATH` usage.
+  * New optional key: **`oldTokenKey`** — allows one-time migration of a previously stored auth token from `SharedPreferences` (legacy apps) to the new auth flow.
+
+### Flutter (Bootstrap & Auth)
+
+* `main.dart`:
+
+  * Imports `shared_preferences`, `AuthRepository`, status helpers, and models.
+  * New bootstrap step **`_getUserData()`** (runs during startup) to migrate legacy tokens:
+
+    * Reads `SharedPreferences[AppConfig.oldTokenKey]`.
+    * If present, sets `access_token`, calls `AuthRepository().getUserByTokenResponse()`.
+    * On success: removes old key, persists user via `AuthHelper.setUserData(...)`, calls `saveFCMToken()`.
+    * On failure: clears user data and reports via `recordError(e, st)`.
+* Non-blocking; if `oldTokenKey` is empty or missing, app proceeds normally.
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+* Token validation reuses existing **getUserByToken** endpoint.
+
+### Must Update (Stores)
+
+* **No** — build/signing correction and silent token migration only (no manifest/plist changes, no user-visible behavior).
+
+</details>
+
+
 <details>
 <summary><strong>AV 9.10.45 – Streaming downloads (no plugin), MediaStore export, and platform cleanup</strong></summary>
 
