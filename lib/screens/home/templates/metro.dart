@@ -127,14 +127,14 @@ class _MetroScreenState extends State<MetroScreen>
                               isBannersInitial: homeData.isBannerTwoInitial,
                             ),
                           ),
-                          //  HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                          //  HomeBannersList(bannersImagesList: homeData.bannerTwoImageList),
                           // SliverToBoxAdapter(
-                          //   child: HomeBannersAnimated(
+                          //   child: HomeBannersList(
                           //     bannersImagesList: homeData.bannerTwoImageList,
                           //     isBannersInitial: homeData.isBannerTwoInitial,
                           //   ),
                           // ),
-                          // HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                          // HomeBannersList(bannersImagesList: homeData.bannerTwoImageList),
                           // SliverToBoxAdapter(
                           //   child: HomeBannersListAnimation(
                           //     bannersImagesList: homeData.bannerTwoImageList,
@@ -146,6 +146,12 @@ class _MetroScreenState extends State<MetroScreen>
                           //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                           const BestSellingSectionSliver(),
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerThreeImageList,
+                              isBannersInitial: homeData.isBannerThreeInitial,
+                            ),
+                          ),
                           // const VerticalProductsSectionSliver(),
                           //auction products----------------------------
                           AuctionProductsSectionSliver(

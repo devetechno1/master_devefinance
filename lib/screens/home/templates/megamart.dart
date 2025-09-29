@@ -104,7 +104,12 @@ class _MegamartScreenState extends State<MegamartScreen>
                               ),
                             ]),
                           ),
-
+                            SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerOneImageList,
+                              isBannersInitial: homeData.isBannerOneInitial,
+                            ),
+                          ),
                           //featuredProducts-----------------------------
                           const FeaturedProductsListSliver(),
                           //BannerList---------------------
@@ -120,6 +125,12 @@ class _MegamartScreenState extends State<MegamartScreen>
                           const BestSellingSectionSliver(),
                           //newProducts-----------------------------
                           const NewProductsListSliver(),
+                          SliverToBoxAdapter(
+                            child: HomeBannersList(
+                              bannersImagesList: homeData.bannerThreeImageList,
+                              isBannersInitial: homeData.isBannerThreeInitial,
+                            ),
+                          ),
 
                           //Brand List ---------------------------
                           if (homeData.isBrandsInitial ||
