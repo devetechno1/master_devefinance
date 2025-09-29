@@ -661,7 +661,7 @@ Users on RTL locales (e.g., Arabic) saw OTP cells flow right-to-left, which is c
 <summary><strong>AV 9.10.20 – Point API to local dev server</strong></summary>
 
 ### Config
-- `DOMAIN_PATH` set to `devefinance.com`.
+- `DOMAIN_PATH` set to `sellerwise.devefinance.com`.
 - `RAW_BASE_URL` switched to `http://192.168.100.200:8080/devef` (overrides `PROTOCOL + DOMAIN_PATH`).
 - Effective `BASE_URL`: `http://192.168.100.200:8080/devef/api/v2`.
 
