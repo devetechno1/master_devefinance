@@ -122,7 +122,8 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                               const SizedBox(height: 16),
 
                               // Flash Sale Section
-                              const FlashSale(isCircle: false)
+                               FlashSale(isCircle: false,
+                              defaultTextColor: Theme.of(context).primaryColor,)
                             ]),
                           ),
                           //featuredProducts-----------------------------

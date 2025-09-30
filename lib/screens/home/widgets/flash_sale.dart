@@ -12,9 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FlashSale extends StatelessWidget {
-  const FlashSale({super.key, required this.isCircle, this.backgroundColor});
+  const FlashSale({super.key, required this.isCircle, this.backgroundColor,this.defaultTextColor});
   final bool isCircle;
   final Color? backgroundColor;
+  final Color? defaultTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -157,10 +158,10 @@ class FlashSale extends StatelessWidget {
                 ),
                 Flexible(
                   child: Builder(builder: (context) {
-                    final Color textColor =
-                        AppConfig.businessSettingsData.isLightFlashDealTextColor
-                            ? Colors.white
-                            : Colors.black;
+                    final Color  textColor = defaultTextColor ??
+                   ((AppConfig.businessSettingsData.isLightFlashDealTextColor )
+                      ? Colors.white
+                      : Colors.black);
                     return Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

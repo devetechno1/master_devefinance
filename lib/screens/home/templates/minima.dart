@@ -21,6 +21,7 @@ import '../../../services/push_notification_service.dart';
 import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/new_products_list_sliver.dart';
+import '../widgets/today_deal.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
 class MinimaScreen extends StatefulWidget {
@@ -147,8 +148,15 @@ class _MinimaScreenState extends State<MinimaScreen>
                                         padding: const EdgeInsets.all(
                                             AppDimensions.paddingSmallExtra),
                                         child: Column(
+                                          
                                           children: [
-                                            //  buildTimerRow(homeData.flashDealRemainingTime),
+                                             GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                    return FlashDealList();
+                                                  }));
+                                                },
+                                              child: buildTimerRow(homeData.flashDealRemainingTime)),
                                             //FlashBanner SpecialOffer
                                             FlashBannerWidget(
                                               bannerLink:
@@ -162,6 +170,16 @@ class _MinimaScreenState extends State<MinimaScreen>
                               ],
                             ]),
                           ),
+                          //todays deal
+                           SliverList(
+                            delegate: SliverChildListDelegate([
+                              TodaysDealProductsWidget(
+                                homePresenter: homeData,
+                              ),
+                            ]),
+                          ),
+                          //new products-----------------------------
+                          const NewProductsListSliver(),
                           //feature_categories//
 
                           const CategoryList(),

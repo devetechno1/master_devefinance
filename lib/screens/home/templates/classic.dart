@@ -90,9 +90,11 @@ class _ClassicScreenState extends State<ClassicScreen>
                               HomeCarouselSlider(homeData: homeData),
                               const SizedBox(height: 16),
 
-                              const FlashSale(
+                               FlashSale(
                                 isCircle: true,
                                 backgroundColor: Colors.white,
+                                defaultTextColor: Theme.of(context).primaryColor
+                                //Theme.of(context).primaryColor,
                               ),
                             ]),
                           ),
