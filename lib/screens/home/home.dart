@@ -114,6 +114,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                           //Featured Categories
                           const CategoryList(),
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              HomeBannersList(
+                                bannersImagesList: homeData.bannerTwoImageList,
+                                isBannersInitial: homeData.isBannerTwoInitial,
+                              ),
+                            ]),
+                          ),
                           // const  CategoryListVertical(crossAxisCount: 5,),
 
                           if (homeData.isFlashDeal)
@@ -149,15 +157,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                           //Featured Products
                           const FeaturedProductsListSliver(),
+                          
                           //Home Banner Slider Two
-                          // SliverList(
-                          //   delegate: SliverChildListDelegate([
-                          //     HomeBannerTwo(
-                          //       context: context,
-                          //       homeData: homeData,
-                          //     ),
-                          //   ]),
-                          // ),
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              HomeBannersList(
+                                bannersImagesList: homeData.bannerThreeImageList,
+                                isBannersInitial: homeData.isBannerThreeInitial,
+                              ),
+                            ]),
+                          ),
                           SliverPadding(
                             padding:
                                 const EdgeInsets.fromLTRB(18.0, 20, 20.0, 0.0),
