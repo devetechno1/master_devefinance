@@ -289,7 +289,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                   width: 180,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingDefault),
+                        bottom: AppDimensions.paddingDefault,
+                        left: AppDimensions.paddingDefault),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
