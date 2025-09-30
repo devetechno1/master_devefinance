@@ -7,6 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/brand_list.da
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_category/feautured_category_horizontal.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/new_products_list_sliver.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
@@ -146,6 +147,7 @@ class _MetroScreenState extends State<MetroScreen>
                           //Best Selling-------------------
                           // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                           const BestSellingSectionSliver(),
+                           const NewProductsListSliver(),
                           SliverToBoxAdapter(
                             child: HomeBannersList(
                               bannersImagesList: homeData.bannerThreeImageList,
