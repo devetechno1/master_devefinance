@@ -21,7 +21,7 @@ class TodaysDealProductsWidget extends StatelessWidget {
       height: 250,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
         itemCount: homePresenter.TodayDealList.length,
         itemBuilder: (context, index) {
           final product = homePresenter.TodayDealList[index];
