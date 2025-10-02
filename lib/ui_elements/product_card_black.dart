@@ -73,7 +73,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                       child: FadeInImage.assetNetwork(
                         placeholder: AppImages.placeholder,
                         image: widget.image ?? AppImages.placeholder,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
