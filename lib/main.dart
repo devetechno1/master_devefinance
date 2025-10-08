@@ -187,7 +187,7 @@ Future<void> _getUserData() async {
   } else {
     AuthHelper().clearUserData();
 
-    String error = "an_error_occurred".tr();
+    String error = "an error occurred";
 
     if (loginStatus.data?.message.runtimeType == List) {
       error = loginStatus.data!.message!.join("\n");
