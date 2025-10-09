@@ -21,7 +21,7 @@ class HomeBannersList extends StatefulWidget {
   const HomeBannersList({
     Key? key,
     required this.isBannersInitial,
-    this.aspectRatio = 2,
+    this.aspectRatio = 3.5,
     required this.bannersImagesList,
     this.fallbackAspectRatio = 2.0,
     this.viewportFraction = 0.49,
