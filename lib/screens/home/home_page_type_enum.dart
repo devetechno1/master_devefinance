@@ -18,7 +18,7 @@ enum HomePageType {
   metro('metro', screen: MetroScreen()),
   minima('minima', screen: MinimaScreen()),
   megaMart('megamart', screen: MegamartScreen()),
-  reClassic('re-classic', screen: ReClassicScreen()),
+  reClassic('reclassic', screen: ReClassicScreen()),
   home('home', screen: Home());
 
   final String typeString;

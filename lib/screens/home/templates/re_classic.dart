@@ -97,8 +97,9 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18)),
                         ),
-                        const TodaysDealProductsWidget(),
                       ])),
+                      const TodaysDealProductsSliverWidget(),
+
                       //BannerList---------------------
                       const SliverToBoxAdapter(child: HomeBannersOne()),
 
@@ -115,7 +116,10 @@ class _ReClassicScreenState extends State<ReClassicScreen>
                           const SizedBox(height: 16),
 
                           // Flash Sale Section
-                          const FlashSale(isCircle: false)
+                          FlashSale(
+                            isCircle: false,
+                            defaultTextColor: Theme.of(context).primaryColor,
+                          )
                         ]),
                       ),
                       //featuredProducts-----------------------------

@@ -1,5 +1,6 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/home_banners/home_banners_three.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -95,16 +96,8 @@ class _MetroScreenState extends State<MetroScreen>
                           const FlashSale(isCircle: true)
                         ]),
                       ),
-                      //move banner
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          //   child: Image.network("https://sellerwise.devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                          // ),
-                          const TodaysDealProductsWidget(),
-                        ]),
-                      ),
+                      const TodaysDealProductsSliverWidget(),
+
                       //Featured category-----------------------
                       const CategoryList(),
                       // const CategoryListVertical(crossAxisCount: 3,),
@@ -135,6 +128,7 @@ class _MetroScreenState extends State<MetroScreen>
                       //Best Selling-------------------
                       // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                       const BestSellingSectionSliver(),
+                      const SliverToBoxAdapter(child: HomeBannersThree()),
                       // const VerticalProductsSectionSliver(),
                       //auction products----------------------------
                       const AuctionProductsSectionSliver(),

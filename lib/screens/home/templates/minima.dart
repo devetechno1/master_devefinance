@@ -22,6 +22,7 @@ import '../../../services/push_notification_service.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/flash_deal_home_widget.dart';
 import '../widgets/new_products_list_sliver.dart';
+import '../widgets/today_deal.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
 class MinimaScreen extends StatefulWidget {
@@ -96,6 +97,10 @@ class _MinimaScreenState extends State<MinimaScreen>
                           const FlashDealHomeWidget(),
                         ]),
                       ),
+                      const TodaysDealProductsSliverWidget(),
+
+                      //new products-----------------------------
+                      const NewProductsListSliver(),
                       //feature_categories//
 
                       const CategoryList(),
@@ -160,8 +165,15 @@ class _MinimaScreenState extends State<MinimaScreen>
       ],
     );
   }
+}
 
-  Widget buildTimerRow(CurrentRemainingTime time) {
+class BuildTimerRow extends StatelessWidget {
+  const BuildTimerRow(this.time, {super.key});
+
+  final CurrentRemainingTime time;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
       child: Row(
@@ -169,7 +181,7 @@ class _MinimaScreenState extends State<MinimaScreen>
           const Spacer(),
           Column(
             children: [
-              timerCircularContainer(time.days, 365,
+              TimerCircularContainer(time.days, 365,
                   timeText((time.days).toString(), default_length: 3)),
               const SizedBox(height: 5),
               Text('days'.tr(context: context),
@@ -179,7 +191,7 @@ class _MinimaScreenState extends State<MinimaScreen>
           const SizedBox(width: 12),
           Column(
             children: [
-              timerCircularContainer(time.hours, 24,
+              TimerCircularContainer(time.hours, 24,
                   timeText((time.hours).toString(), default_length: 2)),
               const SizedBox(height: 5),
               Text('hours'.tr(context: context),
@@ -189,7 +201,7 @@ class _MinimaScreenState extends State<MinimaScreen>
           const SizedBox(width: 10),
           Column(
             children: [
-              timerCircularContainer(time.min, 60,
+              TimerCircularContainer(time.min, 60,
                   timeText((time.min).toString(), default_length: 2)),
               const SizedBox(height: 5),
               Text('minutes'.tr(context: context),
@@ -199,7 +211,7 @@ class _MinimaScreenState extends State<MinimaScreen>
           const SizedBox(width: 5),
           Column(
             children: [
-              timerCircularContainer(time.sec, 60,
+              TimerCircularContainer(time.sec, 60,
                   timeText((time.sec).toString(), default_length: 2)),
               const SizedBox(height: 5),
               Text('seconds'.tr(context: context),
@@ -228,8 +240,49 @@ class _MinimaScreenState extends State<MinimaScreen>
       ),
     );
   }
+}
 
-  String timeText(String val, {int default_length = 2}) {
-    return val.padLeft(default_length, '0');
+String timeText(String val, {int default_length = 2}) {
+  return val.padLeft(default_length, '0');
+}
+
+class TimerCircularContainer extends StatelessWidget {
+  const TimerCircularContainer(
+    this.currentValue,
+    this.totalValue,
+    this.timeText, {
+    super.key,
+  });
+  final int currentValue;
+  final int totalValue;
+  final String timeText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: CircularProgressIndicator(
+            value: currentValue / totalValue,
+            backgroundColor: const Color.fromARGB(255, 240, 220, 220),
+            valueColor: const AlwaysStoppedAnimation<Color>(
+                Color.fromARGB(255, 255, 80, 80)),
+            strokeWidth: 4.0,
+            strokeCap: StrokeCap.round,
+          ),
+        ),
+        Text(
+          timeText,
+          style: const TextStyle(
+            color: Color.fromARGB(228, 218, 29, 29),
+            fontSize: 10.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
   }
 }

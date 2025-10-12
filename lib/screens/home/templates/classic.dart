@@ -91,22 +91,14 @@ class _ClassicScreenState extends State<ClassicScreen>
                           const HomeCarouselSlider(),
                           const SizedBox(height: 16),
 
-                          const FlashSale(
-                            isCircle: true,
-                            backgroundColor: Colors.white,
-                          ),
+                          FlashSale(
+                              isCircle: true,
+                              backgroundColor: Colors.white,
+                              defaultTextColor: Theme.of(context).primaryColor),
                         ]),
                       ),
-                      //move banner
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          //   child: Image.network("https://sellerwise.devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                          // ),
-                          const TodaysDealProductsWidget(),
-                        ]),
-                      ),
+                      const TodaysDealProductsSliverWidget(),
+
                       //Featured category-----------------------
                       const CategoryList(),
 

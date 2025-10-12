@@ -3,6 +3,8 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/home_banners/home_banners_one.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/home_banners/home_banners_three.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/home_banners/home_banners_two.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/build_app_bar.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products_list_sliver.dart';
@@ -78,7 +80,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     slivers: <Widget>[
                       SliverList(
                         delegate: SliverChildListDelegate([
-                          if (AppConfig.purchase_code == "") const PiratedWidget(),
+                          if (AppConfig.purchase_code == "")
+                            const PiratedWidget(),
 
                           const SizedBox(height: 10),
 
@@ -107,6 +110,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                       //Featured Categories
                       const CategoryList(),
+                      const SliverToBoxAdapter(child: HomeBannersTwo()),
                       // const  CategoryListVertical(crossAxisCount: 5,),
 
                       if (homeProvider.isFlashDeal)
@@ -125,7 +129,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-                          FlashDealBanner(),
+                          const FlashDealBanner(),
                         ])),
 
                       // SliverList(
@@ -139,14 +143,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       //Featured Products
                       const FeaturedProductsListSliver(),
                       //Home Banner Slider Two
-                      // SliverList(
-                      //   delegate: SliverChildListDelegate([
-                      //     HomeBannerTwo(
-                      //       context: context,
-                      //       homeData: homeData,
-                      //     ),
-                      //   ]),
-                      // ),
+                      const SliverToBoxAdapter(child: HomeBannersThree()),
                       SliverPadding(
                         padding: const EdgeInsets.fromLTRB(18.0, 20, 20.0, 0.0),
                         sliver: SliverToBoxAdapter(

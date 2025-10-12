@@ -257,7 +257,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
             children: <Widget>[
               AspectRatio(
                 aspectRatio: 1,
-                child: Container(
+                child: Container(       
                     width: double.infinity,
                     child: ClipRRect(
                         borderRadius:
@@ -265,7 +265,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
                         child: FadeInImage.assetNetwork(
                           placeholder: AppImages.placeholder,
                           image: widget.image!,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ))),
               ),
               Flexible(

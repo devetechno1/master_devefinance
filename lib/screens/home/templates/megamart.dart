@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app_config.dart';
 import '../../../custom/home_banners/home_banners_one.dart';
+import '../../../custom/home_banners/home_banners_three.dart';
+import '../../../custom/home_banners/home_banners_two.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
@@ -97,18 +99,24 @@ class _MegamartScreenState extends State<MegamartScreen>
                         ]),
                       ),
                       //move banner
-                      const TodaysDealProductsWidget(),
+                      const TodaysDealProductsSliverWidget(),
+
+                      //BannerList---------------------
+                      const SliverToBoxAdapter(child: HomeBannersOne()),
 
                       //featuredProducts-----------------------------
                       const FeaturedProductsListSliver(),
+
                       //BannerList---------------------
-                      const SliverToBoxAdapter(child: HomeBannersOne()),
+                      const SliverToBoxAdapter(child: HomeBannersTwo()),
 
                       //Best Selling-------------------
                       // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
                       const BestSellingSectionSliver(),
                       //newProducts-----------------------------
                       const NewProductsListSliver(),
+
+                      const SliverToBoxAdapter(child: HomeBannersThree()),
 
                       //Brand List ---------------------------
                       const BrandListSectionSliver(showViewAllButton: false),

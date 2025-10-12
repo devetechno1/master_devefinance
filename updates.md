@@ -5,10 +5,42 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.46'`
+- `mobileVersion = '9.10.47'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.47 – Provider state refactor, module reorganization, and Equatable implementation</strong></summary>
+
+### State Management (Provider Refactor)
+
+* **Refactored `HomePresenter` to `HomeProvider`** (`lib/presenter/home_presenter.dart` renamed to `lib/presenter/home_provider.dart`). This migrates the home screen state management from a single `ChangeNotifier` to a modular Provider pattern using **`context.read`** and **`context.select`**.
+* Updated almost all widget usages across the application (home screen templates, cart provider, auth screens) to access data and logic via `HomeProvider`.
+* Extracted banner management logic into three new dedicated widgets: **`HomeBannersOne`**, **`HomeBannersTwo`**, and **`HomeBannersThree`** for cleaner composition.
+
+### Code Cleanup & Consistency
+
+* **`emptyWidget` Constant:** Introduced a global constant **`const SizedBox emptyWidget = SizedBox();`** in `lib/app_config.dart`. This constant is used extensively to replace direct usages of `const SizedBox()` for improved consistency and minor performance gains.
+* **Data Model `Equatable`:** Implemented the `Equatable` package on several major data models to ensure reliable object comparison:
+    * `Category`
+    * `FlashDealResponseDatum`
+    * `Product` (in `product_mini_response.dart`)
+    * `AIZSlider`
+    * `CurrentRemainingTime`
+    * `SingleBanner`
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+### Must Update (Stores)
+
+* **No** — Internal architecture and client-side code refactoring only.
+</details>
+
+
+
 <details>
 <summary><strong>AV 9.10.46 – Release signing fix & legacy token migration</strong></summary>
 
@@ -661,7 +693,7 @@ Users on RTL locales (e.g., Arabic) saw OTP cells flow right-to-left, which is c
 <summary><strong>AV 9.10.20 – Point API to local dev server</strong></summary>
 
 ### Config
-- `DOMAIN_PATH` set to `devefinance.com`.
+- `DOMAIN_PATH` set to `sellerwise.devefinance.com`.
 - `RAW_BASE_URL` switched to `http://192.168.100.200:8080/devef` (overrides `PROTOCOL + DOMAIN_PATH`).
 - Effective `BASE_URL`: `http://192.168.100.200:8080/devef/api/v2`.
 

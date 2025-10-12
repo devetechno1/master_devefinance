@@ -8,6 +8,7 @@ import '../../../data_model/flash_deal_response.dart';
 import '../../../my_theme.dart';
 import '../../../presenter/home_provider.dart';
 import '../../flash_deal/flash_deal_list.dart';
+import '../templates/minima.dart';
 
 class FlashDealHomeWidget extends StatelessWidget {
   const FlashDealHomeWidget({super.key});
@@ -18,6 +19,9 @@ class FlashDealHomeWidget extends StatelessWidget {
         context.select<HomeProvider, FlashDealResponseDatum?>(
             (provider) => provider.flashDeal);
     if (flashDeal == null) return emptyWidget;
+    final CurrentRemainingTime flashDealRemainingTime =
+        context.select<HomeProvider, CurrentRemainingTime>(
+            (provider) => provider.flashDealRemainingTime);
     return Column(
       children: [
         GestureDetector(
@@ -67,6 +71,16 @@ class FlashDealHomeWidget extends StatelessWidget {
                   children: [
                     //  buildTimerRow(homeData.flashDealRemainingTime),
                     //FlashBanner SpecialOffer
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return FlashDealList();
+                        }));
+                      },
+                      child: BuildTimerRow(flashDealRemainingTime),
+                    ),
                     FlashBannerWidget(
                       bannerLink: flashDeal.banner,
                       slug: flashDeal.slug,
