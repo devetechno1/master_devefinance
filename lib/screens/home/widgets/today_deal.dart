@@ -16,7 +16,9 @@ class TodaysDealProductsSliverWidget extends StatelessWidget {
     final todayDealList =
         context.select<HomeProvider, UnmodifiableListView<Product>>(
             (value) => UnmodifiableListView(value.TodayDealList));
-    if (todayDealList.isEmpty) return emptyWidget;
+    if (todayDealList.isEmpty) {
+      return const SliverToBoxAdapter(child: emptyWidget);
+    }
 
     return SliverToBoxAdapter(
       child: SizedBox(
@@ -27,7 +29,7 @@ class TodaysDealProductsSliverWidget extends StatelessWidget {
           itemCount: todayDealList.length,
           itemBuilder: (context, index) {
             final product = todayDealList[index];
-      
+
             return GestureDetector(
               onTap: product.slug == null
                   ? null
