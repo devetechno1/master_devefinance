@@ -23,7 +23,6 @@ import 'package:active_ecommerce_cms_demo_app/screens/coupon/coupons.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/digital_product/digital_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/last_view_product.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/top_selling_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/refund_request.dart';
@@ -38,6 +37,7 @@ import 'package:route_transitions/route_transitions.dart';
 
 import '../app_config.dart';
 import '../custom/btn.dart';
+import '../presenter/home_provider.dart';
 import '../repositories/auth_repository.dart';
 import 'auction/auction_bidded_products.dart';
 import 'auction/auction_purchase_history.dart';
@@ -400,22 +400,28 @@ class _ProfileState extends State<Profile> {
             color: MyTheme.light_grey,
           ),
           //flash_deals
-          if (homeData.isFlashDealInitial != false)
-            Column(
-              children: [
-                buildBottomVerticalCardListItem(
-                    AppImages.flashDeal, 'flash_deal_ucf'.tr(context: context),
-                    onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return FlashDealList();
-                  }));
-                }),
-                const Divider(
-                  thickness: 1,
-                  color: MyTheme.light_grey,
-                ),
-              ],
-            ),
+          Selector<HomeProvider, bool>(
+            selector: (_, provider) => provider.isFlashDealInitial,
+            builder: (context, isFlashDealInitial, child) {
+              if (isFlashDealInitial != false)
+                return Column(
+                  children: [
+                    buildBottomVerticalCardListItem(AppImages.flashDeal,
+                        'flash_deal_ucf'.tr(context: context), onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return FlashDealList();
+                      }));
+                    }),
+                    const Divider(
+                      thickness: 1,
+                      color: MyTheme.light_grey,
+                    ),
+                  ],
+                );
+              return emptyWidget;
+            },
+          ),
 
           //flash_deals
           buildBottomVerticalCardListItem(

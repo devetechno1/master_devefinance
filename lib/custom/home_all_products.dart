@@ -1,33 +1,48 @@
+import 'dart:collection';
+
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../data_model/product_mini_response.dart';
 import '../helpers/shimmer_helper.dart';
-import '../presenter/home_presenter.dart';
+import '../presenter/home_provider.dart';
 import '../ui_elements/product_card.dart';
 
 class HomeAllProducts extends StatelessWidget {
-  final BuildContext? context;
-  final HomePresenter? homeData;
-  const HomeAllProducts({
-    Key? key,
-    this.context,
-    this.homeData,
-  }) : super(key: key);
+  const HomeAllProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (homeData!.isAllProductInitial && homeData!.allProductList.isEmpty) {
+    final ({
+      UnmodifiableListView<Product> allProductList,
+      bool isAllProductInitial,
+      int totalAllProductData
+    }) p = context.select<
+        HomeProvider,
+        ({
+          bool isAllProductInitial,
+          UnmodifiableListView<Product> allProductList,
+          int totalAllProductData
+        })>(
+      (provider) => (
+        allProductList: UnmodifiableListView(provider.allProductList),
+        isAllProductInitial: provider.isAllProductInitial,
+        totalAllProductData: provider.totalAllProductData
+      ),
+    );
+    if (p.isAllProductInitial && p.allProductList.isEmpty) {
       return SingleChildScrollView(
         child: ShimmerHelper().buildProductGridShimmer(),
       );
-    } else if (homeData!.allProductList.isNotEmpty) {
+    } else if (p.allProductList.isNotEmpty) {
       //snapshot.hasData
 
       return GridView.builder(
         // 2
         //addAutomaticKeepAlives: true,
-        itemCount: homeData!.allProductList.length,
+        itemCount: p.allProductList.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
@@ -39,19 +54,19 @@ class HomeAllProducts extends StatelessWidget {
         itemBuilder: (context, index) {
           // 3
           return ProductCard(
-            id: homeData!.allProductList[index].id,
-            slug: homeData!.allProductList[index].slug ?? '',
-            image: homeData!.allProductList[index].thumbnail_image,
-            name: homeData!.allProductList[index].name,
-            main_price: homeData!.allProductList[index].main_price,
-            stroked_price: homeData!.allProductList[index].stroked_price,
-            has_discount: homeData!.allProductList[index].has_discount == true,
-            discount: homeData!.allProductList[index].discount,
+            id: p.allProductList[index].id,
+            slug: p.allProductList[index].slug ?? '',
+            image: p.allProductList[index].thumbnail_image,
+            name: p.allProductList[index].name,
+            main_price: p.allProductList[index].main_price,
+            stroked_price: p.allProductList[index].stroked_price,
+            has_discount: p.allProductList[index].has_discount == true,
+            discount: p.allProductList[index].discount,
             isWholesale: null,
           );
         },
       );
-    } else if (homeData!.totalAllProductData == 0) {
+    } else if (p.totalAllProductData == 0) {
       return Center(
           child: Text('no_product_is_available'.tr(context: context)));
     } else {

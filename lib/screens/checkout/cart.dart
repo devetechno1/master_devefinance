@@ -551,7 +551,7 @@ class _LinearOrderProgressState extends State<LinearOrderProgress> {
       crossFadeState:
           showProgress ? CrossFadeState.showFirst : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 100),
-      secondChild: const SizedBox(),
+      secondChild: emptyWidget,
       firstChild: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: AppDimensions.paddingLarge),

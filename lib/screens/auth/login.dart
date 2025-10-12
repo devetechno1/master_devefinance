@@ -29,15 +29,16 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 // import 'package:twitter_login/twitter_login.dart';
 
 import '../../custom/loading.dart';
 import '../../data_model/login_response.dart';
 import '../../data_model/otp_provider_model.dart';
+import '../../presenter/home_provider.dart';
 import '../../repositories/address_repository.dart';
 import '../../status/status.dart';
-import '../home/home.dart';
 import 'otp.dart';
 import 'otp_login.dart';
 
@@ -61,6 +62,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  late final homeP = context.read<HomeProvider>();
 
   @override
   void initState() {
@@ -113,14 +115,13 @@ class _LoginState extends State<Login> {
       await Future.wait([
         // push notification starts
         saveFCMToken(),
-        homeData.fetchAddressLists(false, false),
+        homeP.fetchAddressLists(false, false),
       ]);
 
       Loading.close();
       ToastComponent.showDialog(loginResponse.message!);
 
-      final bool needHandleAddress =
-          homeData.needHandleAddressNavigation();
+      final bool needHandleAddress = homeP.needHandleAddressNavigation();
       if (needHandleAddress) return;
 
       // redirect
@@ -224,13 +225,13 @@ class _LoginState extends State<Login> {
       await Future.wait([
         // push notification starts
         saveFCMToken(),
-        homeData.fetchAddressLists(false, false),
+        homeP.fetchAddressLists(false, false),
       ]);
 
       Loading.close();
       ToastComponent.showDialog(loginResponse.message!);
 
-      final bool needHandleAddress = homeData.needHandleAddressNavigation();
+      final bool needHandleAddress = homeP.needHandleAddressNavigation();
       if (needHandleAddress) return;
 
       // redirect
@@ -271,7 +272,7 @@ class _LoginState extends State<Login> {
           await Future.wait([
             // push notification starts
             saveFCMToken(),
-            homeData.fetchAddressLists(false),
+            homeP.fetchAddressLists(false),
           ]);
 
           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -321,7 +322,7 @@ class _LoginState extends State<Login> {
         await Future.wait([
           // push notification starts
           saveFCMToken(),
-          homeData.fetchAddressLists(false),
+          homeP.fetchAddressLists(false),
         ]);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Main();
@@ -442,7 +443,7 @@ class _LoginState extends State<Login> {
         await Future.wait([
           // push notification starts
           saveFCMToken(),
-          homeData.fetchAddressLists(false),
+          homeP.fetchAddressLists(false),
         ]);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Main();
@@ -758,25 +759,25 @@ class _LoginState extends State<Login> {
                     //     imageColor: Theme.of(context).primaryColor,
                     //   ),
                     if (AppConfig.businessSettingsData.allowOTPLogin)
-                    ...List.generate(
-                      AppConfig.businessSettingsData.otpProviders.length,
-                      (i) {
-                        final OTPProviderModel otpProvider =
-                            AppConfig.businessSettingsData.otpProviders[i];
+                      ...List.generate(
+                        AppConfig.businessSettingsData.otpProviders.length,
+                        (i) {
+                          final OTPProviderModel otpProvider =
+                              AppConfig.businessSettingsData.otpProviders[i];
 
-                        final String providerName =
-                            otpProvider.sendOTPText ?? "OTP";
-                        return LoginWith3rd(
-                          onTap: () => onPressedOTPLogin(
-                            providerName: providerName,
-                            providerType: otpProvider.type,
-                          ),
-                          name: providerName,
-                          networkImage: otpProvider.image,
-                          assetImage: AppImages.otp,
-                        );
-                      },
-                    ),
+                          final String providerName =
+                              otpProvider.sendOTPText ?? "OTP";
+                          return LoginWith3rd(
+                            onTap: () => onPressedOTPLogin(
+                              providerName: providerName,
+                              providerType: otpProvider.type,
+                            ),
+                            name: providerName,
+                            networkImage: otpProvider.image,
+                            assetImage: AppImages.otp,
+                          );
+                        },
+                      ),
                   ],
                 ),
               ),

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'home/home.dart';
+import '../presenter/home_provider.dart';
 
 class CurrencyChange extends StatefulWidget {
   const CurrencyChange({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
     setState(() {});
 
     system_currency.save().then((value) {
-      homeData.onRefresh();
+      context.read<HomeProvider>().onRefresh();
       context.go("/");
     });
   }

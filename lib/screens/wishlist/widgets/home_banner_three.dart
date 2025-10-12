@@ -1,24 +1,30 @@
 import 'package:active_ecommerce_cms_demo_app/custom/aiz_image.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app_config.dart';
+import '../../../data_model/slider_response.dart';
 import '../../../helpers/shimmer_helper.dart';
 import '../../../my_theme.dart';
 
 class HomeBannerThree extends StatelessWidget {
-  final HomePresenter? homeData;
-  final BuildContext? context;
-
-  const HomeBannerThree({Key? key, this.homeData, this.context})
-      : super(key: key);
+  const HomeBannerThree({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (homeData!.isBannerOneInitial && homeData!.bannerOneImageList.isEmpty) {
+    final homeProvider = context.select<HomeProvider,
+        ({bool isBannerOneInitial, List<AIZSlider> bannerOneImageList})>(
+      (HomeProvider provider) => (
+        bannerOneImageList: provider.bannerOneImageList,
+        isBannerOneInitial: provider.isBannerOneInitial,
+      ),
+    );
+    if (homeProvider.isBannerOneInitial &&
+        homeProvider.bannerOneImageList.isEmpty) {
       return Padding(
           padding: const EdgeInsets.only(
               left: AppDimensions.paddingMedium,
@@ -26,7 +32,7 @@ class HomeBannerThree extends StatelessWidget {
               top: 10,
               bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
-    } else if (homeData!.bannerOneImageList.isNotEmpty) {
+    } else if (homeProvider.bannerOneImageList.isNotEmpty) {
       return Container(
         height: 160,
         decoration: BoxDecoration(
@@ -54,7 +60,7 @@ class HomeBannerThree extends StatelessWidget {
               // Optionally handle page change
             },
           ),
-          items: homeData!.bannerOneImageList.map((i) {
+          items: homeProvider.bannerOneImageList.map((i) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -75,8 +81,8 @@ class HomeBannerThree extends StatelessWidget {
           }).toList(),
         ),
       );
-    } else if (!homeData!.isBannerOneInitial &&
-        homeData!.bannerOneImageList.isEmpty) {
+    } else if (!homeProvider.isBannerOneInitial &&
+        homeProvider.bannerOneImageList.isEmpty) {
       return Container(
           height: 100,
           child: Center(

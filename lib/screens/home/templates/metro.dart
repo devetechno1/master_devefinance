@@ -10,12 +10,14 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/flash_sale.da
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/today_deal.dart';
 import 'package:flutter/material.dart';
-import '../../../custom/home_banners/home_banners_list.dart';
+import 'package:provider/provider.dart';
+import '../../../custom/home_banners/home_banners_one.dart';
+import '../../../custom/home_banners/home_banners_two.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
+import '../../../presenter/home_provider.dart';
 import '../../../services/push_notification_service.dart';
-import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -37,13 +39,15 @@ class MetroScreen extends StatefulWidget {
 
 class _MetroScreenState extends State<MetroScreen>
     with SingleTickerProviderStateMixin {
+  late final HomeProvider provider = context.read<HomeProvider>();
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         if (OtherConfig.USE_PUSH_NOTIFICATION)
           PushNotificationService.updateDeviceToken();
-        homeData.onRefresh();
+        provider.onRefresh();
       },
     );
     super.initState();
@@ -54,125 +58,102 @@ class _MetroScreenState extends State<MetroScreen>
     return PopScope(
       canPop: widget.go_back,
       child: SafeArea(
-        child: ListenableBuilder(
-          listenable: homeData,
-          builder: (context, child) {
-            return Scaffold(
-              floatingActionButton: whatsappFloatingButtonWidget,
-              appBar: BuildAppBar(context: context),
-              backgroundColor: Colors.white,
-              body: Stack(
-                children: [
-                  RefreshIndicator(
-                    color: Theme.of(context).primaryColor,
-                    backgroundColor: Colors.white,
-                    onRefresh: homeData.onRefresh,
-                    displacement: 0,
-                    child: NotificationListener<ScrollUpdateNotification>(
-                      onNotification: (notification) {
-                        homeData.paginationListener(notification.metrics);
-                        return false;
-                      },
-                      child: CustomScrollView(
-                        physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics(),
-                        ),
-                        slivers: <Widget>[
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == ""
-                                  ? PiratedWidget(homeData: homeData)
-                                  : const SizedBox(),
-                              const SizedBox(height: 10),
-
-                              // Header Banner
-                              HomeCarouselSlider(homeData: homeData),
-
-                              const SizedBox(height: 16),
-
-                              // Flash Sale Section
-                              const FlashSale(isCircle: true)
-                            ]),
-                          ),
-                          //move banner
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              // Padding(
-                              //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                              //   child: Image.network("https://sellerwise.devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
-                              // ),
-                              TodaysDealProductsWidget(
-                                homePresenter: homeData,
-                              ),
-                            ]),
-                          ),
-                          //Featured category-----------------------
-                          const CategoryList(),
-                          // const CategoryListVertical(crossAxisCount: 3,),
-
-                          //BannerList---------------------
-
-                          SliverToBoxAdapter(
-                            child: HomeBannersList(
-                              bannersImagesList: homeData.bannerOneImageList,
-                              isBannersInitial: homeData.isBannerOneInitial,
-                            ),
-                          ),
-                          //featuredProducts-----------------------------
-                          const FeaturedProductsListSliver(),
-                          //  BannerList---------------------
-                          SliverToBoxAdapter(
-                            child: HomeBannersList(
-                              bannersImagesList: homeData.bannerTwoImageList,
-                              isBannersInitial: homeData.isBannerTwoInitial,
-                            ),
-                          ),
-                          //  HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
-                          // SliverToBoxAdapter(
-                          //   child: HomeBannersAnimated(
-                          //     bannersImagesList: homeData.bannerTwoImageList,
-                          //     isBannersInitial: homeData.isBannerTwoInitial,
-                          //   ),
-                          // ),
-                          // HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
-                          // SliverToBoxAdapter(
-                          //   child: HomeBannersListAnimation(
-                          //     bannersImagesList: homeData.bannerTwoImageList,
-                          //     isBannersInitial: homeData.isBannerTwoInitial,
-                          //   ),
-                          // ),
-                          //SliverToBoxAdapter(child: BannerHome(isBannersInitial: homeData.isBannerTwoInitial, bannersImagesList: homeData.bannerTwoImageList)),
-
-                          //Best Selling-------------------
-                          // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
-                          const BestSellingSectionSliver(),
-                          // const VerticalProductsSectionSliver(),
-                          //auction products----------------------------
-                          AuctionProductsSectionSliver(
-                            homeData: homeData,
-                          ),
-                          //Brand List ---------------------------
-                          if (homeData.isBrandsInitial ||
-                              homeData.brandsList.isNotEmpty)
-                            BrandListSectionSliver(
-                              homeData: homeData,
-                            ),
-                          //all products --------------------------
-                          ...allProductsSliver(context, homeData),
-
-                          ///
-                        ],
-                      ),
+        child: Scaffold(
+          floatingActionButton: whatsappFloatingButtonWidget,
+          appBar: BuildAppBar(context: context),
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                backgroundColor: Colors.white,
+                onRefresh: provider.onRefresh,
+                displacement: 0,
+                child: NotificationListener<ScrollUpdateNotification>(
+                  onNotification: (notification) {
+                    provider.paginationListener(notification.metrics);
+                    return false;
+                  },
+                  child: CustomScrollView(
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
                     ),
+                    slivers: <Widget>[
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          AppConfig.purchase_code == ""
+                              ? const PiratedWidget()
+                              : emptyWidget,
+                          const SizedBox(height: 10),
+
+                          // Header Banner
+                          const HomeCarouselSlider(),
+
+                          const SizedBox(height: 16),
+
+                          // Flash Sale Section
+                          const FlashSale(isCircle: true)
+                        ]),
+                      ),
+                      //move banner
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          //   child: Image.network("https://sellerwise.devefinance.com/public/uploads/all/Ryto4mRZFjxR8INkhLs1DFyX6eoamXKIxXEDFBZM.png"),//TODO:# banner
+                          // ),
+                          const TodaysDealProductsWidget(),
+                        ]),
+                      ),
+                      //Featured category-----------------------
+                      const CategoryList(),
+                      // const CategoryListVertical(crossAxisCount: 3,),
+
+                      //BannerList---------------------
+
+                      const SliverToBoxAdapter(child: HomeBannersOne()),
+                      //featuredProducts-----------------------------
+                      const FeaturedProductsListSliver(),
+                      //  BannerList---------------------
+                      const SliverToBoxAdapter(child: HomeBannersTwo()),
+                      //  HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                      // SliverToBoxAdapter(
+                      //   child: HomeBannersAnimated(
+                      //     bannersImagesList: homeData.bannerTwoImageList,
+                      //     isBannersInitial: homeData.isBannerTwoInitial,
+                      //   ),
+                      // ),
+                      // HomeBannersAnimated(bannersImagesList: homeData.bannerTwoImageList),
+                      // SliverToBoxAdapter(
+                      //   child: HomeBannersListAnimation(
+                      //     bannersImagesList: homeData.bannerTwoImageList,
+                      //     isBannersInitial: homeData.isBannerTwoInitial,
+                      //   ),
+                      // ),
+                      //SliverToBoxAdapter(child: BannerHome(isBannersInitial: homeData.isBannerTwoInitial, bannersImagesList: homeData.bannerTwoImageList)),
+
+                      //Best Selling-------------------
+                      // if(homeData.isFeaturedProductInitial || homeData.featuredProductList.isNotEmpty)
+                      const BestSellingSectionSliver(),
+                      // const VerticalProductsSectionSliver(),
+                      //auction products----------------------------
+                      const AuctionProductsSectionSliver(),
+                      //Brand List ---------------------------
+                      const BrandListSectionSliver(),
+                      //all products --------------------------
+                      ...allProductsSliver,
+
+                      ///
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ProductLoadingContainer(homeData: homeData),
-                  ),
-                ],
+                ),
               ),
-            );
-          },
+              const Align(
+                alignment: Alignment.center,
+                child: ProductLoadingContainer(),
+              ),
+            ],
+          ),
         ),
       ),
     );

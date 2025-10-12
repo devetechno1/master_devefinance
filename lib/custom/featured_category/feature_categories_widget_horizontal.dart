@@ -1,28 +1,38 @@
+import 'dart:collection';
+
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../data_model/category_response.dart';
 import '../../my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FeaturedCategoriesWidget extends StatelessWidget {
-  final HomePresenter homeData;
-  const FeaturedCategoriesWidget({Key? key, required this.homeData})
-      : super(key: key);
+  const FeaturedCategoriesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (homeData.isCategoryInitial && homeData.featuredCategoryList.isEmpty) {
+    final ({UnmodifiableListView<Category> featuredCategoryList, bool isCategoryInitial}) p =
+        context.select<HomeProvider,
+            ({bool isCategoryInitial, UnmodifiableListView<Category> featuredCategoryList})>(
+      (provider) => (
+        featuredCategoryList: UnmodifiableListView(provider.featuredCategoryList),
+        isCategoryInitial: provider.isCategoryInitial,
+      ),
+    );
+    if (p.isCategoryInitial && p.featuredCategoryList.isEmpty) {
       // Handle shimmer loading here (if no categories loaded yet)
       return ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
-          item_count: 10,
-          mainAxisExtent: 170.0,
-          controller: homeData.featuredCategoryScrollController);
-    } else if (homeData.featuredCategoryList.isNotEmpty) {
+        crossAxisSpacing: 12.0,
+        mainAxisSpacing: 12.0,
+        item_count: 10,
+        mainAxisExtent: 170.0,
+      );
+    } else if (p.featuredCategoryList.isNotEmpty) {
       return GridView.builder(
         padding: const EdgeInsets.only(
             left: AppDimensions.paddingLarge,
@@ -30,8 +40,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
             top: 11,
             bottom: 24),
         scrollDirection: Axis.horizontal,
-        controller: homeData.featuredCategoryScrollController,
-        itemCount: homeData.featuredCategoryList.length,
+        itemCount: p.featuredCategoryList.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1, // Ensures square boxes
@@ -46,8 +55,8 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) {
                       return CategoryProducts(
-                        name: homeData.featuredCategoryList[index].name ?? '',
-                        slug: homeData.featuredCategoryList[index].slug ?? '',
+                        name: p.featuredCategoryList[index].name ?? '',
+                        slug: p.featuredCategoryList[index].slug ?? '',
                       );
                     },
                   ),
@@ -64,16 +73,15 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                           ),
                           child: FadeInImage.assetNetwork(
                             placeholder: AppImages.placeholder,
-                            image: homeData
-                                    .featuredCategoryList[index].coverImage ??
-                                '',
+                            image:
+                                p.featuredCategoryList[index].coverImage ?? '',
                             fit: BoxFit.cover,
                           ),
                         )),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Text(
-                        homeData.featuredCategoryList[index].name ?? '',
+                        p.featuredCategoryList[index].name ?? '',
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
@@ -89,8 +97,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
               ));
         },
       );
-    } else if (!homeData.isCategoryInitial &&
-        homeData.featuredCategoryList.isEmpty) {
+    } else if (!p.isCategoryInitial && p.featuredCategoryList.isEmpty) {
       return Container(
         height: 100,
         child: Center(

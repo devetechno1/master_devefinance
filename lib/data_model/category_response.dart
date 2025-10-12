@@ -97,6 +97,8 @@
 // }
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 CategoryResponse categoryResponseFromJson(String str) =>
     CategoryResponse.fromJson(json.decode(str));
 
@@ -132,8 +134,8 @@ class CategoryResponse {
       };
 }
 
-class Category {
-  Category({
+class Category extends Equatable {
+  const Category({
     this.id,
     this.name,
     this.slug,
@@ -144,14 +146,14 @@ class Category {
     this.coverImage, // Added cover_image
   });
 
-  int? id;
-  String? name;
-  String? slug;
-  String? banner;
-  String? icon;
-  int? number_of_children;
-  Links? links;
-  String? coverImage; // Added cover_image
+  final int? id;
+  final String? name;
+  final String? slug;
+  final String? banner;
+  final String? icon;
+  final int? number_of_children;
+  final Links? links;
+  final String? coverImage; // Added cover_image
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
@@ -176,6 +178,18 @@ class Category {
             : null, // Handle null case for links
         "cover_image": coverImage, // Added cover_image
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        slug,
+        banner,
+        icon,
+        number_of_children,
+        links?.toJson(),
+        coverImage,
+      ];
 }
 
 class Links {

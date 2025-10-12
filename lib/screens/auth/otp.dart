@@ -11,14 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../../data_model/otp_provider_model.dart';
 import '../../main.dart';
+import '../../presenter/home_provider.dart';
 import '../../ui_elements/otp_input_widget.dart';
 import '../../ui_elements/select_otp_provider_widget.dart';
-import '../home/home.dart';
 
 class Otp extends StatefulWidget {
   final String? title;
@@ -49,6 +50,9 @@ class _OtpState extends State<Otp> {
   CountdownController countdownController =
       CountdownController(autoStart: true);
   bool canResend = false;
+
+  late final homeP = context.read<HomeProvider>();
+
   @override
   void initState() {
     selectedProvider = widget.provider;
@@ -114,8 +118,8 @@ class _OtpState extends State<Otp> {
       if (SystemConfig.systemUser != null) {
         SystemConfig.systemUser!.emailVerified = true;
       }
-      await homeData.fetchAddressLists(false, false);
-      final bool needHandleAddress = homeData.needHandleAddressNavigation();
+      await homeP.fetchAddressLists(false, false);
+      final bool needHandleAddress = homeP.needHandleAddressNavigation();
       if (needHandleAddress) return;
       if (widget.fromRegistration) {
         context.go("/");

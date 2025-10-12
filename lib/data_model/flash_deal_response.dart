@@ -133,6 +133,8 @@
 // }
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 // To parse this JSON data, do:
 // final flashDealResponse = flashDealResponseFromJson(jsonString);
 
@@ -172,8 +174,8 @@ class FlashDealResponse {
       };
 }
 
-class FlashDealResponseDatum {
-  FlashDealResponseDatum({
+class FlashDealResponseDatum extends Equatable {
+  const FlashDealResponseDatum({
     this.id,
     this.slug,
     this.title,
@@ -183,13 +185,13 @@ class FlashDealResponseDatum {
     this.isFeatured = false,
   });
 
-  int? id;
-  String? slug;
-  String? title;
-  int? date;
-  String? banner;
-  Products? products;
-  bool isFeatured;
+  final int? id;
+  final String? slug;
+  final String? title;
+  final int? date;
+  final String? banner;
+  final Products? products;
+  final bool isFeatured;
 
   factory FlashDealResponseDatum.fromJson(Map<String, dynamic> json) =>
       FlashDealResponseDatum(
@@ -213,6 +215,17 @@ class FlashDealResponseDatum {
         "featured": isFeatured ? 1 : 0,
         "products": products != null ? products!.toJson() : null,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        slug,
+        title,
+        date,
+        banner,
+        products,
+        isFeatured,
+      ];
 }
 
 class Products {
@@ -235,8 +248,8 @@ class Products {
       };
 }
 
-class Product {
-  Product({
+class Product extends Equatable {
+  const Product({
     this.id,
     this.name,
     this.price,
@@ -244,12 +257,11 @@ class Product {
     this.links,
   });
 
-  var id;
-  String? name;
-  String? price;
-  String? image;
-  Links? links;
-
+  final id;
+  final String? name;
+  final String? price;
+  final String? image;
+  final Links? links;
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         name: json["name"],
@@ -265,14 +277,23 @@ class Product {
         "image": image,
         "links": links != null ? links!.toJson() : null,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        price,
+        image,
+        links,
+      ];
 }
 
-class Links {
-  Links({
+class Links extends Equatable {
+  const Links({
     this.details,
   });
 
-  String? details;
+  final String? details;
 
   factory Links.fromJson(Map<String, dynamic> json) => Links(
         details: json["details"],
@@ -281,4 +302,7 @@ class Links {
   Map<String, dynamic> toJson() => {
         "details": details,
       };
+
+  @override
+  List<Object?> get props => [details];
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+import '../../../app_config.dart';
 import '../../../custom/btn.dart';
 import '../../../custom/toast_component.dart';
 import '../../../custom/useful_elements.dart';
@@ -461,7 +462,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             style: const TextStyle(color: Colors.black, fontSize: 13),
             iconSize: 13,
-            underline: const SizedBox(),
+            underline: emptyWidget,
             value: _selectedFilter,
             items: _dropdownWhichFilterItems,
             onChanged: (WhichFilter? selectedFilter) {

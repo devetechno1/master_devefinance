@@ -4,27 +4,31 @@ import '../../constants/app_dimensions.dart';
 import '../../constants/app_images.dart';
 import '../../helpers/shimmer_helper.dart';
 import '../../my_theme.dart';
-import '../../presenter/home_presenter.dart';
 import '../../screens/category_list_n_product/category_products.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FeatureCategoriesWidgetVertical extends StatelessWidget {
-  final HomePresenter homeData;
   final int crossAxisCount;
-  const FeatureCategoriesWidgetVertical(
-      {super.key, required this.homeData, required this.crossAxisCount});
+  final bool isCategoryInitial;
+  final List featuredCategoryList;
+  const FeatureCategoriesWidgetVertical({
+    super.key,
+    required this.crossAxisCount,
+    required this.isCategoryInitial,
+    required this.featuredCategoryList,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (homeData.isCategoryInitial && homeData.featuredCategoryList.isEmpty) {
+    if (isCategoryInitial && featuredCategoryList.isEmpty) {
       // Handle shimmer loading here (if no categories loaded yet)
       return ShimmerHelper().buildGridShimmerWithAxisCount(
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
-          item_count: 10,
-          mainAxisExtent: 170.0,
-          controller: homeData.featuredCategoryScrollController);
-    } else if (homeData.featuredCategoryList.isNotEmpty) {
+        crossAxisSpacing: 12.0,
+        mainAxisSpacing: 12.0,
+        item_count: 10,
+        mainAxisExtent: 170.0,
+      );
+    } else if (featuredCategoryList.isNotEmpty) {
       return GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -34,8 +38,7 @@ class FeatureCategoriesWidgetVertical extends StatelessWidget {
             top: 11,
             bottom: 24),
         scrollDirection: Axis.vertical,
-        controller: homeData.featuredCategoryScrollController,
-        itemCount: homeData.featuredCategoryList.length,
+        itemCount: featuredCategoryList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
             childAspectRatio: 1, // Ensures square boxes
@@ -50,8 +53,8 @@ class FeatureCategoriesWidgetVertical extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) {
                       return CategoryProducts(
-                        name: homeData.featuredCategoryList[index].name ?? '',
-                        slug: homeData.featuredCategoryList[index].slug ?? '',
+                        name: featuredCategoryList[index].name ?? '',
+                        slug: featuredCategoryList[index].slug ?? '',
                       );
                     },
                   ),
@@ -79,9 +82,8 @@ class FeatureCategoriesWidgetVertical extends StatelessWidget {
                                 AppDimensions.radiusNormal),
                             child: FadeInImage.assetNetwork(
                               placeholder: AppImages.placeholder,
-                              image: homeData
-                                      .featuredCategoryList[index].coverImage ??
-                                  '',
+                              image:
+                                  featuredCategoryList[index].coverImage ?? '',
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -89,7 +91,7 @@ class FeatureCategoriesWidgetVertical extends StatelessWidget {
                     const SizedBox(width: 10),
                     Flexible(
                       child: Text(
-                        homeData.featuredCategoryList[index].name ?? '',
+                        featuredCategoryList[index].name ?? '',
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
@@ -105,8 +107,7 @@ class FeatureCategoriesWidgetVertical extends StatelessWidget {
               ));
         },
       );
-    } else if (!homeData.isCategoryInitial &&
-        homeData.featuredCategoryList.isEmpty) {
+    } else if (!isCategoryInitial && featuredCategoryList.isEmpty) {
       return Container(
         height: 100,
         child: Center(

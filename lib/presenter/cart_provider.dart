@@ -268,7 +268,7 @@ import '../repositories/address_repository.dart';
 import '../screens/checkout/select_address.dart';
 import '../screens/checkout/shipping_info.dart';
 import '../screens/guest_checkout_pages/guest_checkout_address.dart';
-import '../screens/home/home.dart';
+import 'home_provider.dart';
 
 ValueNotifier<double> cartTotalAmount = ValueNotifier<double>(0.0);
 ValueNotifier<int> cartQuantityProduct = ValueNotifier<int>(0);
@@ -545,9 +545,11 @@ class CartProvider extends ChangeNotifier {
 
     final cartProcessResponse = await CartRepository()
         .getCartProcessResponse(cartIdsString, cartQuantitiesString);
-    if (homeData.defaultAddress?.id != null)
-      await AddressRepository().getAddressUpdateInCartResponse(
-          address_id: homeData.defaultAddress?.id);
+    final HomeProvider homeP = context.read<HomeProvider>();
+
+    if (homeP.defaultAddress?.id != null)
+      await AddressRepository()
+          .getAddressUpdateInCartResponse(address_id: homeP.defaultAddress?.id);
 
     if (cartProcessResponse.result == false) {
       ToastComponent.showDialog(cartProcessResponse.message, isError: true);

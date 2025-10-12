@@ -1,18 +1,21 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/menu_item_model.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:provider/provider.dart';
+
+import '../../../presenter/home_provider.dart';
 
 class MenuItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final HomeProvider homeProvider = context.read<HomeProvider>();
     final List<MenuItemModel> menuItems = [
-      if (homeData.isTodayDeal)
+      if (homeProvider.isTodayDeal)
         MenuItemModel(
           title: 'todays_deal_ucf'.tr(context: context),
           image: AppImages.todayDeal,
@@ -24,7 +27,7 @@ class MenuItemList extends StatelessWidget {
           textColor: Colors.white,
           backgroundColor: const Color(0xffE62D05),
         ),
-      if (homeData.isFlashDeal)
+      if (homeProvider.isFlashDeal)
         MenuItemModel(
           title: 'flash_deal_ucf'.tr(context: context),
           image: AppImages.flashDeal,
@@ -36,7 +39,7 @@ class MenuItemList extends StatelessWidget {
           textColor: Colors.white,
           backgroundColor: const Color(0xffF6941C),
         ),
-      if (homeData.isBrands)
+      if (homeProvider.isBrands)
         MenuItemModel(
           title: 'brands_ucf'.tr(context: context),
           image: AppImages.brands,
@@ -61,7 +64,7 @@ class MenuItemList extends StatelessWidget {
           backgroundColor: const Color(0xffE9EAEB),
         ),
     ];
-    if (menuItems.isEmpty) return const SizedBox();
+    if (menuItems.isEmpty) return emptyWidget;
 
     return Container(
       height: 40,

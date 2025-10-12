@@ -1,7 +1,7 @@
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 
+import '../../../../app_config.dart';
 import '../../../../custom/featured_products/product_vertical_list_widget.dart';
 
 class CustomVerticalProductsListSectionWidget extends StatelessWidget {
@@ -26,7 +26,7 @@ class CustomVerticalProductsListSectionWidget extends StatelessWidget {
   final TextStyle? nameTextStyle;
   @override
   Widget build(BuildContext context) {
-    if (!isProductInitial && productList.isEmpty) return const SizedBox();
+    if (!isProductInitial && productList.isEmpty) return emptyWidget;
     return Container(
       width: double.maxFinite,
       margin:

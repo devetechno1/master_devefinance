@@ -1,32 +1,34 @@
+import 'dart:collection';
+
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_config.dart';
+import '../../data_model/flash_deal_response.dart';
 import '../dynamic_size_image_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 class FlashDealBanner extends StatelessWidget {
-  final HomePresenter? homeData;
-  final BuildContext? context;
 
-  const FlashDealBanner({Key? key, this.homeData, this.context})
-      : super(key: key);
+  const FlashDealBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Null safety check for homeData
-    if (homeData == null) {
-      return Container(
-        height: 100,
-        child: Center(child: Text('no_data_is_available'.tr(context: context))),
-      );
-    }
+    final ({List<FlashDealResponseDatum> banners, bool isFlashDealInitial}) p =
+        context.select<HomeProvider,
+            ({bool isFlashDealInitial, UnmodifiableListView<FlashDealResponseDatum> banners})>(
+      (provider) => (
+        banners: UnmodifiableListView(provider.banners),
+        isFlashDealInitial: provider.isFlashDealInitial,
+      ),
+    );
 
     // When data is loading and no images are available
-    if (homeData!.isFlashDealInitial && homeData!.banners.isEmpty) {
+    if (p.isFlashDealInitial && p.banners.isEmpty) {
       return Padding(
         padding: const EdgeInsets.only(
             left: AppDimensions.paddingMedium,
@@ -38,7 +40,7 @@ class FlashDealBanner extends StatelessWidget {
     }
 
     // When banner images are available
-    else if (homeData!.banners.isNotEmpty) {
+    else if (p.banners.isNotEmpty) {
       return CarouselSlider(
         options: CarouselOptions(
           height: 237,
@@ -52,7 +54,7 @@ class FlashDealBanner extends StatelessWidget {
             // Optionally handle page change
           },
         ),
-        items: homeData!.banners.map((i) {
+        items: p.banners.map((i) {
           return Builder(
             builder: (BuildContext context) {
               return Padding(
@@ -67,7 +69,7 @@ class FlashDealBanner extends StatelessWidget {
     }
 
     // When images are not found and loading is complete
-    else if (!homeData!.isFlashDealInitial && homeData!.banners.isEmpty) {
+    else if (!p.isFlashDealInitial && p.banners.isEmpty) {
       return Container(
         height: 100,
         child: Center(
@@ -102,32 +104,5 @@ class FlashBannerWidget extends StatelessWidget {
       photo: bannerLink,
       radius: 10,
     );
-
-    // return Container(
-    //   height: size,
-    //   width: size,
-    //   decoration: BoxDecoration(
-    //     color: Colors.white, // background color for container
-    //     borderRadius: BorderRadius.circular(AppDimensions.radiusNormal), // rounded corners
-    //     boxShadow: [
-    //       BoxShadow(
-    //         color:
-    //             const Color(0xff000000).withValues(alpha: 0.1), // shadow color
-    //         spreadRadius: 2, // spread radius
-    //         blurRadius: 5, // blur radius
-    //         offset: const Offset(0, 3), // changes position of shadow
-    //       ),
-    //     ],
-    //   ),
-    //   child: ClipRRect(
-    //     borderRadius: BorderRadius.circular(
-    //         10), // round corners for the image too
-    //     child: InkWell(
-    //       onTap: () => GoRouter.of(context).go('/flash-deal/$slug'),
-    //       child: AIZImage.radiusImage(bannerLink, 6),
-    //       // Display the image with rounded corners
-    //     ),
-    //   ),
-    // );
   }
 }

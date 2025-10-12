@@ -1,8 +1,10 @@
-class SingleBanner {
+import 'package:equatable/equatable.dart';
+
+class SingleBanner extends Equatable {
   final String photo;
   final String url;
 
-  SingleBanner({required this.photo, required this.url});
+  const SingleBanner({required this.photo, required this.url});
 
   factory SingleBanner.fromJson(Map<String, dynamic> json) {
     return SingleBanner(
@@ -10,4 +12,7 @@ class SingleBanner {
       url: json['url'] ?? '', // Fallback to an empty string if null
     );
   }
+
+  @override
+  List<Object?> get props => [photo, url];
 }

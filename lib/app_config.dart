@@ -93,3 +93,5 @@ class AppConfig {
   /// mostly in cms "user_login_token" in multi "6ammart_token" or "devetechno_token"
   static const String oldTokenKey = "";
 }
+
+const SizedBox emptyWidget = SizedBox();

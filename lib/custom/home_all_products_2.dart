@@ -1,15 +1,18 @@
+import 'dart:collection';
+
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/app_dimensions.dart';
+import '../data_model/product_mini_response.dart';
 import '../helpers/shimmer_helper.dart';
-import '../presenter/home_presenter.dart';
+import '../presenter/home_provider.dart';
 import '../ui_elements/product_card_black.dart';
 
 class HomeAllProductsSliver extends StatelessWidget {
-  final HomePresenter homeData;
-  const HomeAllProductsSliver({super.key, required this.homeData});
+  const HomeAllProductsSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,35 +28,52 @@ class HomeAllProductsSliver extends StatelessWidget {
   }
 
   RenderObjectWidget _slivers(BuildContext context) {
-    if (homeData.isAllProductInitial) {
+    final ({
+      List<Product> allProductList,
+      bool isAllProductInitial,
+      int totalAllProductData
+    }) data = context.select<
+        HomeProvider,
+        ({
+          UnmodifiableListView<Product> allProductList,
+          int totalAllProductData,
+          bool isAllProductInitial
+        })>(
+      (data) => (
+        allProductList: UnmodifiableListView(data.allProductList),
+        totalAllProductData: data.totalAllProductData,
+        isAllProductInitial: data.isAllProductInitial,
+      ),
+    );
+    if (data.isAllProductInitial) {
       return ShimmerHelper().buildProductSliverGridShimmer();
-    } else if (homeData.allProductList.isNotEmpty) {
+    } else if (data.allProductList.isNotEmpty) {
       final bool isLoadingMore =
-          homeData.allProductList.length < homeData.totalAllProductData;
+          data.allProductList.length < data.totalAllProductData;
       return SliverMasonryGrid.count(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           childCount: isLoadingMore
-              ? homeData.allProductList.length + 2
-              : homeData.allProductList.length,
+              ? data.allProductList.length + 2
+              : data.allProductList.length,
           itemBuilder: (context, index) {
-            if (index > homeData.allProductList.length - 1) {
+            if (index > data.allProductList.length - 1) {
               return ShimmerHelper().buildBasicShimmer(height: 200);
             }
             return ProductCardBlack(
-              id: homeData.allProductList[index].id,
-              slug: homeData.allProductList[index].slug ?? '',
-              image: homeData.allProductList[index].thumbnail_image,
-              name: homeData.allProductList[index].name,
-              main_price: homeData.allProductList[index].main_price,
-              stroked_price: homeData.allProductList[index].stroked_price,
-              has_discount: homeData.allProductList[index].has_discount == true,
-              discount: homeData.allProductList[index].discount,
-              isWholesale: homeData.allProductList[index].isWholesale,
+              id: data.allProductList[index].id,
+              slug: data.allProductList[index].slug ?? '',
+              image: data.allProductList[index].thumbnail_image,
+              name: data.allProductList[index].name,
+              main_price: data.allProductList[index].main_price,
+              stroked_price: data.allProductList[index].stroked_price,
+              has_discount: data.allProductList[index].has_discount == true,
+              discount: data.allProductList[index].discount,
+              isWholesale: data.allProductList[index].isWholesale,
             );
           });
-    } else if (homeData.totalAllProductData == 0) {
+    } else if (data.totalAllProductData == 0) {
       return SliverToBoxAdapter(
         child: Center(
           child: Text('no_product_is_available'.tr(context: context)),

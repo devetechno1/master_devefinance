@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../app_config.dart';
 import '../../constants/app_dimensions.dart';
 import '../../data_model/slider_response.dart';
 import '../../services/navigation_service.dart';
@@ -87,7 +88,7 @@ class HomeBannersListCircle extends StatelessWidget {
         ),
       );
     } else {
-      return const SizedBox();
+      return emptyWidget;
     }
   }
 }

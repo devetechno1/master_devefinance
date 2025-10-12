@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../app_config.dart';
 import '../../data_model/order_mini_response.dart';
 
 class PaymentStatus {
@@ -270,7 +271,7 @@ class _OrderListState extends State<OrderList> {
                 ),
               ),
               iconSize: 14,
-              underline: const SizedBox(),
+              underline: emptyWidget,
               value: _selectedPaymentStatus,
               items: _dropdownPaymentStatusItems,
               onChanged: (PaymentStatus? selectedFilter) {
@@ -301,7 +302,7 @@ class _OrderListState extends State<OrderList> {
                 ),
               ),
               iconSize: 14,
-              underline: const SizedBox(),
+              underline: emptyWidget,
               value: _selectedDeliveryStatus,
               items: _dropdownDeliveryStatusItems,
               onChanged: (DeliveryStatus? selectedFilter) {

@@ -1219,7 +1219,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     _productDetails != null
                                         ? (_colorList.isNotEmpty
                                             ? buildColorRow()
-                                            : const SizedBox())
+                                            : emptyWidget)
                                         : ShimmerHelper().buildBasicShimmer(
                                             height: 30.0,
                                           ),
@@ -1673,7 +1673,7 @@ class _ProductDetailsState extends State<ProductDetails>
   Widget buildSellerRow(BuildContext context) {
     //print("sl:" +  _productDetails!.shop_logo);
     if (_productDetails?.shop_slug?.trim().isNotEmpty != true)
-      return const SizedBox();
+      return emptyWidget;
     return Container(
       color: const Color(0xffF6F7F8),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -2422,7 +2422,7 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   Widget buildBottomAppBar(_addedToCartSnackbar) {
-    if (productHasError) return const SizedBox();
+    if (productHasError) return emptyWidget;
     return Container(
       padding:
           const EdgeInsets.symmetric(vertical: AppDimensions.paddingDefault),

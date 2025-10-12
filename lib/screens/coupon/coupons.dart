@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
+import '../../app_config.dart';
 import '../../custom/my_separator.dart';
 import '../../custom/toast_component.dart';
 import '../../custom/useful_elements.dart';
@@ -315,7 +316,7 @@ class _CouponsState extends State<Coupons> {
             ),
           );
         } else {
-          return const SizedBox();
+          return emptyWidget;
         }
       },
     );

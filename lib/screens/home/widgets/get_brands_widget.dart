@@ -1,5 +1,4 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/brand_products.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
@@ -8,13 +7,14 @@ import 'package:go_router/go_router.dart';
 import '../../../data_model/brand_response.dart';
 
 class CustomBrandListWidget extends StatefulWidget {
-  final HomePresenter homePresenter;
   final bool showViewAllButton;
+  final List<Brands> brands;
 
-  const CustomBrandListWidget(
-      {super.key,
-      required this.homePresenter,
-      required this.showViewAllButton});
+  const CustomBrandListWidget({
+    super.key,
+    required this.showViewAllButton,
+    required this.brands,
+  });
 
   @override
   State<CustomBrandListWidget> createState() => _CustomBrandListWidgetState();
@@ -23,12 +23,10 @@ class CustomBrandListWidget extends StatefulWidget {
 class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
   @override
   Widget build(BuildContext context) {
-    final List<Brands> brands = widget.homePresenter.brandsList;
-
-    if (brands.isEmpty) {
+    if (widget.brands.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
-    final bool showViewAll = widget.showViewAllButton && brands.length > 8;
+    final bool showViewAll = widget.showViewAllButton && widget.brands.length > 8;
 
     return Column(
       children: [
@@ -36,7 +34,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: showViewAll ? 8 : brands.length,
+          itemCount: showViewAll ? 8 : widget.brands.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 10,
@@ -44,7 +42,7 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
             childAspectRatio: 0.9,
           ),
           itemBuilder: (context, index) {
-            final Brands brand = brands[index];
+            final Brands brand = widget.brands[index];
 
             if (showViewAll && index == 7) {
               return GestureDetector(

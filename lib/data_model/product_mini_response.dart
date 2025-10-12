@@ -162,6 +162,8 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 ProductMiniResponse productMiniResponseFromJson(String str) =>
     ProductMiniResponse.fromJson(json.decode(str));
 
@@ -205,8 +207,8 @@ class ProductMiniResponse {
       };
 }
 
-class Product {
-  Product({
+class Product extends Equatable {
+  const Product({
     this.id,
     this.slug,
     this.name,
@@ -221,18 +223,18 @@ class Product {
     this.isWholesale,
   });
 
-  int? id;
-  String? slug;
-  String? name;
-  String? thumbnail_image;
-  String? main_price;
-  String? stroked_price;
-  bool? has_discount;
-  var discount;
-  int? rating;
-  int? sales;
-  Links? links;
-  bool? isWholesale;
+  final int? id;
+  final String? slug;
+  final String? name;
+  final String? thumbnail_image;
+  final String? main_price;
+  final String? stroked_price;
+  final bool? has_discount;
+  final discount;
+  final int? rating;
+  final int? sales;
+  final Links? links;
+  final bool? isWholesale;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
@@ -263,6 +265,22 @@ class Product {
         "links": links!.toJson(),
         "isWholesale": isWholesale,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        slug,
+        name,
+        thumbnail_image,
+        main_price,
+        stroked_price,
+        has_discount,
+        discount,
+        rating,
+        sales,
+        links,
+        isWholesale,
+      ];
 }
 
 class Links {

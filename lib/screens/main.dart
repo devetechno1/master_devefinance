@@ -2,6 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/main.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
@@ -15,7 +16,6 @@ import 'package:provider/provider.dart';
 import '../app_config.dart';
 import '../presenter/cart_provider.dart';
 import '../ui_elements/close_app_dialog_widget.dart';
-import 'home/home.dart';
 import 'splash_screen/custom_statusbar.dart';
 
 // import 'home/home_page_type_enum.dart';
@@ -32,6 +32,7 @@ class _MainState extends State<Main> {
   List<Widget> _children = [];
   CartCounter counter = CartCounter();
   BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
+  late final HomeProvider homeProvider = context.read<HomeProvider>();
 
   fetchAll() {
     getCartData();
@@ -53,7 +54,7 @@ class _MainState extends State<Main> {
       routes.push("/dashboard").then(
         (value) async {
           fetchAll();
-          await homeData.onRefresh();
+          await homeProvider.onRefresh();
         },
       );
       return;
@@ -125,8 +126,7 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
-    homeData.showPopupBanner(context);
-
+    homeProvider.showPopupBanner(context);
     return WillPopScope(
       onWillPop: willPop,
       child: Directionality(

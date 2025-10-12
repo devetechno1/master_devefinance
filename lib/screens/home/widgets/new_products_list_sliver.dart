@@ -1,7 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
-import '../home.dart';
+import 'package:provider/provider.dart';
+import '../../../app_config.dart';
+import '../../../data_model/product_mini_response.dart';
+import '../../../presenter/home_provider.dart';
 import 'featured_products/custom_horizontal_products_list_widget.dart';
 
 // TODO:# change to new products not featured
@@ -12,17 +17,28 @@ class NewProductsListSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: ListenableBuilder(
-          listenable: homeData,
-          builder: (context, child) {
-            if (!homeData.isFeaturedProductInitial &&
-                homeData.featuredProductList.isEmpty) return const SizedBox();
+      child: Selector<
+              HomeProvider,
+              ({
+                bool isFeaturedProductInitial,
+                UnmodifiableListView<Product> featuredProductList,
+                int totalFeaturedProductData
+              })>(
+          selector: (_, p) => (
+                isFeaturedProductInitial: p.isFeaturedProductInitial,
+                featuredProductList: UnmodifiableListView(p.featuredProductList),
+                totalFeaturedProductData: p.totalFeaturedProductData,
+              ),
+          builder: (context, s, child) {
+            if (!s.isFeaturedProductInitial && s.featuredProductList.isEmpty)
+              return emptyWidget;
             return CustomHorizontalProductsListSectionWidget(
               title: 'new_products'.tr(context: context),
-              isProductInitial: homeData.isFeaturedProductInitial,
-              productList: homeData.featuredProductList,
-              numberOfTotalProducts: homeData.totalFeaturedProductData,
-              onArriveTheEndOfList: homeData.fetchFeaturedProducts,
+              isProductInitial: s.isFeaturedProductInitial,
+              productList: s.featuredProductList,
+              numberOfTotalProducts: s.totalFeaturedProductData,
+              onArriveTheEndOfList:
+                  context.read<HomeProvider>().fetchFeaturedProducts,
               //  nameTextStyle: ,
               //pricesTextStyle:
             );

@@ -13,6 +13,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/flash_deal_repository
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/sliders_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
@@ -31,7 +32,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import 'cart_provider.dart';
 
-class HomePresenter extends ChangeNotifier {
+class HomeProvider extends ChangeNotifier {
   CurrentRemainingTime flashDealRemainingTime =
       CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
   FlashDealResponseDatum? flashDeal;
@@ -44,7 +45,7 @@ class HomePresenter extends ChangeNotifier {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int current_slider = 0;
-  ScrollController? featuredCategoryScrollController;
+  // ScrollController? featuredCategoryScrollController;
   // ScrollController mainScrollController = ScrollController();
 
   // late AnimationController pirated_logo_controller;
@@ -104,7 +105,7 @@ class HomePresenter extends ChangeNotifier {
 
   bool isBrands = false;
 
-  List<productMini.Product> allProductList = [];
+  final List<productMini.Product> allProductList = [];
   bool isAllProductInitial = true;
   int totalAllProductData = 0;
   int allProductPage = 1;
@@ -509,7 +510,7 @@ class HomePresenter extends ChangeNotifier {
         await ProductRepository().getFilteredProducts(page: allProductPage));
 
     if (productResponse?.products != null) {
-      allProductList.addAll(productResponse?.products ?? []);
+      allProductList.addAll(List.of(productResponse?.products ?? []));
     }
     isAllProductInitial = false;
     totalAllProductData = productResponse?.meta?.total ?? allProductList.length;
@@ -644,18 +645,21 @@ class HomePresenter extends ChangeNotifier {
   }
 }
 
-class CurrentRemainingTime {
+class CurrentRemainingTime extends Equatable {
   final int days;
   final int hours;
   final int min;
   final int sec;
 
-  CurrentRemainingTime({
+  const CurrentRemainingTime({
     required this.days,
     required this.hours,
     required this.min,
     required this.sec,
   });
+
+  @override
+  List<Object?> get props => [days, hours, min, sec];
 }
 
 bool _isOpenedBefore = false;

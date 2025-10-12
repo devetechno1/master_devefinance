@@ -200,7 +200,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
                 onPressed: () => Navigator.pop(context, goToOrdersScreen),
               ),
             )
-          : const SizedBox(),
+          : emptyWidget,
       title: Text(
         'pay_with_my_paymob'.tr(context: context),
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),

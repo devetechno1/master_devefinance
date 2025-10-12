@@ -43,11 +43,11 @@ class WishlistItem {
   });
 
   int? id;
-  Product? product;
+  WishListProduct? product;
 
   factory WishlistItem.fromJson(Map<String, dynamic> json) => WishlistItem(
         id: json["id"],
-        product: Product.fromJson(json["product"]),
+        product: WishListProduct.fromJson(json["product"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,8 +56,8 @@ class WishlistItem {
       };
 }
 
-class Product {
-  Product({
+class WishListProduct {
+  WishListProduct({
     this.id,
     this.name,
     this.thumbnail_image,
@@ -73,7 +73,7 @@ class Product {
   int? rating;
   String? slug;
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory WishListProduct.fromJson(Map<String, dynamic> json) => WishListProduct(
         id: json["id"],
         name: json["name"],
         thumbnail_image: json["thumbnail_image"],

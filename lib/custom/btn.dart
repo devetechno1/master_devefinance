@@ -3,6 +3,8 @@ import "package:active_ecommerce_cms_demo_app/my_theme.dart";
 import "package:flutter/material.dart";
 import "package:one_context/one_context.dart";
 
+import "../app_config.dart";
+
 class Btn {
   static Widget basic({
     Color color = const Color.fromARGB(0, 0, 0, 0),
@@ -10,7 +12,7 @@ class Btn {
     OutlinedBorder shape = const RoundedRectangleBorder(
         borderRadius:
             BorderRadius.all(Radius.circular(AppDimensions.radiusNormal))),
-    Widget child = const SizedBox(),
+    Widget child = emptyWidget,
     EdgeInsetsGeometry padding =
         const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
     double? minWidth,

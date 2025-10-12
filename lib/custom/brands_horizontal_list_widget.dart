@@ -3,6 +3,7 @@ import 'package:active_ecommerce_cms_demo_app/data_model/brand_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../app_config.dart';
 import '../helpers/shimmer_helper.dart';
 import '../ui_elements/mini_product_card.dart';
 
@@ -107,7 +108,7 @@ class BrandHorizontalListWidget extends StatelessWidget {
         ),
       );
     } else {
-      return const SizedBox();
+      return emptyWidget;
     }
   }
 }

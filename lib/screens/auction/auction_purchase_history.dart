@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../app_config.dart';
 import '../../custom/device_info.dart';
 import '../../custom/toast_component.dart';
 import '../../custom/useful_elements.dart';
@@ -662,7 +663,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 ),
               ),
               iconSize: 14,
-              underline: const SizedBox(),
+              underline: emptyWidget,
               value: _selectedPaymentStatus,
               items: _dropdownPaymentStatusItems,
               onChanged: (PaymentStatus? selectedFilter) {
@@ -694,7 +695,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 ),
               ),
               iconSize: 14,
-              underline: const SizedBox(),
+              underline: emptyWidget,
               value: _selectedDeliveryStatus,
               items: _dropdownDeliveryStatusItems,
               onChanged: (DeliveryStatus? selectedFilter) {

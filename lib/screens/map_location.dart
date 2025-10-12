@@ -205,7 +205,7 @@ class MapLocationState extends State<MapLocation>
                   // controller: _countryController,
                   debounceDuration: const Duration(milliseconds: 500),
                   emptyBuilder: (context) {
-                    return const SizedBox();
+                    return emptyWidget;
                   },
                   constraints: BoxConstraints(
                       maxHeight: MediaQuery.sizeOf(context).height * 0.7),

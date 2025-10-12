@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../app_config.dart';
 import '../../helpers/shimmer_helper.dart';
 import '../../ui_elements/mini_product_card.dart';
-import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart'
-    as productMini;
+import 'package:active_ecommerce_cms_demo_app/data_model/product_mini_response.dart';
 
 class ProductVerticalListWidget extends StatelessWidget {
   final bool isProductInitial;
-  final List<productMini.Product> productList;
+  final List<Product> productList;
   final int numberOfTotalProducts;
   final void Function() onArriveTheEndOfList;
   final TextStyle? priceTextStyle;
@@ -95,7 +95,7 @@ class ProductVerticalListWidget extends StatelessWidget {
         ),
       );
     } else {
-      return const SizedBox();
+      return emptyWidget;
     }
   }
 }

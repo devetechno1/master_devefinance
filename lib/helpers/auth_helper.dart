@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:one_context/one_context.dart';
@@ -6,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../data_model/login_response.dart';
 import '../presenter/cart_provider.dart';
-import '../screens/home/home.dart';
 import 'shared_value_helper.dart';
 
 class AuthHelper {
@@ -45,7 +45,8 @@ class AuthHelper {
     user_email.$ = "";
     user_phone.$ = "";
     avatar_original.$ = "";
-    homeData.logOutAddress(true);
+
+    OneContext().context?.read<HomeProvider>().logOutAddress(true);
 
     await Future.wait([
       is_logged_in.save(),

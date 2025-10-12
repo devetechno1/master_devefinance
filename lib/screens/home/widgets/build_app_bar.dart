@@ -3,9 +3,11 @@ import 'package:active_ecommerce_cms_demo_app/custom/home_search_box.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../data_model/address_response.dart';
 import '../../../helpers/shared_value_helper.dart';
-import '../home.dart';
+import '../../../presenter/home_provider.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BuildAppBar({super.key, required this.context});
@@ -51,7 +53,7 @@ class AddressAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => homeData.handleAddressNavigation(false),
+      onTap: () => context.read<HomeProvider>().handleAddressNavigation(false),
       child: Container(
         height: 40,
         padding: const EdgeInsets.symmetric(
@@ -72,15 +74,19 @@ class AddressAppBarWidget extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             Expanded(
-              child: ListenableBuilder(
-                listenable: homeData,
-                builder: (context, child) {
+              child: Selector<HomeProvider,
+                  ({bool isLoadingAddress, Address? defaultAddress})>(
+                selector: (_, p) => (
+                  defaultAddress: p.defaultAddress,
+                  isLoadingAddress: p.isLoadingAddress
+                ),
+                builder: (context, p, child) {
                   return Text(
-                    homeData.isLoadingAddress
+                    p.isLoadingAddress
                         ? "is_loading".tr(context: context)
-                        : homeData.defaultAddress == null
+                        : p.defaultAddress == null
                             ? "add_default_address".tr(context: context)
-                            : "${homeData.defaultAddress?.city_name}, ${homeData.defaultAddress?.state_name}, ${homeData.defaultAddress?.country_name}",
+                            : "${p.defaultAddress?.city_name}, ${p.defaultAddress?.state_name}, ${p.defaultAddress?.country_name}",
                   );
                 },
               ),

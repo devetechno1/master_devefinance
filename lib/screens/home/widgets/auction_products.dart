@@ -1,15 +1,15 @@
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
+import 'dart:collection';
+
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_products/custom_horizontal_products_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data_model/product_mini_response.dart';
 
 class AuctionProductsSectionSliver extends StatelessWidget {
-  final HomePresenter homeData;
-
-  const AuctionProductsSectionSliver({
-    super.key,
-    required this.homeData,
-  });
+  const AuctionProductsSectionSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,31 @@ class AuctionProductsSectionSliver extends StatelessWidget {
                   width: double.infinity,
                 ),
               ),
-              CustomHorizontalProductsListSectionWidget(
-                title: 'auction_product_ucf'.tr(context: context),
-                isProductInitial: homeData.isauctionProductInitial,
-                productList: homeData.auctionProductList,
-                numberOfTotalProducts: homeData.totalauctionProductData ?? 0,
-                onArriveTheEndOfList: homeData.fetchAuctionProducts,
-              ),
+              Selector<
+                      HomeProvider,
+                      ({
+                        bool isAuctionProductInitial,
+                        UnmodifiableListView<Product> auctionProductList,
+                        int? totalAuctionProductData,
+                      })>(
+                  selector: (context, provider) => (
+                        isAuctionProductInitial:
+                            provider.isauctionProductInitial,
+                        auctionProductList: UnmodifiableListView(provider.auctionProductList),
+                        totalAuctionProductData:
+                            provider.totalauctionProductData,
+                      ),
+                  builder: (context, provider, child) {
+                    return CustomHorizontalProductsListSectionWidget(
+                      title: 'auction_product_ucf'.tr(context: context),
+                      isProductInitial: provider.isAuctionProductInitial,
+                      productList: provider.auctionProductList,
+                      numberOfTotalProducts:
+                          provider.totalAuctionProductData ?? 0,
+                      onArriveTheEndOfList:
+                          context.read<HomeProvider>().fetchAuctionProducts,
+                    );
+                  }),
             ],
           ),
         ),

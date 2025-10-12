@@ -1,7 +1,7 @@
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../app_config.dart';
 import '../../data_model/slider_response.dart';
 import '../../services/navigation_service.dart';
 import '../aiz_image.dart';
@@ -88,7 +88,7 @@ class HomeBannersList extends StatelessWidget {
         ),
       );
     } else {
-      return const SizedBox();
+      return emptyWidget;
     }
   }
 }

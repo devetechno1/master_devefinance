@@ -29,8 +29,8 @@ import '../custom/useful_elements.dart';
 import '../data_model/address_add_response.dart';
 import '../data_model/address_response.dart' as res;
 import '../presenter/cart_counter.dart';
+import '../presenter/home_provider.dart';
 import 'add_address_screen.dart';
-import 'home/home.dart';
 
 // class Address extends StatelessWidget {
 //   const Address({super.key, required this.onPressContinue});
@@ -256,7 +256,7 @@ class _AddressScreenState extends State<AddressScreen> {
       _default_shipping_address = address.id;
     });
 
-    homeData.defaultAddress = address;
+    context.read<HomeProvider>().defaultAddress = address;
 
     fetchShippingAddressList(false);
   }
@@ -839,7 +839,7 @@ class LineData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (body?.isNotEmpty != true) return const SizedBox();
+    if (body?.isNotEmpty != true) return emptyWidget;
     return Padding(
       padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
       child: Row(

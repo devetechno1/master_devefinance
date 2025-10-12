@@ -4,6 +4,8 @@
 //https://app.quicktype.io/
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 SliderResponse sliderResponseFromJson(String str) =>
     SliderResponse.fromJson(json.decode(str));
 
@@ -36,11 +38,11 @@ class SliderResponse {
       };
 }
 
-class AIZSlider {
-  AIZSlider({this.photo, this.url});
+class AIZSlider extends Equatable {
+  const AIZSlider({this.photo, this.url});
 
-  String? photo;
-  String? url;
+  final String? photo;
+  final String? url;
 
   factory AIZSlider.fromJson(Map<String, dynamic> json) => AIZSlider(
         photo: json["photo"],
@@ -48,4 +50,7 @@ class AIZSlider {
       );
 
   Map<String, dynamic> toJson() => {"photo": photo, "url": url};
+  
+  @override
+  List<Object?> get props => [photo, url];
 }

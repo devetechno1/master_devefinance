@@ -1,10 +1,7 @@
 // import statements
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/flash%20deals%20banner/flash_deal_banner.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/home_banners/home_banners_list.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_list.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/best_selling_section_sliver.dart';
@@ -14,12 +11,16 @@ import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/featured_cate
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/product_loading_container.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:provider/provider.dart';
+import '../../../custom/home_banners/home_banners_one.dart';
+import '../../../custom/home_banners/home_banners_three.dart';
+import '../../../custom/home_banners/home_banners_two.dart';
 import '../../../custom/home_carousel_slider.dart';
 import '../../../custom/pirated_widget.dart';
 import '../../../other_config.dart';
 import '../../../services/push_notification_service.dart';
-import '../home.dart';
 import '../widgets/featured_products_list_sliver.dart';
+import '../widgets/flash_deal_home_widget.dart';
 import '../widgets/new_products_list_sliver.dart';
 import '../widgets/whatsapp_floating_widget.dart';
 
@@ -41,13 +42,14 @@ class MinimaScreen extends StatefulWidget {
 
 class _MinimaScreenState extends State<MinimaScreen>
     with SingleTickerProviderStateMixin {
+  late final HomeProvider provider = context.read<HomeProvider>();
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         if (OtherConfig.USE_PUSH_NOTIFICATION)
           PushNotificationService.updateDeviceToken();
-        homeData.onRefresh();
+        provider.onRefresh();
       },
     );
     super.initState();
@@ -58,167 +60,80 @@ class _MinimaScreenState extends State<MinimaScreen>
     return PopScope(
       canPop: widget.go_back,
       child: SafeArea(
-        child: ListenableBuilder(
-          listenable: homeData,
-          builder: (context, child) {
-            return Scaffold(
-              floatingActionButton: whatsappFloatingButtonWidget,
-              appBar: BuildAppBar(context: context),
-              backgroundColor: Colors.white,
-              body: Stack(
-                children: [
-                  RefreshIndicator(
-                    color: Theme.of(context).primaryColor,
-                    backgroundColor: Colors.white,
-                    onRefresh: homeData.onRefresh,
-                    displacement: 0,
-                    child: NotificationListener<ScrollUpdateNotification>(
-                      onNotification: (notification) {
-                        homeData.paginationListener(notification.metrics);
-                        return false;
-                      },
-                      child: CustomScrollView(
-                        physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics(),
-                        ),
-                        slivers: <Widget>[
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              AppConfig.purchase_code == ""
-                                  ? PiratedWidget(homeData: homeData)
-                                  : const SizedBox(),
-                              const SizedBox(height: 10),
-
-                              // Header Banner
-                              HomeCarouselSlider(homeData: homeData),
-                              const SizedBox(height: 16),
-
-                              // Flash Sale Section
-                              if (homeData.flashDeal != null) ...[
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return FlashDealList();
-                                    }));
-                                  },
-                                  child: ColoredBox(
-                                    color: Colors.transparent,
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(22, 10, 10, 10),
-                                          child: Text(
-                                              'flash_deal_ucf'
-                                                  .tr(context: context),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18)),
-                                        ),
-                                        Image.asset(AppImages.flashDeal,
-                                            height: 20, color: MyTheme.golden),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25),
-                                  child: Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey
-                                                .withValues(alpha: 0.5),
-                                            spreadRadius: 5,
-                                            blurRadius: 7,
-                                            offset: const Offset(0,
-                                                3), // changes position of shadow
-                                          )
-                                        ],
-                                        color: const Color.fromARGB(
-                                            255, 249, 248, 248),
-                                        borderRadius: BorderRadius.circular(
-                                            AppDimensions.radiusSmall),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            AppDimensions.paddingSmallExtra),
-                                        child: Column(
-                                          children: [
-                                            //  buildTimerRow(homeData.flashDealRemainingTime),
-                                            //FlashBanner SpecialOffer
-                                            FlashBannerWidget(
-                                              bannerLink:
-                                                  homeData.flashDeal?.banner,
-                                              slug: homeData.flashDeal!.slug,
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                ),
-                              ],
-                            ]),
-                          ),
-                          //feature_categories//
-
-                          const CategoryList(),
-                          SliverToBoxAdapter(
-                            child: HomeBannersList(
-                              bannersImagesList: homeData.bannerOneImageList,
-                              isBannersInitial: homeData.isBannerOneInitial,
-                            ),
-                          ),
-                          const FeaturedProductsListSliver(),
-                          SliverToBoxAdapter(
-                            child: HomeBannersList(
-                              bannersImagesList: homeData.bannerTwoImageList,
-                              isBannersInitial: homeData.isBannerTwoInitial,
-                            ),
-                          ),
-
-                          //Best Selling
-                          const BestSellingSectionSliver(),
-                          const NewProductsListSliver(),
-                          SliverToBoxAdapter(
-                            child: HomeBannersList(
-                              bannersImagesList: homeData.bannerThreeImageList,
-                              isBannersInitial: homeData.isBannerThreeInitial,
-                            ),
-                          ),
-
-                          //auction products
-                          AuctionProductsSectionSliver(
-                            homeData: homeData,
-                          ),
-                          if (homeData.isBrandsInitial ||
-                              homeData.brandsList.isNotEmpty)
-                            BrandListSectionSliver(
-                              homeData: homeData,
-                            ),
-                          //all products ------------
-                          ...allProductsSliver(context, homeData),
-                        ],
-                      ),
+        child: Scaffold(
+          floatingActionButton: whatsappFloatingButtonWidget,
+          appBar: BuildAppBar(context: context),
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                backgroundColor: Colors.white,
+                onRefresh: provider.onRefresh,
+                displacement: 0,
+                child: NotificationListener<ScrollUpdateNotification>(
+                  onNotification: (notification) {
+                    provider.paginationListener(notification.metrics);
+                    return false;
+                  },
+                  child: CustomScrollView(
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
                     ),
+                    slivers: <Widget>[
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          AppConfig.purchase_code == ""
+                              ? const PiratedWidget()
+                              : emptyWidget,
+                          const SizedBox(height: 10),
+
+                          // Header Banner
+                          const HomeCarouselSlider(),
+                          const SizedBox(height: 16),
+
+                          // Flash Sale Section
+                          const FlashDealHomeWidget(),
+                        ]),
+                      ),
+                      //feature_categories//
+
+                      const CategoryList(),
+                      const SliverToBoxAdapter(child: HomeBannersOne()),
+                      const FeaturedProductsListSliver(),
+                      const SliverToBoxAdapter(child: HomeBannersTwo()),
+
+                      //Best Selling
+                      const BestSellingSectionSliver(),
+                      const NewProductsListSliver(),
+                      const SliverToBoxAdapter(child: HomeBannersThree()),
+
+                      //auction products
+                      const AuctionProductsSectionSliver(),
+
+                      const BrandListSectionSliver(),
+                      //all products ------------
+                      ...allProductsSliver,
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ProductLoadingContainer(homeData: homeData),
-                  ),
-                ],
+                ),
               ),
-            );
-          },
+              const Align(
+                alignment: Alignment.center,
+                child: ProductLoadingContainer(),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget timerCircularContainer(
-      int currentValue, int totalValue, String timeText) {
+    int currentValue,
+    int totalValue,
+    String timeText,
+  ) {
     return Stack(
       alignment: Alignment.center,
       children: [

@@ -1036,7 +1036,7 @@ class _CheckoutState extends State<Checkout> {
                                                         AppImages.placeholder,
                                                     imageErrorBuilder:
                                                         (___, __, _) =>
-                                                            const SizedBox(),
+                                                            emptyWidget,
                                                     image: integration.image!,
                                                     fit: BoxFit.fitWidth,
                                                   ),

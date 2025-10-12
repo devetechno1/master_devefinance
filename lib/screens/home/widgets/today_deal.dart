@@ -1,30 +1,30 @@
+import 'dart:collection';
+
 import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
+import 'package:active_ecommerce_cms_demo_app/presenter/home_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../app_config.dart';
 import '../../../constants/app_dimensions.dart';
+import '../../../data_model/product_mini_response.dart';
 import '../../product/product_details.dart';
 
 class TodaysDealProductsWidget extends StatelessWidget {
-  //final List<Product>? products;
-  final HomePresenter homePresenter;
-
-  const TodaysDealProductsWidget({
-    super.key,
-    required this.homePresenter,
-  });
+  const TodaysDealProductsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (homePresenter.TodayDealList.isEmpty) return const SizedBox();
+    final todayDealList = context.select<HomeProvider,UnmodifiableListView<Product>>((value) => UnmodifiableListView(value.TodayDealList));
+    if (todayDealList.isEmpty) return emptyWidget;
 
     return SizedBox(
       height: 250,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: homePresenter.TodayDealList.length,
+        itemCount: todayDealList.length,
         itemBuilder: (context, index) {
-          final product = homePresenter.TodayDealList[index];
+          final product = todayDealList[index];
 
           return GestureDetector(
             onTap: product.slug == null

@@ -37,6 +37,7 @@ import 'other_config.dart';
 import 'presenter/cart_counter.dart';
 import 'presenter/cart_provider.dart';
 import 'presenter/currency_presenter.dart';
+import 'presenter/home_provider.dart';
 import 'presenter/select_address_provider.dart';
 import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
@@ -62,7 +63,6 @@ import 'screens/coupon/coupons.dart';
 import 'screens/flash_deal/flash_deal_list.dart';
 import 'screens/flash_deal/flash_deal_products.dart';
 import 'screens/followed_sellers.dart';
-import 'screens/home/home.dart';
 import 'screens/index.dart';
 import 'screens/orders/order_details.dart';
 import 'screens/orders/order_list.dart';
@@ -127,7 +127,7 @@ Future<void> appRunner() async {
   await Future.wait([
     BusinessSettingHelper.handleTranslations(),
     BusinessSettingHelper.getOTPLoginProviders(),
-    homeData.fetchAddressLists(false, false),
+    // homeData.fetchAddressLists(false, false),
   ]);
 
   SystemChrome.setPreferredOrientations([
@@ -258,7 +258,7 @@ var routes = GoRouter(
             _isUpdateScreenOpened = true;
             return '/update?url=${state.uri.path}';
           }
-          if (homeData.haveToGoAddress) return '/address';
+          if (context.read<HomeProvider>().haveToGoAddress) return '/address';
 
           return null;
         },
@@ -450,12 +450,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) => HomeProvider()..fetchAddressLists(false, false),
+        ),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => CartCounter()),
         ChangeNotifierProvider(create: (context) => SelectAddressProvider()),
         ChangeNotifierProvider(
-            create: (context) => UnReadNotificationCounter()),
+          create: (context) => UnReadNotificationCounter(),
+        ),
         ChangeNotifierProvider(create: (context) => CurrencyPresenter()),
 
         ///

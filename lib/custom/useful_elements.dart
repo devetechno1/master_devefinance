@@ -30,7 +30,7 @@ class UsefulElements {
   }
 
   static Widget backToMain({color = 'black', go_back = true}) {
-    if (!go_back) return const SizedBox();
+    if (!go_back) return emptyWidget;
     return IconButton(
       icon: Icon(
           app_language_rtl.$!

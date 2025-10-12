@@ -135,7 +135,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                               context: context,
                               args: {"maxQuantity": "${item.maxQuantity}"});
                         }
-                        if (text == null) return const SizedBox();
+                        if (text == null) return emptyWidget;
                         return Center(
                           child: Text(
                             text,

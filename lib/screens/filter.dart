@@ -337,7 +337,7 @@ class _FilterState extends State<Filter> {
   }
 
   Widget buildProductLoadingContainer() {
-    if (_totalProductData != _productList.length) return const SizedBox();
+    if (_totalProductData != _productList.length) return emptyWidget;
     return Container(
       height: _showProductLoadingContainer ? 36 : 0,
       width: double.infinity,
@@ -349,7 +349,7 @@ class _FilterState extends State<Filter> {
   }
 
   Widget buildBrandLoadingContainer() {
-    if (_totalBrandData != _brandList.length) return const SizedBox();
+    if (_totalBrandData != _brandList.length) return emptyWidget;
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,
@@ -361,7 +361,7 @@ class _FilterState extends State<Filter> {
   }
 
   Widget buildShopLoadingContainer() {
-    if (_totalShopData != _shopList.length) return const SizedBox();
+    if (_totalShopData != _shopList.length) return emptyWidget;
     return Container(
       height: _showShopLoadingContainer ? 36 : 0,
       width: double.infinity,
@@ -459,7 +459,7 @@ class _FilterState extends State<Filter> {
               ),
               style: const TextStyle(color: Colors.black, fontSize: 13),
               iconSize: 13,
-              underline: const SizedBox(),
+              underline: emptyWidget,
               value: _selectedFilter,
               items: _dropdownWhichFilterItems,
               isExpanded: true,

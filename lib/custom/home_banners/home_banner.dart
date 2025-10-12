@@ -151,7 +151,7 @@
 //       );
 //     }
 
-//     return const SizedBox();
+//     return emptyWidget;
 //   }
 
 //   Widget _buildBanner(AIZSlider slider,double aspectRatio) {
