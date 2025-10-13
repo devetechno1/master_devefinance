@@ -33,8 +33,11 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'cart_provider.dart';
 
 class HomeProvider extends ChangeNotifier {
+  HomeProvider(Address? address) {
+    defaultAddress = address;
+  }
   CurrentRemainingTime flashDealRemainingTime =
-      CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
+      const CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
   FlashDealResponseDatum? flashDeal;
 
   Timer? _flashDealTimer;
@@ -216,7 +219,7 @@ class HomeProvider extends ChangeNotifier {
       if (remaining.isNegative) {
         _flashDealTimer?.cancel();
         flashDealRemainingTime =
-            CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
+            const CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
         isFlashDeal = false;
         notifyListeners();
         return;
@@ -663,3 +666,33 @@ class CurrentRemainingTime extends Equatable {
 }
 
 bool _isOpenedBefore = false;
+
+Future<Address?> getDefaultAddress() async {
+  if (!shouldHaveAddress) return null;
+
+  Address? defaultAddress;
+
+  final AddressResponse? addressResponse =
+      await handleErrorsWithMessage(AddressRepository().getAddressList);
+  if (addressResponse != null) {
+    if (addressResponse.addresses?.isNotEmpty != true) return null;
+
+    for (Address a in addressResponse.addresses!) {
+      if (a.set_default == 1) {
+        defaultAddress = a;
+        break;
+      }
+    }
+    if (defaultAddress == null) {
+      final Address temp = addressResponse.addresses!.first;
+      final addressMakeDefaultResponse =
+          await AddressRepository().getAddressMakeDefaultResponse(temp.id);
+
+      if (addressMakeDefaultResponse.result == false) return null;
+
+      defaultAddress = temp;
+    }
+  }
+
+  return defaultAddress;
+}

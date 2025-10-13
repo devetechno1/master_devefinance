@@ -25,6 +25,7 @@ import 'app_config.dart';
 import 'custom/aiz_route.dart';
 
 import 'custom/error_widget.dart';
+import 'data_model/address_response.dart';
 import 'data_model/business_settings/update_model.dart';
 import 'data_model/login_response.dart';
 import 'helpers/auth_helper.dart';
@@ -91,6 +92,8 @@ void main() async {
   }
 }
 
+late final Address? _initAddress;
+
 Future<void> appRunner() async {
   WidgetsFlutterBinding.ensureInitialized();
   ErrorWidget.builder = (e) {
@@ -104,7 +107,7 @@ Future<void> appRunner() async {
     recordError(error, stack);
     return true; // Mark as handled
   };
-  Widget app = SharedValue.wrapApp(MyApp());
+  Widget app = SharedValue.wrapApp(const MyApp());
 
   AppConfig.storeType = await StoreType.thisDeviceType();
 
@@ -120,6 +123,7 @@ Future<void> appRunner() async {
     Firebase.initializeApp(),
     Hive.initFlutter(),
   ]);
+  _initAddress = await getDefaultAddress();
   await _getUserData();
 
   localeTranslation = await Hive.openBox<Map>('langs');
@@ -429,6 +433,7 @@ var routes = GoRouter(
 );
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -452,7 +457,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) => HomeProvider()..fetchAddressLists(false, false),
+          create: (_) => HomeProvider(_initAddress),
         ),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
