@@ -15,6 +15,7 @@ import 'package:active_ecommerce_cms_demo_app/data_model/state_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/middlewares/banned_user.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddressRepository {
   Future<AddressResponse> getAddressList() async {
@@ -28,6 +29,24 @@ class AddressRepository {
       },
     );
     return addressResponseFromJson(response.body);
+  }
+
+  Future<({Country country, MyState state, City city})?> getAddressDataByLatLng(
+      LatLng latLng) async {
+    const String url = ("${AppConfig.BASE_URL}/location/city-by-coords");
+    final response = await ApiRequest.post(
+      url: url,
+      headers: {"Authorization": ""},
+      body: jsonEncode({"lat": latLng.latitude, "lng": latLng.longitude}),
+    );
+    final json = jsonDecode(response.body);
+    return json['success'] == true
+        ? (
+            country: Country.fromJson(json['country_id']),
+            state: MyState.fromJson(json['state_id']),
+            city: City.fromJson(json['city_id']),
+          )
+        : null;
   }
 
   Future<dynamic> getHomeDeliveryAddress() async {
