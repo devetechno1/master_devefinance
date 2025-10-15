@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 AddressResponse addressResponseFromJson(String str) =>
     AddressResponse.fromJson(json.decode(str));
 
@@ -36,8 +38,8 @@ class AddressResponse {
       };
 }
 
-class Address {
-  Address(
+class Address extends Equatable {
+  const Address(
       {this.id,
       this.user_id,
       this.address,
@@ -54,21 +56,21 @@ class Address {
       this.lat,
       this.lang});
 
-  int? id;
-  int? user_id;
-  String? address;
-  int? country_id;
-  int? state_id;
-  int? city_id;
-  String? country_name;
-  String? state_name;
-  String? city_name;
-  String? postal_code;
-  String? phone;
-  int? set_default;
-  bool? location_available;
-  double? lat;
-  double? lang;
+  final int? id;
+  final int? user_id;
+  final String? address;
+  final int? country_id;
+  final int? state_id;
+  final int? city_id;
+  final String? country_name;
+  final String? state_name;
+  final String? city_name;
+  final String? postal_code;
+  final String? phone;
+  final int? set_default;
+  final bool? location_available;
+  final double? lat;
+  final double? lang;
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
         id: json["id"],
@@ -105,4 +107,23 @@ class Address {
         "lat": lat,
         "lang": lang,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        user_id,
+        address,
+        country_id,
+        state_id,
+        city_id,
+        country_name,
+        state_name,
+        city_name,
+        postal_code,
+        phone,
+        set_default,
+        location_available,
+        lat,
+        lang,
+      ];
 }

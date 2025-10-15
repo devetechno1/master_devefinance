@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../../../presenter/home_provider.dart';
 
 class MenuItemList extends StatelessWidget {
+  const MenuItemList({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final HomeProvider homeProvider = context.read<HomeProvider>();

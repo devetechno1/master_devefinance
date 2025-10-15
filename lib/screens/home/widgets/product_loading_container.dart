@@ -13,12 +13,18 @@ class ProductLoadingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int? totalAllProductData = context.select<HomeProvider, int?>((p) => p.totalAllProductData);
-    final List<Product> allProductList = context.select<HomeProvider, UnmodifiableListView<Product>>((value) => UnmodifiableListView(value.allProductList));
-    final bool showAllLoadingContainer = context.select<HomeProvider, bool>((p) => p.showAllLoadingContainer,);
+    final int? totalAllProductData =
+        context.select<HomeProvider, int?>((p) => p.totalAllProductData);
+    final List<Product> allProductList =
+        context.select<HomeProvider, UnmodifiableListView<Product>>(
+            (value) => UnmodifiableListView(value.allProductList));
+    final bool showAllLoadingContainer = context.select<HomeProvider, bool>(
+      (p) => p.showAllLoadingContainer,
+    );
 
-    if (totalAllProductData != allProductList.length)
+    if (totalAllProductData != allProductList.length) {
       return emptyWidget;
+    }
     return Container(
       height: showAllLoadingContainer ? 40 : 0,
       width: double.infinity,
