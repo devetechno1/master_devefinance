@@ -18,6 +18,8 @@ import '../data_model/state_response.dart';
 import '../helpers/shared_value_helper.dart';
 import '../my_theme.dart';
 import '../repositories/address_repository.dart';
+import '../status/execute_and_handle_remote_errors.dart';
+import '../status/status.dart';
 import 'guest_checkout_pages/map_location.dart';
 
 class AddAddressScreen extends StatefulWidget {
@@ -529,12 +531,40 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     return countryResponse.countries;
   }
 
-  void handleAddressData(LatLng? latLong) {
-    if (latLong == null) {
-      // TODO:** Make address empty
-      return;
-    }
-    // TODO:** Fill addresses fields
+  Future<void> handleAddressData(LatLng? latLong) async {
+    if (latLong == null) return;
+
+    final Status<({Country country, MyState state, City city})?> status =
+        await executeAndHandleErrors(
+      () => AddressRepository().getAddressDataByLatLng(latLong),
+    );
+
+    if (status is Failure<
+        ({
+          Country country,
+          MyState state,
+          City city,
+        })?>) return;
+
+    final response = (status as Success<
+            ({
+              Country country,
+              MyState state,
+              City city,
+            })?>)
+        .data;
+
+    if (response == null) return;
+
+    _selected_country = response.country;
+    _selected_state = response.state;
+    _selected_city = response.city;
+
+    _countryController.text = _selected_country?.name ?? '';
+    _stateController.text = _selected_state?.name ?? '';
+    _cityController.text = _selected_city?.name ?? '';
+
+    setState(() {});
   }
 }
 

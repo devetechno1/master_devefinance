@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../custom/toast_component.dart';
 import '../main.dart';
 import 'status.dart';
@@ -11,7 +9,6 @@ Future<Status<T>> executeAndHandleErrors<T>(
   try {
     return Success<T>(await function());
   } catch (e, st) {
-    log("error: $e");
     recordError(e, st);
 
     T? data;

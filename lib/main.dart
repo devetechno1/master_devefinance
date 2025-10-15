@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:active_ecommerce_cms_demo_app/middlewares/auth_middleware.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
@@ -565,6 +566,9 @@ Future<void> _handleDeepLink() async {
 }
 
 void recordError(Object error, StackTrace? stack) {
+  log("error: $error");
+  log("stack: $stack");
+
   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
   if (AppConfig.businessSettingsData.useSentry) {
     Sentry.captureException(error, stackTrace: stack);
