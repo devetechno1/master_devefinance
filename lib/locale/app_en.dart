@@ -1,4 +1,5 @@
 const Map<String, String> enLangs = {
+  "prescription": "Prescription",
   "download_started": "Download started",
   "download_failed": "Download failed",
   "Newest": "Newest",

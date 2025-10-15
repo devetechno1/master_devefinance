@@ -11,6 +11,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
@@ -38,8 +39,26 @@ class _MainState extends State<Main> {
     getCartData();
   }
 
+  int setIndexWhenPrescription(int index) {
+    if (showPrescription && index > 1) return index - 1;
+
+    return index;
+  }
+
+  int getIndexWhenPrescription(int index) {
+    if (showPrescription && index > 1) return index + 1;
+
+    return index;
+  }
+
   void onTapped(int i) {
+    if (showPrescription && i == 2) {
+      onTapPrescription();
+      return;
+    }
     fetchAll();
+
+    i = setIndexWhenPrescription(i);
 
     if (AppConfig.businessSettingsData.guestCheckoutStatus && (i == 2)) {
     } else if (!AppConfig.businessSettingsData.guestCheckoutStatus &&
@@ -60,7 +79,7 @@ class _MainState extends State<Main> {
       return;
     }
     setState(() {
-      _currentIndex = i;
+      _currentIndex = getIndexWhenPrescription(i);
     });
   }
 
@@ -124,6 +143,8 @@ class _MainState extends State<Main> {
     return Future.value(false);
   }
 
+  bool get showPrescription => AppConfig.businessSettingsData.showPrescription;
+
   @override
   Widget build(BuildContext context) {
     homeProvider.showPopupBanner(context);
@@ -137,6 +158,17 @@ class _MainState extends State<Main> {
           extendBody: true,
           extendBodyBehindAppBar: true,
           body: _children[_currentIndex],
+          floatingActionButton: showPrescription
+              ? Transform.translate(
+                  offset: const Offset(0, 8),
+                  child: FloatingActionButton(
+                    onPressed: onTapPrescription,
+                    child: const FaIcon(FontAwesomeIcons.filePrescription),
+                  ),
+                )
+              : null,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: onTapped,
@@ -149,27 +181,30 @@ class _MainState extends State<Main> {
                 color: Theme.of(context).primaryColor,
                 fontSize: 12),
             unselectedLabelStyle: const TextStyle(
-                fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(168, 175, 179, 1),
-                fontSize: 12),
+              fontWeight: FontWeight.w400,
+              color: Color.fromRGBO(168, 175, 179, 1),
+              fontSize: 12,
+            ),
             items: [
               BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingSmall),
-                    child: Image.asset(
-                      AppImages.home,
-                      color: _currentIndex == 0
-                          ? Theme.of(context).primaryColor
-                          : const Color.fromRGBO(153, 153, 153, 1),
-                      height: 16,
-                    ),
+                icon: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+                  child: Image.asset(
+                    AppImages.home,
+                    color: _currentIndex == 0
+                        ? Theme.of(context).primaryColor
+                        : const Color.fromRGBO(153, 153, 153, 1),
+                    height: 16,
                   ),
-                  label: 'home_ucf'.tr(context: context)),
+                ),
+                label: 'home_ucf'.tr(context: context),
+              ),
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingSmall),
+                      bottom: AppDimensions.paddingSmall,
+                    ),
                     child: Image.asset(
                       AppImages.categories,
                       color: _currentIndex == 1
@@ -179,6 +214,11 @@ class _MainState extends State<Main> {
                     ),
                   ),
                   label: 'categories_ucf'.tr(context: context)),
+              if (showPrescription)
+                BottomNavigationBarItem(
+                  icon: const SizedBox(height: 34),
+                  label: 'prescription'.tr(context: context),
+                ),
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(
@@ -232,5 +272,9 @@ class _MainState extends State<Main> {
         ),
       ),
     );
+  }
+
+  void onTapPrescription() {
+    print("Prescription");
   }
 }

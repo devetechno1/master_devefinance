@@ -1,4 +1,5 @@
 const Map<String, String> arLangs = {
+  "prescription": "روشتة",
   "download_started": "تم بدء التحميل",
   "download_failed": "فشل التنزيل",
   "Newest": "الأحدث",
