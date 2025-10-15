@@ -6,13 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data_model/address_response.dart';
-import '../../../helpers/shared_value_helper.dart';
 import '../../../presenter/home_provider.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BuildAppBar({super.key, required this.context});
+  const BuildAppBar({
+    super.key,
+    required this.context,
+    required this.showAddress,
+  });
 
   final BuildContext context;
+  final bool showAddress;
 
   @override
   Widget build(BuildContext context) => appBar;
@@ -26,13 +30,12 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
         scrolledUnderElevation: 0.0,
         centerTitle: false,
         elevation: 0,
-        bottom:
-            is_logged_in.$ && AppConfig.businessSettingsData.sellerWiseShipping
-                ? const PreferredSize(
-                    preferredSize: Size.fromHeight(30),
-                    child: AddressAppBarWidget(),
-                  )
-                : null,
+        bottom: showAddress
+            ? const PreferredSize(
+                preferredSize: Size.fromHeight(30),
+                child: AddressAppBarWidget(),
+              )
+            : null,
         flexibleSpace: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: AppDimensions.paddingSupSmall,

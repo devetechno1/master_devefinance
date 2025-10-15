@@ -55,8 +55,6 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
     super.initState();
   }
 
-  late final homeP = context.read<HomeProvider>();
-
   @override
   void dispose() {
     otpCtrl.dispose();
@@ -100,9 +98,11 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
 
     await AuthHelper().setUserData(response);
 
-    Future.wait([
+    final homeP = context.read<HomeProvider>();
+
+    await Future.wait([
       saveFCMToken(),
-      homeP.fetchAddressLists(false, false),
+      homeP.fetchAddressLists(true, false),
     ]);
 
     Loading.close();

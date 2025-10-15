@@ -8,6 +8,8 @@ class PiratedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (AppConfig.purchase_code != "") return emptyWidget;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         9.0,

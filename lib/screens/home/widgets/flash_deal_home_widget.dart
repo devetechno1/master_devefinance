@@ -8,7 +8,7 @@ import '../../../data_model/flash_deal_response.dart';
 import '../../../my_theme.dart';
 import '../../../presenter/home_provider.dart';
 import '../../flash_deal/flash_deal_list.dart';
-import '../templates/minima.dart';
+import 'build_timer_row_widget.dart';
 
 class FlashDealHomeWidget extends StatelessWidget {
   const FlashDealHomeWidget({super.key});
@@ -79,7 +79,7 @@ class FlashDealHomeWidget extends StatelessWidget {
                           return FlashDealList();
                         }));
                       },
-                      child: BuildTimerRow(flashDealRemainingTime),
+                      child: BuildTimerRowWidget(flashDealRemainingTime),
                     ),
                     FlashBannerWidget(
                       bannerLink: flashDeal.banner,
