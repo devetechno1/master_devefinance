@@ -44,6 +44,7 @@ class CustomLocalization {
 
   static String translateWithGivenLocale(String key, Locale locale) {
     return (localizedValues[locale.languageCode] ??
+            localizedValues[supportedLocales.first.languageCode] ??
             localizedValues[localizedValues.keys.first])![key] ??
         key;
   }
