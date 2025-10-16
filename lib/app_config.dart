@@ -24,7 +24,7 @@ class AppConfig {
 
   /// App Version (AV) shown on the splash screen.
   /// Used to verify the app build matches the master version.
-  static const String mobileVersion = '9.10.47';
+  static const String mobileVersion = '9.10.48';
 
   /// Backend Version (BV) used for compatibility checks.
   /// Used to verify the app is compatible with backend data.
@@ -33,14 +33,11 @@ class AppConfig {
   //configure this
   // static String copyright_text =
   //     "@ Deve Finance " + this_year; //this shows in the splash screen
-  static const String app_name_ar = "متجر ديفي تكنو";
-  static const String app_name_en = "Deve Techno Store";
 
   /// This get the name of the application in deviceLocale
-  static String appNameOnDeviceLang =
-      PlatformDispatcher.instance.locale.languageCode == 'ar'
-          ? app_name_ar
-          : app_name_en;
+  static String appNameOnDeviceLang = "app_name".trGivenLocale(
+    PlatformDispatcher.instance.locale,
+  );
 
   static bool isDebugMode = kDebugMode;
   static bool turnDevicePreviewOn = isDebugMode;

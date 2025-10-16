@@ -5,10 +5,40 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.47'`
+- `mobileVersion = '9.10.48'`
 ---
 
 ## 📱 Mobile App Updates
+
+<details>
+<summary><strong>AV 9.10.48 – Centralize App Name Localization and Enhance Translation Utilities</strong></summary>
+
+### Localization Refactor
+
+* **App Name Decoupling:** Removed hardcoded static fields `app_name_ar` and `app_name_en` from `lib/app_config.dart`.
+* **Dynamic App Name:** The application name, `appNameOnDeviceLang`, is now determined dynamically by leveraging a new translation utility to fetch the value associated with the generic key `"app_name"` based on the device's locale.
+* **New Translation Utility:** Introduced `CustomLocalization.translateWithGivenLocale(String key, Locale locale)` to retrieve translations for an explicit locale.
+* **String Extension:** Added the `String` extension method `trGivenLocale(Locale locale, {Map<String, String>? args})` to simplify fetching localized strings for a specific locale and supporting optional string interpolation.
+
+***
+
+### Code Cleanup & Consistency
+
+* **Simplified `AppConfig`:** The removal of static name fields cleans up `lib/app_config.dart`.
+* **Localization Abstraction:** Centralizing the logic for getting translations ensures a consistent approach across the application, making future language changes easier.
+
+***
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+***
+
+### Must Update (Stores)
+
+* **Yes** — Localization files (`.arb` or equivalent) must be updated to include the `"app_name"` key for each supported language.
+</details>
 
 <details>
 <summary><strong>AV 9.10.47 – Provider state refactor, module reorganization, and Equatable implementation</strong></summary>
