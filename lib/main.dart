@@ -520,7 +520,7 @@ class MyMaterialApp extends StatelessWidget {
             if (CustomLocalization.isSupported(deviceLocale!))
               return deviceLocale;
 
-            return const Locale('en');
+            return provider.locale;
           },
         );
       },

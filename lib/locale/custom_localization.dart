@@ -69,10 +69,10 @@ class CustomLocalizationDelegate
 extension StringTr on String {
   String tr({BuildContext? context, Map<String, String>? args}) {
     final _context = context ?? OneContext().context!;
-    String translated = CustomLocalization.of(_context)!.translate(
+    String translated = CustomLocalization.of(_context)?.translate(
       this,
       Provider.of<LocaleProvider>(_context, listen: false).locale,
-    );
+    ) ?? this;
     if (args != null) {
       for (String key in args.keys) {
         translated = translated.replaceAll('{$key}', args[key] ?? key);
