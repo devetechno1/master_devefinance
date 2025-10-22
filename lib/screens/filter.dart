@@ -21,6 +21,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../data_model/search_suggestion_response.dart';
+import '../helpers/grid_responsive.dart';
 import '../repositories/search_repository.dart';
 import '../ui_elements/highlighted_searched_word.dart';
 
@@ -517,115 +518,114 @@ class _FilterState extends State<Filter> {
                   ? showDialog(
                       context: context,
                       builder: (_) => AlertDialog(
-                        contentPadding: const EdgeInsets.only(
-                          top: 16.0,
-                          left: 2.0,
-                          right: 2.0,
-                          bottom: 2.0,
-                        ),
-                        content: StatefulBuilder(builder:
-                            (BuildContext context, StateSetter setState) {
-                          return RadioGroup(
-                            groupValue: _selectedSort,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedSort = value;
-                              });
-                              _onSortChange();
-                              Navigator.pop(context);
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 24.0),
-                                  child: Text(
-                                    'sort_products_by_ucf'
-                                        .tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'default_ucf'.tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "price_high_to_low",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'price_high_to_low'
-                                        .tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "price_low_to_high",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'price_low_to_high'
-                                        .tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "new_arrival",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text('new_arrival_ucf'
-                                      .tr(context: context)),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "popularity",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'popularity_ucf'.tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "top_rated",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'top_rated_ucf'.tr(context: context),
-                                  ),
-                                ),
-                              ],
+                            contentPadding: const EdgeInsets.only(
+                              top: 16.0,
+                              left: 2.0,
+                              right: 2.0,
+                              bottom: 2.0,
                             ),
-                          );
-                        }),
-                        actions: [
-                          Btn.basic(
-                            child: Text(
-                              'close_all_capital'.tr(context: context),
-                              style: const TextStyle(
-                                  color: MyTheme.medium_grey),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop();
-                            },
-                          ),
-                        ],
-                      ))
+                            content: StatefulBuilder(builder:
+                                (BuildContext context, StateSetter setState) {
+                              return RadioGroup(
+                                groupValue: _selectedSort,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedSort = value;
+                                  });
+                                  _onSortChange();
+                                  Navigator.pop(context);
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24.0),
+                                      child: Text(
+                                        'sort_products_by_ucf'
+                                            .tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'default_ucf'.tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "price_high_to_low",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'price_high_to_low'
+                                            .tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "price_low_to_high",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'price_low_to_high'
+                                            .tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "new_arrival",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text('new_arrival_ucf'
+                                          .tr(context: context)),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "popularity",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'popularity_ucf'.tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "top_rated",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'top_rated_ucf'.tr(context: context),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                            actions: [
+                              Btn.basic(
+                                child: Text(
+                                  'close_all_capital'.tr(context: context),
+                                  style: const TextStyle(
+                                      color: MyTheme.medium_grey),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop();
+                                },
+                              ),
+                            ],
+                          ))
                   : ToastComponent.showDialog(
                       'you_can_use_filters_while_searching_for_products'
                           .tr(context: context),
@@ -1127,10 +1127,10 @@ class _FilterState extends State<Filter> {
                     : _productList.length,
                 controller: _scrollController,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 14,
-                childAspectRatio: 0.63,  
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 14,
+                  crossAxisSpacing: 14,
+                  childAspectRatio: 0.63,
                 ),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingSupSmall,
@@ -1188,6 +1188,9 @@ class _FilterState extends State<Filter> {
               .buildSquareGridShimmer(scontroller: _scrollController));
     } else if (_brandList.isNotEmpty) {
       final bool hasMoreBrands = (_totalBrandData ?? 0) > _brandList.length;
+      final double width = MediaQuery.sizeOf(context).width;
+      final int cross = GridResponsive.columnsForWidth(width);
+      final double ratio = GridResponsive.aspectRatioForWidth(width);
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: Theme.of(context).primaryColor,
@@ -1207,11 +1210,12 @@ class _FilterState extends State<Filter> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _brandList.length + (hasMoreBrands ? 2 : 0),
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 14,
-                    mainAxisSpacing: 14,
-                    childAspectRatio: 1),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: cross,
+                  crossAxisSpacing: 14,
+                  mainAxisSpacing: 14,
+                  childAspectRatio: ratio,
+                ),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingLarge,
                     bottom: AppDimensions.paddingSupSmall,
