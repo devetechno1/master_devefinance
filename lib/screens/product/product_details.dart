@@ -2229,31 +2229,33 @@ class _ProductDetailsState extends State<ProductDetails>
             ),
           ),
         ),
-        Container(
-          alignment: app_language_rtl.$!
-              ? Alignment.centerRight
-              : Alignment.centerLeft,
-          height: 40,
-          width: MediaQuery.sizeOf(context).width - (107 + 44),
-          child: Scrollbar(
-            controller: _colorScrollController,
-            child: ListView.separated(
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 10,
-                );
-              },
-              itemCount: _colorList.length,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildColorItem(index),
-                  ],
-                );
-              },
+        Flexible(
+          child: Container(
+            alignment: app_language_rtl.$!
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            height: 40,
+            width: MediaQuery.sizeOf(context).width - (107 + 44),
+            child: Scrollbar(
+              controller: _colorScrollController,
+              child: ListView.separated(
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    width: 10,
+                  );
+                },
+                itemCount: _colorList.length,
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildColorItem(index),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         )

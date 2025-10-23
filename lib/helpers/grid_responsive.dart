@@ -11,6 +11,8 @@ class GridResponsive {
   static const double bpLg = 1200;
 
   /// Columns based on width & min tile width; capped by breakpoints.
+  /// 
+  /// make [minTileWidth] in range [140,280] for denser grids.
   static int columnsForWidth(
     double width, {
     double minTileWidth = 180,
@@ -26,7 +28,7 @@ class GridResponsive {
             : width >= bpSm
                 ? maxSm
                 : maxXs;
-    final int byMin = width ~/ minTileWidth.clamp(140, 280);
+    final int byMin = width ~/ minTileWidth;
     return byMin.clamp(1, byBp);
   }
 

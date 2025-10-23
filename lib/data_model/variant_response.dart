@@ -22,7 +22,7 @@ class VariantResponse {
   factory VariantResponse.fromJson(Map<String, dynamic> json) =>
       VariantResponse(
         result: json["result"],
-        variantData: VariantData.fromJson(json["data"]),
+        variantData: json["data"] == null ? null : VariantData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
