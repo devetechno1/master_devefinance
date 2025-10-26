@@ -99,6 +99,7 @@ class PagedView<T> extends StatefulWidget {
     this.preloadTriggerFraction = 0.8,
     this.initialPage = 1,
     this.enableRefresh = true,
+    this.refreshEdgeOffset = 0.0,
 
     // Placeholders
     this.loadingItemBuilder,
@@ -135,6 +136,7 @@ class PagedView<T> extends StatefulWidget {
   final double preloadTriggerFraction;
   final int initialPage;
   final bool enableRefresh;
+  final double refreshEdgeOffset;
 
   // Placeholders
   final LoadingItemBuilder? loadingItemBuilder;
@@ -268,6 +270,7 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   Future<void> _reset({int? page, bool jumpToTop = true}) async {
     final nextPage = page ?? widget.initialPage;
     _page = nextPage;
+    _hasMore = false;
     if (jumpToTop) {
       await _jumpToTop(animate: false);
     }
@@ -434,6 +437,7 @@ class _PagedViewState<T> extends State<PagedView<T>> {
     if (!widget.enableRefresh) return body;
 
     return RefreshIndicator.adaptive(
+      edgeOffset: widget.refreshEdgeOffset,
       onRefresh: () async {
         await _resetToFirstPage();
       },
