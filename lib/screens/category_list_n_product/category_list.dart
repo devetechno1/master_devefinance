@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../../custom/category_item_card_widget.dart';
+import '../../helpers/grid_responsive.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({
@@ -126,6 +127,22 @@ class _CategoryListState extends State<CategoryList> {
     final data = widget.is_top_category
         ? CategoryRepository().getTopCategories()
         : CategoryRepository().getCategories(parent_id: widget.slug);
+
+    final cross = GridResponsive.columnsForWidth(
+      context,
+      minTileWidth: 160,
+      maxXs: 3,
+      maxSm: 5,
+      maxMd: 7,
+      maxLg: 9,
+    );
+    final ratio = GridResponsive.aspectRatioForWidth(
+      context,
+      fallback:  0.825,
+      maxSm: 0.81,
+      maxMd: 0.82,
+      maxLg: 0.81,
+    );
     return FutureBuilder(
       future: data,
       builder: (context, AsyncSnapshot<CategoryResponse> snapshot) {
@@ -133,37 +150,44 @@ class _CategoryListState extends State<CategoryList> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
             child: ShimmerHelper().buildCategoryCardShimmer(
-                is_base_category: widget.is_base_category),
+              is_base_category: widget.is_base_category,
+              crossAxisCount: cross,
+              
+            ),
           );
         }
         // if response has issue
         if (snapshot.hasError) {
-          return Container(
-            height: 10,
-          );
+          return const SizedBox(height: 10);
         } else if (snapshot.hasData) {
           return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisSpacing: 14,
               crossAxisSpacing: 14,
-              childAspectRatio: 0.7,
-              crossAxisCount: 3,
+              crossAxisCount: cross,
+              childAspectRatio: ratio,
             ),
             itemCount: snapshot.data!.categories!.length,
             padding: EdgeInsets.only(
-                left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+              left: 18,
+              right: 18,
+              bottom: widget.is_base_category ? 30 : 0,
+            ),
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return CategoryItemCardWidget(
-                  categoryResponse: snapshot.data!, index: index);
+                categoryResponse: snapshot.data!,
+                index: index,
+              );
             },
           );
         } else {
           return SingleChildScrollView(
             child: ShimmerHelper().buildCategoryCardShimmer(
               is_base_category: widget.is_base_category,
+              crossAxisCount: cross,
             ),
           );
         }

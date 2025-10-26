@@ -112,7 +112,7 @@ class ShimmerHelper {
   }
 
   SliverMasonryGrid buildProductSliverGridShimmer(
-      {required int crossAxisCount,scontroller, item_count = 10}) {
+      {required int crossAxisCount, scontroller, item_count = 10}) {
     return SliverMasonryGrid.count(
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: 14,
@@ -135,13 +135,17 @@ class ShimmerHelper {
     );
   }
 
-  GridView buildCategoryCardShimmer({is_base_category}) {
+  GridView buildCategoryCardShimmer({
+    int crossAxisCount = 3,
+    double aspectRatio = 1.0,
+    is_base_category,
+  }) {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
-        childAspectRatio: 1,
-        crossAxisCount: 3,
+        childAspectRatio: aspectRatio,
+        crossAxisCount: crossAxisCount,
       ),
       itemCount: 18,
       padding: EdgeInsets.only(
@@ -240,7 +244,7 @@ class ShimmerHelper {
         itemCount: item_count,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: aspectRatio,
+            childAspectRatio: aspectRatio,
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: crossAxisSpacing,
             mainAxisSpacing: mainAxisSpacing,
