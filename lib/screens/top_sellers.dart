@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import '../data_model/shop_response.dart';
+import '../helpers/grid_responsive.dart';
 
 class TopSellers extends StatefulWidget {
   const TopSellers({super.key});
@@ -84,6 +85,8 @@ class _TopSellersState extends State<TopSellers> {
   }
 
   Widget buildTopSellerList(context) {
+    final int cross = GridResponsive.columnsForWidth(context);
+    final double ratio = GridResponsive.aspectRatioForWidth(context);
     if (isInit) {
       //print(productResponse.toString());
       return GridView.builder(
@@ -91,11 +94,11 @@ class _TopSellersState extends State<TopSellers> {
         //addAutomaticKeepAlives: true,
         itemCount: topSellers.length,
         controller: _scrollController,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: cross,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
-            childAspectRatio: 0.68),
+            childAspectRatio: ratio),
         padding: const EdgeInsets.only(
             top: AppDimensions.paddingLarge,
             bottom: AppDimensions.paddingSupSmall,
@@ -115,8 +118,10 @@ class _TopSellersState extends State<TopSellers> {
         },
       );
     } else {
-      return ShimmerHelper()
-          .buildSquareGridShimmer(scontroller: _scrollController);
+      return ShimmerHelper().buildSquareGridShimmer(
+          crossAxisCount: cross,
+          childAspectRatio: ratio,
+          scontroller: _scrollController);
     }
   }
 }

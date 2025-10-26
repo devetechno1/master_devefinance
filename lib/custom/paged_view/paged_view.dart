@@ -160,6 +160,9 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   bool _hasMore = true;
   final List<T> _items = [];
 
+  int get cross => _effectiveCrossAxisCount();
+  double get ratio => _aspectRatioForWidth();
+
   @override
   void initState() {
     super.initState();
@@ -304,9 +307,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
             itemBuilder: (c, i) => widget.loadingItemBuilder!(c, i),
           );
         case PagedLayout.grid:
-          final width = MediaQuery.sizeOf(context).width;
-          final cross = _effectiveCrossAxisCount(width);
-          final ratio = _aspectRatioForWidth(width);
           return SliverPadding(
             padding: widget.padding,
             sliver: SliverGrid(
@@ -324,8 +324,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
             ),
           );
         case PagedLayout.masonry:
-          final width = MediaQuery.sizeOf(context).width;
-          final cross = _effectiveCrossAxisCount(width);
           return SliverPadding(
             padding: widget.padding,
             sliver: SliverMasonryGrid.count(
@@ -342,9 +340,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   Widget _buildGridSliver(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    final cross = _effectiveCrossAxisCount(width);
-    final ratio = _aspectRatioForWidth(width);
     return SliverPadding(
       padding: widget.padding,
       sliver: SliverGrid(
@@ -364,8 +359,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   Widget _buildMasonrySliver(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    final cross = _effectiveCrossAxisCount(width);
     return SliverPadding(
       padding: widget.padding,
       sliver: SliverMasonryGrid.count(
@@ -379,17 +372,17 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   // ===== Responsive helpers (via GridResponsive) =====
-  int _effectiveCrossAxisCount(double width) {
+  int _effectiveCrossAxisCount() {
     if (!widget.responsiveGrid) return widget.gridCrossAxisCount;
-    return GridResponsive.columnsForWidth(width,
+    return GridResponsive.columnsForWidth(context,
         minTileWidth: widget.minTileWidth);
   }
 
-  double _aspectRatioForWidth(double width) {
+  double _aspectRatioForWidth() {
     final explicit = widget.gridAspectRatio;
     if (explicit > 0) return explicit;
     return GridResponsive.aspectRatioForWidth(
-      width,
+      context,
       useResponsiveAspectRatio: widget.useResponsiveAspectRatio,
     );
   }

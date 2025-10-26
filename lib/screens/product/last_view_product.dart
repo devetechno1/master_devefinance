@@ -6,6 +6,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../custom/useful_elements.dart';
+import '../../helpers/grid_responsive.dart';
 import '../../helpers/shared_value_helper.dart';
 import '../../helpers/shimmer_helper.dart';
 import '../../my_theme.dart';
@@ -68,9 +69,12 @@ class _LastViewProductState extends State<LastViewProduct> {
   }
 
   Widget body() {
+     final   int  cross = GridResponsive.columnsForWidth(context);
     if (!_dataFetch) {
       return ShimmerHelper()
-          .buildProductGridShimmer(scontroller: _mainScrollController);
+          .buildProductGridShimmer(
+            crossAxisCount: cross,
+            scontroller: _mainScrollController);
     }
 
     if (_lastViewProducts.length == 0) {

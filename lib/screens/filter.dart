@@ -133,6 +133,9 @@ class _FilterState extends State<Filter> {
     super.dispose();
   }
 
+  int get cross => GridResponsive.columnsForWidth(context);
+  double get ratio => GridResponsive.aspectRatioForWidth(context);
+
   init() {
     _givenSelectedFilterOptionKey = widget.selected_filter;
 
@@ -1098,10 +1101,14 @@ class _FilterState extends State<Filter> {
   }
 
   Widget buildProductScrollableList() {
+    final width = MediaQuery.sizeOf(context).width;
+    final cross = GridResponsive.columnsForWidth(context);
     if (_isProductInitial && _productList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildProductGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildProductGridShimmer(
+        crossAxisCount: cross,
+        scontroller: _scrollController,
+      ));
     } else if (_productList.isNotEmpty) {
       final bool hasMoreProducts =
           (_totalProductData ?? 0) > _productList.length;
@@ -1126,8 +1133,8 @@ class _FilterState extends State<Filter> {
                     ? _productList.length + 2
                     : _productList.length,
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: cross,
                   mainAxisSpacing: 14,
                   crossAxisSpacing: 14,
                   childAspectRatio: 0.63,
@@ -1184,13 +1191,13 @@ class _FilterState extends State<Filter> {
   Widget buildBrandScrollableList() {
     if (_isBrandInitial && _brandList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildSquareGridShimmer(
+        crossAxisCount: cross,
+        childAspectRatio: ratio,
+        scontroller: _scrollController,
+      ));
     } else if (_brandList.isNotEmpty) {
       final bool hasMoreBrands = (_totalBrandData ?? 0) > _brandList.length;
-      final double width = MediaQuery.sizeOf(context).width;
-      final int cross = GridResponsive.columnsForWidth(width);
-      final double ratio = GridResponsive.aspectRatioForWidth(width);
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: Theme.of(context).primaryColor,
@@ -1263,8 +1270,10 @@ class _FilterState extends State<Filter> {
     if (_isShopInitial && _shopList.isEmpty) {
       return SingleChildScrollView(
           controller: _scrollController,
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildSquareGridShimmer(
+              crossAxisCount: cross,
+              childAspectRatio: ratio,
+              scontroller: _scrollController));
     } else if (_shopList.isNotEmpty) {
       final bool hasMoreShops = (_totalShopData ?? 0) > _shopList.length;
       return RefreshIndicator(
@@ -1286,11 +1295,11 @@ class _FilterState extends State<Filter> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _shopList.length + (hasMoreShops ? 2 : 0),
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: cross,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
-                    childAspectRatio: 0.7),
+                    childAspectRatio: ratio),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingLarge,
                     bottom: AppDimensions.paddingSupSmall,

@@ -29,9 +29,8 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
     }
     final bool showViewAll =
         widget.showViewAllButton && widget.brands.length > 8;
-    final width = MediaQuery.sizeOf(context).width;
     final cross = GridResponsive.columnsForWidth(
-      width,
+      context,
       minTileWidth: 50,
       maxXs: 4,
       maxSm: 6,

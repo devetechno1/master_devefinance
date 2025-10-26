@@ -95,9 +95,10 @@ class ShimmerHelper {
     );
   }
 
-  MasonryGridView buildProductGridShimmer({scontroller, item_count = 10}) {
+  MasonryGridView buildProductGridShimmer(
+      {required int crossAxisCount, scontroller, item_count = 10}) {
     return MasonryGridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisCount,
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
         itemCount: item_count,
@@ -109,9 +110,11 @@ class ShimmerHelper {
           return shimmerInGrid(index);
         });
   }
-  SliverMasonryGrid buildProductSliverGridShimmer({scontroller, item_count = 10}) {
+
+  SliverMasonryGrid buildProductSliverGridShimmer(
+      {required int crossAxisCount,scontroller, item_count = 10}) {
     return SliverMasonryGrid.count(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisCount,
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
         childCount: item_count,
@@ -155,15 +158,20 @@ class ShimmerHelper {
     );
   }
 
-  GridView buildSquareGridShimmer({scontroller, item_count = 10}) {
+  GridView buildSquareGridShimmer(
+      {required int crossAxisCount,
+      double childAspectRatio = 1.0,
+      scontroller,
+      item_count = 10}) {
     return GridView.builder(
       itemCount: item_count,
       controller: scontroller,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: childAspectRatio,
+      ),
       padding: const EdgeInsets.all(AppDimensions.paddingSmall),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -186,7 +194,8 @@ class ShimmerHelper {
 
   GridView buildHorizontalGridShimmerWithAxisCount(
       {item_count = 10,
-      int crossAxisCount = 2,
+      required int crossAxisCount,
+      double aspectRatio = 1.0,
       crossAxisSpacing = 10.0,
       mainAxisSpacing = 10.0,
       mainAxisExtent = 100.0,
@@ -200,6 +209,7 @@ class ShimmerHelper {
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: crossAxisSpacing,
             mainAxisSpacing: 10,
+            childAspectRatio: aspectRatio,
             mainAxisExtent: mainAxisExtent),
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
@@ -216,10 +226,11 @@ class ShimmerHelper {
 
   GridView buildGridShimmerWithAxisCount(
       {item_count = 10,
-      int crossAxisCount = 2,
+      required int crossAxisCount,
       crossAxisSpacing = 10.0,
       mainAxisSpacing = 10.0,
       mainAxisExtent = 100.0,
+      double aspectRatio = 1.0,
       Axis scrollDirection = Axis.vertical,
       controller}) {
     return GridView.builder(
@@ -229,6 +240,7 @@ class ShimmerHelper {
         itemCount: item_count,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: aspectRatio,
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: crossAxisSpacing,
             mainAxisSpacing: mainAxisSpacing,

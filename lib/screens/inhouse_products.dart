@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../helpers/grid_responsive.dart';
 import '../helpers/shared_value_helper.dart';
 import '../helpers/shimmer_helper.dart';
 import '../my_theme.dart';
@@ -138,10 +139,11 @@ class _InhouseProductsState extends State<InhouseProducts> {
   }
 
   Widget buildInhouserProductList(context) {
+    final int cross = GridResponsive.columnsForWidth(context);
     if (_isFetch && _inhouseProductList.isEmpty) {
       return SingleChildScrollView(
           child: ShimmerHelper()
-              .buildProductGridShimmer(scontroller: _scrollController));
+              .buildProductGridShimmer(crossAxisCount: cross , scontroller: _scrollController));
     } else if (_inhouseProductList.isNotEmpty) {
       return RefreshIndicator(
         color: Theme.of(context).primaryColor,
@@ -153,7 +155,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
           child: MasonryGridView.count(
-            crossAxisCount: 2,
+            crossAxisCount: cross,
             mainAxisSpacing: 14,
             crossAxisSpacing: 14,
             itemCount: _inhouseProductList.length,

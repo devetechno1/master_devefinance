@@ -1034,6 +1034,8 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../helpers/grid_responsive.dart';
+
 // ignore: must_be_immutable
 class SellerDetails extends StatefulWidget {
   String slug;
@@ -1068,6 +1070,8 @@ class _SellerDetailsState extends State<SellerDetails> {
   // ScrollController _scrollController = ScrollController();
 
   int tabOptionIndex = 0;
+
+  late final int crossProducts = GridResponsive.columnsForWidth(context);
 
   @override
   void initState() {
@@ -1276,12 +1280,14 @@ class _SellerDetailsState extends State<SellerDetails> {
     if (tabOptionIndex == 1) {
       return _shopDetails != null
           ? buildTopSelling(context)
-          : ShimmerHelper().buildProductGridShimmer();
+          : ShimmerHelper()
+              .buildProductGridShimmer(crossAxisCount: crossProducts);
     }
     if (tabOptionIndex == 2) {
       return _shopDetails != null
           ? buildAllProducts(context)
-          : ShimmerHelper().buildProductGridShimmer();
+          : ShimmerHelper()
+              .buildProductGridShimmer(crossAxisCount: crossProducts);
     }
 
     return _shopDetails != null
@@ -1390,7 +1396,7 @@ class _SellerDetailsState extends State<SellerDetails> {
           child: ShimmerHelper()
               .buildBasicShimmer(height: 15, width: 90, radius: 0),
         ),
-        ShimmerHelper().buildProductGridShimmer(),
+        ShimmerHelper().buildProductGridShimmer(crossAxisCount: crossProducts),
       ],
     );
   }
@@ -1721,7 +1727,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 
   Widget buildTopSellingProducts() {
     return MasonryGridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: crossProducts,
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
         itemCount: _topProducts.length,
@@ -1751,10 +1757,11 @@ class _SellerDetailsState extends State<SellerDetails> {
   Widget buildNewArrivalProducts(context) {
     if (!_newArrivalProductInit && _newArrivalProducts.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper().buildProductGridShimmer());
+          child: ShimmerHelper()
+              .buildProductGridShimmer(crossAxisCount: crossProducts));
     } else if (_newArrivalProducts.isNotEmpty) {
       return MasonryGridView.count(
-          crossAxisCount: 2,
+          crossAxisCount: crossProducts,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           itemCount: _newArrivalProducts.length,
@@ -1788,7 +1795,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 
   Widget buildAllProductList() {
     return MasonryGridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: crossProducts,
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
         itemCount: _allProductList.length,

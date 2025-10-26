@@ -990,7 +990,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                         child: ProductSliderImageWidget(
                                           productImageList: _productImageList,
                                           currentImage: _currentImage,
-                                          carouselController: _carouselController,
+                                          carouselController:
+                                              _carouselController,
                                         ),
                                       ),
                                     ),
@@ -1019,7 +1020,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                                             .arrow_right
                                                         : CupertinoIcons
                                                             .arrow_left,
-                                                    color: MyTheme.dark_font_grey,
+                                                    color:
+                                                        MyTheme.dark_font_grey,
                                                     size: 20,
                                                   ),
                                                 ),
@@ -1027,7 +1029,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                             ),
                                           ),
                                           // Show product name in appbar
-                                
+
                                           const Spacer(),
                                           // Cart button at top
                                           InkWell(
@@ -1056,7 +1058,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                                   end: -6,
                                                 ),
                                                 badgeStyle: badges.BadgeStyle(
-                                                  shape: badges.BadgeShape.circle,
+                                                  shape:
+                                                      badges.BadgeShape.circle,
                                                   badgeColor: Theme.of(context)
                                                       .primaryColor,
                                                   borderRadius:
@@ -1072,7 +1075,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                                 child: Center(
                                                   child: Image.asset(
                                                     "assets/cart.png",
-                                                    color: MyTheme.dark_font_grey,
+                                                    color:
+                                                        MyTheme.dark_font_grey,
                                                     height: 16,
                                                   ),
                                                 ),
@@ -1114,7 +1118,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                                   )
                                                 : const TappableIconWidget(
                                                     icon: Icons.favorite_border,
-                                                    color: MyTheme.dark_font_grey,
+                                                    color:
+                                                        MyTheme.dark_font_grey,
                                                   ),
                                           ),
                                         ],
@@ -1289,7 +1294,9 @@ class _ProductDetailsState extends State<ProductDetails>
                       ////////////////////////for description//////////////////
                       SliverToBoxAdapter(
                         child: Padding(
-                          padding: isPhone ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 16),
+                          padding: isPhone
+                              ? EdgeInsets.zero
+                              : const EdgeInsets.symmetric(horizontal: 16),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -2806,29 +2813,16 @@ class _ProductDetailsState extends State<ProductDetails>
 
   Widget buildProductsMayLikeList() {
     if (_relatedProductInit == false && _relatedProducts.isEmpty) {
-      return Row(
-        children: [
-          Padding(
-              padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
-                  : const EdgeInsets.only(right: 8.0),
-              child: ShimmerHelper().buildBasicShimmer(
-                  height: 120.0,
-                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
-          Padding(
-              padding: app_language_rtl.$!
-                  ? const EdgeInsets.only(left: AppDimensions.paddingSmall)
-                  : const EdgeInsets.only(right: 8.0),
-              child: ShimmerHelper().buildBasicShimmer(
-                  height: 120.0,
-                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
-          Padding(
-              padding: const EdgeInsets.only(right: 0.0),
-              child: ShimmerHelper().buildBasicShimmer(
-                  height: 120.0,
-                  width: (MediaQuery.sizeOf(context).width - 32) / 3)),
-        ],
+      final flexible = Flexible(
+        child: Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: AppDimensions.paddingSmall,
+            ),
+            child: ShimmerHelper().buildBasicShimmer(
+                height: 120.0,
+                width: (MediaQuery.sizeOf(context).width - 32) / 3)),
       );
+      return Row(children: List.generate(3, (index) => flexible));
     } else if (_relatedProducts.isNotEmpty) {
       return SingleChildScrollView(
         child: SizedBox(

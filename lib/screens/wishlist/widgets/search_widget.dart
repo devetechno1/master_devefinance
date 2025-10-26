@@ -10,6 +10,7 @@ import '../../../app_config.dart';
 import '../../../custom/btn.dart';
 import '../../../custom/toast_component.dart';
 import '../../../custom/useful_elements.dart';
+import '../../../helpers/grid_responsive.dart';
 import '../../../helpers/reg_ex_inpur_formatter.dart';
 import '../../../helpers/shared_value_helper.dart';
 import '../../../helpers/shimmer_helper.dart';
@@ -104,6 +105,9 @@ class _SearchWidgetState extends State<SearchWidget> {
   bool _showShopLoadingContainer = false;
 
   //----------------------------------------
+
+  int get cross => GridResponsive.columnsForWidth(context);
+  double get ratio => GridResponsive.aspectRatioForWidth(context);
 
   fetchFilteredBrands() async {
     final filteredBrandResponse = await BrandRepository().getFilterPageBrands();
@@ -1116,8 +1120,8 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget buildProductScrollableList() {
     if (_isProductInitial && _productList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildProductGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildProductGridShimmer(
+              crossAxisCount: cross, scontroller: _scrollController));
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
@@ -1138,7 +1142,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _productList.length,
                 controller: _scrollController,
-                crossAxisCount: 2,
+                crossAxisCount: cross,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
                 padding: const EdgeInsets.only(
@@ -1191,8 +1195,10 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget buildBrandScrollableList() {
     if (_isBrandInitial && _brandList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildSquareGridShimmer(
+              childAspectRatio: 1,
+              crossAxisCount: cross,
+              scontroller: _scrollController));
     } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
@@ -1213,8 +1219,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _brandList.length,
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: cross,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
                     childAspectRatio: 1),
@@ -1262,8 +1268,10 @@ class _SearchWidgetState extends State<SearchWidget> {
     if (_isShopInitial && _shopList.isEmpty) {
       return SingleChildScrollView(
           controller: _scrollController,
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildSquareGridShimmer(
+              childAspectRatio: ratio,
+              crossAxisCount: cross,
+              scontroller: _scrollController));
     } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
@@ -1284,11 +1292,12 @@ class _SearchWidgetState extends State<SearchWidget> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _shopList.length,
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 14,
-                    childAspectRatio: 0.7),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: cross,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 14,
+                  childAspectRatio: ratio,
+                ),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingLarge,
                     bottom: AppDimensions.paddingSupSmall,

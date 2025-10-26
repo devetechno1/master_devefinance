@@ -18,6 +18,8 @@ import 'package:flutter_countdown_timer/index.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../helpers/grid_responsive.dart';
+
 class FlashDealProducts extends StatefulWidget {
   const FlashDealProducts({
     Key? key,
@@ -186,6 +188,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
         future: _future,
         builder:
             (context, AsyncSnapshot<productMini.ProductMiniResponse> snapshot) {
+               final   int  cross = GridResponsive.columnsForWidth(context);
           if (snapshot.hasError) {
             return Container();
           } else if (snapshot.hasData) {
@@ -234,7 +237,9 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 children: [
                   headerShimmer(),
                   ShimmerHelper()
-                      .buildProductGridShimmer(scontroller: _scrollController),
+                      .buildProductGridShimmer(
+                        crossAxisCount: cross,
+                        scontroller: _scrollController),
                 ],
               ),
             );

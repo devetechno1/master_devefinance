@@ -8,6 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/ca
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../data_model/category_response.dart';
+import '../../helpers/grid_responsive.dart';
 import '../../my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
@@ -16,6 +17,8 @@ class FeaturedCategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+         final   int  cross = GridResponsive.columnsForWidth(context);
+   final  double  ratio = GridResponsive.aspectRatioForWidth(context);
     final ({UnmodifiableListView<Category> featuredCategoryList, bool isCategoryInitial}) p =
         context.select<HomeProvider,
             ({bool isCategoryInitial, UnmodifiableListView<Category> featuredCategoryList})>(
@@ -24,9 +27,12 @@ class FeaturedCategoriesWidget extends StatelessWidget {
         isCategoryInitial: provider.isCategoryInitial,
       ),
     );
+
     if (p.isCategoryInitial && p.featuredCategoryList.isEmpty) {
       // Handle shimmer loading here (if no categories loaded yet)
       return ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
+        crossAxisCount: cross,
+        aspectRatio: 1,
         crossAxisSpacing: 12.0,
         mainAxisSpacing: 12.0,
         item_count: 10,

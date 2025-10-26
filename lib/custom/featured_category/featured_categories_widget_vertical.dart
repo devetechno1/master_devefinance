@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants/app_dimensions.dart';
 import '../../constants/app_images.dart';
+import '../../helpers/grid_responsive.dart';
 import '../../helpers/shimmer_helper.dart';
 import '../../my_theme.dart';
 import '../../screens/category_list_n_product/category_products.dart';
@@ -20,9 +21,12 @@ class FeatureCategoriesWidgetVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final int  cross = GridResponsive.columnsForWidth(context);
     if (isCategoryInitial && featuredCategoryList.isEmpty) {
       // Handle shimmer loading here (if no categories loaded yet)
       return ShimmerHelper().buildGridShimmerWithAxisCount(
+        aspectRatio: 1,
+        crossAxisCount: cross,
         crossAxisSpacing: 12.0,
         mainAxisSpacing: 12.0,
         item_count: 10,

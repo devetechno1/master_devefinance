@@ -46,13 +46,14 @@ class HomeAllProductsSliver extends StatelessWidget {
         isAllProductInitial: data.isAllProductInitial,
       ),
     );
+    final cross = GridResponsive.columnsForWidth(context);
+
     if (data.isAllProductInitial) {
-      return ShimmerHelper().buildProductSliverGridShimmer();
+      return ShimmerHelper()
+          .buildProductSliverGridShimmer(crossAxisCount: cross);
     } else if (data.allProductList.isNotEmpty) {
       final bool isLoadingMore =
           data.allProductList.length < data.totalAllProductData;
-      final width = MediaQuery.sizeOf(context).width;
-      final cross = GridResponsive.columnsForWidth(width);
       return SliverMasonryGrid.count(
           crossAxisCount: cross,
           mainAxisSpacing: 14,
