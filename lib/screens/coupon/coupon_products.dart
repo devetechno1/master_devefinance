@@ -96,7 +96,7 @@ class _CouponProductsState extends State<CouponProducts> {
   }
 
   FutureBuilder<ProductMiniResponse> buildCouponProductList(context) {
-   final   int  cross = GridResponsive.columnsForWidth(context);
+    final int cross = GridResponsive.columnsForWidth(context);
     return FutureBuilder(
         future: CouponRepository().getCouponProductList(id: widget.id),
         builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
@@ -140,10 +140,8 @@ class _CouponProductsState extends State<CouponProducts> {
               ),
             );
           } else {
-            return ShimmerHelper()
-                .buildProductGridShimmer(
-                  crossAxisCount:cross ,
-                  scontroller: _scrollController);
+            return ShimmerHelper().buildProductGridShimmer(
+                crossAxisCount: cross, scontroller: _scrollController);
           }
         });
   }

@@ -17,13 +17,20 @@ class FeaturedCategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-         final   int  cross = GridResponsive.columnsForWidth(context);
-   final  double  ratio = GridResponsive.aspectRatioForWidth(context);
-    final ({UnmodifiableListView<Category> featuredCategoryList, bool isCategoryInitial}) p =
-        context.select<HomeProvider,
-            ({bool isCategoryInitial, UnmodifiableListView<Category> featuredCategoryList})>(
+    final int cross = GridResponsive.columnsForWidth(context);
+
+    final ({
+      UnmodifiableListView<Category> featuredCategoryList,
+      bool isCategoryInitial
+    }) p = context.select<
+        HomeProvider,
+        ({
+          bool isCategoryInitial,
+          UnmodifiableListView<Category> featuredCategoryList
+        })>(
       (provider) => (
-        featuredCategoryList: UnmodifiableListView(provider.featuredCategoryList),
+        featuredCategoryList:
+            UnmodifiableListView(provider.featuredCategoryList),
         isCategoryInitial: provider.isCategoryInitial,
       ),
     );

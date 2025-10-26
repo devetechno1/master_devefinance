@@ -114,12 +114,10 @@ class _PurchasedDigitalProductsState extends State<PurchasedDigitalProducts> {
   }
 
   Widget body() {
-      final   int  cross = GridResponsive.columnsForWidth(context);
+    final int cross = GridResponsive.columnsForWidth(context);
     if (!_dataFetch) {
-      return ShimmerHelper()
-          .buildProductGridShimmer(
-            crossAxisCount: cross,
-            scontroller: _mainScrollController);
+      return ShimmerHelper().buildProductGridShimmer(
+          crossAxisCount: cross, scontroller: _mainScrollController);
     }
 
     if (_digitalProducts.isEmpty) {
