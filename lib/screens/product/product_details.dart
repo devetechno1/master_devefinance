@@ -590,7 +590,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
-                          : Container(),
+                          : emptyWidget,
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
@@ -1725,7 +1725,7 @@ class _ProductDetailsState extends State<ProductDetails>
       child: Row(
         children: [
           _productDetails!.added_by == "admin"
-              ? Container()
+              ? emptyWidget
               : InkWell(
                   onTap: () {
                     Navigator.push(
@@ -2666,7 +2666,7 @@ class _ProductDetailsState extends State<ProductDetails>
               ],
             ),
           )
-        : Container();
+        : emptyWidget;
   }
 
   Widget buildExpandableDescription() {

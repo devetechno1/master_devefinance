@@ -190,7 +190,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
             (context, AsyncSnapshot<productMini.ProductMiniResponse> snapshot) {
                final   int  cross = GridResponsive.columnsForWidth(context);
           if (snapshot.hasError) {
-            return Container();
+            return emptyWidget;
           } else if (snapshot.hasData) {
             final productResponse = snapshot.data;
             if (_fullList.isEmpty) {

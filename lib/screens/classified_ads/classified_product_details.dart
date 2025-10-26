@@ -184,7 +184,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
-                          : Container(),
+                          : emptyWidget,
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
@@ -925,7 +925,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
               ],
             ),
           )
-        : Container();
+        : emptyWidget;
   }
 
   ExpandableNotifier buildExpandableDescription() {

@@ -3,6 +3,7 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/category.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
+import '../../app_config.dart';
 import '../../custom/aiz_summer_note.dart';
 import '../../custom/device_info.dart';
 import '../../custom/loading.dart';
@@ -419,7 +420,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                           child: DropdownButton<String>(
                             menuMaxHeight: 300,
                             isDense: true,
-                            underline: Container(),
+                            underline: emptyWidget,
                             isExpanded: true,
                             onChanged: (String? value) {
                               setState(() {
@@ -1108,7 +1109,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
           dropdownColor: Colors.white,
           menuMaxHeight: 300,
           isDense: true,
-          underline: Container(),
+          underline: emptyWidget,
           isExpanded: true,
           onChanged: (CommonDropDownItem? value) {
             onchange(value);
@@ -1165,7 +1166,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         child: DropdownButton<CommonDropDownItemWithChild>(
           menuMaxHeight: 300,
           isDense: true,
-          underline: Container(),
+          underline: emptyWidget,
           isExpanded: true,
           onChanged: (CommonDropDownItemWithChild? value) {
             onchange(value);

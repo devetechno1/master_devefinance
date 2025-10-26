@@ -615,7 +615,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
           automaticallyImplyLeading: false,
           scrolledUnderElevation: 0.0,
           actions: [
-            Container(),
+            emptyWidget,
           ],
           elevation: 0.0,
           titleSpacing: 0,

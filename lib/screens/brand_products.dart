@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../app_config.dart';
 import '../helpers/grid_responsive.dart';
 import '../helpers/shared_value_helper.dart';
 
@@ -222,7 +223,7 @@ class _BrandProductsState extends State<BrandProducts> {
     } else if (_totalData == 0) {
       return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 }

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../app_config.dart';
 import '../../helpers/grid_responsive.dart';
 
 class TodaysDealProducts extends StatefulWidget {
@@ -66,7 +67,7 @@ class _TodaysDealProductsState extends State<TodaysDealProducts> {
       builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return Container();
+            return emptyWidget;
           } else if (snapshot.data!.products!.isEmpty) {
             return Container(
               child: Center(

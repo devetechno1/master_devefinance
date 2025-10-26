@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../app_config.dart';
 import '../helpers/grid_responsive.dart';
 import '../helpers/shared_value_helper.dart';
 import '../helpers/shimmer_helper.dart';
@@ -185,7 +186,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
     } else if (_totalData == 0) {
       return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 }

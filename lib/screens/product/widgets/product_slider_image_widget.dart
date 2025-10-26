@@ -98,33 +98,34 @@ class CarouselItemCoverWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      carouselController: carouselController,
-      options: CarouselOptions(
-        aspectRatio: 355 / 375,
-        viewportFraction: 1,
-        initialPage: 0,
-        autoPlay: productImageList!.length > 1,
-        autoPlayInterval: const Duration(seconds: 5),
-        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-        autoPlayCurve: Curves.easeInExpo,
-        enlargeCenterPage: false,
-        scrollDirection: Axis.horizontal,
-        onPageChanged: onPageChanged,
-      ),
-      items: productImageList!.map(
-        (i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                child: InkWell(
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: AppDimensions.phoneMaxWidth),
+      child: CarouselSlider(
+        carouselController: carouselController,
+        options: CarouselOptions(
+          aspectRatio: 355 / 375,
+          viewportFraction: 1,
+          initialPage: 0,
+          autoPlay: productImageList!.length > 1,
+          autoPlayInterval: const Duration(seconds: 5),
+          autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+          autoPlayCurve: Curves.easeInExpo,
+          enlargeCenterPage: false,
+          scrollDirection: Axis.horizontal,
+          onPageChanged: onPageChanged,
+        ),
+        items: productImageList!.map(
+          (i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return InkWell(
                   onTap: () {
                     openPhotoDialog(
                       context,
                       productImageList![currentImage!],
                     );
                   },
-                  child: Container(
+                  child: SizedBox(
                     height: double.infinity,
                     width: double.infinity,
                     child: FadeInImage.assetNetwork(
@@ -133,12 +134,12 @@ class CarouselItemCoverWidget extends StatelessWidget {
                       fit: BoxFit.fitHeight,
                     ),
                   ),
-                ),
-              );
-            },
-          );
-        },
-      ).toList(),
+                );
+              },
+            );
+          },
+        ).toList(),
+      ),
     );
   }
 

@@ -4,6 +4,8 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
 
+import '../app_config.dart';
+
 // ignore: must_be_immutable
 class TopSellingProductsCard extends StatefulWidget {
   int? id;
@@ -129,7 +131,7 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.normal),
                               )
-                            : Container(),
+                            : emptyWidget,
                       ],
                     ),
                   )

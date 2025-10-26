@@ -271,7 +271,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                     color: MyTheme.medium_grey, fontSize: 12),
                               ),
                             )
-                          : Container(),
+                          : emptyWidget,
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: AppDimensions.paddingSmall),
@@ -1056,7 +1056,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       child: Row(
         children: [
           _auctionproductDetails.addedBy == "admin"
-              ? Container()
+              ? emptyWidget
               : InkWell(
                   onTap: () {
                     Navigator.push(
@@ -1618,7 +1618,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               ],
             ),
           )
-        : Container();
+        : emptyWidget;
   }
 
   ExpandableNotifier buildExpandableDescription() {

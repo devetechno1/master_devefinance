@@ -7,6 +7,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../../app_config.dart';
 import '../../custom/device_info.dart';
 import '../../custom/my_widget.dart';
 import '../../custom/toast_component.dart';
@@ -451,7 +452,7 @@ class _UploadFileState extends State<UploadFile> {
                   ),
                   child: DropdownButton<CommonDropDownItem>(
                     isDense: true,
-                    underline: Container(),
+                    underline: emptyWidget,
                     isExpanded: true,
                     onChanged: (value) {
                       sortBy = value;

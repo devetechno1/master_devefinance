@@ -328,7 +328,7 @@ class _OrderListState extends State<OrderList> {
           scrolledUnderElevation: 0.0,
           automaticallyImplyLeading: false,
           actions: [
-            Container(),
+            emptyWidget,
           ],
           elevation: 0.0,
           titleSpacing: 0,
@@ -446,7 +446,7 @@ class _OrderListState extends State<OrderList> {
     } else if (_totalData == 0) {
       return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 

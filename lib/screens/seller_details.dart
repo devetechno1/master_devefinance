@@ -645,7 +645,7 @@
 //         }).toList(),
 //       );
 //     } else {
-//       return Container();
+//       return emptyWidget;
 //     }
 //   }
 
@@ -703,7 +703,7 @@
 //       return Center(
 //           child: Text('no_product_is_available'.tr(context: context)));
 //     } else {
-//       return Container(); // should never be happening
+//       return emptyWidget; // should never be happening
 //     }
 //   }
 
@@ -1244,7 +1244,14 @@ class _SellerDetailsState extends State<SellerDetails> {
               slivers: [
                 SliverList(
                   delegate: SliverChildListDelegate([
-                    buildCarouselSlider(context),
+                    Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: AppDimensions.phoneMaxWidth,
+                        ),
+                        child: buildCarouselSlider(context),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(
                         18.0,
@@ -1649,7 +1656,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         ),
       );
     } else {
-      return Container();
+      return emptyWidget;
     }
   }
 
@@ -1715,7 +1722,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       return Center(
           child: Text('no_product_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 

@@ -15,6 +15,8 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 // import 'package:intl/intl.dart' as intl;
 import 'package:shimmer/shimmer.dart';
 
+import '../../app_config.dart';
+
 class Chat extends StatefulWidget {
   const Chat({
     Key? key,
@@ -353,7 +355,7 @@ class _ChatState extends State<Chat> {
     } else if (_totalData == 0) {
       return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
-      return Container();
+      return emptyWidget;
     }
   }
 
@@ -527,7 +529,7 @@ class _ChatState extends State<Chat> {
                                 fontSize: 8, color: Color(0xff999999)),
                           ),
                         )
-                      : Container(),
+                      : emptyWidget,
                   const SizedBox(
                     height: 5,
                   ),

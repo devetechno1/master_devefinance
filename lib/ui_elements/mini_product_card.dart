@@ -95,7 +95,7 @@
 //                               fontWeight: FontWeight.w600),
 //                         ),
 //                       )
-//                     : Container(),
+//                     : emptyWidget,
 //                 Padding(
 //                   padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
 //                   child: Text(

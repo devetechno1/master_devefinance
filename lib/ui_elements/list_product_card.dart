@@ -6,6 +6,8 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
 import 'package:flutter/material.dart';
 
+import '../app_config.dart';
+
 class ListProductCard extends StatefulWidget {
   final int? id;
   final String slug;
@@ -118,7 +120,7 @@ class _ListProductCardState extends State<ListProductCard> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400),
                               )
-                            : Container(),
+                            : emptyWidget,
                       ],
                     ),
                   )

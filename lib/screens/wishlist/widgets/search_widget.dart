@@ -424,7 +424,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         actions: [
-          Container(),
+          emptyWidget,
         ],
         centerTitle: false,
         flexibleSpace: Padding(
@@ -1177,7 +1177,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       return Center(
           child: Text('no_product_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 
@@ -1249,7 +1249,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_totalBrandData == 0) {
       return Center(child: Text('no_brand_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 
@@ -1324,7 +1324,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_totalShopData == 0) {
       return Center(child: Text('no_shop_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 
