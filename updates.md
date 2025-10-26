@@ -9,6 +9,87 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.49 – Unify Pagination, Reuse Carousels, Stronger Typing & RTL Polish</strong></summary>
+
+### UI & Pagination
+
+* **Centralized infinite scroll:** Migrated products/brands/shops to a shared **`PagedView`** pattern with a reusable `dataBodyWidget<T>` helper.
+
+  * Pull-to-refresh now performs a **silent refresh** (`showLoading: false`) for snappier UX.
+  * Added `showLoading` support to internal `_loadFirstPage/_reset/_resetToFirstPage`.
+* **Responsive grids:** `GridResponsive.aspectRatioForWidth(...)` accepts `maxSm/maxMd/maxLg` to fine-tune card aspect ratios per breakpoint.
+
+### Search & Filter
+
+* **Filter screen refactor:**
+
+  * Replaced ad-hoc `ScrollController` logic and manual footers with **typed** `PagedViewController<Product/Brands/Shop>`.
+  * Introduced `PageResult<T>` based loaders: `_fetchProducts`, `_fetchBrands`, `_fetchShops`.
+  * Consistent empty states via `emptyBuilder` and unified padding.
+
+### Media & Carousels
+
+* **Reusable carousel:** Extracted **`CarouselItemCoverWidget`** and reused it in Product Details and Seller header.
+* **Safer image lists:**
+
+  * `productImageList` and seller `_carouselImageList` are now **`List<String>`**; null paths are ignored to prevent runtime issues.
+  * Product Details only appends non-null photo paths.
+
+### Components & Cards
+
+* **Shop & Brand tiles:**
+
+  * Hard-edge clipping + simplified image composition (less nesting) for **`ShopSquareCard`** and **`BrandSquareCard`**.
+  * Layout polish: consistent symmetric paddings and card radii.
+
+### RTL & Icons
+
+* **Chevron icons:** Replaced multiple `CupertinoIcons.arrow_*` with platform-neutral `Icons.keyboard_arrow_*` and **directional paddings** (`EdgeInsetsDirectional`) across screens for better RTL behavior.
+
+### Data Layer & Typing
+
+* **`ShopRepository.getShops`** now returns **`ShopResponse`** (typed), not `dynamic`.
+* Search widget’s `_shopList` strongly typed (`List<Shop>`), safer `slug/meta` null handling.
+
+### Code Cleanup & Consistency
+
+* Shared `dataBodyWidget<T>` reduces duplication for paged grid/list bodies.
+* Removed scattered loading footers in favor of `PagedView` loading items & empty builders.
+
+---
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+---
+
+### Must Update (Stores)
+
+* **No** — client-side refactors and UI polish only.
+
+---
+
+### Breaking Changes
+
+* `ShopRepository.getShops(...)` → returns **`ShopResponse`**. Update any callers expecting `dynamic`.
+* `ProductSliderImageWidget.productImageList` → **`List<String>?`** (was untyped `List?`).
+* `GridResponsive.aspectRatioForWidth(...)` signature adds optional `maxSm/maxMd/maxLg` (defaults maintain previous behavior).
+
+---
+
+### QA Checklist
+
+* [ ] Paged lists (products/brands/shops) paginate & refresh without duplicate spinners.
+* [ ] Empty states show translated copy for each tab.
+* [ ] Product slider opens full-screen photo; index/auto-play behaves as expected.
+* [ ] Seller header carousel indicators sync with slides.
+* [ ] RTL paddings/arrows render correctly across replaced screens.
+* [ ] No analyzer warnings for nullability/typing in updated files.
+
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.48 – Centralize App Name Localization and Enhance Translation Utilities</strong></summary>

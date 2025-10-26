@@ -95,7 +95,7 @@ class _ProductDetailsState extends State<ProductDetails>
   bool _isInWishList = false;
   var _productDetailsFetched = false;
   DetailedProduct? _productDetails;
-  final _productImageList = [];
+  final List<String> _productImageList = [];
   final _colorList = [];
   int _selectedColorIndex = 0;
   final _selectedChoices = [];
@@ -270,7 +270,7 @@ class _ProductDetailsState extends State<ProductDetails>
       // fetchVariantPrice();
       _stock = _productDetails!.current_stock ?? _stock;
       _productDetails!.photos?.forEach((photo) {
-        _productImageList.add(photo.path);
+        if (photo.path != null) _productImageList.add(photo.path!);
       });
 
       _productDetails!.choice_options?.forEach((choiceOpiton) {

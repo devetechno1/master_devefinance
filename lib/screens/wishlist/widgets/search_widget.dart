@@ -10,6 +10,7 @@ import '../../../app_config.dart';
 import '../../../custom/btn.dart';
 import '../../../custom/toast_component.dart';
 import '../../../custom/useful_elements.dart';
+import '../../../data_model/shop_response.dart';
 import '../../../helpers/grid_responsive.dart';
 import '../../../helpers/reg_ex_inpur_formatter.dart';
 import '../../../helpers/shared_value_helper.dart';
@@ -98,7 +99,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   int? _totalBrandData = 0;
   bool _showBrandLoadingContainer = false;
 
-  final List<dynamic> _shopList = [];
+  final List<Shop> _shopList = [];
   bool _isShopInitial = true;
   int _shopPage = 1;
   int? _totalShopData = 0;
@@ -248,9 +249,9 @@ class _SearchWidgetState extends State<SearchWidget> {
   fetchShopData() async {
     final shopResponse =
         await ShopRepository().getShops(page: _shopPage, name: _searchKey);
-    _shopList.addAll(shopResponse.shops);
+    _shopList.addAll(shopResponse.shops ?? []);
     _isShopInitial = false;
-    _totalShopData = shopResponse.meta.total;
+    _totalShopData = shopResponse.meta?.total;
     _showShopLoadingContainer = false;
     //print("_shopPage:" + _shopPage.toString());
     //print("_totalShopData:" + _totalShopData.toString());
@@ -1309,7 +1310,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   // 3
                   return ShopSquareCard(
                     id: _shopList[index].id,
-                    shopSlug: _shopList[index].slug,
+                    shopSlug: _shopList[index].slug ?? '',
                     image: _shopList[index].logo,
                     name: _shopList[index].name,
                     stars: double.parse(_shopList[index].rating.toString()),

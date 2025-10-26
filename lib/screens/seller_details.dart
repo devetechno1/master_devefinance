@@ -1028,13 +1028,13 @@ import 'package:active_ecommerce_cms_demo_app/repositories/shop_repository.dart'
 import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_details.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../helpers/grid_responsive.dart';
+import 'product/widgets/product_slider_image_widget.dart';
 
 // ignore: must_be_immutable
 class SellerDetails extends StatefulWidget {
@@ -1052,7 +1052,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 
   //init
   int _current_slider = 0;
-  final List<dynamic> _carouselImageList = [];
+  final List<String> _carouselImageList = [];
   bool _carouselInit = false;
   Shop? _shopDetails;
 
@@ -1071,7 +1071,7 @@ class _SellerDetailsState extends State<SellerDetails> {
 
   int tabOptionIndex = 0;
 
-  late final int crossProducts = GridResponsive.columnsForWidth(context);
+  int get crossProducts => GridResponsive.columnsForWidth(context);
 
   @override
   void initState() {
@@ -1359,7 +1359,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(
+                padding: const EdgeInsetsDirectional.fromSTEB(
                   20.0,
                   14.0,
                   0.0,
@@ -1387,7 +1387,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       children: [
         buildFeaturedProductsShimmerSection(),
         Padding(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             18.0,
             20.0,
             18.0,
@@ -1414,9 +1414,10 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                  left: AppDimensions.paddingLarge,
-                  top: AppDimensions.paddingLarge),
+              padding: const EdgeInsetsDirectional.only(
+                start: AppDimensions.paddingLarge,
+                top: AppDimensions.paddingLarge,
+              ),
               child: Text(
                 'featured_products_ucf'.tr(context: context),
                 style: const TextStyle(
@@ -1431,8 +1432,9 @@ class _SellerDetailsState extends State<SellerDetails> {
               width: double.infinity,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding:
-                      const EdgeInsets.only(left: AppDimensions.paddingLarge),
+                  padding: const EdgeInsetsDirectional.only(
+                    start: AppDimensions.paddingLarge,
+                  ),
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
@@ -1475,8 +1477,10 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                left: AppDimensions.paddingMedium, top: 20),
+            padding: const EdgeInsetsDirectional.only(
+              start: AppDimensions.paddingMedium,
+              top: 20,
+            ),
             child: Column(
               children: [
                 ShimmerHelper()
@@ -1634,90 +1638,14 @@ class _SellerDetailsState extends State<SellerDetails> {
             ),
           ],
         ),
-        child: CarouselSlider(
-          options: CarouselOptions(
-            height: 177,
-            aspectRatio: 3.7,
-            viewportFraction: 1.0,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            reverse: false,
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 5),
-            autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-            autoPlayCurve: Curves.easeInExpo,
-            enlargeCenterPage: false,
-            scrollDirection: Axis.horizontal,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _current_slider = index;
-              });
-            },
-          ),
-          items: _carouselImageList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Stack(
-                  children: <Widget>[
-                    Container(
-                      height: 177,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        child: FadeInImage.assetNetwork(
-                          placeholder: AppImages.placeholderRectangle,
-                          image: i,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: _carouselImageList.map((url) {
-                          final int index = _carouselImageList.indexOf(url);
-                          return Container(
-                            width: 8.0, // Size of the indicator
-                            height: 8.0,
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 4.0,
-                            ),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: _current_slider == index
-                                    ? Colors
-                                        .white // White border for active indicator
-                                    : const Color(
-                                        0xffE62E04), // Red border for inactive
-                                width: 1.0, // Width of the border
-                              ),
-                              color: _current_slider == index
-                                  ? const Color(
-                                      0xffE62E04) // Red fill for active indicator
-                                  : Colors
-                                      .transparent, // No fill for inactive indicator
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black
-                                      .withValues(alpha: 0.2), // Shadow color
-                                  spreadRadius: 2, // Spread of the shadow
-                                  blurRadius: 4, // Blur radius for softness
-                                  offset: const Offset(
-                                      0, 2), // Offset for shadow position
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            );
-          }).toList(),
+        child: CarouselItemCoverWidget(
+          currentImage: _current_slider,
+          productImageList: _carouselImageList,
+          onPageChanged: (index, reason) {
+            setState(() {
+              _current_slider = index;
+            });
+          },
         ),
       );
     } else {
@@ -1732,11 +1660,10 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _topProducts.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(
-            top: AppDimensions.paddingSupSmall,
-            bottom: AppDimensions.paddingSupSmall,
-            left: 18,
-            right: 18),
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingSupSmall,
+          horizontal: 18,
+        ),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1766,11 +1693,10 @@ class _SellerDetailsState extends State<SellerDetails> {
           crossAxisSpacing: 14,
           itemCount: _newArrivalProducts.length,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(
-              top: AppDimensions.paddingSupSmall,
-              bottom: AppDimensions.paddingSupSmall,
-              left: 18,
-              right: 18),
+          padding: const EdgeInsets.symmetric(
+            vertical: AppDimensions.paddingSupSmall,
+            horizontal: 18,
+          ),
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return FeaturedProductCard(
@@ -1800,11 +1726,10 @@ class _SellerDetailsState extends State<SellerDetails> {
         crossAxisSpacing: 14,
         itemCount: _allProductList.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.only(
-            top: AppDimensions.paddingSupSmall,
-            bottom: AppDimensions.paddingSupSmall,
-            left: 18,
-            right: 18),
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingSupSmall,
+          horizontal: 18,
+        ),
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return FeaturedProductCard(
@@ -1826,6 +1751,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       backgroundColor: MyTheme.mainColor,
       scrolledUnderElevation: 0.0,
       toolbarHeight: 50,
+      centerTitle: false,
       leading: Builder(
         builder: (context) => IconButton(
           padding: EdgeInsets.zero,
@@ -1880,8 +1806,10 @@ class _SellerDetailsState extends State<SellerDetails> {
               ),
             ),
             Container(
-              padding:
-                  const EdgeInsets.only(bottom: AppDimensions.paddingSupSmall),
+              padding: const EdgeInsetsDirectional.only(
+                start: AppDimensions.paddingSmall,
+                bottom: AppDimensions.paddingSupSmall,
+              ),
               width: DeviceInfo(context).width! / 2.5,
               height: 60,
               child: Column(
@@ -2020,21 +1948,16 @@ class _SellerDetailsState extends State<SellerDetails> {
         ]);
   }
 
-  Row buildAppbarShopTitle() {
-    return Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-      Container(
-        width: DeviceInfo(context).width! - 70,
-        child: Text(
-          _shopDetails?.name ?? "",
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: const TextStyle(
-              color: MyTheme.dark_font_grey,
-              fontSize: 16,
-              fontWeight: FontWeight.w600),
-        ),
-      ),
-    ]);
+  Widget buildAppbarShopTitle() {
+    return Text(
+      _shopDetails?.name ?? "",
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
+      style: const TextStyle(
+          color: MyTheme.dark_font_grey,
+          fontSize: 16,
+          fontWeight: FontWeight.w600),
+    );
   }
 
   Row buildRatingWithCountRow() {
@@ -2202,7 +2125,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
             ),
             Positioned.fill(
               child: Align(
-                alignment: Alignment.topRight,
+                alignment: AlignmentDirectional.topEnd,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -2212,8 +2135,11 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                         // padding:
                         //     EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         height: 20, width: 48,
-                        margin: const EdgeInsets.only(
-                            top: 8, right: 8, bottom: 15), // Adjusted margin
+                        margin: const EdgeInsetsDirectional.only(
+                          top: 8,
+                          end: 8,
+                          bottom: 15,
+                        ), // Adjusted margin
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
                           borderRadius:
@@ -2248,10 +2174,10 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                             horizontal: 12, vertical: 4),
                         decoration: const BoxDecoration(
                           color: Colors.blueGrey,
-                          borderRadius: BorderRadius.only(
-                            topRight:
+                          borderRadius: BorderRadiusDirectional.only(
+                            topEnd:
                                 Radius.circular(AppDimensions.radiusHalfSmall),
-                            bottomLeft:
+                            bottomStart:
                                 Radius.circular(AppDimensions.radiusHalfSmall),
                           ),
                           boxShadow: [

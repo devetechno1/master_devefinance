@@ -37,13 +37,16 @@ class GridResponsive {
     BuildContext context, {
     bool useResponsiveAspectRatio = true,
     double fallback = 0.62,
+    double maxSm = 0.68,
+    double maxMd = 0.70,
+    double maxLg = 0.72,
   }) {
     if (!useResponsiveAspectRatio) return fallback;
     final double width = MediaQuery.sizeOf(context).width;
 
-    if (width >= bpLg) return 0.72;
-    if (width >= bpMd) return 0.70;
-    if (width >= bpSm) return 0.68;
+    if (width >= bpLg) return maxLg;
+    if (width >= bpMd) return maxMd;
+    if (width >= bpSm) return maxSm;
     return fallback;
   }
 }

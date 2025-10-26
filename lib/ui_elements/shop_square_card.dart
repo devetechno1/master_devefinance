@@ -47,33 +47,26 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-                height: 165,
-                width: 170,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(AppDimensions.radiusNormal)),
-                padding:
-                    const EdgeInsets.all(AppDimensions.paddingVeryExtraLarge),
-                child: _buildImage()),
+              height: 165,
+              width: 170,
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+              ),
+              child: _buildImage(),
+            ),
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5),
                 _buildName(),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5),
                 _buildRating(),
-                const SizedBox(
-                  height: 8,
-                ),
+                const SizedBox(height: 8),
                 _buildVisitStoreButton(),
-                const SizedBox(
-                  height: 2,
-                )
+                const SizedBox(height: 2)
               ],
             )
           ],
@@ -83,20 +76,10 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
   }
 
   Widget _buildImage() {
-    return Container(
-      width: double.infinity,
-      height: 100,
-      child: Center(
-        child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(AppDimensions.radiusDefault)),
-          child: FadeInImage.assetNetwork(
-            placeholder: AppImages.placeholder,
-            image: widget.image ?? AppImages.placeholder,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+    return FadeInImage.assetNetwork(
+      placeholder: AppImages.placeholder,
+      image: widget.image ?? AppImages.placeholder,
+      fit: BoxFit.cover,
     );
   }
 
