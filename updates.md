@@ -5,10 +5,84 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.49'`
+- `mobileVersion = '9.10.50'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.50 – Mobile build upgrades: iOS 15 floor, Firebase/SDK bumps, and Flutter deps sync</strong></summary>
+
+### Android
+
+* Switched Firebase artifacts from **ktx** to base libs for **Auth/Analytics/Firestore** to align with BoM-managed versions.
+* Kept **Firebase BoM 33.15.0**; retained **Messaging** and **Crashlytics NDK**.
+* No changes to `minSdk`/`compileSdk`; desugaring unchanged.
+
+### iOS
+
+* Raised **deployment target to iOS 15.0** (`Podfile`).
+* Updated Pods:
+
+  * **Firebase 12.4.0** (Core / Crashlytics / Messaging)
+  * **GoogleMaps 9.4.0**
+  * **Facebook SDK 18.0.1**
+  * **SDWebImage 5.21.3**
+  * **Sentry Hybrid 8.56.2**
+  * Added transitive **objective_c** pod
+* Xcode project:
+
+  * `objectVersion` → **77**
+  * Cleared `DEVELOPMENT_TEAM` (set to empty)
+  * Tidied `[CP]` script input/output lists
+  * Runner scheme: **LaunchAction uses Release** build configuration
+
+### Flutter Dependencies
+
+* **firebase_core → 4.2.0**
+* **firebase_messaging → 16.0.3**
+* **firebase_crashlytics → 5.0.3**
+* **connectivity_plus → 7.0.0**
+* **fluttertoast → 9.0.0**
+* **go_router → 16.3.0**
+* Regenerated **pubspec.lock** to reflect all version changes.
+
+---
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+---
+
+### Must Update (Stores)
+
+* **No** — build and dependency updates only.
+
+---
+
+### QA Checklist
+
+* [ ] iOS/Android push notifications deliver and open correctly (foreground/background/terminated).
+* [ ] Crash reports appear in Crashlytics with correct app version.
+* [ ] Maps render on iOS (GoogleMaps 9.x) and Android without regressions.
+* [ ] Facebook login still succeeds on both platforms.
+* [ ] App launches on iOS 15+ devices/simulators; older (<15) correctly blocked by store settings.
+* [ ] Smoke test navigation after `go_router` bump.
+* [ ] No analyzer warnings from dependency updates.
+
+---
+
+### Notes
+
+* After pulling, **clean & reinstall iOS pods**:
+
+  * `cd ios && pod repo update && pod install --clean-install`
+* On Android, run a **Gradle sync/clean**:
+
+  * `./gradlew clean` then rebuild.
+
+</details>
+
 <details>
 <summary><strong>AV 9.10.49 – Unify Pagination, Reuse Carousels, Stronger Typing & RTL Polish</strong></summary>
 
