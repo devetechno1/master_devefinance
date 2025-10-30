@@ -48,7 +48,7 @@ class BusinessSettingHelper {
     CustomLocalization.supportedLocales.clear();
     for (Language l in langs.languages ?? []) {
       CustomLocalization.supportedLocales.add(
-        Locale(l.code ?? AppConfig.mobile_app_code),
+        Locale(l.mobile_app_code ?? AppConfig.mobile_app_code),
       );
     }
 

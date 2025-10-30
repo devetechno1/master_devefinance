@@ -13,9 +13,15 @@ class TodaysDealProductsSliverWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todayDealList =
-        context.select<HomeProvider, UnmodifiableListView<Product>>(
-            (value) => UnmodifiableListView(value.TodayDealList));
+    final todayDealList = context
+        .select<HomeProvider,
+            ({bool z, UnmodifiableListView<Product> products})>(
+          (value) => (
+            products: UnmodifiableListView(value.TodayDealList),
+            z: value.isTodayDealInitial
+          ),
+        )
+        .products;
     if (todayDealList.isEmpty) {
       return const SliverToBoxAdapter(child: emptyWidget);
     }

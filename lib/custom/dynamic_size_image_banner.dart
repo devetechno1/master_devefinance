@@ -48,15 +48,22 @@ class _DynamicSizeImageBannerState extends State<DynamicSizeImageBanner> {
     if (widget.photo == null || widget.photo!.isEmpty) {
       return emptyWidget;
     }
-    return InkWell(
-      onTap: () =>
-          NavigationService.handleUrls(widget.urlToOpen, context: context),
-      child: _aspectRatio == null
-          ? const LoadingImageBannerWidget()
-          : AspectRatio(
-              aspectRatio: _aspectRatio!,
-              child: AIZImage.radiusImage(widget.photo, widget.radius),
-            ),
+    return Align(
+      child: ConstrainedBox(
+        constraints:  BoxConstraints(
+          maxHeight: MediaQuery.sizeOf(context).height * 0.4,
+        ),
+        child: InkWell(
+          onTap: () =>
+              NavigationService.handleUrls(widget.urlToOpen, context: context),
+          child: _aspectRatio == null
+              ? const LoadingImageBannerWidget()
+              : AspectRatio(
+                  aspectRatio: _aspectRatio!,
+                  child: AIZImage.radiusImage(widget.photo, widget.radius),
+                ),
+        ),
+      ),
     );
   }
 }

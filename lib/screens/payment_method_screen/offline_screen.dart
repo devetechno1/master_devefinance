@@ -21,6 +21,8 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../app_config.dart';
+
 class OfflineScreen extends StatefulWidget {
   final int? order_id;
   final String? paymentInstruction;
@@ -429,7 +431,7 @@ class _OfflineState extends State<OfflineScreen> {
                             const EdgeInsets.all(AppDimensions.paddingSmall),
                         child: Text('selected_ucf'.tr(context: context)),
                       )
-                    : Container()
+                    : emptyWidget
               ],
             ),
             if (_photo_file != null)

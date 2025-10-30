@@ -254,7 +254,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     if (AppConfig.businessSettingsData.carrierBaseShipping) {
       return buildCarrierSection(sellerArrayIndex);
     } else {
-      return Container();
+      return emptyWidget;
     }
   }
 
@@ -586,7 +586,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     );
   }
 
-  Container buildShippingSelectMarkContainer(bool check) {
+  Widget buildShippingSelectMarkContainer(bool check) {
     return check
         ? Container(
             height: 16,
@@ -600,7 +600,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               child: Icon(Icons.check, color: Colors.white, size: 10),
             ),
           )
-        : Container();
+        : emptyWidget;
   }
 
   BottomAppBar buildBottomAppBar(BuildContext context) {
@@ -898,7 +898,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             style: const TextStyle(color: MyTheme.font_grey),
           )));
     }
-    return Container();
+    return emptyWidget;
   }
 
   SingleChildScrollView buildCartSellerListBody() {
@@ -974,7 +974,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         ),
                       ],
                     )
-                  : Container()),
+                  : emptyWidget),
         ),
       ),
       Padding(

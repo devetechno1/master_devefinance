@@ -9,6 +9,161 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.50 – Mobile build upgrades: iOS 15 floor, Firebase/SDK bumps, and Flutter deps sync</strong></summary>
+
+### Android
+
+* Switched Firebase artifacts from **ktx** to base libs for **Auth/Analytics/Firestore** to align with BoM-managed versions.
+* Kept **Firebase BoM 33.15.0**; retained **Messaging** and **Crashlytics NDK**.
+* No changes to `minSdk`/`compileSdk`; desugaring unchanged.
+
+### iOS
+
+* Raised **deployment target to iOS 15.0** (`Podfile`).
+* Updated Pods:
+
+  * **Firebase 12.4.0** (Core / Crashlytics / Messaging)
+  * **GoogleMaps 9.4.0**
+  * **Facebook SDK 18.0.1**
+  * **SDWebImage 5.21.3**
+  * **Sentry Hybrid 8.56.2**
+  * Added transitive **objective_c** pod
+* Xcode project:
+
+  * `objectVersion` → **77**
+  * Cleared `DEVELOPMENT_TEAM` (set to empty)
+  * Tidied `[CP]` script input/output lists
+  * Runner scheme: **LaunchAction uses Release** build configuration
+
+### Flutter Dependencies
+
+* **firebase_core → 4.2.0**
+* **firebase_messaging → 16.0.3**
+* **firebase_crashlytics → 5.0.3**
+* **connectivity_plus → 7.0.0**
+* **fluttertoast → 9.0.0**
+* **go_router → 16.3.0**
+* Regenerated **pubspec.lock** to reflect all version changes.
+
+---
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+---
+
+### Must Update (Stores)
+
+* **No** — build and dependency updates only.
+
+---
+
+### QA Checklist
+
+* [ ] iOS/Android push notifications deliver and open correctly (foreground/background/terminated).
+* [ ] Crash reports appear in Crashlytics with correct app version.
+* [ ] Maps render on iOS (GoogleMaps 9.x) and Android without regressions.
+* [ ] Facebook login still succeeds on both platforms.
+* [ ] App launches on iOS 15+ devices/simulators; older (<15) correctly blocked by store settings.
+* [ ] Smoke test navigation after `go_router` bump.
+* [ ] No analyzer warnings from dependency updates.
+
+---
+
+### Notes
+
+* After pulling, **clean & reinstall iOS pods**:
+
+  * `cd ios && pod repo update && pod install --clean-install`
+* On Android, run a **Gradle sync/clean**:
+
+  * `./gradlew clean` then rebuild.
+
+</details>
+
+<details>
+<summary><strong>AV 9.10.49 – Unify Pagination, Reuse Carousels, Stronger Typing & RTL Polish</strong></summary>
+
+### UI & Pagination
+
+* **Centralized infinite scroll:** Migrated products/brands/shops to a shared **`PagedView`** pattern with a reusable `dataBodyWidget<T>` helper.
+
+  * Pull-to-refresh now performs a **silent refresh** (`showLoading: false`) for snappier UX.
+  * Added `showLoading` support to internal `_loadFirstPage/_reset/_resetToFirstPage`.
+* **Responsive grids:** `GridResponsive.aspectRatioForWidth(...)` accepts `maxSm/maxMd/maxLg` to fine-tune card aspect ratios per breakpoint.
+
+### Search & Filter
+
+* **Filter screen refactor:**
+
+  * Replaced ad-hoc `ScrollController` logic and manual footers with **typed** `PagedViewController<Product/Brands/Shop>`.
+  * Introduced `PageResult<T>` based loaders: `_fetchProducts`, `_fetchBrands`, `_fetchShops`.
+  * Consistent empty states via `emptyBuilder` and unified padding.
+
+### Media & Carousels
+
+* **Reusable carousel:** Extracted **`CarouselItemCoverWidget`** and reused it in Product Details and Seller header.
+* **Safer image lists:**
+
+  * `productImageList` and seller `_carouselImageList` are now **`List<String>`**; null paths are ignored to prevent runtime issues.
+  * Product Details only appends non-null photo paths.
+
+### Components & Cards
+
+* **Shop & Brand tiles:**
+
+  * Hard-edge clipping + simplified image composition (less nesting) for **`ShopSquareCard`** and **`BrandSquareCard`**.
+  * Layout polish: consistent symmetric paddings and card radii.
+
+### RTL & Icons
+
+* **Chevron icons:** Replaced multiple `CupertinoIcons.arrow_*` with platform-neutral `Icons.keyboard_arrow_*` and **directional paddings** (`EdgeInsetsDirectional`) across screens for better RTL behavior.
+
+### Data Layer & Typing
+
+* **`ShopRepository.getShops`** now returns **`ShopResponse`** (typed), not `dynamic`.
+* Search widget’s `_shopList` strongly typed (`List<Shop>`), safer `slug/meta` null handling.
+
+### Code Cleanup & Consistency
+
+* Shared `dataBodyWidget<T>` reduces duplication for paged grid/list bodies.
+* Removed scattered loading footers in favor of `PagedView` loading items & empty builders.
+
+---
+
+### API / Backend
+
+* **No endpoint or schema changes.**
+
+---
+
+### Must Update (Stores)
+
+* **No** — client-side refactors and UI polish only.
+
+---
+
+### Breaking Changes
+
+* `ShopRepository.getShops(...)` → returns **`ShopResponse`**. Update any callers expecting `dynamic`.
+* `ProductSliderImageWidget.productImageList` → **`List<String>?`** (was untyped `List?`).
+* `GridResponsive.aspectRatioForWidth(...)` signature adds optional `maxSm/maxMd/maxLg` (defaults maintain previous behavior).
+
+---
+
+### QA Checklist
+
+* [ ] Paged lists (products/brands/shops) paginate & refresh without duplicate spinners.
+* [ ] Empty states show translated copy for each tab.
+* [ ] Product slider opens full-screen photo; index/auto-play behaves as expected.
+* [ ] Seller header carousel indicators sync with slides.
+* [ ] RTL paddings/arrows render correctly across replaced screens.
+* [ ] No analyzer warnings for nullability/typing in updated files.
+
+</details>
+
 
 <details>
 <summary><strong>AV 9.10.48 – Centralize App Name Localization and Enhance Translation Utilities</strong></summary>

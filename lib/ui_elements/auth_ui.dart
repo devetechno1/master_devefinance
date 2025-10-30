@@ -130,25 +130,22 @@ class AuthScreen {
                   [
                     Padding(
                       padding: const EdgeInsets.only(top: 48.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 12,
-                            ),
-                            width: 72,
-                            height: 72,
-                            decoration: BoxDecoration(
-                              color: MyTheme.white,
-                              borderRadius: BorderRadius.circular(
-                                AppDimensions.radiusSmall,
-                              ),
-                            ),
-                            child: Image.asset(AppImages.loginRegistration),
+                      child: ResAlign(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 12,
                           ),
-                        ],
+                          width: 72,
+                          height: 72,
+                          decoration: BoxDecoration(
+                            color: MyTheme.white,
+                            borderRadius: BorderRadius.circular(
+                              AppDimensions.radiusSmall,
+                            ),
+                          ),
+                          child: Image.asset(AppImages.loginRegistration),
+                        ),
                       ),
                     ),
                     Padding(
@@ -156,24 +153,28 @@ class AuthScreen {
                         bottom: AppDimensions.paddingLarge,
                         top: AppDimensions.paddingSupSmall,
                       ),
-                      child: Text(
-                        headerText,
-                        style: const TextStyle(
-                          color: MyTheme.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                      child: ResAlign(
+                        child: Text(
+                          headerText,
+                          style: const TextStyle(
+                            color: MyTheme.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18.0),
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecorations.buildBoxDecoration_1(
-                              radius: 16)
-                          .copyWith(
-                              boxShadow: [const BoxShadow(spreadRadius: 0.08)]),
-                      child: child,
+                    ResAlign(
+                      child: Container(
+                        padding: const EdgeInsets.all(24),
+                        decoration:
+                            BoxDecorations.buildBoxDecoration_1(radius: 16)
+                                .copyWith(boxShadow: [
+                          const BoxShadow(spreadRadius: 0.08)
+                        ]),
+                        child: ResAlign(child: child),
+                      ),
                     ),
                   ],
                 ),
@@ -201,6 +202,29 @@ class AuthScreen {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ResAlign extends StatelessWidget {
+  const ResAlign({
+    this.alignment = Alignment.center,
+    required this.child,
+    super.key,
+    this.maxWidth = AppDimensions.phoneMaxWidth,
+  });
+  final Widget child;
+  final AlignmentGeometry alignment;
+  final double maxWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: alignment,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: child,
       ),
     );
   }

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../helpers/grid_responsive.dart';
 import '../product/product_details.dart';
 
 class DigitalProducts extends StatefulWidget {
@@ -159,9 +160,10 @@ class _DigitalProductsState extends State<DigitalProducts> {
   }
 
   Widget body() {
+    final int cross = GridResponsive.columnsForWidth(context);
     if (!_dataFetch) {
-      return ShimmerHelper()
-          .buildProductGridShimmer(scontroller: _mainScrollController);
+      return ShimmerHelper().buildProductGridShimmer(
+          crossAxisCount: cross, scontroller: _mainScrollController);
     }
 
     if (_digitalProducts.isEmpty) {

@@ -10,6 +10,8 @@ import '../../../app_config.dart';
 import '../../../custom/btn.dart';
 import '../../../custom/toast_component.dart';
 import '../../../custom/useful_elements.dart';
+import '../../../data_model/shop_response.dart';
+import '../../../helpers/grid_responsive.dart';
 import '../../../helpers/reg_ex_inpur_formatter.dart';
 import '../../../helpers/shared_value_helper.dart';
 import '../../../helpers/shimmer_helper.dart';
@@ -97,13 +99,16 @@ class _SearchWidgetState extends State<SearchWidget> {
   int? _totalBrandData = 0;
   bool _showBrandLoadingContainer = false;
 
-  final List<dynamic> _shopList = [];
+  final List<Shop> _shopList = [];
   bool _isShopInitial = true;
   int _shopPage = 1;
   int? _totalShopData = 0;
   bool _showShopLoadingContainer = false;
 
   //----------------------------------------
+
+  int get cross => GridResponsive.columnsForWidth(context);
+  double get ratio => GridResponsive.aspectRatioForWidth(context);
 
   fetchFilteredBrands() async {
     final filteredBrandResponse = await BrandRepository().getFilterPageBrands();
@@ -244,9 +249,9 @@ class _SearchWidgetState extends State<SearchWidget> {
   fetchShopData() async {
     final shopResponse =
         await ShopRepository().getShops(page: _shopPage, name: _searchKey);
-    _shopList.addAll(shopResponse.shops);
+    _shopList.addAll(shopResponse.shops ?? []);
     _isShopInitial = false;
-    _totalShopData = shopResponse.meta.total;
+    _totalShopData = shopResponse.meta?.total;
     _showShopLoadingContainer = false;
     //print("_shopPage:" + _shopPage.toString());
     //print("_totalShopData:" + _totalShopData.toString());
@@ -419,7 +424,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         actions: [
-          Container(),
+          emptyWidget,
         ],
         centerTitle: false,
         flexibleSpace: Padding(
@@ -1116,8 +1121,8 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget buildProductScrollableList() {
     if (_isProductInitial && _productList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildProductGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildProductGridShimmer(
+              crossAxisCount: cross, scontroller: _scrollController));
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
@@ -1138,7 +1143,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _productList.length,
                 controller: _scrollController,
-                crossAxisCount: 2,
+                crossAxisCount: cross,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
                 padding: const EdgeInsets.only(
@@ -1172,7 +1177,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       return Center(
           child: Text('no_product_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 
@@ -1191,8 +1196,10 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget buildBrandScrollableList() {
     if (_isBrandInitial && _brandList.isEmpty) {
       return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildSquareGridShimmer(
+              childAspectRatio: 1,
+              crossAxisCount: cross,
+              scontroller: _scrollController));
     } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
@@ -1213,8 +1220,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _brandList.length,
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: cross,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
                     childAspectRatio: 1),
@@ -1242,7 +1249,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_totalBrandData == 0) {
       return Center(child: Text('no_brand_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 
@@ -1262,8 +1269,10 @@ class _SearchWidgetState extends State<SearchWidget> {
     if (_isShopInitial && _shopList.isEmpty) {
       return SingleChildScrollView(
           controller: _scrollController,
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
+          child: ShimmerHelper().buildSquareGridShimmer(
+              childAspectRatio: ratio,
+              crossAxisCount: cross,
+              scontroller: _scrollController));
     } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
         color: Colors.white,
@@ -1284,11 +1293,12 @@ class _SearchWidgetState extends State<SearchWidget> {
                 //addAutomaticKeepAlives: true,
                 itemCount: _shopList.length,
                 controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 14,
-                    childAspectRatio: 0.7),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: cross,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 14,
+                  childAspectRatio: ratio,
+                ),
                 padding: const EdgeInsets.only(
                     top: AppDimensions.paddingLarge,
                     bottom: AppDimensions.paddingSupSmall,
@@ -1300,7 +1310,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   // 3
                   return ShopSquareCard(
                     id: _shopList[index].id,
-                    shopSlug: _shopList[index].slug,
+                    shopSlug: _shopList[index].slug ?? '',
                     image: _shopList[index].logo,
                     name: _shopList[index].name,
                     stars: double.parse(_shopList[index].rating.toString()),
@@ -1314,7 +1324,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     } else if (_totalShopData == 0) {
       return Center(child: Text('no_shop_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 

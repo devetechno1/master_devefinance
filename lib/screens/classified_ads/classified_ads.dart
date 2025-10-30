@@ -11,6 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../data_model/classified_ads_response.dart';
+import '../../helpers/grid_responsive.dart';
 import '../../repositories/classified_product_repository.dart';
 
 class ClassifiedAds extends StatefulWidget {
@@ -101,11 +102,13 @@ class _ClassifiedAdsState extends State<ClassifiedAds> {
   }
 
   Widget body() {
+  final int  cross = GridResponsive.columnsForWidth(context);
     if (!_dataFetch) {
       return ShimmerHelper()
-          .buildProductGridShimmer(scontroller: _mainScrollController);
+          .buildProductGridShimmer(
+            crossAxisCount: cross,
+            scontroller: _mainScrollController);
     }
-
     if (_classifiedProducts.isEmpty) {
       return Center(
         child: Text('no_data_is_available'.tr(context: context)),

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../app_config.dart';
 import '../presenter/home_provider.dart';
 
 class CurrencyChange extends StatefulWidget {
@@ -155,7 +156,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
     );
   }
 
-  Container buildCheckContainer(bool check) {
+  Widget buildCheckContainer(bool check) {
     return check
         ? Container(
             height: 16,
@@ -169,6 +170,6 @@ class _CurrencyChangeState extends State<CurrencyChange> {
               child: Icon(Icons.check, color: Colors.white, size: 10),
             ),
           )
-        : Container();
+        : emptyWidget;
   }
 }

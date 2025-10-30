@@ -9,7 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 
 class ShopRepository {
-  Future<dynamic> getShops({name = "", page = 1}) async {
+  Future<ShopResponse> getShops({name = "", page = 1}) async {
     final String url =
         ("${AppConfig.BASE_URL}/shops" + "?page=$page&name=$name");
 

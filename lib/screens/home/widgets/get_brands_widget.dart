@@ -5,6 +5,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data_model/brand_response.dart';
+import '../../../helpers/grid_responsive.dart';
 
 class CustomBrandListWidget extends StatefulWidget {
   final bool showViewAllButton;
@@ -26,7 +27,16 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
     if (widget.brands.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
-    final bool showViewAll = widget.showViewAllButton && widget.brands.length > 8;
+    final bool showViewAll =
+        widget.showViewAllButton && widget.brands.length > 8;
+    final cross = GridResponsive.columnsForWidth(
+      context,
+      minTileWidth: 50,
+      maxXs: 4,
+      maxSm: 6,
+      maxMd: 8,
+      maxLg: 8,
+    );
 
     return Column(
       children: [
@@ -35,8 +45,8 @@ class _CustomBrandListWidgetState extends State<CustomBrandListWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           physics: const NeverScrollableScrollPhysics(),
           itemCount: showViewAll ? 8 : widget.brands.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: cross,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
             childAspectRatio: 0.9,

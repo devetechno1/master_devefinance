@@ -261,7 +261,7 @@ class _WalletState extends State<Wallet> {
     } else if (_totalRechargeData == 0) {
       return Center(child: Text('no_recharges_yet'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 

@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../helpers/grid_responsive.dart';
 import '../../repositories/auction_products_repository.dart';
 
 class AuctionProducts extends StatefulWidget {
@@ -149,9 +150,12 @@ class _AuctionProductsState extends State<AuctionProducts> {
   }
 
   Widget body() {
+    final int crossProducts = GridResponsive.columnsForWidth(context);
     if (!_dataFetch) {
-      return ShimmerHelper()
-          .buildProductGridShimmer(scontroller: _mainScrollController);
+      return ShimmerHelper().buildProductGridShimmer(
+        scontroller: _mainScrollController,
+        crossAxisCount: crossProducts,
+      );
     }
 
     if (_auctionProductItems.isEmpty) {

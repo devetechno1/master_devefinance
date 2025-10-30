@@ -87,8 +87,6 @@ import '../data_model/category_response.dart';
 import '../my_theme.dart';
 import '../screens/category_list_n_product/category_products.dart';
 
-import 'device_info.dart';
-
 class CategoryItemCardWidget extends StatelessWidget {
   final CategoryResponse categoryResponse;
   final int index;
@@ -101,63 +99,64 @@ class CategoryItemCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemWidth =
-        ((DeviceInfo(context).width! - 48) / 3); // Adjust spacing between items
-    return Container(
-      // decoration: BoxDecorations.buildBoxDecoration_1(),
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return CategoryProducts(
-                  name: categoryResponse.categories![index].name ?? "",
-                  slug: categoryResponse.categories![index].slug ?? "",
-                );
-              },
-            ),
-          );
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return CategoryProducts(
+                name: categoryResponse.categories![index].name ?? "",
+                slug: categoryResponse.categories![index].slug ?? "",
+              );
+            },
+          ),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              alignment: Alignment.center,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+              ),
+              // width: itemWidth,
+              // height: itemWidth,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: ClipRRect(
                   borderRadius:
-                      BorderRadius.circular(AppDimensions.radiusNormal),
-                  color: Colors.white),
-              width: itemWidth,
-              height: itemWidth,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
-                child: FadeInImage.assetNetwork(
-                  placeholder: AppImages.placeholder,
-                  image: categoryResponse.categories![index].coverImage ?? '',
-                  //  image: categoryResponse.categories![index].banner!,
-                  fit: BoxFit.cover,
+                      BorderRadius.circular(AppDimensions.radiusSmall),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: AppImages.placeholder,
+                    image: categoryResponse.categories![index].coverImage ?? '',
+                    //  image: categoryResponse.categories![index].banner!,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            Container(
-              width: itemWidth,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                categoryResponse.categories![index].name!,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: const TextStyle(
-                  color: MyTheme.font_grey,
-                  fontSize: 10,
-                  height: 1.4,
-                  fontWeight: FontWeight.w600,
-                ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            height: 25,
+            child: Text(
+              categoryResponse.categories![index].name!,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: const TextStyle(
+                color: MyTheme.font_grey,
+                fontSize: 10,
+                height: 1.4,
+                fontWeight: FontWeight.w600,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

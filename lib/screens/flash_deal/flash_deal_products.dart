@@ -18,6 +18,8 @@ import 'package:flutter_countdown_timer/index.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../helpers/grid_responsive.dart';
+
 class FlashDealProducts extends StatefulWidget {
   const FlashDealProducts({
     Key? key,
@@ -119,22 +121,22 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
     super.initState();
   }
 
-  _buildSearchList(searchKey) async {
-    _searchList.clear();
-    //print(_fullList.length);
+  // _buildSearchList(searchKey) async {
+  //   _searchList.clear();
+  //   //print(_fullList.length);
 
-    if (searchKey.isEmpty) {
-      _searchList.addAll(_fullList);
-      setState(() {});
-    } else {
-      for (var i = 0; i < _fullList.length; i++) {
-        if (StringHelper().stringContains(_fullList[i].name, searchKey)!) {
-          _searchList.add(_fullList[i]);
-          setState(() {});
-        }
-      }
-    }
-  }
+  //   if (searchKey.isEmpty) {
+  //     _searchList.addAll(_fullList);
+  //     setState(() {});
+  //   } else {
+  //     for (var i = 0; i < _fullList.length; i++) {
+  //       if (StringHelper().stringContains(_fullList[i].name, searchKey)!) {
+  //         _searchList.add(_fullList[i]);
+  //         setState(() {});
+  //       }
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -182,12 +184,13 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
   }
 
   FutureBuilder<productMini.ProductMiniResponse> buildProductList(context) {
+    final int cross = GridResponsive.columnsForWidth(context);
     return FutureBuilder(
         future: _future,
         builder:
             (context, AsyncSnapshot<productMini.ProductMiniResponse> snapshot) {
           if (snapshot.hasError) {
-            return Container();
+            return emptyWidget;
           } else if (snapshot.hasData) {
             final productResponse = snapshot.data;
             if (_fullList.isEmpty) {
@@ -202,7 +205,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 children: [
                   buildFlashDealsBanner(context),
                   MasonryGridView.count(
-                    crossAxisCount: 2,
+                    crossAxisCount: cross,
                     mainAxisSpacing: 14,
                     crossAxisSpacing: 14,
                     itemCount: _searchList.length,
@@ -233,8 +236,10 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
               child: Column(
                 children: [
                   headerShimmer(),
-                  ShimmerHelper()
-                      .buildProductGridShimmer(scontroller: _scrollController),
+                  ShimmerHelper().buildProductGridShimmer(
+                    crossAxisCount: cross,
+                    scontroller: _scrollController,
+                  ),
                 ],
               ),
             );

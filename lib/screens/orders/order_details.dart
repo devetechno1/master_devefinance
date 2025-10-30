@@ -323,7 +323,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         style: const TextStyle(
                                             color: Colors.red, fontSize: 12)),
                                   )
-                                : Container(),
+                                : emptyWidget,
                           ],
                         ),
                       ),
@@ -1469,7 +1469,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       ),
                     ),
                   )
-                : Container(),
+                : emptyWidget,
             _orderedItemList[index].refund_section == true &&
                     _orderedItemList[index].refund_label != ""
                 ? Row(
@@ -1581,7 +1581,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     onPressOfflinePaymentButton();
                   },
                 )
-              : Container(),
+              : emptyWidget,
         ],
       ),
     );

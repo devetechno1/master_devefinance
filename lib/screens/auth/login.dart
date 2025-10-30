@@ -527,7 +527,7 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                             )
-                          : Container()
+                          : emptyWidget
                     ],
                   ),
                 )
@@ -878,6 +878,9 @@ Future<void> saveFCMToken() async {
     try {
       fcmToken = await _fcm.getToken();
     } catch (e) {
+      if (Platform.isIOS) {
+        fcmToken = await _fcm.getToken();
+      }
       print('Caught exception: $e');
     }
 

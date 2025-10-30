@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app_config.dart';
 import '../../../custom/useful_elements.dart';
 
 class ImageShow extends StatelessWidget {
@@ -55,6 +56,6 @@ class ImageShow extends StatelessWidget {
       );
     }
 
-    return Container();
+    return emptyWidget;
   }
 }

@@ -4,7 +4,6 @@ import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/reg_ex_inpur_formatter.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/string_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -17,10 +16,17 @@ import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/shop_square_card.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../custom/box_decorations.dart';
+import '../custom/paged_view/models/page_result.dart';
+import '../custom/paged_view/paged_view.dart';
+import '../data_model/brand_response.dart';
+import '../data_model/product_mini_response.dart';
 import '../data_model/search_suggestion_response.dart';
+import '../data_model/shop_response.dart';
+import '../helpers/grid_responsive.dart';
 import '../repositories/search_repository.dart';
 import '../ui_elements/highlighted_searched_word.dart';
 
@@ -55,13 +61,18 @@ class _FilterState extends State<Filter> {
   final _amountValidator = RegExInputFormatter.withRegex(
       '^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
 
-  final ScrollController _productScrollController = ScrollController();
-  final ScrollController _brandScrollController = ScrollController();
-  final ScrollController _shopScrollController = ScrollController();
+  // final ScrollController _productScrollController = ScrollController();
+
+  final PagedViewController<Product> _productController =
+      PagedViewController<Product>();
+  final PagedViewController<Brands> _brandController =
+      PagedViewController<Brands>();
+
+  final PagedViewController<Shop> _shopController = PagedViewController<Shop>();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  ScrollController? _scrollController;
+  // ScrollController? _scrollController;
   WhichFilter? _selectedFilter;
   String? _givenSelectedFilterOptionKey; // may be it can come from another page
   String? _selectedSort = "";
@@ -84,24 +95,6 @@ class _FilterState extends State<Filter> {
   //----------------------------------------
   String? _searchKey = "";
 
-  final List<dynamic> _productList = [];
-  bool _isProductInitial = true;
-  int _productPage = 1;
-  int? _totalProductData = 0;
-  bool _showProductLoadingContainer = false;
-
-  final List<dynamic> _brandList = [];
-  bool _isBrandInitial = true;
-  int _brandPage = 1;
-  int? _totalBrandData = 0;
-  bool _showBrandLoadingContainer = false;
-
-  final List<dynamic> _shopList = [];
-  bool _isShopInitial = true;
-  int _shopPage = 1;
-  int? _totalShopData = 0;
-  bool _showShopLoadingContainer = false;
-
   //----------------------------------------
 
   fetchFilteredBrands() async {
@@ -123,14 +116,13 @@ class _FilterState extends State<Filter> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _productScrollController.dispose();
-    _brandScrollController.dispose();
-    _shopScrollController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _productScrollController.dispose();
+  //   _brandScrollController.dispose();
+  //   _shopScrollController.dispose();
+  //   super.dispose();
+  // }
 
   init() {
     _givenSelectedFilterOptionKey = widget.selected_filter;
@@ -150,104 +142,91 @@ class _FilterState extends State<Filter> {
     fetchFilteredBrands();
 
     if (_selectedFilter!.option_key == "sellers") {
-      fetchShopData();
+      _shopController.refresh();
     } else if (_selectedFilter!.option_key == "brands") {
-      fetchBrandData();
+      _brandController.refresh();
     } else {
-      fetchProductData();
+      _productController.refresh();
     }
 
     //set scroll listeners
 
-    _productScrollController.addListener(() {
-      if (_productScrollController.position.pixels ==
-          _productScrollController.position.maxScrollExtent) {
-        setState(() {
-          _productPage++;
-        });
-        _showProductLoadingContainer = true;
-        fetchProductData();
-      }
-    });
+    // _productScrollController.addListener(() {
+    //   if (_productScrollController.position.pixels ==
+    //       _productScrollController.position.maxScrollExtent) {
+    //     setState(() {
+    //       _productPage++;
+    //     });
+    //     _showProductLoadingContainer = true;
+    //     fetchProductData();
+    //   }
+    // });
 
-    _brandScrollController.addListener(() {
-      if (_brandScrollController.position.pixels ==
-          _brandScrollController.position.maxScrollExtent) {
-        setState(() {
-          _brandPage++;
-        });
-        _showBrandLoadingContainer = true;
-        fetchBrandData();
-      }
-    });
+    // _brandScrollController.addListener(() {
+    //   if (_brandScrollController.position.pixels ==
+    //       _brandScrollController.position.maxScrollExtent) {
+    //     setState(() {
+    //       _brandPage++;
+    //     });
+    //     _showBrandLoadingContainer = true;
+    //     fetchBrandData();
+    //   }
+    // });
 
-    _shopScrollController.addListener(() {
-      if (_shopScrollController.position.pixels ==
-          _shopScrollController.position.maxScrollExtent) {
-        setState(() {
-          _shopPage++;
-        });
-        _showShopLoadingContainer = true;
-        fetchShopData();
-      }
-    });
+    // _shopScrollController.addListener(() {
+    //   if (_shopScrollController.position.pixels ==
+    //       _shopScrollController.position.maxScrollExtent) {
+    //     setState(() {
+    //       _shopPage++;
+    //     });
+    //     _showShopLoadingContainer = true;
+    //     fetchShopData();
+    //   }
+    // });
   }
 
-  fetchProductData() async {
-    final productResponse = await ProductRepository().getFilteredProducts(
-        page: _productPage,
+  Future<PageResult<Product>> _fetchProducts(int page) async {
+    try {
+      final ProductMiniResponse res =
+          await ProductRepository().getFilteredProducts(
+        page: page,
         name: _searchKey,
         sort_key: _selectedSort,
         brands: _selectedBrands.join(",").toString(),
         categories: _selectedCategories.join(",").toString(),
         max: _maxPriceController.text.toString(),
-        min: _minPriceController.text.toString());
-
-    _productList.addAll(productResponse.products!);
-    _isProductInitial = false;
-    _totalProductData = productResponse.meta!.total;
-    _showProductLoadingContainer = false;
-    setState(() {});
+        min: _minPriceController.text.toString(),
+      );
+      final List<Product> list = res.products ?? [];
+      final bool hasMore = list.isNotEmpty;
+      return PageResult<Product>(data: list, hasMore: hasMore);
+    } catch (_) {
+      return const PageResult<Product>(data: [], hasMore: false);
+    }
   }
 
-  resetProductList() {
-    _productList.clear();
-    _isProductInitial = true;
-    _totalProductData = 0;
-    _productPage = 1;
-    _showProductLoadingContainer = false;
-    setState(() {});
+  Future<PageResult<Brands>> _fetchBrands(int page) async {
+    try {
+      final BrandResponse res =
+          await BrandRepository().getBrands(page: page, name: _searchKey);
+      final List<Brands> list = res.brands ?? [];
+      final bool hasMore = list.isNotEmpty;
+      return PageResult<Brands>(data: list, hasMore: hasMore);
+    } catch (_) {
+      return const PageResult<Brands>(data: [], hasMore: false);
+    }
   }
 
-  fetchBrandData() async {
-    final brandResponse =
-        await BrandRepository().getBrands(page: _brandPage, name: _searchKey);
-    _brandList.addAll(brandResponse.brands!);
-    _isBrandInitial = false;
-    _totalBrandData = brandResponse.meta!.total;
-    _showBrandLoadingContainer = false;
-    setState(() {});
-  }
-
-  resetBrandList() {
-    _brandList.clear();
-    _isBrandInitial = true;
-    _totalBrandData = 0;
-    _brandPage = 1;
-    _showBrandLoadingContainer = false;
-    setState(() {});
-  }
-
-  fetchShopData() async {
-    final shopResponse =
-        await ShopRepository().getShops(page: _shopPage, name: _searchKey);
-    _shopList.addAll(shopResponse.shops);
-    _isShopInitial = false;
-    _totalShopData = shopResponse.meta.total;
-    _showShopLoadingContainer = false;
-    //print("_shopPage:" + _shopPage.toString());
-    //print("_totalShopData:" + _totalShopData.toString());
-    setState(() {});
+  Future<PageResult<Shop>> _fetchShops(int page) async {
+    try {
+      final ShopResponse res =
+          await ShopRepository().getShops(page: page, name: _searchKey);
+      final List<Shop> list = res.shops ?? [];
+      final bool hasMore = list.isNotEmpty;
+      return PageResult<Shop>(data: list, hasMore: hasMore);
+    } catch (_) {
+      return const PageResult<Shop>(data: [], hasMore: false);
+    }
   }
 
   reset() {
@@ -255,69 +234,43 @@ class _FilterState extends State<Filter> {
     setState(() {});
   }
 
-  resetShopList() {
-    _shopList.clear();
-    _isShopInitial = true;
-    _totalShopData = 0;
-    _shopPage = 1;
-    _showShopLoadingContainer = false;
-    setState(() {});
-  }
+  // resetShopList() {
+  //   _shopList.clear();
+  //   _isShopInitial = true;
+  //   _totalShopData = 0;
+  //   _shopPage = 1;
+  //   _showShopLoadingContainer = false;
+  //   setState(() {});
+  // }
 
-  Future<void> _onProductListRefresh() async {
+  void _applyProductFilter() {
     reset();
-    resetProductList();
-    fetchProductData();
+    _productController.refresh();
   }
 
-  Future<void> _onBrandListRefresh() async {
-    reset();
-    resetBrandList();
-    fetchBrandData();
-  }
-
-  Future<void> _onShopListRefresh() async {
-    reset();
-    resetShopList();
-    fetchShopData();
-  }
-
-  _applyProductFilter() {
-    reset();
-    resetProductList();
-    fetchProductData();
-  }
-
-  _onSearchSubmit() {
+  void _onSearchSubmit() {
     reset();
     if (_selectedFilter!.option_key == "sellers") {
-      resetShopList();
-      fetchShopData();
+      _shopController.refresh();
     } else if (_selectedFilter!.option_key == "brands") {
-      resetBrandList();
-      fetchBrandData();
+      _brandController.refresh();
     } else {
-      resetProductList();
-      fetchProductData();
+      _productController.refresh();
     }
   }
 
-  _onSortChange() {
+  void _onSortChange() {
     reset();
-    resetProductList();
-    fetchProductData();
+    _productController.refresh();
   }
 
-  _onWhichFilterChange() {
+  void _onWhichFilterChange() {
     if (_selectedFilter!.option_key == "sellers") {
-      resetShopList();
-      fetchShopData();
+      _shopController.refresh();
     } else if (_selectedFilter!.option_key == "brands") {
-      resetBrandList();
-      fetchBrandData();
+      _brandController.refresh();
     } else {
-      resetProductList();
-      fetchProductData();
+      _productController.refresh();
     }
   }
 
@@ -336,46 +289,49 @@ class _FilterState extends State<Filter> {
     return items;
   }
 
-  Widget buildProductLoadingContainer() {
-    if (_totalProductData != _productList.length) return emptyWidget;
-    return Container(
-      height: _showProductLoadingContainer ? 36 : 0,
-      width: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: Text('no_more_products_ucf'.tr(context: context)),
-      ),
-    );
-  }
+  // Widget buildProductLoadingContainer() {
+  //   if (_totalProductData != _productList.length) return emptyWidget;
+  //   return Container(
+  //     height: _showProductLoadingContainer ? 36 : 0,
+  //     width: double.infinity,
+  //     color: Colors.white,
+  //     child: Center(
+  //       child: Text('no_more_products_ucf'.tr(context: context)),
+  //     ),
+  //   );
+  // }
 
-  Widget buildBrandLoadingContainer() {
-    if (_totalBrandData != _brandList.length) return emptyWidget;
-    return Container(
-      height: _showBrandLoadingContainer ? 36 : 0,
-      width: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: Text('no_more_brands_ucf'.tr(context: context)),
-      ),
-    );
-  }
+  // Widget buildBrandLoadingContainer() {
+  //   if (_totalBrandData != _brandList.length) return emptyWidget;
+  //   return Container(
+  //     height: _showBrandLoadingContainer ? 36 : 0,
+  //     width: double.infinity,
+  //     color: Colors.white,
+  //     child: Center(
+  //       child: Text('no_more_brands_ucf'.tr(context: context)),
+  //     ),
+  //   );
+  // }
 
-  Widget buildShopLoadingContainer() {
-    if (_totalShopData != _shopList.length) return emptyWidget;
-    return Container(
-      height: _showShopLoadingContainer ? 36 : 0,
-      width: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: Text('no_more_shops_ucf'.tr(context: context)),
-      ),
-    );
-  }
+  // Widget buildShopLoadingContainer() {
+  //   if (_totalShopData != _shopList.length) return emptyWidget;
+  //   return Container(
+  //     height: _showShopLoadingContainer ? 36 : 0,
+  //     width: double.infinity,
+  //     color: Colors.white,
+  //     child: Center(
+  //       child: Text('no_more_shops_ucf'.tr(context: context)),
+  //     ),
+  //   );
+  // }
 
   //--------------------
 
+  static const double _refreshEdgeOffset = 150.0;
+
   @override
   Widget build(BuildContext context) {
+    final AppBar appBar = buildAppBar(context);
     return Directionality(
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
@@ -383,26 +339,30 @@ class _FilterState extends State<Filter> {
         endDrawer: buildFilterDrawer(),
         key: _scaffoldKey,
         backgroundColor: MyTheme.mainColor,
-        body: Stack(fit: StackFit.loose, children: [
-          _selectedFilter!.option_key == 'product'
-              ? buildProductList()
-              : (_selectedFilter!.option_key == 'brands'
-                  ? buildBrandList()
-                  : buildShopList()),
-          Positioned(
-            top: 0.0,
-            left: 0.0,
-            right: 0.0,
-            child: buildAppBar(context),
-          ),
-          Align(
-              alignment: Alignment.bottomCenter,
+        body: Stack(
+          children: [
+            Positioned.fill(
               child: _selectedFilter!.option_key == 'product'
-                  ? buildProductLoadingContainer()
+                  ? buildProductScrollableList()
                   : (_selectedFilter!.option_key == 'brands'
-                      ? buildBrandLoadingContainer()
-                      : buildShopLoadingContainer()))
-        ]),
+                      ? buildBrandScrollableList()
+                      : buildShopScrollableList()),
+            ),
+            Positioned(
+              top: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: appBar,
+            ),
+            // Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: _selectedFilter!.option_key == 'product'
+            //         ? buildProductLoadingContainer()
+            //         : (_selectedFilter!.option_key == 'brands'
+            //             ? buildBrandLoadingContainer()
+            //             : buildShopLoadingContainer()))
+          ],
+        ),
       ),
     );
   }
@@ -517,115 +477,114 @@ class _FilterState extends State<Filter> {
                   ? showDialog(
                       context: context,
                       builder: (_) => AlertDialog(
-                        contentPadding: const EdgeInsets.only(
-                          top: 16.0,
-                          left: 2.0,
-                          right: 2.0,
-                          bottom: 2.0,
-                        ),
-                        content: StatefulBuilder(builder:
-                            (BuildContext context, StateSetter setState) {
-                          return RadioGroup(
-                            groupValue: _selectedSort,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedSort = value;
-                              });
-                              _onSortChange();
-                              Navigator.pop(context);
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 24.0),
-                                  child: Text(
-                                    'sort_products_by_ucf'
-                                        .tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'default_ucf'.tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "price_high_to_low",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'price_high_to_low'
-                                        .tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "price_low_to_high",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'price_low_to_high'
-                                        .tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "new_arrival",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text('new_arrival_ucf'
-                                      .tr(context: context)),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "popularity",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'popularity_ucf'.tr(context: context),
-                                  ),
-                                ),
-                                RadioListTile(
-                                  dense: true,
-                                  value: "top_rated",
-                                  activeColor: MyTheme.font_grey,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title: Text(
-                                    'top_rated_ucf'.tr(context: context),
-                                  ),
-                                ),
-                              ],
+                            contentPadding: const EdgeInsets.only(
+                              top: 16.0,
+                              left: 2.0,
+                              right: 2.0,
+                              bottom: 2.0,
                             ),
-                          );
-                        }),
-                        actions: [
-                          Btn.basic(
-                            child: Text(
-                              'close_all_capital'.tr(context: context),
-                              style: const TextStyle(
-                                  color: MyTheme.medium_grey),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop();
-                            },
-                          ),
-                        ],
-                      ))
+                            content: StatefulBuilder(builder:
+                                (BuildContext context, StateSetter setState) {
+                              return RadioGroup(
+                                groupValue: _selectedSort,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedSort = value;
+                                  });
+                                  _onSortChange();
+                                  Navigator.pop(context);
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24.0),
+                                      child: Text(
+                                        'sort_products_by_ucf'
+                                            .tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'default_ucf'.tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "price_high_to_low",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'price_high_to_low'
+                                            .tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "price_low_to_high",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'price_low_to_high'
+                                            .tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "new_arrival",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text('new_arrival_ucf'
+                                          .tr(context: context)),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "popularity",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'popularity_ucf'.tr(context: context),
+                                      ),
+                                    ),
+                                    RadioListTile(
+                                      dense: true,
+                                      value: "top_rated",
+                                      activeColor: MyTheme.font_grey,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      title: Text(
+                                        'top_rated_ucf'.tr(context: context),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                            actions: [
+                              Btn.basic(
+                                child: Text(
+                                  'close_all_capital'.tr(context: context),
+                                  style: const TextStyle(
+                                      color: MyTheme.medium_grey),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop();
+                                },
+                              ),
+                            ],
+                          ))
                   : ToastComponent.showDialog(
                       'you_can_use_filters_while_searching_for_products'
                           .tr(context: context),
@@ -1085,237 +1044,104 @@ class _FilterState extends State<Filter> {
     );
   }
 
-  Container buildProductList() {
-    return Container(
-      child: Column(
-        children: [
-          Expanded(
-            child: buildProductScrollableList(),
-          )
-        ],
-      ),
-    );
-  }
-
   Widget buildProductScrollableList() {
-    if (_isProductInitial && _productList.isEmpty) {
-      return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildProductGridShimmer(scontroller: _scrollController));
-    } else if (_productList.isNotEmpty) {
-      final bool hasMoreProducts =
-          (_totalProductData ?? 0) > _productList.length;
-      return RefreshIndicator(
-        color: Colors.white,
-        backgroundColor: Theme.of(context).primaryColor,
-        onRefresh: _onProductListRefresh,
-        child: SingleChildScrollView(
-          controller: _productScrollController,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          child: Column(
-            children: [
-              SizedBox(
-                  height: MediaQuery.viewPaddingOf(context).top > 40 ? 150 : 135
-                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                  ),
-              GridView.builder(
-                // 2
-                //addAutomaticKeepAlives: true,
-                itemCount: hasMoreProducts
-                    ? _productList.length + 2
-                    : _productList.length,
-                controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 14,
-                childAspectRatio: 0.63,  
-                ),
-                padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingSupSmall,
-                    bottom: AppDimensions.paddingSupSmall,
-                    left: 18,
-                    right: 18),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (index >= _productList.length) {
-                    return ShimmerHelper.shimmerInGrid(index);
-                  }
-                  // 3
-                  return ProductCard(
-                    id: _productList[index].id,
-                    slug: _productList[index].slug,
-                    image: _productList[index].thumbnail_image,
-                    name: _productList[index].name,
-                    main_price: _productList[index].main_price,
-                    stroked_price: _productList[index].stroked_price,
-                    has_discount: _productList[index].has_discount,
-                    discount: _productList[index].discount,
-                    isWholesale: _productList[index].isWholesale,
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      );
-    } else if (_totalProductData == 0) {
-      return Center(
-          child: Text('no_product_is_available'.tr(context: context)));
-    } else {
-      return Container(); // should never be happening
-    }
-  }
+    final double ratio = GridResponsive.aspectRatioForWidth(
+      context,
+      fallback: 0.59,
+      maxSm: 0.64,
+      maxMd: 0.67,
+      maxLg: 0.69,
+    );
 
-  Container buildBrandList() {
-    return Container(
-      child: Column(
-        children: [
-          Expanded(
-            child: buildBrandScrollableList(),
-          )
-        ],
+    return dataBodyWidget<Product>(
+      controller: _productController,
+      fetchPage: _fetchProducts,
+      ratio: ratio,
+      translatedEmptyText: "no_product_is_available",
+      itemBuilder: (context, product, index) => ProductCard(
+        id: product.id,
+        slug: product.slug ?? '',
+        image: product.thumbnail_image,
+        name: product.name,
+        main_price: product.main_price,
+        stroked_price: product.stroked_price,
+        has_discount: product.has_discount == true,
+        discount: product.discount,
+        isWholesale: product.isWholesale,
       ),
     );
   }
 
   Widget buildBrandScrollableList() {
-    if (_isBrandInitial && _brandList.isEmpty) {
-      return SingleChildScrollView(
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
-    } else if (_brandList.isNotEmpty) {
-      final bool hasMoreBrands = (_totalBrandData ?? 0) > _brandList.length;
-      return RefreshIndicator(
-        color: Colors.white,
-        backgroundColor: Theme.of(context).primaryColor,
-        onRefresh: _onBrandListRefresh,
-        child: SingleChildScrollView(
-          controller: _brandScrollController,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          child: Column(
-            children: [
-              SizedBox(
-                  height: MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
-                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                  ),
-              GridView.builder(
-                // 2
-                //addAutomaticKeepAlives: true,
-                itemCount: _brandList.length + (hasMoreBrands ? 2 : 0),
-                controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 14,
-                    mainAxisSpacing: 14,
-                    childAspectRatio: 1),
-                padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingLarge,
-                    bottom: AppDimensions.paddingSupSmall,
-                    left: 18,
-                    right: 18),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (index >= _brandList.length) {
-                    return ShimmerHelper.shimmerInGrid(index);
-                  }
-                  // 3
-                  return BrandSquareCard(
-                    id: _brandList[index].id,
-                    slug: _brandList[index].slug,
-                    image: _brandList[index].logo,
-                    name: _brandList[index].name,
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      );
-    } else if (_totalBrandData == 0) {
-      return Center(child: Text('no_brand_is_available'.tr(context: context)));
-    } else {
-      return Container(); // should never be happening
-    }
-  }
-
-  Container buildShopList() {
-    return Container(
-      child: Column(
-        children: [
-          Expanded(
-            child: buildShopScrollableList(),
-          )
-        ],
+    return dataBodyWidget<Brands>(
+      controller: _brandController,
+      fetchPage: _fetchBrands,
+      translatedEmptyText: "no_brand_is_available",
+      itemBuilder: (context, brand, index) => BrandSquareCard(
+        id: brand.id,
+        slug: brand.slug ?? '',
+        image: brand.logo,
+        name: brand.name,
       ),
     );
   }
 
   Widget buildShopScrollableList() {
-    if (_isShopInitial && _shopList.isEmpty) {
-      return SingleChildScrollView(
-          controller: _scrollController,
-          child: ShimmerHelper()
-              .buildSquareGridShimmer(scontroller: _scrollController));
-    } else if (_shopList.isNotEmpty) {
-      final bool hasMoreShops = (_totalShopData ?? 0) > _shopList.length;
-      return RefreshIndicator(
-        color: Colors.white,
-        backgroundColor: Theme.of(context).primaryColor,
-        onRefresh: _onShopListRefresh,
-        child: SingleChildScrollView(
-          controller: _shopScrollController,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          child: Column(
-            children: [
-              SizedBox(
-                  height: MediaQuery.viewPaddingOf(context).top > 40 ? 140 : 135
-                  //MediaQuery.viewPaddingOf(context).top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                  ),
-              GridView.builder(
-                // 2
-                //addAutomaticKeepAlives: true,
-                itemCount: _shopList.length + (hasMoreShops ? 2 : 0),
-                controller: _scrollController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 14,
-                    mainAxisSpacing: 14,
-                    childAspectRatio: 0.7),
-                padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingLarge,
-                    bottom: AppDimensions.paddingSupSmall,
-                    left: 18,
-                    right: 18),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (index >= _shopList.length) {
-                    return ShimmerHelper.shimmerInGrid(index);
-                  }
-                  // 3
-                  return ShopSquareCard(
-                    id: _shopList[index].id,
-                    shopSlug: _shopList[index].slug,
-                    image: _shopList[index].logo,
-                    name: _shopList[index].name,
-                    stars: double.parse(_shopList[index].rating.toString()),
-                  );
-                },
-              )
-            ],
+    final double ratio = GridResponsive.aspectRatioForWidth(context);
+
+    return dataBodyWidget<Shop>(
+      controller: _shopController,
+      fetchPage: _fetchShops,
+      translatedEmptyText: 'no_shop_is_available',
+      ratio: ratio,
+      itemBuilder: (context, shop, index) => ShopSquareCard(
+        id: shop.id,
+        shopSlug: shop.slug ?? '',
+        image: shop.logo,
+        name: shop.name,
+        stars: double.parse(shop.rating.toString()),
+      ),
+    );
+  }
+
+  PagedView<T> dataBodyWidget<T>({
+    PagedViewController<T>? controller,
+    String? translatedEmptyText,
+    int crossAxisCount = 2,
+    double ratio = 1,
+    required Future<PageResult<T>> Function(int page) fetchPage,
+    required Widget Function(BuildContext, T, int) itemBuilder,
+  }) {
+    return PagedView<T>(
+      controller: controller,
+      fetchPage: fetchPage,
+      layout: PagedLayout.grid,
+      mainAxisSpacing: 14,
+      crossAxisSpacing: 14,
+      gridCrossAxisCount: crossAxisCount,
+      gridAspectRatio: ratio,
+      refreshEdgeOffset: _refreshEdgeOffset,
+      emptyBuilder: translatedEmptyText == null
+          ? null
+          : (_) => Center(child: Text(translatedEmptyText.tr(context: _))),
+      padding: const EdgeInsets.only(
+        top: _refreshEdgeOffset,
+        bottom: AppDimensions.paddingSupSmall,
+        left: AppDimensions.paddingMedium,
+        right: AppDimensions.paddingMedium,
+      ),
+      itemBuilder: itemBuilder,
+      loadingItemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: MyTheme.shimmer_base,
+          highlightColor: MyTheme.shimmer_highlighted,
+          child: Container(
+            height: (index + 1) % 2 != 0 ? 250 : 300,
+            width: double.infinity,
+            decoration: BoxDecorations.buildBoxDecoration_1(),
           ),
-        ),
-      );
-    } else if (_totalShopData == 0) {
-      return Center(child: Text('no_shop_is_available'.tr(context: context)));
-    } else {
-      return Container(); // should never be happening
-    }
+        );
+      },
+    );
   }
 }

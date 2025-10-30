@@ -8,7 +8,7 @@ import '../../../my_theme.dart';
 
 // ignore: must_be_immutable
 class ProductSliderImageWidget extends StatefulWidget {
-  final List? productImageList;
+  final List<String>? productImageList;
   final CarouselSliderController? carouselController;
   int? currentImage;
   ProductSliderImageWidget({
@@ -32,51 +32,16 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
       return Stack(
         children: [
           Positioned.fill(
-            child: CarouselSlider(
+            child: CarouselItemCoverWidget(
+              productImageList: widget.productImageList,
+              currentImage: widget.currentImage,
               carouselController: widget.carouselController,
-              options: CarouselOptions(
-                  aspectRatio: 355 / 375,
-                  viewportFraction: 1,
-                  initialPage: 0,
-                  autoPlay: widget.productImageList!.length > 1,
-                  autoPlayInterval: const Duration(seconds: 5),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-                  autoPlayCurve: Curves.easeInExpo,
-                  enlargeCenterPage: false,
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (index, reason) {
-                    print(index);
-                    setState(() {
-                      widget.currentImage = index;
-                    });
-                  }),
-              items: widget.productImageList!.map(
-                (i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        child: InkWell(
-                          onTap: () {
-                            openPhotoDialog(
-                              context,
-                              widget.productImageList![widget.currentImage!],
-                            );
-                          },
-                          child: Container(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: FadeInImage.assetNetwork(
-                              placeholder: AppImages.placeholderRectangle,
-                              image: i,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ).toList(),
+              onPageChanged: (index, reason) {
+                print(index);
+                setState(() {
+                  widget.currentImage = index;
+                });
+              },
             ),
           ),
           Align(
@@ -115,6 +80,67 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
         ],
       );
     }
+  }
+}
+
+class CarouselItemCoverWidget extends StatelessWidget {
+  const CarouselItemCoverWidget({
+    super.key,
+    this.productImageList,
+    this.carouselController,
+    this.currentImage,
+    this.onPageChanged,
+  });
+  final List<String>? productImageList;
+  final CarouselSliderController? carouselController;
+  final int? currentImage;
+  final Function(int, CarouselPageChangedReason)? onPageChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: AppDimensions.phoneMaxWidth),
+      child: CarouselSlider(
+        carouselController: carouselController,
+        options: CarouselOptions(
+          aspectRatio: 355 / 375,
+          viewportFraction: 1,
+          initialPage: 0,
+          autoPlay: productImageList!.length > 1,
+          autoPlayInterval: const Duration(seconds: 5),
+          autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+          autoPlayCurve: Curves.easeInExpo,
+          enlargeCenterPage: false,
+          scrollDirection: Axis.horizontal,
+          onPageChanged: onPageChanged,
+        ),
+        items: productImageList!.map(
+          (i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return InkWell(
+                  onTap: () {
+                    openPhotoDialog(
+                      context,
+                      productImageList![currentImage!],
+                    );
+                  },
+                  child: SizedBox(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: FadeInImage.assetNetwork(
+                      placeholder: AppImages.placeholderRectangle,
+                      image: i,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ).toList(),
+      ),
+    );
   }
 
   Future openPhotoDialog(BuildContext context, path) => showDialog(

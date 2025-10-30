@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import '../../custom/toast_component.dart';
 import '../../data_model/product_mini_response.dart';
+import '../../helpers/grid_responsive.dart';
 import '../../helpers/shared_value_helper.dart';
 import '../../helpers/shimmer_helper.dart';
 import '../../my_theme.dart';
@@ -95,6 +96,7 @@ class _CouponProductsState extends State<CouponProducts> {
   }
 
   FutureBuilder<ProductMiniResponse> buildCouponProductList(context) {
+    final int cross = GridResponsive.columnsForWidth(context);
     return FutureBuilder(
         future: CouponRepository().getCouponProductList(id: widget.id),
         builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
@@ -138,8 +140,8 @@ class _CouponProductsState extends State<CouponProducts> {
               ),
             );
           } else {
-            return ShimmerHelper()
-                .buildProductGridShimmer(scontroller: _scrollController);
+            return ShimmerHelper().buildProductGridShimmer(
+                crossAxisCount: cross, scontroller: _scrollController);
           }
         });
   }

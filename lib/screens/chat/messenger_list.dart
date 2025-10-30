@@ -9,6 +9,8 @@ import 'package:active_ecommerce_cms_demo_app/screens/chat/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
+import '../../app_config.dart';
+
 class MessengerList extends StatefulWidget {
   @override
   _MessengerListState createState() => _MessengerListState();
@@ -167,7 +169,7 @@ class _MessengerListState extends State<MessengerList> {
     } else if (_totalData == 0) {
       return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never be happening
+      return emptyWidget; // should never be happening
     }
   }
 

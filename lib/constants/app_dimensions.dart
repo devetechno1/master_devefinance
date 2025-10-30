@@ -30,6 +30,7 @@ abstract final class AppDimensions {
   static const double radiusVeryVeryExtra = 116;
   //constrained width
   static const double constrainedBoxDefaultWidth = 500;
+  static const double phoneMaxWidth = 600;
 
   //animation
   static const int animationShortInMillis = 100;

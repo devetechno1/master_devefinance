@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/presenter/select_address_provider.
 import 'package:active_ecommerce_cms_demo_app/screens/address.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../app_config.dart';
 import '../map_location.dart';
 
 class SelectAddress extends StatefulWidget {
@@ -468,7 +469,7 @@ class _SelectAddressState extends State<SelectAddress> {
   //   );
   // }
 
-  Container buildShippingOptionsCheckContainer(bool check) {
+  Widget buildShippingOptionsCheckContainer(bool check) {
     return check
         ? Container(
             height: 16,
@@ -482,7 +483,7 @@ class _SelectAddressState extends State<SelectAddress> {
               child: Icon(Icons.check, color: Colors.white, size: 10),
             ),
           )
-        : Container();
+        : emptyWidget;
   }
 
   BottomAppBar buildBottomAppBar(

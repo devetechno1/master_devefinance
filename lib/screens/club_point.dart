@@ -12,6 +12,8 @@ import 'package:active_ecommerce_cms_demo_app/screens/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
+import '../app_config.dart';
+
 class Clubpoint extends StatefulWidget {
   @override
   _ClubpointState createState() => _ClubpointState();
@@ -210,7 +212,7 @@ class _ClubpointState extends State<Clubpoint> {
     } else if (_totalData == 0) {
       return Center(child: Text('no_data_is_available'.tr(context: context)));
     } else {
-      return Container(); // should never happen
+      return emptyWidget; // should never happen
     }
   }
 

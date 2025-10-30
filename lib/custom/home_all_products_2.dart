@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../constants/app_dimensions.dart';
 import '../data_model/product_mini_response.dart';
+import '../helpers/grid_responsive.dart';
 import '../helpers/shimmer_helper.dart';
 import '../presenter/home_provider.dart';
 import '../ui_elements/product_card_black.dart';
@@ -45,13 +46,16 @@ class HomeAllProductsSliver extends StatelessWidget {
         isAllProductInitial: data.isAllProductInitial,
       ),
     );
+    final cross = GridResponsive.columnsForWidth(context);
+
     if (data.isAllProductInitial) {
-      return ShimmerHelper().buildProductSliverGridShimmer();
+      return ShimmerHelper()
+          .buildProductSliverGridShimmer(crossAxisCount: cross);
     } else if (data.allProductList.isNotEmpty) {
       final bool isLoadingMore =
           data.allProductList.length < data.totalAllProductData;
       return SliverMasonryGrid.count(
-          crossAxisCount: 2,
+          crossAxisCount: cross,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           childCount: isLoadingMore

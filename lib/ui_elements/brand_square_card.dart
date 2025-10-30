@@ -29,25 +29,23 @@ class _BrandSquareCardState extends State<BrandSquareCard> {
         }));
       },
       child: Container(
-        decoration: BoxDecorations.buildBoxDecoration_1(),
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecorations.buildBoxDecoration_1(
+            radius: AppDimensions.radiusDefault),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Flexible(
-                  flex: 1,
-                  //height: 60,
-                  //width: double.infinity,
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(AppDimensions.radiusDefault),
-                          bottom: Radius.zero),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: AppImages.placeholder,
-                        image: widget.image!,
-                        fit: BoxFit.cover,
-                      ))),
-              Container(
+              Expanded(
+                child: Center(
+                  child: FadeInImage.assetNetwork(
+                    placeholder: AppImages.placeholder,
+                    image: widget.image!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(
                 height: 40,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),

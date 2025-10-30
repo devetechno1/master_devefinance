@@ -170,7 +170,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                                     decoration: TextDecoration.underline),
                               ),
                             )
-                          : Container()
+                          : emptyWidget
                     ],
                   ),
                 )

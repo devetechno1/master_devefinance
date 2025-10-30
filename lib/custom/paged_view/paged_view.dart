@@ -99,6 +99,7 @@ class PagedView<T> extends StatefulWidget {
     this.preloadTriggerFraction = 0.8,
     this.initialPage = 1,
     this.enableRefresh = true,
+    this.refreshEdgeOffset = 0.0,
 
     // Placeholders
     this.loadingItemBuilder,
@@ -135,6 +136,7 @@ class PagedView<T> extends StatefulWidget {
   final double preloadTriggerFraction;
   final int initialPage;
   final bool enableRefresh;
+  final double refreshEdgeOffset;
 
   // Placeholders
   final LoadingItemBuilder? loadingItemBuilder;
@@ -159,6 +161,9 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   bool _isLoadingMore = false;
   bool _hasMore = true;
   final List<T> _items = [];
+
+  int get cross => _effectiveCrossAxisCount();
+  double get ratio => _aspectRatioForWidth();
 
   @override
   void initState() {
@@ -196,20 +201,21 @@ class _PagedViewState<T> extends State<PagedView<T>> {
     }
   }
 
-  Future<void> _loadFirstPage() async {
+  Future<void> _loadFirstPage([bool showLoading = true]) async {
     // Safety: ensure we are not far scrolled when clearing items (avoids Masonry assertion)
     if (_scrollController.hasClients && _scrollController.position.pixels > 0) {
       _scrollController.jumpTo(0);
     }
     setState(() {
-      _isLoading = true;
+      if (showLoading) _isLoading = true;
       _hasMore = true;
-      _items.clear();
     });
     try {
       final res = await widget.fetchPage(_page);
+
       if (!mounted) return;
       setState(() {
+        _items.clear();
         _items.addAll(res.data);
         _hasMore = res.hasMore;
         _isLoading = false;
@@ -258,17 +264,29 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   // ===== Imperative helpers (used by PagedViewController) =====
-  Future<void> _resetToFirstPage({bool jumpToTop = true}) async {
-    await _reset(page: widget.initialPage, jumpToTop: jumpToTop);
+  Future<void> _resetToFirstPage({
+    bool showLoading = true,
+    bool jumpToTop = true,
+  }) async {
+    await _reset(
+      showLoading: showLoading,
+      page: widget.initialPage,
+      jumpToTop: jumpToTop,
+    );
   }
 
-  Future<void> _reset({int? page, bool jumpToTop = true}) async {
+  Future<void> _reset({
+    bool showLoading = true,
+    int? page,
+    bool jumpToTop = true,
+  }) async {
     final nextPage = page ?? widget.initialPage;
     _page = nextPage;
+    _hasMore = false;
     if (jumpToTop) {
       await _jumpToTop(animate: false);
     }
-    await _loadFirstPage();
+    await _loadFirstPage(showLoading);
   }
 
   Future<void> _jumpToTop({bool animate = true}) async {
@@ -304,9 +322,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
             itemBuilder: (c, i) => widget.loadingItemBuilder!(c, i),
           );
         case PagedLayout.grid:
-          final width = MediaQuery.sizeOf(context).width;
-          final cross = _effectiveCrossAxisCount(width);
-          final ratio = _aspectRatioForWidth(width);
           return SliverPadding(
             padding: widget.padding,
             sliver: SliverGrid(
@@ -324,8 +339,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
             ),
           );
         case PagedLayout.masonry:
-          final width = MediaQuery.sizeOf(context).width;
-          final cross = _effectiveCrossAxisCount(width);
           return SliverPadding(
             padding: widget.padding,
             sliver: SliverMasonryGrid.count(
@@ -342,9 +355,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   Widget _buildGridSliver(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    final cross = _effectiveCrossAxisCount(width);
-    final ratio = _aspectRatioForWidth(width);
     return SliverPadding(
       padding: widget.padding,
       sliver: SliverGrid(
@@ -364,8 +374,6 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   Widget _buildMasonrySliver(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    final cross = _effectiveCrossAxisCount(width);
     return SliverPadding(
       padding: widget.padding,
       sliver: SliverMasonryGrid.count(
@@ -379,17 +387,17 @@ class _PagedViewState<T> extends State<PagedView<T>> {
   }
 
   // ===== Responsive helpers (via GridResponsive) =====
-  int _effectiveCrossAxisCount(double width) {
+  int _effectiveCrossAxisCount() {
     if (!widget.responsiveGrid) return widget.gridCrossAxisCount;
-    return GridResponsive.columnsForWidth(width,
+    return GridResponsive.columnsForWidth(context,
         minTileWidth: widget.minTileWidth);
   }
 
-  double _aspectRatioForWidth(double width) {
+  double _aspectRatioForWidth() {
     final explicit = widget.gridAspectRatio;
     if (explicit > 0) return explicit;
     return GridResponsive.aspectRatioForWidth(
-      width,
+      context,
       useResponsiveAspectRatio: widget.useResponsiveAspectRatio,
     );
   }
@@ -441,8 +449,9 @@ class _PagedViewState<T> extends State<PagedView<T>> {
     if (!widget.enableRefresh) return body;
 
     return RefreshIndicator.adaptive(
+      edgeOffset: widget.refreshEdgeOffset,
       onRefresh: () async {
-        await _resetToFirstPage();
+        await _resetToFirstPage(showLoading: false);
       },
       child: body,
     );

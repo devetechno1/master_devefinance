@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../app_config.dart';
+import '../../helpers/grid_responsive.dart';
+
 class TodaysDealProducts extends StatefulWidget {
   @override
   _TodaysDealProductsState createState() => _TodaysDealProductsState();
@@ -58,12 +61,13 @@ class _TodaysDealProductsState extends State<TodaysDealProducts> {
   }
 
   FutureBuilder<ProductMiniResponse> buildProductList(context) {
+     final   int  cross = GridResponsive.columnsForWidth(context);
     return FutureBuilder(
       future: ProductRepository().getTodaysDealProducts(),
       builder: (context, AsyncSnapshot<ProductMiniResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return Container();
+            return emptyWidget;
           } else if (snapshot.data!.products!.isEmpty) {
             return Container(
               child: Center(
@@ -107,7 +111,9 @@ class _TodaysDealProductsState extends State<TodaysDealProducts> {
         }
 
         return ShimmerHelper()
-            .buildProductGridShimmer(scontroller: _scrollController);
+            .buildProductGridShimmer(
+              crossAxisCount: cross,
+              scontroller: _scrollController);
       },
     );
   }
