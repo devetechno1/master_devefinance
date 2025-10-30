@@ -33,7 +33,7 @@ class BusinessSettingRepository {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       if (user_id.$ != null && is_logged_in.$) 'user_id': user_id.$.toString(),
-      'device_info': jsonEncode(AppConfig.deviceInfo),
+      // 'device_info': jsonEncode(AppConfig.deviceInfo),
     });
 
     return businessSettingListResponseFromJson(response.body);
