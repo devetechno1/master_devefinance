@@ -215,7 +215,7 @@ class _RegistrationState extends State<Registration> {
 
         print("--fcm token--");
         print("fcmToken $fcmToken");
-        if (is_logged_in.$ == true) {
+        if (is_logged_in.$ == true && fcmToken?.isNotEmpty == true) {
           // update device token
           await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken!);
         }
