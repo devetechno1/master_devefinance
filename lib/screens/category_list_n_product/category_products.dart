@@ -10,9 +10,6 @@ import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.da
 import 'package:active_ecommerce_cms_demo_app/ui_elements/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
-import 'package:shimmer/shimmer.dart';
-
-import '../../custom/box_decorations.dart';
 import '../../custom/paged_view/models/page_result.dart';
 import '../../custom/paged_view/paged_view.dart';
 import '../../data_model/product_mini_response.dart';
@@ -122,17 +119,6 @@ class _CategoryProductsState extends State<CategoryProducts> {
               isWholesale: product.isWholesale,
               has_discount: product.has_discount == true,
               searchedText: _searchKey,
-            );
-          },
-          loadingItemBuilder: (context, index) {
-            return Shimmer.fromColors(
-              baseColor: MyTheme.shimmer_base,
-              highlightColor: MyTheme.shimmer_highlighted,
-              child: Container(
-                height: (index + 1) % 2 != 0 ? 250 : 300,
-                width: double.infinity,
-                decoration: BoxDecorations.buildBoxDecoration_1(),
-              ),
             );
           },
         ),

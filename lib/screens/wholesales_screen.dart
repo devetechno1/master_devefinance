@@ -9,11 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/product/product_details.da
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../app_config.dart';
-import '../custom/box_decorations.dart';
-
 import '../custom/paged_view/models/page_result.dart';
 import '../custom/paged_view/paged_view.dart';
 
@@ -90,17 +86,6 @@ class WholesalesScreen extends StatelessWidget {
             has_discount: product.discount != 0.0,
             discount: product.discount_percentage,
             isWholesale: true,
-          );
-        },
-        loadingItemBuilder: (context, index) {
-          return Shimmer.fromColors(
-            baseColor: MyTheme.shimmer_base,
-            highlightColor: MyTheme.shimmer_highlighted,
-            child: Container(
-              height: (index + 1) % 2 != 0 ? 250 : 300,
-              width: double.infinity,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-            ),
           );
         },
       ),
