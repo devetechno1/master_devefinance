@@ -1,5 +1,3 @@
-library flutter_summernote;
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -11,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../helpers/camera_helper.dart';
 import '../main.dart';
 
 /*
@@ -53,7 +52,6 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
   static String text = '';
   late String _page;
   final Key _mapKey = UniqueKey();
-  final _imagePicker = ImagePicker();
   late bool _hasAttachment;
 
   String htmlContent = "";
@@ -381,7 +379,7 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
               subtitle: const Text('Attach image from camera'),
               onTap: () async {
                 Navigator.pop(context);
-                final image = await _getImage(true);
+                final image = await CameraHelper.getImage(true);
                 if (image != null) _addImage(image);
               },
             ),
@@ -391,23 +389,12 @@ class FlutterSummernoteState extends State<FlutterSummernote> {
               subtitle: const Text('Attach image from gallery'),
               onTap: () async {
                 Navigator.pop(context);
-                final image = await _getImage(false);
+                final image = await CameraHelper.getImage(false);
                 if (image != null) _addImage(image);
               },
             ),
           ]);
         });
-  }
-
-  /// [_getImage] to get image from summernote
-  Future<XFile?> _getImage(bool fromCamera) async {
-    final picked = await _imagePicker.pickImage(
-        source: (fromCamera) ? ImageSource.camera : ImageSource.gallery);
-    if (picked != null) {
-      return XFile(picked.path);
-    } else {
-      return null;
-    }
   }
 
   /// [_addImage] to add image in summernote form

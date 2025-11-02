@@ -15,6 +15,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
+import '../custom/loading.dart';
+import '../helpers/camera_helper.dart';
 import '../presenter/cart_provider.dart';
 import '../ui_elements/close_app_dialog_widget.dart';
 import 'splash_screen/custom_statusbar.dart';
@@ -97,6 +99,7 @@ class _MainState extends State<Main> {
         name: "",
         is_base_category: true,
       ),
+      if (showPrescription) emptyWidget,
       Cart(
         has_bottomnav: true,
         from_navigation: true,
@@ -207,7 +210,7 @@ class _MainState extends State<Main> {
                     ),
                     child: Image.asset(
                       AppImages.categories,
-                      color: _currentIndex == 1
+                      color: _currentIndex == getIndexWhenPrescription(1)
                           ? Theme.of(context).primaryColor
                           : const Color.fromRGBO(153, 153, 153, 1),
                       height: 16,
@@ -236,7 +239,7 @@ class _MainState extends State<Main> {
                       ),
                       child: Image.asset(
                         AppImages.cart,
-                        color: _currentIndex == 2
+                        color: _currentIndex == getIndexWhenPrescription(2)
                             ? Theme.of(context).primaryColor
                             : const Color.fromRGBO(153, 153, 153, 1),
                         height: 16,
@@ -259,7 +262,7 @@ class _MainState extends State<Main> {
                       const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
                   child: Image.asset(
                     AppImages.profile,
-                    color: _currentIndex == 3
+                    color: _currentIndex == getIndexWhenPrescription(3)
                         ? Theme.of(context).primaryColor
                         : const Color.fromRGBO(153, 153, 153, 1),
                     height: 16,
@@ -274,7 +277,29 @@ class _MainState extends State<Main> {
     );
   }
 
-  void onTapPrescription() {
+  Future<void> onTapPrescription() async {
+    if (!AppConfig.businessSettingsData.guestCheckoutStatus &&
+        !is_logged_in.$) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Login()));
+      return;
+    }
+    Loading.show(context);
+    final image = await CameraHelper.getImage(false);
+    if (image == null) {
+      Loading.close();
+      return;
+    }
+
+    await Future.delayed(const Duration(seconds: 1)); //TODO:* make request with image
+    Loading.close();
+
+    getCartData();
+
+    setState(() {
+      _currentIndex = 3;
+    });
+
     print("Prescription");
   }
 }
