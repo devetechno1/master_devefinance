@@ -5,8 +5,11 @@ import 'package:active_ecommerce_cms_demo_app/custom/paged_view/models/page_resu
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../main.dart';
+import '../../my_theme.dart';
+import '../box_decorations.dart';
 
 typedef PageFetcher<T> = Future<PageResult<T>> Function(int page);
 typedef ItemBuilder<T> = Widget Function(
@@ -311,47 +314,57 @@ class _PagedViewState<T> extends State<PagedView<T>> {
 
   // ===== Builders =====
 
+  Widget _customLoading(context, index) {
+    return Shimmer.fromColors(
+      baseColor: MyTheme.shimmer_base,
+      highlightColor: MyTheme.shimmer_highlighted,
+      child: Container(
+        height: (index + 1) % 2 != 0 ? 250 : 300,
+        width: double.infinity,
+        decoration: BoxDecorations.buildBoxDecoration_1(),
+      ),
+    );
+  }
+
   Widget _buildLoadingSliver(BuildContext context) {
-    if (widget.loadingItemBuilder != null) {
-      switch (widget.layout) {
-        case PagedLayout.list:
-          return SliverList.separated(
-            separatorBuilder: (_, __) =>
-                SizedBox(height: widget.mainAxisSpacing),
-            itemCount: widget.loadingPlaceholdersCount,
-            itemBuilder: (c, i) => widget.loadingItemBuilder!(c, i),
-          );
-        case PagedLayout.grid:
-          return SliverPadding(
-            padding: widget.padding,
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: cross,
-                mainAxisSpacing: widget.mainAxisSpacing,
-                crossAxisSpacing: widget.crossAxisSpacing,
-                childAspectRatio: ratio,
-                mainAxisExtent: widget.gridMainAxisExtent,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (c, i) => widget.loadingItemBuilder!(c, i),
-                childCount: widget.loadingPlaceholdersCount,
-              ),
-            ),
-          );
-        case PagedLayout.masonry:
-          return SliverPadding(
-            padding: widget.padding,
-            sliver: SliverMasonryGrid.count(
+    final LoadingItemBuilder customLoading =
+        widget.loadingItemBuilder ?? _customLoading;
+    switch (widget.layout) {
+      case PagedLayout.list:
+        return SliverList.separated(
+          separatorBuilder: (_, __) => SizedBox(height: widget.mainAxisSpacing),
+          itemCount: widget.loadingPlaceholdersCount,
+          itemBuilder: (c, i) => customLoading(c, i),
+        );
+      case PagedLayout.grid:
+        return SliverPadding(
+          padding: widget.padding,
+          sliver: SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: cross,
               mainAxisSpacing: widget.mainAxisSpacing,
               crossAxisSpacing: widget.crossAxisSpacing,
-              childCount: widget.loadingPlaceholdersCount,
-              itemBuilder: (c, i) => widget.loadingItemBuilder!(c, i),
+              childAspectRatio: ratio,
+              mainAxisExtent: widget.gridMainAxisExtent,
             ),
-          );
-      }
+            delegate: SliverChildBuilderDelegate(
+              (c, i) => customLoading(c, i),
+              childCount: widget.loadingPlaceholdersCount,
+            ),
+          ),
+        );
+      case PagedLayout.masonry:
+        return SliverPadding(
+          padding: widget.padding,
+          sliver: SliverMasonryGrid.count(
+            crossAxisCount: cross,
+            mainAxisSpacing: widget.mainAxisSpacing,
+            crossAxisSpacing: widget.crossAxisSpacing,
+            childCount: widget.loadingPlaceholdersCount,
+            itemBuilder: (c, i) => customLoading(c, i),
+          ),
+        );
     }
-    return const SliverToBoxAdapter(child: SizedBox.shrink());
   }
 
   Widget _buildGridSliver(BuildContext context) {

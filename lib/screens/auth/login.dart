@@ -879,7 +879,7 @@ Future<void> saveFCMToken() async {
       fcmToken = await _fcm.getToken();
     } catch (e) {
       if (Platform.isIOS) {
-        fcmToken = await _fcm.getToken();
+        fcmToken = await _fcm.getAPNSToken();
       }
       print('Caught exception: $e');
     }

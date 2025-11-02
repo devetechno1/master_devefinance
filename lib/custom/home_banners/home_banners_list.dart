@@ -37,9 +37,10 @@ class HomeBannersList extends StatefulWidget {
 }
 
 class _HomeBannersListState extends State<HomeBannersList> {
-  late final PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
   final Map<int, double> _aspectByIndex = {};
+
   @override
   void initState() {
     super.initState();
@@ -53,30 +54,56 @@ class _HomeBannersListState extends State<HomeBannersList> {
   @override
   void didUpdateWidget(covariant HomeBannersList oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.bannersImagesList != widget.bannersImagesList && widget.bannersImagesList.isNotEmpty) {
+    if (oldWidget.bannersImagesList != widget.bannersImagesList &&
+        widget.bannersImagesList.isNotEmpty) {
       _aspectByIndex.clear();
       _currentPage = 0;
-      _resolveAspect(0, widget.bannersImagesList[0].photo);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // _pageController.jumpToPage(0);
+        _resolveAspect(0, widget.bannersImagesList[0].photo);
+      });
+    }
+
+    if (oldWidget.viewportFraction != widget.viewportFraction) {
+      final oldController = _pageController;
+      _pageController = PageController(
+        initialPage: _currentPage,
+        viewportFraction: widget.viewportFraction,
+      );
+      oldController.dispose();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() {});
+      });
     }
   }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   void _resolveAspect(int index, String? url) {
-  if (url == null || url.isEmpty) return; 
-  final img = Image.network(url);
-  final stream = img.image.resolve(const ImageConfiguration());
-  ImageStreamListener? listener;
-  listener = ImageStreamListener((info, _) {
-    final w = info.image.width.toDouble();
-    final h = info.image.height.toDouble();
-    if (w > 0 && h > 0) {
-      _aspectByIndex[index] = w / h;
-      if (mounted) setState(() {});
-    }
-    stream.removeListener(listener!);
-  }, onError: (_, __) {
-    stream.removeListener(listener!);
-  });
-  stream.addListener(listener);
-}
+    if (url == null || url.isEmpty) return;
+    if (_aspectByIndex.containsKey(index)) return;
+    final img = Image.network(url);
+    final stream = img.image.resolve(const ImageConfiguration());
+    ImageStreamListener? listener;
+    listener = ImageStreamListener((info, _) {
+      final w = info.image.width.toDouble();
+      final h = info.image.height.toDouble();
+      if (w > 0 && h > 0) {
+        _aspectByIndex[index] = w / h;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) setState(() {});
+        });
+      }
+      stream.removeListener(listener!);
+    }, onError: (_, __) {
+      stream.removeListener(listener!);
+    });
+    stream.addListener(listener);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +113,8 @@ class _HomeBannersListState extends State<HomeBannersList> {
     if (widget.bannersImagesList.isEmpty) {
       return const SizedBox();
     }
-    if (widget.bannersImagesList.length == 1 && widget.makeOneBannerDynamicSize) {
+    if (widget.bannersImagesList.length == 1 &&
+        widget.makeOneBannerDynamicSize) {
       return DynamicSizeImageBanner(
         urlToOpen: widget.bannersImagesList.first.url,
         photo: widget.bannersImagesList.first.photo,
@@ -96,16 +124,15 @@ class _HomeBannersListState extends State<HomeBannersList> {
     final canScroll = widget.bannersImagesList.length > 1;
     final currentAspect =
         _aspectByIndex[_currentPage] ?? widget.fallbackAspectRatio;
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardWidth =
-            constraints.maxWidth * widget.viewportFraction - 16;
+        final cardWidth = constraints.maxWidth * widget.viewportFraction - 16;
         final cardHeight = cardWidth / currentAspect;
 
         return AnimatedContainer(
           duration: const Duration(milliseconds: 220),
-          // curve: Curves.easeInOut,
-          height: cardHeight ,
+          height: cardHeight,
           alignment: Alignment.topCenter,
           child: PageView.builder(
             controller: _pageController,
@@ -115,11 +142,12 @@ class _HomeBannersListState extends State<HomeBannersList> {
                 : const NeverScrollableScrollPhysics(),
             itemCount: widget.bannersImagesList.length,
             onPageChanged: (i) {
+              setState(() => _currentPage = i);
               _resolveAspect(i, widget.bannersImagesList[i].photo);
             },
             itemBuilder: (context, index) {
               final item = widget.bannersImagesList[index];
-              _resolveAspect(index, item.photo);
+              _resolveAspect(index, item.photo); // هتتجاهل لو اتحسبت قبل كده
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -128,10 +156,12 @@ class _HomeBannersListState extends State<HomeBannersList> {
                   height: cardHeight,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusNormal),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xff000000).withValues(alpha: 0.08),
+                        // استخدم withOpacity لمتوافقية أحسن
+                        color: const Color(0xff000000).withOpacity(0.08),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -139,18 +169,17 @@ class _HomeBannersListState extends State<HomeBannersList> {
                   ),
                   child: Material(
                     color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusNormal),
                     clipBehavior: Clip.antiAlias,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusNormal),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusNormal),
                       onTap: () => NavigationService.handleUrls(
                         item.url,
                         context: context,
-                      ),          
-                      child: AIZImage.radiusImage(
-                        item.photo,
-                        2     
                       ),
+                      child: AIZImage.radiusImage(item.photo, 2),
                     ),
                   ),
                 ),

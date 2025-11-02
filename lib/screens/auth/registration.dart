@@ -203,7 +203,15 @@ class _RegistrationState extends State<Registration> {
           sound: true,
         );
 
-        final String? fcmToken = await _fcm.getToken();
+        String? fcmToken;
+        try {
+          fcmToken = await _fcm.getToken();
+        } catch (e) {
+          if (Platform.isIOS) {
+            fcmToken = await _fcm.getAPNSToken();
+          }
+          print('Caught exception: $e');
+        }
 
         print("--fcm token--");
         print("fcmToken $fcmToken");
