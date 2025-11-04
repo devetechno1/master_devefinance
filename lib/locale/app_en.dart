@@ -1,4 +1,19 @@
 const Map<String, String> enLangs = {
+  "clear_all_images": "Clear all images?",
+  "confirm_remove_all_prescription_images":
+      "Are you sure you want to remove all prescription images?",
+  "prescription_images": "Prescription images",
+  "replace": "Replace",
+  "replace_camera": "Replace from Camera",
+  "replace_gallery": "Replace from Gallery",
+  "add_more": "Add more",
+  "clear_all_close": "Clear all & Close",
+  "no_images_yet": "No images yet. Add from Camera or Gallery.",
+  "delete": "Delete",
+  "yes_clear": "Yes, clear",
+  "upload_failed": "Upload failed",
+  "gallery": "Gallery",
+  "camera": "Camera",
   "prescription": "Prescription",
   "download_started": "Download started",
   "download_failed": "Download failed",
@@ -898,5 +913,4 @@ const Map<String, String> enLangs = {
   "download_canceled": "Download canceled by user",
   "saved_to": "Saved to",
   "invoice_downloaded": "Invoice downloaded",
-
 };

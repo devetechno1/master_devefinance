@@ -1,7 +1,11 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
 
 import '../app_config.dart';
 import '../data_model/common_response.dart';
@@ -68,5 +72,77 @@ class FileUploadRepository {
     });
 
     return commonResponseFromJson(response.body);
+  }
+
+  /// Upload multiple files in ONE multipart request using `http` only,
+  /// with accurate byte-level progress via HttpClient.addStream.
+  /// - `onProgress`: value 0..1 (double)
+  Future<CommonResponse> multiFileUploadHttpWithProgress(
+    String endPoint, {
+    void Function(double progress)? onProgress,
+    required List<XFile> files,
+    String fieldName = "aiz_file",
+  }) async {
+    final Uri url = Uri.parse("${AppConfig.BASE_URL}/$endPoint");
+
+    final req = http.MultipartRequest("POST", url);
+
+    req.headers.addAll({
+      "Authorization": "Bearer ${access_token.$}",
+      "Accept": "*/*",
+      "System-Key": AppConfig.system_key,
+    });
+
+    for (final f in files) {
+      req.files.add(
+        await http.MultipartFile.fromPath(
+          fieldName,
+          f.path,
+          filename: path.basename(f.path),
+        ),
+      );
+    }
+
+    final Stream<List<int>> bodyStream = req.finalize();
+    final int total = req.contentLength;
+    int sent = 0;
+    final countingStream = bodyStream.transform<List<int>>(
+      StreamTransformer.fromHandlers(
+        handleData: (chunk, sink) {
+          sent += chunk.length;
+          if (total > 0 && onProgress != null) {
+            onProgress(sent / total);
+          }
+          sink.add(chunk);
+        },
+      ),
+    );
+
+    final httpClient = HttpClient();
+    final ioReq = await httpClient.postUrl(url);
+
+    // copy headers including multipart boundary content type if present
+    req.headers.forEach((k, v) => ioReq.headers.set(k, v));
+    final ct = req.headers[HttpHeaders.contentTypeHeader];
+    if (ct != null) {
+      ioReq.headers.set(HttpHeaders.contentTypeHeader, ct);
+    }
+
+    if (total >= 0) {
+      ioReq.contentLength = total;
+    }
+
+    await ioReq.addStream(countingStream);
+
+    final ioRes = await ioReq.close();
+    final respBody = await utf8.decodeStream(ioRes);
+
+    if (ioRes.statusCode < 200 || ioRes.statusCode >= 300) {
+      throw HttpException("Upload failed (${ioRes.statusCode}): $respBody");
+    }
+
+    final Map<String, dynamic> jsonMap =
+        jsonDecode(respBody) as Map<String, dynamic>;
+    return CommonResponse.fromJson(jsonMap);
   }
 }

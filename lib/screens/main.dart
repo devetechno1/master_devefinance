@@ -12,16 +12,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
-import '../custom/loading.dart';
+import '../constants/app_dimensions.dart';
+import '../constants/app_images.dart';
 import '../helpers/camera_helper.dart';
 import '../presenter/cart_provider.dart';
+import '../presenter/prescription_controller.dart';
+import '../repositories/upload_repository.dart';
 import '../ui_elements/close_app_dialog_widget.dart';
+import '../ui_elements/image_viewer_page.dart';
+import '../ui_elements/prescription_sheet.dart';
 import 'splash_screen/custom_statusbar.dart';
-
-// import 'home/home_page_type_enum.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
@@ -31,25 +35,32 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
+  // ---- Navigation / Pages ----
   int _currentIndex = 0;
-  List<Widget> _children = [];
-  CartCounter counter = CartCounter();
-  BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
+  late final List<Widget> _pages;
+  final CartCounter counter = CartCounter();
+  final BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
   late final HomeProvider homeProvider = context.read<HomeProvider>();
 
-  fetchAll() {
+  final PrescriptionController _presc = PrescriptionController();
+
+  // ---- Cart / Data ----
+  void fetchAll() {
     getCartData();
   }
 
+  void getCartData() {
+    Provider.of<CartProvider>(context, listen: false).fetchData(context);
+  }
+
+  // ---- Prescription tab helpers (keep same behavior) ----
   int setIndexWhenPrescription(int index) {
     if (showPrescription && index > 1) return index - 1;
-
     return index;
   }
 
   int getIndexWhenPrescription(int index) {
     if (showPrescription && index > 1) return index + 1;
-
     return index;
   }
 
@@ -63,6 +74,7 @@ class _MainState extends State<Main> {
     i = setIndexWhenPrescription(i);
 
     if (AppConfig.businessSettingsData.guestCheckoutStatus && (i == 2)) {
+      // allowed guest
     } else if (!AppConfig.businessSettingsData.guestCheckoutStatus &&
         (i == 2) &&
         !is_logged_in.$) {
@@ -85,39 +97,33 @@ class _MainState extends State<Main> {
     });
   }
 
-  void getCartData() {
-    Provider.of<CartProvider>(context, listen: false).fetchData(context);
-  }
-
+  // ---- Lifecycle ----
   @override
   void initState() {
-    _children = [
-      //   HomePageType.home.screen,
-      AppConfig.businessSettingsData.selectedHomePage.screen,
-      const CategoryList(
-        slug: "",
-        name: "",
-        is_base_category: true,
-      ),
-      if (showPrescription) emptyWidget,
-      Cart(
-        has_bottomnav: true,
-        from_navigation: true,
-        counter: counter,
-      ),
-      const Profile()
-    ];
-    fetchAll();
-
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.initState();
+
+    _pages = [
+      AppConfig.businessSettingsData.selectedHomePage.screen,
+      const CategoryList(slug: "", name: "", is_base_category: true),
+      if (showPrescription) emptyWidget,
+      Cart(has_bottomnav: true, from_navigation: true, counter: counter),
+      const Profile(),
+    ];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchAll();
+      homeProvider.showPopupBanner(context);
+    });
+
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: const [SystemUiOverlay.top, SystemUiOverlay.bottom],
+    );
   }
 
   bool _dialogShowing = false;
 
   Future<bool> willPop() async {
-    print(_currentIndex);
     if (_currentIndex != 0) {
       fetchAll();
       setState(() {
@@ -125,7 +131,7 @@ class _MainState extends State<Main> {
       });
     } else {
       if (_dialogShowing) {
-        return Future.value(false); // Dialog already showing, don't show again
+        return Future.value(false);
       }
       setState(() {
         _dialogShowing = true;
@@ -138,7 +144,7 @@ class _MainState extends State<Main> {
           false;
 
       setState(() {
-        _dialogShowing = false; // Reset flag after dialog is closed
+        _dialogShowing = false;
       });
 
       return shouldPop;
@@ -150,7 +156,6 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
-    homeProvider.showPopupBanner(context);
     return WillPopScope(
       onWillPop: willPop,
       child: Directionality(
@@ -160,7 +165,10 @@ class _MainState extends State<Main> {
           appBar: customStatusBar(SystemUiOverlayStyle.dark),
           extendBody: true,
           extendBodyBehindAppBar: true,
-          body: _children[_currentIndex],
+          body: IndexedStack(
+            index: _currentIndex,
+            children: _pages,
+          ),
           floatingActionButton: showPrescription
               ? Transform.translate(
                   offset: const Offset(0, 8),
@@ -180,9 +188,10 @@ class _MainState extends State<Main> {
             unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
             selectedItemColor: Theme.of(context).primaryColor,
             selectedLabelStyle: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: Theme.of(context).primaryColor,
-                fontSize: 12),
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).primaryColor,
+              fontSize: 12,
+            ),
             unselectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.w400,
               color: Color.fromRGBO(168, 175, 179, 1),
@@ -204,58 +213,59 @@ class _MainState extends State<Main> {
                 label: 'home_ucf'.tr(context: context),
               ),
               BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingSmall,
-                    ),
-                    child: Image.asset(
-                      AppImages.categories,
-                      color: _currentIndex == getIndexWhenPrescription(1)
-                          ? Theme.of(context).primaryColor
-                          : const Color.fromRGBO(153, 153, 153, 1),
-                      height: 16,
-                    ),
+                icon: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+                  child: Image.asset(
+                    AppImages.categories,
+                    color: _currentIndex == getIndexWhenPrescription(1)
+                        ? Theme.of(context).primaryColor
+                        : const Color.fromRGBO(153, 153, 153, 1),
+                    height: 16,
                   ),
-                  label: 'categories_ucf'.tr(context: context)),
+                ),
+                label: 'categories_ucf'.tr(context: context),
+              ),
               if (showPrescription)
                 BottomNavigationBarItem(
                   icon: const SizedBox(height: 34),
                   label: 'prescription'.tr(context: context),
                 ),
               BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: AppDimensions.paddingSmall),
-                    child: badges.Badge(
-                      badgeStyle: badges.BadgeStyle(
-                        shape: badges.BadgeShape.circle,
-                        badgeColor: Theme.of(context).primaryColor,
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusNormal),
-                        padding: const EdgeInsets.all(5),
-                      ),
-                      badgeAnimation: const badges.BadgeAnimation.slide(
-                        toAnimate: false,
-                      ),
-                      child: Image.asset(
-                        AppImages.cart,
-                        color: _currentIndex == getIndexWhenPrescription(2)
-                            ? Theme.of(context).primaryColor
-                            : const Color.fromRGBO(153, 153, 153, 1),
-                        height: 16,
-                      ),
-                      badgeContent: Consumer<CartCounter>(
-                        builder: (context, cart, child) {
-                          return Text(
-                            "${cart.cartCounter}",
-                            style: const TextStyle(
-                                fontSize: 10, color: Colors.white),
-                          );
-                        },
-                      ),
+                icon: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+                  child: badges.Badge(
+                    badgeStyle: badges.BadgeStyle(
+                      shape: badges.BadgeShape.circle,
+                      badgeColor: Theme.of(context).primaryColor,
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusNormal),
+                      padding: const EdgeInsets.all(5),
+                    ),
+                    badgeAnimation: const badges.BadgeAnimation.slide(
+                      toAnimate: false,
+                    ),
+                    child: Image.asset(
+                      AppImages.cart,
+                      color: _currentIndex == getIndexWhenPrescription(2)
+                          ? Theme.of(context).primaryColor
+                          : const Color.fromRGBO(153, 153, 153, 1),
+                      height: 16,
+                    ),
+                    badgeContent: Consumer<CartCounter>(
+                      builder: (context, cart, child) {
+                        return Text(
+                          "${cart.cartCounter}",
+                          style: const TextStyle(
+                              fontSize: 10, color: Colors.white),
+                        );
+                      },
                     ),
                   ),
-                  label: 'cart_ucf'.tr(context: context)),
+                ),
+                label: 'cart_ucf'.tr(context: context),
+              ),
               BottomNavigationBarItem(
                 icon: Padding(
                   padding:
@@ -284,22 +294,95 @@ class _MainState extends State<Main> {
           context, MaterialPageRoute(builder: (context) => const Login()));
       return;
     }
-    Loading.show(context);
-    final image = await CameraHelper.getImage(false);
-    if (image == null) {
-      Loading.close();
-      return;
+
+    if (_presc.imagesVN.value.isEmpty) {
+      await CameraHelper.openImageSourceSheet(
+        context,
+        onAddImages: (x) => _presc.addImages(x),
+      );
     }
-
-    await Future.delayed(const Duration(seconds: 1)); //TODO:* make request with image
-    Loading.close();
-
-    getCartData();
-
-    setState(() {
-      _currentIndex = 3;
-    });
-
-    print("Prescription");
+    await showPrescriptionSheetReusable(
+      context: context,
+      imagesController: _presc,
+      onAddMore: () async {
+        await CameraHelper.openImageSourceSheet(
+          context,
+          onAddImages: (x) => _presc.addImages(x),
+        );
+      },
+      onReplaceAt: (i) async {
+        final nx = await CameraHelper.getImageBottomSheet(
+          context,
+          cameraTitle: 'replace_camera'.tr(context: context),
+          galleryTitle: 'replace_gallery'.tr(context: context),
+        );
+        if (nx != null) _presc.replaceAt(i, nx);
+      },
+      onDeleteAt: (i) => _presc.removeAt(i),
+      onClearAll: () async {
+        final ok = await showDialog<bool>(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text('clear_all_images'.tr(context: context)),
+                content: Text('confirm_remove_all_prescription_images'
+                    .tr(context: context)),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx, false),
+                    child: Text('cancel'.tr(context: context)),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(ctx, true),
+                    child: Text('yes_clear'.tr(context: context)),
+                  ),
+                ],
+              ),
+            ) ??
+            false;
+        if (ok) {
+          _presc.clearAll();
+          if (Navigator.canPop(context)) Navigator.pop(context);
+        }
+      },
+      onSubmit: () async {
+        if (_presc.images.isEmpty) return;
+        _presc.setUploading(true);
+        _presc.setProgress(0.0);
+        try {
+          await FileUploadRepository().multiFileUploadHttpWithProgress(
+            "|",
+            files: _presc.images,
+            onProgress: _presc.setProgress,
+          );
+          getCartData();
+          if (Navigator.canPop(context)) Navigator.pop(context);
+          setState(() => _currentIndex = 3);
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('${"upload_failed".tr(context: context)}: $e')),
+          );
+        } finally {
+          _presc.setUploading(false);
+        }
+      },
+      onOpenViewer: (index) {
+        final imgs = _presc.images;
+        if (imgs.isEmpty) return;
+        Navigator.push(
+          OneContext().context!,
+          MaterialPageRoute(
+            builder: (_) => ImageViewerPage.fromFiles(
+              imgs,
+              initialIndex: index,
+              heroTags: List.generate(
+                imgs.length,
+                (index) => "${imgs[index].path}",
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
