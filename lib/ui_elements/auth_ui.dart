@@ -186,7 +186,7 @@ class AuthScreen {
             top: MediaQuery.paddingOf(context).top + 10,
             end: 10,
             child: GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () => Navigator.maybePop(context),
               child: Container(
                 padding: const EdgeInsets.all(AppDimensions.paddingSmall),
                 decoration: BoxDecoration(

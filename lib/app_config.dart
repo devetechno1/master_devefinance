@@ -13,6 +13,14 @@ export 'constants/app_images.dart';
 
 class AppConfig {
   /// To know the device operating system (ios, huawei or any android device)
+  /// Determines whether the login page should directly show full login fields
+  /// (phone/email + password + others) or just display a single "Login" button
+  /// that navigates to the detailed login form when pressed.
+  /// [showFullLoginFields] = false that means the default behavior will be used
+  /// [showFullLoginFields] = true that means the full login form will be shown
+  static const bool showFullLoginFields = false;
+
+  /// To know the device operating system (ios, huawei or any android device)
   static StoreType storeType = StoreType.unknown;
 
   ///Specifies the splash screen type to use a custom animated widget instead of a static image or traditional screen.

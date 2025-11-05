@@ -64,6 +64,9 @@ class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
   late final homeP = context.read<HomeProvider>();
 
+  bool showLoginFields = AppConfig.showFullLoginFields;
+  final Duration duration = const Duration(milliseconds: 300);
+
   @override
   void initState() {
     //on Splash Screen hide statusbar
@@ -85,6 +88,9 @@ class _LoginState extends State<Login> {
 
   @override
   void dispose() {
+    _phoneNumberController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     //before going to other screen show statusbar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
@@ -350,47 +356,6 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // onPressedTwitterLogin() async {
-  //   try {
-  //     final twitterLogin = new TwitterLogin(
-  //         apiKey: SocialConfig().twitter_consumer_key,
-  //         apiSecretKey: SocialConfig().twitter_consumer_secret,
-  //         redirectURI: 'activeecommerceflutterapp://');
-  //     // Trigger the sign-in flow
-
-  //     final authResult = await twitterLogin.login();
-
-  //     // print("authResult");
-
-  //     // print(json.encode(authResult));
-
-  //     var loginResponse = await AuthRepository().getSocialLoginResponse(
-  //         "twitter",
-  //         authResult.user!.name,
-  //         authResult.user!.email,
-  //         authResult.user!.id.toString(),
-  //         access_token: authResult.authToken,
-  //         secret_token: authResult.authTokenSecret);
-
-  //     if (loginResponse.result == false) {
-  //       ToastComponent.showDialog(
-  //         loginResponse.message!,
-  //       );
-  //     } else {
-  //       ToastComponent.showDialog(
-  //         loginResponse.message!,
-  //       );
-  //       AuthHelper().setUserData(loginResponse);
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) {
-  //         return Main();
-  //       }));
-  //     }
-  //   } on Exception catch (e) {
-  //     print("error is ....... $e");
-  //     // TODO
-  //   }
-  // }
-
   String generateNonce([int length = 32]) {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -469,10 +434,21 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final _screen_width = MediaQuery.sizeOf(context).width;
-    return AuthScreen.buildScreen(
+    final bool canPop = !(!AppConfig.showFullLoginFields && showLoginFields);
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!canPop) {
+          showLoginFields = false;
+          setState(() {});
+        }
+      },
+      child: AuthScreen.buildScreen(
         context,
         "${"login_to".tr(context: context)} " + 'app_name'.tr(context: context),
-        buildBody(context, _screen_width));
+        buildBody(context, _screen_width),
+      ),
+    );
   }
 
   Widget buildBody(BuildContext context, double _screen_width) {
@@ -484,192 +460,215 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  _login_by == "email"
-                      ? "email_ucf".tr(context: context)
-                      : "login_screen_phone".tr(context: context),
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              if (_login_by == "email")
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 36,
-                        child: TextField(
-                          controller: _emailController,
-                          autofocus: false,
-                          decoration: InputDecorations.buildInputDecoration_1(
-                              hint_text: "user@example.com"),
-                        ),
+              AnimatedCrossFade(
+                firstChild: const SizedBox(width: double.maxFinite),
+                secondChild: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingSmallExtra),
+                      child: Text(
+                        _login_by == "email"
+                            ? "email_ucf".tr(context: context)
+                            : "login_screen_phone".tr(context: context),
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w600),
                       ),
-                      otp_addon_installed.$
-                          ? GestureDetector(
+                    ),
+                    if (_login_by == "email")
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingSmall),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 36,
+                              child: TextField(
+                                controller: _emailController,
+                                autofocus: false,
+                                decoration:
+                                    InputDecorations.buildInputDecoration_1(
+                                        hint_text: "user@example.com"),
+                              ),
+                            ),
+                            otp_addon_installed.$
+                                ? GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _login_by = "phone";
+                                      });
+                                    },
+                                    child: Text(
+                                      'or_login_with_a_phone'
+                                          .tr(context: context),
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  )
+                                : emptyWidget
+                          ],
+                        ),
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: AppDimensions.paddingSmall),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              height: 36,
+                              child: CustomInternationalPhoneNumberInput(
+                                countries: countries_code,
+                                hintText:
+                                    'phone_number_ucf'.tr(context: context),
+                                errorMessage:
+                                    'invalid_phone_number'.tr(context: context),
+                                initialValue: PhoneNumber(
+                                    isoCode: AppConfig.default_country),
+                                onInputChanged: (PhoneNumber number) {
+                                  setState(() {
+                                    if (number.isoCode != null)
+                                      AppConfig.default_country =
+                                          number.isoCode!;
+                                    _phone = number.phoneNumber;
+                                  });
+                                },
+                                onInputValidated: (bool value) {
+                                  print(value);
+                                },
+                                selectorConfig: const SelectorConfig(
+                                  selectorType: PhoneInputSelectorType.DIALOG,
+                                ),
+                                ignoreBlank: false,
+                                autoValidateMode: AutovalidateMode.disabled,
+                                selectorTextStyle:
+                                    const TextStyle(color: MyTheme.font_grey),
+                                textStyle:
+                                    const TextStyle(color: MyTheme.font_grey),
+                                // initialValue: PhoneNumber(
+                                //     isoCode: countries_code[0].toString()),
+                                textFieldController: _phoneNumberController,
+                                formatInput: true,
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        signed: true, decimal: true),
+                                inputDecoration:
+                                    InputDecorations.buildInputDecoration_phone(
+                                        hint_text: "01XXX XXX XXX"),
+                                onSaved: (PhoneNumber number) {
+                                  print('On Saved: $number');
+                                },
+                              ),
+                            ),
+                            GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  _login_by = "phone";
+                                  _login_by = "email";
                                 });
                               },
                               child: Text(
-                                'or_login_with_a_phone'.tr(context: context),
+                                "or_login_with_an_email".tr(context: context),
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),
                             )
-                          : emptyWidget
-                    ],
-                  ),
-                )
-              else
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        height: 36,
-                        child: CustomInternationalPhoneNumberInput(
-                          countries: countries_code,
-                          hintText: 'phone_number_ucf'.tr(context: context),
-                          errorMessage:
-                              'invalid_phone_number'.tr(context: context),
-                          initialValue:
-                              PhoneNumber(isoCode: AppConfig.default_country),
-                          onInputChanged: (PhoneNumber number) {
-                            setState(() {
-                              if (number.isoCode != null)
-                                AppConfig.default_country = number.isoCode!;
-                              _phone = number.phoneNumber;
-                            });
-                          },
-                          onInputValidated: (bool value) {
-                            print(value);
-                          },
-                          selectorConfig: const SelectorConfig(
-                            selectorType: PhoneInputSelectorType.DIALOG,
-                          ),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle:
-                              const TextStyle(color: MyTheme.font_grey),
-                          textStyle: const TextStyle(color: MyTheme.font_grey),
-                          // initialValue: PhoneNumber(
-                          //     isoCode: countries_code[0].toString()),
-                          textFieldController: _phoneNumberController,
-                          formatInput: true,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              signed: true, decimal: true),
-                          inputDecoration:
-                              InputDecorations.buildInputDecoration_phone(
-                                  hint_text: "01XXX XXX XXX"),
-                          onSaved: (PhoneNumber number) {
-                            print('On Saved: $number');
-                          },
+                          ],
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _login_by = "email";
-                          });
-                        },
-                        child: Text(
-                          "or_login_with_an_email".tr(context: context),
-                          style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingSmallExtra),
+                      child: Text(
+                        "password_ucf".tr(context: context),
+                        style: TextStyle(
                             color: Theme.of(context).primaryColor,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: AppDimensions.paddingSmallExtra),
-                child: Text(
-                  "password_ucf".tr(context: context),
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        controller: _passwordController,
-                        autofocus: false,
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "• • • • • • • •"),
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return PasswordForget();
-                        }));
-                      },
-                      child: Text(
-                        'login_screen_forgot_password'.tr(context: context),
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontStyle: FontStyle.italic,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: AppDimensions.paddingSmall),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            height: 36,
+                            child: TextField(
+                              controller: _passwordController,
+                              autofocus: false,
+                              obscureText: true,
+                              enableSuggestions: false,
+                              autocorrect: false,
+                              decoration:
+                                  InputDecorations.buildInputDecoration_1(
+                                      hint_text: "• • • • • • • •"),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return PasswordForget();
+                              }));
+                            },
+                            child: Text(
+                              'login_screen_forgot_password'
+                                  .tr(context: context),
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                    )
+                    ),
                   ],
                 ),
+                crossFadeState: showLoginFields
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: duration,
               ),
-              Padding(
-                padding:
+              Container(
+                height: 45,
+                margin:
                     const EdgeInsets.only(top: AppDimensions.paddingExtraLarge),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: MyTheme.textfield_grey, width: 1),
-                      borderRadius: const BorderRadius.all(
-                          Radius.circular(AppDimensions.radiusNormal))),
-                  child: Btn.minWidthFixHeight(
-                    minWidth: MediaQuery.sizeOf(context).width,
-                    height: 50,
-                    color: Theme.of(context).primaryColor,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(AppDimensions.radiusHalfSmall))),
-                    child: Text(
-                      "login_screen_log_in".tr(context: context),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    onPressed: () {
-                      onPressedLogin(context);
-                    },
+                decoration: BoxDecoration(
+                    border: Border.all(color: MyTheme.textfield_grey, width: 1),
+                    borderRadius: const BorderRadius.all(
+                        Radius.circular(AppDimensions.radiusNormal))),
+                child: Btn.minWidthFixHeight(
+                  minWidth: MediaQuery.sizeOf(context).width,
+                  height: 50,
+                  color: Theme.of(context).primaryColor,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(AppDimensions.radiusHalfSmall))),
+                  child: Text(
+                    "login_screen_log_in".tr(context: context),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600),
                   ),
+                  onPressed: () {
+                    if (!showLoginFields) {
+                      showLoginFields = true;
+                      setState(() {});
+                      return;
+                    }
+
+                    onPressedLogin(context);
+                  },
                 ),
               ),
               Padding(
@@ -681,7 +680,7 @@ class _LoginState extends State<Login> {
                       const TextStyle(color: MyTheme.font_grey, fontSize: 12),
                 )),
               ),
-              Container(
+              SizedBox(
                 height: 45,
                 child: Btn.minWidthFixHeight(
                   minWidth: MediaQuery.sizeOf(context).width,
@@ -729,63 +728,89 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(top: 15.0),
-                width: double.maxFinite,
-                child: Wrap(
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.spaceAround,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: AppDimensions.paddingDefault,
-                  runSpacing: AppDimensions.paddingLarge,
-                  children: [
-                    if (AppConfig.businessSettingsData.allowGoogleLogin)
-                      LoginWith3rd(
-                        onTap: onPressedGoogleLogin,
-                        name: 'google_ucf'.tr(context: context),
-                        assetImage: AppImages.google,
-                      ),
-                    if (AppConfig.businessSettingsData.allowFacebookLogin)
-                      LoginWith3rd(
-                        onTap: onPressedFacebookLogin,
-                        name: 'facebook_ucf'.tr(context: context),
-                        assetImage: AppImages.facebook,
-                      ),
-                    // if (AppConfig.businessSettingsData.allowOTPLogin)
-                    //   LoginWith3rd(
-                    //     onTap: onPressedOTPLogin,
-                    //     name: "OTP",
-                    //     assetImage: AppImages.otp,
-                    //     imageColor: Theme.of(context).primaryColor,
-                    //   ),
-                    if (AppConfig.businessSettingsData.allowOTPLogin)
-                      ...List.generate(
-                        AppConfig.businessSettingsData.otpProviders.length,
-                        (i) {
-                          final OTPProviderModel otpProvider =
-                              AppConfig.businessSettingsData.otpProviders[i];
+              Builder(builder: (context) {
+                final w = min(MediaQuery.sizeOf(context).width,
+                    AppDimensions.phoneMaxWidth);
 
-                          final String providerName =
-                              otpProvider.sendOTPText ?? "OTP";
-                          return LoginWith3rd(
-                            onTap: () => onPressedOTPLogin(
-                              providerName: providerName,
-                              providerType: otpProvider.type,
+                final h = min(w, MediaQuery.sizeOf(context).height);
+                final l = loginWith(context);
+                return AnimatedScale(
+                  duration: duration,
+                  scale: showLoginFields ? 1.0 : 1.3,
+                  alignment: Alignment.topCenter,
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: AnimatedContainer(
+                      duration: duration,
+                      padding: const EdgeInsets.only(top: 15.0),
+                      margin: showLoginFields
+                          ? EdgeInsets.zero
+                          : EdgeInsets.all(w * 0.1).copyWith(
+                              top: 0,
+                              bottom: l.length *
+                                  h *
+                                  (w < AppDimensions.phoneMaxWidth ? 0.03 : 0.02),
                             ),
-                            name: providerName,
-                            networkImage: otpProvider.image,
-                            assetImage: AppImages.otp,
-                          );
-                        },
+                      child: Wrap(
+                        runAlignment: WrapAlignment.center,
+                        alignment: WrapAlignment.spaceAround,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: AppDimensions.paddingDefault,
+                        runSpacing: AppDimensions.paddingLarge,
+                        children: l,
                       ),
-                  ],
-                ),
-              ),
+                    ),
+                  ),
+                );
+              }),
             ],
           ),
         )
       ],
     );
+  }
+
+  List<Widget> loginWith(BuildContext context) {
+    return [
+      if (AppConfig.businessSettingsData.allowGoogleLogin)
+        LoginWith3rd(
+          onTap: onPressedGoogleLogin,
+          name: 'google_ucf'.tr(context: context),
+          assetImage: AppImages.google,
+        ),
+      if (AppConfig.businessSettingsData.allowFacebookLogin)
+        LoginWith3rd(
+          onTap: onPressedFacebookLogin,
+          name: 'facebook_ucf'.tr(context: context),
+          assetImage: AppImages.facebook,
+        ),
+      // if (AppConfig.businessSettingsData.allowOTPLogin)
+      //   LoginWith3rd(
+      //     onTap: onPressedOTPLogin,
+      //     name: "OTP",
+      //     assetImage: AppImages.otp,
+      //     imageColor: Theme.of(context).primaryColor,
+      //   ),
+      if (AppConfig.businessSettingsData.allowOTPLogin)
+        ...List.generate(
+          AppConfig.businessSettingsData.otpProviders.length,
+          (i) {
+            final OTPProviderModel otpProvider =
+                AppConfig.businessSettingsData.otpProviders[i];
+
+            final String providerName = otpProvider.sendOTPText ?? "OTP";
+            return LoginWith3rd(
+              onTap: () => onPressedOTPLogin(
+                providerName: providerName,
+                providerType: otpProvider.type,
+              ),
+              name: providerName,
+              networkImage: otpProvider.image,
+              assetImage: AppImages.otp,
+            );
+          },
+        ),
+    ];
   }
 }
 
