@@ -81,7 +81,7 @@ class FileUploadRepository {
     String endPoint, {
     void Function(double progress)? onProgress,
     required List<XFile> files,
-    String fieldName = "aiz_file",
+    String fieldName = "images[]",
   }) async {
     final Uri url = Uri.parse("${AppConfig.BASE_URL}/$endPoint");
 
@@ -89,9 +89,15 @@ class FileUploadRepository {
 
     req.headers.addAll({
       "Authorization": "Bearer ${access_token.$}",
-      "Accept": "*/*",
-      "System-Key": AppConfig.system_key,
+      "Accept": "application/json",
+      "System-Key": AppConfig.system_key
     });
+
+    req.fields.addAll(
+      is_logged_in.$
+          ? {"user_id": user_id.$.toString()}
+          : {"temp_user_id": temp_user_id.$.toString()},
+    );
 
     for (final f in files) {
       req.files.add(
@@ -138,7 +144,7 @@ class FileUploadRepository {
     final respBody = await utf8.decodeStream(ioRes);
 
     if (ioRes.statusCode < 200 || ioRes.statusCode >= 300) {
-      throw HttpException("Upload failed (${ioRes.statusCode}): $respBody");
+      throw respBody;
     }
 
     final Map<String, dynamic> jsonMap =

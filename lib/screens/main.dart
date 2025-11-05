@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/main.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/bottom_appbar_index.dart';
@@ -295,94 +298,113 @@ class _MainState extends State<Main> {
       return;
     }
 
-    if (_presc.imagesVN.value.isEmpty) {
+    addPrescriptionFN(
+      context,
+      _presc,
+      () => setState(() => _currentIndex = 3),
+    );
+  }
+}
+
+Future<void> addPrescriptionFN(
+  BuildContext context,
+  PrescriptionController _presc, [
+  void Function()? afterUpload,
+]) async {
+  if (_presc.imagesVN.value.isEmpty) {
+    await CameraHelper.openImageSourceSheet(
+      context,
+      onAddImages: (x) => _presc.addImages(x),
+    );
+  }
+  if (_presc.imagesVN.value.isEmpty) return;
+  await showPrescriptionSheetReusable(
+    context: context,
+    imagesController: _presc,
+    onAddMore: () async {
       await CameraHelper.openImageSourceSheet(
         context,
         onAddImages: (x) => _presc.addImages(x),
       );
-    }
-    await showPrescriptionSheetReusable(
-      context: context,
-      imagesController: _presc,
-      onAddMore: () async {
-        await CameraHelper.openImageSourceSheet(
-          context,
-          onAddImages: (x) => _presc.addImages(x),
+    },
+    onReplaceAt: (i) async {
+      final nx = await CameraHelper.getImageBottomSheet(
+        context,
+        cameraTitle: 'replace_camera'.tr(context: context),
+        galleryTitle: 'replace_gallery'.tr(context: context),
+      );
+      if (nx != null) _presc.replaceAt(i, nx);
+    },
+    onDeleteAt: (i) => _presc.removeAt(i),
+    onClearAll: () async {
+      final ok = await showDialog<bool>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text('clear_all_images'.tr(context: context)),
+              content: Text('confirm_remove_all_prescription_images'
+                  .tr(context: context)),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  child: Text('cancel'.tr(context: context)),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, true),
+                  child: Text('yes_clear'.tr(context: context)),
+                ),
+              ],
+            ),
+          ) ??
+          false;
+      if (ok) {
+        _presc.clearAll();
+        if (Navigator.canPop(context)) Navigator.pop(context);
+      }
+    },
+    onSubmit: () async {
+      if (_presc.images.isEmpty) return;
+      _presc.setUploading(true);
+      _presc.setProgress(0.0);
+      try {
+        await FileUploadRepository().multiFileUploadHttpWithProgress(
+          "carts/prescription/add",
+          files: _presc.images,
+          onProgress: _presc.setProgress,
         );
-      },
-      onReplaceAt: (i) async {
-        final nx = await CameraHelper.getImageBottomSheet(
-          context,
-          cameraTitle: 'replace_camera'.tr(context: context),
-          galleryTitle: 'replace_gallery'.tr(context: context),
-        );
-        if (nx != null) _presc.replaceAt(i, nx);
-      },
-      onDeleteAt: (i) => _presc.removeAt(i),
-      onClearAll: () async {
-        final ok = await showDialog<bool>(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                title: Text('clear_all_images'.tr(context: context)),
-                content: Text('confirm_remove_all_prescription_images'
-                    .tr(context: context)),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(ctx, false),
-                    child: Text('cancel'.tr(context: context)),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(ctx, true),
-                    child: Text('yes_clear'.tr(context: context)),
-                  ),
-                ],
-              ),
-            ) ??
-            false;
-        if (ok) {
-          _presc.clearAll();
-          if (Navigator.canPop(context)) Navigator.pop(context);
-        }
-      },
-      onSubmit: () async {
-        if (_presc.images.isEmpty) return;
-        _presc.setUploading(true);
-        _presc.setProgress(0.0);
+        Provider.of<CartProvider>(context, listen: false).fetchData(context);
+        if (Navigator.canPop(context)) Navigator.pop(context);
+        afterUpload?.call();
+      } catch (e, s) {
+        String error = '';
+
         try {
-          await FileUploadRepository().multiFileUploadHttpWithProgress(
-            "|",
-            files: _presc.images,
-            onProgress: _presc.setProgress,
-          );
-          getCartData();
-          if (Navigator.canPop(context)) Navigator.pop(context);
-          setState(() => _currentIndex = 3);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('${"upload_failed".tr(context: context)}: $e')),
-          );
-        } finally {
-          _presc.setUploading(false);
+          error += "${jsonDecode(e.toString())["message"]}";
+        } catch (a) {
+          error += "$e";
         }
-      },
-      onOpenViewer: (index) {
-        final imgs = _presc.images;
-        if (imgs.isEmpty) return;
-        Navigator.push(
-          OneContext().context!,
-          MaterialPageRoute(
-            builder: (_) => ImageViewerPage.fromFiles(
-              imgs,
-              initialIndex: index,
-              heroTags: List.generate(
-                imgs.length,
-                (index) => "${imgs[index].path}",
-              ),
+
+        ToastComponent.showDialog(error, isError: true);
+        recordError(e, s);
+      } finally {
+        _presc.setUploading(false);
+      }
+    },
+    onOpenViewer: (index) {
+      final imgs = _presc.images;
+      if (imgs.isEmpty) return;
+      Navigator.push(
+        OneContext().context!,
+        MaterialPageRoute(
+          builder: (_) => ImageViewerPage.fromFiles(
+            imgs,
+            initialIndex: index,
+            heroTags: List.generate(
+              imgs.length,
+              (index) => "${imgs[index].path}",
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
 }

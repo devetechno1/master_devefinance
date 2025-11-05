@@ -264,7 +264,11 @@ class _CartState extends State<_Cart> {
         color: MyTheme.mainColor,
       ),
 
-      height: widget.has_bottomnav! ? 200 : 120,
+      height: AppConfig.businessSettingsData.showPrescription
+          ? 240
+          : widget.has_bottomnav!
+              ? 200
+              : 120,
       //color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4),

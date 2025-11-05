@@ -192,6 +192,7 @@ Future<void> showPrescriptionSheetReusable({
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
+    clipBehavior: Clip.hardEdge,
     builder: (_) => PrescriptionSheet(
       controller: imagesController,
       onAddMore: onAddMore,

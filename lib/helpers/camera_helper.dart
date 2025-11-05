@@ -31,7 +31,9 @@ abstract final class CameraHelper {
   }) async {
     final bool? src = await showModalBottomSheet<bool>(
       context: context,
+      clipBehavior: Clip.hardEdge,
       builder: (mctx) => SafeArea(
+        bottom: true,
         child: Wrap(children: [
           ListTile(
             leading: const Icon(Icons.photo_camera_outlined),
@@ -55,32 +57,36 @@ abstract final class CameraHelper {
     required void Function(List<XFile>) onAddImages,
   }) async {
     if (!context.mounted) return;
-    await showModalBottomSheet(
+    final bool? src = await showModalBottomSheet(
       context: context,
+      clipBehavior: Clip.hardEdge,
       builder: (ctx) => SafeArea(
+        bottom: true,
         child: Wrap(
           children: [
             ListTile(
               leading: const Icon(Icons.photo_camera_outlined),
               title: Text('camera'.tr(context: context)),
-              onTap: () async {
-                Navigator.pop(ctx);
-                final x = await getImage(true);
-                if (x != null) onAddImages([x]);
-              },
+              onTap: () => Navigator.pop(ctx, true),
             ),
             ListTile(
               leading: const Icon(Icons.photo_library_outlined),
               title: Text('gallery'.tr(context: context)),
-              onTap: () async {
-                Navigator.pop(ctx);
-                final picks = await pickMulti();
-                if (picks.isNotEmpty) onAddImages(picks);
-              },
+              onTap: () => Navigator.pop(ctx, false),
             ),
           ],
         ),
       ),
     );
+
+    if (src == null) return;
+    final List<XFile> picks = [];
+    if (src) {
+      final x = await getImage(true);
+      if (x != null) picks.add(x);
+    } else {
+      picks.addAll(await pickMulti());
+    }
+    if (picks.isNotEmpty) onAddImages(picks);
   }
 }

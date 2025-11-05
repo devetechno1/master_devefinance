@@ -78,7 +78,7 @@ class AppConfig {
 
   /// use only domain name without http:// or https://
   /// if you make update to old type app from multi/cms to this. to save login put the [oldTokenKey]
-  static const DOMAIN_PATH = "sellerwise.devefinance.com";
+  static const DOMAIN_PATH = "v9.11.0.devefinance.com";
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
