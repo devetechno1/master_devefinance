@@ -714,15 +714,28 @@ class _LoginState extends State<Login> {
                 ),
               Visibility(
                 visible: AppConfig.businessSettingsData.otherLogins,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(top: AppDimensions.paddingLarge),
+                child: AnimatedPadding(
+                  duration: duration,
+                  padding: EdgeInsets.only(
+                    top: showLoginFields
+                        ? AppDimensions.paddingLarge
+                        : AppDimensions.paddingVeryExtraLarge,
+                  ),
                   child: Center(
-                    child: Text(
-                      "login_screen_login_with".tr(context: context),
-                      style: const TextStyle(
-                        color: MyTheme.font_grey,
-                        fontSize: 12,
+                    child: AnimatedDefaultTextStyle(
+                      duration: duration,
+                      style: showLoginFields
+                          ? const TextStyle(
+                              color: MyTheme.font_grey,
+                              fontSize: 14,
+                            )
+                          : const TextStyle(
+                              color: MyTheme.dark_font_grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      child: Text(
+                        "login_screen_login_with".tr(context: context),
                       ),
                     ),
                   ),
@@ -749,7 +762,9 @@ class _LoginState extends State<Login> {
                               top: 0,
                               bottom: l.length *
                                   h *
-                                  (w < AppDimensions.phoneMaxWidth ? 0.03 : 0.02),
+                                  (w < AppDimensions.phoneMaxWidth
+                                      ? 0.03
+                                      : 0.02),
                             ),
                       child: Wrap(
                         runAlignment: WrapAlignment.center,
