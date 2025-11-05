@@ -5,10 +5,41 @@ This file tracks all update versions for both the **Mobile App**.
 ---
 
 ## ✅ Latest Versions:
-- `mobileVersion = '9.10.50'`
+- `mobileVersion = '9.10.51'`
 ---
 
 ## 📱 Mobile App Updates
+<details>
+<summary><strong>AV 9.10.51 – Login UI Animation & Auth Screen Polish</strong></summary>
+
+### Auth / UI
+* Introduced **animated login transition** with `AnimatedCrossFade` and `AnimatedScale` for smoother UX.
+* Added **toggleable login fields** controlled by `AppConfig.showFullLoginFields` (`bool`).
+  * When `false`: shows a single “Login” button first.
+  * When pressed, expands to show full fields (email/phone + password).
+* Added **PopScope** logic to gracefully collapse fields on back press.
+* Polished "Login with..." text:
+  * Now animates size/color via `AnimatedDefaultTextStyle`.
+  * Adjusts padding responsively with `AnimatedPadding`.
+* Replaced red close icon with **white circular back icon** via `UsefulElements.backIcon`.
+
+### Code
+* `AppConfig`:
+  * Added constant `showFullLoginFields` with full documentation.
+* `login.dart`:
+  * Cleaned controller disposals.
+  * Extracted `loginWith(context)` builder.
+* `auth_ui.dart`:
+  * Updated cross button layout for LTR/RTL alignment.
+  * Imported `useful_elements.dart`.
+
+### API / Backend
+* **No changes.**
+
+### Must Update (Stores)
+* **No** — client-side UX polish only.
+</details>
+
 <details>
 <summary><strong>AV 9.10.50 – Mobile build upgrades: iOS 15 floor, Firebase/SDK bumps, and Flutter deps sync</strong></summary>
 
