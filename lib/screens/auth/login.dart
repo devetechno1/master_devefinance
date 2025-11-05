@@ -488,6 +488,7 @@ class _LoginState extends State<Login> {
                               height: 36,
                               child: TextField(
                                 controller: _emailController,
+                                textInputAction: TextInputAction.next,
                                 autofocus: false,
                                 decoration:
                                     InputDecorations.buildInputDecoration_1(
@@ -524,7 +525,9 @@ class _LoginState extends State<Login> {
                             SizedBox(
                               height: 36,
                               child: CustomInternationalPhoneNumberInput(
+                                keyboardAction: TextInputAction.next,
                                 countries: countries_code,
+
                                 hintText:
                                     'phone_number_ucf'.tr(context: context),
                                 errorMessage:
@@ -607,6 +610,8 @@ class _LoginState extends State<Login> {
                               obscureText: true,
                               enableSuggestions: false,
                               autocorrect: false,
+                              textInputAction: TextInputAction.done,
+                              onSubmitted: (_) => onPressedLogin(context),
                               decoration:
                                   InputDecorations.buildInputDecoration_1(
                                       hint_text: "• • • • • • • •"),
