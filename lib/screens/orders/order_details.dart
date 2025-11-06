@@ -29,6 +29,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../data_model/order_item_response.dart';
+import '../../ui_elements/prescription_card.dart';
 import 'download_bill.dart';
 
 class OrderDetails extends StatefulWidget {
@@ -64,6 +65,8 @@ class _OrderDetailsState extends State<OrderDetails> {
   DetailedOrder? _orderDetails;
   final List<OrderItem> _orderedItemList = [];
   bool _orderItemsInit = false;
+
+  OrderItem? prescriptionOrder;
 
   @override
   void initState() {
@@ -119,6 +122,15 @@ class _OrderDetailsState extends State<OrderDetails> {
     final orderItemResponse =
         await OrderRepository().getOrderItems(id: widget.id);
     _orderedItemList.addAll(orderItemResponse.ordered_items ?? []);
+    for (int i = 0; i < _orderedItemList.length; i++) {
+      if (_orderedItemList[i].isPrescription) {
+        prescriptionOrder = _orderedItemList[i];
+        _orderedItemList.removeAt(i);
+        break;
+      } else {
+        prescriptionOrder = null;
+      }
+    }
     _orderItemsInit = true;
 
     setState(() {});
@@ -1519,11 +1531,21 @@ class _OrderDetailsState extends State<OrderDetails> {
         child: ListView.separated(
           separatorBuilder: (context, index) =>
               const Divider(color: MyTheme.medium_grey),
-          itemCount: _orderedItemList.length,
+          itemCount: prescriptionOrder != null
+              ? _orderedItemList.length + 1
+              : _orderedItemList.length,
           scrollDirection: Axis.vertical,
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
+          reverse: true,
           itemBuilder: (context, index) {
+            if (index == _orderedItemList.length) {
+              return PrescriptionCard(
+                canAddMore: false,
+                padding: EdgeInsets.zero,
+                images: prescriptionOrder?.prescriptionImages ?? [],
+              );
+            }
             return buildOrderedProductItemsCard(index);
           },
         ),

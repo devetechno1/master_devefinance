@@ -4,6 +4,8 @@
 //https://app.quicktype.io/
 import 'dart:convert';
 
+import 'cart_response.dart';
+
 OrderItemResponse orderItemlResponseFromJson(String str) =>
     OrderItemResponse.fromJson(json.decode(str));
 
@@ -54,6 +56,8 @@ class OrderItem {
       this.refund_section,
       this.refund_button,
       this.refund_label,
+      this.isPrescription = false,
+      this.prescriptionImages = const [],
       this.refund_request_status});
 
   int? id;
@@ -73,6 +77,8 @@ class OrderItem {
   bool? refund_button;
   String? refund_label;
   int? refund_request_status;
+  bool isPrescription;
+  List<PrescriptionImages> prescriptionImages;
 
   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
         id: json["id"],
@@ -91,6 +97,11 @@ class OrderItem {
         refund_section: json["refund_section"],
         refund_button: json["refund_button"],
         refund_label: json["refund_label"],
+        isPrescription: "${json["is_prescription"]}" == "1",
+        prescriptionImages: List<PrescriptionImages>.from(
+          json["prescription_images"]
+              .map((x) => PrescriptionImages.fromJson(x)),
+        ),
         refund_request_status: json["refund_request_status"],
       );
 

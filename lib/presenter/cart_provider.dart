@@ -254,6 +254,7 @@ import 'package:active_ecommerce_cms_demo_app/data_model/cart_response.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/cart_repository.dart';
+import 'package:active_ecommerce_cms_demo_app/status/execute_and_handle_remote_errors.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:provider/provider.dart';
@@ -261,6 +262,7 @@ import 'package:provider/provider.dart';
 import '../app_config.dart';
 import '../custom/aiz_route.dart';
 import '../custom/btn.dart';
+import '../custom/loading.dart';
 import '../helpers/debouncer.dart';
 import '../helpers/shared_value_helper.dart';
 import '../my_theme.dart';
@@ -337,18 +339,32 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> removePrescription(String id, BuildContext context) async {
+    Loading.show(context);
+
+    await handleErrorsWithMessage(
+      () => CartRepository().removePrescription(id),
+    );
+    await fetchData(context);
+    Loading.close();
+  }
+
   void setPrescriptionItem() {
     if (AppConfig.businessSettingsData.isPrescriptionActive &&
         _shopList.isNotEmpty &&
         _shopList[0].cartItems!.isNotEmpty) {
-      prescriptionItem = _shopList[0].cartItems![0];
-      _shopResponse!.data![0].cartItems!.removeAt(0);
-      if (_shopList[0].cartItems!.isEmpty) _shopList.removeAt(0);
+      final CartItem first = _shopList[0].cartItems![0];
+      if (first.isPrescription) {
+        prescriptionItem = first;
+        _shopResponse!.data![0].cartItems!.removeAt(0);
+        if (_shopList[0].cartItems!.isEmpty) _shopList.removeAt(0);
 
-      // _shopList[0].cartItems!.removeAt(0);
-    } else {
-      prescriptionItem = null;
+        // _shopList[0].cartItems!.removeAt(0);
+
+        return;
+      }
     }
+    prescriptionItem = null;
   }
 
   Future<void> getCartCount(BuildContext context) {

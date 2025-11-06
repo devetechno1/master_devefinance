@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 
 import '../../app_config.dart';
 import '../../custom/wholesale_text_widget.dart';
+import '../../ui_elements/prescription_card.dart';
 import '../product/product_details.dart';
 
 class ShippingInfo extends StatefulWidget {
@@ -1033,8 +1034,17 @@ class _ShippingInfoState extends State<ShippingInfo> {
     );
   }
 
-  Container buildCartSellerItemCard(itemIndex, sellerIndex) {
+  Widget buildCartSellerItemCard(itemIndex, sellerIndex) {
     final CartItem item = _deliveryInfoList[sellerIndex].cartItems![itemIndex];
+
+    if (item.isPrescription == true) {
+      return PrescriptionCard(
+        canAddMore: false,
+        padding: EdgeInsets.all(0),
+        images: item.prescriptionImages,
+      );
+    }
+
     final bool hasWholesale = makeNewVisualWholesale(item.wholesales);
     return Container(
       height: 100,

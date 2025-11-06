@@ -32,13 +32,18 @@ class PrescriptionCardCart extends StatelessWidget {
     return PrescriptionCard(
       canAddMore: true,
       padding: padding,
-      onDelete: onDeleteAt,
       titleTextStyle: titleTextStyle,
+      onDelete: (id) => onDeleteAt(id, context),
       images: prescriptionItem?.prescriptionImages ?? [],
     );
   }
 
-  void onDeleteAt(int i) {}
+  Future<void> onDeleteAt(String id, BuildContext context) async {
+    Provider.of<CartProvider>(
+      context,
+      listen: false,
+    ).removePrescription(id, context);
+  }
 }
 
 class PrescriptionCard extends StatelessWidget {
@@ -54,7 +59,7 @@ class PrescriptionCard extends StatelessWidget {
   final EdgeInsets padding;
   final TextStyle? titleTextStyle;
   final List<PrescriptionImages> images;
-  final void Function(int index)? onDelete;
+  final void Function(String id)? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +142,7 @@ class PrescriptionCard extends StatelessWidget {
                       ),
                       if (onDelete != null)
                         IconButton(
-                          onPressed: () => onDelete!(i),
+                          onPressed: () => onDelete!(x.id),
                           icon: Icon(
                             Icons.delete_outline,
                             color: Theme.of(context).colorScheme.error,

@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'cart_response.dart';
 import 'product_details_response.dart';
 
 List<DeliveryInfoResponse> deliveryInfoResponseFromJson(String str) =>
@@ -112,6 +113,8 @@ class CartItem {
     this.productName,
     this.productThumbnailImage,
     this.isDigital,
+    this.isPrescription,
+    this.prescriptionImages = const [],
     this.wholesales = const [],
   });
 
@@ -124,6 +127,9 @@ class CartItem {
   String? productName;
   String? productThumbnailImage;
   bool? isDigital;
+  bool? isPrescription;
+  List<PrescriptionImages> prescriptionImages;
+
   List<Wholesale> wholesales;
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
@@ -136,6 +142,12 @@ class CartItem {
         productQuantity: int.tryParse("${json["product_quantity"]}"),
         productThumbnailImage: json["product_thumbnail_image"],
         isDigital: json["product_is_digital"],
+        isPrescription: "${json["is_prescription"]}" == "1",
+        prescriptionImages: json["prescription_images"] == null
+            ? []
+            : List<PrescriptionImages>.from(
+                (json["prescription_images"] as List)
+                    .map((x) => PrescriptionImages.fromJson(x))),
         wholesales: json["wholesale_variation"] == null
             ? []
             : List<Wholesale>.from((json["wholesale_variation"] as List)

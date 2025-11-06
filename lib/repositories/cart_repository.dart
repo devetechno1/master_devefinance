@@ -35,6 +35,29 @@ class CartRepository {
     return cartResponseFromJson(response.body);
   }
 
+  Future<void> removePrescription(String imageId) async {
+    const String url = "${AppConfig.BASE_URL}/carts/prescription/remove-image";
+    Map<String, String> postBody;
+
+    if (AppConfig.businessSettingsData.guestCheckoutStatus && !is_logged_in.$) {
+      postBody = {"temp_user_id": temp_user_id.$};
+    } else {
+      postBody = {"user_id": "${user_id.$}"};
+    }
+
+    postBody['image_id'] = imageId;
+
+    await ApiRequest.post(
+      url: url,
+      headers: {
+        "Content-Type": "application/json",
+        "App-Language": app_language.$!,
+      },
+      body: jsonEncode(postBody),
+      middleware: BannedUser(),
+    );
+  }
+
   // cart count
   Future<dynamic> getCartCount() async {
     String postBody;
