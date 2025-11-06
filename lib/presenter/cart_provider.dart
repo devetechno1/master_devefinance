@@ -295,6 +295,8 @@ class CartProvider extends ChangeNotifier {
 
   Debouncer debouncer = Debouncer(milliseconds: 900);
 
+  CartItem? prescriptionItem;
+
   int get itemsCount {
     int count = 0;
     for (var e in _shopList) {
@@ -327,11 +329,26 @@ class CartProvider extends ChangeNotifier {
     if (cartResponseList.data != null) {
       _shopList = cartResponseList.data!;
       _shopResponse = cartResponseList;
+      setPrescriptionItem();
       getSetCartTotal();
     }
     _isInitial = false;
 
     notifyListeners();
+  }
+
+  void setPrescriptionItem() {
+    if (AppConfig.businessSettingsData.isPrescriptionActive &&
+        _shopList.isNotEmpty &&
+        _shopList[0].cartItems!.isNotEmpty) {
+      prescriptionItem = _shopList[0].cartItems![0];
+      _shopResponse!.data![0].cartItems!.removeAt(0);
+      if (_shopList[0].cartItems!.isEmpty) _shopList.removeAt(0);
+
+      // _shopList[0].cartItems!.removeAt(0);
+    } else {
+      prescriptionItem = null;
+    }
   }
 
   Future<void> getCartCount(BuildContext context) {
@@ -535,8 +552,11 @@ class CartProvider extends ChangeNotifier {
       });
     }
 
-    if (cartIds.isEmpty) {
-      ToastComponent.showDialog('cart_is_empty'.tr(context: context));
+    if (cartIds.isEmpty && prescriptionItem == null) {
+      ToastComponent.showDialog(
+        'cart_is_empty'.tr(context: context),
+        isError: true,
+      );
       return true;
     }
 

@@ -31,6 +31,7 @@ import '../ui_elements/pop_up_banner.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
 import 'cart_provider.dart';
+import 'prescription_controller.dart';
 
 class HomeProvider extends ChangeNotifier {
   HomeProvider(Address? address) {
@@ -39,6 +40,9 @@ class HomeProvider extends ChangeNotifier {
   CurrentRemainingTime flashDealRemainingTime =
       const CurrentRemainingTime(days: 0, hours: 0, min: 0, sec: 0);
   FlashDealResponseDatum? flashDeal;
+
+  final PrescriptionController presc = PrescriptionController();
+
 
   Timer? _flashDealTimer;
   DateTime? _flashDealEndTime;

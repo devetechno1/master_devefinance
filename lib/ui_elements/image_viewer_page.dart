@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:one_context/one_context.dart';
+
+import '../data_model/cart_response.dart';
 
 /// عارض صور عام:
 /// - يقبل أي ImageProvider (FileImage, NetworkImage, AssetImage, CachedNetworkImageProvider).
@@ -42,6 +45,33 @@ class ImageViewerPage extends StatefulWidget {
   }) {
     return ImageViewerPage(
       images: files.map((f) => FileImage(File(f.path))).toList(),
+      initialIndex: initialIndex,
+      heroTags: heroTags,
+      enableHero: enableHero,
+    );
+  }
+
+  factory ImageViewerPage.fromNetwork(
+    List<String> links, {
+    int initialIndex = 0,
+    List<Object?>? heroTags,
+    bool enableHero = true,
+  }) {
+    return ImageViewerPage(
+      images: links.map((f) => CachedNetworkImageProvider(f)).toList(),
+      initialIndex: initialIndex,
+      heroTags: heroTags,
+      enableHero: enableHero,
+    );
+  }
+  factory ImageViewerPage.prescription(
+    List<PrescriptionImages> images, {
+    int initialIndex = 0,
+    List<Object?>? heroTags,
+    bool enableHero = true,
+  }) {
+    return ImageViewerPage(
+      images: images.map((f) => CachedNetworkImageProvider(f.image)).toList(),
       initialIndex: initialIndex,
       heroTags: heroTags,
       enableHero: enableHero,
@@ -213,7 +243,7 @@ class _ImageViewerPageState extends State<ImageViewerPage>
       ),
       body: PageView.builder(
         controller: _pageController,
-        allowImplicitScrolling: true,
+        allowImplicitScrolling: false,
         physics: _zoomedFlag
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(
@@ -232,14 +262,17 @@ class _ImageViewerPageState extends State<ImageViewerPage>
               final size = constraints.biggest;
 
               final heroWrapped = widget.enableHero
-                  ? Hero(
-                      tag: _heroTagFor(i),
-                      transitionOnUserGestures: true,
-                      child: Material(
-                        type: MaterialType.transparency,
-                        child: _buildImage(i),
+                  ? HeroMode(
+                    enabled: i == _index,
+                    child: Hero(
+                        tag: _heroTagFor(i),
+                        transitionOnUserGestures: true,
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: _buildImage(i),
+                        ),
                       ),
-                    )
+                  )
                   : _buildImage(i);
 
               return Center(

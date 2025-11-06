@@ -45,7 +45,6 @@ class _MainState extends State<Main> {
   final BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
   late final HomeProvider homeProvider = context.read<HomeProvider>();
 
-  final PrescriptionController _presc = PrescriptionController();
 
   // ---- Cart / Data ----
   void fetchAll() {
@@ -155,7 +154,7 @@ class _MainState extends State<Main> {
     return Future.value(false);
   }
 
-  bool get showPrescription => AppConfig.businessSettingsData.showPrescription;
+  bool get showPrescription => AppConfig.businessSettingsData.isPrescriptionActive;
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +299,7 @@ class _MainState extends State<Main> {
 
     addPrescriptionFN(
       context,
-      _presc,
+      homeProvider.presc,
       () => setState(() => _currentIndex = 3),
     );
   }
@@ -373,6 +372,7 @@ Future<void> addPrescriptionFN(
         );
         Provider.of<CartProvider>(context, listen: false).fetchData(context);
         if (Navigator.canPop(context)) Navigator.pop(context);
+        _presc.clearAll();
         afterUpload?.call();
       } catch (e, s) {
         String error = '';

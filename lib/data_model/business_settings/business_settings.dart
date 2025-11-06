@@ -11,7 +11,7 @@ import 'update_model.dart';
 import 'verification_form.dart';
 
 class BusinessSettingsData extends Equatable {
-  final bool showPrescription;
+  final bool isPrescriptionActive;
   final bool hideEmailCheckout;
   final bool hidePostalCodeCheckout;
   final bool showWholesaleLabel;
@@ -287,7 +287,7 @@ class BusinessSettingsData extends Equatable {
   bool get useClarity => clarityProjectId?.isNotEmpty == true;
 
   BusinessSettingsData({
-    this.showPrescription = false,
+    this.isPrescriptionActive = false,
     this.hideEmailCheckout = false,
     this.hidePostalCodeCheckout = false,
     this.checkoutMessage,
@@ -579,7 +579,7 @@ class BusinessSettingsData extends Equatable {
         sentryDSN: (data['sentry_dsn'] as String?)?.trim(),
         clarityProjectId: (data['clarity_project_id'] as String?)?.trim(),
         updateData: updateData,
-        showPrescription: "${data['show_prescription']}" != "1", //TODO: change this to "${data['show_prescription']}" == "1",
+        isPrescriptionActive: "${data['is_prescription_active']}" == "1",
         hideEmailCheckout: "${data['hide_email_checkout']}" == "1",
         hidePostalCodeCheckout: "${data['hide_postal_code_checkout']}" == "1",
         checkoutMessage: data['checkout_message'] == null

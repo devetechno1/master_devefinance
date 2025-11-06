@@ -19,9 +19,7 @@ class CartSellerItemListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 14,
-        ),
+        separatorBuilder: (context, index) => const SizedBox(height: 14),
         itemCount: cartProvider.shopList[sellerIndex].cartItems!.length,
         scrollDirection: Axis.vertical,
         physics: const NeverScrollableScrollPhysics(),

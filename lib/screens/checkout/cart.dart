@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../../app_config.dart';
 import '../../custom/cart_seller_item_list_widget.dart';
 import '../../presenter/cart_provider.dart';
+import '../../ui_elements/prescription_card.dart';
 
 class Cart extends StatelessWidget {
   const Cart(
@@ -237,10 +238,7 @@ class _CartState extends State<_Cart> {
                         //   ),
                         // ),
                         // ],
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                          child: buildCartSellerList(cartProvider, context),
-                        ),
+                        buildCartSellerList(cartProvider, context),
                         SizedBox(height: widget.has_bottomnav! ? 140 : 100),
                       ],
                     ),
@@ -264,7 +262,7 @@ class _CartState extends State<_Cart> {
         color: MyTheme.mainColor,
       ),
 
-      height: AppConfig.businessSettingsData.showPrescription
+      height: AppConfig.businessSettingsData.isPrescriptionActive
           ? 240
           : widget.has_bottomnav!
               ? 200
@@ -347,9 +345,7 @@ class _CartState extends State<_Cart> {
               ),
               child: Btn.basic(
                 minWidth: MediaQuery.sizeOf(context).width,
-                color: cartProvider.shopList.isNotEmpty
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey,
+                color: Theme.of(context).primaryColor,
                 shape: app_language_rtl.$!
                     ? const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -378,9 +374,10 @@ class _CartState extends State<_Cart> {
                       fontSize: 13,
                       fontWeight: FontWeight.w700),
                 ),
-                onPressed: () {
-                  cartProvider.onPressProceedToShipping(context);
-                },
+                onPressed: cartProvider.shopList.isNotEmpty ||
+                        cartProvider.prescriptionItem != null
+                    ? () => cartProvider.onPressProceedToShipping(context)
+                    : null,
               ),
             ),
           ],
@@ -408,78 +405,86 @@ class _CartState extends State<_Cart> {
     );
   }
 
-  Widget? buildCartSellerList(cartProvider, context) {
-    if (cartProvider.isInitial && cartProvider.shopList.length == 0) {
+  Widget buildCartSellerList(CartProvider cartProvider, context) {
+    const EdgeInsets padding = EdgeInsets.fromLTRB(20, 10, 20, 0);
+    if (cartProvider.isInitial &&
+        cartProvider.shopList.isEmpty &&
+        cartProvider.prescriptionItem == null) {
       return SingleChildScrollView(
+          padding: padding,
           child: ShimmerHelper()
               .buildListShimmer(item_count: 5, item_height: 100.0));
-    } else if (cartProvider.shopList.length > 0) {
+    } else if (cartProvider.shopList.isNotEmpty ||
+        cartProvider.prescriptionItem != null) {
+      const TextStyle titleTextStyle = TextStyle(
+        color: MyTheme.dark_font_grey,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      );
       return SingleChildScrollView(
-        child: ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 26,
-          ),
-          itemCount: cartProvider.shopList.length,
-          scrollDirection: Axis.vertical,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: AppDimensions.paddingNormal),
-                  child: Row(
-                    children: [
-                      Text(
-                        cartProvider.shopList[index].name,
-                        style: const TextStyle(
-                            color: MyTheme.dark_font_grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12),
+        child: Column(
+          spacing: 26,
+          children: [
+            if (cartProvider.prescriptionItem != null)
+              const PrescriptionCardCart(
+                padding: padding,
+                titleTextStyle: titleTextStyle,
+              ),
+            ListView.separated(
+              padding: padding,
+              separatorBuilder: (context, index) => const SizedBox(height: 26),
+              itemCount: cartProvider.shopList.length,
+              scrollDirection: Axis.vertical,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: AppDimensions.paddingNormal,
                       ),
-                      const Spacer(),
-                      // Text(
-                      //     cartProvider.shopList[index].subTotal.replaceAll(
-                      //             SystemConfig.systemCurrency!.code,
-                      //             SystemConfig.systemCurrency!.symbol) ??
-                      //         '',
-                      //     style: TextStyle(
-                      //         color: Theme.of(context).primaryColor,
-                      //         fontWeight: FontWeight.bold,
-                      //         fontSize: 12),
-                      //   ),
-                      AnimatedNumberText<double>(
-                        double.tryParse(
-                              cartProvider.shopList[index].subTotal
-                                  .replaceAll(RegExp('[^0-9.]'), ''),
-                            ) ??
-                            0.0, // fallback value لو فشل التحويل
+                      child: Row(
+                        children: [
+                          Text(
+                            cartProvider.shopList[index].name ?? '',
+                            style: titleTextStyle,
+                          ),
+                          const Spacer(),
+                          AnimatedNumberText<double>(
+                            double.tryParse(
+                                  cartProvider.shopList[index].subTotal
+                                          ?.replaceAll(RegExp('[^0-9.]'), '') ??
+                                      '0.0',
+                                ) ??
+                                0.0, // fallback value لو فشل التحويل
 
-                        duration: const Duration(milliseconds: 300),
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        formatter: (value) =>
-                            '${value.toStringAsFixed(2)} ${SystemConfig.systemCurrency?.symbol ?? ''}',
+                            duration: const Duration(milliseconds: 300),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                            formatter: (value) =>
+                                '${value.toStringAsFixed(2)} ${SystemConfig.systemCurrency?.symbol ?? ''}',
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                CartSellerItemListWidget(
-                  sellerIndex: index,
-                  cartProvider: cartProvider,
-                  context: context,
-                ),
-              ],
-            );
-          },
+                    ),
+                    CartSellerItemListWidget(
+                      sellerIndex: index,
+                      cartProvider: cartProvider,
+                      context: context,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
         ),
       );
-    } else if (!cartProvider.isInitial && cartProvider.shopList.length == 0) {
+    } else if (!cartProvider.isInitial && cartProvider.shopList.isEmpty) {
       return SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.65,
         child: Center(
@@ -492,7 +497,7 @@ class _CartState extends State<_Cart> {
         ),
       );
     }
-    return null;
+    return emptyWidget;
   }
 }
 

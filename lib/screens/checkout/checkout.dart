@@ -770,49 +770,51 @@ class _CheckoutState extends State<Checkout> {
   Row buildApplyCouponRow(BuildContext context) {
     return Row(
       children: [
-        Form(
-          key: _formKey,
-          child: Container(
-            height: 42,
-            width: (MediaQuery.sizeOf(context).width - 32) * (2 / 3),
-            child: TextFormField(
-              controller: _couponController,
-              readOnly: _coupon_applied!,
-              autofocus: false,
-              decoration: InputDecoration(
-                  hintText: 'enter_coupon_code'.tr(context: context),
-                  hintStyle: const TextStyle(
-                      fontSize: 14.0, color: MyTheme.textfield_grey),
-                  enabledBorder: app_language_rtl.$!
-                      ? const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: MyTheme.textfield_grey, width: 0.5),
-                          borderRadius: BorderRadius.only(
-                            topRight:
-                                Radius.circular(AppDimensions.radiusSmall),
-                            bottomRight:
-                                Radius.circular(AppDimensions.radiusSmall),
+        Expanded(
+          child: Form(
+            key: _formKey,
+            child: SizedBox(
+              height: 42,
+              width: (MediaQuery.sizeOf(context).width - 32) * (2 / 3),
+              child: TextFormField(
+                controller: _couponController,
+                readOnly: _coupon_applied!,
+                autofocus: false,
+                decoration: InputDecoration(
+                    hintText: 'enter_coupon_code'.tr(context: context),
+                    hintStyle: const TextStyle(
+                        fontSize: 14.0, color: MyTheme.textfield_grey),
+                    enabledBorder: app_language_rtl.$!
+                        ? const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: MyTheme.textfield_grey, width: 0.5),
+                            borderRadius: BorderRadius.only(
+                              topRight:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                              bottomRight:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                            ),
+                          )
+                        : const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: MyTheme.textfield_grey, width: 0.5),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(AppDimensions.radiusSmall),
+                              bottomLeft:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                            ),
                           ),
-                        )
-                      : const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: MyTheme.textfield_grey, width: 0.5),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(AppDimensions.radiusSmall),
-                            bottomLeft:
-                                Radius.circular(AppDimensions.radiusSmall),
-                          ),
-                        ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: MyTheme.medium_grey, width: 0.5),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppDimensions.radiusSmall),
-                      bottomLeft: Radius.circular(AppDimensions.radiusSmall),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: MyTheme.medium_grey, width: 0.5),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(AppDimensions.radiusSmall),
+                        bottomLeft: Radius.circular(AppDimensions.radiusSmall),
+                      ),
                     ),
-                  ),
-                  contentPadding:
-                      const EdgeInsetsDirectional.only(start: 16.0)),
+                    contentPadding:
+                        const EdgeInsetsDirectional.only(start: 16.0)),
+              ),
             ),
           ),
         ),

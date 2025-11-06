@@ -87,7 +87,9 @@ class CartItem {
   int upperLimit;
   int? _maxQty;
   bool isDigital;
+  bool isPrescription;
   bool isLoading;
+  List<PrescriptionImages> prescriptionImages;
   List<Wholesale> wholesales;
   int get maxQuantity =>
       isDigital ? 999999 : min(upperLimit, _maxQty ?? upperLimit);
@@ -112,6 +114,8 @@ class CartItem {
     this.lowerLimit,
     this.upperLimit = 0,
     this.isDigital = false,
+    this.isPrescription = false,
+    this.prescriptionImages = const [],
     int? maxQty,
     this.isLoading = false,
     this.wholesales = const [],
@@ -137,6 +141,12 @@ class CartItem {
         lowerLimit: json["lower_limit"],
         upperLimit: json["upper_limit"] ?? 0,
         isDigital: "${json["is_digital"]}" == "1",
+        isPrescription: "${json["is_prescription"]}" == "1",
+        prescriptionImages: json["prescription_images"] is List
+            ? (json["prescription_images"] as List)
+                .map((e) => PrescriptionImages.fromJson(e))
+                .toList()
+            : [],
         wholesales: json["wholesale_variation"] == null
             ? []
             : List<Wholesale>.from((json["wholesale_variation"] as List)
@@ -160,7 +170,25 @@ class CartItem {
         "quantity": quantity,
         "lower_limit": lowerLimit,
         "upper_limit": upperLimit,
+        "is_prescription": isPrescription ? "1" : "0",
+        "is_digital": isDigital ? "1" : "0",
         "wholesale_variation":
             List<dynamic>.from(wholesales.map((x) => x.toJson())),
       };
+}
+
+class PrescriptionImages {
+  final String id;
+  final String image;
+
+  const PrescriptionImages({
+    required this.id,
+    required this.image,
+  });
+
+  factory PrescriptionImages.fromJson(Map<String, dynamic> json) =>
+      PrescriptionImages(
+        id: json["id"],
+        image: json["path"],
+      );
 }

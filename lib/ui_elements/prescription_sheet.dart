@@ -106,9 +106,9 @@ class PrescriptionSheet extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Positioned(
+                        PositionedDirectional(
                           top: 4,
-                          right: 4,
+                          end: 4,
                           child: PopupMenuButton<String>(
                             onSelected: (v) {
                               if (v == 'replace') {
@@ -151,7 +151,7 @@ class PrescriptionSheet extends StatelessWidget {
                 ValueListenableBuilder<double>(
                   valueListenable: controller.progressVN,
                   builder: (_, p, __) =>
-                      Text('${(p * 100).toStringAsFixed(0)}%'),
+                      Text('${(p * 100).toStringAsFixed(2)}%'),
                 ),
                 const SizedBox(height: 8),
               ]);
