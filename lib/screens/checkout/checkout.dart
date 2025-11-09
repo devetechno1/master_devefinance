@@ -770,49 +770,52 @@ class _CheckoutState extends State<Checkout> {
   Row buildApplyCouponRow(BuildContext context) {
     return Row(
       children: [
-        Form(
-          key: _formKey,
-          child: Container(
-            height: 42,
-            width: (MediaQuery.sizeOf(context).width - 32) * (2 / 3),
-            child: TextFormField(
-              controller: _couponController,
-              readOnly: _coupon_applied!,
-              autofocus: false,
-              decoration: InputDecoration(
-                  hintText: 'enter_coupon_code'.tr(context: context),
-                  hintStyle: const TextStyle(
-                      fontSize: 14.0, color: MyTheme.textfield_grey),
-                  enabledBorder: app_language_rtl.$!
-                      ? const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: MyTheme.textfield_grey, width: 0.5),
-                          borderRadius: BorderRadius.only(
-                            topRight:
-                                Radius.circular(AppDimensions.radiusSmall),
-                            bottomRight:
-                                Radius.circular(AppDimensions.radiusSmall),
+        Flexible(
+          child: Form(
+            key: _formKey,
+            child: Container(
+              height: 42,
+              width: (MediaQuery.sizeOf(context).width - 32) * (2 / 3),
+              child: TextFormField(
+                controller: _couponController,
+                readOnly: _coupon_applied!,
+                autofocus: false,
+                decoration: InputDecoration(
+                    hintText: 'enter_coupon_code'.tr(context: context),
+                    hintStyle: const TextStyle(
+                        fontSize: 14.0, color: MyTheme.textfield_grey),
+                    enabledBorder: app_language_rtl.$!
+                        ? const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: MyTheme.textfield_grey, width: 0.5),
+                            borderRadius: BorderRadius.only(
+                              topRight:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                              bottomRight:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                            ),
+                          )
+                        : const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: MyTheme.textfield_grey, width: 0.5),
+                            borderRadius: BorderRadius.only(
+                              topLeft:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                              bottomLeft:
+                                  Radius.circular(AppDimensions.radiusSmall),
+                            ),
                           ),
-                        )
-                      : const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: MyTheme.textfield_grey, width: 0.5),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(AppDimensions.radiusSmall),
-                            bottomLeft:
-                                Radius.circular(AppDimensions.radiusSmall),
-                          ),
-                        ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: MyTheme.medium_grey, width: 0.5),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppDimensions.radiusSmall),
-                      bottomLeft: Radius.circular(AppDimensions.radiusSmall),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: MyTheme.medium_grey, width: 0.5),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(AppDimensions.radiusSmall),
+                        bottomLeft: Radius.circular(AppDimensions.radiusSmall),
+                      ),
                     ),
-                  ),
-                  contentPadding:
-                      const EdgeInsetsDirectional.only(start: 16.0)),
+                    contentPadding:
+                        const EdgeInsetsDirectional.only(start: 16.0)),
+              ),
             ),
           ),
         ),
@@ -997,11 +1000,14 @@ class _CheckoutState extends State<Checkout> {
                           Builder(
                             builder: (context) {
                               subPaymentOption = '';
+                              final List<SubPayment> integrations =
+                                  _paymentTypeList[index].integrations;
                               final bool hasSubOptions =
                                   _selected_payment_method_index == index &&
-                                      _paymentTypeList[index]
-                                          .integrations
-                                          .isNotEmpty;
+                                      integrations.isNotEmpty;
+                              if (integrations.length == 1 && hasSubOptions) {
+                                subPaymentOption = integrations[0].value ?? '';
+                              }
 
                               return AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
@@ -1015,21 +1021,18 @@ class _CheckoutState extends State<Checkout> {
                                 child: StatefulBuilder(
                                   builder: (context, setState2) {
                                     return ListView.builder(
-                                      itemCount: _paymentTypeList[index]
-                                          .integrations
-                                          .length,
+                                      itemCount: integrations.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, i) {
-                                        final SubPayment integration =
-                                            _paymentTypeList[index]
-                                                .integrations[i];
+                                        final SubPayment subPayment =
+                                            integrations[i];
                                         return Padding(
                                           padding:
                                               const EdgeInsetsDirectional.only(
                                             end: AppDimensions.paddingSmall,
                                           ),
                                           child: ChoiceChip(
-                                            avatar: integration.image == null
+                                            avatar: subPayment.image == null
                                                 ? null
                                                 : FadeInImage.assetNetwork(
                                                     placeholder:
@@ -1037,28 +1040,28 @@ class _CheckoutState extends State<Checkout> {
                                                     imageErrorBuilder:
                                                         (___, __, _) =>
                                                             emptyWidget,
-                                                    image: integration.image!,
+                                                    image: subPayment.image!,
                                                     fit: BoxFit.fitWidth,
                                                   ),
                                             checkmarkColor: Colors.white,
                                             onSelected: (value) {
                                               setState2(() {
                                                 subPaymentOption =
-                                                    integration.value ?? '';
+                                                    subPayment.value ?? '';
                                               });
                                             },
                                             selected: subPaymentOption ==
-                                                    integration.value &&
+                                                    subPayment.value &&
                                                 subPaymentOption
                                                     .trim()
                                                     .isNotEmpty,
-                                            label: Text(integration.name ?? ''),
+                                            label: Text(subPayment.name ?? ''),
                                             labelStyle: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium!
                                                 .copyWith(
                                                   color: subPaymentOption ==
-                                                              integration
+                                                              subPayment
                                                                   .value &&
                                                           subPaymentOption
                                                               .trim()

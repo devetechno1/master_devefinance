@@ -43,9 +43,15 @@ class PaymentTypeResponse {
         details: json["details"],
         integrations: json["integrations"] == null
             ? <SubPayment>[]
-            : (json["integrations"] as List<dynamic>)
-                .map<SubPayment>((x) => SubPayment.fromJson(x))
-                .toList(),
+            : () {
+                final List<SubPayment> integrations = <SubPayment>[];
+                for (final e in (json["integrations"] as List<dynamic>)) {
+                  final s = SubPayment.fromJson(e);
+                  if (s.status == true) integrations.add(s);
+                }
+
+                return integrations;
+              }(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,7 +70,7 @@ class SubPayment {
   String? type;
   String? name;
   String? value;
-  String? status;
+  bool? status;
   String? image;
 
   SubPayment({this.type, this.name, this.value, this.status, this.image});
@@ -73,7 +79,7 @@ class SubPayment {
     type = json['type'];
     name = json['name'];
     value = json['value'];
-    status = json['status'];
+    status = "${json['status']}" == "1";
     image = json['img_full_path'];
   }
 
@@ -82,7 +88,7 @@ class SubPayment {
     data['type'] = type;
     data['name'] = name;
     data['value'] = value;
-    data['status'] = status;
+    data['status'] = status == true ? "1" : "0";
     data['img_full_path'] = image;
     return data;
   }
