@@ -307,7 +307,8 @@ class _CheckoutState extends State<Checkout> {
       );
       return;
     }
-    if (_grandTotalValue == 0.00) {
+    if (_grandTotalValue == 0.00 &&
+        !AppConfig.businessSettingsData.isPrescriptionActive) {
       ToastComponent.showDialog(
         'nothing_to_pay'.tr(context: context),
         isError: true,
@@ -799,7 +800,8 @@ class _CheckoutState extends State<Checkout> {
                             borderSide: BorderSide(
                                 color: MyTheme.textfield_grey, width: 0.5),
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(AppDimensions.radiusSmall),
+                              topLeft:
+                                  Radius.circular(AppDimensions.radiusSmall),
                               bottomLeft:
                                   Radius.circular(AppDimensions.radiusSmall),
                             ),

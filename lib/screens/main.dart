@@ -173,7 +173,7 @@ class _MainState extends State<Main> {
           ),
           floatingActionButton: showPrescription
               ? Transform.translate(
-                  offset: const Offset(0, 8),
+                  offset: const Offset(0, 4),
                   child: FloatingActionButton(
                     onPressed: onTapPrescription,
                     child: const FaIcon(FontAwesomeIcons.filePrescription),

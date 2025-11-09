@@ -257,6 +257,8 @@ class _CartState extends State<_Cart> {
   }
 
   Container buildBottomContainer(CartProvider cartProvider) {
+    final bool canProceed = cartProvider.shopList.isNotEmpty ||
+        cartProvider.prescriptionItem != null;
     return Container(
       decoration: const BoxDecoration(
         color: MyTheme.mainColor,
@@ -345,7 +347,7 @@ class _CartState extends State<_Cart> {
               ),
               child: Btn.basic(
                 minWidth: MediaQuery.sizeOf(context).width,
-                color: Theme.of(context).primaryColor,
+                color: canProceed ? Theme.of(context).primaryColor : MyTheme.grey_153,
                 shape: app_language_rtl.$!
                     ? const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -374,8 +376,7 @@ class _CartState extends State<_Cart> {
                       fontSize: 13,
                       fontWeight: FontWeight.w700),
                 ),
-                onPressed: cartProvider.shopList.isNotEmpty ||
-                        cartProvider.prescriptionItem != null
+                onPressed: canProceed
                     ? () => cartProvider.onPressProceedToShipping(context)
                     : null,
               ),

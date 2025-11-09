@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 
+import '../constants/app_dimensions.dart';
+import '../my_theme.dart';
 import '../presenter/prescription_controller.dart';
 
 class PrescriptionSheet extends StatelessWidget {
@@ -144,8 +146,10 @@ class PrescriptionSheet extends StatelessWidget {
               return Column(children: [
                 ValueListenableBuilder<double>(
                   valueListenable: controller.progressVN,
-                  builder: (_, p, __) =>
-                      LinearProgressIndicator(value: p.clamp(0, 1)),
+                  builder: (_, p, __) => LinearProgressIndicator(
+                    value: p.clamp(0, 1),
+                    minHeight: 10,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 ValueListenableBuilder<double>(
@@ -167,6 +171,17 @@ class PrescriptionSheet extends StatelessWidget {
                   onPressed: images.isEmpty || uploading ? null : onSubmit,
                   icon: const Icon(Icons.shopping_cart_outlined),
                   label: Text('add_to_cart_ucf'.tr(context: context)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Colors.white,
+                    fixedSize: const Size.fromHeight(60),
+                    shadowColor: MyTheme.accent_color_shadow,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusHalfSmall),
+                    ),
+                    elevation: 5,
+                  ),
                 ),
               ),
             ),

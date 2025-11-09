@@ -566,9 +566,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                   Padding(
                       padding: const EdgeInsets.only(
                           left: 18.0, right: 18.0, top: 14.0),
-                      child: _orderedItemList.isEmpty && _orderItemsInit
+                      child: _orderedItemList.isEmpty && _orderItemsInit && prescriptionOrder == null
                           ? ShimmerHelper().buildBasicShimmer(height: 100.0)
-                          : (_orderedItemList.isNotEmpty
+                          : (_orderedItemList.isNotEmpty || prescriptionOrder != null
                               ? buildOrderdProductList()
                               : Container(
                                   height: 100,

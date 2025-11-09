@@ -141,12 +141,15 @@ class PrescriptionCard extends StatelessWidget {
                         ),
                       ),
                       if (onDelete != null)
-                        IconButton(
+                        IconButton.filled(
                           onPressed: () => onDelete!(x.id),
-                          icon: Icon(
-                            Icons.delete_outline,
-                            color: Theme.of(context).colorScheme.error,
+                          style: IconButton.styleFrom(
+                            foregroundColor:
+                                Theme.of(context).colorScheme.error,
+                            backgroundColor:
+                                Colors.blueGrey.withValues(alpha: 0.5),
                           ),
+                          icon: const Icon(Icons.delete_outline),
                         ),
                     ],
                   ),
