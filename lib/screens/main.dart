@@ -298,7 +298,7 @@ class _MainState extends State<Main> {
     }
 
     addPrescriptionFN(
-      context,
+      OneContext().context!,
       homeProvider.presc,
       () => setState(() => _currentIndex = 3),
     );
@@ -393,7 +393,7 @@ Future<void> addPrescriptionFN(
       final imgs = _presc.images;
       if (imgs.isEmpty) return;
       Navigator.push(
-        OneContext().context!,
+        context,
         MaterialPageRoute(
           builder: (_) => ImageViewerPage.fromFiles(
             imgs,

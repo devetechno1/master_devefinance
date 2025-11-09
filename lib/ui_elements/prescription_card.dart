@@ -122,18 +122,22 @@ class PrescriptionCard extends StatelessWidget {
                     children: [
                       Positioned.fill(
                         child: GestureDetector(
-                          onTap: () => onOpenViewer(i, images),
+                          onTap: () =>
+                              onOpenViewer(index, images.reversed.toList()),
                           child: Hero(
                             tag: "${x.image}",
                             transitionOnUserGestures: true,
-                            child: Material(
-                              type: MaterialType.transparency,
-                              child: CachedNetworkImage(
-                                imageUrl: x.image,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => Image.asset(
-                                  AppImages.placeholder,
+                            child: ClipRRect(
+                              borderRadius: borderRadius,
+                              child: Material(
+                                type: MaterialType.transparency,
+                                child: CachedNetworkImage(
+                                  imageUrl: x.image,
                                   fit: BoxFit.cover,
+                                  placeholder: (context, url) => Image.asset(
+                                    AppImages.placeholder,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
