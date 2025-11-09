@@ -1001,11 +1001,14 @@ class _CheckoutState extends State<Checkout> {
                           Builder(
                             builder: (context) {
                               subPaymentOption = '';
+                              final List<SubPayment> integrations =
+                                  _paymentTypeList[index].integrations;
                               final bool hasSubOptions =
                                   _selected_payment_method_index == index &&
-                                      _paymentTypeList[index]
-                                          .integrations
-                                          .isNotEmpty;
+                                      integrations.isNotEmpty;
+                              if (integrations.length == 1 && hasSubOptions) {
+                                subPaymentOption = integrations[0].value ?? '';
+                              }
 
                               return AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
@@ -1019,21 +1022,18 @@ class _CheckoutState extends State<Checkout> {
                                 child: StatefulBuilder(
                                   builder: (context, setState2) {
                                     return ListView.builder(
-                                      itemCount: _paymentTypeList[index]
-                                          .integrations
-                                          .length,
+                                      itemCount: integrations.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, i) {
-                                        final SubPayment integration =
-                                            _paymentTypeList[index]
-                                                .integrations[i];
+                                        final SubPayment subPayment =
+                                            integrations[i];
                                         return Padding(
                                           padding:
                                               const EdgeInsetsDirectional.only(
                                             end: AppDimensions.paddingSmall,
                                           ),
                                           child: ChoiceChip(
-                                            avatar: integration.image == null
+                                            avatar: subPayment.image == null
                                                 ? null
                                                 : FadeInImage.assetNetwork(
                                                     placeholder:
@@ -1041,28 +1041,28 @@ class _CheckoutState extends State<Checkout> {
                                                     imageErrorBuilder:
                                                         (___, __, _) =>
                                                             emptyWidget,
-                                                    image: integration.image!,
+                                                    image: subPayment.image!,
                                                     fit: BoxFit.fitWidth,
                                                   ),
                                             checkmarkColor: Colors.white,
                                             onSelected: (value) {
                                               setState2(() {
                                                 subPaymentOption =
-                                                    integration.value ?? '';
+                                                    subPayment.value ?? '';
                                               });
                                             },
                                             selected: subPaymentOption ==
-                                                    integration.value &&
+                                                    subPayment.value &&
                                                 subPaymentOption
                                                     .trim()
                                                     .isNotEmpty,
-                                            label: Text(integration.name ?? ''),
+                                            label: Text(subPayment.name ?? ''),
                                             labelStyle: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium!
                                                 .copyWith(
                                                   color: subPaymentOption ==
-                                                              integration
+                                                              subPayment
                                                                   .value &&
                                                           subPaymentOption
                                                               .trim()

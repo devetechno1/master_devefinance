@@ -10,6 +10,38 @@ This file tracks all update versions for both the **Mobile App**.
 
 ## 📱 Mobile App Updates
 <details>
+<summary><strong>AV 9.10.52 – Filter Enabled Sub-Payments and Fix Coupon Text Field Layout</strong></summary>
+
+### Data Model & Filtering (Payment Gateway)
+
+* **Filter Disabled Sub-Payments**: The JSON deserialization logic for `PaymentTypeResponse` is refactored to explicitly **filter and exclude `SubPayment` entries where `status == false`**. This ensures the UI only displays active/enabled payment integrations.
+    * This logic is applied inside `PaymentTypeResponse.fromJson` when mapping the `"integrations"` list.
+* **Fix `SubPayment.status` Type**: Changed the type of `status` field in the `SubPayment` data model from `String?` to `bool?`.
+    * Updated the `fromJson` factory to parse the incoming JSON status (which often comes as a string, e.g., `"1"`) into a proper boolean (`"${json['status']}" == "1"`).
+    * Updated the `toJson` method to convert the `bool?` status back to a string `"1"` or `"0"` for API consistency.
+
+***
+
+### UI/UX Improvements (Checkout Screen)
+
+* **Fixed Coupon Field Layout**: Wrapped the `Form` containing the coupon `TextFormField` in `buildApplyCouponRow` with a **`Flexible`** widget. This resolves potential overflow issues and ensures the coupon input field respects the row constraints.
+* **Sub-Payment Auto-Selection**: Added logic within the checkout screen's payment method list to automatically select the single sub-payment option if only **one integration is available** for a selected payment method.
+* **Code Clarity**: Renamed a local variable `integration` to `subPayment` in the checkout screen's `ListView.builder` for clarity when iterating over sub-payment options.
+
+***
+
+### API / Backend
+
+* No endpoint or schema changes, but client-side models now enforce filtering based on the `status` field.
+
+***
+
+### Must Update (Stores)
+
+* No — This is a client-side data model and UI logic update.
+</details>
+
+<details>
 <summary><strong>AV 9.10.51 – Login UI Animation & Auth Screen Polish</strong></summary>
 
 ### Auth / UI

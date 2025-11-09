@@ -101,9 +101,11 @@ import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
+import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 
 import '../custom/useful_elements.dart';
+import '../helpers/shared_value_helper.dart';
 
 class AuthScreen {
   static Widget buildScreen(
@@ -195,7 +197,12 @@ class AuthScreen {
                   color: Colors.white.withValues(alpha: 0.7),
                   shape: BoxShape.circle,
                 ),
-                child: UsefulElements.backIcon(color: "black"),
+                child: Icon(
+                  app_language_rtl.$!
+                      ? CupertinoIcons.arrow_right
+                      : CupertinoIcons.arrow_left,
+                  color: MyTheme.primaryColor,
+                ),
               ),
             ),
           ),

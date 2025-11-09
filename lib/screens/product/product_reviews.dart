@@ -37,7 +37,7 @@ class _ProductReviewsState extends State<ProductReviews> {
   final List<dynamic> _reviewList = [];
   bool _isInitial = true;
   int _page = 1;
-  int? _totalData = 0;
+  int _totalData = 0;
   bool _showLoadingContainer = false;
 
   @override
@@ -64,9 +64,9 @@ class _ProductReviewsState extends State<ProductReviews> {
       widget.id,
       page: _page,
     );
-    _reviewList.addAll(reviewResponse.reviews);
+    _reviewList.addAll(reviewResponse.reviews ?? []);
     _isInitial = false;
-    _totalData = reviewResponse.meta.total;
+    _totalData = reviewResponse.meta?.total ?? 0;
     _showLoadingContainer = false;
     setState(() {});
   }

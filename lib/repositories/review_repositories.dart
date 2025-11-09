@@ -8,7 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/api-request.dart';
 
 class ReviewRepository {
-  Future<dynamic> getReviewResponse(int? productId, {page = 1}) async {
+  Future<ReviewResponse> getReviewResponse(int? productId, {page = 1}) async {
     final String url =
         ("${AppConfig.BASE_URL}/reviews/product/$productId?page=$page");
     final response = await ApiRequest.get(
