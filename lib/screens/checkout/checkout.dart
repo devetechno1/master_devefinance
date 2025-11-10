@@ -648,6 +648,7 @@ class _CheckoutState extends State<Checkout> {
     if (_selected_payment_method_key !=
         _paymentTypeList[index].payment_type_key) {
       setState(() {
+        subPaymentOption = '';
         _selected_payment_method_index = index;
         _selected_payment_method = _paymentTypeList[index].payment_type;
         _selected_payment_method_key = _paymentTypeList[index].payment_type_key;
@@ -1000,7 +1001,6 @@ class _CheckoutState extends State<Checkout> {
                           ),
                           Builder(
                             builder: (context) {
-                              subPaymentOption = '';
                               final List<SubPayment> integrations =
                                   _paymentTypeList[index].integrations;
                               final bool hasSubOptions =

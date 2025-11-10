@@ -40,6 +40,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
   int? _combined_order_id = 0;
   bool _order_init = false;
   bool canPop = true;
+  bool isLoading = true;
 
   final WebViewController _webViewController = WebViewController();
   bool get goToOrdersScreen =>
@@ -72,6 +73,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
           //   Navigator.pop(context, goToOrdersScreen);
           // },
           onPageFinished: (page) {
+            isLoading = false;
             canPop = true;
             setState(() {});
             if (page.contains("/paymob/callback")) {
@@ -171,16 +173,31 @@ class _PaymobScreenState extends State<PaymobScreen> {
         widget.payment_type == "cart_payment") {
       return Container(
         child: Center(
-          child: Text('creating_order'.tr(context: context)),
+          child: Text(
+            'creating_order'.tr(context: context),
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
       );
     } else {
-      return SingleChildScrollView(
-        child: SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height,
-          child: WebViewWidget(controller: _webViewController),
-        ),
+      return Stack(
+        alignment: Alignment.center,
+        children: [
+          SingleChildScrollView(
+            child: SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              height: MediaQuery.sizeOf(context).height,
+              child: WebViewWidget(controller: _webViewController),
+            ),
+          ),
+          if (isLoading)
+            Center(
+              child: Transform.scale(
+                scale: 2,
+                child: const CircularProgressIndicator.adaptive(),
+              ),
+            ),
+        ],
       );
     }
   }

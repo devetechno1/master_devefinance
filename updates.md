@@ -10,6 +10,30 @@ This file tracks all update versions for both the **Mobile App**.
 
 ## 📱 Mobile App Updates
 <details>
+<summary><strong>AV 9.10.53 – Improve Paymob Loading State and Standardize Payment Option Reset</strong></summary>
+
+### Checkout Screen Refactoring (Fix)
+
+* **Standardized Sub-Payment Reset**: Moved the logic for resetting `subPaymentOption` to an empty string (`''`) out of the `Builder` widget and into the main `setState` block within the `onPaymentMethodChange` handler.
+    * This ensures the sub-payment selection is consistently cleared immediately upon selecting a different main payment gateway, preventing bugs where old sub-options might persist visually or logically.
+
+***
+
+### Paymob Integration (Feat/Enhancement)
+
+* **Added Loading Indicator**: Implemented a visual loading state for the Paymob payment screen (`paymob_screen.dart`).
+    * Introduced a new state variable, `isLoading`, initialized to `true`.
+    * `isLoading` is set to `false` when the web view calls `onPageFinished`, indicating the payment page has fully loaded.
+    * The `buildBody` method now uses a `Stack` to display a large, centered `CircularProgressIndicator` over the `WebViewWidget` while `isLoading` is true, providing clearer feedback to the user.
+* **"Creating Order" Text Styling**: Updated the "creating order" message to use the `Theme.of(context).textTheme.headlineSmall` style for improved visibility and adherence to the app's theme.
+
+***
+
+### Must Update (Stores)
+
+* No — This is a client-side logic and UI improvement.
+</details>
+<details>
 <summary><strong>AV 9.10.52 – Filter Enabled Sub-Payments and Fix Coupon Text Field Layout</strong></summary>
 
 ### Data Model & Filtering (Payment Gateway)
