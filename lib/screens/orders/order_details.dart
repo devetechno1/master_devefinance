@@ -566,9 +566,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                   Padding(
                       padding: const EdgeInsets.only(
                           left: 18.0, right: 18.0, top: 14.0),
-                      child: _orderedItemList.isEmpty && _orderItemsInit && prescriptionOrder == null
+                      child: _orderedItemList.isEmpty &&
+                              _orderItemsInit &&
+                              prescriptionOrder == null
                           ? ShimmerHelper().buildBasicShimmer(height: 100.0)
-                          : (_orderedItemList.isNotEmpty || prescriptionOrder != null
+                          : (_orderedItemList.isNotEmpty ||
+                                  prescriptionOrder != null
                               ? buildOrderdProductList()
                               : Container(
                                   height: 100,
@@ -1312,12 +1315,10 @@ class _OrderDetailsState extends State<OrderDetails> {
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      const SizedBox(height: 8),
-                      Btn.basic(
-                          // shape: RoundedRectangleBorder(side: Border()),
-
+                      if (_orderedItemList.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Btn.basic(
                           minWidth: 60,
-                          // color: MyTheme.font_grey,
                           onPressed: () {
                             _onPressReorder(_orderDetails!.id);
                           },
@@ -1341,7 +1342,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 ),
                               ],
                             ),
-                          )),
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: AppDimensions.paddingSmall),
                       DownloadBill(orderId: _orderDetails?.id ?? -1),
                     ],

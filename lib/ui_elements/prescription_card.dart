@@ -122,8 +122,9 @@ class PrescriptionCard extends StatelessWidget {
                     children: [
                       Positioned.fill(
                         child: GestureDetector(
-                          onTap: () =>
-                              onOpenViewer(index, images.reversed.toList()),
+                          onTap: () => canAddMore
+                              ? onOpenViewer(i, images)
+                              : onOpenViewer(index, images.reversed.toList()),
                           child: Hero(
                             tag: "${x.image}",
                             transitionOnUserGestures: true,
