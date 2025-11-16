@@ -15,51 +15,55 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../helpers/main_helpers.dart';
 
-class PaymobScreen extends StatefulWidget {
+class MainPaymentScreen extends StatefulWidget {
   final double? amount;
-  final String payment_type;
-  final String? payment_method_key;
-  final String package_id;
+  final String paymentType;
+  final String title;
+  final String paymentKey;
+  final String? paymentMethodKey;
+  final String packageId;
   final int? orderId;
   final String subPaymentOption;
-  const PaymobScreen(
-      {Key? key,
-      this.amount = 0.00,
-      this.orderId = 0,
-      this.payment_type = "",
-      this.payment_method_key = "",
-      required this.subPaymentOption,
-      this.package_id = "0"})
-      : super(key: key);
+  const MainPaymentScreen({
+    Key? key,
+    this.amount = 0.00,
+    this.orderId = 0,
+    this.paymentType = "",
+    this.paymentMethodKey = "",
+    required this.title,
+    required this.subPaymentOption,
+    required this.paymentKey,
+    this.packageId = "0",
+  }) : super(key: key);
 
   @override
-  _PaymobScreenState createState() => _PaymobScreenState();
+  _MainPaymentScreenState createState() => _MainPaymentScreenState();
 }
 
-class _PaymobScreenState extends State<PaymobScreen> {
-  int? _combined_order_id = 0;
-  bool _order_init = false;
+class _MainPaymentScreenState extends State<MainPaymentScreen> {
+  int? _combinedOrderId = 0;
+  bool _orderInit = false;
   bool canPop = true;
   bool isLoading = true;
 
   final WebViewController _webViewController = WebViewController();
   bool get goToOrdersScreen =>
-      widget.payment_type != "cart_payment" || _order_init;
+      widget.paymentType != "cart_payment" || _orderInit;
 
   @override
   void initState() {
     super.initState();
-    if (widget.payment_type == "cart_payment") {
+    if (widget.paymentType == "cart_payment") {
       createOrder();
     } else {
-      paymob();
+      init();
     }
   }
 
-  paymob() {
-    final String _initial_url =
-        "${AppConfig.BASE_URL}/paymob/initiate?payment_type=${widget.payment_type}&combined_order_id=$_combined_order_id&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}&order_id=${widget.orderId}&sub_payment_option=${widget.subPaymentOption}";
-    print(_initial_url);
+  void init() {
+    final String _initialUrl =
+        "${AppConfig.BASE_URL}/${widget.paymentKey}/initiate?payment_type=${widget.paymentType}&combined_order_id=$_combinedOrderId&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.packageId}&order_id=${widget.orderId}&sub_payment_option=${widget.subPaymentOption}";
+    print(_initialUrl);
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -76,7 +80,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
             isLoading = false;
             canPop = true;
             setState(() {});
-            if (page.contains("/paymob/callback")) {
+            if (page.contains("/${widget.paymentKey}/callback")) {
               getData();
             } else if (page.contains("pending=false") &&
                 page.contains("success=true")) {
@@ -87,12 +91,12 @@ class _PaymobScreenState extends State<PaymobScreen> {
           },
         ),
       )
-      ..loadRequest(Uri.parse(_initial_url), headers: commonHeader);
+      ..loadRequest(Uri.parse(_initialUrl), headers: commonHeader);
   }
 
   Future<void> createOrder() async {
     final orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponse(widget.payment_method_key);
+        .getOrderCreateResponse(widget.paymentMethodKey);
 
     if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(
@@ -102,10 +106,10 @@ class _PaymobScreenState extends State<PaymobScreen> {
       return;
     }
 
-    _combined_order_id = orderCreateResponse.combined_order_id;
-    _order_init = true;
+    _combinedOrderId = orderCreateResponse.combined_order_id;
+    _orderInit = true;
     setState(() {});
-    paymob();
+    init();
   }
 
   @override
@@ -117,8 +121,6 @@ class _PaymobScreenState extends State<PaymobScreen> {
           Navigator.pop(context, goToOrdersScreen);
         }
       },
-      // textDirection:
-      //     app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
@@ -141,21 +143,21 @@ class _PaymobScreenState extends State<PaymobScreen> {
     } else if (responseJSON["result"] == true) {
       ToastComponent.showDialog(responseJSON["message"]);
 
-      if (widget.payment_type == "cart_payment") {
+      if (widget.paymentType == "cart_payment") {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return const OrderList(from_checkout: true);
         }));
-      } else if (widget.payment_type == "order_re_payment") {
+      } else if (widget.paymentType == "order_re_payment") {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const OrderList(from_checkout: true);
         }));
-      } else if (widget.payment_type == "wallet_payment") {
+      } else if (widget.paymentType == "wallet_payment") {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return const Wallet(from_recharge: true);
         }));
-      } else if (widget.payment_type == "customer_package_payment") {
+      } else if (widget.paymentType == "customer_package_payment") {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return const Profile();
@@ -168,9 +170,9 @@ class _PaymobScreenState extends State<PaymobScreen> {
     //print("init url");
     //print(initial_url);
 
-    if (_order_init == false &&
-        _combined_order_id == 0 &&
-        widget.payment_type == "cart_payment") {
+    if (_orderInit == false &&
+        _combinedOrderId == 0 &&
+        widget.paymentType == "cart_payment") {
       return Container(
         child: Center(
           child: Text(
@@ -219,7 +221,7 @@ class _PaymobScreenState extends State<PaymobScreen> {
             )
           : emptyWidget,
       title: Text(
-        'pay_with_my_paymob'.tr(context: context),
+        widget.title,
         style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       elevation: 0.0,

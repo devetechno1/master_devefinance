@@ -71,7 +71,7 @@ class _CheckoutState extends State<Checkout> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var _selected_payment_method_index = 0;
-  String? _selected_payment_method = "";
+  String _selected_payment_method = "";
   String? _selected_payment_method_key = "";
   String subPaymentOption = '';
 
@@ -169,7 +169,7 @@ class _CheckoutState extends State<Checkout> {
 
     _paymentTypeList.addAll(paymentTypeResponseList);
     if (_paymentTypeList.isNotEmpty) {
-      _selected_payment_method = _paymentTypeList[0].payment_type;
+      _selected_payment_method = _paymentTypeList[0].payment_type ?? '';
       _selected_payment_method_key = _paymentTypeList[0].payment_type_key;
     }
     _isInitial = false;
@@ -550,19 +550,6 @@ class _CheckoutState extends State<Checkout> {
       })).then((value) {
         onPopped(value);
       });
-    } else if (_selected_payment_method == "paymob") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return PaymobScreen(
-          subPaymentOption: subPaymentOption,
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-          orderId: widget.order_id,
-        );
-      })).then((value) {
-        onPopped(value);
-      });
     } else if (_selected_payment_method == "wallet_system") {
       pay_by_wallet();
     } else if (_selected_payment_method == "cash_payment") {
@@ -590,6 +577,26 @@ class _CheckoutState extends State<Checkout> {
       })).then((value) {
         onPopped(value);
       });
+    }else {
+      String title = 'payment_settings_ucf'.tr(context: context);
+      if(_selected_payment_method == "paymob"){
+        title = 'pay_with_my_paymob'.tr(context: context);
+      }
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return MainPaymentScreen(
+          paymentKey: _selected_payment_method,
+          title: title,
+          subPaymentOption: subPaymentOption,
+          amount: _grandTotalValue,
+          paymentType: payment_type,
+          paymentMethodKey: _selected_payment_method_key,
+          packageId: widget.packageId.toString(),
+          orderId: widget.order_id,
+        );
+      })).then((value) {
+        onPopped(value);
+      });
+    
     }
   }
 
@@ -650,7 +657,7 @@ class _CheckoutState extends State<Checkout> {
       setState(() {
         subPaymentOption = '';
         _selected_payment_method_index = index;
-        _selected_payment_method = _paymentTypeList[index].payment_type;
+        _selected_payment_method = _paymentTypeList[index].payment_type ?? '';
         _selected_payment_method_key = _paymentTypeList[index].payment_type_key;
       });
     }
