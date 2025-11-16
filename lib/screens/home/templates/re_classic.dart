@@ -27,22 +27,9 @@ class ReClassicScreen extends StatelessWidget {
         const SliverToBoxAdapter(child: HomeCarouselSlider()),
         const CategoryList(),
 
-        SliverPadding(
-          padding: const EdgeInsets.only(
-            left: AppDimensions.paddingLarge,
-            bottom: 10,
-          ),
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              'todays_deal_ucf'.tr(context: context),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-          ),
+        TodaysDealProductsSliverWidget(
+          title: 'todays_deal_ucf'.tr(context: context),
         ),
-        const TodaysDealProductsSliverWidget(),
 
         //BannerList---------------------
         const SliverToBoxAdapter(child: HomeBannersOne()),
