@@ -78,7 +78,7 @@ class SubPayment {
   SubPayment.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     name = json['name'];
-    value = json['value'];
+    value = json['value']?.toString();
     status = "${json['status']}" == "1";
     image = json['img_full_path'];
   }

@@ -87,7 +87,7 @@ class _MainPaymentScreenState extends State<MainPaymentScreen> {
               canPop = false;
               setState(() {});
             }
-            print(page);
+            print("page: $page");
           },
         ),
       )

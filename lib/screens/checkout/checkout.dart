@@ -40,7 +40,7 @@ import '../../helpers/auth_helper.dart';
 import '../../repositories/guest_checkout_repository.dart';
 import '../../repositories/order_repository.dart';
 import '../guest_checkout_pages/guest_checkout_address.dart';
-import '../payment_method_screen/paymob_screen.dart';
+import '../payment_method_screen/main_payment_screen.dart';
 
 class Checkout extends StatefulWidget {
   final int?
