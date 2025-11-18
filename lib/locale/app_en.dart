@@ -577,6 +577,8 @@ const Map<String, String> enLangs = {
   "pay_with_phonepay": "Pay with Phonepay",
   "pay_with_my_fatoora": "Pay with MyFatoora",
   "pay_with_my_paymob": "Pay with Paymob",
+  "pay_with_fawaterk": "Pay with Fawaterk",
+  "pay_with_": "Pay with {payment_method}",
   "your_delivery_location": "Your delivery location . . .",
   "calculating": "Calculating...",
   "pick_here": "Pick Here",

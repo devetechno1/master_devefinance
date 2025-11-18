@@ -19,4 +19,7 @@ extension StringHelperEx on String {
   TextDirection get direction => isRTL ? TextDirection.rtl : TextDirection.ltr;
 
   TextAlign get textAlign => isRTL ? TextAlign.right : TextAlign.left;
+
+  String get capitalizeFirst =>
+      length > 1 ? '${this[0].toUpperCase()}${substring(1)}' : this;
 }

@@ -569,6 +569,8 @@ const Map<String, String> arLangs = {
   "pay_with_phonepay": "الدفع باستخدام Phonepay",
   "pay_with_my_fatoora": "الدفع باستخدام MyFatoora",
   "pay_with_my_paymob": "الدفع باستخدام Paymob",
+  "pay_with_fawaterk": "الدفع باستخدام Fawaterk",
+  "pay_with_": "الدفع باستخدام {payment_method}",
   "your_delivery_location": "موقع التوصيل الخاص بك ...",
   "calculating": "جارٍ الحساب...",
   "pick_here": "اختر هنا",

@@ -577,10 +577,22 @@ class _CheckoutState extends State<Checkout> {
       })).then((value) {
         onPopped(value);
       });
-    }else {
-      String title = 'payment_settings_ucf'.tr(context: context);
-      if(_selected_payment_method == "paymob"){
-        title = 'pay_with_my_paymob'.tr(context: context);
+    } else {
+      final String? name =
+          _paymentTypeList[_selected_payment_method_index].name;
+      String title = name == null
+          ? 'payment_settings_ucf'.tr(context: context)
+          : 'pay_with_'.tr(
+              context: context,
+              args: {'payment_method': name.capitalizeFirst},
+            );
+      switch (_selected_payment_method) {
+        case "paymob":
+          title = 'pay_with_my_paymob'.tr(context: context);
+          break;
+        case "fawaterk":
+          title = 'pay_with_fawaterk'.tr(context: context);
+          break;
       }
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return MainPaymentScreen(
@@ -596,7 +608,6 @@ class _CheckoutState extends State<Checkout> {
       })).then((value) {
         onPopped(value);
       });
-    
     }
   }
 
