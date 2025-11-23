@@ -456,9 +456,9 @@ class _AddressScreenState extends State<AddressScreen> {
                               addAddress: (addressEntity) async {
                                 final LatLng latLang = LatLng(
                                   addressEntity.latitude ??
-                                      AppConfig.initPlace.latitude,
+                                      AppConfig.businessSettingsData.initPlace.latitude,
                                   addressEntity.longitude ??
-                                      AppConfig.initPlace.longitude,
+                                      AppConfig.businessSettingsData.initPlace.longitude,
                                 );
                                 if (Loading.isLoading) return;
 

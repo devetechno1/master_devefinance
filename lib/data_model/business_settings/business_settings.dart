@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:active_ecommerce_cms_demo_app/helpers/color_helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../app_config.dart';
 import '../../screens/home/home_page_type_enum.dart';
@@ -224,8 +225,7 @@ class BusinessSettingsData extends Equatable {
   final String? disableImageOptimization;
   final String? viewProductOutOfStock;
   final String? posAcceptsNegativeQuantity;
-  final bool googleMapLongtitude;
-  final bool googleMapLatitude;
+  final LatLng initPlace;
   final String? adminNotifications;
   final String? adminRealertNotification;
   final String? printWidth;
@@ -285,7 +285,11 @@ class BusinessSettingsData extends Equatable {
   bool get useSentry => sentryDSN?.isNotEmpty == true;
   bool get useClarity => clarityProjectId?.isNotEmpty == true;
 
+  static const LatLng _initPlace =
+      LatLng(30.723003387451172, 31.02609634399414);
+
   BusinessSettingsData({
+    this.initPlace = _initPlace,
     this.hideEmailCheckout = false,
     this.hidePostalCodeCheckout = false,
     this.checkoutMessage,
@@ -502,8 +506,6 @@ class BusinessSettingsData extends Equatable {
     this.disableImageOptimization,
     this.viewProductOutOfStock,
     this.posAcceptsNegativeQuantity,
-    this.googleMapLongtitude = false,
-    this.googleMapLatitude = false,
     this.adminNotifications,
     this.adminRealertNotification,
     this.printWidth,
@@ -807,8 +809,14 @@ class BusinessSettingsData extends Equatable {
         disableImageOptimization: data['disable_image_optimization'] as String?,
         viewProductOutOfStock: data['view_product_out_of_stock'] as String?,
         posAcceptsNegativeQuantity: data['pos_accepts_negative_quantity'] as String?,
-        googleMapLongtitude: (data['google_map_longtitude'] as String?) == "1",
-        googleMapLatitude: (data['google_map_latitude'] as String?) == "1",
+        initPlace: () {
+          final double? lat = double.tryParse("${data['google_map_latitude']}");
+          final double? long =
+              double.tryParse("${data['google_map_longtitude']}");
+          if (lat != null && long != null) return LatLng(lat, long);
+
+          return _initPlace;
+        }(),
         adminNotifications: data['admin_notifications'] as String?,
         adminRealertNotification: data['admin_realert_notification'] as String?,
         printWidth: data['print_width'] as String?,
@@ -1892,8 +1900,6 @@ class BusinessSettingsData extends Equatable {
       disableImageOptimization,
       viewProductOutOfStock,
       posAcceptsNegativeQuantity,
-      googleMapLongtitude,
-      googleMapLatitude,
       adminNotifications,
       adminRealertNotification,
       printWidth,

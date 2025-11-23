@@ -27,7 +27,7 @@ class MapLocation extends StatefulWidget {
 class MapLocationState extends State<MapLocation>
     with SingleTickerProviderStateMixin {
   // PickResult? selectedPlace;
-  static LatLng kInitialPosition = AppConfig.initPlace;
+  static LatLng kInitialPosition = AppConfig.businessSettingsData.initPlace;
 
   GoogleMapController? _controller;
 
@@ -56,13 +56,13 @@ class MapLocationState extends State<MapLocation>
 
   setInitialLocation() {
     kInitialPosition = LatLng(
-        widget.address.lat ?? AppConfig.initPlace.latitude,
-        widget.address.lang ?? AppConfig.initPlace.longitude);
+        widget.address.lat ?? AppConfig.businessSettingsData.initPlace.latitude,
+        widget.address.lang ?? AppConfig.businessSettingsData.initPlace.longitude);
     setState(() {});
   }
 
   setDummyInitialLocation() {
-    kInitialPosition = AppConfig.initPlace;
+    kInitialPosition = AppConfig.businessSettingsData.initPlace;
     setState(() {});
   }
 

@@ -33,7 +33,7 @@ class MapLocationWidget extends StatefulWidget {
 }
 
 class MapLocationWidgetState extends State<MapLocationWidget> {
-  static LatLng kInitialPosition = AppConfig.initPlace;
+  static LatLng kInitialPosition = AppConfig.businessSettingsData.initPlace;
 
   GoogleMapController? _controller;
 
@@ -47,8 +47,8 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
   void initState() {
     super.initState();
     kInitialPosition = LatLng(
-      widget.latitude ?? AppConfig.initPlace.latitude,
-      widget.longitude ?? AppConfig.initPlace.longitude,
+      widget.latitude ?? AppConfig.businessSettingsData.initPlace.latitude,
+      widget.longitude ?? AppConfig.businessSettingsData.initPlace.longitude,
     );
     initLocation(kInitialPosition);
 
@@ -216,7 +216,7 @@ class MapLocationScreen extends StatefulWidget {
 
 class MapLocationScreenState extends State<MapLocationScreen> {
   // PickResult? selectedPlace;
-  static LatLng kInitialPosition = AppConfig.initPlace;
+  static LatLng kInitialPosition = AppConfig.businessSettingsData.initPlace;
 
   GoogleMapController? _controller;
 
@@ -244,13 +244,13 @@ class MapLocationScreenState extends State<MapLocationScreen> {
   }
 
   setInitialLocation() {
-    kInitialPosition = LatLng(widget.latitude ?? AppConfig.initPlace.latitude,
-        widget.longitude ?? AppConfig.initPlace.longitude);
+    kInitialPosition = LatLng(widget.latitude ?? AppConfig.businessSettingsData.initPlace.latitude,
+        widget.longitude ?? AppConfig.businessSettingsData.initPlace.longitude);
     setState(() {});
   }
 
   setDummyInitialLocation() {
-    kInitialPosition = AppConfig.initPlace;
+    kInitialPosition = AppConfig.businessSettingsData.initPlace;
     setState(() {});
   }
 
