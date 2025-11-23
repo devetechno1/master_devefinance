@@ -36,9 +36,11 @@ class RefundRequestResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(refund_requests!.map((x) => x.toJson())),
-        "links": links!.toJson(),
-        "meta": meta!.toJson(),
+        "data": refund_requests == null
+            ? []
+            : List<dynamic>.from(refund_requests!.map((x) => x.toJson())),
+        "links": links?.toJson(),
+        "meta": meta?.toJson(),
         "success": success,
         "status": status,
       };

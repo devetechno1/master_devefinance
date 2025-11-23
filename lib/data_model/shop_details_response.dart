@@ -29,7 +29,7 @@ class ShopDetailsResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": shop!.toJson(),
+        "data": shop?.toJson(),
         "success": success,
         "status": status,
       };
@@ -81,7 +81,8 @@ class Shop {
         "user_id": user_id,
         "name": name,
         "logo": logo,
-        "sliders": List<dynamic>.from(sliders!.map((x) => x)),
+        "sliders":
+            sliders == null ? [] : List<dynamic>.from(sliders!.map((x) => x)),
         "address": address,
         "facebook": facebook,
         "google": google,

@@ -87,7 +87,7 @@ class _CheckoutState extends State<Checkout> {
   String? _discountString = ". . .";
   String _used_coupon_code = "";
   bool? _coupon_applied = false;
-  late BuildContext loadingcontext;
+  BuildContext? loadingcontext;
   String payment_type = "cart_payment";
 
   @override
@@ -632,7 +632,9 @@ class _CheckoutState extends State<Checkout> {
     loading();
     final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromCod(_selected_payment_method_key);
-    Navigator.of(loadingcontext).pop();
+    if (loadingcontext != null) {
+      Navigator.of(loadingcontext!).pop();
+    }
     if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(
         orderCreateResponse.message,
@@ -650,7 +652,9 @@ class _CheckoutState extends State<Checkout> {
     loading();
     final orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromManualPayment(_selected_payment_method_key);
-    Navigator.pop(loadingcontext);
+    if (loadingcontext != null) {
+      Navigator.pop(loadingcontext!);
+    }
     if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(
         orderCreateResponse.message,

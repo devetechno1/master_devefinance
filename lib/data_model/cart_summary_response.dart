@@ -37,7 +37,8 @@ class CartSummaryResponse {
         shipping_cost: json["shipping_cost"],
         discount: json["discount"],
         grand_total: json["grand_total"],
-        grand_total_value: double.parse(json["grand_total_value"].toString()),
+        grand_total_value:
+            double.tryParse(json["grand_total_value"].toString()) ?? 0.0,
         coupon_code: json["coupon_code"],
         coupon_applied: json["coupon_applied"],
       );

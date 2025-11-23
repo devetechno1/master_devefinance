@@ -26,9 +26,11 @@ class FollowedSellersResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-        "links": links!.toJson(),
-        "meta": meta!.toJson(),
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "links": links?.toJson(),
+        "meta": meta?.toJson(),
       };
 }
 
@@ -136,7 +138,9 @@ class Meta {
         "current_page": currentPage,
         "from": from,
         "last_page": lastPage,
-        "links": List<dynamic>.from(links!.map((x) => x.toJson())),
+        "links": links == null
+            ? []
+            : List<dynamic>.from(links!.map((x) => x.toJson())),
         "path": path,
         "per_page": perPage,
         "to": to,

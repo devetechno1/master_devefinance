@@ -33,7 +33,7 @@ class MapLocationWidget extends StatefulWidget {
 }
 
 class MapLocationWidgetState extends State<MapLocationWidget> {
-  static LatLng kInitialPosition = AppConfig.initPlace;
+  static LatLng kInitialPosition = AppConfig.businessSettingsData.initPlace;
 
   GoogleMapController? _controller;
 
@@ -47,8 +47,8 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
   void initState() {
     super.initState();
     kInitialPosition = LatLng(
-      widget.latitude ?? AppConfig.initPlace.latitude,
-      widget.longitude ?? AppConfig.initPlace.longitude,
+      widget.latitude ?? AppConfig.businessSettingsData.initPlace.latitude,
+      widget.longitude ?? AppConfig.businessSettingsData.initPlace.longitude,
     );
     initLocation(kInitialPosition);
 
@@ -85,6 +85,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
       ),
     ).then(
       (value) {
+        if (!mounted) return;
         if (value is LatLng) {
           _controller?.animateCamera(CameraUpdate.newLatLng(value));
           setState(() {
@@ -145,6 +146,8 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
                     } catch (e) {
                       print("Error in map location widget e = $e");
                     }
+
+                    if (!mounted) return;
 
                     isLoadingFormattedAddress = false;
                     // print("onPlacePicked..."+result.toString());
@@ -216,13 +219,13 @@ class MapLocationScreen extends StatefulWidget {
 
 class MapLocationScreenState extends State<MapLocationScreen> {
   // PickResult? selectedPlace;
-  static LatLng kInitialPosition = AppConfig.initPlace;
+  static LatLng kInitialPosition = AppConfig.businessSettingsData.initPlace;
 
   GoogleMapController? _controller;
 
   @override
   void dispose() {
-    _controller?.dispose();
+    // _controller?.dispose();
     super.dispose();
   }
 
@@ -244,13 +247,14 @@ class MapLocationScreenState extends State<MapLocationScreen> {
   }
 
   setInitialLocation() {
-    kInitialPosition = LatLng(widget.latitude ?? AppConfig.initPlace.latitude,
-        widget.longitude ?? AppConfig.initPlace.longitude);
+    kInitialPosition = LatLng(
+        widget.latitude ?? AppConfig.businessSettingsData.initPlace.latitude,
+        widget.longitude ?? AppConfig.businessSettingsData.initPlace.longitude);
     setState(() {});
   }
 
   setDummyInitialLocation() {
-    kInitialPosition = AppConfig.initPlace;
+    kInitialPosition = AppConfig.businessSettingsData.initPlace;
     setState(() {});
   }
 
@@ -320,6 +324,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                   formattedAddress =
                       '${temp.first.street}, ${temp.first.locality}, ${temp.first.administrativeArea}, ${temp.first.country}';
                 } catch (e) {}
+
+                if (!mounted) return;
 
                 isLoadingFormattedAddress = false;
                 // print("onPlacePicked..."+result.toString());

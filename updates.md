@@ -10,6 +10,25 @@ This file tracks all update versions for both the **Mobile App**.
 
 ## 📱 Mobile App Updates
 <details>
+<summary><strong>AV 9.10.54 – Profile UI Refactor & Null Safety Hardening</strong></summary>
+
+### Profile Screen Refactor
+* **Optimized Layout**: Replaced the root `Container` with `DecoratedBox` and redistributed horizontal margins as padding and inner margins for better performance and layout consistency.
+* **Streamlined List Items**: Refactored the profile screen list item rendering by replacing manual `Column` and `Divider` compositions with a reusable `BottomVerticalCardListItemWidget`. This reduces code duplication and ensures consistent padding and styling.
+* **Animation Improvements**: Added a smoother expansion animation to the `AuctionTileWidget` using `AnimatedSize` and implemented an animated rotation for the expansion icon with RTL support.
+
+### Null Safety & Robustness
+* **Enhanced Data Models**: Improved null safety and data parsing robustness across various data models (e.g., `CartSummaryResponse`, `VariantResponse`, `BusinessSettingsData`) by replacing unsafe `!.` assertions and `parse` calls with `?.` and `tryParse`.
+* **Crash Prevention**: Addressed potential crash sources by adding default values and safe casting, ensuring the app remains stable even with unexpected API responses.
+
+### API / Backend
+* **No endpoint or schema changes.**
+
+### Must Update (Stores)
+* **No** — Client-side refactoring and stability improvements only.
+</details>
+
+<details>
 <summary><strong>AV 9.10.53 – Improve Paymob Loading State and Standardize Payment Option Reset</strong></summary>
 
 ### Checkout Screen Refactoring (Fix)

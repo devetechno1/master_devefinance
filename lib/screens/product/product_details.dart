@@ -1368,12 +1368,13 @@ class _ProductDetailsState extends State<ProductDetails>
                                       InkWell(
                                         onTap: () async {
                                           print(_productDetails?.downloads);
-                                          final url = Uri.parse(
+                                          final url = Uri.tryParse(
                                               _productDetails?.downloads ?? "");
-                                          print(url);
-                                          launchUrl(url,
-                                              mode: LaunchMode
-                                                  .externalApplication);
+                                          if (url != null) {
+                                            launchUrl(url,
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          }
                                         },
                                         child: Container(
                                           color: MyTheme.white,
@@ -1965,7 +1966,8 @@ class _ProductDetailsState extends State<ProductDetails>
                     quantityText,
                     isDisable: _stock == 0,
                     onChanged: (val) {
-                      _quantity = int.parse(quantityText.text);
+                      _quantity =
+                          int.tryParse(quantityText.text) ?? minQuantity;
                       if (_quantity > maxQuantity) {
                         _quantity = maxQuantity;
                       } else if (_quantity < minQuantity) {
@@ -1974,7 +1976,8 @@ class _ProductDetailsState extends State<ProductDetails>
                       quantityText.text = _quantity.toString();
                     },
                     onSubmitted: () {
-                      _quantity = int.parse(quantityText.text);
+                      _quantity =
+                          int.tryParse(quantityText.text) ?? minQuantity;
                       fetchAndSetVariantWiseInfo();
                     },
                   ),
@@ -2575,7 +2578,8 @@ class _ProductDetailsState extends State<ProductDetails>
         RatingBar(
           itemSize: 15.0,
           ignoreGestures: true,
-          initialRating: double.parse(_productDetails!.rating.toString()),
+          initialRating:
+              double.tryParse(_productDetails!.rating.toString()) ?? 0.0,
           direction: Axis.horizontal,
           allowHalfRating: false,
           itemCount: 5,
@@ -2749,7 +2753,7 @@ class _ProductDetailsState extends State<ProductDetails>
       if (value.trim() == 'null' && webViewHeight == null) {
         throw "value (webViewHeight) is null";
       }
-      webViewHeight = double.parse(value.toString());
+      webViewHeight = double.tryParse(value.toString());
       errorsTimes = 0;
 
       setState(() {});
