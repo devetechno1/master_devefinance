@@ -27,7 +27,9 @@ class CityResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(cities!.map((x) => x.toJson())),
+        "data": cities == null
+            ? []
+            : List<dynamic>.from(cities!.map((x) => x.toJson())),
         "success": success,
         "status": status,
       };

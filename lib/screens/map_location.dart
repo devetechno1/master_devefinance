@@ -33,7 +33,7 @@ class MapLocationState extends State<MapLocation>
 
   @override
   void dispose() {
-    _controller?.dispose();
+    // _controller?.dispose();
     super.dispose();
   }
 
@@ -57,7 +57,8 @@ class MapLocationState extends State<MapLocation>
   setInitialLocation() {
     kInitialPosition = LatLng(
         widget.address.lat ?? AppConfig.businessSettingsData.initPlace.latitude,
-        widget.address.lang ?? AppConfig.businessSettingsData.initPlace.longitude);
+        widget.address.lang ??
+            AppConfig.businessSettingsData.initPlace.longitude);
     setState(() {});
   }
 
@@ -103,6 +104,8 @@ class MapLocationState extends State<MapLocation>
                 formattedAddress =
                     '${temp.first.street}, ${temp.first.locality}, ${temp.first.administrativeArea}, ${temp.first.country}';
               } catch (e) {}
+
+              if (!mounted) return;
 
               isLoadingFormattedAddress = false;
               // print("onPlacePicked..."+result.toString());

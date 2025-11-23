@@ -30,7 +30,9 @@ class OrderItemResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(ordered_items!.map((x) => x.toJson())),
+        "data": ordered_items == null
+            ? []
+            : List<dynamic>.from(ordered_items!.map((x) => x.toJson())),
         "success": success,
         "status": status,
       };

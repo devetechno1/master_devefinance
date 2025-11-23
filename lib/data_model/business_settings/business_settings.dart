@@ -701,8 +701,8 @@ class BusinessSettingsData extends Equatable {
         authorizenetSandbox: data['authorizenet_sandbox'] as String?,
         minOrderAmountCheckActivat:
             data['min_order_amount_check_activat'] as dynamic,
-        minimumOrderAmount: double.parse(data['minimum_order_amount'] as String? ?? '0.0'),
-        freeShippingMinimumOrderAmount: double.parse(data['free_shipping_minimum_order_amount'] as String? ?? '0.0'),
+        minimumOrderAmount: double.tryParse(data['minimum_order_amount'] as String? ?? '0.0') ?? 0.0,
+        freeShippingMinimumOrderAmount: double.tryParse(data['free_shipping_minimum_order_amount'] as String? ?? '0.0') ?? 0.0,
         itemName: data['item_name'] as String?,
         aamarpaySandbox: (data['aamarpay_sandbox'] as String?) == "1",
         secondaryColor: ColorHelper.stringToColor(data['secondary_base_color'] as String?),

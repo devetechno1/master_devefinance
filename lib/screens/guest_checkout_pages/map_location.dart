@@ -85,6 +85,7 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
       ),
     ).then(
       (value) {
+        if (!mounted) return;
         if (value is LatLng) {
           _controller?.animateCamera(CameraUpdate.newLatLng(value));
           setState(() {
@@ -145,6 +146,8 @@ class MapLocationWidgetState extends State<MapLocationWidget> {
                     } catch (e) {
                       print("Error in map location widget e = $e");
                     }
+
+                    if (!mounted) return;
 
                     isLoadingFormattedAddress = false;
                     // print("onPlacePicked..."+result.toString());
@@ -222,7 +225,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
 
   @override
   void dispose() {
-    _controller?.dispose();
+    // _controller?.dispose();
     super.dispose();
   }
 
@@ -244,7 +247,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
   }
 
   setInitialLocation() {
-    kInitialPosition = LatLng(widget.latitude ?? AppConfig.businessSettingsData.initPlace.latitude,
+    kInitialPosition = LatLng(
+        widget.latitude ?? AppConfig.businessSettingsData.initPlace.latitude,
         widget.longitude ?? AppConfig.businessSettingsData.initPlace.longitude);
     setState(() {});
   }
@@ -320,6 +324,8 @@ class MapLocationScreenState extends State<MapLocationScreen> {
                   formattedAddress =
                       '${temp.first.street}, ${temp.first.locality}, ${temp.first.administrativeArea}, ${temp.first.country}';
                 } catch (e) {}
+
+                if (!mounted) return;
 
                 isLoadingFormattedAddress = false;
                 // print("onPlacePicked..."+result.toString());

@@ -32,7 +32,9 @@ class ProductDetailsResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(detailed_products!.map((x) => x.toJson())),
+        "data": detailed_products == null
+            ? []
+            : List<dynamic>.from(detailed_products!.map((x) => x.toJson())),
         "success": success,
         "status": status,
       };
@@ -173,13 +175,17 @@ class DetailedProduct {
         "shop_slug": shop_slug,
         "shop_name": shop_name,
         "shop_logo": shop_logo,
-        "photos": List<dynamic>.from(photos!.map((x) => x.toJson())),
+        "photos": photos == null
+            ? []
+            : List<dynamic>.from(photos!.map((x) => x.toJson())),
         "thumbnail_image": thumbnail_image,
-        "tags": List<dynamic>.from(tags!.map((x) => x)),
+        "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
         "price_high_low": price_high_low,
-        "choice_options":
-            List<dynamic>.from(choice_options!.map((x) => x.toJson())),
-        "colors": List<dynamic>.from(colors!.map((x) => x)),
+        "choice_options": choice_options == null
+            ? []
+            : List<dynamic>.from(choice_options!.map((x) => x.toJson())),
+        "colors":
+            colors == null ? [] : List<dynamic>.from(colors!.map((x) => x)),
         "discount": discount,
         "stroked_price": stroked_price,
         "main_price": main_price,
@@ -196,8 +202,10 @@ class DetailedProduct {
         "link": link,
         "min_qty": minQty,
         "max_qty": maxQty,
-        "brand": brand!.toJson(),
-        "wholesale": List<dynamic>.from(wholesale!.map((x) => x.toJson())),
+        "brand": brand?.toJson(),
+        "wholesale": wholesale == null
+            ? []
+            : List<dynamic>.from(wholesale!.map((x) => x.toJson())),
       };
 }
 
