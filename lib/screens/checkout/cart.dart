@@ -264,11 +264,11 @@ class _CartState extends State<_Cart> {
         color: MyTheme.mainColor,
       ),
 
-      height: AppConfig.businessSettingsData.isPrescriptionActive
-          ? 240
-          : widget.has_bottomnav!
-              ? 200
-              : 120,
+      height: widget.has_bottomnav!
+          ? AppConfig.businessSettingsData.isPrescriptionActive
+              ? 240
+              : 200
+          : 120,
       //color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4),
@@ -347,7 +347,9 @@ class _CartState extends State<_Cart> {
               ),
               child: Btn.basic(
                 minWidth: MediaQuery.sizeOf(context).width,
-                color: canProceed ? Theme.of(context).primaryColor : MyTheme.grey_153,
+                color: canProceed
+                    ? Theme.of(context).primaryColor
+                    : MyTheme.grey_153,
                 shape: app_language_rtl.$!
                     ? const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(

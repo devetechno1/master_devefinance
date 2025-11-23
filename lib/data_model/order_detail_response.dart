@@ -4,6 +4,8 @@
 //https://app.quicktype.io/
 import 'dart:convert';
 
+import 'order_mini_response.dart';
+
 OrderDetailResponse orderDetailResponseFromJson(String str) =>
     OrderDetailResponse.fromJson(json.decode(str));
 
@@ -47,7 +49,7 @@ class DetailedOrder {
       this.shipping_type,
       this.shipping_type_string,
       this.payment_type,
-      this.payment_status,
+      this.paymentStatus,
       this.payment_status_string,
       this.delivery_status,
       this.delivery_status_string,
@@ -70,7 +72,7 @@ class DetailedOrder {
   String? shipping_type;
   String? shipping_type_string;
   String? payment_type;
-  String? payment_status;
+  PaymentStatusEnum? paymentStatus;
   String? payment_status_string;
   String? delivery_status;
   String? delivery_status_string;
@@ -99,7 +101,7 @@ class DetailedOrder {
         shipping_type: json["shipping_type"],
         shipping_type_string: json["shipping_type_string"],
         payment_type: json["payment_type"],
-        payment_status: json["payment_status"],
+        paymentStatus: PaymentStatusEnum.fromString("${json["payment_status"]}"),
         payment_status_string: json["payment_status_string"],
         delivery_status: json["delivery_status"],
         delivery_status_string: json["delivery_status_string"],
@@ -123,7 +125,7 @@ class DetailedOrder {
         "shipping_type": shipping_type,
         "shipping_type_string": shipping_type_string,
         "payment_type": payment_type,
-        "payment_status": payment_status,
+        "payment_status": paymentStatus?.name,
         "payment_status_string": payment_status_string,
         "delivery_status": delivery_status,
         "delivery_status_string": delivery_status_string,

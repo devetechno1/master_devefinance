@@ -45,13 +45,49 @@ class OrderMiniResponse {
       };
 }
 
+enum PaymentStatusEnum {
+  paid,
+  pending,
+  unpaid;
+
+  Color get color {
+    switch (this) {
+      case paid:
+        return Colors.green;
+      case pending:
+        return Colors.orangeAccent;
+      case unpaid:
+        return Colors.red;
+    }
+  }
+  IconData get icon {
+    switch (this) {
+      case paid:
+        return Icons.check;
+      case pending:
+        return Icons.priority_high_rounded;
+      case unpaid:
+        return Icons.clear;
+    }
+  }
+
+  static PaymentStatusEnum? fromString(String name) {
+    for (final p in values) {
+      if (p.name == name) {
+        return p;
+      }
+    }
+    return null;
+  }
+}
+
 class Order {
   Order({
     this.id,
     this.code,
     this.user_id,
     this.payment_type,
-    this.payment_status,
+    this.paymentStatus,
     this.payment_status_string,
     this.delivery_status,
     this.delivery_status_string,
@@ -64,24 +100,13 @@ class Order {
   String? code;
   int? user_id;
   String? payment_type;
-  String? payment_status;
+  PaymentStatusEnum? paymentStatus;
   String? payment_status_string;
   String? delivery_status;
   String? delivery_status_string;
   String? grand_total;
   String? date;
   OrderLinks? links;
-
-  Color get paymentColor {
-    switch (payment_status) {
-      case "paid":
-        return Colors.green;
-      case "unpaid":
-        return Colors.red;
-      default:
-        return Colors.orangeAccent;
-    }
-  }
 
   Color get deliveryColor {
     switch (delivery_status) {
@@ -103,7 +128,7 @@ class Order {
         code: json["code"],
         user_id: json["user_id"],
         payment_type: json["payment_type"],
-        payment_status: json["payment_status"],
+        paymentStatus: PaymentStatusEnum.fromString("${json["payment_status"]}"),
         payment_status_string: json["payment_status_string"],
         delivery_status: json["delivery_status"],
         delivery_status_string: json["delivery_status_string"],
@@ -117,7 +142,7 @@ class Order {
         "code": code,
         "user_id": user_id,
         "payment_type": payment_type,
-        "payment_status": payment_status,
+        "payment_status": paymentStatus?.name,
         "payment_status_string": payment_status_string,
         "delivery_status": delivery_status,
         "delivery_status_string": delivery_status_string,

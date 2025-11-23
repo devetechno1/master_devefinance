@@ -29,6 +29,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../data_model/order_item_response.dart';
+import '../../data_model/order_mini_response.dart';
 import '../../ui_elements/prescription_card.dart';
 import 'download_bill.dart';
 
@@ -1203,13 +1204,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                     padding: const EdgeInsetsDirectional.only(end: 8.0),
                     child: Text(
                       _orderDetails!.payment_status_string!,
-                      style: const TextStyle(
-                        color: MyTheme.grey_153,
+                      style: TextStyle(
+                        color: _orderDetails?.paymentStatus?.color,
                       ),
                     ),
                   ),
                   buildPaymentStatusCheckContainer(
-                      _orderDetails!.payment_status),
+                      _orderDetails!.paymentStatus),
                   const Spacer(),
                   Text(
                     _orderDetails!.delivery_status_string!,
@@ -1355,7 +1356,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               ),
             ),
             if (_orderDetails!.delivery_status == "pending" &&
-                _orderDetails!.payment_status == "unpaid")
+                _orderDetails!.paymentStatus == PaymentStatusEnum.unpaid)
               Btn.basic(
                   shape: RoundedRectangleBorder(
                       borderRadius:
@@ -1371,7 +1372,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                   )),
             if (_orderDetails!.delivery_status == "pending" &&
-                _orderDetails!.payment_status == "unpaid")
+                _orderDetails!.paymentStatus == PaymentStatusEnum.unpaid)
               Btn.basic(
                   shape: RoundedRectangleBorder(
                       borderRadius:
@@ -1614,16 +1615,15 @@ class _OrderDetailsState extends State<OrderDetails> {
     );
   }
 
-  Container buildPaymentStatusCheckContainer(String? paymentStatus) {
+  Container buildPaymentStatusCheckContainer(PaymentStatusEnum? paymentStatus) {
     return Container(
       height: 16,
       width: 16,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.radiusDefault),
-          color: paymentStatus == "paid" ? Colors.green : Colors.red),
-      child: Icon(paymentStatus == "paid" ? Icons.check : Icons.clear,
-          color: Colors.white, size: 10),
+          color: paymentStatus?.color),
+      child: Icon(paymentStatus?.icon, color: Colors.white, size: 10),
     );
   }
 }

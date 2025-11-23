@@ -496,7 +496,7 @@ class _OrderListState extends State<OrderList> {
                   Text(
                     _orderList[index].payment_status_string!,
                     style: TextStyle(
-                        color: _orderList[index].paymentColor,
+                        color: _orderList[index].paymentStatus?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
                   ),
