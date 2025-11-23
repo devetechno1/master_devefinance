@@ -104,6 +104,7 @@ class _CheckoutState extends State<Checkout> {
   void dispose() {
     super.dispose();
     _mainScrollController.dispose();
+    _couponController.dispose();
   }
 
   String balance() {
@@ -203,6 +204,7 @@ class _CheckoutState extends State<Checkout> {
     }
 
     final cartSummaryResponse = await CartRepository().getCartSummaryResponse();
+    if (!mounted) return;
 
     if (cartSummaryResponse != null) {
       _subTotalString = cartSummaryResponse.sub_total;

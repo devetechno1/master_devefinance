@@ -67,14 +67,14 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   final List<ClassifiedAdsMiniData> _relatedProducts = [];
   bool _relatedProductInit = false;
 
-  // @override
-  // void dispose() {
-  //   // _mainScrollController.dispose();
-  //   // _variantScrollController.dispose();
-  //   // _imageScrollController.dispose();
-  //   // _colorScrollController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _mainScrollController.dispose();
+    _variantScrollController.dispose();
+    _imageScrollController.dispose();
+    _ColorAnimationController.dispose();
+    super.dispose();
+  }
 
   void fetchAll() {
     fetchProductDetails();

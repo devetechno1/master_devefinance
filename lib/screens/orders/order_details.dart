@@ -69,6 +69,12 @@ class _OrderDetailsState extends State<OrderDetails> {
   OrderItem? prescriptionOrder;
 
   @override
+  void dispose() {
+    _refundReasonController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     fetchAll();
 
@@ -89,11 +95,6 @@ class _OrderDetailsState extends State<OrderDetails> {
     super.initState();
 
     print(widget.id);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   fetchAll() {
@@ -473,6 +474,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     }
 
     Navigator.of(context, rootNavigator: true).pop();
+    if (!mounted) return;
     _refundReasonController.clear();
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -59,6 +59,7 @@ class _WalletState extends State<Wallet> {
   @override
   void dispose() {
     _mainScrollController.dispose();
+    _amountController.dispose();
     super.dispose();
   }
 

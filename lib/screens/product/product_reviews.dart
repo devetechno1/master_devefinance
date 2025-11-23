@@ -113,6 +113,8 @@ class _ProductReviewsState extends State<ProductReviews> {
     final reviewSubmitResponse = await ReviewRepository()
         .getReviewSubmitResponse(widget.id, _my_rating.toInt(), myReviewText);
 
+    if (!mounted) return;
+
     if (reviewSubmitResponse.result == false) {
       ToastComponent.showDialog(
         reviewSubmitResponse.message,
@@ -133,6 +135,8 @@ class _ProductReviewsState extends State<ProductReviews> {
   void dispose() {
     // TODO: implement dispose
     _xcrollController.dispose();
+    _myReviewTextController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -314,7 +318,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                               bottom: AppDimensions.paddingSmallExtra,
                               right: AppDimensions.paddingDefault),
                           child: Text(
-                            textDirection:TextDirection.ltr,
+                            textDirection: TextDirection.ltr,
                             _reviewList[index].time,
                             style: const TextStyle(color: MyTheme.medium_grey),
                           ),

@@ -199,6 +199,14 @@ class _OfflineState extends State<OfflineScreen> {
   }
 
   @override
+  void dispose() {
+    _amountController.dispose();
+    _nameController.dispose();
+    _trxIdController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     _amountController.text = widget.rechargeAmount.toString();
     // TODO: implement initState

@@ -126,18 +126,20 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 
   @override
-  void initState() {
-    init();
-    super.initState();
-  }
-
-  @override
   void dispose() {
-    // TODO: implement dispose
+    _searchController.dispose();
+    _minPriceController.dispose();
+    _maxPriceController.dispose();
     _productScrollController.dispose();
     _brandScrollController.dispose();
     _shopScrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    init();
+    super.initState();
   }
 
   init() {

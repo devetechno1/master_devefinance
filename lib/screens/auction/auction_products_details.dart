@@ -117,16 +117,19 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _mainScrollController.dispose();
-  //   _variantScrollController.dispose();
-  //   _imageScrollController.dispose();
-  //   _colorScrollController.dispose();
-  //   // countDownTimercontroller.dispose();
-  //   _bidPriceController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _mainScrollController.dispose();
+    _variantScrollController.dispose();
+    _imageScrollController.dispose();
+    _colorScrollController.dispose();
+    // countDownTimercontroller.dispose();
+    _bidPriceController.dispose();
+    sellerChatTitleController.dispose();
+    sellerChatMessageController.dispose();
+    _ColorAnimationController.dispose();
+    super.dispose();
+  }
 
   Future<void> onPressBidPlace() async {
     final bidPlacedResponse = await AuctionProductsRepository()
@@ -556,6 +559,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             message: message);
 
     Navigator.of(loadingcontext).pop();
+
+    if (!mounted) return;
 
     if (conversationCreateResponse.result == false) {
       ToastComponent.showDialog(

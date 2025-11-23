@@ -112,13 +112,13 @@ class _FilterState extends State<Filter> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _productScrollController.dispose();
-  //   _brandScrollController.dispose();
-  //   _shopScrollController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _minPriceController.dispose();
+    _maxPriceController.dispose();
+    super.dispose();
+  }
 
   init() {
     _givenSelectedFilterOptionKey = widget.selected_filter;
