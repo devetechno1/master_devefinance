@@ -1090,7 +1090,7 @@ class AuctionTileWidgetState extends State<AuctionTileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -1099,7 +1099,6 @@ class AuctionTileWidgetState extends State<AuctionTileWidget> {
           ),
         ),
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Column(
         children: [
           InkWell(
@@ -1108,43 +1107,47 @@ class AuctionTileWidgetState extends State<AuctionTileWidget> {
                 _auctionExpand = !_auctionExpand;
               });
             },
-            child: SizedBox(
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 24.0),
-                          child: Image.asset(
-                            AppImages.auction,
-                            height: 16,
-                            width: 16,
-                            color: MyTheme.dark_font_grey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: SizedBox(
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsetsDirectional.only(end: 24.0),
+                            child: Image.asset(
+                              AppImages.auction,
+                              height: 16,
+                              width: 16,
+                              color: MyTheme.dark_font_grey,
+                            ),
                           ),
-                        ),
-                        Text(
-                          'auction_ucf'.tr(context: context),
-                          style: const TextStyle(
-                              fontSize: 12, color: MyTheme.dark_font_grey),
-                        ),
-                      ],
+                          Text(
+                            'auction_ucf'.tr(context: context),
+                            style: const TextStyle(
+                                fontSize: 12, color: MyTheme.dark_font_grey),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  AnimatedRotation(
-                    turns: _auctionExpand
-                        ? (app_language_rtl.$ == true ? -0.25 : 0.25)
-                        : 0.0,
-                    duration: const Duration(milliseconds: 300),
-                    child: const Icon(
-                      Icons.navigate_next_rounded,
-                      size: 20,
-                      color: MyTheme.dark_font_grey,
-                    ),
-                  )
-                ],
+                    AnimatedRotation(
+                      turns: _auctionExpand
+                          ? (app_language_rtl.$ == true ? -0.25 : 0.25)
+                          : 0.0,
+                      duration: const Duration(milliseconds: 300),
+                      child: const Icon(
+                        Icons.navigate_next_rounded,
+                        size: 20,
+                        color: MyTheme.dark_font_grey,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -1157,6 +1160,7 @@ class AuctionTileWidgetState extends State<AuctionTileWidget> {
                     width: double.infinity,
                     padding:
                         const EdgeInsetsDirectional.only(start: 40, bottom: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 22),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
