@@ -43,12 +43,10 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   final ScrollController _mainScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
-  final ScrollController _variantScrollController = ScrollController();
   final ScrollController _imageScrollController = ScrollController();
 
   double _scrollPosition = 0.0;
 
-  Animation? _colorTween;
   late AnimationController _ColorAnimationController;
 
   final CarouselSliderController _carouselController =
@@ -56,8 +54,6 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
 
   //init values
 
-  final bool _isInWishList = false;
-  var _productDetailsFetched = false;
   ClassifiedProductDetailsResponseDatum? _productDetails = null;
 
   final _productImageList = [];
@@ -111,7 +107,6 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
     _currentImage = 0;
     _productImageList.clear();
     _relatedProducts.clear();
-    _productDetailsFetched = false;
     _productDetails = null;
     setState(() {});
   }
@@ -125,7 +120,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
     setState(() {
       _showCopied = true;
     });
-    final Timer timer = Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       setState(() {
         _showCopied = false;
       });
@@ -252,9 +247,6 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   void initState() {
     _ColorAnimationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 0));
-
-    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.white)
-        .animate(_ColorAnimationController);
 
     _mainScrollController.addListener(() {
       _scrollPosition = _mainScrollController.position.pixels;

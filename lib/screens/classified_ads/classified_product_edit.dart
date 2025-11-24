@@ -36,8 +36,6 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
   bool _generalExpanded = true;
   bool _mediaExpanded = false;
   bool _priceExpanded = false;
-  final bool _descriptionExpanded = false;
-  final FocusNode _focusNode = FocusNode();
   bool _hasFocus = false;
 
   // Controllers
@@ -1385,7 +1383,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
 
   pickGalleryImages() async {
     final tmp = productGalleryImages;
-    final List<FileInfo>? images = await Navigator.push(
+    await Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => UploadFile(
