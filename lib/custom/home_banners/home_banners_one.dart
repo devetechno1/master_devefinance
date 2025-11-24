@@ -12,8 +12,12 @@ class HomeBannersOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.select<HomeProvider,
-        ({bool isBannerOneInitial, UnmodifiableListView<AIZSlider> bannerOneImageList})>(
+    final p = context.select<
+        HomeProvider,
+        ({
+          bool isBannerOneInitial,
+          UnmodifiableListView<AIZSlider> bannerOneImageList
+        })>(
       (provider) => (
         bannerOneImageList: UnmodifiableListView(provider.bannerOneImageList),
         isBannerOneInitial: provider.isBannerOneInitial,
