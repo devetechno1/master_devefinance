@@ -47,8 +47,6 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
 
   double _scrollPosition = 0.0;
 
-  late AnimationController _ColorAnimationController;
-
   final CarouselSliderController _carouselController =
       CarouselSliderController();
 
@@ -245,9 +243,6 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
 
   @override
   void initState() {
-    _ColorAnimationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 0));
-
     _mainScrollController.addListener(() {
       _scrollPosition = _mainScrollController.position.pixels;
 

@@ -423,7 +423,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         backgroundColor: MyTheme.white.withValues(alpha: 0.95),
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
-        actions: [
+        actions: const [
           emptyWidget,
         ],
         centerTitle: false,

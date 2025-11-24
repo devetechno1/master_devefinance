@@ -614,9 +614,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
           backgroundColor: MyTheme.mainColor,
           automaticallyImplyLeading: false,
           scrolledUnderElevation: 0.0,
-          actions: [
-            emptyWidget,
-          ],
+          actions: const [emptyWidget],
           elevation: 0.0,
           titleSpacing: 0,
           flexibleSpace: Padding(
