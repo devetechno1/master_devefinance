@@ -64,9 +64,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   @override
   void dispose() {
     _mainScrollController.dispose();
-    _variantScrollController.dispose();
     _imageScrollController.dispose();
-    _ColorAnimationController.dispose();
     super.dispose();
   }
 
