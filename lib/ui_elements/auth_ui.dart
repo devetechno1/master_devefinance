@@ -104,7 +104,6 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 
-import '../custom/useful_elements.dart';
 import '../helpers/shared_value_helper.dart';
 
 class AuthScreen {

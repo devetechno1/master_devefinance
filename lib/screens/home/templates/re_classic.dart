@@ -1,4 +1,3 @@
-import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/all_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home/widgets/auction_products.dart';

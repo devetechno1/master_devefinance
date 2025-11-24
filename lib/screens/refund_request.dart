@@ -20,7 +20,6 @@ class RefundRequest extends StatefulWidget {
 class _RefundRequestState extends State<RefundRequest> {
   final ScrollController _xcrollController = ScrollController();
   List<dynamic> _list = [];
-  List<dynamic> _converted_ids = [];
   bool _isInitial = true;
   int _page = 1;
   int? _totalData = 0;
@@ -61,7 +60,6 @@ class _RefundRequestState extends State<RefundRequest> {
 
   reset() {
     _list = [];
-    _converted_ids = [];
     _isInitial = true;
     _totalData = 0;
     _page = 1;

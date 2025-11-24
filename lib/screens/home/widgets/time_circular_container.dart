@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../app_config.dart';
-
 class TimeCircularContainer extends StatelessWidget {
   const TimeCircularContainer({
     super.key,
@@ -41,10 +39,10 @@ class TimeCircularContainer extends StatelessWidget {
             right: 4,
             child: Builder(
               builder: (context) {
-                  //  final Color  textColor =
-                  //  ((AppConfig.businessSettingsData.isLightFlashDealTextColor )
-                  //     ? Colors.white
-                  //     : Colors.black);
+                //  final Color  textColor =
+                //  ((AppConfig.businessSettingsData.isLightFlashDealTextColor )
+                //     ? Colors.white
+                //     : Colors.black);
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +50,9 @@ class TimeCircularContainer extends StatelessWidget {
                     Text(
                       timeText,
                       style: TextStyle(
-                        color: 
-                        //textColor,
-                        Theme.of(context).primaryColor,
+                        color:
+                            //textColor,
+                            Theme.of(context).primaryColor,
                         fontSize: 10.0,
                         fontWeight: FontWeight.w600,
                       ),
@@ -67,14 +65,14 @@ class TimeCircularContainer extends StatelessWidget {
                           fit: BoxFit.scaleDown,
                           child: Text(timeType,
                               style: TextStyle(
-                                  color: 
-                                  //textColor,
-                                  Theme.of(context).primaryColor,
+                                  color:
+                                      //textColor,
+                                      Theme.of(context).primaryColor,
                                   fontSize: 7))),
                     )),
                   ],
                 );
-              }
+              },
             ),
           ),
         ],
