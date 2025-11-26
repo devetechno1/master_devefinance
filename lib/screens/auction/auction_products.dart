@@ -1,5 +1,3 @@
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
-import 'package:active_ecommerce_cms_demo_app/constants/app_images.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -121,28 +119,12 @@ class _AuctionProductsState extends State<AuctionProducts> {
       backgroundColor: MyTheme.mainColor,
       centerTitle: false,
       leading: UsefulElements.backButton(),
-      title: Padding(
-        padding:
-            const EdgeInsets.only(bottom: AppDimensions.paddingVeryExtraLarge),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'auction_product_screen_title'.tr(context: context),
-              style: const TextStyle(
-                  fontSize: 16,
-                  color: MyTheme.dark_font_grey,
-                  fontWeight: FontWeight.bold),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                AppImages.search,
-                height: 20,
-              ),
-            ),
-          ],
-        ),
+      title: Text(
+        'auction_product_screen_title'.tr(context: context),
+        style: const TextStyle(
+            fontSize: 16,
+            color: MyTheme.dark_font_grey,
+            fontWeight: FontWeight.bold),
       ),
       elevation: 0.0,
       titleSpacing: 0,
