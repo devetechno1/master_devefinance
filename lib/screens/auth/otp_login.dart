@@ -8,6 +8,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auth/custom_otp.dart';
 import 'package:active_ecommerce_cms_demo_app/status/execute_and_handle_remote_errors.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,6 @@ import '../../custom/loading.dart';
 import '../../data_model/login_response.dart';
 import '../../repositories/address_repository.dart';
 import '../../status/status.dart';
-import 'custom_otp.dart';
 
 class OTPLoginScreen extends StatefulWidget {
   final String providerType;

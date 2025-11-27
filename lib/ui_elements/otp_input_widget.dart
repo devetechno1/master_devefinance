@@ -38,20 +38,20 @@ class OtpInputController extends ChangeNotifier {
 
   Future<String?> listenOnceUserConsent() async {
     if (!Platform.isAndroid) return null;
-    try {
-      return await _listenOnceUserConsent();
-    } catch (e) {
-      return await _listenOnceUserConsent();
-    }
+    return await _listenOnceUserConsent();
   }
 
   Future<String?> _listenOnceUserConsent() async {
-    final res = await _smartAuth.getSmsWithUserConsentApi();
-    if (res.hasData) {
-      final data = res.requireData;
-      final code = data.code ?? _extractFromSms(data.sms);
-      if (code != null) fill(code);
-      return code;
+    try {
+      final res = await _smartAuth.getSmsWithUserConsentApi();
+      if (res.hasData) {
+        final data = res.requireData;
+        final code = data.code ?? _extractFromSms(data.sms);
+        if (code != null) fill(code);
+        return code;
+      }
+    } catch (e) {
+      debugPrint("SmartAuth Error: $e");
     }
     return null;
   }

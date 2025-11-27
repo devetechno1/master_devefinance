@@ -41,6 +41,7 @@ import '../presenter/home_provider.dart';
 import '../repositories/auth_repository.dart';
 import 'auction/auction_bidded_products.dart';
 import 'auction/auction_purchase_history.dart';
+import 'auth/custom_otp.dart';
 import 'change_language.dart';
 import 'chat/messenger_list.dart';
 import 'checkout/cart.dart';
@@ -137,7 +138,7 @@ class _ProfileState extends State<Profile> {
     if (response.result) {
       AuthHelper().clearUserData();
       Navigator.pop(loadingContext);
-      context.go("/");
+      goHome(context);
     }
     ToastComponent.showDialog(response.message);
   }
@@ -180,7 +181,7 @@ class _ProfileState extends State<Profile> {
 
   Future<void> onTapLogout(BuildContext context) async {
     await AuthHelper().clearUserData();
-    context.go("/");
+    goHome(context);
   }
 
   @override

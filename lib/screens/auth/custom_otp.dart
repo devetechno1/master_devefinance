@@ -4,12 +4,14 @@ import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/index.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:timer_count_down/timer_controller.dart';
 
@@ -20,6 +22,7 @@ import '../../presenter/home_provider.dart';
 import '../../status/execute_and_handle_remote_errors.dart';
 import '../../status/status.dart';
 import '../../ui_elements/otp_input_widget.dart';
+
 import 'login.dart';
 import 'otp_login.dart';
 
@@ -110,7 +113,7 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
     final bool needHandleAddress = homeP.needHandleAddressNavigation();
     if (needHandleAddress) return;
 
-    context.go("/");
+    goHome(context);
     await Future.delayed(Duration.zero);
 
     ToastComponent.showDialog(response.message!);
@@ -255,4 +258,19 @@ class _CustomOTPScreenState extends State<CustomOTPScreen> {
       ],
     );
   }
+}
+
+void goHome(BuildContext context) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (_) => const Index()),
+    (route) => false,
+  ).then(
+    (value) {
+      final BuildContext? _context = OneContext().context;
+      if (_context == null) return;
+      final String x = GoRouter.of(_context).state.fullPath.toString();
+      if (x != "/") _context.go("/");
+    },
+  );
 }

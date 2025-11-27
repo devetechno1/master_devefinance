@@ -1,4 +1,3 @@
-import 'package:active_ecommerce_cms_demo_app/constants/app_dimensions.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/currency_response.dart';
@@ -8,11 +7,11 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/currency_presenter.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
 import '../presenter/home_provider.dart';
+import 'auth/custom_otp.dart';
 
 class CurrencyChange extends StatefulWidget {
   const CurrencyChange({Key? key}) : super(key: key);
@@ -29,7 +28,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
 
     system_currency.save().then((value) {
       context.read<HomeProvider>().onRefresh();
-      context.go("/");
+      goHome(context);
     });
   }
 

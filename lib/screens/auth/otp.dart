@@ -16,10 +16,11 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../../data_model/otp_provider_model.dart';
-import '../../main.dart';
+
 import '../../presenter/home_provider.dart';
 import '../../ui_elements/otp_input_widget.dart';
 import '../../ui_elements/select_otp_provider_widget.dart';
+import 'custom_otp.dart';
 
 class Otp extends StatefulWidget {
   final String? title;
@@ -122,7 +123,7 @@ class _OtpState extends State<Otp> {
       final bool needHandleAddress = homeP.needHandleAddressNavigation();
       if (needHandleAddress) return;
       if (widget.fromRegistration) {
-        context.go("/");
+        goHome(context);
       } else {
         context.pop();
       }
@@ -301,7 +302,7 @@ class _OtpState extends State<Otp> {
   onTapLogout(context) {
     try {
       AuthHelper().clearUserData(); // Ensure this clears user data properly
-      routes.push("/");
+      goHome(context);
     } catch (e) {
       print('Error navigating to Main: $e');
     }

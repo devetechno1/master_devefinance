@@ -3,6 +3,7 @@ import 'package:active_ecommerce_cms_demo_app/locale/custom_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
+import '../screens/auth/custom_otp.dart';
 import 'btn.dart';
 
 class CustomErrorWidget extends StatefulWidget {
@@ -117,7 +118,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
                   ),
                 if (widget.canGoHome)
                   TextButton(
-                    onPressed: () => context.go("/"),
+                    onPressed: () => goHome(context),
                     child: Text(
                       "go_home".tr(context: context),
                       style: const TextStyle(
