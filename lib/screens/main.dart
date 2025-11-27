@@ -19,8 +19,6 @@ import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 
 import '../app_config.dart';
-import '../constants/app_dimensions.dart';
-import '../constants/app_images.dart';
 import '../helpers/camera_helper.dart';
 import '../presenter/cart_provider.dart';
 import '../presenter/prescription_controller.dart';
@@ -28,7 +26,6 @@ import '../repositories/upload_repository.dart';
 import '../ui_elements/close_app_dialog_widget.dart';
 import '../ui_elements/image_viewer_page.dart';
 import '../ui_elements/prescription_sheet.dart';
-import 'splash_screen/custom_statusbar.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
@@ -44,7 +41,6 @@ class _MainState extends State<Main> {
   final CartCounter counter = CartCounter();
   final BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
   late final HomeProvider homeProvider = context.read<HomeProvider>();
-
 
   // ---- Cart / Data ----
   void fetchAll() {
@@ -154,7 +150,8 @@ class _MainState extends State<Main> {
     return Future.value(false);
   }
 
-  bool get showPrescription => AppConfig.businessSettingsData.isPrescriptionActive;
+  bool get showPrescription =>
+      AppConfig.businessSettingsData.isPrescriptionActive;
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +161,7 @@ class _MainState extends State<Main> {
         textDirection:
             app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
         child: Scaffold(
-          appBar: customStatusBar(SystemUiOverlayStyle.dark),
+          // appBar: customStatusBar(SystemUiOverlayStyle.dark),
           extendBody: true,
           extendBodyBehindAppBar: true,
           body: IndexedStack(

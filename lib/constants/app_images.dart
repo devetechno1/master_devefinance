@@ -65,6 +65,7 @@ abstract final class AppImages {
   static const String googleplay = "$_assetDir/googleplay.png";
   static const String applestore = "$_assetDir/applestore.png";
   static const String applogo = "$_assetDir/app_logo.png";
+  static const String squareLogo = "$_assetDir/square_logo.png";
 
 //dummy assets
   static const String _dummyAssetDir = "dummy_assets";

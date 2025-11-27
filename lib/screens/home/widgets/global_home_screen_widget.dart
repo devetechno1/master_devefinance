@@ -1,5 +1,6 @@
 import 'package:active_ecommerce_cms_demo_app/data_model/address_response.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app_config.dart';
@@ -46,16 +47,17 @@ class _GlobalHomeScreenWidgetState extends State<GlobalHomeScreenWidget>
     return PopScope(
       canPop: widget.goBack,
       child: SafeArea(
+        top: false,
         child: Selector<HomeProvider, Address?>(
           selector: (_, provider) => provider.defaultAddress,
           builder: (context, s, child) {
             return Scaffold(
-              floatingActionButton: whatsappFloatingButtonWidget,
-              appBar: BuildAppBar(
-                context: context,
-                showAddress: is_logged_in.$ &&
-                    AppConfig.businessSettingsData.sellerWiseShipping,
+              appBar: AppBar(
+                toolbarHeight: 0,
+                backgroundColor: Theme.of(context).primaryColor,
+                systemOverlayStyle: SystemUiOverlayStyle.light,
               ),
+              floatingActionButton: whatsappFloatingButtonWidget,
               backgroundColor: Colors.white,
               body: Stack(
                 children: [
@@ -64,6 +66,7 @@ class _GlobalHomeScreenWidgetState extends State<GlobalHomeScreenWidget>
                     backgroundColor: Colors.white,
                     onRefresh: provider.onRefresh,
                     displacement: 0,
+                    edgeOffset: 125,
                     child: NotificationListener<ScrollUpdateNotification>(
                       onNotification: (notification) {
                         provider.paginationListener(notification.metrics);
@@ -73,7 +76,15 @@ class _GlobalHomeScreenWidgetState extends State<GlobalHomeScreenWidget>
                         physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics(),
                         ),
-                        slivers: widget.slivers,
+                        slivers: [
+                          BuildAppBar(
+                            context: context,
+                            showAddress: is_logged_in.$ &&
+                                AppConfig
+                                    .businessSettingsData.sellerWiseShipping,
+                          ),
+                          ...widget.slivers,
+                        ],
                       ),
                     ),
                   ),
